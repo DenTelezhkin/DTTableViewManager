@@ -13,3 +13,31 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+
+syntax: glob
+
+build
+DerivedData
+.DS*
+project.xcworkspace
+xcuserdata
+.DS_Store
+.svn
+*.swp
+*~.nib
+
+# Xcode
+build/*
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
