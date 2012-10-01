@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "AppDataStore.h"
 
-@class ViewController;
+@class ExampleTableViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) ViewController *viewController;
+@property (strong, nonatomic) ExampleTableViewController *viewController;
 
 @property (nonatomic, readonly) AppDataStore *dataStore;
 

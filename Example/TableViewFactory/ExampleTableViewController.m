@@ -6,24 +6,23 @@
 //  Copyright (c) 2012 Denys Telezhkin. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ExampleTableViewController.h"
+#import "Example.h"
 
-@interface ViewController ()
+@interface ExampleTableViewController ()
 
 @end
 
-@implementation ViewController
+@implementation ExampleTableViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self addTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]];
+    
+    [self.table reloadData];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

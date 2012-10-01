@@ -38,13 +38,17 @@
 
 -(NSArray *)headers {
     if (!_headers)
+    {
         _headers = [NSArray new];
+    }
     return _headers;
 }
 
 -(NSArray *)footers {
     if (!_footers)
+    {
         _footers = [NSArray new];
+    }
     return _footers;
 }
 

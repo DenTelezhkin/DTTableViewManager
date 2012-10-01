@@ -23,13 +23,4 @@
     else
         return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-#define DEFAULT_VIEW_WIDTH_FOR_POPOVER  320
-#define DEFAULT_VIEW_HEIGHT_FOR_POPOVER 400
-
--(CGSize)contentSizeForViewInPopover
-{
-    return CGSizeMake(DEFAULT_VIEW_WIDTH_FOR_POPOVER, DEFAULT_VIEW_HEIGHT_FOR_POPOVER);
-}
-
 @end
