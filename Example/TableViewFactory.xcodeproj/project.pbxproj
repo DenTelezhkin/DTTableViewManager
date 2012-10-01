@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E638F0F0161990E600694FBC /* UITableView+ReloadIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0EF161990E600694FBC /* UITableView+ReloadIndexPath.m */; };
 		E638F0F4161990F800694FBC /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0F3161990F800694FBC /* CellFactory.m */; };
 		E638F0FA1619910600694FBC /* AppDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0F61619910600694FBC /* AppDataStore.m */; };
 		E638F0FB1619910600694FBC /* SingletonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0F81619910600694FBC /* SingletonFactory.m */; };
@@ -30,8 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E638F0EE161990E600694FBC /* UITableView+ReloadIndexPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+ReloadIndexPath.h"; path = "Utilities/UITableView+ReloadIndexPath.h"; sourceTree = "<group>"; };
-		E638F0EF161990E600694FBC /* UITableView+ReloadIndexPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+ReloadIndexPath.m"; path = "Utilities/UITableView+ReloadIndexPath.m"; sourceTree = "<group>"; };
 		E638F0F2161990F800694FBC /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellFactory.h; path = Factory/CellFactory.h; sourceTree = "<group>"; };
 		E638F0F3161990F800694FBC /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellFactory.m; path = Factory/CellFactory.m; sourceTree = "<group>"; };
 		E638F0F51619910600694FBC /* AppDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDataStore.h; path = Factory/AppDataStore.h; sourceTree = "<group>"; };
@@ -133,7 +130,6 @@
 			children = (
 				E6EA83931615F07F00F8B8C3 /* Base */,
 				E6EA83891615F04600F8B8C3 /* Factory */,
-				E6EA83A01615F13600F8B8C3 /* Extensions */,
 				E638F1051619913B00694FBC /* Models */,
 				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
@@ -201,15 +197,6 @@
 				E638F1011619911900694FBC /* BaseViewController.m */,
 			);
 			name = Base;
-			sourceTree = "<group>";
-		};
-		E6EA83A01615F13600F8B8C3 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E638F0EE161990E600694FBC /* UITableView+ReloadIndexPath.h */,
-				E638F0EF161990E600694FBC /* UITableView+ReloadIndexPath.m */,
-			);
-			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,7 +268,6 @@
 				E6EA83731615EE6000F8B8C3 /* main.m in Sources */,
 				E6EA83771615EE6000F8B8C3 /* AppDelegate.m in Sources */,
 				E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */,
-				E638F0F0161990E600694FBC /* UITableView+ReloadIndexPath.m in Sources */,
 				E638F0F4161990F800694FBC /* CellFactory.m in Sources */,
 				E638F0FA1619910600694FBC /* AppDataStore.m in Sources */,
 				E638F0FB1619910600694FBC /* SingletonFactory.m in Sources */,

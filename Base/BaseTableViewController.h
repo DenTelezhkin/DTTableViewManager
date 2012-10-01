@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "UITableView+ReloadIndexPath.h"
 
 @interface BaseTableViewController : BaseViewController 
 <UITableViewDataSource, UITableViewDelegate>

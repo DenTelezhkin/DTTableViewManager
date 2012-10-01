@@ -9,7 +9,8 @@
 #import "CellFactory.h"
 #import "SingletonFactory.h"
 #import "BaseTableViewCell.h"
-
+#import "Example.h"
+#import "ExampleCell.h"
 
 @interface CellFactory ()
 - (UITableViewCell *)reuseCellFromTable:(UITableView *)table
@@ -33,7 +34,7 @@
     if (self)
     {
         self.classMappingDictionary =
-                    @{ // NSStringFromClass([Status class]) : NSStringFromClass([StatusCell class])
+                    @{  NSStringFromClass([Example class]) : NSStringFromClass([ExampleCell class])
                     };
     }
     return self;

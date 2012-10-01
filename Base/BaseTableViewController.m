@@ -13,7 +13,7 @@
 
 @interface BaseTableViewController ()
 - (NSMutableArray *)getValidTableSection:(NSInteger)index;
-
+- (void)insertTableSectionsWithAnimation:(UITableViewRowAnimation)animation;
 @property (nonatomic,retain) NSMutableArray * sections;
 @property (nonatomic,retain) NSArray * headers;
 @property (nonatomic,retain) NSArray * footers;
@@ -142,10 +142,13 @@
     return [items autorelease];
 }
 
-
 - (NSArray *)tableItemsInSection:(int)section
 {
-    return [self.sections objectAtIndex:section];
+   if (section<[self.sections count])
+   {
+       return [self.sections objectAtIndex:section];
+   }
+   else return nil;
 }
 
 - (void)addTableItem:(NSObject *)tableItem
@@ -174,14 +177,29 @@
     [array addObject:tableItem];
 }
 
+-(void)reloadTableSections
+{
+    for (int i = self.table.numberOfSections; i<self.sections.count ; i++)
+    {
+        [self.table reloadSections:[NSIndexSet indexSetWithIndex:i]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 -(void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section
-                                      withAnimation:(UITableViewRowAnimation)animation
+      withAnimation:(UITableViewRowAnimation)animation
 {
     NSIndexPath * lastItemPath = [NSIndexPath indexPathForRow:[self numberOfTableItemsInSection:section]
                                                     inSection:section];
     [self addTableItem:tableItem toSection:section];
-
-    [self.table insertRowAtIndexPaths:lastItemPath withRowAnimation:animation];
+    
+    if (section >= self.table.numberOfSections)
+    {
+        [self insertTableSectionsWithAnimation:animation];
+    }
+    else {
+        [self.table insertRowsAtIndexPaths:@[lastItemPath] withRowAnimation:animation];
+    }
 }
 
 
@@ -214,7 +232,14 @@
          withAnimation:(UITableViewRowAnimation)animation
 {
     [self insertTableItem:tableItem toIndexPath:indexPath];
-    [self.table insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
+    
+    if (indexPath.section >= self.table.numberOfSections)
+    {
+        [self insertTableSectionsWithAnimation:animation];
+    }
+    else {
+        [self.table insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
+    }
 }
 
 -(void)replaceTableItem:(NSObject *)tableItemToReplace
@@ -233,7 +258,7 @@
     NSIndexPath * indexPathToReplace = [self indexPathOfTableItem:tableItemToReplace];
     [self replaceTableItem:tableItemToReplace withTableItem:replacingTableItem];
     
-    [self.table reloadRowAtIndexPath:indexPathToReplace
+    [self.table reloadRowsAtIndexPaths:@[indexPathToReplace]
                     withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -318,8 +343,19 @@
 
 #pragma mark -
 #pragma mark private
-
-
+-(void)insertTableSectionsWithAnimation:(UITableViewRowAnimation)animation
+{
+    
+    NSMutableIndexSet * sectionsToAdd = [[NSMutableIndexSet alloc] init];
+    
+    for (int i = self.table.numberOfSections; i<self.sections.count; i++)
+    {
+        [sectionsToAdd addIndex:i];
+    }
+    if ([sectionsToAdd count])
+        [self.table insertSections:sectionsToAdd withRowAnimation:animation];
+    [sectionsToAdd release];
+}
 
 - (NSMutableArray *)getValidTableSection:(NSInteger)index
 {
@@ -327,15 +363,18 @@
     {
         return (NSMutableArray *)[self tableItemsInSection:index];
     }
-    else if (index == self.sections.count)
+    else // if (index == self.sections.count)
     {
-        NSMutableArray *newSection = [NSMutableArray array];
-        [self.sections addObject:newSection];
-        return newSection;
-    }
+        for (int i = self.sections.count; i <= index ; i++)
+        {
+            NSMutableArray *newSection = [NSMutableArray array];
+            [self.sections addObject:newSection];
+        }
+        return [self.sections lastObject];
+    }/*
     NSString *reason = [NSString stringWithFormat:@"Can't get section with index '%d',\
                         contain only '%d' sections", index, self.sections.count];
-    @throw [NSException exceptionWithName:@"Can't get section" reason:reason userInfo:nil];
+    @throw [NSException exceptionWithName:@"Can't get section" reason:reason userInfo:nil];*/
 }
 
 -(void)setSectionHeaders:(NSArray *)headers
