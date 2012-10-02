@@ -7,64 +7,92 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E638F0F4161990F800694FBC /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0F3161990F800694FBC /* CellFactory.m */; };
-		E638F0FA1619910600694FBC /* AppDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0F61619910600694FBC /* AppDataStore.m */; };
-		E638F0FB1619910600694FBC /* SingletonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0F81619910600694FBC /* SingletonFactory.m */; };
-		E638F1021619911B00694FBC /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0FD1619911500694FBC /* BaseTableViewCell.m */; };
-		E638F1031619911B00694FBC /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F0FF1619911700694FBC /* BaseTableViewController.m */; };
-		E638F1041619911B00694FBC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1011619911900694FBC /* BaseViewController.m */; };
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
+		E6CB9774161B181C00A7E936 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB976F161B181C00A7E936 /* BaseTableViewCell.m */; };
+		E6CB9775161B181C00A7E936 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* BaseTableViewController.m */; };
+		E6CB9776161B181C00A7E936 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9773161B181C00A7E936 /* BaseViewController.m */; };
+		E6CB9779161B182E00A7E936 /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9778161B182E00A7E936 /* CellFactory.m */; };
+		E6CB977F161B183600A7E936 /* AppDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977B161B183600A7E936 /* AppDataStore.m */; };
+		E6CB9780161B183600A7E936 /* SingletonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977D161B183600A7E936 /* SingletonFactory.m */; };
+		E6CB97AD161B26C900A7E936 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
+		E6CB97AE161B26C900A7E936 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83681615EE6000F8B8C3 /* Foundation.framework */; };
+		E6CB97AF161B26C900A7E936 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */; };
+		E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6CB97B3161B26C900A7E936 /* InfoPlist.strings */; };
+		E6CB97B7161B26C900A7E936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97B6161B26C900A7E936 /* main.m */; };
+		E6CB97D9161B27B800A7E936 /* BaseTableViewControllerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* BaseTableViewControllerSpec.mm */; };
+		E6CB97F5161B2E8B00A7E936 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* BaseTableViewController.m */; };
+		E6CB97F7161B2E8E00A7E936 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9773161B181C00A7E936 /* BaseViewController.m */; };
+		E6CB97F8161B2E9000A7E936 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB976F161B181C00A7E936 /* BaseTableViewCell.m */; };
+		E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
+		E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
+		E6CB97FB161B2EA200A7E936 /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9778161B182E00A7E936 /* CellFactory.m */; };
+		E6CB97FC161B2EA500A7E936 /* AppDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977B161B183600A7E936 /* AppDataStore.m */; };
+		E6CB97FD161B2EA800A7E936 /* SingletonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977D161B183600A7E936 /* SingletonFactory.m */; };
 		E6EA83671615EE6000F8B8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
 		E6EA83691615EE6000F8B8C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83681615EE6000F8B8C3 /* Foundation.framework */; };
 		E6EA836B1615EE6000F8B8C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */; };
 		E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6EA836F1615EE6000F8B8C3 /* InfoPlist.strings */; };
 		E6EA83731615EE6000F8B8C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EA83721615EE6000F8B8C3 /* main.m */; };
 		E6EA83771615EE6000F8B8C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EA83761615EE6000F8B8C3 /* AppDelegate.m */; };
-		E6EA83791615EE6000F8B8C3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E6EA83781615EE6000F8B8C3 /* Default.png */; };
-		E6EA837B1615EE6000F8B8C3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6EA837A1615EE6000F8B8C3 /* Default@2x.png */; };
-		E6EA837D1615EE6000F8B8C3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6EA837C1615EE6000F8B8C3 /* Default-568h@2x.png */; };
 		E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */; };
 		E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */; };
+		EFA1BB36741D4A18852059EB /* libPods-CedarUnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 443AAC7353A943DCAA45DED0 /* libPods-CedarUnitTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E638F0F2161990F800694FBC /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellFactory.h; path = Factory/CellFactory.h; sourceTree = "<group>"; };
-		E638F0F3161990F800694FBC /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellFactory.m; path = Factory/CellFactory.m; sourceTree = "<group>"; };
-		E638F0F51619910600694FBC /* AppDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDataStore.h; path = Factory/AppDataStore.h; sourceTree = "<group>"; };
-		E638F0F61619910600694FBC /* AppDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDataStore.m; path = Factory/AppDataStore.m; sourceTree = "<group>"; };
-		E638F0F71619910600694FBC /* SingletonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonFactory.h; path = Factory/SingletonFactory.h; sourceTree = "<group>"; };
-		E638F0F81619910600694FBC /* SingletonFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingletonFactory.m; path = Factory/SingletonFactory.m; sourceTree = "<group>"; };
-		E638F0F91619910600694FBC /* SingletonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonProtocol.h; path = Factory/SingletonProtocol.h; sourceTree = "<group>"; };
-		E638F0FC1619911500694FBC /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewCell.h; path = Base/BaseTableViewCell.h; sourceTree = "<group>"; };
-		E638F0FD1619911500694FBC /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTableViewCell.m; path = Base/BaseTableViewCell.m; sourceTree = "<group>"; };
-		E638F0FE1619911600694FBC /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewController.h; path = Base/BaseTableViewController.h; sourceTree = "<group>"; };
-		E638F0FF1619911700694FBC /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTableViewController.m; path = Base/BaseTableViewController.m; sourceTree = "<group>"; };
-		E638F1001619911800694FBC /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Base/BaseViewController.h; sourceTree = "<group>"; };
-		E638F1011619911900694FBC /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Base/BaseViewController.m; sourceTree = "<group>"; };
+		443AAC7353A943DCAA45DED0 /* libPods-CedarUnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CedarUnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3F9431F27DC49DBA1DBDFC0 /* Pods-CedarUnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CedarUnitTests.xcconfig"; path = "Pods/Pods-CedarUnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		E638F1071619916B00694FBC /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = TableViewFactory/Models/Example.h; sourceTree = "<group>"; };
 		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
 		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
 		E638F10B1619919900694FBC /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleCell.m; path = TableViewFactory/Cells/ExampleCell.m; sourceTree = "<group>"; };
+		E6CB976E161B181C00A7E936 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewCell.h; path = ../../Base/BaseTableViewCell.h; sourceTree = "<group>"; };
+		E6CB976F161B181C00A7E936 /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTableViewCell.m; path = ../../Base/BaseTableViewCell.m; sourceTree = "<group>"; };
+		E6CB9770161B181C00A7E936 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewController.h; path = ../../Base/BaseTableViewController.h; sourceTree = "<group>"; };
+		E6CB9771161B181C00A7E936 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTableViewController.m; path = ../../Base/BaseTableViewController.m; sourceTree = "<group>"; };
+		E6CB9772161B181C00A7E936 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = ../../Base/BaseViewController.h; sourceTree = "<group>"; };
+		E6CB9773161B181C00A7E936 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = ../../Base/BaseViewController.m; sourceTree = "<group>"; };
+		E6CB9777161B182E00A7E936 /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellFactory.h; path = ../../Factory/CellFactory.h; sourceTree = "<group>"; };
+		E6CB9778161B182E00A7E936 /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellFactory.m; path = ../../Factory/CellFactory.m; sourceTree = "<group>"; };
+		E6CB977A161B183600A7E936 /* AppDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDataStore.h; path = ../../Factory/AppDataStore.h; sourceTree = "<group>"; };
+		E6CB977B161B183600A7E936 /* AppDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDataStore.m; path = ../../Factory/AppDataStore.m; sourceTree = "<group>"; };
+		E6CB977C161B183600A7E936 /* SingletonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonFactory.h; path = ../../Factory/SingletonFactory.h; sourceTree = "<group>"; };
+		E6CB977D161B183600A7E936 /* SingletonFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingletonFactory.m; path = ../../Factory/SingletonFactory.m; sourceTree = "<group>"; };
+		E6CB977E161B183600A7E936 /* SingletonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonProtocol.h; path = ../../Factory/SingletonProtocol.h; sourceTree = "<group>"; };
+		E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CedarUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6CB97B2161B26C900A7E936 /* CedarUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CedarUnitTests-Info.plist"; sourceTree = "<group>"; };
+		E6CB97B4161B26C900A7E936 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E6CB97B6161B26C900A7E936 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CedarUnitTests-Prefix.pch"; sourceTree = "<group>"; };
+		E6CB97D8161B27B800A7E936 /* BaseTableViewControllerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseTableViewControllerSpec.mm; sourceTree = "<group>"; };
 		E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6EA83661615EE6000F8B8C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		E6EA83681615EE6000F8B8C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E6EA83661615EE6000F8B8C3 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E6EA83681615EE6000F8B8C3 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E6EA836E1615EE6000F8B8C3 /* TableViewFactory-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewFactory-Info.plist"; sourceTree = "<group>"; };
 		E6EA83701615EE6000F8B8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E6EA83721615EE6000F8B8C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6EA83741615EE6000F8B8C3 /* TableViewFactory-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableViewFactory-Prefix.pch"; sourceTree = "<group>"; };
 		E6EA83751615EE6000F8B8C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E6EA83761615EE6000F8B8C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E6EA83781615EE6000F8B8C3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		E6EA837A1615EE6000F8B8C3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		E6EA837C1615EE6000F8B8C3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleTableViewController.h; sourceTree = "<group>"; };
 		E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTableViewController.m; sourceTree = "<group>"; };
 		E6EA83821615EE6000F8B8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ExampleTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E6CB97A8161B26C900A7E936 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6CB97AD161B26C900A7E936 /* UIKit.framework in Frameworks */,
+				E6CB97AE161B26C900A7E936 /* Foundation.framework in Frameworks */,
+				E6CB97AF161B26C900A7E936 /* CoreGraphics.framework in Frameworks */,
+				EFA1BB36741D4A18852059EB /* libPods-CedarUnitTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6EA835F1615EE6000F8B8C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -98,12 +126,34 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		E6CB97B0161B26C900A7E936 /* CedarUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				E6CB97D8161B27B800A7E936 /* BaseTableViewControllerSpec.mm */,
+				E6CB97B1161B26C900A7E936 /* Supporting Files */,
+			);
+			path = CedarUnitTests;
+			sourceTree = "<group>";
+		};
+		E6CB97B1161B26C900A7E936 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E6CB97B2161B26C900A7E936 /* CedarUnitTests-Info.plist */,
+				E6CB97B3161B26C900A7E936 /* InfoPlist.strings */,
+				E6CB97B6161B26C900A7E936 /* main.m */,
+				E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
 				E6EA836C1615EE6000F8B8C3 /* TableViewFactory */,
+				E6CB97B0161B26C900A7E936 /* CedarUnitTests */,
 				E6EA83651615EE6000F8B8C3 /* Frameworks */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
+				A3F9431F27DC49DBA1DBDFC0 /* Pods-CedarUnitTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */,
+				E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,6 +172,7 @@
 				E6EA83661615EE6000F8B8C3 /* UIKit.framework */,
 				E6EA83681615EE6000F8B8C3 /* Foundation.framework */,
 				E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */,
+				443AAC7353A943DCAA45DED0 /* libPods-CedarUnitTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -149,9 +201,6 @@
 				E6EA836F1615EE6000F8B8C3 /* InfoPlist.strings */,
 				E6EA83721615EE6000F8B8C3 /* main.m */,
 				E6EA83741615EE6000F8B8C3 /* TableViewFactory-Prefix.pch */,
-				E6EA83781615EE6000F8B8C3 /* Default.png */,
-				E6EA837A1615EE6000F8B8C3 /* Default@2x.png */,
-				E6EA837C1615EE6000F8B8C3 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -168,11 +217,11 @@
 		E6EA838A1615F04D00F8B8C3 /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
-				E638F0F51619910600694FBC /* AppDataStore.h */,
-				E638F0F61619910600694FBC /* AppDataStore.m */,
-				E638F0F71619910600694FBC /* SingletonFactory.h */,
-				E638F0F81619910600694FBC /* SingletonFactory.m */,
-				E638F0F91619910600694FBC /* SingletonProtocol.h */,
+				E6CB977A161B183600A7E936 /* AppDataStore.h */,
+				E6CB977B161B183600A7E936 /* AppDataStore.m */,
+				E6CB977C161B183600A7E936 /* SingletonFactory.h */,
+				E6CB977D161B183600A7E936 /* SingletonFactory.m */,
+				E6CB977E161B183600A7E936 /* SingletonProtocol.h */,
 			);
 			name = Singleton;
 			sourceTree = "<group>";
@@ -180,8 +229,8 @@
 		E6EA838F1615F06800F8B8C3 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E638F0F2161990F800694FBC /* CellFactory.h */,
-				E638F0F3161990F800694FBC /* CellFactory.m */,
+				E6CB9777161B182E00A7E936 /* CellFactory.h */,
+				E6CB9778161B182E00A7E936 /* CellFactory.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -189,12 +238,12 @@
 		E6EA83931615F07F00F8B8C3 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				E638F0FC1619911500694FBC /* BaseTableViewCell.h */,
-				E638F0FD1619911500694FBC /* BaseTableViewCell.m */,
-				E638F0FE1619911600694FBC /* BaseTableViewController.h */,
-				E638F0FF1619911700694FBC /* BaseTableViewController.m */,
-				E638F1001619911800694FBC /* BaseViewController.h */,
-				E638F1011619911900694FBC /* BaseViewController.m */,
+				E6CB976E161B181C00A7E936 /* BaseTableViewCell.h */,
+				E6CB976F161B181C00A7E936 /* BaseTableViewCell.m */,
+				E6CB9770161B181C00A7E936 /* BaseTableViewController.h */,
+				E6CB9771161B181C00A7E936 /* BaseTableViewController.m */,
+				E6CB9772161B181C00A7E936 /* BaseViewController.h */,
+				E6CB9773161B181C00A7E936 /* BaseViewController.m */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -202,6 +251,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E6CB97AA161B26C900A7E936 /* CedarUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6CB97C2161B26C900A7E936 /* Build configuration list for PBXNativeTarget "CedarUnitTests" */;
+			buildPhases = (
+				E6CB97A7161B26C900A7E936 /* Sources */,
+				E6CB97A8161B26C900A7E936 /* Frameworks */,
+				E6CB97A9161B26C900A7E936 /* Resources */,
+				8872F1B9C48B4F3D924B1003 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CedarUnitTests;
+			productName = CedarUnitTests;
+			productReference = E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E6EA83611615EE6000F8B8C3 /* TableViewFactory */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "TableViewFactory" */;
@@ -241,26 +308,66 @@
 			projectRoot = "";
 			targets = (
 				E6EA83611615EE6000F8B8C3 /* TableViewFactory */,
+				E6CB97AA161B26C900A7E936 /* CedarUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E6CB97A9161B26C900A7E936 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6EA83601615EE6000F8B8C3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */,
-				E6EA83791615EE6000F8B8C3 /* Default.png in Resources */,
-				E6EA837B1615EE6000F8B8C3 /* Default@2x.png in Resources */,
-				E6EA837D1615EE6000F8B8C3 /* Default-568h@2x.png in Resources */,
 				E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8872F1B9C48B4F3D924B1003 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-CedarUnitTests-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		E6CB97A7161B26C900A7E936 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6CB97B7161B26C900A7E936 /* main.m in Sources */,
+				E6CB97D9161B27B800A7E936 /* BaseTableViewControllerSpec.mm in Sources */,
+				E6CB97F5161B2E8B00A7E936 /* BaseTableViewController.m in Sources */,
+				E6CB97F7161B2E8E00A7E936 /* BaseViewController.m in Sources */,
+				E6CB97F8161B2E9000A7E936 /* BaseTableViewCell.m in Sources */,
+				E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */,
+				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
+				E6CB97FB161B2EA200A7E936 /* CellFactory.m in Sources */,
+				E6CB97FC161B2EA500A7E936 /* AppDataStore.m in Sources */,
+				E6CB97FD161B2EA800A7E936 /* SingletonFactory.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6EA835E1615EE6000F8B8C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,20 +375,28 @@
 				E6EA83731615EE6000F8B8C3 /* main.m in Sources */,
 				E6EA83771615EE6000F8B8C3 /* AppDelegate.m in Sources */,
 				E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */,
-				E638F0F4161990F800694FBC /* CellFactory.m in Sources */,
-				E638F0FA1619910600694FBC /* AppDataStore.m in Sources */,
-				E638F0FB1619910600694FBC /* SingletonFactory.m in Sources */,
-				E638F1021619911B00694FBC /* BaseTableViewCell.m in Sources */,
-				E638F1031619911B00694FBC /* BaseTableViewController.m in Sources */,
-				E638F1041619911B00694FBC /* BaseViewController.m in Sources */,
 				E638F1091619916B00694FBC /* Example.m in Sources */,
 				E638F10C1619919900694FBC /* ExampleCell.m in Sources */,
+				E6CB9774161B181C00A7E936 /* BaseTableViewCell.m in Sources */,
+				E6CB9775161B181C00A7E936 /* BaseTableViewController.m in Sources */,
+				E6CB9776161B181C00A7E936 /* BaseViewController.m in Sources */,
+				E6CB9779161B182E00A7E936 /* CellFactory.m in Sources */,
+				E6CB977F161B183600A7E936 /* AppDataStore.m in Sources */,
+				E6CB9780161B183600A7E936 /* SingletonFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		E6CB97B3161B26C900A7E936 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6CB97B4161B26C900A7E936 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		E6EA836F1615EE6000F8B8C3 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -301,6 +416,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E6CB97C3161B26C900A7E936 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3F9431F27DC49DBA1DBDFC0 /* Pods-CedarUnitTests.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CedarUnitTests/CedarUnitTests-Prefix.pch";
+				INFOPLIST_FILE = "CedarUnitTests/CedarUnitTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E6CB97C4161B26C900A7E936 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3F9431F27DC49DBA1DBDFC0 /* Pods-CedarUnitTests.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CedarUnitTests/CedarUnitTests-Prefix.pch";
+				INFOPLIST_FILE = "CedarUnitTests/CedarUnitTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		E6EA83841615EE6000F8B8C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -351,6 +506,7 @@
 		E6EA83871615EE6000F8B8C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/TableViewFactory-Prefix.pch";
 				INFOPLIST_FILE = "TableViewFactory/TableViewFactory-Info.plist";
@@ -362,6 +518,7 @@
 		E6EA83881615EE6000F8B8C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/TableViewFactory-Prefix.pch";
 				INFOPLIST_FILE = "TableViewFactory/TableViewFactory-Info.plist";
@@ -373,6 +530,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E6CB97C2161B26C900A7E936 /* Build configuration list for PBXNativeTarget "CedarUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6CB97C3161B26C900A7E936 /* Debug */,
+				E6CB97C4161B26C900A7E936 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E6EA835C1615EE6000F8B8C3 /* Build configuration list for PBXProject "TableViewFactory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

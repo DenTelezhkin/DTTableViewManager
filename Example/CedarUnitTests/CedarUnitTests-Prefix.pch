@@ -1,0 +1,17 @@
+//
+// Prefix header for all source files of the 'CedarUnitTests' target in the 'CedarUnitTests' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "OCMock.h"
+    #import <Cedar-iOS/Cedar-iOS.h>
+    #import <Cedar-iOS/SpecHelper.h>
+#endif

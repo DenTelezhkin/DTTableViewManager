@@ -1,0 +1,7 @@
+xcodeproj 'TableViewFactory.xcodeproj'
+platform :ios
+
+target :CedarUnitTests do
+  pod 'Cedar'
+  pod 'OCMock'
+end

@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface BaseTableViewController : BaseViewController 
+@interface BaseTableViewController : BaseViewController
 <UITableViewDataSource, UITableViewDelegate>
 
 
@@ -38,17 +38,17 @@
 - (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section;
 
 - (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section
-                                       withAnimation:(UITableViewRowAnimation)animation;
+       withAnimation:(UITableViewRowAnimation)animation;
 
 - (void)addTableItems:(NSArray *)tableItems toSection:(NSInteger)section;
 
 - (void)addTableItems:(NSArray *)tableItems toSection:(NSInteger)section
-                                        withAnimation:(UITableViewRowAnimation)animation;
+        withAnimation:(UITableViewRowAnimation)animation;
 
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath;
 
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
-                                            withAnimation:(UITableViewRowAnimation)animation;
+          withAnimation:(UITableViewRowAnimation)animation;
 
 - (void)replaceTableItem:(NSObject *)tableItemToReplace
            withTableItem:(NSObject *)replacingTableItem;
@@ -68,6 +68,13 @@
 - (void)removeAllTableItems;
 
 - (int)numberOfTableItemsInSection:(NSInteger)section;
+
+- (void)moveSection:(int)indexFrom toSection:(int)indexTo;
+
+- (void)deleteSections:(NSIndexSet *)indexSet;
+- (void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
+
+- (void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
 - (void)setSectionHeaders:(NSArray *)headers;
 - (void)setSectionFooters:(NSArray *)footers;

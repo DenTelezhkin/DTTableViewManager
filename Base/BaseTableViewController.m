@@ -75,7 +75,7 @@
     NSArray *section=nil;
     if (indexPath.section < [self.sections count])
     {
-     section = [self tableItemsInSection:indexPath.section];
+        section = [self tableItemsInSection:indexPath.section];
     }
     else {
         NSLog(@"Table item not found");
@@ -116,7 +116,7 @@
             [indexPaths release];
             return nil;
         }
-
+        
         [indexPaths addObject:foundIndexPath];
     }
     return [indexPaths autorelease];
@@ -131,7 +131,7 @@
         NSIndexPath * foundIndexPath = [self tableItemAtIndexPath:path];
         if (foundIndexPath)
         {
-          [items addObject:foundIndexPath];
+            [items addObject:foundIndexPath];
         }
         else {
             NSLog(@"item not found. Returning nil for NSArrayForIndexPaths");
@@ -144,11 +144,11 @@
 
 - (NSArray *)tableItemsInSection:(int)section
 {
-   if (section<[self.sections count])
-   {
-       return [self.sections objectAtIndex:section];
-   }
-   else return nil;
+    if (section<[self.sections count])
+    {
+        return [self.sections objectAtIndex:section];
+    }
+    else return nil;
 }
 
 - (void)addTableItem:(NSObject *)tableItem
@@ -211,7 +211,7 @@
 }
 
 -(void)addTableItems:(NSArray *)tableItems toSection:(NSInteger)section
-                                       withAnimation:(UITableViewRowAnimation)animation
+       withAnimation:(UITableViewRowAnimation)animation
 {
     [self.table beginUpdates];
     for (id tableItem in tableItems)
@@ -259,7 +259,7 @@
     [self replaceTableItem:tableItemToReplace withTableItem:replacingTableItem];
     
     [self.table reloadRowsAtIndexPaths:@[indexPathToReplace]
-                    withRowAnimation:UITableViewRowAnimationAutomatic];
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)removeTableItem:(NSObject *)tableItem
@@ -270,7 +270,7 @@
         NSArray *section = [self tableItemsInSection:indexPath.section];
         NSMutableArray *castedSection = (NSMutableArray *)section;
         [castedSection removeObject:tableItem];
-     }
+    }
 }
 
 -(void)removeTableItems:(NSArray *)tableItems
@@ -312,6 +312,26 @@
     return self.sections.count;
 }
 
+-(void)moveSection:(int)indexFrom toSection:(int)indexTo
+{
+    NSArray * validSectionFrom = [[self getValidTableSection:indexFrom] retain];
+    NSArray * validSectionTo = [[self getValidTableSection:indexTo] retain];
+    
+    [self.sections removeObject:validSectionFrom];
+    [self.sections insertObject:validSectionFrom atIndex:indexTo];
+    
+    [validSectionFrom release];
+    [validSectionTo release];
+    
+    if (self.sections.count >= self.table.numberOfSections)
+    {
+        [self insertTableSectionsWithAnimation:UITableViewRowAnimationAutomatic];
+    }
+    else {
+        [self.table moveSection:indexFrom toSection:indexTo];
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray *sectionArray = [self tableItemsInSection:section];
@@ -325,7 +345,7 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-   return (section < self.footers.count) ? [self.footers objectAtIndex:section] : nil;
+    return (section < self.footers.count) ? [self.footers objectAtIndex:section] : nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -372,9 +392,9 @@
         }
         return [self.sections lastObject];
     }/*
-    NSString *reason = [NSString stringWithFormat:@"Can't get section with index '%d',\
-                        contain only '%d' sections", index, self.sections.count];
-    @throw [NSException exceptionWithName:@"Can't get section" reason:reason userInfo:nil];*/
+      NSString *reason = [NSString stringWithFormat:@"Can't get section with index '%d',\
+      contain only '%d' sections", index, self.sections.count];
+      @throw [NSException exceptionWithName:@"Can't get section" reason:reason userInfo:nil];*/
 }
 
 -(void)setSectionHeaders:(NSArray *)headers
