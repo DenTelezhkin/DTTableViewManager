@@ -157,6 +157,32 @@ describe(@"BaseTableViewController", ^{
         [itemsSection2 lastObject] should equal(acc1);
     });
     
+    it(@"should delete sections", ^{
+        [model addTableItem:acc1];
+        [model addTableItem:acc2 toSection:1];
+        [model addTableItem:acc3 toSection:2];
+        
+        [model deleteSections:[NSIndexSet indexSetWithIndex:1]];
+        
+        [model numberOfSections] should equal(2);
+        
+        NSArray * itemsSection1 = [model tableItemsInSection:1];
+        [itemsSection1 lastObject] should equal(acc3);
+    });
+    
+    it(@"should remove sections from table view", ^{
+        [model addTableItem:acc1 withRowAnimation:UITableViewRowAnimationAutomatic];
+        [model addTableItem:acc2 toSection:1 withAnimation:UITableViewRowAnimationAutomatic];
+        [model addTableItem:acc3 toSection:2 withAnimation:UITableViewRowAnimationAutomatic];
+        
+        [model.table reloadData];
+        
+        [model deleteSections:[NSIndexSet indexSetWithIndex:1]
+             withRowAnimation:UITableViewRowAnimationNone];
+        
+        [model.table numberOfSections] should equal(2);
+    });
+    
 });
 
 SPEC_END

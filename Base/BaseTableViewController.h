@@ -67,6 +67,7 @@
 
 - (void)removeAllTableItems;
 
+- (int)numberOfSections;
 - (int)numberOfTableItemsInSection:(NSInteger)section;
 
 - (void)moveSection:(int)indexFrom toSection:(int)indexTo;

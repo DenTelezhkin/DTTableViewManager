@@ -332,6 +332,32 @@
     }
 }
 
+-(void)deleteSections:(NSIndexSet *)indexSet
+{
+    for (int i=0; i< [indexSet count]; i++)
+    {
+        if ([self.sections count] > i)
+        {
+            [self.sections removeObjectAtIndex:i];
+        }
+    }
+}
+
+-(void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
+{
+    [self deleteSections:indexSet];
+    for (int i=0; i< [indexSet count]; i++)
+    {
+        [self.table beginUpdates];
+        if ([self.table numberOfSections] > i)
+        {
+            [self.table deleteSections:[NSIndexSet indexSetWithIndex:i]
+                      withRowAnimation:animation];
+        }
+        [self.table endUpdates];
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray *sectionArray = [self tableItemsInSection:section];
@@ -411,6 +437,11 @@
 {
     NSArray * itemsInSection = [self tableItemsInSection:section];
     return [itemsInSection count];
+}
+
+-(int)numberOfSections
+{
+    return [self.sections count];
 }
 
 @end
