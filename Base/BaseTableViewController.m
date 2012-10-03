@@ -10,10 +10,9 @@
 #import "CellFactory.h"
 #import "BaseTableViewCell.h"
 
-
 @interface BaseTableViewController ()
 - (NSMutableArray *)getValidTableSection:(NSInteger)index;
-- (void)insertTableSectionsWithAnimation:(UITableViewRowAnimation)animation;
+- (void)insertTableSectionsWithRowAnimation:(UITableViewRowAnimation)animation;
 @property (nonatomic,retain) NSMutableArray * sections;
 @property (nonatomic,retain) NSArray * headers;
 @property (nonatomic,retain) NSArray * footers;
@@ -158,7 +157,7 @@
 
 -(void)addTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self addTableItem:tableItem toSection:0 withAnimation:animation];
+    [self addTableItem:tableItem toSection:0 withRowAnimation:animation];
 }
 
 - (void)addTableItems:(NSArray *)tableItems
@@ -168,7 +167,7 @@
 
 -(void)addTableItems:(NSArray *)tableItems withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self addTableItems:tableItems toSection:0 withAnimation:animation];
+    [self addTableItems:tableItems toSection:0 withRowAnimation:animation];
 }
 
 - (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section
@@ -187,7 +186,7 @@
 }
 
 -(void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section
-      withAnimation:(UITableViewRowAnimation)animation
+   withRowAnimation:(UITableViewRowAnimation)animation
 {
     NSIndexPath * lastItemPath = [NSIndexPath indexPathForRow:[self numberOfTableItemsInSection:section]
                                                     inSection:section];
@@ -195,7 +194,7 @@
     
     if (section >= self.table.numberOfSections)
     {
-        [self insertTableSectionsWithAnimation:animation];
+        [self insertTableSectionsWithRowAnimation:animation];
     }
     else {
         [self.table insertRowsAtIndexPaths:@[lastItemPath] withRowAnimation:animation];
@@ -211,12 +210,12 @@
 }
 
 -(void)addTableItems:(NSArray *)tableItems toSection:(NSInteger)section
-       withAnimation:(UITableViewRowAnimation)animation
+    withRowAnimation:(UITableViewRowAnimation)animation
 {
     [self.table beginUpdates];
     for (id tableItem in tableItems)
     {
-        [self addTableItem:tableItem toSection:section withAnimation:animation];
+        [self addTableItem:tableItem toSection:section withRowAnimation:animation];
     }
     [self.table endUpdates];
 }
@@ -229,13 +228,13 @@
 }
 
 -(void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
-         withAnimation:(UITableViewRowAnimation)animation
+      withRowAnimation:(UITableViewRowAnimation)animation
 {
     [self insertTableItem:tableItem toIndexPath:indexPath];
     
     if (indexPath.section >= self.table.numberOfSections)
     {
-        [self insertTableSectionsWithAnimation:animation];
+        [self insertTableSectionsWithRowAnimation:animation];
     }
     else {
         [self.table insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
@@ -287,12 +286,12 @@
     [self.table beginUpdates];
     for (NSObject * item in tableItems)
     {
-        [self removeTableItem:item withAnimation:UITableViewRowAnimationAutomatic];
+        [self removeTableItem:item withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     [self.table endUpdates];
 }
 
--(void)removeTableItem:(NSObject *)tableItem withAnimation:(UITableViewRowAnimation)animation
+-(void)removeTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation
 {
     NSIndexPath *indexPath = [self indexPathOfTableItem:tableItem];
     [self removeTableItem:tableItem];
@@ -314,18 +313,18 @@
 
 -(void)moveSection:(int)indexFrom toSection:(int)indexTo
 {
-    NSArray * validSectionFrom = [[self getValidTableSection:indexFrom] retain];
-    NSArray * validSectionTo = [[self getValidTableSection:indexTo] retain];
+    NSMutableArray * validSectionFrom = [[self getValidTableSection:indexFrom] retain];
+    [self getValidTableSection:indexTo];
     
     [self.sections removeObject:validSectionFrom];
     [self.sections insertObject:validSectionFrom atIndex:indexTo];
-    
     [validSectionFrom release];
-    [validSectionTo release];
     
-    if (self.sections.count >= self.table.numberOfSections)
+    if (self.sections.count > self.table.numberOfSections)
     {
-        [self insertTableSectionsWithAnimation:UITableViewRowAnimationAutomatic];
+        //Row does not exist, moving section causes many sections to change, so we just reload
+        [self.table reloadData];
+//        [self insertTableSectionsWithRowAnimation:UITableViewRowAnimationAutomatic];
     }
     else {
         [self.table moveSection:indexFrom toSection:indexTo];
@@ -334,9 +333,9 @@
 
 -(void)deleteSections:(NSIndexSet *)indexSet
 {
-    for (int i=0; i< [indexSet count]; i++)
+    for (int i=0; i<= [self numberOfSections]; i++)
     {
-        if ([self.sections count] > i)
+        if ([indexSet containsIndex:i])
         {
             [self.sections removeObjectAtIndex:i];
         }
@@ -346,16 +345,30 @@
 -(void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
 {
     [self deleteSections:indexSet];
-    for (int i=0; i< [indexSet count]; i++)
+    [self.table beginUpdates];
+    for (int i=0; i<= [self.table numberOfSections]; i++)
     {
-        [self.table beginUpdates];
-        if ([self.table numberOfSections] > i)
+        if ([indexSet containsIndex:i])
         {
             [self.table deleteSections:[NSIndexSet indexSetWithIndex:i]
                       withRowAnimation:animation];
         }
-        [self.table endUpdates];
     }
+    [self.table endUpdates];
+}
+
+-(void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
+{
+    [self.table beginUpdates];
+    for (int i=0; i<= [self.table numberOfSections]; i++)
+    {
+        if ([indexSet containsIndex:i])
+        {
+            [self.table reloadSections:[NSIndexSet indexSetWithIndex:i]
+                      withRowAnimation:animation];
+        }
+    }
+    [self.table endUpdates];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -389,7 +402,7 @@
 
 #pragma mark -
 #pragma mark private
--(void)insertTableSectionsWithAnimation:(UITableViewRowAnimation)animation
+-(void)insertTableSectionsWithRowAnimation:(UITableViewRowAnimation)animation
 {
     
     NSMutableIndexSet * sectionsToAdd = [[NSMutableIndexSet alloc] init];

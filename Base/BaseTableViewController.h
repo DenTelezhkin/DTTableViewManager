@@ -38,17 +38,17 @@
 - (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section;
 
 - (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section
-       withAnimation:(UITableViewRowAnimation)animation;
+    withRowAnimation:(UITableViewRowAnimation)animation;
 
 - (void)addTableItems:(NSArray *)tableItems toSection:(NSInteger)section;
 
 - (void)addTableItems:(NSArray *)tableItems toSection:(NSInteger)section
-        withAnimation:(UITableViewRowAnimation)animation;
+     withRowAnimation:(UITableViewRowAnimation)animation;
 
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath;
 
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
-          withAnimation:(UITableViewRowAnimation)animation;
+       withRowAnimation:(UITableViewRowAnimation)animation;
 
 - (void)replaceTableItem:(NSObject *)tableItemToReplace
            withTableItem:(NSObject *)replacingTableItem;
@@ -59,7 +59,7 @@
 
 - (void)removeTableItem:(NSObject *)tableItem;
 
-- (void)removeTableItem:(NSObject *)tableItem withAnimation:(UITableViewRowAnimation)animation;
+- (void)removeTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation;
 
 - (void)removeTableItems:(NSArray *)tableItems;
 
