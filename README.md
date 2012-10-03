@@ -24,6 +24,15 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 
 Please go to BaseTableViewController.h for all available API. Example project is included in Example folder.
 
+### Example project installation
+
+Project uses CocoaPods(Please visit www.cocoapods.org for install guide).
+
+setup: in project directory
+pod install
+
+open TableViewFactory.xcworkspace.
+
 
 ### Discussion
 
