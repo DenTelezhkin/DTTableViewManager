@@ -360,12 +360,19 @@
 -(void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
 {
     [self.table beginUpdates];
-    for (int i=0; i<= [self.table numberOfSections]; i++)
+    for (int i=0; i<= self.table.numberOfSections; i++)
     {
         if ([indexSet containsIndex:i])
         {
-            [self.table reloadSections:[NSIndexSet indexSetWithIndex:i]
-                      withRowAnimation:animation];
+            if (i==self.table.numberOfSections)
+            {
+                [self insertTableSectionsWithRowAnimation:animation];
+            }
+            else
+            {
+                [self.table reloadSections:[NSIndexSet indexSetWithIndex:i]
+                          withRowAnimation:animation];
+            }
         }
     }
     [self.table endUpdates];

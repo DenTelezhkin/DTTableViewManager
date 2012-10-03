@@ -59,7 +59,13 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self moveSection:1 toSection:3];
     });
-    
+ 
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self addTableItem:[Example exampleWithText:@"Add item and reload section" andDetails:@""]
+                 toSection:4];
+        [self reloadSections:[NSIndexSet indexSetWithIndex:4]
+            withRowAnimation:UITableViewRowAnimationAutomatic];
+    });
 }
 
 @end
