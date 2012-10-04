@@ -24,17 +24,11 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 
 Please go to BaseTableViewController.h for all available API. Example project is included in Example folder.
 
-### Example project installation
-
-Project uses CocoaPods(Please visit www.cocoapods.org for install guide).
-
-setup: in project directory
-pod install
-
-open TableViewFactory.xcworkspace.
-
-
 ### Discussion
 
 This approach intends to clean your view controller from massive amounts of repeatable delegate and datasource code. It helps to think about table view models instead of table view cells. Table view cells should be responsive for displaying their content, and controller should only be responsive for displaying cells. 
 		
+
+### Thanks
+
+Special thanks to Alexey Belkevich (https://github.com/belkevich) for providing initial implementation of CellFactory and SingletonFactory, they are really the core of this approach.

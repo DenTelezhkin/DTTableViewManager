@@ -68,4 +68,11 @@
     });
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Example * selectedExample = [self tableItemAtIndexPath:indexPath];
+    
+    [self removeTableItem:selectedExample withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 @end

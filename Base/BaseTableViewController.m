@@ -23,8 +23,7 @@
 
 @synthesize table=_table, headers=_headers, sections=_sections,footers = _footers;
 
-#pragma mark -
-#pragma mark main routine
+#pragma mark - Getters, initializers and cleaning
 
 -(NSMutableArray *)sections
 {
@@ -51,7 +50,6 @@
     return _footers;
 }
 
-
 - (void)dealloc
 {
     self.sections = nil;
@@ -66,8 +64,7 @@
     [super viewDidUnload];
 }
 
-#pragma mark -
-#pragma mark actions
+#pragma mark - search
 
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -324,7 +321,6 @@
     {
         //Row does not exist, moving section causes many sections to change, so we just reload
         [self.table reloadData];
-//        [self insertTableSectionsWithRowAnimation:UITableViewRowAnimationAutomatic];
     }
     else {
         [self.table moveSection:indexFrom toSection:indexTo];
@@ -429,7 +425,7 @@
     {
         return (NSMutableArray *)[self tableItemsInSection:index];
     }
-    else // if (index == self.sections.count)
+    else 
     {
         for (int i = self.sections.count; i <= index ; i++)
         {

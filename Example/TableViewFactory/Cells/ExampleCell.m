@@ -15,21 +15,14 @@
 
 @implementation ExampleCell
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 -(void)updateWithModel:(id)model
 {
     self.exampleModel = model;
     
     self.textLabel.text = self.exampleModel.someText;
     self.detailTextLabel.text = self.exampleModel.details;
+    
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 -(void)dealloc

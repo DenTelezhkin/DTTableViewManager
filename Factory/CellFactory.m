@@ -25,8 +25,8 @@
 
 @implementation CellFactory
 @synthesize classMappingDictionary = _classMappingDictionary;
-#pragma mark -
-#pragma mark main routine
+
+#pragma mark - Init and destroy
 
 - (id)init
 {

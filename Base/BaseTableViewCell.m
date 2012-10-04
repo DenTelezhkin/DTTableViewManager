@@ -10,15 +10,6 @@
 
 @implementation BaseTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 -(id)initWithStyle:(UITableViewCellStyle)style
    reuseIdentifier:(NSString *)reuseIdentifier
           andModel:(id)model
@@ -33,8 +24,6 @@
 
 -(void)updateWithModel:(id)model;
 {
-    NSLog(@"ALERT!!!!!    updateWithModel: method is not overridden by class: %@ ",
-                                                                NSStringFromClass([self class]));
     NSString *reason = [NSString stringWithFormat:@"updateWithModel is not overridden by %@ class",
                                                                 NSStringFromClass([self class])];
     @throw [NSException exceptionWithName:@"API misuse" reason:reason userInfo:nil];
