@@ -6,13 +6,16 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
-#import "CellFactory.h"
-#import "SingletonFactory.h"
+#import "DTCellFactory.h"
+
 #import "Example.h"
 #import "ExampleCell.h"
 #import "TableViewModelProtocol.h"
 
-@interface CellFactory ()
+
+
+
+@interface DTCellFactory ()
 - (UITableViewCell *)reuseCellFromTable:(UITableView *)table
                              identifier:(NSString *)identifier
                                andModel:(id)model;
@@ -20,38 +23,22 @@
                                       andModel:(id)model;
 - (Class)cellClassWithIdentifier:(NSString *)identifier;
 
-@property (nonatomic,retain) NSDictionary * classMappingDictionary;
 @end
 
-@implementation CellFactory
+
+
+@implementation DTCellFactory
+
+SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
+
 @synthesize classMappingDictionary = _classMappingDictionary;
 
 #pragma mark - Init and destroy
-
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-        self.classMappingDictionary =
-                    @{  NSStringFromClass([Example class]) : NSStringFromClass([ExampleCell class])
-                    };
-    }
-    return self;
-}
 
 - (void)dealloc
 {
     self.classMappingDictionary = nil;
     [super dealloc];
-}
-
-#pragma mark -
-#pragma mark singleton protocol implementation
-
-+ (id)sharedInstance
-{
-    return [SingletonFactory sharedInstanceOfClass:[self class]];
 }
 
 #pragma mark -
@@ -87,12 +74,22 @@
 - (UITableViewCell *)cellWithIdentifier:(NSString *)identifier andModel:(id)model
 {
     Class cellClass = [self cellClassWithIdentifier:identifier];
-    UITableViewCell<TableViewModelProtocol> * cell = [(UITableViewCell <TableViewModelProtocol>  *)[cellClass alloc]
-                                                      initWithStyle:UITableViewCellStyleSubtitle
-                                                               reuseIdentifier:identifier];
-    [cell updateWithModel:model];
     
-    return [cell autorelease];
+    if ([cellClass conformsToProtocol:@protocol(TableViewModelProtocol)])
+    {
+        UITableViewCell<TableViewModelProtocol> * cell = [(UITableViewCell <TableViewModelProtocol>  *)[cellClass alloc]
+                                                          initWithStyle:UITableViewCellStyleSubtitle
+                                                          reuseIdentifier:identifier];
+        [cell updateWithModel:model];
+        
+        return [cell autorelease];
+    }
+    NSString *reason = [NSString stringWithFormat:@"cell class '%@' does not conform TableViewModelProtocol",
+                        cellClass];
+    @throw [NSException exceptionWithName:@"API misuse"
+                                   reason:reason userInfo:nil];
+    
+    return nil;
 }
 
 - (Class)cellClassWithIdentifier:(NSString *)identifier

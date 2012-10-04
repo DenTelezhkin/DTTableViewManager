@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
-@interface BaseTableViewController : UIViewController
+@interface DTBaseTableViewController : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
 
 

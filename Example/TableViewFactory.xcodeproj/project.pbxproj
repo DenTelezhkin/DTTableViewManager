@@ -9,22 +9,20 @@
 /* Begin PBXBuildFile section */
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
-		E651028D161D7D80004B508C /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* CellFactory.m */; };
-		E651028E161D7D80004B508C /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* CellFactory.m */; };
-		E6CB9775161B181C00A7E936 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* BaseTableViewController.m */; };
-		E6CB977F161B183600A7E936 /* AppDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977B161B183600A7E936 /* AppDataStore.m */; };
-		E6CB9780161B183600A7E936 /* SingletonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977D161B183600A7E936 /* SingletonFactory.m */; };
+		E64727D3161DD84300CBE2AC /* CellObjectMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E64727D2161DD84300CBE2AC /* CellObjectMapper.m */; };
+		E64727D4161DD84300CBE2AC /* CellObjectMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E64727D2161DD84300CBE2AC /* CellObjectMapper.m */; };
+		E651028D161D7D80004B508C /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* DTCellFactory.m */; };
+		E651028E161D7D80004B508C /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* DTCellFactory.m */; };
+		E6CB9775161B181C00A7E936 /* DTBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* DTBaseTableViewController.m */; };
 		E6CB97AD161B26C900A7E936 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
 		E6CB97AE161B26C900A7E936 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83681615EE6000F8B8C3 /* Foundation.framework */; };
 		E6CB97AF161B26C900A7E936 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */; };
 		E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6CB97B3161B26C900A7E936 /* InfoPlist.strings */; };
 		E6CB97B7161B26C900A7E936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97B6161B26C900A7E936 /* main.m */; };
 		E6CB97D9161B27B800A7E936 /* BaseTableViewControllerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* BaseTableViewControllerSpec.mm */; };
-		E6CB97F5161B2E8B00A7E936 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* BaseTableViewController.m */; };
+		E6CB97F5161B2E8B00A7E936 /* DTBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* DTBaseTableViewController.m */; };
 		E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
-		E6CB97FC161B2EA500A7E936 /* AppDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977B161B183600A7E936 /* AppDataStore.m */; };
-		E6CB97FD161B2EA800A7E936 /* SingletonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977D161B183600A7E936 /* SingletonFactory.m */; };
 		E6EA83671615EE6000F8B8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
 		E6EA83691615EE6000F8B8C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83681615EE6000F8B8C3 /* Foundation.framework */; };
 		E6EA836B1615EE6000F8B8C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */; };
@@ -43,15 +41,13 @@
 		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
 		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
 		E638F10B1619919900694FBC /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleCell.m; path = TableViewFactory/Cells/ExampleCell.m; sourceTree = "<group>"; };
-		E651028B161D7D80004B508C /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFactory.h; sourceTree = "<group>"; };
-		E651028C161D7D80004B508C /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFactory.m; sourceTree = "<group>"; };
-		E6CB9770161B181C00A7E936 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewController.h; path = ../../Base/BaseTableViewController.h; sourceTree = "<group>"; };
-		E6CB9771161B181C00A7E936 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTableViewController.m; path = ../../Base/BaseTableViewController.m; sourceTree = "<group>"; };
-		E6CB977A161B183600A7E936 /* AppDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDataStore.h; path = ../../Factory/AppDataStore.h; sourceTree = "<group>"; };
-		E6CB977B161B183600A7E936 /* AppDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDataStore.m; path = ../../Factory/AppDataStore.m; sourceTree = "<group>"; };
-		E6CB977C161B183600A7E936 /* SingletonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonFactory.h; path = ../../Factory/SingletonFactory.h; sourceTree = "<group>"; };
-		E6CB977D161B183600A7E936 /* SingletonFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingletonFactory.m; path = ../../Factory/SingletonFactory.m; sourceTree = "<group>"; };
-		E6CB977E161B183600A7E936 /* SingletonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonProtocol.h; path = ../../Factory/SingletonProtocol.h; sourceTree = "<group>"; };
+		E64727D0161DD5CC00CBE2AC /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+		E64727D1161DD84300CBE2AC /* CellObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellObjectMapper.h; sourceTree = "<group>"; };
+		E64727D2161DD84300CBE2AC /* CellObjectMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellObjectMapper.m; sourceTree = "<group>"; };
+		E651028B161D7D80004B508C /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCellFactory.h; sourceTree = "<group>"; };
+		E651028C161D7D80004B508C /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCellFactory.m; sourceTree = "<group>"; };
+		E6CB9770161B181C00A7E936 /* DTBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTBaseTableViewController.h; path = ../../Base/DTBaseTableViewController.h; sourceTree = "<group>"; };
+		E6CB9771161B181C00A7E936 /* DTBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTBaseTableViewController.m; path = ../../Base/DTBaseTableViewController.m; sourceTree = "<group>"; };
 		E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CedarUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CB97B2161B26C900A7E936 /* CedarUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CedarUnitTests-Info.plist"; sourceTree = "<group>"; };
 		E6CB97B4161B26C900A7E936 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -179,6 +175,8 @@
 				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
 				E6EA83761615EE6000F8B8C3 /* AppDelegate.m */,
+				E64727D1161DD84300CBE2AC /* CellObjectMapper.h */,
+				E64727D2161DD84300CBE2AC /* CellObjectMapper.m */,
 				E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */,
 				E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */,
 				E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */,
@@ -210,11 +208,7 @@
 		E6EA838A1615F04D00F8B8C3 /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
-				E6CB977A161B183600A7E936 /* AppDataStore.h */,
-				E6CB977B161B183600A7E936 /* AppDataStore.m */,
-				E6CB977C161B183600A7E936 /* SingletonFactory.h */,
-				E6CB977D161B183600A7E936 /* SingletonFactory.m */,
-				E6CB977E161B183600A7E936 /* SingletonProtocol.h */,
+				E64727D0161DD5CC00CBE2AC /* SynthesizeSingleton.h */,
 			);
 			name = Singleton;
 			sourceTree = "<group>";
@@ -222,8 +216,8 @@
 		E6EA838F1615F06800F8B8C3 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E651028B161D7D80004B508C /* CellFactory.h */,
-				E651028C161D7D80004B508C /* CellFactory.m */,
+				E651028B161D7D80004B508C /* DTCellFactory.h */,
+				E651028C161D7D80004B508C /* DTCellFactory.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -232,8 +226,8 @@
 			isa = PBXGroup;
 			children = (
 				E6D0AA71161D97640064EA38 /* TableViewModelProtocol.h */,
-				E6CB9770161B181C00A7E936 /* BaseTableViewController.h */,
-				E6CB9771161B181C00A7E936 /* BaseTableViewController.m */,
+				E6CB9770161B181C00A7E936 /* DTBaseTableViewController.h */,
+				E6CB9771161B181C00A7E936 /* DTBaseTableViewController.m */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -347,12 +341,11 @@
 			files = (
 				E6CB97B7161B26C900A7E936 /* main.m in Sources */,
 				E6CB97D9161B27B800A7E936 /* BaseTableViewControllerSpec.mm in Sources */,
-				E6CB97F5161B2E8B00A7E936 /* BaseTableViewController.m in Sources */,
+				E6CB97F5161B2E8B00A7E936 /* DTBaseTableViewController.m in Sources */,
 				E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */,
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
-				E6CB97FC161B2EA500A7E936 /* AppDataStore.m in Sources */,
-				E6CB97FD161B2EA800A7E936 /* SingletonFactory.m in Sources */,
-				E651028E161D7D80004B508C /* CellFactory.m in Sources */,
+				E651028E161D7D80004B508C /* DTCellFactory.m in Sources */,
+				E64727D4161DD84300CBE2AC /* CellObjectMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,10 +358,9 @@
 				E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */,
 				E638F1091619916B00694FBC /* Example.m in Sources */,
 				E638F10C1619919900694FBC /* ExampleCell.m in Sources */,
-				E6CB9775161B181C00A7E936 /* BaseTableViewController.m in Sources */,
-				E6CB977F161B183600A7E936 /* AppDataStore.m in Sources */,
-				E6CB9780161B183600A7E936 /* SingletonFactory.m in Sources */,
-				E651028D161D7D80004B508C /* CellFactory.m in Sources */,
+				E6CB9775161B181C00A7E936 /* DTBaseTableViewController.m in Sources */,
+				E651028D161D7D80004B508C /* DTCellFactory.m in Sources */,
+				E64727D3161DD84300CBE2AC /* CellObjectMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,30 +7,16 @@
 //
 
 #import "AppDelegate.h"
-
+#import "CellObjectMapper.h"
 #import "ExampleTableViewController.h"
 
 @implementation AppDelegate
-
-@synthesize dataStore = _dataStore;
 
 - (void)dealloc
 {
     [_window release];
     [_viewController release];
     [super dealloc];
-}
-
-#pragma mark -
-#pragma mark data store
-
-- (AppDataStore *)dataStore
-{
-    if (!_dataStore)
-    {
-        _dataStore = [AppDataStore new];
-    }
-    return _dataStore;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -40,6 +26,8 @@
     self.viewController = [[[ExampleTableViewController alloc] init] autorelease];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+    [CellObjectMapper setupCellMappings];
     return YES;
 }
 

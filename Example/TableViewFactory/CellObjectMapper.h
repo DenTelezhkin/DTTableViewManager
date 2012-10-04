@@ -1,5 +1,5 @@
 //
-//  TableViewModelProtocol.h
+//  CellObjectMapper.h
 //  TableViewFactory
 //
 //  Created by Denys Telezhkin on 10/4/12.
@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TableViewModelProtocol <NSObject>
-@required
-- (void)updateWithModel:(id)model;
-@optional
-- (id)model;
+@interface CellObjectMapper : NSObject
+
++(void)setupCellMappings;
 @end

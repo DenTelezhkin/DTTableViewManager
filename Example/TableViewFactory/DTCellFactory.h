@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SingletonProtocol.h"
+#import "SynthesizeSingleton.h"
 
 
-@interface CellFactory : NSObject <SingletonProtocol>
+
+@interface DTCellFactory : NSObject
+
+@property (nonatomic,retain) NSDictionary * classMappingDictionary;
+
+SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 
 // actions
 - (UITableViewCell *)cellForModel:(NSObject *)model inTable:(UITableView *)table;

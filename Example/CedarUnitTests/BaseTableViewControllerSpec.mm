@@ -1,5 +1,6 @@
-#import "BaseTableViewController.h"
+#import "DTBaseTableViewController.h"
 #import "Example.h"
+#import "ExampleCell.h"
 #import <Foundation/Foundation.h>
 
 using namespace Cedar::Matchers;
@@ -17,6 +18,8 @@ describe(@"BaseTableViewController", ^{
     __block Example * acc6;
     beforeEach(^{
         model = [BaseTableViewController new];
+        model.table.delegate = model;
+        model.table.dataSource = model;
         testModel = [Example new];
         acc1 = [[Example new] autorelease];
         acc2 = [[Example new] autorelease];

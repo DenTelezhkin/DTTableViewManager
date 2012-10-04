@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
-#import "CellFactory.h"
+#import "DTBaseTableViewController.h"
+#import "DTCellFactory.h"
 
-@interface BaseTableViewController ()
+@interface DTBaseTableViewController ()
 - (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
 @property (nonatomic,retain) NSMutableArray * sections;
 @property (nonatomic,retain) NSArray * headers;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation BaseTableViewController
+@implementation DTBaseTableViewController
 
 @synthesize table=_table, headers=_headers, sections=_sections,footers = _footers;
 
@@ -386,7 +386,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSObject *model = [self tableItemAtIndexPath:indexPath];
-    UITableViewCell *cell = [[CellFactory sharedInstance] cellForModel:model inTable:tableView];
+    UITableViewCell *cell = [[DTCellFactory sharedInstance] cellForModel:model inTable:tableView];
     return cell;
 }
 

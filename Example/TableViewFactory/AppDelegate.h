@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDataStore.h"
 
 @class ExampleTableViewController;
 
@@ -16,7 +15,5 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) ExampleTableViewController *viewController;
-
-@property (nonatomic, readonly) AppDataStore *dataStore;
 
 @end
