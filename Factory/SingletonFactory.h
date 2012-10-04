@@ -2,7 +2,7 @@
 //  SingletonFactory.h
 //  DonetskAR
 //
-//  Created by Alexey Belkevich on 4/13/12.
+//  Created by Denys Telezhkin on 4/13/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 

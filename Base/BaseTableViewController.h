@@ -1,8 +1,8 @@
 //
 //  BaseTableViewController.h
-//  ainifinity
+//  TableViewFactory
 //
-//  Created by Alexey Belkevich on 6/19/12.
+//  Created by Denys Telezhkin on 6/19/12.
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 

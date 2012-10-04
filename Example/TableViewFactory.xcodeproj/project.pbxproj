@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
+		E651028D161D7D80004B508C /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* CellFactory.m */; };
+		E651028E161D7D80004B508C /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* CellFactory.m */; };
 		E6CB9774161B181C00A7E936 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB976F161B181C00A7E936 /* BaseTableViewCell.m */; };
 		E6CB9775161B181C00A7E936 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* BaseTableViewController.m */; };
 		E6CB9776161B181C00A7E936 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9773161B181C00A7E936 /* BaseViewController.m */; };
-		E6CB9779161B182E00A7E936 /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9778161B182E00A7E936 /* CellFactory.m */; };
 		E6CB977F161B183600A7E936 /* AppDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977B161B183600A7E936 /* AppDataStore.m */; };
 		E6CB9780161B183600A7E936 /* SingletonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977D161B183600A7E936 /* SingletonFactory.m */; };
 		E6CB97AD161B26C900A7E936 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
@@ -26,7 +27,6 @@
 		E6CB97F8161B2E9000A7E936 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB976F161B181C00A7E936 /* BaseTableViewCell.m */; };
 		E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
-		E6CB97FB161B2EA200A7E936 /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9778161B182E00A7E936 /* CellFactory.m */; };
 		E6CB97FC161B2EA500A7E936 /* AppDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977B161B183600A7E936 /* AppDataStore.m */; };
 		E6CB97FD161B2EA800A7E936 /* SingletonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB977D161B183600A7E936 /* SingletonFactory.m */; };
 		E6EA83671615EE6000F8B8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
@@ -47,14 +47,14 @@
 		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
 		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
 		E638F10B1619919900694FBC /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleCell.m; path = TableViewFactory/Cells/ExampleCell.m; sourceTree = "<group>"; };
+		E651028B161D7D80004B508C /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFactory.h; sourceTree = "<group>"; };
+		E651028C161D7D80004B508C /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFactory.m; sourceTree = "<group>"; };
 		E6CB976E161B181C00A7E936 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewCell.h; path = ../../Base/BaseTableViewCell.h; sourceTree = "<group>"; };
 		E6CB976F161B181C00A7E936 /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTableViewCell.m; path = ../../Base/BaseTableViewCell.m; sourceTree = "<group>"; };
 		E6CB9770161B181C00A7E936 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewController.h; path = ../../Base/BaseTableViewController.h; sourceTree = "<group>"; };
 		E6CB9771161B181C00A7E936 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTableViewController.m; path = ../../Base/BaseTableViewController.m; sourceTree = "<group>"; };
 		E6CB9772161B181C00A7E936 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = ../../Base/BaseViewController.h; sourceTree = "<group>"; };
 		E6CB9773161B181C00A7E936 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = ../../Base/BaseViewController.m; sourceTree = "<group>"; };
-		E6CB9777161B182E00A7E936 /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellFactory.h; path = ../../Factory/CellFactory.h; sourceTree = "<group>"; };
-		E6CB9778161B182E00A7E936 /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellFactory.m; path = ../../Factory/CellFactory.m; sourceTree = "<group>"; };
 		E6CB977A161B183600A7E936 /* AppDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDataStore.h; path = ../../Factory/AppDataStore.h; sourceTree = "<group>"; };
 		E6CB977B161B183600A7E936 /* AppDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDataStore.m; path = ../../Factory/AppDataStore.m; sourceTree = "<group>"; };
 		E6CB977C161B183600A7E936 /* SingletonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonFactory.h; path = ../../Factory/SingletonFactory.h; sourceTree = "<group>"; };
@@ -229,8 +229,8 @@
 		E6EA838F1615F06800F8B8C3 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E6CB9777161B182E00A7E936 /* CellFactory.h */,
-				E6CB9778161B182E00A7E936 /* CellFactory.m */,
+				E651028B161D7D80004B508C /* CellFactory.h */,
+				E651028C161D7D80004B508C /* CellFactory.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -362,9 +362,9 @@
 				E6CB97F8161B2E9000A7E936 /* BaseTableViewCell.m in Sources */,
 				E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */,
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
-				E6CB97FB161B2EA200A7E936 /* CellFactory.m in Sources */,
 				E6CB97FC161B2EA500A7E936 /* AppDataStore.m in Sources */,
 				E6CB97FD161B2EA800A7E936 /* SingletonFactory.m in Sources */,
+				E651028E161D7D80004B508C /* CellFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,9 +380,9 @@
 				E6CB9774161B181C00A7E936 /* BaseTableViewCell.m in Sources */,
 				E6CB9775161B181C00A7E936 /* BaseTableViewController.m in Sources */,
 				E6CB9776161B181C00A7E936 /* BaseViewController.m in Sources */,
-				E6CB9779161B182E00A7E936 /* CellFactory.m in Sources */,
 				E6CB977F161B183600A7E936 /* AppDataStore.m in Sources */,
 				E6CB9780161B183600A7E936 /* SingletonFactory.m in Sources */,
+				E651028D161D7D80004B508C /* CellFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
