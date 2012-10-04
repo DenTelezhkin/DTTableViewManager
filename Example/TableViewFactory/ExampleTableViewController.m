@@ -19,11 +19,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self addTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]];
+    [self insertTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]
+              toIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [self setSectionHeaders:@[@"A", @"B", @"C", @"D", @"E"]];
-    
-
-    [self.table reloadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated

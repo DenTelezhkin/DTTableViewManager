@@ -8,9 +8,9 @@
 
 #import "CellFactory.h"
 #import "SingletonFactory.h"
-#import "BaseTableViewCell.h"
 #import "Example.h"
 #import "ExampleCell.h"
+#import "TableViewModelProtocol.h"
 
 @interface CellFactory ()
 - (UITableViewCell *)reuseCellFromTable:(UITableView *)table
@@ -79,7 +79,7 @@
                              identifier:(NSString *)identifier
                                andModel:(id)model
 {
-    BaseTableViewCell * cell =  [table dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell <TableViewModelProtocol> * cell =  [table dequeueReusableCellWithIdentifier:identifier];
     [cell updateWithModel:model];
     return cell;
 }
@@ -87,10 +87,12 @@
 - (UITableViewCell *)cellWithIdentifier:(NSString *)identifier andModel:(id)model
 {
     Class cellClass = [self cellClassWithIdentifier:identifier];
-    return [[(BaseTableViewCell *)[cellClass alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                                  reuseIdentifier:identifier
-                                                         andModel:model] autorelease];
-
+    UITableViewCell<TableViewModelProtocol> * cell = [(UITableViewCell <TableViewModelProtocol>  *)[cellClass alloc]
+                                                      initWithStyle:UITableViewCellStyleSubtitle
+                                                               reuseIdentifier:identifier];
+    [cell updateWithModel:model];
+    
+    return [cell autorelease];
 }
 
 - (Class)cellClassWithIdentifier:(NSString *)identifier

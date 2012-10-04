@@ -8,11 +8,9 @@
 
 #import "BaseTableViewController.h"
 #import "CellFactory.h"
-#import "BaseTableViewCell.h"
 
 @interface BaseTableViewController ()
-- (NSMutableArray *)getValidTableSection:(NSInteger)index;
-- (void)insertTableSectionsWithRowAnimation:(UITableViewRowAnimation)animation;
+- (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
 @property (nonatomic,retain) NSMutableArray * sections;
 @property (nonatomic,retain) NSArray * headers;
 @property (nonatomic,retain) NSArray * footers;
@@ -55,12 +53,16 @@
     self.sections = nil;
     self.table = nil;
     self.headers = nil;
+    self.footers = nil;
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
+    self.sections = nil;
     self.table = nil;
+    self.headers = nil;
+    self.footers = nil;
     [super viewDidUnload];
 }
 
@@ -149,7 +151,7 @@
 
 - (void)addTableItem:(NSObject *)tableItem
 {
-    [self addTableItem:tableItem toSection:0];
+    [self addTableItem:tableItem toSection:0 withRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(void)addTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation
@@ -159,7 +161,7 @@
 
 - (void)addTableItems:(NSArray *)tableItems
 {
-    [self addTableItems:tableItems toSection:0];
+    [self addTableItems:tableItems toSection:0  withRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(void)addTableItems:(NSArray *)tableItems withRowAnimation:(UITableViewRowAnimation)animation
@@ -169,46 +171,38 @@
 
 - (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section
 {
-    NSMutableArray *array = [self getValidTableSection:section];
-    [array addObject:tableItem];
+    [self addTableItem:tableItem toSection:section withRowAnimation:UITableViewRowAnimationNone];
 }
 
--(void)reloadTableSections
-{
-    for (int i = self.table.numberOfSections; i<self.sections.count ; i++)
-    {
-        [self.table reloadSections:[NSIndexSet indexSetWithIndex:i]
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
--(void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section
+-(void)addTableItem:(NSObject *)tableItem
+          toSection:(NSInteger)section
    withRowAnimation:(UITableViewRowAnimation)animation
 {
-    NSIndexPath * lastItemPath = [NSIndexPath indexPathForRow:[self numberOfTableItemsInSection:section]
-                                                    inSection:section];
-    [self addTableItem:tableItem toSection:section];
+   // Update datasource
+    NSMutableArray *array = [self getValidTableSection:section withAnimation:animation];
+    [array addObject:tableItem];
     
-    if (section >= self.table.numberOfSections)
+    
+    //update UI
+    NSIndexPath * modelItemPath = [self indexPathOfTableItem:tableItem];
+    
+    UITableViewCell * modelCell = [self.table cellForRowAtIndexPath:modelItemPath];
+    if (!modelCell)
     {
-        [self insertTableSectionsWithRowAnimation:animation];
-    }
-    else {
-        [self.table insertRowsAtIndexPaths:@[lastItemPath] withRowAnimation:animation];
+        [self.table insertRowsAtIndexPaths:@[modelItemPath] withRowAnimation:animation];
     }
 }
-
 
 - (void)addTableItems:(NSArray *)tableItems toSection:(NSInteger)section
 {
-    NSMutableArray *array = [self getValidTableSection:section];
-    
-    [array addObjectsFromArray:tableItems];
+    [self addTableItems:tableItems toSection:section withRowAnimation:UITableViewRowAnimationNone];
 }
 
--(void)addTableItems:(NSArray *)tableItems toSection:(NSInteger)section
+-(void)addTableItems:(NSArray *)tableItems
+           toSection:(NSInteger)section
     withRowAnimation:(UITableViewRowAnimation)animation
 {
+    //update Datasource and UI
     [self.table beginUpdates];
     for (id tableItem in tableItems)
     {
@@ -219,53 +213,80 @@
 
 -(void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray *array = [self getValidTableSection:indexPath.section];
-    
-    [array insertObject:tableItem atIndex:indexPath.row];
+    [self insertTableItem:tableItem toIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
 }
 
--(void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
+-(void)insertTableItem:(NSObject *)tableItem
+           toIndexPath:(NSIndexPath *)indexPath
       withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self insertTableItem:tableItem toIndexPath:indexPath];
+    // Update datasource
+    NSMutableArray *array = [self getValidTableSection:indexPath.section
+                                         withAnimation:animation];
+    [array insertObject:tableItem atIndex:indexPath.row];
     
-    if (indexPath.section >= self.table.numberOfSections)
+    
+    // UPdate UI
+    NSIndexPath * modelItemPath = [self indexPathOfTableItem:tableItem];
+    
+    UITableViewCell * modelCell = [self.table cellForRowAtIndexPath:modelItemPath];
+    if (!modelCell)
     {
-        [self insertTableSectionsWithRowAnimation:animation];
-    }
-    else {
         [self.table insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
+    }
+}
+
+-(void)reloadTableSections
+{
+    for (int i = 0; i<self.sections.count ; i++)
+    {
+        [self.table reloadSections:[NSIndexSet indexSetWithIndex:i]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
 -(void)replaceTableItem:(NSObject *)tableItemToReplace
           withTableItem:(NSObject *)replacingTableItem
 {
-    NSIndexPath * indexPathToReplace = [self indexPathOfTableItem:tableItemToReplace];
-    
-    NSMutableArray *section = [self getValidTableSection:indexPathToReplace.section];
-    [section replaceObjectAtIndex:indexPathToReplace.row withObject:replacingTableItem];
+    [self replaceTableItem:tableItemToReplace
+             withTableItem:replacingTableItem
+           andRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(void)replaceTableItem:(NSObject *)tableItemToReplace
           withTableItem:(NSObject *)replacingTableItem
         andRowAnimation:(UITableViewRowAnimation)animation
 {
+    //Update datasource
     NSIndexPath * indexPathToReplace = [self indexPathOfTableItem:tableItemToReplace];
-    [self replaceTableItem:tableItemToReplace withTableItem:replacingTableItem];
     
+    NSMutableArray *section = [self getValidTableSection:indexPathToReplace.section
+                                           withAnimation:animation];
+    [section replaceObjectAtIndex:indexPathToReplace.row withObject:replacingTableItem];
+    
+    //Update UI
     [self.table reloadRowsAtIndexPaths:@[indexPathToReplace]
                       withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)removeTableItem:(NSObject *)tableItem
 {
+    [self removeTableItem:tableItem withRowAnimation:UITableViewRowAnimationNone];
+}
+
+-(void)removeTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation
+{
+    // Update datasource
     NSIndexPath *indexPath = [self indexPathOfTableItem:tableItem];
     if (indexPath)
     {
+        // Update datasource
         NSArray *section = [self tableItemsInSection:indexPath.section];
         NSMutableArray *castedSection = (NSMutableArray *)section;
         [castedSection removeObject:tableItem];
+        
+        //Update UI
+        [self.table deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
     }
 }
 
@@ -283,16 +304,9 @@
     [self.table beginUpdates];
     for (NSObject * item in tableItems)
     {
-        [self removeTableItem:item withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self removeTableItem:item withRowAnimation:animation];
     }
     [self.table endUpdates];
-}
-
--(void)removeTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation
-{
-    NSIndexPath *indexPath = [self indexPathOfTableItem:tableItem];
-    [self removeTableItem:tableItem];
-    [self.table deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
 }
 
 - (void)removeAllTableItems
@@ -310,8 +324,10 @@
 
 -(void)moveSection:(int)indexFrom toSection:(int)indexTo
 {
-    NSMutableArray * validSectionFrom = [[self getValidTableSection:indexFrom] retain];
-    [self getValidTableSection:indexTo];
+    NSMutableArray * validSectionFrom = [[self getValidTableSection:indexFrom
+                                                      withAnimation:UITableViewRowAnimationNone]
+                                         retain];
+    [self getValidTableSection:indexTo withAnimation:UITableViewRowAnimationNone];
     
     [self.sections removeObject:validSectionFrom];
     [self.sections insertObject:validSectionFrom atIndex:indexTo];
@@ -329,49 +345,25 @@
 
 -(void)deleteSections:(NSIndexSet *)indexSet
 {
-    for (int i=0; i<= [self numberOfSections]; i++)
-    {
-        if ([indexSet containsIndex:i])
-        {
-            [self.sections removeObjectAtIndex:i];
-        }
-    }
+    [self deleteSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self deleteSections:indexSet];
-    [self.table beginUpdates];
-    for (int i=0; i<= [self.table numberOfSections]; i++)
-    {
-        if ([indexSet containsIndex:i])
-        {
-            [self.table deleteSections:[NSIndexSet indexSetWithIndex:i]
-                      withRowAnimation:animation];
-        }
-    }
-    [self.table endUpdates];
+    // Update datasource
+    [self.sections removeObjectsAtIndexes:indexSet];
+    
+    // Update UI
+    [self.table deleteSections:indexSet withRowAnimation:animation];
 }
 
 -(void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self.table beginUpdates];
-    for (int i=0; i<= self.table.numberOfSections; i++)
-    {
-        if ([indexSet containsIndex:i])
-        {
-            if (i==self.table.numberOfSections)
-            {
-                [self insertTableSectionsWithRowAnimation:animation];
-            }
-            else
-            {
-                [self.table reloadSections:[NSIndexSet indexSetWithIndex:i]
-                          withRowAnimation:animation];
-            }
-        }
-    }
-    [self.table endUpdates];
+   [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+       [self getValidTableSection:idx withAnimation:animation];
+   }];
+    
+    [self.table reloadSections:indexSet withRowAnimation:animation];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -403,23 +395,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-#pragma mark -
-#pragma mark private
--(void)insertTableSectionsWithRowAnimation:(UITableViewRowAnimation)animation
-{
-    
-    NSMutableIndexSet * sectionsToAdd = [[NSMutableIndexSet alloc] init];
-    
-    for (int i = self.table.numberOfSections; i<self.sections.count; i++)
-    {
-        [sectionsToAdd addIndex:i];
-    }
-    if ([sectionsToAdd count])
-        [self.table insertSections:sectionsToAdd withRowAnimation:animation];
-    [sectionsToAdd release];
-}
+#pragma mark -private
 
-- (NSMutableArray *)getValidTableSection:(NSInteger)index
+- (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation
 {
     if (index < self.sections.count)
     {
@@ -429,8 +407,13 @@
     {
         for (int i = self.sections.count; i <= index ; i++)
         {
+            //Update datasource
             NSMutableArray *newSection = [NSMutableArray array];
             [self.sections addObject:newSection];
+            
+            //Update UI
+            [self.table insertSections:[NSIndexSet indexSetWithIndex:i]
+                      withRowAnimation:animation];
         }
         return [self.sections lastObject];
     }/*
@@ -442,11 +425,15 @@
 -(void)setSectionHeaders:(NSArray *)headers
 {
     self.headers = headers;
+    
+    [self.table reloadData];
 }
 
 -(void)setSectionFooters:(NSArray *)footers
 {
     self.footers = footers;
+    
+    [self.table reloadData];
 }
 
 -(int)numberOfTableItemsInSection:(NSInteger)section

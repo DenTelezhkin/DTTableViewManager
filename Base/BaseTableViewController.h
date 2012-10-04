@@ -6,9 +6,7 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
-#import "BaseViewController.h"
-
-@interface BaseTableViewController : BaseViewController
+@interface BaseTableViewController : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
 
 
@@ -37,7 +35,7 @@
 
 ///////////////////////
 // Add table items.
-// Methods that have withRowAnimation in name, will update UI too.
+// Methods without rowAnimation parameter will update UI with UITableViewRowAnimationNone
 
 - (void)addTableItem:(NSObject *)tableItem;
 - (void)addTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation;

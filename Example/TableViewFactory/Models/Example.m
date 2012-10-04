@@ -17,4 +17,11 @@
     example.details = details;
     return [example autorelease];
 }
+
+-(void)dealloc
+{
+    self.someText = nil;
+    self.details = nil;
+    [super dealloc];
+}
 @end
