@@ -8,7 +8,7 @@ using namespace Cedar::Matchers;
 SPEC_BEGIN(BaseTableViewControllerSpec)
 
 describe(@"BaseTableViewController", ^{
-    __block BaseTableViewController *model;
+    __block DTBaseTableViewController *model;
     __block Example * testModel;
     __block Example * acc1;
     __block Example * acc2;
@@ -17,7 +17,7 @@ describe(@"BaseTableViewController", ^{
     __block Example * acc5;
     __block Example * acc6;
     beforeEach(^{
-        model = [BaseTableViewController new];
+        model = [DTBaseTableViewController new];
         model.table.delegate = model;
         model.table.dataSource = model;
         testModel = [Example new];

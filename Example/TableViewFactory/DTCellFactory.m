@@ -23,6 +23,8 @@
                                       andModel:(id)model;
 - (Class)cellClassWithIdentifier:(NSString *)identifier;
 
+@property (nonatomic,retain) NSMutableDictionary * mappingsDictionary;
+
 @end
 
 
@@ -33,16 +35,41 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 
 @synthesize classMappingDictionary = _classMappingDictionary;
 
+
+-(NSMutableDictionary *)mappingsDictionary
+{
+    if (!_mappingsDictionary)
+        _mappingsDictionary = [[NSMutableDictionary alloc] init];
+    return _mappingsDictionary;
+}
+
+-(NSDictionary *)classMappingDictionary
+{
+    return [self.mappingsDictionary copy];
+}
+
 #pragma mark - Init and destroy
 
 - (void)dealloc
 {
-    self.classMappingDictionary = nil;
+    self.mappingsDictionary = nil;
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark actions
+#pragma mark - class mapping
+
+-(void)addCellClassMapping:(Class)cellClass forModel:(id)model
+{
+    [self.mappingsDictionary setObject:NSStringFromClass(cellClass)
+                                forKey:NSStringFromClass([model class])];
+}
+
+-(void)addObjectMappingDictionary:(NSDictionary *)mappingDictionary
+{
+    [self.mappingsDictionary addEntriesFromDictionary:mappingDictionary];
+}
+
+#pragma mark - actions
 
 - (UITableViewCell *)cellForModel:(NSObject *)model inTable:(UITableView *)table
 {

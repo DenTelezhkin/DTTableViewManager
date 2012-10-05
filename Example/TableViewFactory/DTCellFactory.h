@@ -13,7 +13,7 @@
 
 @interface DTCellFactory : NSObject
 
-@property (nonatomic,retain) NSDictionary * classMappingDictionary;
+@property (readonly) NSDictionary * classMappingDictionary;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 
@@ -21,7 +21,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 - (UITableViewCell *)cellForModel:(NSObject *)model inTable:(UITableView *)table;
 - (Class)cellClassForModel:(NSObject *)model;
 
--(void)addObjectMappingDictionary:(NSDictionary *)mapping;
+-(void)addObjectMappingDictionary:(NSDictionary *)mappingDictionary;
 -(void)addCellClassMapping:(Class)cellClass forModel:(id)model;
 
 @end
