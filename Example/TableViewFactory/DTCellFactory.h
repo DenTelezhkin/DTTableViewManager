@@ -21,4 +21,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 - (UITableViewCell *)cellForModel:(NSObject *)model inTable:(UITableView *)table;
 - (Class)cellClassForModel:(NSObject *)model;
 
+-(void)addObjectMappingDictionary:(NSDictionary *)mapping;
+-(void)addCellClassMapping:(Class)cellClass forModel:(id)model;
+
 @end

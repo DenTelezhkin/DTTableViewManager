@@ -91,5 +91,9 @@
 - (void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
 
+// redirect to CellFactory
+-(void)addObjectMappingDictionary:(NSDictionary *)mapping;
+-(void)addCellClassMapping:(Class)cellClass forModel:(id)model;
+
 
 @end
