@@ -84,10 +84,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 {
     NSString *modelClassName = NSStringFromClass([model class]);
     return [self cellClassWithIdentifier:modelClassName];
+#warning FIX ME why not use dictionary immediately?
 }
 
 #pragma mark -
 #pragma mark private
+
+#warning TODO add option not to reuse cells
 
 - (UITableViewCell *)reuseCellFromTable:(UITableView *)table
                              identifier:(NSString *)identifier
