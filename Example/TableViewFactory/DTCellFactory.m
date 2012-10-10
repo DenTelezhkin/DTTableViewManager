@@ -36,14 +36,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 @synthesize classMappingDictionary = _classMappingDictionary;
 
 
--(NSMutableDictionary *)mappingsDictionary
+- (NSMutableDictionary *)mappingsDictionary
 {
     if (!_mappingsDictionary)
         _mappingsDictionary = [[NSMutableDictionary alloc] init];
     return _mappingsDictionary;
 }
 
--(NSDictionary *)classMappingDictionary
+- (NSDictionary *)classMappingDictionary
 {
     return [self.mappingsDictionary copy];
 }
@@ -58,13 +58,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 
 #pragma mark - class mapping
 
--(void)addCellClassMapping:(Class)cellClass forModel:(id)model
+- (void)addCellClassMapping:(Class)cellClass forModel:(id)model
 {
     [self.mappingsDictionary setObject:NSStringFromClass(cellClass)
                                 forKey:NSStringFromClass([model class])];
 }
 
--(void)addObjectMappingDictionary:(NSDictionary *)mappingDictionary
+- (void)addObjectMappingDictionary:(NSDictionary *)mappingDictionary
 {
     [self.mappingsDictionary addEntriesFromDictionary:mappingDictionary];
 }
