@@ -269,6 +269,13 @@
                       withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+-(void)removeTableItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *section = [self tableItemsInSection:indexPath.section];
+    NSMutableArray *castedSection = (NSMutableArray *)section;
+    [castedSection removeObjectAtIndex:indexPath.row];
+}
+
 - (void)removeTableItem:(NSObject *)tableItem
 {
     [self removeTableItem:tableItem withRowAnimation:UITableViewRowAnimationNone];
@@ -278,16 +285,16 @@
 {
     // Update datasource
     NSIndexPath *indexPath = [self indexPathOfTableItem:tableItem];
+    
     if (indexPath)
     {
-        // Update datasource
-        NSArray *section = [self tableItemsInSection:indexPath.section];
-        NSMutableArray *castedSection = (NSMutableArray *)section;
-        [castedSection removeObject:tableItem];
+        //update datasource
+        [self removeTableItemAtIndexPath:indexPath];
         
         //Update UI
         [self.table deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
     }
+    
 }
 
 -(void)removeTableItems:(NSArray *)tableItems

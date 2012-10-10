@@ -83,8 +83,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 - (Class)cellClassForModel:(NSObject *)model
 {
     NSString *modelClassName = NSStringFromClass([model class]);
-    return [self cellClassWithIdentifier:modelClassName];
-#warning FIX ME why not use dictionary immediately?
+    return NSClassFromString([self.mappingsDictionary objectForKey:modelClassName]);
 }
 
 #pragma mark -
@@ -103,7 +102,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 
 - (UITableViewCell *)cellWithIdentifier:(NSString *)identifier andModel:(id)model
 {
-    Class cellClass = [self cellClassWithIdentifier:identifier];
+    Class cellClass = [self cellClassForModel:model];
     
     if ([cellClass conformsToProtocol:@protocol(TableViewModelProtocol)])
     {
