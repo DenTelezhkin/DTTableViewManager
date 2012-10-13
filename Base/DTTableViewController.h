@@ -6,14 +6,11 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
-@interface DTBaseTableViewController : UIViewController
+@interface DTTableViewController : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
 
 
-@property (nonatomic, retain) IBOutlet UITableView * table;
-
-
-
+@property (nonatomic, retain) IBOutlet UITableView * tableView;
 
 
 //////////////////////////
@@ -91,9 +88,12 @@
 - (void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
 
+///////////////////////
+// Mapping
 // redirect to CellFactory
+
 -(void)addObjectMappingDictionary:(NSDictionary *)mapping;
--(void)addCellClassMapping:(Class)cellClass forModel:(id)model;
+-(void)addCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
 
 
 @end

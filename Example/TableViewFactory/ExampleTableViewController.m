@@ -8,6 +8,7 @@
 
 #import "ExampleTableViewController.h"
 #import "Example.h"
+#import "ExampleCell.h"
 
 @interface ExampleTableViewController ()
 
@@ -18,7 +19,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    [self addCellClassMapping:[ExampleCell class] forModelClass:[Example class]];
+    
     [self insertTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]
               toIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [self setSectionHeaders:@[@"A", @"B", @"C", @"D", @"E"]];

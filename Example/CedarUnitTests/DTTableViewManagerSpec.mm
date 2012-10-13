@@ -1,14 +1,14 @@
-#import "DTBaseTableViewController.h"
+#import "DTTableVIewController.h"
 #import "Example.h"
 #import "ExampleCell.h"
 #import <Foundation/Foundation.h>
 
 using namespace Cedar::Matchers;
 
-SPEC_BEGIN(BaseTableViewControllerSpec)
+SPEC_BEGIN(DTTableViewManagerSpec)
 
 describe(@"BaseTableViewController", ^{
-    __block DTBaseTableViewController *model;
+    __block DTTableViewController *model;
     __block Example * testModel;
     __block Example * acc1;
     __block Example * acc2;
@@ -17,9 +17,9 @@ describe(@"BaseTableViewController", ^{
     __block Example * acc5;
     __block Example * acc6;
     beforeEach(^{
-        model = [DTBaseTableViewController new];
-        model.table.delegate = model;
-        model.table.dataSource = model;
+        model = [DTTableViewController new];
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
         testModel = [Example new];
         acc1 = [[Example new] autorelease];
         acc2 = [[Example new] autorelease];
@@ -39,15 +39,15 @@ describe(@"BaseTableViewController", ^{
     
     it(@"should set section titles", ^{
         [model setSectionHeaders:@[ TEST_1, TEST_2 ]];
-        [model tableView:model.table titleForHeaderInSection:0] should equal(TEST_1);
-        [model tableView:model.table titleForHeaderInSection:1] should equal(TEST_2);
+        [model tableView:model.tableView titleForHeaderInSection:0] should equal(TEST_1);
+        [model tableView:model.tableView titleForHeaderInSection:1] should equal(TEST_2);
     });
     
     it(@"should set section footers", ^{
         [model setSectionFooters:@[ TEST_1, TEST_2 ]];
         
-        [model tableView:model.table titleForFooterInSection:0] should equal(TEST_1);
-        [model tableView:model.table titleForFooterInSection:1] should equal(TEST_2);
+        [model tableView:model.tableView titleForFooterInSection:0] should equal(TEST_1);
+        [model tableView:model.tableView titleForFooterInSection:1] should equal(TEST_2);
     });
     
     it(@"should not raise exceptions", ^{
@@ -55,8 +55,8 @@ describe(@"BaseTableViewController", ^{
         [model addTableItem:testModel toSection:1];
         
         ^{
-            [model tableView:model.table titleForFooterInSection:1];
-            [model tableView:model.table titleForHeaderInSection:1];
+            [model tableView:model.tableView titleForFooterInSection:1];
+            [model tableView:model.tableView titleForHeaderInSection:1];
             
         } should_not raise_exception;
     });
@@ -171,6 +171,11 @@ describe(@"BaseTableViewController", ^{
         
         NSArray * itemsSection1 = [model tableItemsInSection:1];
         [itemsSection1 lastObject] should equal(acc3);
+    });
+    
+    it(@"should support all datasource methods", ^{
+
+        
     });
    
 });

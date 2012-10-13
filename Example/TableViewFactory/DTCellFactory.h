@@ -21,7 +21,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 - (UITableViewCell *)cellForModel:(NSObject *)model inTable:(UITableView *)table;
 - (Class)cellClassForModel:(NSObject *)model;
 
+///////////////////////
+// Mapping
+// 
+
+// Designated mapping method:
+-(void)addCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
+
+// Dictionary should contain NSStringFromClass values and keys
 -(void)addObjectMappingDictionary:(NSDictionary *)mappingDictionary;
--(void)addCellClassMapping:(Class)cellClass forModel:(id)model;
 
 @end

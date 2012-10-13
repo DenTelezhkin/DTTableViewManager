@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
-#import "DTBaseTableViewController.h"
+#import "DTTableViewController.h"
 #import "DTCellFactory.h"
 
-@interface DTBaseTableViewController ()
+@interface DTTableViewController ()
 - (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
 @property (nonatomic,retain) NSMutableArray * sections;
 @property (nonatomic,retain) NSArray * headers;
@@ -17,9 +17,9 @@
 
 @end
 
-@implementation DTBaseTableViewController
+@implementation DTTableViewController
 
-@synthesize table=_table, headers=_headers, sections=_sections,footers = _footers;
+@synthesize tableView=_tableView, headers=_headers, sections=_sections,footers = _footers;
 
 #pragma mark - Getters, initializers and cleaning
 
@@ -51,26 +51,18 @@
 - (void)dealloc
 {
     self.sections = nil;
-    self.table = nil;
+    self.tableView = nil;
     self.headers = nil;
     self.footers = nil;
     [super dealloc];
 }
 
-- (void)viewDidUnload
-{
-    self.sections = nil;
-    self.table = nil;
-    self.headers = nil;
-    self.footers = nil;
-    [super viewDidUnload];
-}
-
 #pragma mark - mapping 
 
--(void)addCellClassMapping:(Class)cellClass forModel:(id)model
+-(void)addCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass
 {
-    [[DTCellFactory sharedInstance] addCellClassMapping:cellClass forModel:model];
+    [[DTCellFactory sharedInstance] addCellClassMapping:cellClass
+                                          forModelClass:modelClass];
 }
 
 -(void)addObjectMappingDictionary:(NSDictionary *)mapping
@@ -198,10 +190,10 @@
     //update UI
     NSIndexPath * modelItemPath = [self indexPathOfTableItem:tableItem];
     
-    UITableViewCell * modelCell = [self.table cellForRowAtIndexPath:modelItemPath];
+    UITableViewCell * modelCell = [self.tableView cellForRowAtIndexPath:modelItemPath];
     if (!modelCell)
     {
-        [self.table insertRowsAtIndexPaths:@[modelItemPath] withRowAnimation:animation];
+        [self.tableView insertRowsAtIndexPaths:@[modelItemPath] withRowAnimation:animation];
     }
 }
 
@@ -215,12 +207,12 @@
     withRowAnimation:(UITableViewRowAnimation)animation
 {
     //update Datasource and UI
-    [self.table beginUpdates];
+    [self.tableView beginUpdates];
     for (id tableItem in tableItems)
     {
         [self addTableItem:tableItem toSection:section withRowAnimation:animation];
     }
-    [self.table endUpdates];
+    [self.tableView endUpdates];
 }
 
 -(void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
@@ -241,10 +233,10 @@
     // UPdate UI
     NSIndexPath * modelItemPath = [self indexPathOfTableItem:tableItem];
     
-    UITableViewCell * modelCell = [self.table cellForRowAtIndexPath:modelItemPath];
+    UITableViewCell * modelCell = [self.tableView cellForRowAtIndexPath:modelItemPath];
     if (!modelCell)
     {
-        [self.table insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
     }
 }
 
@@ -252,7 +244,7 @@
 {
     for (int i = 0; i<self.sections.count ; i++)
     {
-        [self.table reloadSections:[NSIndexSet indexSetWithIndex:i]
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:i]
                   withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
@@ -277,7 +269,7 @@
     [section replaceObjectAtIndex:indexPathToReplace.row withObject:replacingTableItem];
     
     //Update UI
-    [self.table reloadRowsAtIndexPaths:@[indexPathToReplace]
+    [self.tableView reloadRowsAtIndexPaths:@[indexPathToReplace]
                       withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -304,7 +296,7 @@
         [self removeTableItemAtIndexPath:indexPath];
         
         //Update UI
-        [self.table deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
     }
     
 }
@@ -320,12 +312,12 @@
 -(void)removeTableItems:(NSArray *)tableItems
        withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self.table beginUpdates];
+    [self.tableView beginUpdates];
     for (NSObject * item in tableItems)
     {
         [self removeTableItem:item withRowAnimation:animation];
     }
-    [self.table endUpdates];
+    [self.tableView endUpdates];
 }
 
 - (void)removeAllTableItems
@@ -352,13 +344,13 @@
     [self.sections insertObject:validSectionFrom atIndex:indexTo];
     [validSectionFrom release];
     
-    if (self.sections.count > self.table.numberOfSections)
+    if (self.sections.count > self.tableView.numberOfSections)
     {
         //Row does not exist, moving section causes many sections to change, so we just reload
-        [self.table reloadData];
+        [self.tableView reloadData];
     }
     else {
-        [self.table moveSection:indexFrom toSection:indexTo];
+        [self.tableView moveSection:indexFrom toSection:indexTo];
     }
 }
 
@@ -373,7 +365,7 @@
     [self.sections removeObjectsAtIndexes:indexSet];
     
     // Update UI
-    [self.table deleteSections:indexSet withRowAnimation:animation];
+    [self.tableView deleteSections:indexSet withRowAnimation:animation];
 }
 
 -(void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
@@ -382,7 +374,7 @@
        [self getValidTableSection:idx withAnimation:animation];
    }];
     
-    [self.table reloadSections:indexSet withRowAnimation:animation];
+    [self.tableView reloadSections:indexSet withRowAnimation:animation];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -431,7 +423,7 @@
             [self.sections addObject:newSection];
             
             //Update UI
-            [self.table insertSections:[NSIndexSet indexSetWithIndex:i]
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i]
                       withRowAnimation:animation];
         }
         return [self.sections lastObject];
@@ -445,14 +437,14 @@
 {
     self.headers = headers;
     
-    [self.table reloadData];
+    [self.tableView reloadData];
 }
 
 -(void)setSectionFooters:(NSArray *)footers
 {
     self.footers = footers;
     
-    [self.table reloadData];
+    [self.tableView reloadData];
 }
 
 -(int)numberOfTableItemsInSection:(NSInteger)section
@@ -465,5 +457,9 @@
 {
     return [self.sections count];
 }
+
+#pragma mark - Delegate methods, trampoline to our delegate
+
+
 
 @end

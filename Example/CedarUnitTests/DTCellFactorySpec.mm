@@ -13,11 +13,11 @@ describe(@"DTCellFactory", ^{
     
     it(@"should set mapping", ^{
         [[DTCellFactory sharedInstance] addCellClassMapping:[@[] class]
-                                                    forModel:@"123"];
+                                                    forModelClass:[NSString class]];
         
         NSDictionary * mapping = [[DTCellFactory sharedInstance] classMappingDictionary];
         mapping should_not be_nil;
-        [mapping objectForKey:NSStringFromClass([@"123" class])] should equal(NSStringFromClass([@[] class]));
+        [mapping objectForKey:NSStringFromClass([NSString class])] should equal(NSStringFromClass([@[] class]));
     });
 
 });
