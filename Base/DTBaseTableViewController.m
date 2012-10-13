@@ -66,6 +66,18 @@
     [super viewDidUnload];
 }
 
+#pragma mark - mapping 
+
+-(void)addCellClassMapping:(Class)cellClass forModel:(id)model
+{
+    [[DTCellFactory sharedInstance] addCellClassMapping:cellClass forModel:model];
+}
+
+-(void)addObjectMappingDictionary:(NSDictionary *)mapping
+{
+    [[DTCellFactory sharedInstance] addObjectMappingDictionary:mapping];
+}
+
 #pragma mark - search
 
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath

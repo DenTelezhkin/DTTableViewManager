@@ -1,14 +1,14 @@
 
-DEPENDENCIES: 
-- Cedar
-- OCMock
+COCOAPODS: 0.15.1
 
 PODS: 
 - Cedar (0.0.1)
 - OCMock (2.0.1)
 
-COCOAPODS: 0.15.0
-
 SPEC CHECKSUMS: 
-  OCMock: 77a9c4c57af6bf258a537d34cf09abf422affede
   Cedar: 4bf5be704d3b0a50d6bd0353b6b04d8475153940
+  OCMock: 77a9c4c57af6bf258a537d34cf09abf422affede
+
+DEPENDENCIES: 
+- Cedar
+- OCMock

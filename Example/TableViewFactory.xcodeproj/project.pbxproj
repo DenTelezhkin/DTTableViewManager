@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
-		E64727D3161DD84300CBE2AC /* CellObjectMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E64727D2161DD84300CBE2AC /* CellObjectMapper.m */; };
-		E64727D4161DD84300CBE2AC /* CellObjectMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E64727D2161DD84300CBE2AC /* CellObjectMapper.m */; };
 		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; };
 		E651028D161D7D80004B508C /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* DTCellFactory.m */; };
 		E651028E161D7D80004B508C /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* DTCellFactory.m */; };
@@ -43,8 +41,6 @@
 		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
 		E638F10B1619919900694FBC /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleCell.m; path = TableViewFactory/Cells/ExampleCell.m; sourceTree = "<group>"; };
 		E64727D0161DD5CC00CBE2AC /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		E64727D1161DD84300CBE2AC /* CellObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellObjectMapper.h; sourceTree = "<group>"; };
-		E64727D2161DD84300CBE2AC /* CellObjectMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellObjectMapper.m; sourceTree = "<group>"; };
 		E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTCellFactorySpec.mm; sourceTree = "<group>"; };
 		E651028B161D7D80004B508C /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCellFactory.h; sourceTree = "<group>"; };
 		E651028C161D7D80004B508C /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCellFactory.m; sourceTree = "<group>"; };
@@ -178,8 +174,6 @@
 				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
 				E6EA83761615EE6000F8B8C3 /* AppDelegate.m */,
-				E64727D1161DD84300CBE2AC /* CellObjectMapper.h */,
-				E64727D2161DD84300CBE2AC /* CellObjectMapper.m */,
 				E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */,
 				E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */,
 				E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */,
@@ -348,7 +342,6 @@
 				E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */,
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
 				E651028E161D7D80004B508C /* DTCellFactory.m in Sources */,
-				E64727D4161DD84300CBE2AC /* CellObjectMapper.m in Sources */,
 				E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,7 +357,6 @@
 				E638F10C1619919900694FBC /* ExampleCell.m in Sources */,
 				E6CB9775161B181C00A7E936 /* DTBaseTableViewController.m in Sources */,
 				E651028D161D7D80004B508C /* DTCellFactory.m in Sources */,
-				E64727D3161DD84300CBE2AC /* CellObjectMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

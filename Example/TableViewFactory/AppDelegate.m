@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "CellObjectMapper.h"
 #import "ExampleTableViewController.h"
 
 @implementation AppDelegate
@@ -27,7 +26,6 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-    [CellObjectMapper setupCellMappings];
     return YES;
 }
 

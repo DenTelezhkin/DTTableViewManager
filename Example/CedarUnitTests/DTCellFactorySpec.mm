@@ -19,10 +19,7 @@ describe(@"DTCellFactory", ^{
         mapping should_not be_nil;
         [mapping objectForKey:NSStringFromClass([@"123" class])] should equal(NSStringFromClass([@[] class]));
     });
-    
-    it(@"should set dictionary mapping", ^{
-    
-    });
+
 });
 
 SPEC_END
