@@ -24,7 +24,7 @@ Example is available in Example folder.
 ### Additional 
 
 Please go to DTBaseTableViewController.h for all available API. Example project is included in Example folder.
-CellFactory uses SynthethizeSingleton macros (...), but you can use any singleton approach you like.
+CellFactory uses SynthethizeSingleton macros (https://github.com/cjhanson/Objective-C-Optimized-Singleton), but you can use any singleton approach you like.
 
 ### Discussion
 
