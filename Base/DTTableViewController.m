@@ -405,7 +405,7 @@
     
     NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
     
-    if (!self.reuseCells)
+    if (self.doNotReuseCells)
         reuseIdentifier = nil;
     
     UITableViewCell *cell = [[DTCellFactory sharedInstance] cellForModel:model

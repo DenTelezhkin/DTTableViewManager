@@ -12,7 +12,7 @@
 
 @property (nonatomic, retain) IBOutlet UITableView * tableView;
 
-@property (nonatomic,assign) BOOL reuseCells;
+@property (nonatomic,assign) BOOL doNotReuseCells;
 
 //////////////////////////
 // Search and setup

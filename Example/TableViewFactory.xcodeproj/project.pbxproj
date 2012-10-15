@@ -12,6 +12,12 @@
 		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; };
 		E651028D161D7D80004B508C /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* DTCellFactory.m */; };
 		E651028E161D7D80004B508C /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E651028C161D7D80004B508C /* DTCellFactory.m */; };
+		E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
+		E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
+		E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
+		E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
+		E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
+		E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
 		E6CB9775161B181C00A7E936 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* DTTableViewController.m */; };
 		E6CB97AD161B26C900A7E936 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
 		E6CB97AE161B26C900A7E936 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83681615EE6000F8B8C3 /* Foundation.framework */; };
@@ -44,6 +50,11 @@
 		E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTCellFactorySpec.mm; sourceTree = "<group>"; };
 		E651028B161D7D80004B508C /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCellFactory.h; sourceTree = "<group>"; };
 		E651028C161D7D80004B508C /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCellFactory.m; sourceTree = "<group>"; };
+		E666ACE9162C02C800A2DBF2 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCell.xib; path = TableViewFactory/Cells/CustomCell.xib; sourceTree = "<group>"; };
+		E666ACED162C034000A2DBF2 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCell.h; path = TableViewFactory/Cells/CustomCell.h; sourceTree = "<group>"; };
+		E666ACEE162C034000A2DBF2 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = TableViewFactory/Cells/CustomCell.m; sourceTree = "<group>"; };
+		E666ACF1162C037B00A2DBF2 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomModel.h; path = TableViewFactory/Models/CustomModel.h; sourceTree = "<group>"; };
+		E666ACF2162C037B00A2DBF2 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomModel.m; path = TableViewFactory/Models/CustomModel.m; sourceTree = "<group>"; };
 		E6CB9770161B181C00A7E936 /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../Base/DTTableViewController.h; sourceTree = "<group>"; };
 		E6CB9771161B181C00A7E936 /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../Base/DTTableViewController.m; sourceTree = "<group>"; };
 		E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CedarUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +109,8 @@
 			children = (
 				E638F1071619916B00694FBC /* Example.h */,
 				E638F1081619916B00694FBC /* Example.m */,
+				E666ACF1162C037B00A2DBF2 /* CustomModel.h */,
+				E666ACF2162C037B00A2DBF2 /* CustomModel.m */,
 			);
 			name = Models;
 			path = ..;
@@ -108,6 +121,9 @@
 			children = (
 				E638F10A1619919900694FBC /* ExampleCell.h */,
 				E638F10B1619919900694FBC /* ExampleCell.m */,
+				E666ACE9162C02C800A2DBF2 /* CustomCell.xib */,
+				E666ACED162C034000A2DBF2 /* CustomCell.h */,
+				E666ACEE162C034000A2DBF2 /* CustomCell.m */,
 			);
 			name = Cells;
 			path = ..;
@@ -300,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */,
+				E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +326,7 @@
 			files = (
 				E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */,
 				E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */,
+				E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +361,8 @@
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
 				E651028E161D7D80004B508C /* DTCellFactory.m in Sources */,
 				E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */,
+				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
+				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +377,8 @@
 				E638F10C1619919900694FBC /* ExampleCell.m in Sources */,
 				E6CB9775161B181C00A7E936 /* DTTableViewController.m in Sources */,
 				E651028D161D7D80004B508C /* DTCellFactory.m in Sources */,
+				E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */,
+				E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,8 @@
 #import "ExampleTableViewController.h"
 #import "Example.h"
 #import "ExampleCell.h"
+#import "CustomCell.h"
+#import "CustomModel.h"
 
 @interface ExampleTableViewController ()
 
@@ -21,9 +23,15 @@
     [super viewDidLoad];
 
     // Uncomment this line if you want to NOT reuse cells.
-    // self.reuseCells = NO;
+    // self.doNotReuseCells = YES;
+    
+    // CustomCell is created from NIB
+    // IMPORTANT to register cell nib for reuse identifier IDENTICAL to your model class name
+    [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil]
+         forCellReuseIdentifier:@"CustomModel"];
     
     [self addCellClassMapping:[ExampleCell class] forModelClass:[Example class]];
+    [self addCellClassMapping:[CustomCell class] forModelClass:[CustomModel class]];
     
     [self insertTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]
               toIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -70,13 +78,26 @@
         [self reloadSections:[NSIndexSet indexSetWithIndex:4]
             withRowAnimation:UITableViewRowAnimationAutomatic];
     });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self addTableItem:[CustomModel modelWithText1:@"Very"
+                                                 text2:@"Customized"
+                                                 text3:@"Table"
+                                                 text4:@"Cell"]
+                 toSection:4];
+    });
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Example * selectedExample = [self tableItemAtIndexPath:indexPath];
-    
-    [self removeTableItem:selectedExample withRowAnimation:UITableViewRowAnimationAutomatic];
+    id model = [self tableItemAtIndexPath:indexPath];
+    if ([model isKindOfClass:[Example class]])
+    {
+        Example * selectedExample = model;
+        
+        [self removeTableItem:selectedExample withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 @end

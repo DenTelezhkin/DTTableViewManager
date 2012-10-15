@@ -82,7 +82,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 
 - (Class)cellClassForModel:(NSObject *)model
 {
-    NSString *modelClassName = NSStringFromClass([model class]);
+    NSString *modelClassName = [self classStringForModel:model];
     if ([self.mappingsDictionary objectForKey:modelClassName])
     {
         return NSClassFromString([self.mappingsDictionary objectForKey:modelClassName]);

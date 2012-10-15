@@ -93,7 +93,7 @@
 
 #define SYNTHESIZE_SINGLETON_FOR_CLASS(__CLASSNAME__)	\
 \
-static volatile __CLASSNAME__* _##__CLASSNAME__##_sharedInstance = nil;	\
+static __CLASSNAME__* _##__CLASSNAME__##_sharedInstance = nil;	\
 \
 + (__CLASSNAME__*) sharedInstanceNoSynch	\
 {	\
