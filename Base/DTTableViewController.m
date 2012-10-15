@@ -393,11 +393,24 @@
     return (section < self.footers.count) ? [self.footers objectAtIndex:section] : nil;
 }
 
+-(NSString *)defaultReuseIdentifierForModel:(id)model
+{
+    return NSStringFromClass([model class]);
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSObject *model = [self tableItemAtIndexPath:indexPath];
-    UITableViewCell *cell = [[DTCellFactory sharedInstance] cellForModel:model inTable:tableView];
+    
+    NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
+    
+    if (!self.reuseCells)
+        reuseIdentifier = nil;
+    
+    UITableViewCell *cell = [[DTCellFactory sharedInstance] cellForModel:model
+                                                                 inTable:tableView
+                                                         reuseIdentifier:reuseIdentifier];
     return cell;
 }
 
@@ -406,7 +419,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-#pragma mark -private
+#pragma mark - private
 
 - (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation
 {

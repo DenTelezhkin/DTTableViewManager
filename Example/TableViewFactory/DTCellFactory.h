@@ -18,7 +18,10 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 
 // actions
-- (UITableViewCell *)cellForModel:(NSObject *)model inTable:(UITableView *)table;
+- (UITableViewCell *)cellForModel:(NSObject *)model
+                          inTable:(UITableView *)table
+                  reuseIdentifier:(NSString *)reuseIdentifier;
+
 - (Class)cellClassForModel:(NSObject *)model;
 
 ///////////////////////

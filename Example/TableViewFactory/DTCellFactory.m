@@ -12,16 +12,14 @@
 #import "ExampleCell.h"
 #import "TableViewModelProtocol.h"
 
-
-
-
 @interface DTCellFactory ()
+
 - (UITableViewCell *)reuseCellFromTable:(UITableView *)table
-                             identifier:(NSString *)identifier
-                               andModel:(id)model;
-- (UITableViewCell *)cellWithIdentifier:(NSString *)identifier
-                                      andModel:(id)model;
-- (Class)cellClassWithIdentifier:(NSString *)identifier;
+                               forModel:(id)model
+                        reuseIdentifier:(NSString *)reuseIdentifier;
+
+- (UITableViewCell *)cellWithModel:(id)model
+                   reuseIdentifier:(NSString *)reuseIdentifier;
 
 @property (nonatomic,retain) NSMutableDictionary * mappingsDictionary;
 
@@ -45,7 +43,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 
 - (NSDictionary *)classMappingDictionary
 {
-    return [self.mappingsDictionary copy];
+    return [[self.mappingsDictionary copy] autorelease];
 }
 
 #pragma mark - Init and destroy
@@ -71,44 +69,61 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 
 #pragma mark - actions
 
-- (UITableViewCell *)cellForModel:(NSObject *)model inTable:(UITableView *)table
+- (UITableViewCell *)cellForModel:(NSObject *)model
+                          inTable:(UITableView *)table
+                  reuseIdentifier:(NSString *)reuseIdentifier
 {
-    NSString *modelClassName = NSStringFromClass([model class]);
     UITableViewCell *cell = [self reuseCellFromTable:table
-                                          identifier:modelClassName
-                                            andModel:model];
-    return cell ? cell : [self cellWithIdentifier:modelClassName andModel:model];
+                                            forModel:model
+                                     reuseIdentifier:reuseIdentifier];
+
+    return cell ? cell : [self cellWithModel:model reuseIdentifier:reuseIdentifier];
 }
 
 - (Class)cellClassForModel:(NSObject *)model
 {
     NSString *modelClassName = NSStringFromClass([model class]);
-    return NSClassFromString([self.mappingsDictionary objectForKey:modelClassName]);
+    if ([self.mappingsDictionary objectForKey:modelClassName])
+    {
+        return NSClassFromString([self.mappingsDictionary objectForKey:modelClassName]);
+    }
+    else
+    {
+        NSString *reason = [NSString stringWithFormat:@"DTCellFactory does not have mapping for %@ class",
+                            [model class]];
+        @throw [NSException exceptionWithName:@"API misuse"
+                                       reason:reason userInfo:nil];
+    }
 }
 
 #pragma mark -
-#pragma mark private
 
-#warning TODO add option not to reuse cells
+-(NSString *)classStringForModel:(id)model
+{
+    return NSStringFromClass([model class]);
+}
 
 - (UITableViewCell *)reuseCellFromTable:(UITableView *)table
-                             identifier:(NSString *)identifier
-                               andModel:(id)model
+                               forModel:(id)model
+                        reuseIdentifier:(NSString *)reuseIdentifier
 {
-    UITableViewCell <TableViewModelProtocol> * cell =  [table dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell <TableViewModelProtocol> * cell =  [table dequeueReusableCellWithIdentifier:
+                                                                reuseIdentifier];
     [cell updateWithModel:model];
     return cell;
 }
 
-- (UITableViewCell *)cellWithIdentifier:(NSString *)identifier andModel:(id)model
+- (UITableViewCell *)cellWithModel:(id)model reuseIdentifier:(NSString *)reuseIdentifier
 {
     Class cellClass = [self cellClassForModel:model];
     
     if ([cellClass conformsToProtocol:@protocol(TableViewModelProtocol)])
     {
-        UITableViewCell<TableViewModelProtocol> * cell = [(UITableViewCell <TableViewModelProtocol>  *)[cellClass alloc]
-                                                          initWithStyle:UITableViewCellStyleSubtitle
-                                                          reuseIdentifier:identifier];
+        UITableViewCell<TableViewModelProtocol> * cell;
+
+        cell = [(UITableViewCell <TableViewModelProtocol>  *)[cellClass alloc]
+                                                initWithStyle:UITableViewCellStyleSubtitle
+                                              reuseIdentifier:reuseIdentifier];
         [cell updateWithModel:model];
         
         return [cell autorelease];
@@ -119,20 +134,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
                                    reason:reason userInfo:nil];
     
     return nil;
-}
-
-- (Class)cellClassWithIdentifier:(NSString *)identifier
-{
-    NSString *cellClassName = [self.classMappingDictionary valueForKey:identifier];
-    Class cellClass = NSClassFromString(cellClassName);
-    if (!cellClass)
-    {
-        NSString *reason = [NSString stringWithFormat:@"No cell class for model '%@'",
-                            identifier];
-        @throw [NSException exceptionWithName:@"No cell class for model" 
-                                       reason:reason userInfo:nil];
-    }
-    return cellClass;
 }
 
 @end

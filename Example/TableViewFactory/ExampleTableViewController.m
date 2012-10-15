@@ -19,6 +19,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // Uncomment this line if you want to NOT reuse cells.
+    // self.reuseCells = NO;
     
     [self addCellClassMapping:[ExampleCell class] forModelClass:[Example class]];
     
