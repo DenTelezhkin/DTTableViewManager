@@ -16,8 +16,8 @@
 		E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
 		E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
 		E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
-		E666AD0B162C294500A2DBF2 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E666AD0A162C294500A2DBF2 /* DTCellFactory.m */; };
-		E666AD0D162C295200A2DBF2 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E666AD0A162C294500A2DBF2 /* DTCellFactory.m */; };
+		E666AD34162C3C8200A2DBF2 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */; };
+		E666AD35162C3C8200A2DBF2 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */; };
 		E6CB9775161B181C00A7E936 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* DTTableViewController.m */; };
 		E6CB97AD161B26C900A7E936 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
 		E6CB97AE161B26C900A7E936 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83681615EE6000F8B8C3 /* Foundation.framework */; };
@@ -53,8 +53,8 @@
 		E666ACEE162C034000A2DBF2 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = TableViewFactory/Cells/CustomCell.m; sourceTree = "<group>"; };
 		E666ACF1162C037B00A2DBF2 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomModel.h; path = TableViewFactory/Models/CustomModel.h; sourceTree = "<group>"; };
 		E666ACF2162C037B00A2DBF2 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomModel.m; path = TableViewFactory/Models/CustomModel.m; sourceTree = "<group>"; };
-		E666AD09162C294400A2DBF2 /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCellFactory.h; sourceTree = "<group>"; };
-		E666AD0A162C294500A2DBF2 /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCellFactory.m; sourceTree = "<group>"; };
+		E666AD32162C3C8200A2DBF2 /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCellFactory.h; sourceTree = "<group>"; };
+		E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCellFactory.m; sourceTree = "<group>"; };
 		E6CB9770161B181C00A7E936 /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../Base/DTTableViewController.h; sourceTree = "<group>"; };
 		E6CB9771161B181C00A7E936 /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../Base/DTTableViewController.m; sourceTree = "<group>"; };
 		E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CedarUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,8 +229,8 @@
 		E6EA838F1615F06800F8B8C3 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E666AD09162C294400A2DBF2 /* DTCellFactory.h */,
-				E666AD0A162C294500A2DBF2 /* DTCellFactory.m */,
+				E666AD32162C3C8200A2DBF2 /* DTCellFactory.h */,
+				E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -362,7 +362,7 @@
 				E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */,
 				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
-				E666AD0B162C294500A2DBF2 /* DTCellFactory.m in Sources */,
+				E666AD35162C3C8200A2DBF2 /* DTCellFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +378,7 @@
 				E6CB9775161B181C00A7E936 /* DTTableViewController.m in Sources */,
 				E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */,
-				E666AD0D162C295200A2DBF2 /* DTCellFactory.m in Sources */,
+				E666AD34162C3C8200A2DBF2 /* DTCellFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
