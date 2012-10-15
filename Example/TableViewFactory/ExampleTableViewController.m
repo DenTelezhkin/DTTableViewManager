@@ -102,6 +102,7 @@
                                                  text3:@"Table"
                                                  text4:@"Cell"]
                               toSection:4];
+        [self.tableView setEditing:YES animated:YES];
     });
     
 }
@@ -115,6 +116,11 @@
         
         [self.tableManager removeTableItem:selectedExample withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+}
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
 }
 
 @end

@@ -21,8 +21,7 @@
     
     self.textLabel.text = self.exampleModel.someText;
     self.detailTextLabel.text = self.exampleModel.details;
-    
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    self.showsReorderControl = YES;
 }
 
 -(void)dealloc
