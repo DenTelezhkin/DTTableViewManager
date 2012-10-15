@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DTTableViewController.h"
+#import "DTTableViewManager.h"
 
-@interface ExampleTableViewController : DTTableViewController
+@interface ExampleTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic,retain) IBOutlet UITableView * tableView;
 @end

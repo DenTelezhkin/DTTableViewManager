@@ -6,13 +6,29 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
-@interface DTTableViewController : UIViewController
+//Optional protocol, but with required method
+@protocol DTTableViewManagerProtocol
+@required
+-(void)createdCell:(UITableViewCell *)cell
+      forTableView:(UITableView *)tableView
+ forRowAtIndexPath:(NSIndexPath *)indexPath;
+@end
+
+
+@interface DTTableViewManager : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
 
 
 @property (nonatomic, retain) IBOutlet UITableView * tableView;
 
 @property (nonatomic,assign) BOOL doNotReuseCells;
+
+
+//////////////////////////
+// Initialization
+
+-(id)initWithDelegate:(id <UITableViewDelegate>)delegate andTableView:(UITableView *)tableView;
++(id)managerWithDelegate:(id <UITableViewDelegate>)delegate andTableView:(UITableView *)tableView;
 
 //////////////////////////
 // Search and setup

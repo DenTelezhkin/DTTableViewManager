@@ -14,9 +14,24 @@
 
 @interface ExampleTableViewController ()
 
+@property (nonatomic,retain) DTTableViewManager * tableManager;
 @end
 
 @implementation ExampleTableViewController
+
+-(void)dealloc
+{
+    self.tableManager = nil;
+    [super dealloc];
+}
+
+-(DTTableViewManager *)tableManager
+{
+    if (!_tableManager)
+        _tableManager = [[DTTableViewManager alloc] initWithDelegate:self
+                                                           andTableView:self.tableView];
+    return _tableManager;
+}
 
 - (void)viewDidLoad
 {
@@ -30,12 +45,12 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil]
          forCellReuseIdentifier:@"CustomModel"];
     
-    [self addCellClassMapping:[ExampleCell class] forModelClass:[Example class]];
-    [self addCellClassMapping:[CustomCell class] forModelClass:[CustomModel class]];
+    [self.tableManager addCellClassMapping:[ExampleCell class] forModelClass:[Example class]];
+    [self.tableManager addCellClassMapping:[CustomCell class] forModelClass:[CustomModel class]];
     
-    [self insertTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]
+    [self.tableManager insertTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]
               toIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [self setSectionHeaders:@[@"A", @"B", @"C", @"D", @"E"]];
+    [self.tableManager setSectionHeaders:@[@"A", @"B", @"C", @"D", @"E"]];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -43,60 +58,62 @@
     [super viewWillAppear:animated];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self addTableItem:[Example exampleWithText:@"Hello section 1!" andDetails:@"Woohoo!"]
-                 toSection:1
-          withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableManager addTableItem:[Example exampleWithText:@"Hello section 1!" andDetails:@"Woohoo!"]
+                              toSection:1
+                       withRowAnimation:UITableViewRowAnimationAutomatic];
     });
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self insertTableItem:[Example exampleWithText:@"Hello section 3!" andDetails:@"Woohoo!"]
-                  toIndexPath:[NSIndexPath indexPathForRow:0 inSection:4]
-             withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableManager insertTableItem:[Example exampleWithText:@"Hello section 3!" andDetails:@"Woohoo!"]
+                               toIndexPath:[NSIndexPath indexPathForRow:0 inSection:4]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
     });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self deleteSections:[NSIndexSet indexSetWithIndex:3]
-            withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableManager deleteSections:[NSIndexSet indexSetWithIndex:3]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
     });
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self addTableItem:[Example exampleWithText:@"Reloaded row from section 2" andDetails:@""]
-                 toSection:2];
+        [self.tableManager addTableItem:[Example exampleWithText:@"Reloaded row from section 2"
+                                                      andDetails:@""]
+                              toSection:2];
     });
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self reloadSections:[NSIndexSet indexSetWithIndex:2]
-            withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableManager reloadSections:[NSIndexSet indexSetWithIndex:2]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
     });
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self moveSection:1 toSection:3];
+        [self.tableManager moveSection:1 toSection:3];
     });
  
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self addTableItem:[Example exampleWithText:@"Add item and reload section" andDetails:@""]
+        [self.tableManager addTableItem:[Example exampleWithText:@"Add item and reload section"
+                                                      andDetails:@""]
                  toSection:4];
-        [self reloadSections:[NSIndexSet indexSetWithIndex:4]
-            withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableManager reloadSections:[NSIndexSet indexSetWithIndex:4]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
     });
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self addTableItem:[CustomModel modelWithText1:@"Very"
+        [self.tableManager addTableItem:[CustomModel modelWithText1:@"Very"
                                                  text2:@"Customized"
                                                  text3:@"Table"
                                                  text4:@"Cell"]
-                 toSection:4];
+                              toSection:4];
     });
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id model = [self tableItemAtIndexPath:indexPath];
+    id model = [self.tableManager tableItemAtIndexPath:indexPath];
     if ([model isKindOfClass:[Example class]])
     {
         Example * selectedExample = model;
         
-        [self removeTableItem:selectedExample withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableManager removeTableItem:selectedExample withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 

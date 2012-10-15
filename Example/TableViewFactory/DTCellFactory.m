@@ -7,9 +7,6 @@
 //
 
 #import "DTCellFactory.h"
-
-#import "Example.h"
-#import "ExampleCell.h"
 #import "TableViewModelProtocol.h"
 
 @interface DTCellFactory ()

@@ -6,22 +6,43 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
-#import "DTTableViewController.h"
+#import "DTTableViewManager.h"
 #import "DTCellFactory.h"
 
-@interface DTTableViewController ()
+@interface DTTableViewManager ()
 - (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
 @property (nonatomic,retain) NSMutableArray * sections;
 @property (nonatomic,retain) NSArray * headers;
 @property (nonatomic,retain) NSArray * footers;
 
+@property (nonatomic,assign) id <UITableViewDelegate,UITableViewDataSource, DTTableViewManagerProtocol> delegate;
 @end
 
-@implementation DTTableViewController
+@implementation DTTableViewManager
 
 @synthesize tableView=_tableView, headers=_headers, sections=_sections,footers = _footers;
 
 #pragma mark - Getters, initializers and cleaning
+
+-(id)initWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
+{
+    self = [super init];
+    if (self)
+    {
+        self.delegate =(id <DTTableViewManagerProtocol, UITableViewDelegate,UITableViewDataSource>) delegate;
+        self.tableView = tableView;
+        tableView.dataSource = self;
+        tableView.delegate = delegate;
+    }
+    return self;
+}
+
++(id)managerWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
+{
+    DTTableViewManager * manager = [[DTTableViewManager alloc] initWithDelegate:delegate
+                                                                         andTableView:tableView];
+    return [manager autorelease];
+}
 
 -(NSMutableArray *)sections
 {
@@ -411,6 +432,12 @@
     UITableViewCell *cell = [[DTCellFactory sharedInstance] cellForModel:model
                                                                  inTable:tableView
                                                          reuseIdentifier:reuseIdentifier];
+    
+    if ([self.delegate respondsToSelector:@selector(createdCell:forTableView:forRowAtIndexPath:)])
+    {
+        [self.delegate createdCell:cell forTableView:tableView forRowAtIndexPath:indexPath];
+    }
+    
     return cell;
 }
 
@@ -471,8 +498,46 @@
     return [self.sections count];
 }
 
-#pragma mark - Delegate methods, trampoline to our delegate
+#pragma mark - Datasource methods, trampoline to our delegate
 
+-(BOOL)delegateRespondsToSelector:(SEL)selector
+{
+    return [self.delegate respondsToSelector:selector];
+}
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self delegateRespondsToSelector:_cmd])
+    {
+        [self.delegate tableView:tableView
+              commitEditingStyle:editingStyle
+               forRowAtIndexPath:indexPath];
+    }
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self delegateRespondsToSelector:_cmd])
+    {
+        return [self.delegate tableView:tableView canEditRowAtIndexPath:indexPath];
+    }
+    return NO;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self delegateRespondsToSelector:_cmd])
+    {
+        return [self.delegate tableView:tableView canMoveRowAtIndexPath:indexPath];
+    }
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView
+moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+     toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+#warning we should update our model here, test this.
+}
 
 @end

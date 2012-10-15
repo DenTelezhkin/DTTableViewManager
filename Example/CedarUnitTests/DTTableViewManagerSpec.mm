@@ -1,4 +1,4 @@
-#import "DTTableVIewController.h"
+//#import "DTTableViewController.h"
 #import "Example.h"
 #import "ExampleCell.h"
 #import <Foundation/Foundation.h>
@@ -174,8 +174,12 @@ describe(@"BaseTableViewController", ^{
     });
     
     it(@"should support all datasource methods", ^{
-
-        
+        [model respondsToSelector:@selector(tableView:
+                                            commitEditingStyle:
+                                            forRowAtIndexPath:)] should equal(YES);
+        [model respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)] should equal(YES);
+        [model respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)] should equal(YES);
+        [model respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)] should equal(YES);
     });
    
 });
