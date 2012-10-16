@@ -7,6 +7,6 @@
 //
 #import "TableViewModelProtocol.h"
 
-@interface ExampleCell : UITableViewCell <TableViewModelProtocol>
+@interface ExampleCell : UITableViewCell <DTTableViewModelProtocol>
 
 @end

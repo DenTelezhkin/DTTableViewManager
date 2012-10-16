@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TableViewModelProtocol <NSObject>
+@protocol DTTableViewModelProtocol <NSObject>
 @required
 - (void)updateWithModel:(id)model;
 @optional

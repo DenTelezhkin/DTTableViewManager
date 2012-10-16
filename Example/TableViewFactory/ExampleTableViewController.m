@@ -28,8 +28,22 @@
 -(DTTableViewManager *)tableManager
 {
     if (!_tableManager)
+    {
         _tableManager = [[DTTableViewManager alloc] initWithDelegate:self
                                                            andTableView:self.tableView];
+        
+        // CustomCell is created from NIB
+        // IMPORTANT to register cell nib for reuse identifier IDENTICAL to your model class name
+        [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil]
+             forCellReuseIdentifier:@"CustomModel"];
+        
+        // Recommended to add mappings right here, in tableManager getter
+        [self.tableManager addCellClassMapping:[ExampleCell class] forModelClass:[Example class]];
+        [self.tableManager addCellClassMapping:[CustomCell class] forModelClass:[CustomModel class]];
+        
+        // Uncomment this line if you want to NOT reuse cells.
+        // self.doNotReuseCells = YES;
+    }
     return _tableManager;
 }
 
@@ -37,17 +51,6 @@
 {
     [super viewDidLoad];
 
-    // Uncomment this line if you want to NOT reuse cells.
-    // self.doNotReuseCells = YES;
-    
-    // CustomCell is created from NIB
-    // IMPORTANT to register cell nib for reuse identifier IDENTICAL to your model class name
-    [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil]
-         forCellReuseIdentifier:@"CustomModel"];
-    
-    [self.tableManager addCellClassMapping:[ExampleCell class] forModelClass:[Example class]];
-    [self.tableManager addCellClassMapping:[CustomCell class] forModelClass:[CustomModel class]];
-    
     [self.tableManager insertTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]
               toIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [self.tableManager setSectionHeaders:@[@"A", @"B", @"C", @"D", @"E"]];

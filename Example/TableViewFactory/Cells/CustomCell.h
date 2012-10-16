@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TableViewModelProtocol.h"
 
-@interface CustomCell : UITableViewCell <TableViewModelProtocol>
+@interface CustomCell : UITableViewCell <DTTableViewModelProtocol>
 
 @property (nonatomic,retain) IBOutlet UILabel * label1;
 @property (nonatomic,retain) IBOutlet UILabel * label2;

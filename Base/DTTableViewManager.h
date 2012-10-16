@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 MLSDev. All rights reserved.
 //
 
+#import "TableViewModelProtocol.h"
+
 //Optional protocol, but with required method
 @protocol DTTableViewManagerProtocol
 @required

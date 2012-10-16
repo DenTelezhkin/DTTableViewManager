@@ -104,7 +104,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
                                forModel:(id)model
                         reuseIdentifier:(NSString *)reuseIdentifier
 {
-    UITableViewCell <TableViewModelProtocol> * cell =  [table dequeueReusableCellWithIdentifier:
+    UITableViewCell <DTTableViewModelProtocol> * cell =  [table dequeueReusableCellWithIdentifier:
                                                                 reuseIdentifier];
     [cell updateWithModel:model];
     return cell;
@@ -114,11 +114,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 {
     Class cellClass = [self cellClassForModel:model];
     
-    if ([cellClass conformsToProtocol:@protocol(TableViewModelProtocol)])
+    if ([cellClass conformsToProtocol:@protocol(DTTableViewModelProtocol)])
     {
-        UITableViewCell<TableViewModelProtocol> * cell;
+        UITableViewCell<DTTableViewModelProtocol> * cell;
 
-        cell = [(UITableViewCell <TableViewModelProtocol>  *)[cellClass alloc]
+        cell = [(UITableViewCell <DTTableViewModelProtocol>  *)[cellClass alloc]
                                                 initWithStyle:UITableViewCellStyleSubtitle
                                               reuseIdentifier:reuseIdentifier];
         [cell updateWithModel:model];
