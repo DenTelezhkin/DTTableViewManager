@@ -6,9 +6,6 @@
 //  Copyright (c) 2012 Denys Telezhkin. All rights reserved.
 //
 
-#import "ExampleCell.h"
-#import "Example.h"
-
 @interface ExampleCell()
 @property (nonatomic,retain) Example * exampleModel;
 @end

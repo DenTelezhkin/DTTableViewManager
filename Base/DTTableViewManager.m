@@ -252,13 +252,7 @@
     
     
     // UPdate UI
-    NSIndexPath * modelItemPath = [self indexPathOfTableItem:tableItem];
-    
-    UITableViewCell * modelCell = [self.tableView cellForRowAtIndexPath:modelItemPath];
-    if (!modelCell)
-    {
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
-    }
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
 }
 
 -(void)reloadTableSections
@@ -344,6 +338,8 @@
 - (void)removeAllTableItems
 {
     [self.sections removeAllObjects];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark -

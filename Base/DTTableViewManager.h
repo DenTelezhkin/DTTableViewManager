@@ -51,7 +51,7 @@
 
 ///////////////////////
 // Add table items.
-// Methods without rowAnimation parameter will update UI with UITableViewRowAnimationNone
+// Methods without rowAnimation in name will update UI with UITableViewRowAnimationNone
 
 - (void)addTableItem:(NSObject *)tableItem;
 - (void)addTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation;

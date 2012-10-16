@@ -17,6 +17,18 @@
 		E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */; };
 		E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */; };
 		E6402F97162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */; };
+		E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */; };
+		E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */; };
+		E6402FB3162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */; };
+		E6402FB4162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */; };
+		E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FB7162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m */; };
+		E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FB7162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m */; };
+		E6402FBB162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB8162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib */; };
+		E6402FBC162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB8162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib */; };
+		E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */; };
+		E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */; };
+		E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
+		E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
 		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; };
 		E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
 		E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
@@ -60,6 +72,15 @@
 		E6402F91162D811F00DDE2B3 /* ReorderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReorderTableViewController.h; path = ExampleControllers/ReorderTableViewController.h; sourceTree = "<group>"; };
 		E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReorderTableViewController.m; path = ExampleControllers/ReorderTableViewController.m; sourceTree = "<group>"; };
 		E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReorderTableViewController.xib; path = ExampleControllers/ReorderTableViewController.xib; sourceTree = "<group>"; };
+		E6402FAE162D8B4F00DDE2B3 /* CustomCellsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCellsTableViewController.h; path = ExampleControllers/CustomCellsTableViewController.h; sourceTree = "<group>"; };
+		E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCellsTableViewController.m; path = ExampleControllers/CustomCellsTableViewController.m; sourceTree = "<group>"; };
+		E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCellsTableViewController.xib; path = ExampleControllers/CustomCellsTableViewController.xib; sourceTree = "<group>"; };
+		E6402FB6162D8F1D00DDE2B3 /* InsertReplaceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertReplaceTableViewController.h; path = ExampleControllers/InsertReplaceTableViewController.h; sourceTree = "<group>"; };
+		E6402FB7162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InsertReplaceTableViewController.m; path = ExampleControllers/InsertReplaceTableViewController.m; sourceTree = "<group>"; };
+		E6402FB8162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InsertReplaceTableViewController.xib; path = ExampleControllers/InsertReplaceTableViewController.xib; sourceTree = "<group>"; };
+		E6402FC2162D9A9500DDE2B3 /* MoveSectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveSectionTableViewController.h; path = ExampleControllers/MoveSectionTableViewController.h; sourceTree = "<group>"; };
+		E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoveSectionTableViewController.m; path = ExampleControllers/MoveSectionTableViewController.m; sourceTree = "<group>"; };
+		E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoveSectionTableViewController.xib; path = ExampleControllers/MoveSectionTableViewController.xib; sourceTree = "<group>"; };
 		E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTCellFactorySpec.mm; sourceTree = "<group>"; };
 		E666ACE9162C02C800A2DBF2 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCell.xib; path = TableViewFactory/Cells/CustomCell.xib; sourceTree = "<group>"; };
 		E666ACED162C034000A2DBF2 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCell.h; path = TableViewFactory/Cells/CustomCell.h; sourceTree = "<group>"; };
@@ -146,6 +167,9 @@
 		E6402F8E162D80EA00DDE2B3 /* Example controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E6402FC1162D9A7800DDE2B3 /* MoveSection */,
+				E6402FB5162D8EF800DDE2B3 /* InsertReplace */,
+				E6402FA6162D8B1200DDE2B3 /* CustomCells */,
 				E6402F90162D80FE00DDE2B3 /* Reorder */,
 				E6402F8F162D80F300DDE2B3 /* AddRemove */,
 			);
@@ -170,6 +194,36 @@
 				E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */,
 			);
 			name = Reorder;
+			sourceTree = "<group>";
+		};
+		E6402FA6162D8B1200DDE2B3 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				E6402FAE162D8B4F00DDE2B3 /* CustomCellsTableViewController.h */,
+				E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */,
+				E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */,
+			);
+			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		E6402FB5162D8EF800DDE2B3 /* InsertReplace */ = {
+			isa = PBXGroup;
+			children = (
+				E6402FB6162D8F1D00DDE2B3 /* InsertReplaceTableViewController.h */,
+				E6402FB7162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m */,
+				E6402FB8162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib */,
+			);
+			name = InsertReplace;
+			sourceTree = "<group>";
+		};
+		E6402FC1162D9A7800DDE2B3 /* MoveSection */ = {
+			isa = PBXGroup;
+			children = (
+				E6402FC2162D9A9500DDE2B3 /* MoveSectionTableViewController.h */,
+				E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */,
+				E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */,
+			);
+			name = MoveSection;
 			sourceTree = "<group>";
 		};
 		E6CB97B0161B26C900A7E936 /* CedarUnitTests */ = {
@@ -363,6 +417,9 @@
 				E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */,
 				E6402F8D162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
 				E6402F97162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
+				E6402FB4162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
+				E6402FBC162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */,
+				E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +432,9 @@
 				E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */,
 				E6402F8C162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
 				E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
+				E6402FB3162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
+				E6402FBB162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */,
+				E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +473,9 @@
 				E666AD35162C3C8200A2DBF2 /* DTCellFactory.m in Sources */,
 				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
 				E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
+				E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
+				E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
+				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +494,9 @@
 				E666AD34162C3C8200A2DBF2 /* DTCellFactory.m in Sources */,
 				E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
 				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
+				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
+				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
+				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,6 @@
 //
 
 #import "ReorderTableViewController.h"
-#import "Example.h"
-#import "ExampleCell.h"
 
 @implementation ReorderTableViewController
 
@@ -22,7 +20,7 @@
     return self;
 }
 
--(void)addSomeExampleCells
+-(void)addExampleCells
 {
     [self addTableItem:[Example exampleWithText:@"Section 1 cell"
                                      andDetails:@""]
@@ -89,7 +87,7 @@
     
     self.title = @"Reorder";
     
-    [self addSomeExampleCells];
+    [self addExampleCells];
     
     [self setEditNavigationButton];
 }

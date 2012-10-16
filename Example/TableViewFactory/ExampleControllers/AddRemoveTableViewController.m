@@ -7,11 +7,11 @@
 //
 
 #import "AddRemoveTableViewController.h"
-#import "Example.h"
-#import "ExampleCell.h"
 
 @interface AddRemoveTableViewController ()
+
 @property (nonatomic,assign) int rowCount;
+
 @end
 
 @implementation AddRemoveTableViewController
