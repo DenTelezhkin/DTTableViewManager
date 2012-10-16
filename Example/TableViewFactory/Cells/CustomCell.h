@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TableViewModelProtocol.h"
+#import "DTTableViewModelProtocol.h"
 
 @interface CustomCell : UITableViewCell <DTTableViewModelProtocol>
 

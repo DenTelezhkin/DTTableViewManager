@@ -13,14 +13,22 @@
 +(Example *)exampleWithText:(NSString *)someText andDetails:(NSString *)details
 {
     Example * example = [[Example alloc] init];
-    example.someText = someText;
+    example.text = someText;
     example.details = details;
+    return [example autorelease];
+}
+
++(Example *)exampleWithController:(Class)controllerClass andText:(NSString *)text
+{
+    Example * example = [[Example alloc] init];
+    example.text = text;
+    example.controllerClass = controllerClass;
     return [example autorelease];
 }
 
 -(void)dealloc
 {
-    self.someText = nil;
+    self.text = nil;
     self.details = nil;
     [super dealloc];
 }

@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface Example : NSObject
-@property (nonatomic,retain) NSString * someText;
+@property (nonatomic,assign) Class controllerClass;
+@property (nonatomic,retain) NSString * text;
 @property (nonatomic,retain) NSString * details;
 
 +(Example *)exampleWithText:(NSString *)someText andDetails:(NSString *)details;
+
++(Example *)exampleWithController:(Class)controllerClass andText:(NSString *)text;
 @end

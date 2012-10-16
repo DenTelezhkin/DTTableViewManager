@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
+		E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */; };
+		E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */; };
+		E6402F8C162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402F89162D788300DDE2B3 /* AddRemoveTableViewController.xib */; };
+		E6402F8D162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402F89162D788300DDE2B3 /* AddRemoveTableViewController.xib */; };
+		E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */; };
+		E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */; };
+		E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */; };
+		E6402F97162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */; };
 		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; };
 		E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
 		E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
@@ -46,6 +54,12 @@
 		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
 		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
 		E638F10B1619919900694FBC /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleCell.m; path = TableViewFactory/Cells/ExampleCell.m; sourceTree = "<group>"; };
+		E6402F87162D788200DDE2B3 /* AddRemoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddRemoveTableViewController.h; path = ExampleControllers/AddRemoveTableViewController.h; sourceTree = "<group>"; };
+		E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddRemoveTableViewController.m; path = ExampleControllers/AddRemoveTableViewController.m; sourceTree = "<group>"; };
+		E6402F89162D788300DDE2B3 /* AddRemoveTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddRemoveTableViewController.xib; path = ExampleControllers/AddRemoveTableViewController.xib; sourceTree = "<group>"; };
+		E6402F91162D811F00DDE2B3 /* ReorderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReorderTableViewController.h; path = ExampleControllers/ReorderTableViewController.h; sourceTree = "<group>"; };
+		E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReorderTableViewController.m; path = ExampleControllers/ReorderTableViewController.m; sourceTree = "<group>"; };
+		E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReorderTableViewController.xib; path = ExampleControllers/ReorderTableViewController.xib; sourceTree = "<group>"; };
 		E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTCellFactorySpec.mm; sourceTree = "<group>"; };
 		E666ACE9162C02C800A2DBF2 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCell.xib; path = TableViewFactory/Cells/CustomCell.xib; sourceTree = "<group>"; };
 		E666ACED162C034000A2DBF2 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCell.h; path = TableViewFactory/Cells/CustomCell.h; sourceTree = "<group>"; };
@@ -63,7 +77,7 @@
 		E6CB97B6161B26C900A7E936 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CedarUnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTTableViewManagerSpec.mm; sourceTree = "<group>"; };
-		E6D0AA71161D97640064EA38 /* TableViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewModelProtocol.h; path = Models/TableViewModelProtocol.h; sourceTree = "<group>"; };
+		E6D0AA71161D97640064EA38 /* DTTableViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelProtocol.h; path = Models/DTTableViewModelProtocol.h; sourceTree = "<group>"; };
 		E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EA83661615EE6000F8B8C3 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E6EA83681615EE6000F8B8C3 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -129,6 +143,35 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		E6402F8E162D80EA00DDE2B3 /* Example controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E6402F90162D80FE00DDE2B3 /* Reorder */,
+				E6402F8F162D80F300DDE2B3 /* AddRemove */,
+			);
+			name = "Example controllers";
+			sourceTree = "<group>";
+		};
+		E6402F8F162D80F300DDE2B3 /* AddRemove */ = {
+			isa = PBXGroup;
+			children = (
+				E6402F87162D788200DDE2B3 /* AddRemoveTableViewController.h */,
+				E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */,
+				E6402F89162D788300DDE2B3 /* AddRemoveTableViewController.xib */,
+			);
+			name = AddRemove;
+			sourceTree = "<group>";
+		};
+		E6402F90162D80FE00DDE2B3 /* Reorder */ = {
+			isa = PBXGroup;
+			children = (
+				E6402F91162D811F00DDE2B3 /* ReorderTableViewController.h */,
+				E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */,
+				E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */,
+			);
+			name = Reorder;
+			sourceTree = "<group>";
+		};
 		E6CB97B0161B26C900A7E936 /* CedarUnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +233,7 @@
 				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
 				E6EA83761615EE6000F8B8C3 /* AppDelegate.m */,
+				E6402F8E162D80EA00DDE2B3 /* Example controllers */,
 				E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */,
 				E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */,
 				E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */,
@@ -238,7 +282,7 @@
 		E6EA83931615F07F00F8B8C3 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				E6D0AA71161D97640064EA38 /* TableViewModelProtocol.h */,
+				E6D0AA71161D97640064EA38 /* DTTableViewModelProtocol.h */,
 				E6CB9770161B181C00A7E936 /* DTTableViewManager.h */,
 				E6CB9771161B181C00A7E936 /* DTTableViewManager.m */,
 			);
@@ -317,6 +361,8 @@
 			files = (
 				E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */,
 				E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */,
+				E6402F8D162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
+				E6402F97162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +373,8 @@
 				E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */,
 				E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */,
 				E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */,
+				E6402F8C162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
+				E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +411,8 @@
 				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				E666AD35162C3C8200A2DBF2 /* DTCellFactory.m in Sources */,
+				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
+				E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +429,8 @@
 				E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				E666AD34162C3C8200A2DBF2 /* DTCellFactory.m in Sources */,
+				E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
+				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,12 +555,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/TableViewFactory-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "TableViewFactory/TableViewFactory-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -517,12 +571,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/TableViewFactory-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "TableViewFactory/TableViewFactory-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

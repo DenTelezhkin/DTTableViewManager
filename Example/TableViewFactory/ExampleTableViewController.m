@@ -11,6 +11,8 @@
 #import "ExampleCell.h"
 #import "CustomCell.h"
 #import "CustomModel.h"
+#import "AddRemoveTableViewController.h"
+#import "ReorderTableViewController.h"
 
 @interface ExampleTableViewController ()
 
@@ -50,16 +52,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"Examples";
 
-    [self.tableManager insertTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]
+  /*  [self.tableManager insertTableItem:[Example exampleWithText:@"Hello" andDetails:@"World"]
               toIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [self.tableManager setSectionHeaders:@[@"A", @"B", @"C", @"D", @"E"]];
+    [self.tableManager setSectionHeaders:@[@"A", @"B", @"C", @"D", @"E"]];*/
+    
+    [self.tableManager addTableItem:[Example exampleWithController:[AddRemoveTableViewController class]
+                                                           andText:@"Add/Remove cells"]];
+    [self.tableManager addTableItem:[Example exampleWithController:[ReorderTableViewController class]
+                                                           andText:@"Reorder cells"]];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    /*
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self.tableManager addTableItem:[Example exampleWithText:@"Hello section 1!" andDetails:@"Woohoo!"]
                               toSection:1
@@ -105,24 +114,29 @@
                                                  text3:@"Table"
                                                  text4:@"Cell"]
                               toSection:4];
-    });
+    });*/
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     id model = [self.tableManager tableItemAtIndexPath:indexPath];
     if ([model isKindOfClass:[Example class]])
     {
         Example * selectedExample = model;
         
-        [self.tableManager removeTableItem:selectedExample withRowAnimation:UITableViewRowAnimationAutomatic];
+        UIViewController * presentExampleClass = [[selectedExample.controllerClass alloc] init];
+        
+        [self.navigationController pushViewController:presentExampleClass animated:YES];
+        [presentExampleClass release];
     }
 }
 
 -(void)createdCell:(UITableViewCell *)cell forTableView:(UITableView *)tableView forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Do anything you want with created cell
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 @end

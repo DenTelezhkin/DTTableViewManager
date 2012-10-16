@@ -19,10 +19,8 @@
 {
     self.exampleModel = model;
     
-    self.textLabel.text = self.exampleModel.someText;
+    self.textLabel.text = self.exampleModel.text;
     self.detailTextLabel.text = self.exampleModel.details;
-//    self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    self.showsReorderControl = YES;
 }
 
 -(void)dealloc
