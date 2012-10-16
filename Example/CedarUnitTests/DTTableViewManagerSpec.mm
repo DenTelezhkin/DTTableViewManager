@@ -1,4 +1,4 @@
-//#import "DTTableViewController.h"
+#import "DTTableViewManager.h"
 #import "Example.h"
 #import "ExampleCell.h"
 #import <Foundation/Foundation.h>
@@ -8,7 +8,7 @@ using namespace Cedar::Matchers;
 SPEC_BEGIN(DTTableViewManagerSpec)
 
 describe(@"BaseTableViewController", ^{
-    __block DTTableViewController *model;
+    __block DTTableViewManager *model;
     __block Example * testModel;
     __block Example * acc1;
     __block Example * acc2;
@@ -17,7 +17,7 @@ describe(@"BaseTableViewController", ^{
     __block Example * acc5;
     __block Example * acc6;
     beforeEach(^{
-        model = [DTTableViewController new];
+        model = [DTTableViewManager new];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
         testModel = [Example new];
