@@ -36,16 +36,16 @@
 		E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
 		E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
 		E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
-		E666AD34162C3C8200A2DBF2 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */; };
-		E666AD35162C3C8200A2DBF2 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */; };
-		E6CB9775161B181C00A7E936 /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* DTTableViewManager.m */; };
+		E69B5F4D162DA9D800E62655 /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */; };
+		E69B5F4E162DA9D800E62655 /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */; };
+		E69B5F51162DA9EF00E62655 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E69B5F50162DA9EF00E62655 /* DTCellFactory.m */; };
+		E69B5F52162DA9EF00E62655 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E69B5F50162DA9EF00E62655 /* DTCellFactory.m */; };
 		E6CB97AD161B26C900A7E936 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
 		E6CB97AE161B26C900A7E936 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83681615EE6000F8B8C3 /* Foundation.framework */; };
 		E6CB97AF161B26C900A7E936 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */; };
 		E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6CB97B3161B26C900A7E936 /* InfoPlist.strings */; };
 		E6CB97B7161B26C900A7E936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97B6161B26C900A7E936 /* main.m */; };
 		E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */; };
-		E6CB97F5161B2E8B00A7E936 /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB9771161B181C00A7E936 /* DTTableViewManager.m */; };
 		E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
 		E6EA83671615EE6000F8B8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
@@ -87,18 +87,18 @@
 		E666ACEE162C034000A2DBF2 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = TableViewFactory/Cells/CustomCell.m; sourceTree = "<group>"; };
 		E666ACF1162C037B00A2DBF2 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomModel.h; path = TableViewFactory/Models/CustomModel.h; sourceTree = "<group>"; };
 		E666ACF2162C037B00A2DBF2 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomModel.m; path = TableViewFactory/Models/CustomModel.m; sourceTree = "<group>"; };
-		E666AD32162C3C8200A2DBF2 /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCellFactory.h; sourceTree = "<group>"; };
-		E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCellFactory.m; sourceTree = "<group>"; };
-		E666AD5E162C57EE00A2DBF2 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		E6CB9770161B181C00A7E936 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../Base/DTTableViewManager.h; sourceTree = "<group>"; };
-		E6CB9771161B181C00A7E936 /* DTTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewManager.m; path = ../../Base/DTTableViewManager.m; sourceTree = "<group>"; };
+		E69B5F49162DA99F00E62655 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthesizeSingleton.h; path = ../../DTTableViewController/SynthesizeSingleton.h; sourceTree = "<group>"; };
+		E69B5F4A162DA9B300E62655 /* DTTableViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelProtocol.h; path = ../../DTTableViewController/DTTableViewModelProtocol.h; sourceTree = "<group>"; };
+		E69B5F4B162DA9D800E62655 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewController/DTTableViewManager.h; sourceTree = "<group>"; };
+		E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewManager.m; path = ../../DTTableViewController/DTTableViewManager.m; sourceTree = "<group>"; };
+		E69B5F4F162DA9EF00E62655 /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewController/DTCellFactory.h; sourceTree = "<group>"; };
+		E69B5F50162DA9EF00E62655 /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewController/DTCellFactory.m; sourceTree = "<group>"; };
 		E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CedarUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CB97B2161B26C900A7E936 /* CedarUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CedarUnitTests-Info.plist"; sourceTree = "<group>"; };
 		E6CB97B4161B26C900A7E936 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E6CB97B6161B26C900A7E936 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CedarUnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTTableViewManagerSpec.mm; sourceTree = "<group>"; };
-		E6D0AA71161D97640064EA38 /* DTTableViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelProtocol.h; path = Models/DTTableViewModelProtocol.h; sourceTree = "<group>"; };
 		E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EA83661615EE6000F8B8C3 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E6EA83681615EE6000F8B8C3 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -309,12 +309,12 @@
 		E6EA83931615F07F00F8B8C3 /* DTTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E666AD5E162C57EE00A2DBF2 /* SynthesizeSingleton.h */,
-				E6D0AA71161D97640064EA38 /* DTTableViewModelProtocol.h */,
-				E6CB9770161B181C00A7E936 /* DTTableViewManager.h */,
-				E6CB9771161B181C00A7E936 /* DTTableViewManager.m */,
-				E666AD32162C3C8200A2DBF2 /* DTCellFactory.h */,
-				E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */,
+				E69B5F49162DA99F00E62655 /* SynthesizeSingleton.h */,
+				E69B5F4A162DA9B300E62655 /* DTTableViewModelProtocol.h */,
+				E69B5F4B162DA9D800E62655 /* DTTableViewManager.h */,
+				E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */,
+				E69B5F4F162DA9EF00E62655 /* DTCellFactory.h */,
+				E69B5F50162DA9EF00E62655 /* DTCellFactory.m */,
 			);
 			name = DTTableViewController;
 			sourceTree = "<group>";
@@ -440,18 +440,18 @@
 			files = (
 				E6CB97B7161B26C900A7E936 /* main.m in Sources */,
 				E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */,
-				E6CB97F5161B2E8B00A7E936 /* DTTableViewManager.m in Sources */,
 				E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */,
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
 				E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */,
 				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
-				E666AD35162C3C8200A2DBF2 /* DTCellFactory.m in Sources */,
 				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
 				E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
+				E69B5F4E162DA9D800E62655 /* DTTableViewManager.m in Sources */,
+				E69B5F52162DA9EF00E62655 /* DTCellFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,15 +464,15 @@
 				E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */,
 				E638F1091619916B00694FBC /* Example.m in Sources */,
 				E638F10C1619919900694FBC /* ExampleCell.m in Sources */,
-				E6CB9775161B181C00A7E936 /* DTTableViewManager.m in Sources */,
 				E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */,
-				E666AD34162C3C8200A2DBF2 /* DTCellFactory.m in Sources */,
 				E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
 				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
+				E69B5F4D162DA9D800E62655 /* DTTableViewManager.m in Sources */,
+				E69B5F51162DA9EF00E62655 /* DTCellFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
