@@ -281,8 +281,7 @@
 		E6EA836C1615EE6000F8B8C3 /* TableViewFactory */ = {
 			isa = PBXGroup;
 			children = (
-				E6EA83931615F07F00F8B8C3 /* Base */,
-				E6EA83891615F04600F8B8C3 /* Factory */,
+				E6EA83931615F07F00F8B8C3 /* DTTableViewController */,
 				E638F1051619913B00694FBC /* Models */,
 				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
@@ -307,40 +306,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E6EA83891615F04600F8B8C3 /* Factory */ = {
-			isa = PBXGroup;
-			children = (
-				E6EA838F1615F06800F8B8C3 /* Cell */,
-				E6EA838A1615F04D00F8B8C3 /* Singleton */,
-			);
-			name = Factory;
-			sourceTree = "<group>";
-		};
-		E6EA838A1615F04D00F8B8C3 /* Singleton */ = {
+		E6EA83931615F07F00F8B8C3 /* DTTableViewController */ = {
 			isa = PBXGroup;
 			children = (
 				E666AD5E162C57EE00A2DBF2 /* SynthesizeSingleton.h */,
-			);
-			name = Singleton;
-			sourceTree = "<group>";
-		};
-		E6EA838F1615F06800F8B8C3 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				E666AD32162C3C8200A2DBF2 /* DTCellFactory.h */,
-				E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */,
-			);
-			name = Cell;
-			sourceTree = "<group>";
-		};
-		E6EA83931615F07F00F8B8C3 /* Base */ = {
-			isa = PBXGroup;
-			children = (
 				E6D0AA71161D97640064EA38 /* DTTableViewModelProtocol.h */,
 				E6CB9770161B181C00A7E936 /* DTTableViewManager.h */,
 				E6CB9771161B181C00A7E936 /* DTTableViewManager.m */,
+				E666AD32162C3C8200A2DBF2 /* DTCellFactory.h */,
+				E666AD33162C3C8200A2DBF2 /* DTCellFactory.m */,
 			);
-			name = Base;
+			name = DTTableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

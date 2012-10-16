@@ -1,4 +1,4 @@
-TableViewFactory
+DTTableViewController
 ================
 
 Powerful architecture for table view controllers. Warning - setup will sound complex, but once you use it at least once, you will see the benefits.
@@ -6,16 +6,15 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 ### Usage
 
 * Your controller with table view needs to be a subclass of DTBaseTableViewController. It will have property tableView - put your table view there.
-* You need to have a model for each type of table view cell. Every cell needs to conform to TableViewModelProtocol(method updateWithModel: is required).
+* You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required).
 * Map every cell class to model class. 
 * Add some table items to the table!
 
-### 0.0.2 changes
+### 0.0.3 changes
 
 * Added option to disable reusing table view cells
 * Added support for creating cells from custom NIB. I use registerNib method to do that. 
-
-Example project updated with these changes.
+* You can now use DTTableViewController as a property on your UIViewController. This way you can move away from subclassing. ExampleTableViewController does just that
 
 ### Example 
 
@@ -32,4 +31,4 @@ This approach intends to clean your view controller from massive amounts of repe
 		
 ### Thanks
 
-Special thanks to Alexey Belkevich (https://github.com/belkevich) for providing initial implementation of CellFactory and SingletonFactory, they are really the core of this approach.
+Special thanks to Alexey Belkevich (https://github.com/belkevich) for providing initial implementation of CellFactory.
