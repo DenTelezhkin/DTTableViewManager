@@ -14,7 +14,7 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 
 * Added option to disable reusing table view cells
 * Added support for creating cells from custom NIB. I use registerNib method to do that. 
-* You can now use DTTableViewController as a property on your UIViewController. This way you can move away from subclassing. ExampleTableViewController does just that
+* You can now use DTTableViewController as a property on your UIViewController. This way you can move away from subclassing. ExampleTableViewController does just that.
 
 ### Example 
 
@@ -22,8 +22,7 @@ Example is available in Example folder.
 
 ### Additional 
 
-Please go to DTBaseTableViewController.h for all available API. Example project is included in Example folder.
-CellFactory uses SynthethizeSingleton macros (https://github.com/cjhanson/Objective-C-Optimized-Singleton), but you can use any singleton approach you like.
+Please go to DTBaseTableViewController.h for all available API. CellFactory uses SynthethizeSingleton macros (https://github.com/cjhanson/Objective-C-Optimized-Singleton), but you can use any singleton approach you like.
 
 ### Discussion
 
