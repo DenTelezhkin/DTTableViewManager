@@ -537,7 +537,6 @@
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
      toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-#warning we should update our model here, test this.
     NSMutableArray *array = [self.sections objectAtIndex:sourceIndexPath.section];
     id tableItem = [[self tableItemAtIndexPath:sourceIndexPath] retain];
     [array removeObjectAtIndex:sourceIndexPath.row];

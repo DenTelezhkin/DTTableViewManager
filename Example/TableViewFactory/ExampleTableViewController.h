@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DTTableViewManager.h"
 
-@interface ExampleTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ExampleTableViewController : UIViewController <UITableViewDelegate,
+                                                          UITableViewDataSource,
+                                                          DTTableViewManagerProtocol>
 
 @property (nonatomic,retain) IBOutlet UITableView * tableView;
 @end

@@ -505,6 +505,7 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/TableViewFactory-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "TableViewFactory/TableViewFactory-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -518,6 +519,7 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/TableViewFactory-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "TableViewFactory/TableViewFactory-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";

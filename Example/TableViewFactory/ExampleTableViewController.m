@@ -102,7 +102,6 @@
                                                  text3:@"Table"
                                                  text4:@"Cell"]
                               toSection:4];
-        [self.tableView setEditing:YES animated:YES];
     });
     
 }
@@ -118,9 +117,9 @@
     }
 }
 
--(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)createdCell:(UITableViewCell *)cell forTableView:(UITableView *)tableView forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    // Do anything you want with created cell
 }
 
 @end
