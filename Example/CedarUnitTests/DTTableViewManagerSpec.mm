@@ -1,6 +1,4 @@
 #import "DTTableViewManager.h"
-//#import "Example.h"
-//#import "ExampleCell.h"
 #import <Foundation/Foundation.h>
 
 using namespace Cedar::Matchers;
@@ -181,7 +179,35 @@ describe(@"BaseTableViewController", ^{
         [model respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)] should equal(YES);
         [model respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)] should equal(YES);
     });
-   
+    
+    it(@"should throw exception when delegate or datasource is not set", ^{
+    
+        UITableView * tableView = [[[UITableView alloc] init] autorelease];
+        ^{
+            [DTTableViewManager managerWithDelegate:nil andTableView:tableView];
+        } should raise_exception;
+        ^{
+            [DTTableViewManager managerWithDelegate:model andTableView:nil];
+        } should raise_exception;
+        
+    });
+    
+    it(@"should add non-repeating items", ^{
+        [model addTableItems:@[acc1,acc2]];
+        
+        [model addNonRepeatingItems:@[acc1,acc3,acc2,acc4,acc5]
+                          toSection:0
+                   withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [model numberOfTableItemsInSection:0] should equal(5);
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        tableItems[0] should equal(acc1);
+        tableItems[1] should equal(acc2);
+        tableItems[2] should equal(acc3);
+        tableItems[3] should equal(acc4);
+        tableItems[4] should equal(acc5);
+    });
 });
 
 SPEC_END

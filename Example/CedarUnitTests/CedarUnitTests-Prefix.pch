@@ -14,4 +14,6 @@
     #import "OCMock.h"
     #import <Cedar-iOS/Cedar-iOS.h>
     #import <Cedar-iOS/SpecHelper.h>
+    #import "Example.h"
+    #import "ExampleCell.h"
 #endif
