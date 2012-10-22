@@ -33,6 +33,14 @@
         self.tableView = tableView;
         tableView.dataSource = self;
         tableView.delegate = delegate;
+        
+        if (!tableView.dataSource || !tableView.delegate)
+        {
+            NSException * tableException = [NSException exceptionWithName:@"Check your tableView"
+                                                                   reason:@"Datasource and delegate cannot be nil"
+                                                                 userInfo:nil];
+            [tableException raise];
+        }
     }
     return self;
 }
