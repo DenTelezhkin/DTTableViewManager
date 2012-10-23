@@ -39,9 +39,10 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem * barItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                              target:self
-                                                                              action:@selector(addButtonTapped)];
+    UIBarButtonItem * barItem = [[UIBarButtonItem alloc]
+                                            initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                 target:self
+                                                                 action:@selector(addButtonTapped)];
     self.navigationItem.rightBarButtonItem = barItem;
     [barItem release];
 }

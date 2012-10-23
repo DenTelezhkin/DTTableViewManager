@@ -33,13 +33,13 @@
 -(Example *)wonderfulExample
 {
     if (!_wonderfulExample)
-        _wonderfulExample = [[Example exampleWithText:@"Extremely useful" andDetails:@"cell"] retain];
+        _wonderfulExample = [[Example exampleWithText:@"Wonderful" andDetails:@"cell"] retain];
     return _wonderfulExample;
 }
 
 -(void)addInsertSection
 {
-    [self addTableItem:[Example exampleWithText:@"Tap me to insert cell" andDetails:nil]];
+    [self addTableItem:[Example exampleWithText:@"Tap me to insert wonderful cell" andDetails:nil]];
 }
 
 -(void)addReplaceSection

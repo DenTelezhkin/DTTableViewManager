@@ -25,7 +25,6 @@
 
 #import "DTTableViewModelProtocol.h"
 
-//Optional protocol, but with required method
 @protocol DTTableViewManagerProtocol
 @optional
 -(void)createdCell:(UITableViewCell *)cell

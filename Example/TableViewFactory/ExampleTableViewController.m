@@ -26,6 +26,8 @@
     [super dealloc];
 }
 
+#pragma mark - getters
+
 -(DTTableViewManager *)tableManager
 {
     if (!_tableManager)
@@ -41,6 +43,8 @@
     }
     return _tableManager;
 }
+
+#pragma mark - View activity
 
 - (void)viewDidLoad
 {
@@ -59,6 +63,8 @@
     [self.tableManager addTableItem:[Example exampleWithController:[MoveSectionTableViewController class]
                                                            andText:@"Move section"]];
 }
+
+#pragma mark - Table View
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Denys Telezhkin. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "DTTableViewManager.h"
 
 @interface ExampleTableViewController : UIViewController <UITableViewDelegate,

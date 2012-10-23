@@ -26,15 +26,12 @@
 #import <Foundation/Foundation.h>
 #import "SynthesizeSingleton.h"
 
-
-
 @interface DTCellFactory : NSObject
 
 @property (readonly) NSDictionary * classMappingDictionary;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 
-// actions
 - (UITableViewCell *)cellForModel:(NSObject *)model
                           inTable:(UITableView *)table
                   reuseIdentifier:(NSString *)reuseIdentifier;
