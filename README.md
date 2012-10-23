@@ -16,8 +16,11 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 ### Subclassing
 
 * You will have a property tableView - put your tableView there
+
 * You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required)
+
 * Map every cell class to model class
+
 * Add some table items to the table!
     	[self addTableItem:<modelObject>];
         
@@ -27,7 +30,9 @@ Powerful architecture for table view controllers. Warning - setup will sound com
     	self.tableManager = [DTTableViewManager managerWithDelegate:self andTableView:self.tableView];
         
 * You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required)
+
 * Map every cell class to model class 
+
 * Add some table items to the table!
 		[self.tableManager addTableItem:<modelObject>];
         
