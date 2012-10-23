@@ -3,7 +3,7 @@ DTTableViewController
 
 Powerful architecture for table view controllers. Warning - setup will sound complex, but once you use it at least once, you will see the benefits.
 
-### Core features
+## Core features
 
 * Ability to manipulate models in the table on the fly. No need to worry about datasource methods.
 * Clean controller code
@@ -11,9 +11,9 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 * You can make your controller a subclass of DTTableViewManager, or you can make it a property on your controller and subclass from whatever you need
 * Any datasource/delegate method can be reimplemented in your controller
 
-### Usage
+## Usage
 
-## Subclassing
+### Subclassing
 
 * You will have a property tableView - put your tableView there
 * You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required)
@@ -22,7 +22,7 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 
     	[self addTableItem:<modelObject>];
 	
-## Property on your controller
+### Property on your controller
 
 * Create DTTableViewManager object instance on your controler 
 
@@ -34,22 +34,22 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 
 		[self.tableManager addTableItem:<modelObject>];
 
-### Changelog
+## Changelog
 
 [Changelog](https://github.com/DenHeadless/DTTableViewController/wiki/Changelog)
 
-### Example 
+## Example 
 
 Example is available in Example folder. 
 
-### Additional 
+## Additional 
 
 Please go to DTTableViewManager.h for all available API. DTCellFactory uses SynthethizeSingleton macros (https://github.com/cjhanson/Objective-C-Optimized-Singleton), but you can use any singleton approach you like.
 
-### Discussion
+## Discussion
 
 This approach intends to clean your view controller from massive amounts of repeatable datasource code. It helps to think about table view models instead of table view cells. Table view cells should be responsive for displaying their content, and controller should only be responsive for displaying cells. 
 		
-### Thanks
+## Thanks
 
 Special thanks to Alexey Belkevich (https://github.com/belkevich) for providing initial implementation of CellFactory.
