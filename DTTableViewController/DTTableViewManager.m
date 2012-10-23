@@ -39,7 +39,16 @@
 
 @synthesize tableView=_tableView, headers=_headers, sections=_sections,footers = _footers;
 
-#pragma mark - Getters, initializers and cleaning
+#pragma mark - initialize, clean
+
+- (void)dealloc
+{
+    self.sections = nil;
+    self.tableView = nil;
+    self.headers = nil;
+    self.footers = nil;
+    [super dealloc];
+}
 
 -(id)initWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
 {
@@ -53,10 +62,11 @@
         
         if (!tableView.dataSource || !tableView.delegate)
         {
-            NSException * tableException = [NSException exceptionWithName:@"Check your tableView"
-                                                                   reason:@"Datasource and delegate cannot be nil"
-                                                                 userInfo:nil];
-            [tableException raise];
+            NSException * exc =
+                        [NSException exceptionWithName:@"DTTableViewManager: Check your tableView"
+                                                reason:@"Datasource and delegate cannot be nil"
+                                              userInfo:nil];
+            [exc raise];
         }
     }
     return self;
@@ -68,6 +78,8 @@
                                                                          andTableView:tableView];
     return [manager autorelease];
 }
+
+#pragma mark - getters, setters
 
 -(NSMutableArray *)sections
 {
@@ -94,13 +106,18 @@
     return _footers;
 }
 
-- (void)dealloc
+-(void)setSectionHeaders:(NSArray *)headers
 {
-    self.sections = nil;
-    self.tableView = nil;
-    self.headers = nil;
-    self.footers = nil;
-    [super dealloc];
+    self.headers = headers;
+    
+    [self.tableView reloadData];
+}
+
+-(void)setSectionFooters:(NSArray *)footers
+{
+    self.footers = footers;
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - mapping 
@@ -118,6 +135,17 @@
 
 #pragma mark - search
 
+-(int)numberOfTableItemsInSection:(NSInteger)section
+{
+    NSArray * itemsInSection = [self tableItemsInSection:section];
+    return [itemsInSection count];
+}
+
+-(int)numberOfSections
+{
+    return [self.sections count];
+}
+
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *section=nil;
@@ -126,14 +154,17 @@
         section = [self tableItemsInSection:indexPath.section];
     }
     else {
-        NSLog(@"Table item not found");
+        NSLog(@"DTTableViewManager: Section not found while searching for table item");
         return nil;
     }
     if (indexPath.row < [section count])
     {
         return [section objectAtIndex:indexPath.row];
     }
-    else return nil;
+    else {
+        NSLog(@"DTTableViewManager: Row not found while searching for table item");
+        return nil;
+    }
 }
 
 - (NSIndexPath *)indexPathOfTableItem:(NSObject *)tableItem
@@ -147,6 +178,7 @@
             return [NSIndexPath indexPathForRow:index inSection:i];
         }
     }
+    NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
     return nil;
 }
 
@@ -160,7 +192,7 @@
         NSIndexPath * foundIndexPath = [self indexPathOfTableItem:[tableItems objectAtIndex:i]];
         if (!foundIndexPath)
         {
-            NSLog(@"object %@ not found, returning nil", [tableItems objectAtIndex:i]);
+            NSLog(@"DTTableViewManager: object %@ not found, returning nil", [tableItems objectAtIndex:i]);
             [indexPaths release];
             return nil;
         }
@@ -182,7 +214,7 @@
             [items addObject:foundIndexPath];
         }
         else {
-            NSLog(@"item not found. Returning nil for NSArrayForIndexPaths");
+            NSLog(@"DTTableViewManager: item not found. Returning nil for NSArrayForIndexPaths");
             [items release];
             return nil;
         }
@@ -196,8 +228,13 @@
     {
         return [self.sections objectAtIndex:section];
     }
-    else return nil;
+    else {
+        NSLog(@"DTTableViewManager: section %d not found",section);
+        return nil;
+    }
 }
+
+#pragma mark - add items
 
 - (void)addTableItem:(NSObject *)tableItem
 {
@@ -277,6 +314,7 @@
     [self.tableView endUpdates];
 }
 
+#pragma mark - insert items
 
 -(void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
 {
@@ -296,6 +334,8 @@
     // UPdate UI
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
 }
+
+#pragma  mark - reload/replace items
 
 -(void)reloadTableSections
 {
@@ -329,6 +369,8 @@
     [self.tableView reloadRowsAtIndexPaths:@[indexPathToReplace]
                       withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
+#pragma  mark - remove items
 
 -(void)removeTableItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -505,35 +547,7 @@
                       withRowAnimation:animation];
         }
         return [self.sections lastObject];
-    }/*
-      NSString *reason = [NSString stringWithFormat:@"Can't get section with index '%d',\
-      contain only '%d' sections", index, self.sections.count];
-      @throw [NSException exceptionWithName:@"Can't get section" reason:reason userInfo:nil];*/
-}
-
--(void)setSectionHeaders:(NSArray *)headers
-{
-    self.headers = headers;
-    
-    [self.tableView reloadData];
-}
-
--(void)setSectionFooters:(NSArray *)footers
-{
-    self.footers = footers;
-    
-    [self.tableView reloadData];
-}
-
--(int)numberOfTableItemsInSection:(NSInteger)section
-{
-    NSArray * itemsInSection = [self tableItemsInSection:section];
-    return [itemsInSection count];
-}
-
--(int)numberOfSections
-{
-    return [self.sections count];
+    }
 }
 
 #pragma mark - Datasource methods, trampoline to our delegate
