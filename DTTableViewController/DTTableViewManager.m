@@ -229,7 +229,7 @@
         return [self.sections objectAtIndex:section];
     }
     else {
-        NSLog(@"DTTableViewManager: section %d not found",section);
+//        NSLog(@"DTTableViewManager: section %d not found",section);
         return nil;
     }
 }
