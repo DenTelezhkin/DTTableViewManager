@@ -19,13 +19,14 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 * You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required).
 * Map every cell class to model class. 
 * Add some table items to the table!
-	[self addTableItem:<modelObject>];
+
+    [self addTableItem:<modelObject>];
 
 ## Property on your controller
 
 * Create DTTableViewManager object instance on your controler 
 
-	self.tableManager = [DTTableViewManager managerWithDelegate:self andTableView:self.tableView];
+    self.tableManager = [DTTableViewManager managerWithDelegate:self andTableView:self.tableView];
 	
 * You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required).
 * Map every cell class to model class. 
