@@ -6,9 +6,13 @@ Powerful architecture for table view controllers. Warning - setup will sound com
 ## Core features
 
 * Ability to manipulate models in the table on the fly. No need to worry about datasource methods.
+
 * Clean controller code
+
 * Table view cells can be created from code, or from IB.
+
 * You can make your controller a subclass of DTTableViewManager, or you can make it a property on your controller and subclass from whatever you need
+
 * Any datasource/delegate method can be reimplemented in your controller
 
 ## Usage
