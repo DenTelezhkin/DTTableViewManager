@@ -16,11 +16,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        [self addCellClassMapping:[CustomCell class] forModelClass:[CustomModel class]];
-        
         self.title = @"Custom NIB";
-               
     }
     return self;
 }
@@ -31,11 +27,10 @@
     // Do any additional setup after loading the view from its nib.
     
     // CustomCell is created from NIB
-    // IMPORTANT to register cell nib for reuse identifier IDENTICAL to your model class name
-    [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil]
-         forCellReuseIdentifier:@"CustomModel"];
-    
-    
+    [self setCellMappingForNib:@"CustomCell"
+                     cellClass:[CustomCell class]
+                    modelClass:[CustomModel class]];
+
     [self addTableItem:[CustomModel modelWithText1:@"Very"
                                              text2:@"Customized"
                                              text3:@"Table"

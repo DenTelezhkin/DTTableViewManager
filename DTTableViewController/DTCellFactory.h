@@ -43,9 +43,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 // 
 
 // Designated mapping method:
--(void)addCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
+-(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
+
+// For mapping custom NIB for cell, please call DTTableViewManager method.
 
 // Dictionary should contain NSStringFromClass values and keys
--(void)addObjectMappingDictionary:(NSDictionary *)mappingDictionary;
+-(void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary;
 
 @end

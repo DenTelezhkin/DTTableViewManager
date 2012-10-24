@@ -122,15 +122,23 @@
 
 #pragma mark - mapping 
 
--(void)addCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass
+-(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass
 {
-    [[DTCellFactory sharedInstance] addCellClassMapping:cellClass
+    [[DTCellFactory sharedInstance] setCellClassMapping:cellClass
                                           forModelClass:modelClass];
 }
 
--(void)addObjectMappingDictionary:(NSDictionary *)mapping
+-(void)setCellMappingForNib:(NSString *)nibName cellClass:(Class)cellClass modelClass:(Class)modelClass
 {
-    [[DTCellFactory sharedInstance] addObjectMappingDictionary:mapping];
+    [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
+         forCellReuseIdentifier:NSStringFromClass([modelClass class])];
+    
+    [self setCellMappingforClass:cellClass modelClass:modelClass];
+}
+
+-(void)setObjectMappingDictionary:(NSDictionary *)mapping
+{
+    [[DTCellFactory sharedInstance] setObjectMappingDictionary:mapping];
 }
 
 #pragma mark - search

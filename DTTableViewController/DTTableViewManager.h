@@ -132,8 +132,19 @@
 // Mapping
 // redirect to CellFactory
 
--(void)addObjectMappingDictionary:(NSDictionary *)mapping;
--(void)addCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
+// Designated setters
 
+// create your cells from code, or use standard cells:
+-(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass;
+
+// create your custom cells from IB:
+-(void)setCellMappingForNib:(NSString *)nibName
+                  cellClass:(Class)cellClass
+                 modelClass:(Class)modelClass;
+
+
+// Not recommended, but you can do it if you like. Just take a look, how
+// this is done in setCellClassMapping:forModelClass method
+-(void)setObjectMappingDictionary:(NSDictionary *)mapping;
 
 @end
