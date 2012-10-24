@@ -70,13 +70,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 
 #pragma mark - class mapping
 
-- (void)addCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass
+- (void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass
 {
     [self.mappingsDictionary setObject:NSStringFromClass(cellClass)
                                 forKey:NSStringFromClass(modelClass)];
 }
 
-- (void)addObjectMappingDictionary:(NSDictionary *)mappingDictionary
+- (void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary
 {
     [self.mappingsDictionary addEntriesFromDictionary:mappingDictionary];
 }
