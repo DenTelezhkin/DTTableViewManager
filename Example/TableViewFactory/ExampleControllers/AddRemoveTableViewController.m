@@ -21,7 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self addCellClassMapping:[ExampleCell class] forModelClass:[Example class]];
+        [self setCellMappingforClass:[ExampleCell class] modelClass:[Example class]];
     }
     return self;
 }
