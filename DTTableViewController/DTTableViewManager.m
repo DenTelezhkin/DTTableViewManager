@@ -375,7 +375,7 @@
     
     //Update UI
     [self.tableView reloadRowsAtIndexPaths:@[indexPathToReplace]
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                          withRowAnimation:animation];
 }
 
 #pragma  mark - remove items
