@@ -62,6 +62,8 @@
         
         if (!tableView.dataSource || !tableView.delegate)
         {
+            NSLog(@"delegate:%@ has not created tableView before allocating DTTableViewManager",
+                            delegate);
             NSException * exc =
                         [NSException exceptionWithName:@"DTTableViewManager: Check your tableView"
                                                 reason:@"Datasource and delegate cannot be nil"
@@ -75,7 +77,7 @@
 +(id)managerWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
 {
     DTTableViewManager * manager = [[DTTableViewManager alloc] initWithDelegate:delegate
-                                                                         andTableView:tableView];
+                                                                   andTableView:tableView];
     return [manager autorelease];
 }
 
@@ -120,7 +122,7 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - mapping 
+#pragma mark - mapping
 
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass
 {
@@ -237,7 +239,7 @@
         return [self.sections objectAtIndex:section];
     }
     else {
-//        NSLog(@"DTTableViewManager: section %d not found",section);
+        //        NSLog(@"DTTableViewManager: section %d not found",section);
         return nil;
     }
 }
@@ -273,7 +275,7 @@
           toSection:(NSInteger)section
    withRowAnimation:(UITableViewRowAnimation)animation
 {
-   // Update datasource
+    // Update datasource
     NSMutableArray *array = [self getValidTableSection:section withAnimation:animation];
     [array addObject:tableItem];
     
@@ -298,6 +300,12 @@
     withRowAnimation:(UITableViewRowAnimation)animation
 {
     //update Datasource and UI
+    
+    // We need to get a valid section before table updates
+    // So we don't mess up animations
+    [self getValidTableSection:section withAnimation:animation];
+    
+    
     [self.tableView beginUpdates];
     for (id tableItem in tableItems)
     {
@@ -310,8 +318,9 @@
                   toSection:(NSInteger)section
            withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self.tableView beginUpdates];
     NSArray * validSection = [self getValidTableSection:section withAnimation:animation];
+    
+    [self.tableView beginUpdates];
     for (id model in tableitems)
     {
         if (![validSection containsObject:model])
@@ -350,7 +359,7 @@
     for (int i = 0; i<self.sections.count ; i++)
     {
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:i]
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
@@ -375,7 +384,7 @@
     
     //Update UI
     [self.tableView reloadRowsAtIndexPaths:@[indexPathToReplace]
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma  mark - remove items
@@ -479,9 +488,9 @@
 
 -(void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
 {
-   [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-       [self getValidTableSection:idx withAnimation:animation];
-   }];
+    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        [self getValidTableSection:idx withAnimation:animation];
+    }];
     
     [self.tableView reloadSections:indexSet withRowAnimation:animation];
 }
@@ -542,7 +551,7 @@
     {
         return (NSMutableArray *)[self tableItemsInSection:index];
     }
-    else 
+    else
     {
         for (int i = self.sections.count; i <= index ; i++)
         {
@@ -552,7 +561,7 @@
             
             //Update UI
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i]
-                      withRowAnimation:animation];
+                          withRowAnimation:animation];
         }
         return [self.sections lastObject];
     }
@@ -595,7 +604,7 @@
 
 - (void)tableView:(UITableView *)tableView
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-     toIndexPath:(NSIndexPath *)destinationIndexPath
+      toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     NSMutableArray *array = [self.sections objectAtIndex:sourceIndexPath.section];
     id tableItem = [[self tableItemAtIndexPath:sourceIndexPath] retain];
