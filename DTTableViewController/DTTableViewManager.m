@@ -62,10 +62,12 @@
         
         if (!tableView.dataSource || !tableView.delegate)
         {
+            NSLog(@"delegate:%@ has not created tableView before allocating DTTableViewManager",
+                            delegate);
             NSException * exc =
-            [NSException exceptionWithName:@"DTTableViewManager: Check your tableView"
-                                    reason:@"Datasource and delegate cannot be nil"
-                                  userInfo:nil];
+                        [NSException exceptionWithName:@"DTTableViewManager: Check your tableView"
+                                                reason:@"Datasource and delegate cannot be nil"
+                                              userInfo:nil];
             [exc raise];
         }
     }
