@@ -44,7 +44,6 @@
                                                                  target:self
                                                                  action:@selector(addButtonTapped)];
     self.navigationItem.rightBarButtonItem = barItem;
-    [barItem release];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

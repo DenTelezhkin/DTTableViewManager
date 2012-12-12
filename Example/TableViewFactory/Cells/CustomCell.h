@@ -11,10 +11,10 @@
 
 @interface CustomCell : UITableViewCell <DTTableViewModelProtocol>
 
-@property (nonatomic,retain) IBOutlet UILabel * label1;
-@property (nonatomic,retain) IBOutlet UILabel * label2;
-@property (nonatomic,retain) IBOutlet UILabel * label3;
-@property (nonatomic,retain) IBOutlet UILabel * label4;
+@property (nonatomic,strong) IBOutlet UILabel * label1;
+@property (nonatomic,strong) IBOutlet UILabel * label2;
+@property (nonatomic,strong) IBOutlet UILabel * label3;
+@property (nonatomic,strong) IBOutlet UILabel * label4;
 
 
 

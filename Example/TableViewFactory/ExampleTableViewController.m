@@ -15,16 +15,11 @@
 
 @interface ExampleTableViewController ()
 
-@property (nonatomic,retain) DTTableViewManager * tableManager;
+@property (nonatomic,strong) DTTableViewManager * tableManager;
 @end
 
 @implementation ExampleTableViewController
 
--(void)dealloc
-{
-    self.tableManager = nil;
-    [super dealloc];
-}
 
 #pragma mark - getters
 
@@ -77,7 +72,6 @@
         UIViewController * presentExampleClass = [[selectedExample.controllerClass alloc] init];
         
         [self.navigationController pushViewController:presentExampleClass animated:YES];
-        [presentExampleClass release];
     }
 }
 

@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Example : NSObject
-@property (nonatomic,assign) Class controllerClass;
-@property (nonatomic,retain) NSString * text;
-@property (nonatomic,retain) NSString * details;
+@property (nonatomic,weak) Class controllerClass;
+@property (nonatomic,strong) NSString * text;
+@property (nonatomic,strong) NSString * details;
 
 +(Example *)exampleWithText:(NSString *)someText andDetails:(NSString *)details;
 

@@ -10,20 +10,11 @@
 #import "CustomModel.h"
 
 @interface CustomCell()
-@property (nonatomic,retain) CustomModel * model;
+@property (nonatomic,strong) CustomModel * model;
 @end
 
 @implementation CustomCell
 
--(void)dealloc
-{
-    self.model = nil;
-    self.label1 = nil;
-    self.label2 = nil;
-    self.label3 = nil;
-    self.label4 = nil;
-    [super dealloc];
-}
 
 -(void)updateWithModel:(id)model
 {

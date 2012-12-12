@@ -8,7 +8,7 @@
 #import "ExampleCell.h"
 
 @interface ExampleCell()
-@property (nonatomic,retain) Example * exampleModel;
+@property (nonatomic,strong) Example * exampleModel;
 @end
 
 @implementation ExampleCell
@@ -21,10 +21,5 @@
     self.detailTextLabel.text = self.exampleModel.details;
 }
 
--(void)dealloc
-{
-    self.exampleModel = nil;
-    [super dealloc];
-}
 
 @end

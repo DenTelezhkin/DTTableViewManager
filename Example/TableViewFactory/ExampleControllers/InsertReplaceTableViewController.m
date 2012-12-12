@@ -9,7 +9,7 @@
 #import "InsertReplaceTableViewController.h"
 
 @interface InsertReplaceTableViewController ()
-@property (nonatomic,retain) Example * wonderfulExample;
+@property (nonatomic,strong) Example * wonderfulExample;
 @end
 
 @implementation InsertReplaceTableViewController
@@ -24,16 +24,11 @@
     return self;
 }
 
--(void)dealloc
-{
-    self.wonderfulExample = nil;
-    [super dealloc];
-}
 
 -(Example *)wonderfulExample
 {
     if (!_wonderfulExample)
-        _wonderfulExample = [[Example exampleWithText:@"Wonderful" andDetails:@"cell"] retain];
+        _wonderfulExample = [Example exampleWithText:@"Wonderful" andDetails:@"cell"];
     return _wonderfulExample;
 }
 

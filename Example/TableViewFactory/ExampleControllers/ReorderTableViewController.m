@@ -52,7 +52,6 @@
                                                                    target:self
                                                                    action:@selector(editModeTapped:)];
     self.navigationItem.rightBarButtonItem = editButton;
-    [editButton release];
 }
 
 -(void)setDoneNavigationButton
@@ -62,7 +61,6 @@
                                                                    target:self
                                                                    action:@selector(doneTapped:)];
     self.navigationItem.rightBarButtonItem = editButton;
-    [editButton release];
 }
 
 

@@ -20,16 +20,8 @@
     model.text2 = text2;
     model.text3 = text3;
     model.text4 = text4;
-    return [model autorelease];
+    return model;
 }
 
--(void)dealloc
-{
-    self.text1 = nil;
-    self.text2 = nil;
-    self.text3 = nil;
-    self.text4 = nil;
-    [super dealloc];
-}
 
 @end

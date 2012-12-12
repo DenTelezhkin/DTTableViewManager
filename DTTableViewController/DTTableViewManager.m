@@ -28,11 +28,11 @@
 
 @interface DTTableViewManager ()
 - (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
-@property (nonatomic,retain) NSMutableArray * sections;
-@property (nonatomic,retain) NSArray * headers;
-@property (nonatomic,retain) NSArray * footers;
+@property (nonatomic,strong) NSMutableArray * sections;
+@property (nonatomic,strong) NSArray * headers;
+@property (nonatomic,strong) NSArray * footers;
 
-@property (nonatomic,assign) id <UITableViewDelegate,UITableViewDataSource, DTTableViewManagerProtocol> delegate;
+@property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewManagerProtocol> delegate;
 @end
 
 @implementation DTTableViewManager
@@ -41,14 +41,6 @@
 
 #pragma mark - initialize, clean
 
-- (void)dealloc
-{
-    self.sections = nil;
-    self.tableView = nil;
-    self.headers = nil;
-    self.footers = nil;
-    [super dealloc];
-}
 
 -(id)initWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
 {
@@ -78,7 +70,7 @@
 {
     DTTableViewManager * manager = [[DTTableViewManager alloc] initWithDelegate:delegate
                                                                    andTableView:tableView];
-    return [manager autorelease];
+    return manager;
 }
 
 #pragma mark - getters, setters
@@ -203,13 +195,12 @@
         if (!foundIndexPath)
         {
             NSLog(@"DTTableViewManager: object %@ not found, returning nil", [tableItems objectAtIndex:i]);
-            [indexPaths release];
             return nil;
         }
         
         [indexPaths addObject:foundIndexPath];
     }
-    return [indexPaths autorelease];
+    return indexPaths;
 }
 
 -(NSArray *)tableItemsArrayForIndexPaths:(NSArray *)indexPaths
@@ -225,11 +216,10 @@
         }
         else {
             NSLog(@"DTTableViewManager: item not found. Returning nil for NSArrayForIndexPaths");
-            [items release];
             return nil;
         }
     }
-    return [items autorelease];
+    return items;
 }
 
 - (NSArray *)tableItemsInSection:(int)section
@@ -453,14 +443,12 @@
 
 -(void)moveSection:(int)indexFrom toSection:(int)indexTo
 {
-    NSMutableArray * validSectionFrom = [[self getValidTableSection:indexFrom
-                                                      withAnimation:UITableViewRowAnimationNone]
-                                         retain];
+    NSMutableArray * validSectionFrom = [self getValidTableSection:indexFrom
+                                                      withAnimation:UITableViewRowAnimationNone];
     [self getValidTableSection:indexTo withAnimation:UITableViewRowAnimationNone];
     
     [self.sections removeObject:validSectionFrom];
     [self.sections insertObject:validSectionFrom atIndex:indexTo];
-    [validSectionFrom release];
     
     if (self.sections.count > self.tableView.numberOfSections)
     {
@@ -607,12 +595,11 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
       toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     NSMutableArray *array = [self.sections objectAtIndex:sourceIndexPath.section];
-    id tableItem = [[self tableItemAtIndexPath:sourceIndexPath] retain];
+    id tableItem = [self tableItemAtIndexPath:sourceIndexPath];
     [array removeObjectAtIndex:sourceIndexPath.row];
     
     array = [self.sections objectAtIndex:destinationIndexPath.section];
     [array insertObject:tableItem atIndex:destinationIndexPath.row];
-    [tableItem release];
 }
 
 @end

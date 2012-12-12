@@ -37,7 +37,7 @@
                                      <UITableViewDataSource, UITableViewDelegate>
 
 
-@property (nonatomic, retain) IBOutlet UITableView * tableView;
+@property (nonatomic, strong) IBOutlet UITableView * tableView;
 
 @property (nonatomic,assign) BOOL doNotReuseCells;
 

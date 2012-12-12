@@ -10,10 +10,10 @@
 
 @interface CustomModel : NSObject
 
-@property (nonatomic,retain) NSString * text1;
-@property (nonatomic,retain) NSString * text2;
-@property (nonatomic,retain) NSString * text3;
-@property (nonatomic,retain) NSString * text4;
+@property (nonatomic,strong) NSString * text1;
+@property (nonatomic,strong) NSString * text2;
+@property (nonatomic,strong) NSString * text3;
+@property (nonatomic,strong) NSString * text4;
 
 +(CustomModel *)modelWithText1:(NSString *)text1
                          text2:(NSString *)text2

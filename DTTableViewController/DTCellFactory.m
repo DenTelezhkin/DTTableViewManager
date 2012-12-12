@@ -36,7 +36,7 @@
 - (UITableViewCell *)cellWithModel:(id)model
                    reuseIdentifier:(NSString *)reuseIdentifier;
 
-@property (nonatomic,retain) NSMutableDictionary * mappingsDictionary;
+@property (nonatomic,strong) NSMutableDictionary * mappingsDictionary;
 
 @end
 
@@ -60,16 +60,11 @@
 
 - (NSDictionary *)classMappingDictionary
 {
-    return [[self.mappingsDictionary copy] autorelease];
+    return [self.mappingsDictionary copy];
 }
 
 #pragma mark - Init and destroy
 
-- (void)dealloc
-{
-    self.mappingsDictionary = nil;
-    [super dealloc];
-}
 
 #pragma mark - class mapping
 
@@ -143,7 +138,7 @@
                                               reuseIdentifier:reuseIdentifier];
         [cell updateWithModel:model];
         
-        return [cell autorelease];
+        return cell;
     }
     NSString *reason = [NSString stringWithFormat:@"cell class '%@' does not conform TableViewModelProtocol",
                         cellClass];

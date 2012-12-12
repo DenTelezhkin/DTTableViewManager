@@ -62,7 +62,6 @@
                                                                    target:self
                                                                    action:@selector(moveSection)];
     self.navigationItem.rightBarButtonItem = moveButton;
-    [moveButton release];
     
     [self addExampleRows];
 }
