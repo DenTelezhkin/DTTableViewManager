@@ -87,7 +87,7 @@
 		E666ACEE162C034000A2DBF2 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = TableViewFactory/Cells/CustomCell.m; sourceTree = "<group>"; };
 		E666ACF1162C037B00A2DBF2 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomModel.h; path = TableViewFactory/Models/CustomModel.h; sourceTree = "<group>"; };
 		E666ACF2162C037B00A2DBF2 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomModel.m; path = TableViewFactory/Models/CustomModel.m; sourceTree = "<group>"; };
-		E69B5F49162DA99F00E62655 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthesizeSingleton.h; path = ../../DTTableViewController/SynthesizeSingleton.h; sourceTree = "<group>"; };
+		E68E3BEE1678E691005B1D11 /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDSingleton.h; path = ../../DTTableViewController/GCDSingleton.h; sourceTree = "<group>"; };
 		E69B5F4A162DA9B300E62655 /* DTTableViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelProtocol.h; path = ../../DTTableViewController/DTTableViewModelProtocol.h; sourceTree = "<group>"; };
 		E69B5F4B162DA9D800E62655 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewController/DTTableViewManager.h; sourceTree = "<group>"; };
 		E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewManager.m; path = ../../DTTableViewController/DTTableViewManager.m; sourceTree = "<group>"; };
@@ -309,12 +309,12 @@
 		E6EA83931615F07F00F8B8C3 /* DTTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E69B5F49162DA99F00E62655 /* SynthesizeSingleton.h */,
 				E69B5F4A162DA9B300E62655 /* DTTableViewModelProtocol.h */,
 				E69B5F4B162DA9D800E62655 /* DTTableViewManager.h */,
 				E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */,
 				E69B5F4F162DA9EF00E62655 /* DTCellFactory.h */,
 				E69B5F50162DA9EF00E62655 /* DTCellFactory.m */,
+				E68E3BEE1678E691005B1D11 /* GCDSingleton.h */,
 			);
 			name = DTTableViewController;
 			sourceTree = "<group>";

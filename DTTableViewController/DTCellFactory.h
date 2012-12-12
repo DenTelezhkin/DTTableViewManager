@@ -24,13 +24,10 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "SynthesizeSingleton.h"
 
 @interface DTCellFactory : NSObject
 
 @property (readonly) NSDictionary * classMappingDictionary;
-
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 
 - (UITableViewCell *)cellForModel:(NSObject *)model
                           inTable:(UITableView *)table
@@ -49,5 +46,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DTCellFactory)
 
 // Dictionary should contain NSStringFromClass values and keys
 -(void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary;
+
++ (id)sharedInstance;
 
 @end

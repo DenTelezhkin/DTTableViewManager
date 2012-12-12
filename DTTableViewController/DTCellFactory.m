@@ -25,6 +25,7 @@
 
 #import "DTCellFactory.h"
 #import "DTTableViewModelProtocol.h"
+#import "GCDSingleton.h"
 
 @interface DTCellFactory ()
 
@@ -39,14 +40,16 @@
 
 @end
 
-
-
 @implementation DTCellFactory
-
-SYNTHESIZE_SINGLETON_FOR_CLASS(DTCellFactory)
 
 @synthesize classMappingDictionary = _classMappingDictionary;
 
++(id)sharedInstance
+{
+    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+        return [[self alloc] init];
+    });
+}
 
 - (NSMutableDictionary *)mappingsDictionary
 {
