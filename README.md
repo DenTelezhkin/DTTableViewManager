@@ -11,7 +11,7 @@ Warning - setup will sound complex, but once you use it at least once, you will 
 * Clean controller code
 * Table view cells can be created from code, or from IB.
 * You can make your controller a subclass of DTTableViewManager, or you can make it a property on your controller and subclass from whatever you need
-* Any datasource/delegate method can be reimplemented in your controller
+* Any datasource/delegate method can be overridden in your controller
 
 ## Usage
 
@@ -28,7 +28,7 @@ Warning - setup will sound complex, but once you use it at least once, you will 
 
 * Create DTTableViewManager object instance on your controler 
 
-    	self.tableManager = [DTTableViewManager managerWithDelegate:self andTableView:self.tableView];    
+   		self.tableManager = [DTTableViewManager managerWithDelegate:self andTableView:self.tableView];    
 * You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required)
 * Map every cell class to model class 
 * Add some table items to the table!
@@ -45,11 +45,11 @@ Example is available in Example folder.
 
 ## Additional 
 
-Please go to DTTableViewManager.h for all available API. DTCellFactory uses SynthethizeSingleton macros (https://github.com/cjhanson/Objective-C-Optimized-Singleton), but you can use any singleton approach you like.
+Added support for ARC, DTCellFactory now uses [GCDSingleton macro](https://gist.github.com/1057420). If you need non-ARC version, please refer to [0.0.5 version](https://github.com/DenHeadless/DTTableViewController/tree/0.0.5).
 
 ## Discussion
 
-This approach intends to clean your view controller from massive amounts of repeatable datasource code. It helps to think about table view models instead of table view cells. Table view cells should be responsive for displaying their content, and controller should only be responsive for displaying models. 
+This approach intends to clean your view controller from massive amounts of repeatable datasource code. It helps to think about table view models instead of table view cells. Table view cells should be responsive for displaying their content, and controller should only be responsive for displaying models, not cells. 
 		
 ## Thanks
 
