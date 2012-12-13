@@ -24,7 +24,6 @@
     return self;
 }
 
-
 -(Example *)wonderfulExample
 {
     if (!_wonderfulExample)

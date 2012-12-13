@@ -8,17 +8,12 @@
 
 #import "MoveSectionTableViewController.h"
 
-@interface MoveSectionTableViewController ()
-
-@end
-
 @implementation MoveSectionTableViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
         self.title = @"Move section";
     }
     return self;
@@ -26,8 +21,7 @@
 
 -(void)moveSection
 {
-    int numberofSections = [self numberOfSections];
-    [self moveSection:0 toSection:numberofSections -1];
+    [self moveSection:0 toSection:([self numberOfSections]-1)];
 }
 
 -(void)addExampleRows
