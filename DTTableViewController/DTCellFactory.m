@@ -44,7 +44,7 @@
 
 @synthesize classMappingDictionary = _classMappingDictionary;
 
-+(id)sharedInstance
++(DTCellFactory *)sharedInstance
 {
     DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
         return [[self alloc] init];

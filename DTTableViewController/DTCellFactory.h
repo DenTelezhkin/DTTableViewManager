@@ -47,6 +47,6 @@
 // Dictionary should contain NSStringFromClass values and keys
 -(void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary;
 
-+ (id)sharedInstance;
++ (DTCellFactory *)sharedInstance;
 
 @end

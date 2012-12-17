@@ -29,7 +29,7 @@
 		E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */; };
 		E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
 		E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
-		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; };
+		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
 		E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
 		E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
@@ -45,7 +45,7 @@
 		E6CB97AF161B26C900A7E936 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */; };
 		E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6CB97B3161B26C900A7E936 /* InfoPlist.strings */; };
 		E6CB97B7161B26C900A7E936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97B6161B26C900A7E936 /* main.m */; };
-		E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */; };
+		E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
 		E6EA83671615EE6000F8B8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
@@ -512,6 +512,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CedarUnitTests/CedarUnitTests-Prefix.pch";
@@ -532,6 +533,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CedarUnitTests/CedarUnitTests-Prefix.pch";
