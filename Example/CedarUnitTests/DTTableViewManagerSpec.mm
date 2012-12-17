@@ -14,6 +14,7 @@ describe(@"BaseTableViewController", ^{
     __block Example * acc4;
     __block Example * acc5;
     __block Example * acc6;
+    
     beforeEach(^{
         model = [DTTableViewManager new];
         model.tableView.delegate = model;

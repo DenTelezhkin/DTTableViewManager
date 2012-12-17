@@ -22,24 +22,12 @@
 
 -(void)addExampleCells
 {
-    [self addTableItem:[Example exampleWithText:@"Section 1 cell"
-                                     andDetails:@""]
-             toSection:0];
-    [self addTableItem:[Example exampleWithText:@"Section 1 cell"
-                                     andDetails:@""]
-             toSection:0];
-    [self addTableItem:[Example exampleWithText:@"Section 2 cell"
-                                                  andDetails:@""]
-             toSection:1];
-    [self addTableItem:[Example exampleWithText:@"Section 3 cell"
-                                     andDetails:@""]
-             toSection:2];
-    [self addTableItem:[Example exampleWithText:@"Section 3 cell"
-                                     andDetails:@""]
-             toSection:2];
-    [self addTableItem:[Example exampleWithText:@"Section 3 cell"
-                                     andDetails:@""]
-             toSection:2];
+    [self addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
+    [self addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
+    [self addTableItem:[Example exampleWithText:@"Section 2 cell" andDetails:@""] toSection:1];
+    [self addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
+    [self addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
+    [self addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
     [self setSectionHeaders:@[@"Section 1", @"Section 2", @" Section 3"]];
 }
 
