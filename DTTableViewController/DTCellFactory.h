@@ -29,6 +29,8 @@
 
 @property (readonly) NSDictionary * classMappingDictionary;
 
++ (DTCellFactory *)sharedInstance;
+
 - (UITableViewCell *)cellForModel:(NSObject *)model
                           inTable:(UITableView *)table
                   reuseIdentifier:(NSString *)reuseIdentifier;
@@ -42,11 +44,10 @@
 // Designated mapping method:
 -(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
 
-// For mapping custom NIB for cell, please call DTTableViewManager method.
+// For mapping custom NIB for cell, please call 
+// setCellMappingForNib:cellClass:modelClass: DTTableViewManager method.
 
 // Dictionary should contain NSStringFromClass values and keys
 -(void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary;
-
-+ (DTCellFactory *)sharedInstance;
 
 @end

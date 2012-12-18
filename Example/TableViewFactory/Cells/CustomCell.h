@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DTTableViewModelProtocol.h"
+#import "DTTableViewModelTransfer.h"
 
-@interface CustomCell : UITableViewCell <DTTableViewModelProtocol>
+@interface CustomCell : UITableViewCell <DTTableViewModelTransfer>
 
 @property (nonatomic,strong) IBOutlet UILabel * label1;
 @property (nonatomic,strong) IBOutlet UILabel * label2;

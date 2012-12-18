@@ -32,7 +32,7 @@
 @property (nonatomic,strong) NSArray * headers;
 @property (nonatomic,strong) NSArray * footers;
 
-@property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewManagerProtocol> delegate;
+@property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewCellCreation> delegate;
 @end
 
 @implementation DTTableViewManager
@@ -47,7 +47,7 @@
     self = [super init];
     if (self)
     {
-        self.delegate =(id <DTTableViewManagerProtocol, UITableViewDelegate,UITableViewDataSource>) delegate;
+        self.delegate =(id <DTTableViewCellCreation, UITableViewDelegate,UITableViewDataSource>) delegate;
         self.tableView = tableView;
         tableView.dataSource = self;
         tableView.delegate = delegate;

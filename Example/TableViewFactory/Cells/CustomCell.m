@@ -25,6 +25,4 @@
     self.label4.text = self.model.text4;
 }
 
-
-
 @end

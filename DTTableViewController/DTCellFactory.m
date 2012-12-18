@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 
 #import "DTCellFactory.h"
-#import "DTTableViewModelProtocol.h"
+#import "DTTableViewModelTransfer.h"
 #import "GCDSingleton.h"
 
 @interface DTCellFactory ()
@@ -119,7 +119,7 @@
                                forModel:(id)model
                         reuseIdentifier:(NSString *)reuseIdentifier
 {
-    UITableViewCell <DTTableViewModelProtocol> * cell =  [table dequeueReusableCellWithIdentifier:
+    UITableViewCell <DTTableViewModelTransfer> * cell =  [table dequeueReusableCellWithIdentifier:
                                                                 reuseIdentifier];
     [cell updateWithModel:model];
     return cell;
@@ -129,11 +129,11 @@
 {
     Class cellClass = [self cellClassForModel:model];
     
-    if ([cellClass conformsToProtocol:@protocol(DTTableViewModelProtocol)])
+    if ([cellClass conformsToProtocol:@protocol(DTTableViewModelTransfer)])
     {
-        UITableViewCell<DTTableViewModelProtocol> * cell;
+        UITableViewCell<DTTableViewModelTransfer> * cell;
 
-        cell = [(UITableViewCell <DTTableViewModelProtocol>  *)[cellClass alloc]
+        cell = [(UITableViewCell <DTTableViewModelTransfer>  *)[cellClass alloc]
                                                 initWithStyle:UITableViewCellStyleSubtitle
                                               reuseIdentifier:reuseIdentifier];
         [cell updateWithModel:model];

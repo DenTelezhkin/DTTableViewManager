@@ -23,15 +23,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTTableViewModelProtocol.h"
-
-@protocol DTTableViewManagerProtocol
-@optional
--(void)createdCell:(UITableViewCell *)cell
-      forTableView:(UITableView *)tableView
- forRowAtIndexPath:(NSIndexPath *)indexPath;
-@end
-
+#import "DTTableViewModelTransfer.h"
+#import "DTTableViewCellCreation.h"
 
 @interface DTTableViewManager : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
@@ -137,7 +130,8 @@
 // create your cells from code, or use standard cells:
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass;
 
-// create your custom cells from IB:
+// create your custom cells from IB, call this method only when outlets are loaded,
+// in viewDidLoad for example :
 -(void)setCellMappingForNib:(NSString *)nibName
                   cellClass:(Class)cellClass
                  modelClass:(Class)modelClass;

@@ -10,7 +10,9 @@
 
 @interface ExampleTableViewController : UIViewController <UITableViewDelegate,
                                                           UITableViewDataSource,
-                                                          DTTableViewManagerProtocol>
+                                                          DTTableViewCellCreation>
+{
+}
 
 @property (nonatomic,strong) IBOutlet UITableView * tableView;
 @end
