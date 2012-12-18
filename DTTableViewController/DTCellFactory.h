@@ -25,29 +25,63 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ `DTCellFactory` is a singleton object that is used to create cells for your tableView. 
+ 
+ ## Mapping
+ You should add mapping from model class to cell class, so that `DTCellFactory` could correctly create custom cells of the correct type, and pass them to `DTTableViewManager`. Use `setCellClassMapping:forModelClass:` for setting that connection.
+ */
+
 @interface DTCellFactory : NSObject
+
+/**
+ Copy of NSDictionary with all model -> cell class mappings.
+ */
 
 @property (readonly) NSDictionary * classMappingDictionary;
 
+
+///---------------------------------------
+/// @name Accessing factory
+///---------------------------------------
+
+/**
+ Singleton object of `DTCellFactory`
+ */
 + (DTCellFactory *)sharedInstance;
+
+///---------------------------------------
+/// @name Mapping
+///---------------------------------------
+
+/**
+ Designated mapping method.
+ 
+ @param cellClass Class of the cell you want to be created for model with `modelClass`.
+ 
+ @param modelClass Class of the model you want to be mapped to `cellClass`.
+ 
+ @warning If you want to use custom XIB for creating cells, use `[DTTableViewManager setCellMappingForNib:cellClass:modelClass:]` instead.
+ */
+
+-(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
+
+
+/*
+ Optional method, that can be used to set all mappings at once. Keys should be `NSStringFromClass` converted model classes, and values must be NSStringFromClass converted cell classes.  This method is not recommended to use.
+ */
+// Dictionary should contain NSStringFromClass values and keys
+-(void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary;
+
+
+/**
+ @name Internal use
+ */
 
 - (UITableViewCell *)cellForModel:(NSObject *)model
                           inTable:(UITableView *)table
                   reuseIdentifier:(NSString *)reuseIdentifier;
 
 - (Class)cellClassForModel:(NSObject *)model;
-
-///////////////////////
-// Mapping
-// 
-
-// Designated mapping method:
--(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
-
-// For mapping custom NIB for cell, please call 
-// setCellMappingForNib:cellClass:modelClass: DTTableViewManager method.
-
-// Dictionary should contain NSStringFromClass values and keys
--(void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary;
 
 @end

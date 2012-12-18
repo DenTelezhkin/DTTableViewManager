@@ -26,6 +26,10 @@
 #import "DTTableViewModelTransfer.h"
 #import "DTTableViewCellCreation.h"
 
+/**
+ `DTTableViewManager` docs 
+ */
+
 @interface DTTableViewManager : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
 
@@ -129,6 +133,19 @@
 
 // create your cells from code, or use standard cells:
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass;
+
+/**
+ This method is used to set mapping from model to custom cell created from XIB with `nibName` name. Cell data is then populated by `cellClass` class.
+ 
+ @param nibName Name of custom XIB that is used to create a cell.
+ 
+ @param cellClass Class of the cell you want to be created for model with modelClass.
+ 
+ @param modelClass Class of the model you want to be mapped to cellClass.
+ 
+ @warning This method need to be called after tableView has been created, in `viewDidLoad`, for example. Underneath this method uses UITableView `registerNib:forCellReuseIdentifier:` method.
+ 
+ */
 
 // create your custom cells from IB, call this method only when outlets are loaded,
 // in viewDidLoad for example :
