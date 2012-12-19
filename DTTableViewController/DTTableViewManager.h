@@ -27,12 +27,34 @@
 #import "DTTableViewCellCreation.h"
 
 /**
- `DTTableViewManager` docs 
+ `DTTableViewManager` manages all `UITableView` datasource methods and provides API for managing your data models in the table. It can be subclassed by your controller, containing UITableView or used as a separate object, that will manage all your data models, creating correctly typed cells for them.
+ 
+ ## Setup
+ 
+ - You should have classes that manage cell layout, using given data model.
+ - Every cell class should be mapped to model class using setCellMappingforClass:modelClass:
+ - `UITableView` delegate should be set to DTTableViewManager object.
+ 
+ # Subclassing
+ 
+ This is recommended approach, if you don't need to subclass your `UIViewController` from another controller. In this case `UITableView` delegate and datasource is your controller. Any UITableViewDatasource method can be overridden in your controller.
+ 
+ # Separate manager
+ 
+ This is needed, when your controller inherits from custom class, and you need to have `DTTableViewManager` as a separate object. In this case you should create `DTTableViewManager` object using [DTTableViewManager managerWithDelegate:andTableView:], and make it a property in your controller. Current implementation sets `UITableView`'s delegate and datasource property to `DTTableViewManager` object. Delegate methods are then trampolined to your controller if it implements them.
+ 
+ There's a `DTTableViewCellCreation` protocol that can be used to modify cell after it has been created.
+ 
+ ## Loading cells from XIB
+ 
+ `DTTableViewManager` internally uses `registerNib:forCellReuseIdentifier:` method for making this happen, which requires iOS 5.0 and higher to work. Use setCellMappingForNib:cellClass:modelClass: for mapping NIB to cell class and model. 
+ 
+ @warning Before executing setCellMappingForNib:cellClass:modelClass:, make sure that tableView property is set and tableView is created. This can be done in viewDidLoad method, for example.
+ 
  */
 
 @interface DTTableViewManager : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
-
 
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 
