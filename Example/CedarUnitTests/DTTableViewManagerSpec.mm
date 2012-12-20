@@ -37,13 +37,13 @@ describe(@"BaseTableViewController", ^{
 #define TEST_2 @"test2"
     
     it(@"should set section titles", ^{
-        [model setSectionHeaders:@[ TEST_1, TEST_2 ]];
+        [model setSectionHeaderTitles:@[ TEST_1, TEST_2 ]];
         [model tableView:model.tableView titleForHeaderInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForHeaderInSection:1] should equal(TEST_2);
     });
     
     it(@"should set section footers", ^{
-        [model setSectionFooters:@[ TEST_1, TEST_2 ]];
+        [model setSectionFooterTitles:@[ TEST_1, TEST_2 ]];
         
         [model tableView:model.tableView titleForFooterInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForFooterInSection:1] should equal(TEST_2);

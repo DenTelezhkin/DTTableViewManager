@@ -100,16 +100,16 @@
     return _footers;
 }
 
--(void)setSectionHeaders:(NSArray *)headers
+-(void)setSectionHeaderTitles:(NSArray *)headerTitles
 {
-    self.headers = headers;
+    self.headers = headerTitles;
     
     [self.tableView reloadData];
 }
 
--(void)setSectionFooters:(NSArray *)footers
+-(void)setSectionFooterTitles:(NSArray *)footerTitles
 {
-    self.footers = footers;
+    self.footers = footerTitles;
     
     [self.tableView reloadData];
 }
@@ -194,11 +194,12 @@
         NSIndexPath * foundIndexPath = [self indexPathOfTableItem:[tableItems objectAtIndex:i]];
         if (!foundIndexPath)
         {
-            NSLog(@"DTTableViewManager: object %@ not found, returning nil", [tableItems objectAtIndex:i]);
-            return nil;
+            NSLog(@"DTTableViewManager: object %@ not found, adding NSNull object", [tableItems objectAtIndex:i]);
+            [indexPaths addObject:[NSNull null]];
         }
-        
-        [indexPaths addObject:foundIndexPath];
+        else {
+            [indexPaths addObject:foundIndexPath];
+        }
     }
     return indexPaths;
 }
@@ -215,8 +216,8 @@
             [items addObject:foundIndexPath];
         }
         else {
-            NSLog(@"DTTableViewManager: item not found. Returning nil for NSArrayForIndexPaths");
-            return nil;
+            NSLog(@"DTTableViewManager: item not found. Adding NSNull object");
+            [items addObject:[NSNull null]];
         }
     }
     return items;
@@ -230,7 +231,7 @@
     }
     else {
         //        NSLog(@"DTTableViewManager: section %d not found",section);
-        return nil;
+        return @[];
     }
 }
 
@@ -304,14 +305,14 @@
     [self.tableView endUpdates];
 }
 
--(void)addNonRepeatingItems:(NSArray *)tableitems
+-(void)addNonRepeatingItems:(NSArray *)tableItems
                   toSection:(NSInteger)section
            withRowAnimation:(UITableViewRowAnimation)animation
 {
     NSArray * validSection = [self getValidTableSection:section withAnimation:animation];
     
     [self.tableView beginUpdates];
-    for (id model in tableitems)
+    for (id model in tableItems)
     {
         if (![validSection containsObject:model])
         {

@@ -36,7 +36,7 @@
     [self addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
     [self addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
     
-    [self setSectionHeaders:@[@"Section 1", @"Section 2", @" Section 3"]];
+    [self setSectionHeaderTitles:@[@"Section 1", @"Section 2", @" Section 3"]];
 }
 
 - (void)viewDidLoad
