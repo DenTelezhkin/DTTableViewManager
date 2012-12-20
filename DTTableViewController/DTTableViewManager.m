@@ -369,8 +369,20 @@
     //Update datasource
     NSIndexPath * indexPathToReplace = [self indexPathOfTableItem:tableItemToReplace];
     
+    if (!indexPathToReplace)
+    {
+        NSLog(@"DTTableViewManager: table item to replace not found.");
+        return;
+    }
+    if (!replacingTableItem)
+    {
+        NSLog(@"DTTableViewManager: replacing table item is nil.");
+        return;
+    }
+    
     NSMutableArray *section = [self getValidTableSection:indexPathToReplace.section
                                            withAnimation:animation];
+    
     [section replaceObjectAtIndex:indexPathToReplace.row withObject:replacingTableItem];
     
     //Update UI
@@ -410,10 +422,12 @@
 
 -(void)removeTableItems:(NSArray *)tableItems
 {
+    [self.tableView beginUpdates];
     for (NSObject * item in tableItems)
     {
         [self removeTableItem:item];
     }
+    [self.tableView endUpdates];
 }
 
 -(void)removeTableItems:(NSArray *)tableItems

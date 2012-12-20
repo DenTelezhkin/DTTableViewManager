@@ -132,7 +132,8 @@ describe(@"BaseTableViewController", ^{
          NSIndexPath * testPath = [model indexPathOfTableItem:testModel];
         NSArray * tableItemsPaths = [model tableItemsArrayForIndexPaths:@[testPath, ip3]];
         
-        tableItemsPaths should be_nil;
+        tableItemsPaths[0] should equal(testModel);
+        tableItemsPaths[1] should equal([NSNull null]);
     });
     
     it(@"should move sections", ^{
@@ -208,6 +209,19 @@ describe(@"BaseTableViewController", ^{
         tableItems[2] should equal(acc3);
         tableItems[3] should equal(acc4);
         tableItems[4] should equal(acc5);
+    });
+    
+    it(@"should fail silently on incorrect replacement", ^{
+        [model addTableItems:@[acc1,acc2]];
+        
+        ^{
+            [model replaceTableItem:acc2 withTableItem:nil];
+        } should_not raise_exception;
+        
+        ^{
+            [model replaceTableItem:acc3 withTableItem:acc2];
+        } should_not raise_exception;
+        
     });
 });
 

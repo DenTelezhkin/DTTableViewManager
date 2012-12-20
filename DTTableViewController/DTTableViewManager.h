@@ -27,7 +27,7 @@
 #import "DTTableViewCellCreation.h"
 
 /**
- `DTTableViewManager` manages all `UITableView` datasource methods and provides API for managing your data models in the table. It can be subclassed by your controller, containing UITableView or used as a separate object, that will manage all your data models, creating correctly typed cells for them.
+ `DTTableViewManager` manages all `UITableView` datasource methods and provides API for managing your data models in the table. 
  
  ## Setup
  
@@ -38,7 +38,7 @@
  
  # Subclassing
  
- This is recommended approach, if you don't need to subclass your `UIViewController` from another controller. In this case `UITableView` delegate and datasource is your controller. Any UITableViewDatasource method can be overridden in your controller.
+ This is recommended and easier approach. In this case `UITableView` delegate and datasource is your controller. Any `UITableViewDatasource` and `UITableViewDelegate` method can be overridden in your controller.
  
  # Separate manager
  
@@ -322,19 +322,68 @@
 /// @name Replace table items
 ///---------------------------------------
 
+/**
+ Replace tableItemToReplace with replacingTableItem. Table is immediately updated with `UITableViewRowAnimationNone` animation. If tableItemToReplace is not found, or replacingTableItem is `nil`, this method does nothing. 
+ 
+ @param tableItemToReplace Model object you want to replace.
+ 
+ @param replacingTableItem Model object you are replacing it with.
+ */
 - (void)replaceTableItem:(NSObject *)tableItemToReplace
            withTableItem:(NSObject *)replacingTableItem;
 
+/**
+ Replace tableItemToReplace with replacingTableItem. Table is immediately updated with `animation` animation. If tableItemToReplace is not found, or replacingTableItem is `nil`, this method does nothing.
+ 
+ @param tableItemToReplace Model object you want to replace.
+ 
+ @param replacingTableItem Model object you are replacing it with.
+ 
+ @param animation Row animation style to be used while replacing item.
+ */
 - (void)replaceTableItem:(NSObject *)tableItemToReplace
            withTableItem:(NSObject *)replacingTableItem
          andRowAnimation:(UITableViewRowAnimation)animation;
 
+///---------------------------------------
+/// @name Removing table items
+///---------------------------------------
+
+/**
+ Removing tableItem. Table is immediately updated with `UITableViewRowAnimationNone` animation. If tableItem is not found,  this method does nothing.
+ 
+ @param tableItem Model object you want to remove.
+ */
 - (void)removeTableItem:(NSObject *)tableItem;
+
+/**
+ Removing tableItem. Table is immediately updated with `animation` animation. If tableItem is not found,  this method does nothing.
+ 
+ @param tableItem Model object you want to remove.
+ 
+ @param animation Row animation style to be used while replacing item.
+ */
 - (void)removeTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation;
 
+/**
+ Removing tableItems. All deletions are made inside beginUpdates and endUpdates tableView block. After all deletions are made, `UITableViewRowAnimationNone` animation is applied. If some tableItem is not found, it is skipped.
+ 
+ @param tableItems Models you want to remove.
+ */
 - (void)removeTableItems:(NSArray *)tableItems;
+
+/**
+ Removing tableItems. All deletions are made inside beginUpdates and endUpdates tableView block. After all deletions are made, `animation` animation is applied. If some tableItem is not found, it is skipped.
+ 
+ @param tableItems Models you want to remove.
+ 
+ @param animation Row animation style to be used while replacing item.
+ */
 - (void)removeTableItems:(NSArray *)tableItems withRowAnimation:(UITableViewRowAnimation)animation;
 
+/**
+ Removes all tableItems. Table view data is reloaded using reloadData method.
+ */
 - (void)removeAllTableItems;
 
 ///////////////////////
