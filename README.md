@@ -1,4 +1,4 @@
-DTTableViewController
+DTTableViewManager
 ================
 
 Powerful architecture for UITableView. The idea is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
@@ -15,7 +15,7 @@ Warning - setup will sound complex, but once you use it at least once, you will 
         
 ## Changelog
 
-[Changelog](https://github.com/DenHeadless/DTTableViewController/wiki/Changelog)
+[Changelog](https://github.com/DenHeadless/DTTableViewManager/wiki/Changelog)
 
 ## Example 
 
@@ -23,7 +23,7 @@ Example is available in Example folder.
 
 ## Additional 
 
-Added support for ARC, DTCellFactory now uses [GCDSingleton macro](https://gist.github.com/1057420). If you need non-ARC version, please refer to [0.0.5 version](https://github.com/DenHeadless/DTTableViewController/tree/0.0.5).
+Added support for ARC, DTCellFactory now uses [GCDSingleton macro](https://gist.github.com/1057420). If you need non-ARC version, please refer to [0.0.5 version](https://github.com/DenHeadless/DTTableViewManager/tree/0.0.5).
 
 ## Discussion
 
