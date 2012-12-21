@@ -12,28 +12,6 @@ Warning - setup will sound complex, but once you use it at least once, you will 
 * Table view cells can be created from code, or from IB.
 * You can make your controller a subclass of DTTableViewManager, or you can make it a property on your controller and subclass from whatever you need
 * Any datasource/delegate method can be overridden in your controller
-
-## Usage
-
-### Subclassing
-
-* You will have a property tableView - put your tableView there
-* You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required)
-* Map every cell class to model class
-* Add some table items to the table!
-
-    	[self addTableItem:<modelObject>];
-        
-### Property on your controller
-
-* Create DTTableViewManager object instance on your controler 
-
-   		self.tableManager = [DTTableViewManager managerWithDelegate:self andTableView:self.tableView];    
-* You need to have a model for each type of table view cell. Every cell needs to conform to DTTableViewModelProtocol(method updateWithModel: is required)
-* Map every cell class to model class 
-* Add some table items to the table!
-
-		[self.tableManager addTableItem:<modelObject>];
         
 ## Changelog
 
