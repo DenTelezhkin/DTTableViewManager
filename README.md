@@ -21,6 +21,10 @@ Warning - setup will sound complex, but once you use it at least once, you will 
 
 Example is available in Example folder. 
 
+## Documentation
+
+You can view documentation [online](http://denheadless.github.com/DTTableViewManager/) or you can install it locally using following atom link: [http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom](http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom).
+
 ## Additional 
 
 Added support for ARC, DTCellFactory now uses [GCDSingleton macro](https://gist.github.com/1057420). If you need non-ARC version, please refer to [0.0.5 version](https://github.com/DenHeadless/DTTableViewManager/tree/0.0.5).
