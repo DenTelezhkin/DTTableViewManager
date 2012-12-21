@@ -32,8 +32,8 @@
  ## Setup
  
  # General steps
- - You should have classes that manage cell layout, using given data model.
- - Every cell class should be mapped to model class using setCellMappingforClass:modelClass:
+ - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model.
+ - Every cell class should be mapped to model class using mapping methods.
  - `UITableView` delegate should be set to DTTableViewManager object.
  
  # Subclassing
@@ -60,6 +60,10 @@
 
 @interface DTTableViewManager : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
+
+///---------------------------------------
+/// @name Properties
+///---------------------------------------
 
 /**
  
@@ -386,25 +390,60 @@
  */
 - (void)removeAllTableItems;
 
-///////////////////////
-// Move, delete, reload sections
+///---------------------------------------
+/// @name Managing sections
+///---------------------------------------
 
-// Move section to section will update both model and UI
+/**
+ Moves a section to a new location in the table view.
+ 
+ @param indexFrom The index of the section to move.
+ 
+ @param indexTo The index in the table view that is the destination of the move for the section. The existing section at that location slides up or down to an adjoining index position to make room for it.
+ */
 - (void)moveSection:(int)indexFrom toSection:(int)indexTo;
 
+/**
+ Deletes one or more sections in the receiver, with `UITableViewRowAnimationNone` animation. 
+ 
+ @param indexSet An index set that specifies the sections to delete from the receiving table view. If a section exists after the specified index location, it is moved up one index location.
+ */
 - (void)deleteSections:(NSIndexSet *)indexSet;
+
+/**
+ Deletes one or more sections in the receiver, with `animation` animation.
+ 
+ @param indexSet An index set that specifies the sections to delete from the receiving table view. If a section exists after the specified index location, it is moved up one index location.
+ 
+ @param animation Row animation style to be used while deleting sections.
+ */
 - (void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
+
+/**
+ Reloads one or more sections in the receiver, with `animation` animation.
+ 
+ @param indexSet An index set that specifies the sections to reload from the receiving table view. 
+ 
+ @param animation Row animation style to be used when reloading sections.
+ */
 - (void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
 
-///////////////////////
-// Mapping
-// redirect to CellFactory
+///---------------------------------------
+/// @name Mapping
+///---------------------------------------
 
-// Designated setters
-
-// create your cells from code, or use standard cells:
+/**
+ This method is used to set mapping from model class to custom cell class. 
+ 
+ @param cellClass Class of the cell you want to be created for model with modelClass.
+ 
+ @param modelClass Class of the model you want to be mapped to cellClass.
+ 
+ @discussion This is the designated mapping method. It can be called anywhere, but probably the best place to call - is in your controller -init method. Inner implementation of this method trampolines mapping to DTCellFactory. You can also call this method of DTCellFactory as well.
+ 
+ */
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass;
 
 /**
@@ -419,16 +458,19 @@
  @warning This method needs to be called after tableView has been created, in `viewDidLoad`, for example. This method uses UITableView `registerNib:forCellReuseIdentifier:` underneath.
  
  */
-
-// create your custom cells from IB, call this method only when outlets are loaded,
-// in viewDidLoad for example :
 -(void)setCellMappingForNib:(NSString *)nibName
                   cellClass:(Class)cellClass
                  modelClass:(Class)modelClass;
 
-
-// Not recommended, but you can do it if you like. Just take a look, how
-// this is done in setCellClassMapping:forModelClass method
+/**
+ This method is used to set mapping from model class to custom cell class.
+ 
+ @param mapping Dictionary of mappings. Must contain NSStringFromClass(<model class>) as keys and NSStringFromClass(<cell class>) as values. 
+ 
+ @discussion This method can be called multiple times. All mappings are simply added, not replaced.
+ 
+ @warning Using this method is not recommended unless you know what you are doing. It can be used to set multiple mappings with one call, however mistakes in calling this method can be devastating. It is better and cleaner way to set mappings one by one, in controllers that represent models you are mapping.
+ */
 -(void)setObjectMappingDictionary:(NSDictionary *)mapping;
 
 @end
