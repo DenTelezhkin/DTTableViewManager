@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E60CA0061684A8E200F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0011684A8E200F4147E /* DTCellFactory.m */; };
-		E60CA0071684A8E200F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0011684A8E200F4147E /* DTCellFactory.m */; };
-		E60CA0081684A8E200F4147E /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0031684A8E200F4147E /* DTTableViewManager.m */; };
-		E60CA0091684A8E200F4147E /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0031684A8E200F4147E /* DTTableViewManager.m */; };
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
 		E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */; };
@@ -33,19 +29,23 @@
 		E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */; };
 		E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
 		E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
-		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; };
+		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
 		E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
 		E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
 		E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
 		E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
 		E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
+		E69B5F4D162DA9D800E62655 /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */; };
+		E69B5F4E162DA9D800E62655 /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */; };
+		E69B5F51162DA9EF00E62655 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E69B5F50162DA9EF00E62655 /* DTCellFactory.m */; };
+		E69B5F52162DA9EF00E62655 /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E69B5F50162DA9EF00E62655 /* DTCellFactory.m */; };
 		E6CB97AD161B26C900A7E936 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
 		E6CB97AE161B26C900A7E936 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83681615EE6000F8B8C3 /* Foundation.framework */; };
 		E6CB97AF161B26C900A7E936 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */; };
 		E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6CB97B3161B26C900A7E936 /* InfoPlist.strings */; };
 		E6CB97B7161B26C900A7E936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97B6161B26C900A7E936 /* main.m */; };
-		E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */; };
+		E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
 		E6EA83671615EE6000F8B8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
@@ -62,12 +62,7 @@
 /* Begin PBXFileReference section */
 		443AAC7353A943DCAA45DED0 /* libPods-CedarUnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CedarUnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F9431F27DC49DBA1DBDFC0 /* Pods-CedarUnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CedarUnitTests.xcconfig"; path = "Pods/Pods-CedarUnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
-		E60CA0001684A8E200F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
-		E60CA0011684A8E200F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
-		E60CA0021684A8E200F4147E /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
-		E60CA0031684A8E200F4147E /* DTTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewManager.m; path = ../../DTTableViewManager/DTTableViewManager.m; sourceTree = "<group>"; };
-		E60CA0041684A8E200F4147E /* DTTableViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelProtocol.h; path = ../../DTTableViewManager/DTTableViewModelProtocol.h; sourceTree = "<group>"; };
-		E60CA0051684A8E200F4147E /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDSingleton.h; path = ../../DTTableViewManager/GCDSingleton.h; sourceTree = "<group>"; };
+		E62A9A781680A63A00C5CC50 /* DTTableViewCellCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCellCreation.h; path = ../../DTTableViewController/DTTableViewCellCreation.h; sourceTree = "<group>"; };
 		E638F1071619916B00694FBC /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = TableViewFactory/Models/Example.h; sourceTree = "<group>"; };
 		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
 		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
@@ -93,20 +88,26 @@
 		E666ACEE162C034000A2DBF2 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = TableViewFactory/Cells/CustomCell.m; sourceTree = "<group>"; };
 		E666ACF1162C037B00A2DBF2 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomModel.h; path = TableViewFactory/Models/CustomModel.h; sourceTree = "<group>"; };
 		E666ACF2162C037B00A2DBF2 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomModel.m; path = TableViewFactory/Models/CustomModel.m; sourceTree = "<group>"; };
+		E68E3BEE1678E691005B1D11 /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDSingleton.h; path = ../../DTTableViewController/GCDSingleton.h; sourceTree = "<group>"; };
+		E69B5F4A162DA9B300E62655 /* DTTableViewModelTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelTransfer.h; path = ../../DTTableViewController/DTTableViewModelTransfer.h; sourceTree = "<group>"; };
+		E69B5F4B162DA9D800E62655 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewController/DTTableViewManager.h; sourceTree = "<group>"; };
+		E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewManager.m; path = ../../DTTableViewController/DTTableViewManager.m; sourceTree = "<group>"; };
+		E69B5F4F162DA9EF00E62655 /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewController/DTCellFactory.h; sourceTree = "<group>"; };
+		E69B5F50162DA9EF00E62655 /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewController/DTCellFactory.m; sourceTree = "<group>"; };
 		E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CedarUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CB97B2161B26C900A7E936 /* CedarUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CedarUnitTests-Info.plist"; sourceTree = "<group>"; };
 		E6CB97B4161B26C900A7E936 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E6CB97B6161B26C900A7E936 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CedarUnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTTableViewManagerSpec.mm; sourceTree = "<group>"; };
-		E6EA83621615EE6000F8B8C3 /* DTTableViewManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTTableViewManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EA83661615EE6000F8B8C3 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E6EA83681615EE6000F8B8C3 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		E6EA836E1615EE6000F8B8C3 /* DTTableViewManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DTTableViewManager-Info.plist"; sourceTree = "<group>"; };
+		E6EA836E1615EE6000F8B8C3 /* TableViewFactory-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewFactory-Info.plist"; sourceTree = "<group>"; };
 		E6EA83701615EE6000F8B8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E6EA83721615EE6000F8B8C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E6EA83741615EE6000F8B8C3 /* DTTableViewManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTTableViewManager-Prefix.pch"; sourceTree = "<group>"; };
+		E6EA83741615EE6000F8B8C3 /* TableViewFactory-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableViewFactory-Prefix.pch"; sourceTree = "<group>"; };
 		E6EA83751615EE6000F8B8C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E6EA83761615EE6000F8B8C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleTableViewController.h; sourceTree = "<group>"; };
@@ -250,7 +251,7 @@
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
-				E6EA836C1615EE6000F8B8C3 /* DTTableViewManager */,
+				E6EA836C1615EE6000F8B8C3 /* TableViewFactory */,
 				E6CB97B0161B26C900A7E936 /* CedarUnitTests */,
 				E6EA83651615EE6000F8B8C3 /* Frameworks */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
@@ -261,7 +262,7 @@
 		E6EA83631615EE6000F8B8C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E6EA83621615EE6000F8B8C3 /* DTTableViewManager.app */,
+				E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */,
 				E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */,
 			);
 			name = Products;
@@ -278,10 +279,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E6EA836C1615EE6000F8B8C3 /* DTTableViewManager */ = {
+		E6EA836C1615EE6000F8B8C3 /* TableViewFactory */ = {
 			isa = PBXGroup;
 			children = (
-				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
+				E6EA83931615F07F00F8B8C3 /* DTTableViewController */,
 				E638F1051619913B00694FBC /* Models */,
 				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
@@ -292,32 +293,32 @@
 				E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */,
 				E6EA836D1615EE6000F8B8C3 /* Supporting Files */,
 			);
-			name = DTTableViewManager;
 			path = TableViewFactory;
 			sourceTree = "<group>";
 		};
 		E6EA836D1615EE6000F8B8C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E6EA836E1615EE6000F8B8C3 /* DTTableViewManager-Info.plist */,
+				E6EA836E1615EE6000F8B8C3 /* TableViewFactory-Info.plist */,
 				E6EA836F1615EE6000F8B8C3 /* InfoPlist.strings */,
 				E6EA83721615EE6000F8B8C3 /* main.m */,
-				E6EA83741615EE6000F8B8C3 /* DTTableViewManager-Prefix.pch */,
+				E6EA83741615EE6000F8B8C3 /* TableViewFactory-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E6EA83931615F07F00F8B8C3 /* DTTableViewManager */ = {
+		E6EA83931615F07F00F8B8C3 /* DTTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E60CA0001684A8E200F4147E /* DTCellFactory.h */,
-				E60CA0011684A8E200F4147E /* DTCellFactory.m */,
-				E60CA0021684A8E200F4147E /* DTTableViewManager.h */,
-				E60CA0031684A8E200F4147E /* DTTableViewManager.m */,
-				E60CA0041684A8E200F4147E /* DTTableViewModelProtocol.h */,
-				E60CA0051684A8E200F4147E /* GCDSingleton.h */,
+				E69B5F4A162DA9B300E62655 /* DTTableViewModelTransfer.h */,
+				E62A9A781680A63A00C5CC50 /* DTTableViewCellCreation.h */,
+				E69B5F4B162DA9D800E62655 /* DTTableViewManager.h */,
+				E69B5F4C162DA9D800E62655 /* DTTableViewManager.m */,
+				E69B5F4F162DA9EF00E62655 /* DTCellFactory.h */,
+				E69B5F50162DA9EF00E62655 /* DTCellFactory.m */,
+				E68E3BEE1678E691005B1D11 /* GCDSingleton.h */,
 			);
-			name = DTTableViewManager;
+			name = DTTableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,9 +342,9 @@
 			productReference = E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E6EA83611615EE6000F8B8C3 /* DTTableViewManager */ = {
+		E6EA83611615EE6000F8B8C3 /* TableViewFactory */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "DTTableViewManager" */;
+			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "TableViewFactory" */;
 			buildPhases = (
 				E6EA835E1615EE6000F8B8C3 /* Sources */,
 				E6EA835F1615EE6000F8B8C3 /* Frameworks */,
@@ -353,9 +354,9 @@
 			);
 			dependencies = (
 			);
-			name = DTTableViewManager;
+			name = TableViewFactory;
 			productName = TableViewFactory;
-			productReference = E6EA83621615EE6000F8B8C3 /* DTTableViewManager.app */;
+			productReference = E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -367,7 +368,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Denys Telezhkin";
 			};
-			buildConfigurationList = E6EA835C1615EE6000F8B8C3 /* Build configuration list for PBXProject "DTTableViewManager" */;
+			buildConfigurationList = E6EA835C1615EE6000F8B8C3 /* Build configuration list for PBXProject "TableViewFactory" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -379,7 +380,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E6EA83611615EE6000F8B8C3 /* DTTableViewManager */,
+				E6EA83611615EE6000F8B8C3 /* TableViewFactory */,
 				E6CB97AA161B26C900A7E936 /* CedarUnitTests */,
 			);
 		};
@@ -451,8 +452,8 @@
 				E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
-				E60CA0071684A8E200F4147E /* DTCellFactory.m in Sources */,
-				E60CA0091684A8E200F4147E /* DTTableViewManager.m in Sources */,
+				E69B5F4E162DA9D800E62655 /* DTTableViewManager.m in Sources */,
+				E69B5F52162DA9EF00E62655 /* DTCellFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,8 +473,8 @@
 				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
-				E60CA0061684A8E200F4147E /* DTCellFactory.m in Sources */,
-				E60CA0081684A8E200F4147E /* DTTableViewManager.m in Sources */,
+				E69B5F4D162DA9D800E62655 /* DTTableViewManager.m in Sources */,
+				E69B5F51162DA9EF00E62655 /* DTCellFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +514,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CedarUnitTests/CedarUnitTests-Prefix.pch";
@@ -533,6 +535,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CedarUnitTests/CedarUnitTests-Prefix.pch";
@@ -601,11 +604,11 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TableViewFactory/DTTableViewManager-Prefix.pch";
+				GCC_PREFIX_HEADER = "TableViewFactory/TableViewFactory-Prefix.pch";
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "TableViewFactory/DTTableViewManager-Info.plist";
+				INFOPLIST_FILE = "TableViewFactory/TableViewFactory-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = DTTableViewManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -619,11 +622,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TableViewFactory/DTTableViewManager-Prefix.pch";
+				GCC_PREFIX_HEADER = "TableViewFactory/TableViewFactory-Prefix.pch";
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "TableViewFactory/DTTableViewManager-Info.plist";
+				INFOPLIST_FILE = "TableViewFactory/TableViewFactory-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = DTTableViewManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
@@ -642,7 +645,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6EA835C1615EE6000F8B8C3 /* Build configuration list for PBXProject "DTTableViewManager" */ = {
+		E6EA835C1615EE6000F8B8C3 /* Build configuration list for PBXProject "TableViewFactory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6EA83841615EE6000F8B8C3 /* Debug */,
@@ -651,7 +654,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "DTTableViewManager" */ = {
+		E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "TableViewFactory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6EA83871615EE6000F8B8C3 /* Debug */,

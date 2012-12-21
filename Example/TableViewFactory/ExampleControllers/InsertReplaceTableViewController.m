@@ -18,7 +18,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
         [self setCellMappingforClass:[ExampleCell class] modelClass:[Example class]];
     }
     return self;
@@ -41,12 +40,8 @@
     [self addTableItem:[Example exampleWithText:@"Tap me to replace with wonderful cell"
                                      andDetails:nil]
              toSection:1];
-    [self addTableItem:[Example exampleWithText:@"Or me"
-                                     andDetails:nil]
-             toSection:1];
-    [self addTableItem:[Example exampleWithText:@"Or me"
-                                     andDetails:nil]
-             toSection:1];
+    [self addTableItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
+    [self addTableItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
 }
 
 - (void)viewDidLoad
@@ -54,7 +49,7 @@
     [super viewDidLoad];
     [self addInsertSection];
     [self addReplaceSection];
-    [self setSectionHeaders:@[@"Insert rows", @"Replace rows"]];
+    [self setSectionHeaderTitles:@[@"Insert rows", @"Replace rows"]];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

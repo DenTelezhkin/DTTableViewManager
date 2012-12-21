@@ -1,4 +1,4 @@
-//#import "DTTableViewManager.h"
+#import "DTTableViewManager.h"
 #import <Foundation/Foundation.h>
 
 using namespace Cedar::Matchers;
@@ -14,6 +14,7 @@ describe(@"BaseTableViewController", ^{
     __block Example * acc4;
     __block Example * acc5;
     __block Example * acc6;
+    
     beforeEach(^{
         model = [DTTableViewManager new];
         model.tableView.delegate = model;
@@ -36,13 +37,13 @@ describe(@"BaseTableViewController", ^{
 #define TEST_2 @"test2"
     
     it(@"should set section titles", ^{
-        [model setSectionHeaders:@[ TEST_1, TEST_2 ]];
+        [model setSectionHeaderTitles:@[ TEST_1, TEST_2 ]];
         [model tableView:model.tableView titleForHeaderInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForHeaderInSection:1] should equal(TEST_2);
     });
     
     it(@"should set section footers", ^{
-        [model setSectionFooters:@[ TEST_1, TEST_2 ]];
+        [model setSectionFooterTitles:@[ TEST_1, TEST_2 ]];
         
         [model tableView:model.tableView titleForFooterInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForFooterInSection:1] should equal(TEST_2);
@@ -131,7 +132,8 @@ describe(@"BaseTableViewController", ^{
          NSIndexPath * testPath = [model indexPathOfTableItem:testModel];
         NSArray * tableItemsPaths = [model tableItemsArrayForIndexPaths:@[testPath, ip3]];
         
-        tableItemsPaths should be_nil;
+        tableItemsPaths[0] should equal(testModel);
+        tableItemsPaths[1] should equal([NSNull null]);
     });
     
     it(@"should move sections", ^{
@@ -207,6 +209,19 @@ describe(@"BaseTableViewController", ^{
         tableItems[2] should equal(acc3);
         tableItems[3] should equal(acc4);
         tableItems[4] should equal(acc5);
+    });
+    
+    it(@"should fail silently on incorrect replacement", ^{
+        [model addTableItems:@[acc1,acc2]];
+        
+        ^{
+            [model replaceTableItem:acc2 withTableItem:nil];
+        } should_not raise_exception;
+        
+        ^{
+            [model replaceTableItem:acc3 withTableItem:acc2];
+        } should_not raise_exception;
+        
     });
 });
 

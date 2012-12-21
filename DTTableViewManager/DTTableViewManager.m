@@ -32,7 +32,7 @@
 @property (nonatomic,strong) NSArray * headers;
 @property (nonatomic,strong) NSArray * footers;
 
-@property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewManagerProtocol> delegate;
+@property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewCellCreation> delegate;
 @end
 
 @implementation DTTableViewManager
@@ -47,7 +47,7 @@
     self = [super init];
     if (self)
     {
-        self.delegate =(id <DTTableViewManagerProtocol, UITableViewDelegate,UITableViewDataSource>) delegate;
+        self.delegate =(id <DTTableViewCellCreation, UITableViewDelegate,UITableViewDataSource>) delegate;
         self.tableView = tableView;
         tableView.dataSource = self;
         tableView.delegate = delegate;
@@ -100,16 +100,16 @@
     return _footers;
 }
 
--(void)setSectionHeaders:(NSArray *)headers
+-(void)setSectionHeaderTitles:(NSArray *)headerTitles
 {
-    self.headers = headers;
+    self.headers = headerTitles;
     
     [self.tableView reloadData];
 }
 
--(void)setSectionFooters:(NSArray *)footers
+-(void)setSectionFooterTitles:(NSArray *)footerTitles
 {
-    self.footers = footers;
+    self.footers = footerTitles;
     
     [self.tableView reloadData];
 }
@@ -194,11 +194,12 @@
         NSIndexPath * foundIndexPath = [self indexPathOfTableItem:[tableItems objectAtIndex:i]];
         if (!foundIndexPath)
         {
-            NSLog(@"DTTableViewManager: object %@ not found, returning nil", [tableItems objectAtIndex:i]);
-            return nil;
+            NSLog(@"DTTableViewManager: object %@ not found, adding NSNull object", [tableItems objectAtIndex:i]);
+            [indexPaths addObject:[NSNull null]];
         }
-        
-        [indexPaths addObject:foundIndexPath];
+        else {
+            [indexPaths addObject:foundIndexPath];
+        }
     }
     return indexPaths;
 }
@@ -215,8 +216,8 @@
             [items addObject:foundIndexPath];
         }
         else {
-            NSLog(@"DTTableViewManager: item not found. Returning nil for NSArrayForIndexPaths");
-            return nil;
+            NSLog(@"DTTableViewManager: item not found. Adding NSNull object");
+            [items addObject:[NSNull null]];
         }
     }
     return items;
@@ -230,7 +231,7 @@
     }
     else {
         //        NSLog(@"DTTableViewManager: section %d not found",section);
-        return nil;
+        return @[];
     }
 }
 
@@ -304,14 +305,14 @@
     [self.tableView endUpdates];
 }
 
--(void)addNonRepeatingItems:(NSArray *)tableitems
+-(void)addNonRepeatingItems:(NSArray *)tableItems
                   toSection:(NSInteger)section
            withRowAnimation:(UITableViewRowAnimation)animation
 {
     NSArray * validSection = [self getValidTableSection:section withAnimation:animation];
     
     [self.tableView beginUpdates];
-    for (id model in tableitems)
+    for (id model in tableItems)
     {
         if (![validSection containsObject:model])
         {
@@ -368,8 +369,20 @@
     //Update datasource
     NSIndexPath * indexPathToReplace = [self indexPathOfTableItem:tableItemToReplace];
     
+    if (!indexPathToReplace)
+    {
+        NSLog(@"DTTableViewManager: table item to replace not found.");
+        return;
+    }
+    if (!replacingTableItem)
+    {
+        NSLog(@"DTTableViewManager: replacing table item is nil.");
+        return;
+    }
+    
     NSMutableArray *section = [self getValidTableSection:indexPathToReplace.section
                                            withAnimation:animation];
+    
     [section replaceObjectAtIndex:indexPathToReplace.row withObject:replacingTableItem];
     
     //Update UI
@@ -409,10 +422,12 @@
 
 -(void)removeTableItems:(NSArray *)tableItems
 {
+    [self.tableView beginUpdates];
     for (NSObject * item in tableItems)
     {
         [self removeTableItem:item];
     }
+    [self.tableView endUpdates];
 }
 
 -(void)removeTableItems:(NSArray *)tableItems

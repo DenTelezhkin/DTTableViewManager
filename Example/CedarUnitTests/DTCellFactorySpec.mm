@@ -1,4 +1,4 @@
-//#import "DTCellFactory.h"
+#import "DTCellFactory.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -12,7 +12,7 @@ describe(@"DTCellFactory", ^{
     });
     
     it(@"should set mapping", ^{
-        [[DTCellFactory sharedInstance] addCellClassMapping:[@[] class]
+        [[DTCellFactory sharedInstance] setCellClassMapping:[@[] class]
                                                     forModelClass:[NSString class]];
         
         NSDictionary * mapping = [[DTCellFactory sharedInstance] classMappingDictionary];

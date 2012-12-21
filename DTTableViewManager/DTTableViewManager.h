@@ -23,128 +23,454 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTTableViewModelProtocol.h"
+#import "DTTableViewModelTransfer.h"
+#import "DTTableViewCellCreation.h"
 
-@protocol DTTableViewManagerProtocol
-@optional
--(void)createdCell:(UITableViewCell *)cell
-      forTableView:(UITableView *)tableView
- forRowAtIndexPath:(NSIndexPath *)indexPath;
-@end
-
+/**
+ `DTTableViewManager` manages all `UITableView` datasource methods and provides API for managing your data models in the table. 
+ 
+ ## Setup
+ 
+ # General steps
+ - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model.
+ - Every cell class should be mapped to model class using mapping methods.
+ - `UITableView` delegate should be set to DTTableViewManager object.
+ 
+ # Subclassing
+ 
+ This is recommended and easier approach. In this case `UITableView` delegate and datasource is your controller. Any `UITableViewDatasource` and `UITableViewDelegate` method can be overridden in your controller.
+ 
+ # Separate manager
+ 
+ This is needed, when your controller inherits from custom class, and you need to have `DTTableViewManager` as a separate object. In this case you should create `DTTableViewManager` object using [DTTableViewManager managerWithDelegate:andTableView:], and make it a property in your controller. Current implementation sets `UITableView`'s delegate and datasource property to `DTTableViewManager` object. Delegate methods are then trampolined to your controller if it implements them.
+ 
+ There's a `DTTableViewCellCreation` protocol that can be used to modify cell after it has been created.
+ 
+ ## Managing table items
+ 
+ Every action that is done to table items - add, delete, insert etc. is applied immediately. There's no need to manually reload data on your table view. Group insertion, addition or deletion is processed inside `UITableView` `beginUpdates` and `endUpdates` block.
+ 
+ ## Loading cells from XIB
+ 
+ `DTTableViewManager` internally uses `registerNib:forCellReuseIdentifier:` method for making this happen, which requires iOS 5.0 and higher to work. Use setCellMappingForNib:cellClass:modelClass: for mapping NIB to cell class and model. 
+ 
+ @warning Before executing setCellMappingForNib:cellClass:modelClass:, make sure that tableView property is set and tableView is created. Good spot to call setCellMappingForNib:cellClass:modelClass: is in viewDidLoad method.
+ 
+ */
 
 @interface DTTableViewManager : UIViewController
                                      <UITableViewDataSource, UITableViewDelegate>
 
+///---------------------------------------
+/// @name Properties
+///---------------------------------------
+
+/**
+ 
+ Table view that will present your data models.
+ */
 
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 
+
+/**
+ Set this property to YES if you don't want to reuse cells.
+ 
+ @warning By default, `reuseIdentifier` for cells is set to `NSStringFromClass(<model class>)`
+ */
 @property (nonatomic,assign) BOOL doNotReuseCells;
 
 
-//////////////////////////
-// Initialization
+///---------------------------------------
+/// @name Initialization
+///---------------------------------------
 
+/**
+ Initializer for DTTableViewManager. Can be used when you are using it as a separate object.
+ 
+ @param delegate Your controller, that wishes to get delegate and datasource calls from `DTTableViewManager`.
+ 
+ @param tableView tableView on your controller you want to manager.
+ 
+ @return DTTableViewManager object
+ */
 -(id)initWithDelegate:(id <UITableViewDelegate>)delegate andTableView:(UITableView *)tableView;
+
+/**
+ Returns autoreleased DTTableViewManager object. Can be used when you are using it as a separate object.
+ 
+ @param delegate Your controller, that wishes to get delegate and datasource calls from `DTTableViewmanager`.
+ 
+ @param tableView tableView on your controller you want to manager.
+ 
+ @return autoreleased DTTableViewManager object
+ */
 +(id)managerWithDelegate:(id <UITableViewDelegate>)delegate andTableView:(UITableView *)tableView;
 
-//////////////////////////
-// Search and setup
+///---------------------------------------
+/// @name Search
+///---------------------------------------
 
+/**
+ If item exists at `indexPath`, it's model will be returned. If section or row does not exist, method will return `nil`.
+ 
+ @param indexPath Index of the item you wish to retrieve. 
+ 
+ @return model at indexPath. If section or row does not exist - `nil`.
+ */
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath;
 //this method returns lowest index item, that is equal to tableItem
+
+/**
+ Searches for tableItem and returns it's indexPath. If there are many equal tableItems, indexPath of the first one will be returned
+ 
+ @param tableItem Model of the item you wish to find.
+ 
+ @return indexPath of `tableItem`.If there are many equal tableItems, indexPath of the first one will be returned
+ */
 - (NSIndexPath *)indexPathOfTableItem:(NSObject *)tableItem;
-// this methods returns array of lowest index paths items, that are equal to table items
+
+/**
+ Searches for tableItems and returns `NSArray` of their indexPaths.
+ 
+ @param tableItems Array of tableItems, that need to be found.
+ 
+ @discussion If tableItem not found, `NSNull` object is added to indexPaths array. That means you shouldn't call this method if you are not sure, that all tableItems exist. This method uses `indexPathOfTableItem:` internally.
+ 
+ @return Array of tableItem's indexes. If at least one tableItem was not found - `nil`.
+ */
 - (NSArray *)indexPathArrayForTableItems:(NSArray *)tableItems;
+
+/**
+ Returns array of table items at indexPaths.
+ 
+ @param indexPaths indexPaths of array you want to find.
+ 
+ @discussion if `indexPath` is not found, `NSNull` object is added instead of the table item. This method uses `tableItemAtIndexPath:` internally.
+ 
+ @return array of table items at indexPaths
+ */
 - (NSArray *)tableItemsArrayForIndexPaths:(NSArray *)indexPaths;
+
+/**
+ Returns array with table items in section
+ 
+ @param section Number of the section in table.
+ 
+ @return array of table items in section. Empty array if section does not exist.
+ */
 - (NSArray *)tableItemsInSection:(int)section;
 
+/**
+ Returns number of sections, contained in `DTTableViewManager`.
+
+ @return number of sections in `DTTableViewManager`.
+ */
 - (int)numberOfSections;
+
+/**
+ Returns number of table items in a given `section`.
+ 
+ @param section section, which items will be counted.
+ 
+ @return number of table items in a given `section`. 0, if section does not exist
+ */
 - (int)numberOfTableItemsInSection:(NSInteger)section;
 
-- (void)setSectionHeaders:(NSArray *)headers;
-- (void)setSectionFooters:(NSArray *)footers;
+///---------------------------------------
+/// @name Section titles
+///---------------------------------------
 
-///////////////////////
-// Add table items.
-// Methods without rowAnimation in name will update UI with UITableViewRowAnimationNone
+/**
+ Sets sections header titles, using `headerTitles` array. Titles must be `NSString` type. 
+ 
+ @param headerTitles header titles for all sections of the table.
+ 
+ @discussion These method is identical to implementing `tableView:titleForHeaderInSection:` datasource method. If you want to have custom section header view, use usual `UITableView` delegate methods. 
+ */
+- (void)setSectionHeaderTitles:(NSArray *)headerTitles;
 
+/**
+ Sets sections footer titles, using `footerTitles` array. Titles must be `NSString` type.
+ 
+ @param footerTitles footer titles for all sections of the table.
+ 
+ @discussion These method is identical to implementing `tableView:titleForFooterInSection:` datasource method. If you want to have custom section footer view, use usual `UITableView` delegate methods.
+ */
+- (void)setSectionFooterTitles:(NSArray *)footerTitles;
+
+///---------------------------------------
+/// @name Add table items
+///---------------------------------------
+
+/**
+ Add tableItem to section 0. Table will be automatically updated with UITableViewRowAnimationNone.
+ 
+ @param tableItem Model you want to add to the table
+ */
 - (void)addTableItem:(NSObject *)tableItem;
-- (void)addTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation;
+
+/**
+ Add table items to section 0. Table will be automatically updated using UITableViewRowAnimationNone.
+ 
+ @param tableItems models to add.
+ */
 - (void)addTableItems:(NSArray *)tableItems;
+
+/**
+ Add table items to section `section`. Table will be automatically updated using UITableViewRowAnimationNone.
+ 
+ @param tableItem Model to add.
+ 
+ @param section Section, where item will be added
+ */
+- (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section;
+
+/**
+ Add table items to section `section`. Table will be automatically updated using UITableViewRowAnimationNone.
+ 
+ @param tableItems Models to add.
+ 
+ @param section Section, where items will be added
+ */
+- (void)addTableItems:(NSArray *)tableItems
+            toSection:(NSInteger)section;
+/**
+ Add table item to section 0. Table will be automatically updated using `animation` style.
+ 
+ @param tableItem Model to add
+ 
+ @param animation Animation that will be applied when item is added.
+ */
+- (void)addTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation;
+
+/**
+ Add table items to section 0. Table will be automatically updated using `animation` style.
+ 
+ @param tableItems Models to add.
+ 
+ @param animation Animation that will be applied when items are added.
+ */
 - (void)addTableItems:(NSArray *)tableItems withRowAnimation:(UITableViewRowAnimation)animation;
 
-// Will check, if items are not already in the table, then add them
--(void)addNonRepeatingItems:(NSArray *)tableitems
+/**
+ Checking, if item already exists in table, if not - adding it. Table will be automatically updated using `animation` style.
+ 
+ @param tableItems Models to add
+ 
+ @param section Section, where items will be added
+ 
+ @param animation Animation that will be applied when items are added.
+ */
+-(void)addNonRepeatingItems:(NSArray *)tableItems
                   toSection:(NSInteger)section
            withRowAnimation:(UITableViewRowAnimation)animation;
-
-- (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section;
+/**
+ Add table item to section `section`. Table will be automatically updated using `animation` style.
+ 
+ @param tableItem model to add.
+ 
+ @param section Section, where item will be added
+ 
+ @param animation Animation that will be applied when item is added.
+ */
 - (void)addTableItem:(NSObject *)tableItem
            toSection:(NSInteger)section
     withRowAnimation:(UITableViewRowAnimation)animation;
 
-- (void)addTableItems:(NSArray *)tableItems
-            toSection:(NSInteger)section;
+/**
+ Add table items to section `section`. Table will be automatically updated using `animation` style.
+ 
+ @param tableItems models to add.
+ 
+ @param section Section, where item will be added
+ 
+ @param animation Animation that will be applied when items are added.
+ */
 - (void)addTableItems:(NSArray *)tableItems
             toSection:(NSInteger)section
      withRowAnimation:(UITableViewRowAnimation)animation;
 
 
-///////////////////////
-// Insertion of table items
+///---------------------------------------
+/// @name Insert table items
+///---------------------------------------
 
+/**
+ Insert table item to indexPath `indexPath`. Table will be automatically updated using `UITableViewRowAnimationNone` style. 
+ 
+ @param tableItem model to insert.
+ 
+ @param indexPath Index, where item should be inserted.
+ 
+ @warning Inserting item at index, that is not occupied, will throw an exception.
+ */
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath;
+
+
+/**
+ Insert table item to indexPath `indexPath`. Table will be automatically updated using `animation` style.
+ 
+ @param tableItem model to insert.
+ 
+ @param indexPath Index, where item should be inserted.
+ 
+ @param animation Animation that will be applied when items are inserted.
+ 
+ @warning Inserting item at index, that is not occupied, will throw an exception.
+ */
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
        withRowAnimation:(UITableViewRowAnimation)animation;
 
-//////////////////////
-// Replace and remove
+///---------------------------------------
+/// @name Replace table items
+///---------------------------------------
 
+/**
+ Replace tableItemToReplace with replacingTableItem. Table is immediately updated with `UITableViewRowAnimationNone` animation. If tableItemToReplace is not found, or replacingTableItem is `nil`, this method does nothing. 
+ 
+ @param tableItemToReplace Model object you want to replace.
+ 
+ @param replacingTableItem Model object you are replacing it with.
+ */
 - (void)replaceTableItem:(NSObject *)tableItemToReplace
            withTableItem:(NSObject *)replacingTableItem;
 
+/**
+ Replace tableItemToReplace with replacingTableItem. Table is immediately updated with `animation` animation. If tableItemToReplace is not found, or replacingTableItem is `nil`, this method does nothing.
+ 
+ @param tableItemToReplace Model object you want to replace.
+ 
+ @param replacingTableItem Model object you are replacing it with.
+ 
+ @param animation Row animation style to be used while replacing item.
+ */
 - (void)replaceTableItem:(NSObject *)tableItemToReplace
            withTableItem:(NSObject *)replacingTableItem
          andRowAnimation:(UITableViewRowAnimation)animation;
 
+///---------------------------------------
+/// @name Removing table items
+///---------------------------------------
+
+/**
+ Removing tableItem. Table is immediately updated with `UITableViewRowAnimationNone` animation. If tableItem is not found,  this method does nothing.
+ 
+ @param tableItem Model object you want to remove.
+ */
 - (void)removeTableItem:(NSObject *)tableItem;
+
+/**
+ Removing tableItem. Table is immediately updated with `animation` animation. If tableItem is not found,  this method does nothing.
+ 
+ @param tableItem Model object you want to remove.
+ 
+ @param animation Row animation style to be used while replacing item.
+ */
 - (void)removeTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation;
 
+/**
+ Removing tableItems. All deletions are made inside beginUpdates and endUpdates tableView block. After all deletions are made, `UITableViewRowAnimationNone` animation is applied. If some tableItem is not found, it is skipped.
+ 
+ @param tableItems Models you want to remove.
+ */
 - (void)removeTableItems:(NSArray *)tableItems;
+
+/**
+ Removing tableItems. All deletions are made inside beginUpdates and endUpdates tableView block. After all deletions are made, `animation` animation is applied. If some tableItem is not found, it is skipped.
+ 
+ @param tableItems Models you want to remove.
+ 
+ @param animation Row animation style to be used while replacing item.
+ */
 - (void)removeTableItems:(NSArray *)tableItems withRowAnimation:(UITableViewRowAnimation)animation;
 
+/**
+ Removes all tableItems. Table view data is reloaded using reloadData method.
+ */
 - (void)removeAllTableItems;
 
-///////////////////////
-// Move, delete, reload sections
+///---------------------------------------
+/// @name Managing sections
+///---------------------------------------
 
-// Move section to section will update both model and UI
+/**
+ Moves a section to a new location in the table view.
+ 
+ @param indexFrom The index of the section to move.
+ 
+ @param indexTo The index in the table view that is the destination of the move for the section. The existing section at that location slides up or down to an adjoining index position to make room for it.
+ */
 - (void)moveSection:(int)indexFrom toSection:(int)indexTo;
 
+/**
+ Deletes one or more sections in the receiver, with `UITableViewRowAnimationNone` animation. 
+ 
+ @param indexSet An index set that specifies the sections to delete from the receiving table view. If a section exists after the specified index location, it is moved up one index location.
+ */
 - (void)deleteSections:(NSIndexSet *)indexSet;
+
+/**
+ Deletes one or more sections in the receiver, with `animation` animation.
+ 
+ @param indexSet An index set that specifies the sections to delete from the receiving table view. If a section exists after the specified index location, it is moved up one index location.
+ 
+ @param animation Row animation style to be used while deleting sections.
+ */
 - (void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
+
+/**
+ Reloads one or more sections in the receiver, with `animation` animation.
+ 
+ @param indexSet An index set that specifies the sections to reload from the receiving table view. 
+ 
+ @param animation Row animation style to be used when reloading sections.
+ */
 - (void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
 
-///////////////////////
-// Mapping
-// redirect to CellFactory
+///---------------------------------------
+/// @name Mapping
+///---------------------------------------
 
-// Designated setters
-
-// create your cells from code, or use standard cells:
+/**
+ This method is used to set mapping from model class to custom cell class. 
+ 
+ @param cellClass Class of the cell you want to be created for model with modelClass.
+ 
+ @param modelClass Class of the model you want to be mapped to cellClass.
+ 
+ @discussion This is the designated mapping method. It can be called anywhere, but probably the best place to call - is in your controller -init method. Inner implementation of this method trampolines mapping to DTCellFactory. You can also call this method of DTCellFactory as well.
+ 
+ */
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass;
 
-// create your custom cells from IB:
+/**
+ This method is used to set mapping from model to custom cell created from XIB with `nibName` name. Cell data is then populated by `cellClass` class.
+ 
+ @param nibName Name of custom XIB that is used to create a cell.
+ 
+ @param cellClass Class of the cell you want to be created for model with modelClass.
+ 
+ @param modelClass Class of the model you want to be mapped to cellClass.
+ 
+ @warning This method needs to be called after tableView has been created, in `viewDidLoad`, for example. This method uses UITableView `registerNib:forCellReuseIdentifier:` underneath.
+ 
+ */
 -(void)setCellMappingForNib:(NSString *)nibName
                   cellClass:(Class)cellClass
                  modelClass:(Class)modelClass;
 
-
-// Not recommended, but you can do it if you like. Just take a look, how
-// this is done in setCellClassMapping:forModelClass method
+/**
+ This method is used to set mapping from model class to custom cell class.
+ 
+ @param mapping Dictionary of mappings. Must contain NSStringFromClass(<model class>) as keys and NSStringFromClass(<cell class>) as values. 
+ 
+ @discussion This method can be called multiple times. All mappings are simply added, not replaced.
+ 
+ @warning Using this method is not recommended unless you know what you are doing. It can be used to set multiple mappings with one call, however mistakes in calling this method can be devastating. It is better and cleaner way to set mappings one by one, in controllers that represent models you are mapping.
+ */
 -(void)setObjectMappingDictionary:(NSDictionary *)mapping;
 
 @end
