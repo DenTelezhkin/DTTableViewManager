@@ -52,7 +52,7 @@
         tableView.dataSource = self;
         tableView.delegate = delegate;
         
-        if (!tableView.dataSource || !tableView.delegate)
+        if (!tableView)
         {
             NSLog(@"delegate:%@ has not created tableView before allocating DTTableViewManager",
                             delegate);
@@ -61,6 +61,11 @@
                                                 reason:@"Datasource and delegate cannot be nil"
                                               userInfo:nil];
             [exc raise];
+        }
+        
+        if (!delegate)
+        {
+            NSLog(@"nil delegate passed to DTTableViewManager");
         }
     }
     return self;
