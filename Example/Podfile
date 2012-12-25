@@ -1,5 +1,5 @@
-xcodeproj 'TableViewFactory.xcodeproj'
-platform :ios
+xcodeproj 'DTTableViewManager.xcodeproj'
+platform :ios, 5.0
 
 target :CedarUnitTests do
   pod 'Cedar'
