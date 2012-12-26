@@ -1,11 +1,12 @@
 #import "DTTableViewManager.h"
+#import "DTTableViewManager+UnitTests.h"
 #import <Foundation/Foundation.h>
 
 using namespace Cedar::Matchers;
 
 SPEC_BEGIN(DTTableViewManagerSpec)
 
-describe(@"BaseTableViewController", ^{
+describe(@"Datasource spec", ^{
     __block DTTableViewManager *model;
     __block Example * testModel;
     __block Example * acc1;
@@ -15,8 +16,10 @@ describe(@"BaseTableViewController", ^{
     __block Example * acc5;
     __block Example * acc6;
     
+    
     beforeEach(^{
         model = [DTTableViewManager new];
+        [model setCellMappingforClass:[ExampleCell class] modelClass:[Example class]];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
         testModel = [Example new];
@@ -45,10 +48,12 @@ describe(@"BaseTableViewController", ^{
     it(@"should return correct tableItem", ^{
         [model addTableItems:@[acc3,acc2,acc1,acc6,acc4]];
         
-        [model tableItemAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]] should equal(acc6);
+        [model verifyTableItem:acc6
+                   atIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]] should be_truthy;
         
-        [model tableItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should equal(acc3);
-        
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]] should be_truthy;
+
         [model tableItemAtIndexPath:[NSIndexPath indexPathForRow:56 inSection:0]] should be_nil;
     });
     
@@ -110,7 +115,17 @@ describe(@"BaseTableViewController", ^{
         [tableItemsPaths objectAtIndex:0] should equal(acc1);
         [tableItemsPaths objectAtIndex:1] should equal(testModel);
         [tableItemsPaths objectAtIndex:2] should equal(acc3);
+    });
+    
+    it(@"should return NSNull if table item not found", ^{
         
+        [model addTableItems:@[acc2,testModel]];
+        NSIndexPath * ip3 = [NSIndexPath indexPathForRow:6 inSection:3];
+        NSIndexPath * testPath = [model indexPathOfTableItem:testModel];
+        NSArray * tableItemsPaths = [model tableItemsArrayForIndexPaths:@[testPath, ip3]];
+        
+        tableItemsPaths[0] should equal(testModel);
+        tableItemsPaths[1] should equal([NSNull null]);
     });
     
     it(@"should return correct number of table items", ^{
@@ -125,6 +140,8 @@ describe(@"BaseTableViewController", ^{
         
         [model numberOfTableItemsInSection:0] should equal(4);
         [model numberOfTableItemsInSection:1] should equal(3);
+        [model tableView:model.tableView numberOfRowsInSection:0] should equal(4);
+        [model tableView:model.tableView numberOfRowsInSection:1] should equal(3);
     });
     
     it(@"should return correct number of sections", ^{
@@ -133,6 +150,7 @@ describe(@"BaseTableViewController", ^{
         [model addTableItem:acc2 toSection:2];
         
         [model numberOfSections] should equal(4);
+        [model numberOfSectionsInTableView:model.tableView] should equal(4);
     });
     
     it(@"should set section titles", ^{
@@ -162,17 +180,19 @@ describe(@"BaseTableViewController", ^{
     it(@"should add table item", ^{
         [model addTableItem:acc1];
         [model addTableItem:acc4];
-        NSArray * items = [model tableItemsInSection:0];
-        items[0] should equal(acc1);
-        items[1] should equal(acc4);
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc4
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
     });
     
     it(@"should add table items", ^{
         [model addTableItems:@[acc3,acc2]];
         [model tableItemsInSection:0].count should equal(2);
-        NSArray * items = [model tableItemsInSection:0];
-        items[0] should equal(acc3);
-        items[1] should equal(acc2);
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
     });
     
     it(@"should add table item to section", ^{
@@ -181,9 +201,12 @@ describe(@"BaseTableViewController", ^{
         [model addTableItem:acc4 toSection:2];
         
         [model numberOfSections] should equal(3);
-        [model tableItemsInSection:0][0] should equal(acc1);
-        [model tableItemsInSection:2][0] should equal(acc2);
-        [model tableItemsInSection:2][1] should equal(acc4);
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]] should be_truthy;
+        [model verifyTableItem:acc4
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]] should be_truthy;
     });
     
     it(@"should add table items to section", ^{
@@ -191,21 +214,217 @@ describe(@"BaseTableViewController", ^{
         
         [model numberOfSections] should equal(5);
         
-        NSArray * items = [model tableItemsInSection:4];
-        items[0] should equal(acc1);
-        items[1] should equal(acc3);
-        items[2] should equal(acc5);
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:4]] should be_truthy;
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:4]] should be_truthy;
+        [model verifyTableItem:acc5
+                   atIndexPath:[NSIndexPath indexPathForRow:2 inSection:4]] should be_truthy;
     });
     
-    it(@"should return nil if table item not found", ^{
-     
-        [model addTableItems:@[acc2,testModel]];
-        NSIndexPath * ip3 = [NSIndexPath indexPathForRow:6 inSection:3];
-         NSIndexPath * testPath = [model indexPathOfTableItem:testModel];
-        NSArray * tableItemsPaths = [model tableItemsArrayForIndexPaths:@[testPath, ip3]];
+    it(@"should add table item withRowAnimation", ^{
+        [model addTableItem:acc2 withRowAnimation:UITableViewRowAnimationNone];
+        [model addTableItem:acc5 withRowAnimation:UITableViewRowAnimationNone];
         
-        tableItemsPaths[0] should equal(testModel);
-        tableItemsPaths[1] should equal([NSNull null]);
+        [model numberOfTableItemsInSection:0] should equal(2);
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc5
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+    });
+    
+    it(@"should add table items  with row animation",^{
+        [model addTableItems:@[acc3,acc5,acc2] withRowAnimation:UITableViewRowAnimationNone];
+        
+        [model numberOfTableItemsInSection:0] should equal(3);
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc5
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] should be_truthy;
+    });
+    
+    it(@"should add non-repeating items", ^{
+        [model addTableItems:@[acc1,acc2]];
+        
+        [model addNonRepeatingItems:@[acc1,acc3,acc2,acc4,acc5]
+                          toSection:0
+                   withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [model numberOfTableItemsInSection:0] should equal(5);
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc4
+                   atIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc5
+                   atIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]] should be_truthy;
+    });
+    
+    it(@"should insert table item to indexPath", ^{
+        [model addTableItems:@[acc2,acc4,acc6]];
+        [model insertTableItem:acc1 toIndexPath:[model indexPathOfTableItem:acc2]];
+        [model insertTableItem:acc3 toIndexPath:[model indexPathOfTableItem:acc4]];
+        
+        [model numberOfTableItemsInSection:0] should equal(5);
+        
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] should be_truthy;
+        
+        ^{
+            [model insertTableItem:acc5 toIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+        } should raise_exception;
+        ^{
+            [model insertTableItem:acc5 toIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+        } should raise_exception;
+    });
+    
+    it(@"should insert table item to indexPath with row animation", ^{
+        [model addTableItems:@[acc2,acc4,acc6]];
+        [model insertTableItem:acc1
+                   toIndexPath:[model indexPathOfTableItem:acc2]
+              withRowAnimation:UITableViewRowAnimationNone];
+        [model insertTableItem:acc3
+                   toIndexPath:[model indexPathOfTableItem:acc4]
+              withRowAnimation:UITableViewRowAnimationNone];
+        
+        [model numberOfTableItemsInSection:0] should equal(5);
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] should be_truthy;
+        
+        ^{
+            [model insertTableItem:acc5
+                       toIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]
+                  withRowAnimation:UITableViewRowAnimationNone];
+        } should raise_exception;
+        ^{
+            [model insertTableItem:acc5
+                       toIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]
+                  withRowAnimation:UITableViewRowAnimationNone];
+        } should raise_exception;
+    });
+    
+    it(@"should replace table item with tableItem", ^{
+        [model addTableItems:@[acc1,acc3]];
+        [model addTableItems:@[acc4,acc6] toSection:1];
+        
+        [model replaceTableItem:acc3 withTableItem:acc2];
+        [model replaceTableItem:acc4 withTableItem:acc5];
+        
+        [model numberOfTableItemsInSection:0] should equal(2);
+        [model numberOfTableItemsInSection:1] should equal(2);
+       
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc5
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] should be_truthy;
+    });
+    
+    it(@"should do nothing if trying to replace nil items", ^{
+        [model addTableItems:@[acc1,acc3,acc5]];
+        ^{
+            [model replaceTableItem:nil withTableItem:acc2];
+            [model replaceTableItem:acc5 withTableItem:nil];
+        } should_not raise_exception;
+        
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc5
+                   atIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] should be_truthy;
+        
+        [model numberOfTableItemsInSection:0] should equal(3);
+    });
+    
+    it(@"should replace table item with tableItem with row animation", ^{
+        [model addTableItems:@[acc1,acc3]];
+        [model addTableItems:@[acc4,acc6] toSection:1];
+        
+        [model replaceTableItem:acc3 withTableItem:acc2 andRowAnimation:UITableViewRowAnimationNone];
+        [model replaceTableItem:acc4 withTableItem:acc5 andRowAnimation:UITableViewRowAnimationNone];
+        
+        [model numberOfTableItemsInSection:0] should equal(2);
+        [model numberOfTableItemsInSection:1] should equal(2);
+        
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc5
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] should be_truthy;
+    });
+    
+    it(@"should do nothing if trying to replace nil items with row animation", ^{
+        [model addTableItems:@[acc1,acc3,acc5]];
+        ^{
+            [model replaceTableItem:nil withTableItem:acc2 andRowAnimation:UITableViewRowAnimationNone];
+            [model replaceTableItem:acc5 withTableItem:nil andRowAnimation:UITableViewRowAnimationNone];
+        } should_not raise_exception;
+        
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc5
+                   atIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] should be_truthy;
+        [[model tableItemsInSection:0] count] should equal(3);
+    });
+    
+    it(@"should remove table item", ^{
+        [model addTableItems:@[acc3,acc1,acc2,acc4,acc5]];
+        
+        [model removeTableItem:acc4];
+        [model removeTableItem:acc3];
+        [model removeTableItem:acc5];
+        
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+    });
+    
+    it(@"should remove table items with row animation", ^{
+        [model addTableItems:@[acc3,acc1,acc2,acc4,acc5]];
+        
+        [model removeTableItem:acc4 withRowAnimation:UITableViewRowAnimationNone];
+        [model removeTableItem:acc3 withRowAnimation:UITableViewRowAnimationNone];
+        [model removeTableItem:acc5 withRowAnimation:UITableViewRowAnimationNone];
+        
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_truthy;
+    });
+    
+    it(@"should remove table items", ^{
+        [model addTableItems:@[acc1,acc3,acc2,acc4]];
+        [model removeTableItems:@[acc1,acc4,acc3,acc5]];
+        [[model tableItemsInSection:0] count] should equal(1);
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+    });
+    
+    it(@"should remove table items with row animation", ^{
+        [model addTableItems:@[acc1,acc3,acc2,acc4]];
+        [model removeTableItems:@[acc1,acc4,acc3,acc5]
+               withRowAnimation:UITableViewRowAnimationNone];
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+        [[model tableItemsInSection:0] count] should equal(1);
+    });
+    
+    it(@"should remove all table items", ^{
+        [model addTableItems:@[acc1,acc5,acc4,acc2]];
+        [model removeAllTableItems];
+        
+        [[model tableItemsInSection:0] count] should equal(0);
     });
     
     it(@"should move sections", ^{
@@ -215,21 +434,22 @@ describe(@"BaseTableViewController", ^{
         
         [model moveSection:0 toSection:1];
         
-        NSArray * itemsSection0 = [model tableItemsInSection:0];
-        [itemsSection0 lastObject] should equal(acc2);
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
         
-        NSArray * itemsSection1 = [model tableItemsInSection:1];
-        [itemsSection1 lastObject] should equal(acc1);
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] should be_truthy;
         
         [model moveSection:2 toSection:0];
-        itemsSection0 = [model tableItemsInSection:0];
-        [itemsSection0 lastObject] should equal(acc3);
         
-        itemsSection1 = [model tableItemsInSection:1];
-        [itemsSection1 lastObject] should equal(acc2);
-        
-        NSArray * itemsSection2 = [model tableItemsInSection:2];
-        [itemsSection2 lastObject] should equal(acc1);
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
+
+        [model verifyTableItem:acc2
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] should be_truthy;
+
+        [model verifyTableItem:acc1
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]] should be_truthy;
     });
     
     it(@"should delete sections", ^{
@@ -241,9 +461,39 @@ describe(@"BaseTableViewController", ^{
         
         [model numberOfSections] should equal(2);
         
-        NSArray * itemsSection1 = [model tableItemsInSection:1];
-        [itemsSection1 lastObject] should equal(acc3);
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] should be_truthy;
     });
+    
+    it(@"should delete sections with row animation", ^{
+        [model addTableItem:acc1];
+        [model addTableItem:acc2 toSection:1];
+        [model addTableItem:acc3 toSection:2];
+        
+        [model deleteSections:[NSIndexSet indexSetWithIndex:1]
+             withRowAnimation:UITableViewRowAnimationNone];
+        
+        [model numberOfSections] should equal(2);
+        
+        [model verifyTableItem:acc3
+                   atIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] should be_truthy;
+    });
+    
+    it(@"should reload sections", ^{
+        id tableViewMock = [OCMockObject niceMockForClass:[UITableView class]];
+        UITableView * temp = model.tableView;
+        model.tableView = tableViewMock;
+        NSIndexSet * iSet = [NSIndexSet indexSetWithIndex:3];
+        
+        [[tableViewMock expect] reloadSections:iSet withRowAnimation:UITableViewRowAnimationNone];
+        
+        [model reloadSections:iSet withRowAnimation:UITableViewRowAnimationNone];
+        
+        [tableViewMock verify];
+        
+        model.tableView = temp;
+    });
+    
     
     it(@"should support all datasource methods", ^{
         [model respondsToSelector:@selector(tableView:
@@ -253,36 +503,7 @@ describe(@"BaseTableViewController", ^{
         [model respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)] should equal(YES);
         [model respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)] should equal(YES);
     });
-    
-    it(@"should add non-repeating items", ^{
-        [model addTableItems:@[acc1,acc2]];
-        
-        [model addNonRepeatingItems:@[acc1,acc3,acc2,acc4,acc5]
-                          toSection:0
-                   withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        [model numberOfTableItemsInSection:0] should equal(5);
-        NSArray * tableItems = [model tableItemsInSection:0];
-        
-        tableItems[0] should equal(acc1);
-        tableItems[1] should equal(acc2);
-        tableItems[2] should equal(acc3);
-        tableItems[3] should equal(acc4);
-        tableItems[4] should equal(acc5);
-    });
-    
-    it(@"should fail silently on incorrect replacement", ^{
-        [model addTableItems:@[acc1,acc2]];
-        
-        ^{
-            [model replaceTableItem:acc2 withTableItem:nil];
-        } should_not raise_exception;
-        
-        ^{
-            [model replaceTableItem:acc3 withTableItem:acc2];
-        } should_not raise_exception;
-        
-    });
+
 });
 
 SPEC_END

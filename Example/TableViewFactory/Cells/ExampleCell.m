@@ -21,5 +21,10 @@
     self.detailTextLabel.text = self.exampleModel.details;
 }
 
+-(id)model
+{
+    return self.exampleModel;
+}
+
 
 @end
