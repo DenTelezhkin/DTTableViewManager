@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
 /**
  `DTTableViewModelTransfer` protocol is used to pass `model` data to your cell. Every UITableViewCell subclass you have should implement this protocol.
 */
 
-@protocol DTTableViewModelTransfer <NSObject>
+@protocol DTTableViewModelTransfer
 @required
 
 /**

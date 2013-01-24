@@ -2,7 +2,6 @@
 
 Pods/*
 Example/Pods/*
-Podfile.lock
 
 # Xcode
 build/*
