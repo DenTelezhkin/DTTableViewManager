@@ -1,6 +1,6 @@
 //
 //  DTTableViewManagerCellProtocol.h
-//  TableViewFactory
+//  DTTableViewManager
 //
 //  Created by Denys Telezhkin on 12/18/12.
 //  Copyright (c) 2012 Denys Telezhkin. All rights reserved.

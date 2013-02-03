@@ -1,5 +1,5 @@
 //
-//  TableViewModelProtocol.h
+//  DTTableViewModelTransfer.h
 //  TableViewFactory
 //
 //  Created by Denys Telezhkin on 10/4/12.

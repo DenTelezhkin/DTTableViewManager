@@ -1,6 +1,5 @@
 //
 //  DTTableViewManager.m
-//  DTTableViewController
 //
 //  Created by Denys Telezhkin on 6/19/12.
 //  Copyright (c) 2012 MLSDev. All rights reserved.

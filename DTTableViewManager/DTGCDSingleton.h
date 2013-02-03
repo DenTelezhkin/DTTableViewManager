@@ -1,13 +1,13 @@
 //
 //  GCDSingleton.h
-//  TableViewFactory
+//  DTTableViewManager
 //
 //  Created by Denys Telezhkin on 12/12/12.
 //  Copyright (c) 2012 Denys Telezhkin. All rights reserved.
 //
 
-#ifndef TableViewFactory_GCDSingleton_h
-#define TableViewFactory_GCDSingleton_h
+#ifndef DTTableViewManager_GCDSingleton_h
+#define DTTableViewManager_GCDSingleton_h
 
 #define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \
 static dispatch_once_t pred = 0; \
