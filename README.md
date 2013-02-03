@@ -3,7 +3,7 @@ DTTableViewManager
 
 Powerful architecture for UITableView. The idea is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
 
-Warning - setup will sound complex, but once you use it at least once, you will see the benefits.
+Warning - setup will sound complex, but once you use it at least once, you will see the benefits. 
 
 ## Core features
 
@@ -19,15 +19,21 @@ Warning - setup will sound complex, but once you use it at least once, you will 
 
 ## Example 
 
-Example is available in Example folder. 
+Example project is available in Example folder. 
 
 ## Documentation
 
 You can view documentation [online](http://denheadless.github.com/DTTableViewManager/) or you can install it locally using following atom link: [http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom](http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom).
 
+## Installation
+
+Simplest option is to use [CocoaPods](www.cocoapods.org):
+
+	pod 'DTTableViewManager'
+
 ## Additional 
 
-Added support for ARC, DTCellFactory now uses [GCDSingleton macro](https://gist.github.com/1057420). If you need non-ARC version, please refer to [0.0.5 version](https://github.com/DenHeadless/DTTableViewManager/tree/0.0.5).
+Added support for ARC, DTCellFactory now uses [GCDSingleton macro](https://gist.github.com/1057420). 
 
 ## Discussion
 
