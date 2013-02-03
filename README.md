@@ -27,7 +27,7 @@ You can view documentation [online](http://denheadless.github.com/DTTableViewMan
 
 ## Installation
 
-Simplest option is to use [CocoaPods](www.cocoapods.org):
+Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
 	pod 'DTTableViewManager'
 
