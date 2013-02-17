@@ -74,11 +74,6 @@
                                 forKey:NSStringFromClass(modelClass)];
 }
 
-- (void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary
-{
-    [self.mappingsDictionary addEntriesFromDictionary:mappingDictionary];
-}
-
 #pragma mark - actions
 
 - (UITableViewCell *)cellForModel:(NSObject *)model

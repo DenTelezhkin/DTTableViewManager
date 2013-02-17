@@ -66,14 +66,6 @@
 
 -(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
 
-
-/*
- Optional method, that can be used to set all mappings at once. Keys should be `NSStringFromClass` converted model classes, and values must be NSStringFromClass converted cell classes.  This method is not recommended to use.
- */
-// Dictionary should contain NSStringFromClass values and keys
--(void)setObjectMappingDictionary:(NSDictionary *)mappingDictionary;
-
-
 /**
  @name Internal use
  */
