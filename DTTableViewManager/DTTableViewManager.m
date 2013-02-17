@@ -134,11 +134,6 @@
     [self setCellMappingforClass:cellClass modelClass:modelClass];
 }
 
--(void)setObjectMappingDictionary:(NSDictionary *)mapping
-{
-    [[DTCellFactory sharedInstance] setObjectMappingDictionary:mapping];
-}
-
 #pragma mark - search
 
 -(int)numberOfTableItemsInSection:(NSInteger)section
@@ -272,11 +267,14 @@
 {
     // Update datasource
     NSMutableArray *array = [self getValidTableSection:section withAnimation:animation];
+    
+    int itemsCountInSection = [array count];
+    
     [array addObject:tableItem];
     
-    
     //update UI
-    NSIndexPath * modelItemPath = [self indexPathOfTableItem:tableItem];
+    NSIndexPath * modelItemPath = [NSIndexPath indexPathForRow:itemsCountInSection
+                                                     inSection:section];
     
     UITableViewCell * modelCell = [self.tableView cellForRowAtIndexPath:modelItemPath];
     if (!modelCell)

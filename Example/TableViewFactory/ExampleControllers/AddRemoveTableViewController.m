@@ -30,6 +30,7 @@
 {
     self.rowCount ++;
     NSString * rowText = [NSString stringWithFormat:@"Row # %d",self.rowCount];
+        
     [self addTableItem:[Example exampleWithText:rowText andDetails:nil]
       withRowAnimation:UITableViewRowAnimationAutomatic];
 }

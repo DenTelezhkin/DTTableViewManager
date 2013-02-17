@@ -462,15 +462,4 @@
                   cellClass:(Class)cellClass
                  modelClass:(Class)modelClass;
 
-/**
- This method is used to set mapping from model class to custom cell class.
- 
- @param mapping Dictionary of mappings. Must contain NSStringFromClass(<model class>) as keys and NSStringFromClass(<cell class>) as values. 
- 
- @discussion This method can be called multiple times. All mappings are simply added, not replaced.
- 
- @warning Using this method is not recommended unless you know what you are doing. It can be used to set multiple mappings with one call, however mistakes in calling this method can be devastating. It is better and cleaner way to set mappings one by one, in controllers that represent models you are mapping.
- */
--(void)setObjectMappingDictionary:(NSDictionary *)mapping;
-
 @end
