@@ -190,6 +190,8 @@
  */
 - (void)setSectionHeaderTitles:(NSArray *)headerTitles;
 
+- (void)setSectionHeaderModels:(NSArray *)headerModels;
+
 /**
  Sets sections footer titles, using `footerTitles` array. Titles must be `NSString` type.
  
@@ -198,6 +200,8 @@
  @discussion These method is identical to implementing `tableView:titleForFooterInSection:` datasource method. If you want to have custom section footer view, use usual `UITableView` delegate methods.
  */
 - (void)setSectionFooterTitles:(NSArray *)footerTitles;
+
+- (void)setSectionFooterModels:(NSArray *)footerModels;
 
 ///---------------------------------------
 /// @name Add table items
@@ -446,6 +450,10 @@
  */
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass;
 
+
+-(void)setHeaderMappingForClass:(Class)headerClass modelClass:(Class)modelClass;
+-(void)setFooterMappingForClass:(Class)footerClass modelClass:(Class)modelClass;
+
 /**
  This method is used to set mapping from model to custom cell created from XIB with `nibName` name. Cell data is then populated by `cellClass` class.
  
@@ -461,5 +469,15 @@
 -(void)setCellMappingForNib:(NSString *)nibName
                   cellClass:(Class)cellClass
                  modelClass:(Class)modelClass;
+
+-(void)setHeaderMappingForNibName:(NSString *)nibName
+                      headerClass:(Class)headerClass
+                       modelClass:(Class)modelClass;
+
+-(void)setFooterMappingForNibName:(NSString *)nibName
+                      footerClass:(Class)footerClass
+                       modelClass:(Class)modelClass;
+
+
 
 @end

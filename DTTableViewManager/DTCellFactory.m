@@ -26,6 +26,7 @@
 #import "DTCellFactory.h"
 #import "DTTableViewModelTransfer.h"
 #import "DTGCDSingleton.h"
+#import "UIView+Loading.h"
 
 @interface DTCellFactory ()
 
@@ -36,13 +37,13 @@
 - (UITableViewCell *)cellWithModel:(id)model
                    reuseIdentifier:(NSString *)reuseIdentifier;
 
-@property (nonatomic,strong) NSMutableDictionary * mappingsDictionary;
+@property (nonatomic,strong) NSMutableDictionary * cellMappingsDictionary;
+@property (nonatomic,strong) NSMutableDictionary * headerMappingsDictionary;
+@property (nonatomic,strong) NSMutableDictionary * footerMappingsDictionary;
 
 @end
 
 @implementation DTCellFactory
-
-@synthesize classMappingDictionary = _classMappingDictionary;
 
 +(DTCellFactory *)sharedInstance
 {
@@ -51,27 +52,71 @@
     });
 }
 
-- (NSMutableDictionary *)mappingsDictionary
+- (NSMutableDictionary *)cellMappingsDictionary
 {
-    if (!_mappingsDictionary)
-        _mappingsDictionary = [[NSMutableDictionary alloc] init];
-    return _mappingsDictionary;
+    if (!_cellMappingsDictionary)
+        _cellMappingsDictionary = [[NSMutableDictionary alloc] init];
+    return _cellMappingsDictionary;
 }
 
-- (NSDictionary *)classMappingDictionary
+-(NSMutableDictionary *)headerMappingsDictionary
 {
-    return [self.mappingsDictionary copy];
+    if (!_headerMappingsDictionary)
+        _headerMappingsDictionary = [[NSMutableDictionary alloc] init];
+    return _headerMappingsDictionary;
 }
 
-#pragma mark - Init and destroy
-
+-(NSMutableDictionary *)footerMappingsDictionary
+{
+    if (!_footerMappingsDictionary)
+        _footerMappingsDictionary = [[NSMutableDictionary alloc] init];
+    return _footerMappingsDictionary;
+}
 
 #pragma mark - class mapping
 
 - (void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass
 {
-    [self.mappingsDictionary setObject:NSStringFromClass(cellClass)
-                                forKey:NSStringFromClass(modelClass)];
+    [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
+                                    forKey:NSStringFromClass(modelClass)];
+}
+
+-(void)setHeaderClassMapping:(Class)headerClass forModelClass:(Class)modelClass
+{
+    [self.headerMappingsDictionary setObject:NSStringFromClass(headerClass)
+                                      forKey:NSStringFromClass(modelClass)];
+}
+
+-(void)setFooterClassMapping:(Class)footerClass forModelClass:(Class)modelClass
+{
+    [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
+                                      forKey:NSStringFromClass(modelClass)];
+}
+
+#pragma mark - reuse
+
+- (UITableViewCell *)reuseCellFromTable:(UITableView *)table
+                               forModel:(id)model
+                        reuseIdentifier:(NSString *)reuseIdentifier
+{
+    UITableViewCell <DTTableViewModelTransfer> * cell =  [table dequeueReusableCellWithIdentifier:
+                                                          reuseIdentifier];
+    [cell updateWithModel:model];
+    return cell;
+}
+
+
+//This method should return nil if no class is registered
+-(UIView *)reuseHeaderFooterViewFromTable:(UITableView *)table
+                                  forModel:(id)model
+                           reuseIdentifier:(NSString *)reuseIdentifier
+{
+    UIView <DTTableViewModelTransfer> * view =
+            [table dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+    
+    [view updateWithModel:model];
+    
+    return view;
 }
 
 #pragma mark - actions
@@ -87,16 +132,66 @@
     return cell ? cell : [self cellWithModel:model reuseIdentifier:reuseIdentifier];
 }
 
+-(UIView *)headerViewForModel:(id)model
+                  inTableView:(UITableView *)tableView
+              reuseIdentifier:(NSString *)reuseIdentifier
+{
+    UIView * view = [self reuseHeaderFooterViewFromTable:tableView
+                                                forModel:model
+                                         reuseIdentifier:reuseIdentifier];
+    return view ? view : [self headerViewForModel:model inTableView:tableView];
+}
+
+-(UIView *)footerViewForModel:(id)model
+                  inTableView:(UITableView *)tableView
+              reuseIdentifier:(NSString *)reuseIdentifier
+{
+    UIView * view = [self reuseHeaderFooterViewFromTable:tableView forModel:model
+                                         reuseIdentifier:reuseIdentifier];
+    
+    return view? view : [self footerViewForModel:model inTableView:tableView];
+}
+
 - (Class)cellClassForModel:(NSObject *)model
 {
     NSString *modelClassName = [self classStringForModel:model];
-    if ([self.mappingsDictionary objectForKey:modelClassName])
+    if ([self.cellMappingsDictionary objectForKey:modelClassName])
     {
-        return NSClassFromString([self.mappingsDictionary objectForKey:modelClassName]);
+        return NSClassFromString([self.cellMappingsDictionary objectForKey:modelClassName]);
     }
     else
     {
-        NSString *reason = [NSString stringWithFormat:@"DTCellFactory does not have mapping for %@ class",
+        NSString *reason = [NSString stringWithFormat:@"DTCellFactory does not have cell mapping for %@ class",
+                            [model class]];
+        @throw [NSException exceptionWithName:@"API misuse"
+                                       reason:reason userInfo:nil];
+    }
+}
+
+-(Class)headerClassForModel:(id)model
+{
+    NSString *modelClassName = NSStringFromClass([model class]);
+    if ([self.headerMappingsDictionary objectForKey:modelClassName])
+    {
+        return NSClassFromString([self.headerMappingsDictionary objectForKey:modelClassName]);
+    }
+    else {
+        NSString *reason = [NSString stringWithFormat:@"DTCellFactory does not have header mapping for %@ class",
+                            [model class]];
+        @throw [NSException exceptionWithName:@"API misuse"
+                                       reason:reason userInfo:nil];
+    }
+}
+
+-(Class)footerClassForModel:(id)model
+{
+    NSString *modelClassName = NSStringFromClass([model class]);
+    if ([self.footerMappingsDictionary objectForKey:modelClassName])
+    {
+        return NSClassFromString([self.footerMappingsDictionary objectForKey:modelClassName]);
+    }
+    else {
+        NSString *reason = [NSString stringWithFormat:@"DTCellFactory does not have footer mapping for %@ class",
                             [model class]];
         @throw [NSException exceptionWithName:@"API misuse"
                                        reason:reason userInfo:nil];
@@ -108,16 +203,6 @@
 -(NSString *)classStringForModel:(id)model
 {
     return NSStringFromClass([model class]);
-}
-
-- (UITableViewCell *)reuseCellFromTable:(UITableView *)table
-                               forModel:(id)model
-                        reuseIdentifier:(NSString *)reuseIdentifier
-{
-    UITableViewCell <DTTableViewModelTransfer> * cell =  [table dequeueReusableCellWithIdentifier:
-                                                                reuseIdentifier];
-    [cell updateWithModel:model];
-    return cell;
 }
 
 - (UITableViewCell *)cellWithModel:(id)model reuseIdentifier:(NSString *)reuseIdentifier
@@ -135,8 +220,51 @@
         
         return cell;
     }
-    NSString *reason = [NSString stringWithFormat:@"cell class '%@' does not conform TableViewModelProtocol",
+    NSString *reason = [NSString stringWithFormat:@"cell class '%@' does not conform DTTableViewModelProtocol",
                         cellClass];
+    @throw [NSException exceptionWithName:@"API misuse"
+                                   reason:reason userInfo:nil];
+    
+    return nil;
+}
+
+-(UIView *)headerViewForModel:(id)model
+                  inTableView:(UITableView *)tableView
+{
+    Class headerClass = [self headerClassForModel:model];
+    
+    if([headerClass conformsToProtocol:@protocol(DTTableViewModelTransfer)])
+    {
+        UIView <DTTableViewModelTransfer> * headerView;
+        
+        headerView = [UIView loadFromXib];
+        [headerView updateWithModel:model];
+        
+        return headerView;
+    }
+    NSString *reason = [NSString stringWithFormat:@"header class '%@' does not conform DTTableViewModelProtocol",
+                        headerClass];
+    @throw [NSException exceptionWithName:@"API misuse"
+                                   reason:reason userInfo:nil];
+    
+    return nil;
+}
+
+-(UIView *)footerViewForModel:(id)model inTableView:(UITableView *)tableView
+{
+    Class footerClass = [self footerClassForModel:model];
+    
+    if([footerClass conformsToProtocol:@protocol(DTTableViewModelTransfer)])
+    {
+        UIView <DTTableViewModelTransfer> * footerView;
+        
+        footerView = [UIView loadFromXib];
+        [footerView updateWithModel:model];
+        
+        return footerView;
+    }
+    NSString *reason = [NSString stringWithFormat:@"footer class '%@' does not conform DTTableViewModelProtocol",
+                        footerClass];
     @throw [NSException exceptionWithName:@"API misuse"
                                    reason:reason userInfo:nil];
     

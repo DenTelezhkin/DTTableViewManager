@@ -28,18 +28,19 @@
 @interface DTTableViewManager ()
 - (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
 @property (nonatomic,strong) NSMutableArray * sections;
-@property (nonatomic,strong) NSArray * headers;
-@property (nonatomic,strong) NSArray * footers;
+
+@property (nonatomic,strong) NSArray * sectionHeaderTitles;
+@property (nonatomic,strong) NSArray * sectionFooterTitles;
+
+@property (nonatomic,strong) NSArray * sectionHeaderModels;
+@property (nonatomic,strong) NSArray * sectionFooterModels;
 
 @property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewCellCreation> delegate;
 @end
 
 @implementation DTTableViewManager
 
-@synthesize tableView=_tableView, headers=_headers, sections=_sections,footers = _footers;
-
 #pragma mark - initialize, clean
-
 
 -(id)initWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
 {
@@ -88,40 +89,74 @@
     return _sections;
 }
 
--(NSArray *)headers {
-    if (!_headers)
+-(NSArray *)sectionHeaderTitles {
+    if (!_sectionHeaderTitles)
     {
-        _headers = [NSArray new];
+        _sectionHeaderTitles = [NSArray new];
     }
-    return _headers;
+    return _sectionHeaderTitles;
 }
 
--(NSArray *)footers {
-    if (!_footers)
+-(NSArray *)sectionFooterTitles {
+    if (!_sectionFooterTitles)
     {
-        _footers = [NSArray new];
+        _sectionFooterTitles = [NSArray new];
     }
-    return _footers;
+    return _sectionFooterTitles;
 }
 
--(void)setSectionHeaderTitles:(NSArray *)headerTitles
+-(NSArray *)sectionHeaderModels
 {
-    self.headers = headerTitles;
-    
-    [self.tableView reloadData];
+    if (!_sectionHeaderModels)
+        _sectionHeaderModels = [NSArray new];
+    return _sectionHeaderModels;
 }
 
--(void)setSectionFooterTitles:(NSArray *)footerTitles
+-(NSArray *)sectionFooterModels
 {
-    self.footers = footerTitles;
-    
-    [self.tableView reloadData];
+    if (!_sectionFooterModels)
+        _sectionFooterModels = [NSArray new];
+    return _sectionFooterModels;
 }
 
 #pragma mark - mapping
 
+-(BOOL)tableViewRespondsToCellClassRegistration
+{
+    // iOS 6.0
+    if ([self.tableView respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)])
+    {
+        return YES;
+    }
+    return NO;
+}
+
+-(BOOL)tableViewRespondsToHeaderFooterViewClassRegistration
+{
+    if ([self.tableView respondsToSelector:@selector(registerClass:forHeaderFooterViewReuseIdentifier:)])
+    {
+        return YES;
+    }
+    return NO;
+}
+
+-(BOOL)tableViewRespondsToHeaderFooterViewNibRegistration
+{
+    if ([self.tableView respondsToSelector:@selector(registerNib:forHeaderFooterViewReuseIdentifier:)])
+    {
+        return YES;
+    }
+    return NO;
+}
+
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass
 {
+    if ([self tableViewRespondsToCellClassRegistration])
+    {
+        [self.tableView registerClass:cellClass
+               forCellReuseIdentifier:NSStringFromClass([modelClass class])];
+    }
+    
     [[DTCellFactory sharedInstance] setCellClassMapping:cellClass
                                           forModelClass:modelClass];
 }
@@ -131,7 +166,58 @@
     [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
          forCellReuseIdentifier:NSStringFromClass([modelClass class])];
     
-    [self setCellMappingforClass:cellClass modelClass:modelClass];
+    [[DTCellFactory sharedInstance] setCellClassMapping:cellClass
+                                          forModelClass:modelClass];
+}
+
+-(void)setHeaderMappingForClass:(Class)headerClass modelClass:(Class)modelClass
+{
+    if ([self tableViewRespondsToHeaderFooterViewClassRegistration])
+    {
+        [self.tableView registerClass:headerClass
+   forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
+    }
+    
+    [[DTCellFactory sharedInstance] setHeaderClassMapping:headerClass
+                                            forModelClass:modelClass];
+}
+
+-(void)setHeaderMappingForNibName:(NSString *)nibName headerClass:(Class)headerClass
+                       modelClass:(Class)modelClass
+{
+    if ([self tableViewRespondsToHeaderFooterViewNibRegistration])
+    {
+        [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
+ forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
+    }
+    
+    [[DTCellFactory sharedInstance] setHeaderClassMapping:headerClass
+                                            forModelClass:modelClass];
+}
+
+-(void)setFooterMappingForClass:(Class)footerClass modelClass:(Class)modelClass
+{
+    if ([self tableViewRespondsToHeaderFooterViewClassRegistration])
+    {
+        [self.tableView registerClass:footerClass
+   forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
+    }
+    
+    [[DTCellFactory sharedInstance] setFooterClassMapping:footerClass
+                                            forModelClass:modelClass];
+}
+
+-(void)setFooterMappingForNibName:(NSString *)nibName footerClass:(Class)footerClass
+                       modelClass:(Class)modelClass
+{
+    if ([self tableViewRespondsToHeaderFooterViewNibRegistration])
+    {
+        [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
+ forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
+    }
+    
+    [[DTCellFactory sharedInstance] setFooterClassMapping:footerClass
+                                            forModelClass:modelClass];
 }
 
 #pragma mark - search
@@ -145,6 +231,30 @@
 -(int)numberOfSections
 {
     return [self.sections count];
+}
+
+-(id)headerItemAtIndex:(int)index
+{
+    if (index<[self.sectionHeaderModels count])
+    {
+        return self.sectionHeaderModels[index];
+    }
+    else {
+//        NSLog(@"DTTableViewManager: Header not found at index: %d",index);
+        return nil;
+    }
+}
+
+-(id)footerItemAtIndex:(int)index
+{
+    if (index<[self.sectionFooterModels count])
+    {
+        return self.sectionHeaderModels[index];
+    }
+    else {
+//        NSLog(@"DTTableViewManager: Footer not found at index: %d",index);
+        return nil;
+    }
 }
 
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath
@@ -508,12 +618,12 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return (section < self.headers.count) ? [self.headers objectAtIndex:section] : nil;
+    return (section < self.sectionHeaderTitles.count) ? [self.sectionHeaderTitles objectAtIndex:section] : nil;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return (section < self.footers.count) ? [self.footers objectAtIndex:section] : nil;
+    return (section < self.sectionFooterTitles.count) ? [self.sectionFooterTitles objectAtIndex:section] : nil;
 }
 
 -(NSString *)defaultReuseIdentifierForModel:(id)model
@@ -543,14 +653,16 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark - private
 
-- (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation
+- (NSMutableArray *)getValidTableSection:(NSInteger)index
+                           withAnimation:(UITableViewRowAnimation)animation
 {
     if (index < self.sections.count)
     {
@@ -579,7 +691,9 @@
     return [self.delegate respondsToSelector:selector];
 }
 
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self delegateRespondsToSelector:_cmd])
     {
@@ -619,4 +733,53 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     [array insertObject:tableItem atIndex:destinationIndexPath.row];
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    id model = [self headerItemAtIndex:section];
+    
+    if (!model) {
+        return nil;
+    }
+    
+    NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
+    
+    UIView * headerView = [[DTCellFactory sharedInstance] headerViewForModel:model
+                                                                 inTableView:tableView
+                                                             reuseIdentifier:reuseIdentifier];
+    return headerView;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    id model = [self footerItemAtIndex:section];
+    
+    if (!model) {
+        return nil;
+    }
+    
+    NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
+    
+    UIView * footerView = [[DTCellFactory sharedInstance] footerViewForModel:model
+                                                                 inTableView:tableView
+                                                             reuseIdentifier:reuseIdentifier];
+    return footerView;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section>[self.sectionHeaderTitles count])
+    {
+        return 0;
+    }
+    return UITableViewAutomaticDimension;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section>[self.sectionFooterTitles count])
+    {
+        return 0;
+    }
+    return UITableViewAutomaticDimension;
+}
 @end

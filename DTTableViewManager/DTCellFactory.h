@@ -34,12 +34,6 @@
 
 @interface DTCellFactory : NSObject
 
-/**
- Copy of NSDictionary with all model -> cell class mappings.
- */
-
-@property (readonly) NSDictionary * classMappingDictionary;
-
 
 ///---------------------------------------
 /// @name Accessing factory
@@ -66,6 +60,10 @@
 
 -(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
 
+-(void)setHeaderClassMapping:(Class)headerClass forModelClass:(Class)modelClass;
+
+-(void)setFooterClassMapping:(Class)footerClass forModelClass:(Class)modelClass;
+
 /**
  @name Internal use
  */
@@ -73,6 +71,15 @@
 - (UITableViewCell *)cellForModel:(NSObject *)model
                           inTable:(UITableView *)table
                   reuseIdentifier:(NSString *)reuseIdentifier;
+
+-(UIView *)headerViewForModel:(id)model
+                  inTableView:(UITableView *)tableView
+              reuseIdentifier:(NSString *)reuseIdentifier;
+
+-(UIView *)footerViewForModel:(id)model
+                  inTableView:(UITableView*)tableView
+              reuseIdentifier:(NSString *)reuseIdentifier;
+
 
 - (Class)cellClassForModel:(NSObject *)model;
 

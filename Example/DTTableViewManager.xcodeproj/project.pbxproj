@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
+		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
 		E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
 		E60CA01C1684AFEF00F4147E /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewManager.m */; };
@@ -33,7 +35,6 @@
 		E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */; };
 		E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
 		E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
-		E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
 		E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
 		E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
@@ -62,6 +63,8 @@
 
 /* Begin PBXFileReference section */
 		443AAC7353A943DCAA45DED0 /* libPods-CedarUnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CedarUnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
+		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
 		A3F9431F27DC49DBA1DBDFC0 /* Pods-CedarUnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CedarUnitTests.xcconfig"; path = "Pods/Pods-CedarUnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
@@ -89,7 +92,6 @@
 		E6402FC2162D9A9500DDE2B3 /* MoveSectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveSectionTableViewController.h; path = ExampleControllers/MoveSectionTableViewController.h; sourceTree = "<group>"; };
 		E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoveSectionTableViewController.m; path = ExampleControllers/MoveSectionTableViewController.m; sourceTree = "<group>"; };
 		E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoveSectionTableViewController.xib; path = ExampleControllers/MoveSectionTableViewController.xib; sourceTree = "<group>"; };
-		E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTCellFactorySpec.mm; sourceTree = "<group>"; };
 		E666ACE9162C02C800A2DBF2 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCell.xib; path = TableViewFactory/Cells/CustomCell.xib; sourceTree = "<group>"; };
 		E666ACED162C034000A2DBF2 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCell.h; path = TableViewFactory/Cells/CustomCell.h; sourceTree = "<group>"; };
 		E666ACEE162C034000A2DBF2 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = TableViewFactory/Cells/CustomCell.m; sourceTree = "<group>"; };
@@ -143,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */ = {
+			isa = PBXGroup;
+			children = (
+				9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */,
+				9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */,
+			);
+			name = "UIView+loadFromXib";
+			sourceTree = "<group>";
+		};
 		E638F1051619913B00694FBC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,7 +247,6 @@
 				E6915660168B382800C5F189 /* DTTableViewManager+UnitTests.h */,
 				E6915661168B382800C5F189 /* DTTableViewManager+UnitTests.m */,
 				E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */,
-				E6486B10161F1E4600D438AC /* DTCellFactorySpec.mm */,
 				E6CB97B1161B26C900A7E936 /* Supporting Files */,
 			);
 			path = CedarUnitTests;
@@ -315,6 +325,7 @@
 		E6EA83931615F07F00F8B8C3 /* DTTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
 				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,
 				E60CA0141684AFEF00F4147E /* DTCellFactory.m */,
 				E60CA0151684AFEF00F4147E /* DTTableViewCellCreation.h */,
@@ -449,7 +460,6 @@
 				E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */,
 				E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */,
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
-				E6486B11161F1E4600D438AC /* DTCellFactorySpec.mm in Sources */,
 				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
@@ -460,6 +470,7 @@
 				E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01D1684AFEF00F4147E /* DTTableViewManager.m in Sources */,
 				E6915662168B382800C5F189 /* DTTableViewManager+UnitTests.m in Sources */,
+				9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +492,7 @@
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01C1684AFEF00F4147E /* DTTableViewManager.m in Sources */,
+				9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
