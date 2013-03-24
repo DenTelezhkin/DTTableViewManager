@@ -131,15 +131,6 @@
     return NO;
 }
 
--(BOOL)tableViewRespondsToHeaderFooterViewClassRegistration
-{
-    if ([self.tableView respondsToSelector:@selector(registerClass:forHeaderFooterViewReuseIdentifier:)])
-    {
-        return YES;
-    }
-    return NO;
-}
-
 -(BOOL)tableViewRespondsToHeaderFooterViewNibRegistration
 {
     if ([self.tableView respondsToSelector:@selector(registerNib:forHeaderFooterViewReuseIdentifier:)])
@@ -170,18 +161,6 @@
                                           forModelClass:modelClass];
 }
 
--(void)setHeaderMappingForClass:(Class)headerClass modelClass:(Class)modelClass
-{
-    if ([self tableViewRespondsToHeaderFooterViewClassRegistration])
-    {
-        [self.tableView registerClass:headerClass
-   forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
-    }
-    
-    [[DTCellFactory sharedInstance] setHeaderClassMapping:headerClass
-                                            forModelClass:modelClass];
-}
-
 -(void)setHeaderMappingForNibName:(NSString *)nibName headerClass:(Class)headerClass
                        modelClass:(Class)modelClass
 {
@@ -192,18 +171,6 @@
     }
     
     [[DTCellFactory sharedInstance] setHeaderClassMapping:headerClass
-                                            forModelClass:modelClass];
-}
-
--(void)setFooterMappingForClass:(Class)footerClass modelClass:(Class)modelClass
-{
-    if ([self tableViewRespondsToHeaderFooterViewClassRegistration])
-    {
-        [self.tableView registerClass:footerClass
-   forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
-    }
-    
-    [[DTCellFactory sharedInstance] setFooterClassMapping:footerClass
                                             forModelClass:modelClass];
 }
 

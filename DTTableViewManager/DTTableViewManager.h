@@ -450,10 +450,6 @@
  */
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass;
 
-
--(void)setHeaderMappingForClass:(Class)headerClass modelClass:(Class)modelClass;
--(void)setFooterMappingForClass:(Class)footerClass modelClass:(Class)modelClass;
-
 /**
  This method is used to set mapping from model to custom cell created from XIB with `nibName` name. Cell data is then populated by `cellClass` class.
  
