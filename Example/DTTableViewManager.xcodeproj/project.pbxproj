@@ -9,6 +9,28 @@
 /* Begin PBXBuildFile section */
 		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
+		95834EE516FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
+		95834EE616FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
+		95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EE716FF821900409396 /* CustomHeaderView.xib */; };
+		95834EE916FF821900409396 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EE716FF821900409396 /* CustomHeaderView.xib */; };
+		95834EED16FF830A00409396 /* CustomHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EEB16FF830A00409396 /* CustomHeaderController.m */; };
+		95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EEB16FF830A00409396 /* CustomHeaderController.m */; };
+		95834EEF16FF830A00409396 /* CustomHeaderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EEC16FF830A00409396 /* CustomHeaderController.xib */; };
+		95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EEC16FF830A00409396 /* CustomHeaderController.xib */; };
+		95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
+		95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
+		95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */; };
+		95A3B4B216FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */; };
+		95A3B4B716FF649100F5897E /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B616FF649100F5897E /* textured_paper.png */; };
+		95A3B4B816FF649100F5897E /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B616FF649100F5897E /* textured_paper.png */; };
+		95A3B4BA16FF64AE00F5897E /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B916FF64AE00F5897E /* mochaGrunge.png */; };
+		95A3B4BB16FF64AE00F5897E /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B916FF64AE00F5897E /* mochaGrunge.png */; };
+		95A3B4BE16FF6C1000F5897E /* CustomHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4BD16FF6C1000F5897E /* CustomHeaderFooterModel.m */; };
+		95A3B4BF16FF6C1000F5897E /* CustomHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4BD16FF6C1000F5897E /* CustomHeaderFooterModel.m */; };
+		95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */; };
+		95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */; };
+		95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */; };
+		95BF2BA216FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */; };
 		E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
 		E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
 		E60CA01C1684AFEF00F4147E /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewManager.m */; };
@@ -65,6 +87,22 @@
 		443AAC7353A943DCAA45DED0 /* libPods-CedarUnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CedarUnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
 		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
+		95834EE316FF820000409396 /* CustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderView.h; path = TableViewFactory/Cells/CustomHeaderView.h; sourceTree = "<group>"; };
+		95834EE416FF820000409396 /* CustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderView.m; path = TableViewFactory/Cells/CustomHeaderView.m; sourceTree = "<group>"; };
+		95834EE716FF821900409396 /* CustomHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderView.xib; path = TableViewFactory/Cells/CustomHeaderView.xib; sourceTree = "<group>"; };
+		95834EEA16FF830A00409396 /* CustomHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderController.h; path = ExampleControllers/CustomHeaderController.h; sourceTree = "<group>"; };
+		95834EEB16FF830A00409396 /* CustomHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderController.m; path = ExampleControllers/CustomHeaderController.m; sourceTree = "<group>"; };
+		95834EEC16FF830A00409396 /* CustomHeaderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderController.xib; path = ExampleControllers/CustomHeaderController.xib; sourceTree = "<group>"; };
+		95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterView.h; path = TableViewFactory/Cells/CustomHeaderFooterView.h; sourceTree = "<group>"; };
+		95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterView.m; path = TableViewFactory/Cells/CustomHeaderFooterView.m; sourceTree = "<group>"; };
+		95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = TableViewFactory/Cells/CustomHeaderFooterView.xib; sourceTree = "<group>"; };
+		95A3B4B616FF649100F5897E /* textured_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textured_paper.png; sourceTree = "<group>"; };
+		95A3B4B916FF64AE00F5897E /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mochaGrunge.png; sourceTree = "<group>"; };
+		95A3B4BC16FF6C1000F5897E /* CustomHeaderFooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterModel.h; path = TableViewFactory/Models/CustomHeaderFooterModel.h; sourceTree = "<group>"; };
+		95A3B4BD16FF6C1000F5897E /* CustomHeaderFooterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterModel.m; path = TableViewFactory/Models/CustomHeaderFooterModel.m; sourceTree = "<group>"; };
+		95BF2B9C16FF72580050D0A7 /* CustomHeaderFooterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterController.h; path = ExampleControllers/CustomHeaderFooterController.h; sourceTree = "<group>"; };
+		95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterController.m; path = ExampleControllers/CustomHeaderFooterController.m; sourceTree = "<group>"; };
+		95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterController.xib; path = ExampleControllers/CustomHeaderFooterController.xib; sourceTree = "<group>"; };
 		A3F9431F27DC49DBA1DBDFC0 /* Pods-CedarUnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CedarUnitTests.xcconfig"; path = "Pods/Pods-CedarUnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
@@ -154,6 +192,44 @@
 			name = "UIView+loadFromXib";
 			sourceTree = "<group>";
 		};
+		9545FBA016FF61A00042A1A3 /* Custom headers/footers */ = {
+			isa = PBXGroup;
+			children = (
+				95BF2B9C16FF72580050D0A7 /* CustomHeaderFooterController.h */,
+				95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */,
+				95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */,
+				95834EEA16FF830A00409396 /* CustomHeaderController.h */,
+				95834EEB16FF830A00409396 /* CustomHeaderController.m */,
+				95834EEC16FF830A00409396 /* CustomHeaderController.xib */,
+			);
+			name = "Custom headers/footers";
+			sourceTree = "<group>";
+		};
+		95A3B4B316FF645600F5897E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				95A3B4B416FF646200F5897E /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		95A3B4B416FF646200F5897E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				95A3B4B516FF646900F5897E /* patterns */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		95A3B4B516FF646900F5897E /* patterns */ = {
+			isa = PBXGroup;
+			children = (
+				95A3B4B616FF649100F5897E /* textured_paper.png */,
+				95A3B4B916FF64AE00F5897E /* mochaGrunge.png */,
+			);
+			name = patterns;
+			sourceTree = "<group>";
+		};
 		E638F1051619913B00694FBC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +237,8 @@
 				E638F1081619916B00694FBC /* Example.m */,
 				E666ACF1162C037B00A2DBF2 /* CustomModel.h */,
 				E666ACF2162C037B00A2DBF2 /* CustomModel.m */,
+				95A3B4BC16FF6C1000F5897E /* CustomHeaderFooterModel.h */,
+				95A3B4BD16FF6C1000F5897E /* CustomHeaderFooterModel.m */,
 			);
 			name = Models;
 			path = ..;
@@ -174,6 +252,12 @@
 				E666ACE9162C02C800A2DBF2 /* CustomCell.xib */,
 				E666ACED162C034000A2DBF2 /* CustomCell.h */,
 				E666ACEE162C034000A2DBF2 /* CustomCell.m */,
+				95834EE316FF820000409396 /* CustomHeaderView.h */,
+				95834EE416FF820000409396 /* CustomHeaderView.m */,
+				95834EE716FF821900409396 /* CustomHeaderView.xib */,
+				95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */,
+				95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */,
+				95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */,
 			);
 			name = Cells;
 			path = ..;
@@ -185,6 +269,7 @@
 				E6402FC1162D9A7800DDE2B3 /* MoveSection */,
 				E6402FB5162D8EF800DDE2B3 /* InsertReplace */,
 				E6402FA6162D8B1200DDE2B3 /* CustomCells */,
+				9545FBA016FF61A00042A1A3 /* Custom headers/footers */,
 				E6402F90162D80FE00DDE2B3 /* Reorder */,
 				E6402F8F162D80F300DDE2B3 /* AddRemove */,
 			);
@@ -306,6 +391,7 @@
 				E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */,
 				E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */,
 				E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */,
+				95A3B4B316FF645600F5897E /* Resources */,
 				E6EA836D1615EE6000F8B8C3 /* Supporting Files */,
 			);
 			path = TableViewFactory;
@@ -414,6 +500,12 @@
 				E6402FB4162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
 				E6402FBC162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */,
 				E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
+				95A3B4B216FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */,
+				95A3B4B816FF649100F5897E /* textured_paper.png in Resources */,
+				95A3B4BB16FF64AE00F5897E /* mochaGrunge.png in Resources */,
+				95BF2BA216FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
+				95834EE916FF821900409396 /* CustomHeaderView.xib in Resources */,
+				95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +521,12 @@
 				E6402FB3162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
 				E6402FBB162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */,
 				E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
+				95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */,
+				95A3B4B716FF649100F5897E /* textured_paper.png in Resources */,
+				95A3B4BA16FF64AE00F5897E /* mochaGrunge.png in Resources */,
+				95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
+				95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */,
+				95834EEF16FF830A00409396 /* CustomHeaderController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +569,11 @@
 				E60CA01D1684AFEF00F4147E /* DTTableViewManager.m in Sources */,
 				E6915662168B382800C5F189 /* DTTableViewManager+UnitTests.m in Sources */,
 				9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
+				95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
+				95A3B4BF16FF6C1000F5897E /* CustomHeaderFooterModel.m in Sources */,
+				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
+				95834EE616FF820000409396 /* CustomHeaderView.m in Sources */,
+				95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +596,11 @@
 				E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01C1684AFEF00F4147E /* DTTableViewManager.m in Sources */,
 				9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
+				95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
+				95A3B4BE16FF6C1000F5897E /* CustomHeaderFooterModel.m in Sources */,
+				95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
+				95834EE516FF820000409396 /* CustomHeaderView.m in Sources */,
+				95834EED16FF830A00409396 /* CustomHeaderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

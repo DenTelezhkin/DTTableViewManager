@@ -12,6 +12,8 @@
 #import "CustomCellsTableViewController.h"
 #import "InsertReplaceTableViewController.h"
 #import "MoveSectionTableViewController.h"
+#import "CustomHeaderFooterController.h"
+#import "CustomHeaderController.h"
 
 @interface ExampleTableViewController ()
 
@@ -53,6 +55,15 @@
                                                            andText:@"Reorder cells"]];
     [self.tableManager addTableItem:[Example exampleWithController:[CustomCellsTableViewController class]
                                                            andText:@"Custom cells from NIB"]];
+    [self.tableManager addTableItem:[Example exampleWithController:[CustomHeaderController class] andText:@"Custom header - iOS 5"]];
+    
+    if ([UITableViewHeaderFooterView class])
+    {
+        // WE are running on iOS 6 and higher, which actually has reusable headers
+        [self.tableManager addTableItem:[Example exampleWithController:[CustomHeaderFooterController class]
+                                                               andText:@"Custom header - iOS 6"]];
+    }
+    
     [self.tableManager addTableItem:[Example exampleWithController:[InsertReplaceTableViewController class]
                                                            andText:@"Insert/replace cells"]];
     [self.tableManager addTableItem:[Example exampleWithController:[MoveSectionTableViewController class]

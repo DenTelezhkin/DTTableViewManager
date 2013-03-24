@@ -119,7 +119,7 @@
     return _sectionFooterModels;
 }
 
-#pragma mark - mapping
+#pragma mark - check for features
 
 -(BOOL)tableViewRespondsToCellClassRegistration
 {
@@ -133,15 +133,35 @@
 
 -(BOOL)tableViewRespondsToHeaderFooterViewNibRegistration
 {
-    if ([self.tableView respondsToSelector:@selector(registerNib:forHeaderFooterViewReuseIdentifier:)])
+    if ([self.tableView respondsToSelector:
+         @selector(registerNib:forHeaderFooterViewReuseIdentifier:)])
     {
         return YES;
     }
     return NO;
 }
 
+-(void)checkClassForModelTransferProtocolSupport:(Class)class
+{
+    if (![class conformsToProtocol:@protocol(DTTableViewModelTransfer)])
+    {
+        NSString * reason = [NSString stringWithFormat:@"class %@ should conform\n"
+                             "to DTTableViewModelTransfer protocol",
+                             NSStringFromClass(class)];
+        NSException * exc =
+        [NSException exceptionWithName:@"DTTableViewManager API exception"
+                                reason:reason
+                              userInfo:nil];
+        [exc raise];
+    }
+}
+
+#pragma mark - mapping
+
 -(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass
 {
+    [self checkClassForModelTransferProtocolSupport:cellClass];
+    
     if ([self tableViewRespondsToCellClassRegistration])
     {
         [self.tableView registerClass:cellClass
@@ -152,8 +172,11 @@
                                           forModelClass:modelClass];
 }
 
--(void)setCellMappingForNib:(NSString *)nibName cellClass:(Class)cellClass modelClass:(Class)modelClass
+-(void)setCellMappingForNib:(NSString *)nibName cellClass:(Class)cellClass
+                 modelClass:(Class)modelClass
 {
+    [self checkClassForModelTransferProtocolSupport:cellClass];
+    
     [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
          forCellReuseIdentifier:NSStringFromClass([modelClass class])];
     
@@ -164,7 +187,10 @@
 -(void)setHeaderMappingForNibName:(NSString *)nibName headerClass:(Class)headerClass
                        modelClass:(Class)modelClass
 {
-    if ([self tableViewRespondsToHeaderFooterViewNibRegistration])
+    [self checkClassForModelTransferProtocolSupport:headerClass];
+    
+    if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
+        [headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
  forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
@@ -177,7 +203,10 @@
 -(void)setFooterMappingForNibName:(NSString *)nibName footerClass:(Class)footerClass
                        modelClass:(Class)modelClass
 {
-    if ([self tableViewRespondsToHeaderFooterViewNibRegistration])
+    [self checkClassForModelTransferProtocolSupport:footerClass];
+    
+    if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
+        [footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
  forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
@@ -216,7 +245,7 @@
 {
     if (index<[self.sectionFooterModels count])
     {
-        return self.sectionHeaderModels[index];
+        return self.sectionFooterModels[index];
     }
     else {
 //        NSLog(@"DTTableViewManager: Footer not found at index: %d",index);

@@ -32,7 +32,7 @@
                     modelClass:[CustomModel class]];
 
     [self addTableItem:[CustomModel modelWithText1:@"Very"
-                                             text2:@"Customized"
+                                             text2:@"Custom"
                                              text3:@"Table"
                                              text4:@"Cell"]];
 }

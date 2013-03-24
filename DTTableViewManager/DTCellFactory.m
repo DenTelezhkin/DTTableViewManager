@@ -111,12 +111,16 @@
                                   forModel:(id)model
                            reuseIdentifier:(NSString *)reuseIdentifier
 {
-    UIView <DTTableViewModelTransfer> * view =
-            [table dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
-    
-    [view updateWithModel:model];
-    
-    return view;
+   if ([table respondsToSelector:@selector(dequeueReusableHeaderFooterViewWithIdentifier:)])
+   {
+       UIView <DTTableViewModelTransfer> * view =
+       [table dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+       
+       [view updateWithModel:model];
+       
+       return view;
+   }
+    return nil;
 }
 
 #pragma mark - actions
@@ -237,7 +241,7 @@
     {
         UIView <DTTableViewModelTransfer> * headerView;
         
-        headerView = [UIView loadFromXib];
+        headerView = [headerClass loadFromXib];
         [headerView updateWithModel:model];
         
         return headerView;
@@ -258,7 +262,7 @@
     {
         UIView <DTTableViewModelTransfer> * footerView;
         
-        footerView = [UIView loadFromXib];
+        footerView = [footerClass loadFromXib];
         [footerView updateWithModel:model];
         
         return footerView;
