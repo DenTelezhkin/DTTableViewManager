@@ -466,10 +466,34 @@
                   cellClass:(Class)cellClass
                  modelClass:(Class)modelClass;
 
+/**
+ Use this method to set mapping from model to custom header view with `nibName` name. `headerClass` object is called with `updateWithModel:` method to update presentation of header view.
+ 
+ @param nibName Name of custom XIB that is used to create a header.
+ 
+ @param headerClass Class of the header you want to be created for model with modelClass.
+ 
+ @param modelClass Class of the model you want to be mapped to headerClass.
+ 
+ @warning If you are building for iOS 5, use UIView subclass, for iOS 6 and higher you can use UITableViewHeaderFooterView with reuse capability. `DTTableViewManager` will automatically figure out which class is used.
+ 
+ */
 -(void)setHeaderMappingForNibName:(NSString *)nibName
                       headerClass:(Class)headerClass
                        modelClass:(Class)modelClass;
 
+/**
+ Use this method to set mapping from model to custom footer view with `nibName` name. `footerClass` object is called with `updateWithModel:` method to update presentation of footer view.
+ 
+ @param nibName Name of custom XIB that is used to create a footer.
+ 
+ @param footerClass Class of the footer you want to be created for model with modelClass.
+ 
+ @param modelClass Class of the model you want to be mapped to footerClass.
+ 
+ @warning If you are building for iOS 5, use UIView subclass, for iOS 6 and higher you can use UITableViewHeaderFooterView with reuse capability. `DTTableViewManager` will automatically figure out which class is used.
+ 
+ */
 -(void)setFooterMappingForNibName:(NSString *)nibName
                       footerClass:(Class)footerClass
                        modelClass:(Class)modelClass;
