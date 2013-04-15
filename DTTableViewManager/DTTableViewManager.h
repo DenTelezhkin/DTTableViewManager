@@ -50,11 +50,18 @@
  
  Every action that is done to table items - add, delete, insert etc. is applied immediately. There's no need to manually reload data on your table view. Group insertion, addition or deletion is processed inside `UITableView` `beginUpdates` and `endUpdates` block.
  
- ## Loading cells from XIB
+ ## Loading cells from NIB
  
  `DTTableViewManager` internally uses `registerNib:forCellReuseIdentifier:` method for making this happen, which requires iOS 5.0 and higher to work. Use setCellMappingForNib:cellClass:modelClass: for mapping NIB to cell class and model. 
  
- @warning Before executing setCellMappingForNib:cellClass:modelClass:, make sure that tableView property is set and tableView is created. Good spot to call setCellMappingForNib:cellClass:modelClass: is in viewDidLoad method.
+ Discussion. Before executing setCellMappingForNib:cellClass:modelClass:, make sure that tableView property is set and tableView is created. Good spot to call setCellMappingForNib:cellClass:modelClass: is in viewDidLoad method.
+ 
+ ## Loading headers/footers from NIB
+ 
+ To register custom NIB for header/footer use methods `setHeaderMappingForNibName:headerClass:modelClass:` and `setFooterMappingForNibName:footerClass:modelClass:` methods. 
+ For iOS 6 and higher, UITableView's `registerNib:forHeaderFooterViewReuseIdentifier:` will be used. For iOS 5, `DTTableViewManager` will use `loadFromNibName:bundle:` method.
+ 
+ To set header/footer models on the  tableView, use `setHeaderModels:` and `setFooterModels:` method.
  
  */
 
@@ -178,7 +185,7 @@
 - (int)numberOfTableItemsInSection:(NSInteger)section;
 
 ///---------------------------------------
-/// @name Section titles
+/// @name Section headers/footers
 ///---------------------------------------
 
 /**
@@ -186,10 +193,17 @@
  
  @param headerTitles header titles for all sections of the table.
  
- @discussion These method is identical to implementing `tableView:titleForHeaderInSection:` datasource method. If you want to have custom section header view, use usual `UITableView` delegate methods. 
+ @discussion This method is identical to implementing `tableView:titleForHeaderInSection:` datasource method. If you want to have custom section header view, use usual `UITableView` delegate methods.
  */
 - (void)setSectionHeaderTitles:(NSArray *)headerTitles;
 
+/**
+ Sets sections header models. Header model class should be previously registered with `setHeaderMappingForNibName:headerClass:modelClass:` method. 
+ 
+ @param headerModels header models for all sections of the table.
+ 
+ @discussion This method is used to set header models. `DTTableViewManager` will then load NIB, registered for headerClass and will call `updateWithModel:` method on each header object. On iOS 5, view will be loaded using loadFromNibName:bundle: method. On iOS 6, if registered header class subclassed from UITableViewHeaderFooterView, it'll use iOS6 `registerNib:forHeaderFooterViewReuseIdentifier:` method.
+ */
 - (void)setSectionHeaderModels:(NSArray *)headerModels;
 
 /**
@@ -201,6 +215,13 @@
  */
 - (void)setSectionFooterTitles:(NSArray *)footerTitles;
 
+/**
+ Sets sections footer models. Footer model class should be previously registered with `setFooterMappingForNibName:headerClass:modelClass:` method.
+ 
+ @param footerModels footer models for all sections of the table.
+ 
+ @discussion This method is used to set footer models. `DTTableViewManager` will then load NIB, registered for footerClass and will call `updateWithModel:` method on each footer object. On iOS 5, view will be loaded using loadFromNibName:bundle: method. On iOS 6, if registered footer class subclassed from UITableViewHeaderFooterView, it'll use iOS6 `registerNib:forHeaderFooterViewReuseIdentifier:` method.
+ */
 - (void)setSectionFooterModels:(NSArray *)footerModels;
 
 ///---------------------------------------
