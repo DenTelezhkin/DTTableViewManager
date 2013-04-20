@@ -382,7 +382,7 @@
 		E6EA836C1615EE6000F8B8C3 /* TableViewFactory */ = {
 			isa = PBXGroup;
 			children = (
-				E6EA83931615F07F00F8B8C3 /* DTTableViewController */,
+				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
 				E638F1051619913B00694FBC /* Models */,
 				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
@@ -408,7 +408,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E6EA83931615F07F00F8B8C3 /* DTTableViewController */ = {
+		E6EA83931615F07F00F8B8C3 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
 				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
@@ -420,7 +420,7 @@
 				E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */,
 				E60CA0191684AFEF00F4147E /* DTGCDSingleton.h */,
 			);
-			name = DTTableViewController;
+			name = DTTableViewManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

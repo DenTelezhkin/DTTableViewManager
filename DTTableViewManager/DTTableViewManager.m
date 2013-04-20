@@ -444,8 +444,16 @@
     // Update datasource
     NSMutableArray *array = [self getValidTableSection:indexPath.section
                                          withAnimation:animation];
-    [array insertObject:tableItem atIndex:indexPath.row];
     
+    if ([[self tableItemsInSection:indexPath.section] count]<indexPath.row)
+    {
+        NSLog(@"DTTableViewManager: failed to insert item for indexPath section: %d, row: %d, only %d items in section",
+              indexPath.section,
+              indexPath.row,
+              [[self tableItemsInSection:indexPath.section] count]);
+        return;
+    }
+    [array insertObject:tableItem atIndex:indexPath.row];
     
     // UPdate UI
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
@@ -495,7 +503,7 @@
     
     //Update UI
     [self.tableView reloadRowsAtIndexPaths:@[indexPathToReplace]
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                          withRowAnimation:animation];
 }
 
 #pragma  mark - remove items

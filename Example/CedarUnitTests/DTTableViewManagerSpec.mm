@@ -276,13 +276,6 @@ describe(@"Datasource spec", ^{
                    atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
         [model verifyTableItem:acc3
                    atIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] should be_truthy;
-        
-        ^{
-            [model insertTableItem:acc5 toIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
-        } should raise_exception;
-        ^{
-            [model insertTableItem:acc5 toIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
-        } should raise_exception;
     });
     
     it(@"should insert table item to indexPath with row animation", ^{
@@ -299,17 +292,6 @@ describe(@"Datasource spec", ^{
                    atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
         [model verifyTableItem:acc3
                    atIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] should be_truthy;
-        
-        ^{
-            [model insertTableItem:acc5
-                       toIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]
-                  withRowAnimation:UITableViewRowAnimationNone];
-        } should raise_exception;
-        ^{
-            [model insertTableItem:acc5
-                       toIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]
-                  withRowAnimation:UITableViewRowAnimationNone];
-        } should raise_exception;
     });
     
     it(@"should replace table item with tableItem", ^{
@@ -502,6 +484,20 @@ describe(@"Datasource spec", ^{
         [model respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)] should equal(YES);
         [model respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)] should equal(YES);
         [model respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)] should equal(YES);
+    });
+    
+    it(@"should not throw exception if inserting at illegal indexPath", ^{
+        ^{
+            [model insertTableItem:acc1 toIndexPath:
+             [NSIndexPath indexPathForRow:1 inSection:0]];
+        } should_not raise_exception;
+    });
+    
+    it(@"should not throw exception if inserting at illegal indexPath", ^{
+        ^{
+            [model insertTableItem:acc1 toIndexPath:
+             [NSIndexPath indexPathForRow:3 inSection:5]];
+        } should_not raise_exception;
     });
 
 });
