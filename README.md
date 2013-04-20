@@ -3,7 +3,12 @@ DTTableViewManager
 
 Powerful architecture for UITableView. The idea is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
 
-But first off, why do we need this? Lets imagine view controller, that manages table view presentation on itself.
+
+## Why?
+
+But first off, why do we need this? 
+
+Lets imagine view controller, that manages table view presentation on itself. 
 
 ![image](without.png)
 
@@ -18,13 +23,11 @@ In the end, view controller is left with following stuff:
 * Set mapping between data model class and cell class.
 * Populate table view with data models
 
-This approach intends to clean your view controller from massive amounts of repeatable datasource code. It helps to think about table view models instead of table view cells. Table view cells should be responsible for displaying their content, and controller should only be responsible for displaying models, not cells.
-
-When view controller manages insertion, deletion, or moves items, it always struggles to keep datasource and table view in sync. DTTableViewManager does this automatically. ViewController handles data models - table view is automatically updated.
+When view controller manages insertion, deletion, or moves items, it always struggles to keep datasource and table view in sync. DTTableViewManager does this automatically. View controller handles data models - table view is automatically updated.
 
 Okay, enough talking, let's dive into code!  
 
-### Show me some code!
+## How?
 
 Simplest way for view controller is to subclass DTTableViewManager (it's not required, you can make it a separate object).
 
@@ -79,9 +82,12 @@ Custom XIB for cell:
 	[self insertTableItem:model toIndexPath:indexPath];
 	[self insertTableItem:model toIndexPath:indexPath withRowAnimation:UITableViewRowAnimationAutomatic];
 	
+	
+## What else do you have?
+
 List is not full, for additional features like:
 
-* Search for tableItem / tableItems
+* Search for tableItem / tableItems, getting all items from one section etc.
 * Section headers/footers titles and custom views
 * Section manipulations (delete, reload, move)
 
