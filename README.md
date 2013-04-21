@@ -10,13 +10,13 @@ But first off, why do we need this?
 
 Lets imagine view controller, that manages table view presentation on itself. 
 
-![](without.png)
+![https://github.com/DenHeadless/DTTableViewManager/blob/gh-pages/without.png](without.png)
 
 Clearly, there are way to many connections, that your view controller needs to handle. And we only show table view stuff, however most likely your view controller is also doing other things, which will make this graph even more complicated. 
 
 Solution for this - separate datasource from view controller. DTTableViewManager does just that. Here's how picture looks, when we use it:
 
-![](with.png)
+![https://github.com/DenHeadless/DTTableViewManager/blob/gh-pages/with.png](with.png)
 
 In the end, view controller is left with following stuff:
 
