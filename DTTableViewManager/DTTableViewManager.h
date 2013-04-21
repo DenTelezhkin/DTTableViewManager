@@ -328,7 +328,7 @@
  
  @param indexPath Index, where item should be inserted.
  
- @warning Inserting item at index, that is not occupied, will throw an exception.
+ @warning Inserting item at index, that is not occupied, will not throw an exception, and won't do anything, except logging into console about failure
  */
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath;
 
@@ -342,7 +342,7 @@
  
  @param animation Animation that will be applied when items are inserted.
  
- @warning Inserting item at index, that is not occupied, will throw an exception.
+ @warning Inserting item at index, that is not occupied, will not throw an exception, and won't do anything, except logging into console about failure
  */
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
        withRowAnimation:(UITableViewRowAnimation)animation;
