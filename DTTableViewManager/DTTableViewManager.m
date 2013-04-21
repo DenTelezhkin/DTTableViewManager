@@ -682,7 +682,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             
             //Update UI
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i]
-                          withRowAnimation:animation];
+                          withRowAnimation:UITableViewRowAnimationNone];
         }
         return [self.sections lastObject];
     }
