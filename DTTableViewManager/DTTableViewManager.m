@@ -362,8 +362,8 @@
         NSIndexPath * foundIndexPath = [self indexPathOfTableItem:[tableItems objectAtIndex:i]];
         if (!foundIndexPath)
         {
-            NSLog(@"DTTableViewManager: object %@ not found, adding NSNull object", [tableItems objectAtIndex:i]);
-            [indexPaths addObject:[NSNull null]];
+            NSLog(@"DTTableViewManager: object %@ not found",
+                  [tableItems objectAtIndex:i]);
         }
         else {
             [indexPaths addObject:foundIndexPath];
@@ -569,6 +569,24 @@
                           withRowAnimation:animation];
 }
 
+-(void)reloadTableItem:(NSObject *)tableItem
+      withRowAnimation:(UITableViewRowAnimation)animation
+{
+    NSIndexPath * indexPathToReload = [self indexPathOfTableItem:tableItem];
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPathToReload]
+                          withRowAnimation:animation];
+}
+
+-(void)reloadTableItems:(NSArray *)tableItems
+       withRowAnimation:(UITableViewRowAnimation)animation
+{
+    NSArray * indexPathsToReload = [self indexPathArrayForTableItems:tableItems];
+    
+    [self.tableView reloadRowsAtIndexPaths:indexPathsToReload
+                          withRowAnimation:animation];
+}
+
 #pragma  mark - remove items
 
 -(void)removeTableItemAtIndexPath:(NSIndexPath *)indexPath
@@ -666,15 +684,6 @@
     
     // Update UI
     [self.tableView deleteSections:indexSet withRowAnimation:animation];
-}
-
--(void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation
-{
-    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        [self getValidTableSection:idx withAnimation:animation];
-    }];
-    
-    [self.tableView reloadSections:indexSet withRowAnimation:animation];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

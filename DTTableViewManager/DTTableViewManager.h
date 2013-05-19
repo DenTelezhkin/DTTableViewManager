@@ -193,7 +193,7 @@
  
  @param headerTitles header titles for all sections of the table.
  
- @discussion This method is identical to implementing `tableView:titleForHeaderInSection:` datasource method. If you want to have custom section header view, use usual `UITableView` delegate methods.
+ @discussion This method is identical to implementing `tableView:titleForHeaderInSection:` datasource method. If you want to have custom section header view, create model for it and use setSectionHeaderModels: method. You can also use standard UITableViewDelegate method to do this.
  */
 - (void)setSectionHeaderTitles:(NSArray *)headerTitles;
 
@@ -211,7 +211,7 @@
  
  @param footerTitles footer titles for all sections of the table.
  
- @discussion These method is identical to implementing `tableView:titleForFooterInSection:` datasource method. If you want to have custom section footer view, use usual `UITableView` delegate methods.
+ @discussion This method is identical to implementing `tableView:titleForFooterInSection:` datasource method. If you want to have custom section footer view, create model for it and use setSectionFooterModels: method. You can also use standard UITableViewDelegate method to do this.
  */
 - (void)setSectionFooterTitles:(NSArray *)footerTitles;
 
@@ -348,6 +348,14 @@
        withRowAnimation:(UITableViewRowAnimation)animation;
 
 ///---------------------------------------
+/// @name Reload table items
+///---------------------------------------
+
+-(void)reloadTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation;
+
+-(void)reloadTableItems:(NSArray *)tableItems withRowAnimation:(UITableViewRowAnimation)animation;
+
+///---------------------------------------
 /// @name Replace table items
 ///---------------------------------------
 
@@ -443,16 +451,6 @@
  @param animation Row animation style to be used while deleting sections.
  */
 - (void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
-
-
-/**
- Reloads one or more sections in the receiver, with `animation` animation.
- 
- @param indexSet An index set that specifies the sections to reload from the receiving table view. 
- 
- @param animation Row animation style to be used when reloading sections.
- */
-- (void)reloadSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
 
 ///---------------------------------------
