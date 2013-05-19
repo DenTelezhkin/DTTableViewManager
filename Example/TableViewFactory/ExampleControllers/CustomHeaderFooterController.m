@@ -10,33 +10,19 @@
 #import "CustomHeaderFooterView.h"
 #import "CustomHeaderFooterModel.h"
 
-@interface CustomHeaderFooterController ()
-
-@end
-
 @implementation CustomHeaderFooterController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        self.title = @"Custom header/footer";
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    [self setHeaderMappingForNibName:NSStringFromClass([CustomHeaderFooterView class])
-                         headerClass:[CustomHeaderFooterView class]
-                          modelClass:[CustomHeaderFooterModel class]];
-    [self setFooterMappingForNibName:NSStringFromClass([CustomHeaderFooterView class])
-                         footerClass:[CustomHeaderFooterView class]
-                          modelClass:[CustomHeaderFooterModel class]];
+    self.title = @"Custom header/footer";
+    
+    [self setNibMappingForHeaderClass:[CustomHeaderFooterView class]
+                           modelClass:[CustomHeaderFooterModel class]];
+    
+    [self setNibMappingForFooterClass:[CustomHeaderFooterView class]
+                           modelClass:[CustomHeaderFooterModel class]];
     
     [self addTableItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
     [self addTableItem:[Example exampleWithText:@"Section 2" andDetails:nil]

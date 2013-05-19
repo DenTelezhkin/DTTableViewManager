@@ -19,7 +19,7 @@ describe(@"Datasource spec", ^{
     
     beforeEach(^{
         model = [DTTableViewManager new];
-        [model setCellMappingforClass:[ExampleCell class] modelClass:[Example class]];
+        [model setClassMappingforCellClass:[ExampleCell class] modelClass:[Example class]];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
         testModel = [Example new];

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		950659EE1749030D008AB32D /* BaseExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659ED1749030C008AB32D /* BaseExampleController.m */; };
+		950659EF1749030D008AB32D /* BaseExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659ED1749030C008AB32D /* BaseExampleController.m */; };
 		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		95834EE516FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
@@ -85,6 +87,8 @@
 
 /* Begin PBXFileReference section */
 		443AAC7353A943DCAA45DED0 /* libPods-CedarUnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CedarUnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		950659EC1749030C008AB32D /* BaseExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseExampleController.h; path = ExampleControllers/BaseExampleController.h; sourceTree = "<group>"; };
+		950659ED1749030C008AB32D /* BaseExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseExampleController.m; path = ExampleControllers/BaseExampleController.m; sourceTree = "<group>"; };
 		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
 		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
 		95834EE316FF820000409396 /* CustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderView.h; path = TableViewFactory/Cells/CustomHeaderView.h; sourceTree = "<group>"; };
@@ -272,6 +276,8 @@
 				9545FBA016FF61A00042A1A3 /* Custom headers/footers */,
 				E6402F90162D80FE00DDE2B3 /* Reorder */,
 				E6402F8F162D80F300DDE2B3 /* AddRemove */,
+				950659EC1749030C008AB32D /* BaseExampleController.h */,
+				950659ED1749030C008AB32D /* BaseExampleController.m */,
 			);
 			name = "Example controllers";
 			sourceTree = "<group>";
@@ -444,9 +450,9 @@
 			productReference = E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E6EA83611615EE6000F8B8C3 /* TableViewFactory */ = {
+		E6EA83611615EE6000F8B8C3 /* DTTableViewManagerExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "TableViewFactory" */;
+			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "DTTableViewManagerExample" */;
 			buildPhases = (
 				E6EA835E1615EE6000F8B8C3 /* Sources */,
 				E6EA835F1615EE6000F8B8C3 /* Frameworks */,
@@ -456,7 +462,7 @@
 			);
 			dependencies = (
 			);
-			name = TableViewFactory;
+			name = DTTableViewManagerExample;
 			productName = TableViewFactory;
 			productReference = E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */;
 			productType = "com.apple.product-type.application";
@@ -482,7 +488,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E6EA83611615EE6000F8B8C3 /* TableViewFactory */,
+				E6EA83611615EE6000F8B8C3 /* DTTableViewManagerExample */,
 				E6CB97AA161B26C900A7E936 /* CedarUnitTests */,
 			);
 		};
@@ -574,6 +580,7 @@
 				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
 				95834EE616FF820000409396 /* CustomHeaderView.m in Sources */,
 				95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */,
+				950659EF1749030D008AB32D /* BaseExampleController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +608,7 @@
 				95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
 				95834EE516FF820000409396 /* CustomHeaderView.m in Sources */,
 				95834EED16FF830A00409396 /* CustomHeaderController.m in Sources */,
+				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,7 +788,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "TableViewFactory" */ = {
+		E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "DTTableViewManagerExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6EA83871615EE6000F8B8C3 /* Debug */,

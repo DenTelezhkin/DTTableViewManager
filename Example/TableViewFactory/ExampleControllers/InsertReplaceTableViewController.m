@@ -14,15 +14,6 @@
 
 @implementation InsertReplaceTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        [self setCellMappingforClass:[ExampleCell class] modelClass:[Example class]];
-    }
-    return self;
-}
-
 -(Example *)wonderfulExample
 {
     if (!_wonderfulExample)

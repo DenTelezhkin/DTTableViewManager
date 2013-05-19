@@ -7,7 +7,8 @@
 //
 
 #import "DTTableViewManager.h"
+#import "BaseExampleController.h"
 
-@interface MoveSectionTableViewController : DTTableViewManager
+@interface MoveSectionTableViewController : BaseExampleController
 
 @end

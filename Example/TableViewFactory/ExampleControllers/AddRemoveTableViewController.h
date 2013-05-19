@@ -7,7 +7,8 @@
 //
 
 #import "DTTableViewManager.h"
+#import "BaseExampleController.h"
 
-@interface AddRemoveTableViewController : DTTableViewManager
+@interface AddRemoveTableViewController : BaseExampleController
 
 @end

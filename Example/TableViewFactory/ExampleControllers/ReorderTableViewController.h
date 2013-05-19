@@ -7,7 +7,8 @@
 //
 
 #import "DTTableViewManager.h"
+#import "BaseExampleController.h"
 
-@interface ReorderTableViewController : DTTableViewManager
+@interface ReorderTableViewController : BaseExampleController
 
 @end

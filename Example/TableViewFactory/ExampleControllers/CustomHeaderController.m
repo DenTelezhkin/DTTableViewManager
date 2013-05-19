@@ -9,32 +9,19 @@
 #import "CustomHeaderController.h"
 #import "CustomHeaderFooterModel.h"
 #import "CustomHeaderView.h"
-@interface CustomHeaderController ()
-
-@end
 
 @implementation CustomHeaderController
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        self.title = @"Custom header/footer";
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    [self setHeaderMappingForNibName:NSStringFromClass([CustomHeaderView class])
-                         headerClass:[CustomHeaderView class]
-                          modelClass:[CustomHeaderFooterModel class]];
-    [self setFooterMappingForNibName:NSStringFromClass([CustomHeaderView class])
-                         footerClass:[CustomHeaderView class]
-                          modelClass:[CustomHeaderFooterModel class]];
+    self.title = @"Custom header/footer";
+    
+    [self setNibMappingForHeaderClass:[CustomHeaderView class]
+                           modelClass:[CustomHeaderFooterModel class]];
+    [self setNibMappingForFooterClass:[CustomHeaderView class]
+                           modelClass:[CustomHeaderFooterModel class]];
     
     [self addTableItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
     [self addTableItem:[Example exampleWithText:@"Section 2" andDetails:nil]
@@ -45,7 +32,6 @@
      [CustomHeaderFooterModel footerModel]]];
     
     [self.tableView reloadData];
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

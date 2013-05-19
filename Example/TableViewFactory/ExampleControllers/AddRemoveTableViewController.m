@@ -16,16 +16,6 @@
 
 @implementation AddRemoveTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        [self setCellMappingforClass:[ExampleCell class] modelClass:[Example class]];
-    }
-    return self;
-}
-
 -(void)addButtonTapped
 {
     self.rowCount ++;

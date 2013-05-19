@@ -10,16 +10,6 @@
 
 @implementation MoveSectionTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = @"Move section";
-        [self setCellMappingforClass:[ExampleCell class] modelClass:[Example class]];
-    }
-    return self;
-}
-
 -(void)moveSection
 {
     [self moveSection:0 toSection:([self numberOfSections]-1)];
@@ -42,6 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"Move section";
 
     UIBarButtonItem * moveButton = [[UIBarButtonItem alloc] initWithTitle:@"Move!"
                                                                     style:UIBarButtonItemStylePlain

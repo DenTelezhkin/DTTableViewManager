@@ -12,25 +12,16 @@
 
 @implementation CustomCellsTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = @"Custom NIB";
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    self.title = @"Custom NIB";
     
     // CustomCell is created from NIB
-    [self setCellMappingForNib:@"CustomCell"
-                     cellClass:[CustomCell class]
-                    modelClass:[CustomModel class]];
-
+    [self setNibMappingForCellClass:[CustomCell class]
+                         modelClass:[CustomModel class]];
+    
     [self addTableItem:[CustomModel modelWithText1:@"Very"
                                              text2:@"Custom"
                                              text3:@"Table"

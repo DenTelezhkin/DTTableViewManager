@@ -469,7 +469,9 @@
  @discussion This is the designated mapping method. It can be called anywhere, but probably the best place to call - is in your controller -init method. Inner implementation of this method trampolines mapping to DTCellFactory. You can also call this method of DTCellFactory as well.
  
  */
--(void)setCellMappingforClass:(Class)cellClass modelClass:(Class)modelClass;
+-(void)setClassMappingforCellClass:(Class)cellClass modelClass:(Class)modelClass;
+
+-(void)setNibMappingForCellClass:(Class)cellClass modelClass:(Class)modelClass;
 
 /**
  This method is used to set mapping from model to custom cell created from XIB with `nibName` name. Cell data is then populated by `cellClass` class.
@@ -483,9 +485,11 @@
  @warning This method needs to be called after tableView has been created, in `viewDidLoad`, for example. This method uses UITableView `registerNib:forCellReuseIdentifier:` underneath.
  
  */
--(void)setCellMappingForNib:(NSString *)nibName
-                  cellClass:(Class)cellClass
-                 modelClass:(Class)modelClass;
+-(void)setNibMappingForCellNibName:(NSString *)nibName
+                         cellClass:(Class)cellClass
+                        modelClass:(Class)modelClass;
+
+-(void)setNibMappingForHeaderClass:(Class)headerClass modelClass:(Class)modelClass;
 
 /**
  Use this method to set mapping from model to custom header view with `nibName` name. `headerClass` object is called with `updateWithModel:` method to update presentation of header view.
@@ -499,9 +503,11 @@
  @warning If you are building for iOS 5, use UIView subclass, for iOS 6 and higher you can use UITableViewHeaderFooterView with reuse capability. `DTTableViewManager` will automatically figure out which class is used.
  
  */
--(void)setHeaderMappingForNibName:(NSString *)nibName
+-(void)setNibMappingForHeaderNibName:(NSString *)nibName
                       headerClass:(Class)headerClass
                        modelClass:(Class)modelClass;
+
+-(void)setNibMappingForFooterClass:(Class)footerClass modelClass:(Class)modelClass;
 
 /**
  Use this method to set mapping from model to custom footer view with `nibName` name. `footerClass` object is called with `updateWithModel:` method to update presentation of footer view.
@@ -515,7 +521,7 @@
  @warning If you are building for iOS 5, use UIView subclass, for iOS 6 and higher you can use UITableViewHeaderFooterView with reuse capability. `DTTableViewManager` will automatically figure out which class is used.
  
  */
--(void)setFooterMappingForNibName:(NSString *)nibName
+-(void)setNibMappingForFooterNibName:(NSString *)nibName
                       footerClass:(Class)footerClass
                        modelClass:(Class)modelClass;
 

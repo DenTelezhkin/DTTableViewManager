@@ -7,7 +7,8 @@
 //
 
 #import "DTTableViewManager.h"
+#import "BaseExampleController.h"
 
-@interface InsertReplaceTableViewController : DTTableViewManager
+@interface InsertReplaceTableViewController : BaseExampleController
 
 @end

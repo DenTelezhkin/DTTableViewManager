@@ -10,16 +10,6 @@
 
 @implementation ReorderTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        [self setCellMappingforClass:[ExampleCell class] modelClass:[Example class]];
-    }
-    return self;
-}
-
 -(void)addExampleCells
 {
     [self addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
