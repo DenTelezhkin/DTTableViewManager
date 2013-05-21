@@ -19,8 +19,8 @@
     self.title = @"Custom NIB";
     
     // CustomCell is created from NIB
-    [self setNibMappingForCellClass:[CustomCell class]
-                         modelClass:[CustomModel class]];
+    [self registerCellClass:[CustomCell class]
+              forModelClass:[CustomModel class]];
     
     [self addTableItem:[CustomModel modelWithText1:@"Very"
                                              text2:@"Custom"

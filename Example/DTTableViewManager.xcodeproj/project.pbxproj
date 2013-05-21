@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		950659EE1749030D008AB32D /* BaseExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659ED1749030C008AB32D /* BaseExampleController.m */; };
 		950659EF1749030D008AB32D /* BaseExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659ED1749030C008AB32D /* BaseExampleController.m */; };
+		950659F4174C01EF008AB32D /* CellWithoutNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659F3174C01EF008AB32D /* CellWithoutNib.m */; };
+		950659F7174C0202008AB32D /* CellWithNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659F6174C0201008AB32D /* CellWithNib.m */; };
+		950659F9174C0219008AB32D /* CellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950659F8174C0219008AB32D /* CellWithNib.xib */; };
+		950659FC174C0280008AB32D /* BaseMockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659FB174C027F008AB32D /* BaseMockCell.m */; };
+		95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
+		95065A03174C03DF008AB32D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
 		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		95834EE516FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
@@ -89,6 +95,15 @@
 		443AAC7353A943DCAA45DED0 /* libPods-CedarUnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CedarUnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		950659EC1749030C008AB32D /* BaseExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseExampleController.h; path = ExampleControllers/BaseExampleController.h; sourceTree = "<group>"; };
 		950659ED1749030C008AB32D /* BaseExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseExampleController.m; path = ExampleControllers/BaseExampleController.m; sourceTree = "<group>"; };
+		950659F2174C01EF008AB32D /* CellWithoutNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellWithoutNib.h; path = mocks/CellWithoutNib.h; sourceTree = "<group>"; };
+		950659F3174C01EF008AB32D /* CellWithoutNib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellWithoutNib.m; path = mocks/CellWithoutNib.m; sourceTree = "<group>"; };
+		950659F5174C0201008AB32D /* CellWithNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellWithNib.h; path = mocks/CellWithNib.h; sourceTree = "<group>"; };
+		950659F6174C0201008AB32D /* CellWithNib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellWithNib.m; path = mocks/CellWithNib.m; sourceTree = "<group>"; };
+		950659F8174C0219008AB32D /* CellWithNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellWithNib.xib; path = mocks/CellWithNib.xib; sourceTree = "<group>"; };
+		950659FA174C027F008AB32D /* BaseMockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMockCell.h; path = mocks/BaseMockCell.h; sourceTree = "<group>"; };
+		950659FB174C027F008AB32D /* BaseMockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseMockCell.m; path = mocks/BaseMockCell.m; sourceTree = "<group>"; };
+		95065A00174C03DF008AB32D /* DTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCell.h; path = ../../DTTableViewManager/DTTableViewCell.h; sourceTree = "<group>"; };
+		95065A01174C03DF008AB32D /* DTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCell.m; path = ../../DTTableViewManager/DTTableViewCell.m; sourceTree = "<group>"; };
 		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
 		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
 		95834EE316FF820000409396 /* CustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderView.h; path = TableViewFactory/Cells/CustomHeaderView.h; sourceTree = "<group>"; };
@@ -147,7 +162,7 @@
 		E6CB97B6161B26C900A7E936 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CedarUnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTTableViewManagerSpec.mm; sourceTree = "<group>"; };
-		E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6EA83621615EE6000F8B8C3 /* DTTableViewManagerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTTableViewManagerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EA83661615EE6000F8B8C3 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E6EA83681615EE6000F8B8C3 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -187,6 +202,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		950659F1174C01CD008AB32D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				950659F2174C01EF008AB32D /* CellWithoutNib.h */,
+				950659F3174C01EF008AB32D /* CellWithoutNib.m */,
+				950659F5174C0201008AB32D /* CellWithNib.h */,
+				950659F6174C0201008AB32D /* CellWithNib.m */,
+				950659F8174C0219008AB32D /* CellWithNib.xib */,
+				950659FA174C027F008AB32D /* BaseMockCell.h */,
+				950659FB174C027F008AB32D /* BaseMockCell.m */,
+			);
+			name = Mocks;
+			sourceTree = "<group>";
+		};
 		9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +364,7 @@
 		E6CB97B0161B26C900A7E936 /* CedarUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				950659F1174C01CD008AB32D /* Mocks */,
 				E6915660168B382800C5F189 /* DTTableViewManager+UnitTests.h */,
 				E6915661168B382800C5F189 /* DTTableViewManager+UnitTests.m */,
 				E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */,
@@ -368,7 +398,7 @@
 		E6EA83631615EE6000F8B8C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */,
+				E6EA83621615EE6000F8B8C3 /* DTTableViewManagerExample.app */,
 				E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */,
 			);
 			name = Products;
@@ -425,6 +455,8 @@
 				E60CA0171684AFEF00F4147E /* DTTableViewManager.m */,
 				E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */,
 				E60CA0191684AFEF00F4147E /* DTGCDSingleton.h */,
+				95065A00174C03DF008AB32D /* DTTableViewCell.h */,
+				95065A01174C03DF008AB32D /* DTTableViewCell.m */,
 			);
 			name = DTTableViewManager;
 			sourceTree = "<group>";
@@ -464,7 +496,7 @@
 			);
 			name = DTTableViewManagerExample;
 			productName = TableViewFactory;
-			productReference = E6EA83621615EE6000F8B8C3 /* TableViewFactory.app */;
+			productReference = E6EA83621615EE6000F8B8C3 /* DTTableViewManagerExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -512,6 +544,7 @@
 				95BF2BA216FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
 				95834EE916FF821900409396 /* CustomHeaderView.xib in Resources */,
 				95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */,
+				950659F9174C0219008AB32D /* CellWithNib.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,6 +614,10 @@
 				95834EE616FF820000409396 /* CustomHeaderView.m in Sources */,
 				95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */,
 				950659EF1749030D008AB32D /* BaseExampleController.m in Sources */,
+				950659F4174C01EF008AB32D /* CellWithoutNib.m in Sources */,
+				950659F7174C0202008AB32D /* CellWithNib.m in Sources */,
+				950659FC174C0280008AB32D /* BaseMockCell.m in Sources */,
+				95065A03174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +646,7 @@
 				95834EE516FF820000409396 /* CustomHeaderView.m in Sources */,
 				95834EED16FF830A00409396 /* CustomHeaderController.m in Sources */,
 				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,
+				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +691,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CedarUnitTests/CedarUnitTests-Prefix.pch";
 				INFOPLIST_FILE = "CedarUnitTests/CedarUnitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lstdc++",
@@ -674,6 +713,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CedarUnitTests/CedarUnitTests-Prefix.pch";
 				INFOPLIST_FILE = "CedarUnitTests/CedarUnitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lstdc++",

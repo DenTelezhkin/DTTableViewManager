@@ -77,6 +77,7 @@
  Table view that will present your data models.
  */
 
+
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 
 
@@ -142,9 +143,9 @@
  
  @param tableItems Array of tableItems, that need to be found.
  
- @discussion If tableItem not found, `NSNull` object is added to indexPaths array. That means you shouldn't call this method if you are not sure, that all tableItems exist. This method uses `indexPathOfTableItem:` internally.
+ @discussion This method uses `indexPathOfTableItem:` internally. If table item is not found, it's skipped.
  
- @return Array of tableItem's indexes. If at least one tableItem was not found - `nil`.
+ @return Array of tableItem's indexes, that were found.
  */
 - (NSArray *)indexPathArrayForTableItems:(NSArray *)tableItems;
 
@@ -153,7 +154,7 @@
  
  @param indexPaths indexPaths of array you want to find.
  
- @discussion if `indexPath` is not found, `NSNull` object is added instead of the table item. This method uses `tableItemAtIndexPath:` internally.
+ @discussion if `indexPath` is not found, it is skipped. This method uses `tableItemAtIndexPath:` internally.
  
  @return array of table items at indexPaths
  */
@@ -467,9 +468,7 @@
  @discussion This is the designated mapping method. It can be called anywhere, but probably the best place to call - is in your controller -init method. Inner implementation of this method trampolines mapping to DTCellFactory. You can also call this method of DTCellFactory as well.
  
  */
--(void)setClassMappingforCellClass:(Class)cellClass modelClass:(Class)modelClass;
-
--(void)setNibMappingForCellClass:(Class)cellClass modelClass:(Class)modelClass;
+-(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass;
 
 /**
  This method is used to set mapping from model to custom cell created from XIB with `nibName` name. Cell data is then populated by `cellClass` class.
@@ -483,9 +482,9 @@
  @warning This method needs to be called after tableView has been created, in `viewDidLoad`, for example. This method uses UITableView `registerNib:forCellReuseIdentifier:` underneath.
  
  */
--(void)setNibMappingForCellNibName:(NSString *)nibName
-                         cellClass:(Class)cellClass
-                        modelClass:(Class)modelClass;
+-(void)registerNibNamed:(NSString *)nibName
+           forCellClass:(Class)cellClass
+             modelClass:(Class)modelClass;
 
 -(void)setNibMappingForHeaderClass:(Class)headerClass modelClass:(Class)modelClass;
 

@@ -18,8 +18,8 @@
 {
     if (self = [super init])
     {
-        [self setClassMappingforCellClass:[ExampleCell class]
-                               modelClass:[Example class]];
+        [self registerCellClass:[ExampleCell class]
+                  forModelClass:[Example class]];
     }
     return self;
 }

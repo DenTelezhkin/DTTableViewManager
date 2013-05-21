@@ -33,8 +33,8 @@
                                                            andTableView:self.tableView];
         
         // Recommended to add mappings right here, in tableManager getter
-        [self.tableManager setClassMappingforCellClass:[ExampleCell class]
-                                            modelClass:[Example class]];
+        [self.tableManager registerCellClass:[ExampleCell class]
+                               forModelClass:[Example class]];
         
         // Uncomment this line if you want to NOT reuse cells.
         // self.doNotReuseCells = YES;

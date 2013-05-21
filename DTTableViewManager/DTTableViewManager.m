@@ -26,7 +26,9 @@
 #import "DTCellFactory.h"
 
 @interface DTTableViewManager ()
+
 - (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
+
 @property (nonatomic,strong) NSMutableArray * sections;
 
 @property (nonatomic,strong) NSArray * sectionHeaderTitles;
@@ -158,7 +160,7 @@
 
 #pragma mark - mapping
 
--(void)setClassMappingforCellClass:(Class)cellClass modelClass:(Class)modelClass
+-(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
     [self checkClassForModelTransferProtocolSupport:cellClass];
     
@@ -168,27 +170,29 @@
                forCellReuseIdentifier:NSStringFromClass([modelClass class])];
     }
     
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:NSStringFromClass(cellClass) ofType:@"nib"];
+    
+    if (path)
+    {
+        UINib * nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:nil];
+        [self.tableView registerNib:nib
+             forCellReuseIdentifier:NSStringFromClass([modelClass class])];
+    }
+    
     [[DTCellFactory sharedInstance] setCellClassMapping:cellClass
                                           forModelClass:modelClass];
 }
 
--(void)setNibMappingForCellClass:(Class)cellClass modelClass:(Class)modelClass
-{
-    [self setNibMappingForCellNibName:NSStringFromClass(cellClass)
-                     cellClass:cellClass
-                    modelClass:modelClass];
-}
-
--(void)setNibMappingForCellNibName:(NSString *)nibName
-                  cellClass:(Class)cellClass
-                 modelClass:(Class)modelClass
+-(void)registerNibNamed:(NSString *)nibName
+           forCellClass:(Class)cellClass
+             modelClass:(Class)modelClass
 {
     [self checkClassForModelTransferProtocolSupport:cellClass];
     
+    NSString *path = [[NSBundle mainBundle] pathForResource:nibName ofType:@"nib"];
     
-    UINib * nib = [UINib nibWithNibName:nibName bundle:nil];
-    
-    if (!nib)
+    if (!path)
     {
         NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
                              NSStringFromClass(cellClass)];
@@ -199,7 +203,7 @@
         [exc raise];
     }
     
-    [self.tableView registerNib:nib
+    [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
          forCellReuseIdentifier:NSStringFromClass([modelClass class])];
     
     [[DTCellFactory sharedInstance] setCellClassMapping:cellClass
@@ -348,6 +352,7 @@
             return [NSIndexPath indexPathForRow:index inSection:i];
         }
     }
+    
     NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
     return nil;
 }
@@ -384,8 +389,7 @@
             [items addObject:foundIndexPath];
         }
         else {
-            NSLog(@"DTTableViewManager: item not found. Adding NSNull object");
-            [items addObject:[NSNull null]];
+            NSLog(@"DTTableViewManager: item not found at indexPath: %@",path);
         }
     }
     return items;
@@ -619,23 +623,26 @@
 
 -(void)removeTableItems:(NSArray *)tableItems
 {
-    [self.tableView beginUpdates];
-    for (NSObject * item in tableItems)
-    {
-        [self removeTableItem:item];
-    }
-    [self.tableView endUpdates];
+    [self removeTableItems:tableItems withRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(void)removeTableItems:(NSArray *)tableItems
        withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self.tableView beginUpdates];
+    NSArray * indexPaths = [self indexPathArrayForTableItems:tableItems];
+    
     for (NSObject * item in tableItems)
     {
-        [self removeTableItem:item withRowAnimation:animation];
+        NSIndexPath *indexPath = [self indexPathOfTableItem:item];
+        
+        if (indexPath)
+        {
+            //update datasource
+            [self removeTableItemAtIndexPath:indexPath];
+        }
     }
-    [self.tableView endUpdates];
+    
+    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:animation];
 }
 
 - (void)removeAllTableItems
