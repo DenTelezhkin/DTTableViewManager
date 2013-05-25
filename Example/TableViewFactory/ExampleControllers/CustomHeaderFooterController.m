@@ -18,19 +18,27 @@
     
     self.title = @"Custom header/footer";
     
-    [self setNibMappingForHeaderClass:[CustomHeaderFooterView class]
-                           modelClass:[CustomHeaderFooterModel class]];
+    [self registerHeaderClass:[CustomHeaderFooterView class]
+                forModelClass:[CustomHeaderFooterModel class]];
     
-    [self setNibMappingForFooterClass:[CustomHeaderFooterView class]
-                           modelClass:[CustomHeaderFooterModel class]];
+    [self registerFooterClass:[CustomHeaderFooterView class]
+                           forModelClass:[CustomHeaderFooterModel class]];
     
     [self addTableItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
     [self addTableItem:[Example exampleWithText:@"Section 2" andDetails:nil]
              toSection:1];
-    [self setSectionHeaderModels:@[[CustomHeaderFooterModel headerModel],
-                                   [CustomHeaderFooterModel headerModel]]];
-    [self setSectionFooterModels:@[[CustomHeaderFooterModel footerModel],
-                                   [CustomHeaderFooterModel footerModel]]];
+    [self.sectionHeaderModels addObjectsFromArray:
+        @[
+            [CustomHeaderFooterModel headerModel],
+            [CustomHeaderFooterModel headerModel]
+        ]
+     ];
+    [self.sectionFooterModels addObjectsFromArray:
+        @[
+            [CustomHeaderFooterModel footerModel],
+            [CustomHeaderFooterModel footerModel]
+        ]
+     ];
     
     [self.tableView reloadData];
     

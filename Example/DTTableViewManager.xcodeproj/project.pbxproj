@@ -25,6 +25,15 @@
 		95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EEB16FF830A00409396 /* CustomHeaderController.m */; };
 		95834EEF16FF830A00409396 /* CustomHeaderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EEC16FF830A00409396 /* CustomHeaderController.xib */; };
 		95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EEC16FF830A00409396 /* CustomHeaderController.xib */; };
+		958941FF1750B9C8007CEB5E /* MockTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */; };
+		958942011750B9E3007CEB5E /* MockTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942001750B9E3007CEB5E /* MockTableHeaderView.xib */; };
+		958942041750BAAA007CEB5E /* NiblessTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */; };
+		958942071750BC08007CEB5E /* MockTableHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */; };
+		958942091750BC27007CEB5E /* MockTableHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */; };
+		9589420C1750BC63007CEB5E /* NiblessTableHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */; };
+		9589420E1750C7AD007CEB5E /* MappingSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9589420D1750C7AD007CEB5E /* MappingSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		958942111750C901007CEB5E /* BaseHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942101750C901007CEB5E /* BaseHeaderFooterView.m */; };
+		958942141750C937007CEB5E /* BaseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942131750C937007CEB5E /* BaseHeaderView.m */; };
 		95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
 		95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
 		95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */; };
@@ -77,7 +86,7 @@
 		E6CB97AF161B26C900A7E936 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA836A1615EE6000F8B8C3 /* CoreGraphics.framework */; };
 		E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6CB97B3161B26C900A7E936 /* InfoPlist.strings */; };
 		E6CB97B7161B26C900A7E936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97B6161B26C900A7E936 /* main.m */; };
-		E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E6CB97D9161B27B800A7E936 /* DatasourceSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
 		E6EA83671615EE6000F8B8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EA83661615EE6000F8B8C3 /* UIKit.framework */; };
@@ -112,6 +121,21 @@
 		95834EEA16FF830A00409396 /* CustomHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderController.h; path = ExampleControllers/CustomHeaderController.h; sourceTree = "<group>"; };
 		95834EEB16FF830A00409396 /* CustomHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderController.m; path = ExampleControllers/CustomHeaderController.m; sourceTree = "<group>"; };
 		95834EEC16FF830A00409396 /* CustomHeaderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderController.xib; path = ExampleControllers/CustomHeaderController.xib; sourceTree = "<group>"; };
+		958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockTableHeaderView.h; path = "mocks/Header:footer mocks/MockTableHeaderView.h"; sourceTree = "<group>"; };
+		958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockTableHeaderView.m; path = "mocks/Header:footer mocks/MockTableHeaderView.m"; sourceTree = "<group>"; };
+		958942001750B9E3007CEB5E /* MockTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MockTableHeaderView.xib; path = "mocks/Header:footer mocks/MockTableHeaderView.xib"; sourceTree = "<group>"; };
+		958942021750BAAA007CEB5E /* NiblessTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NiblessTableHeaderView.h; path = "mocks/Header:footer mocks/NiblessTableHeaderView.h"; sourceTree = "<group>"; };
+		958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NiblessTableHeaderView.m; path = "mocks/Header:footer mocks/NiblessTableHeaderView.m"; sourceTree = "<group>"; };
+		958942051750BC08007CEB5E /* MockTableHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockTableHeaderFooterView.h; path = "mocks/Header:footer mocks/MockTableHeaderFooterView.h"; sourceTree = "<group>"; };
+		958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockTableHeaderFooterView.m; path = "mocks/Header:footer mocks/MockTableHeaderFooterView.m"; sourceTree = "<group>"; };
+		958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MockTableHeaderFooterView.xib; path = "mocks/Header:footer mocks/MockTableHeaderFooterView.xib"; sourceTree = "<group>"; };
+		9589420A1750BC63007CEB5E /* NiblessTableHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NiblessTableHeaderFooterView.h; path = "mocks/Header:footer mocks/NiblessTableHeaderFooterView.h"; sourceTree = "<group>"; };
+		9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NiblessTableHeaderFooterView.m; path = "mocks/Header:footer mocks/NiblessTableHeaderFooterView.m"; sourceTree = "<group>"; };
+		9589420D1750C7AD007CEB5E /* MappingSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MappingSpec.mm; sourceTree = "<group>"; };
+		9589420F1750C900007CEB5E /* BaseHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseHeaderFooterView.h; path = "mocks/Header:footer mocks/BaseHeaderFooterView.h"; sourceTree = "<group>"; };
+		958942101750C901007CEB5E /* BaseHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderFooterView.m; path = "mocks/Header:footer mocks/BaseHeaderFooterView.m"; sourceTree = "<group>"; };
+		958942121750C937007CEB5E /* BaseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseHeaderView.h; path = "mocks/Header:footer mocks/BaseHeaderView.h"; sourceTree = "<group>"; };
+		958942131750C937007CEB5E /* BaseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderView.m; path = "mocks/Header:footer mocks/BaseHeaderView.m"; sourceTree = "<group>"; };
 		95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterView.h; path = TableViewFactory/Cells/CustomHeaderFooterView.h; sourceTree = "<group>"; };
 		95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterView.m; path = TableViewFactory/Cells/CustomHeaderFooterView.m; sourceTree = "<group>"; };
 		95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = TableViewFactory/Cells/CustomHeaderFooterView.xib; sourceTree = "<group>"; };
@@ -161,7 +185,7 @@
 		E6CB97B4161B26C900A7E936 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E6CB97B6161B26C900A7E936 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CedarUnitTests-Prefix.pch"; sourceTree = "<group>"; };
-		E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTTableViewManagerSpec.mm; sourceTree = "<group>"; };
+		E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DatasourceSpec.mm; sourceTree = "<group>"; };
 		E6EA83621615EE6000F8B8C3 /* DTTableViewManagerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTTableViewManagerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EA83661615EE6000F8B8C3 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E6EA83681615EE6000F8B8C3 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -205,6 +229,7 @@
 		950659F1174C01CD008AB32D /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				958941FC1750B992007CEB5E /* Header footer mocks */,
 				950659F2174C01EF008AB32D /* CellWithoutNib.h */,
 				950659F3174C01EF008AB32D /* CellWithoutNib.m */,
 				950659F5174C0201008AB32D /* CellWithNib.h */,
@@ -236,6 +261,27 @@
 				95834EEC16FF830A00409396 /* CustomHeaderController.xib */,
 			);
 			name = "Custom headers/footers";
+			sourceTree = "<group>";
+		};
+		958941FC1750B992007CEB5E /* Header footer mocks */ = {
+			isa = PBXGroup;
+			children = (
+				958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */,
+				958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */,
+				958942001750B9E3007CEB5E /* MockTableHeaderView.xib */,
+				958942021750BAAA007CEB5E /* NiblessTableHeaderView.h */,
+				958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */,
+				958942051750BC08007CEB5E /* MockTableHeaderFooterView.h */,
+				958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */,
+				958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */,
+				9589420A1750BC63007CEB5E /* NiblessTableHeaderFooterView.h */,
+				9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */,
+				9589420F1750C900007CEB5E /* BaseHeaderFooterView.h */,
+				958942101750C901007CEB5E /* BaseHeaderFooterView.m */,
+				958942121750C937007CEB5E /* BaseHeaderView.h */,
+				958942131750C937007CEB5E /* BaseHeaderView.m */,
+			);
+			name = "Header footer mocks";
 			sourceTree = "<group>";
 		};
 		95A3B4B316FF645600F5897E /* Resources */ = {
@@ -367,7 +413,8 @@
 				950659F1174C01CD008AB32D /* Mocks */,
 				E6915660168B382800C5F189 /* DTTableViewManager+UnitTests.h */,
 				E6915661168B382800C5F189 /* DTTableViewManager+UnitTests.m */,
-				E6CB97D8161B27B800A7E936 /* DTTableViewManagerSpec.mm */,
+				E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */,
+				9589420D1750C7AD007CEB5E /* MappingSpec.mm */,
 				E6CB97B1161B26C900A7E936 /* Supporting Files */,
 			);
 			path = CedarUnitTests;
@@ -545,6 +592,8 @@
 				95834EE916FF821900409396 /* CustomHeaderView.xib in Resources */,
 				95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */,
 				950659F9174C0219008AB32D /* CellWithNib.xib in Resources */,
+				958942011750B9E3007CEB5E /* MockTableHeaderView.xib in Resources */,
+				958942091750BC27007CEB5E /* MockTableHeaderFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +643,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6CB97B7161B26C900A7E936 /* main.m in Sources */,
-				E6CB97D9161B27B800A7E936 /* DTTableViewManagerSpec.mm in Sources */,
+				E6CB97D9161B27B800A7E936 /* DatasourceSpec.mm in Sources */,
 				E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */,
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
 				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
@@ -618,6 +667,13 @@
 				950659F7174C0202008AB32D /* CellWithNib.m in Sources */,
 				950659FC174C0280008AB32D /* BaseMockCell.m in Sources */,
 				95065A03174C03DF008AB32D /* DTTableViewCell.m in Sources */,
+				958941FF1750B9C8007CEB5E /* MockTableHeaderView.m in Sources */,
+				958942041750BAAA007CEB5E /* NiblessTableHeaderView.m in Sources */,
+				958942071750BC08007CEB5E /* MockTableHeaderFooterView.m in Sources */,
+				9589420C1750BC63007CEB5E /* NiblessTableHeaderFooterView.m in Sources */,
+				9589420E1750C7AD007CEB5E /* MappingSpec.mm in Sources */,
+				958942111750C901007CEB5E /* BaseHeaderFooterView.m in Sources */,
+				958942141750C937007CEB5E /* BaseHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

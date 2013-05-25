@@ -88,6 +88,12 @@
  */
 @property (nonatomic,assign) BOOL doNotReuseCells;
 
+@property (nonatomic,strong) NSMutableArray * sectionHeaderTitles;
+@property (nonatomic,strong) NSMutableArray * sectionFooterTitles;
+
+@property (nonatomic,strong) NSMutableArray * sectionHeaderModels;
+@property (nonatomic,strong) NSMutableArray * sectionFooterModels;
+
 
 ///---------------------------------------
 /// @name Initialization
@@ -184,46 +190,6 @@
  @return number of table items in a given `section`. 0, if section does not exist
  */
 - (int)numberOfTableItemsInSection:(NSInteger)section;
-
-///---------------------------------------
-/// @name Section headers/footers
-///---------------------------------------
-
-/**
- Sets sections header titles, using `headerTitles` array. Titles must be `NSString` type. 
- 
- @param headerTitles header titles for all sections of the table.
- 
- @discussion This method is identical to implementing `tableView:titleForHeaderInSection:` datasource method. If you want to have custom section header view, create model for it and use setSectionHeaderModels: method. You can also use standard UITableViewDelegate method to do this.
- */
-- (void)setSectionHeaderTitles:(NSArray *)headerTitles;
-
-/**
- Sets sections header models. Header model class should be previously registered with `setHeaderMappingForNibName:headerClass:modelClass:` method. 
- 
- @param headerModels header models for all sections of the table.
- 
- @discussion This method is used to set header models. `DTTableViewManager` will then load NIB, registered for headerClass and will call `updateWithModel:` method on each header object. On iOS 5, view will be loaded using loadFromNibName:bundle: method. On iOS 6, if registered header class subclassed from UITableViewHeaderFooterView, it'll use iOS6 `registerNib:forHeaderFooterViewReuseIdentifier:` method.
- */
-- (void)setSectionHeaderModels:(NSArray *)headerModels;
-
-/**
- Sets sections footer titles, using `footerTitles` array. Titles must be `NSString` type.
- 
- @param footerTitles footer titles for all sections of the table.
- 
- @discussion This method is identical to implementing `tableView:titleForFooterInSection:` datasource method. If you want to have custom section footer view, create model for it and use setSectionFooterModels: method. You can also use standard UITableViewDelegate method to do this.
- */
-- (void)setSectionFooterTitles:(NSArray *)footerTitles;
-
-/**
- Sets sections footer models. Footer model class should be previously registered with `setFooterMappingForNibName:headerClass:modelClass:` method.
- 
- @param footerModels footer models for all sections of the table.
- 
- @discussion This method is used to set footer models. `DTTableViewManager` will then load NIB, registered for footerClass and will call `updateWithModel:` method on each footer object. On iOS 5, view will be loaded using loadFromNibName:bundle: method. On iOS 6, if registered footer class subclassed from UITableViewHeaderFooterView, it'll use iOS6 `registerNib:forHeaderFooterViewReuseIdentifier:` method.
- */
-- (void)setSectionFooterModels:(NSArray *)footerModels;
 
 ///---------------------------------------
 /// @name Add table items
@@ -486,7 +452,7 @@
            forCellClass:(Class)cellClass
              modelClass:(Class)modelClass;
 
--(void)setNibMappingForHeaderClass:(Class)headerClass modelClass:(Class)modelClass;
+-(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass;
 
 /**
  Use this method to set mapping from model to custom header view with `nibName` name. `headerClass` object is called with `updateWithModel:` method to update presentation of header view.
@@ -500,11 +466,11 @@
  @warning If you are building for iOS 5, use UIView subclass, for iOS 6 and higher you can use UITableViewHeaderFooterView with reuse capability. `DTTableViewManager` will automatically figure out which class is used.
  
  */
--(void)setNibMappingForHeaderNibName:(NSString *)nibName
-                      headerClass:(Class)headerClass
+-(void)registerNibNamed:(NSString *)nibName
+                      forHeaderClass:(Class)headerClass
                        modelClass:(Class)modelClass;
 
--(void)setNibMappingForFooterClass:(Class)footerClass modelClass:(Class)modelClass;
+-(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass;
 
 /**
  Use this method to set mapping from model to custom footer view with `nibName` name. `footerClass` object is called with `updateWithModel:` method to update presentation of footer view.
@@ -518,8 +484,8 @@
  @warning If you are building for iOS 5, use UIView subclass, for iOS 6 and higher you can use UITableViewHeaderFooterView with reuse capability. `DTTableViewManager` will automatically figure out which class is used.
  
  */
--(void)setNibMappingForFooterNibName:(NSString *)nibName
-                      footerClass:(Class)footerClass
+-(void)registerNibNamed:(NSString *)nibName
+                      forFooterClass:(Class)footerClass
                        modelClass:(Class)modelClass;
 
 

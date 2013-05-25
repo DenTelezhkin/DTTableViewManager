@@ -1,12 +1,10 @@
 #import "DTTableViewManager.h"
 #import "DTTableViewManager+UnitTests.h"
 #import <Foundation/Foundation.h>
-#import "CellWithNib.h"
-#import "CellWithoutNib.h"
 
 using namespace Cedar::Matchers;
 
-SPEC_BEGIN(DTTableViewManagerSpec)
+SPEC_BEGIN(DatasourceSpecs)
 
 describe(@"Datasource spec", ^{
     __block DTTableViewManager *model;
@@ -147,13 +145,13 @@ describe(@"Datasource spec", ^{
     });
     
     it(@"should set section titles", ^{
-        [model setSectionHeaderTitles:@[ TEST_1, TEST_2 ]];
+        model.sectionHeaderTitles = [@[ TEST_1, TEST_2 ] mutableCopy];
         [model tableView:model.tableView titleForHeaderInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForHeaderInSection:1] should equal(TEST_2);
     });
     
     it(@"should set section footers", ^{
-        [model setSectionFooterTitles:@[ TEST_1, TEST_2 ]];
+        model.sectionFooterTitles = [@[ TEST_1, TEST_2 ] mutableCopy];
         
         [model tableView:model.tableView titleForFooterInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForFooterInSection:1] should equal(TEST_2);
@@ -478,127 +476,6 @@ describe(@"Datasource spec", ^{
         } should_not raise_exception;
     });
 
-});
-
-describe(@"mapping tests", ^{
-   
-    describe(@"mapping from code", ^{
-        
-        __block DTTableViewManager *model;
-        __block Example * testModel;
-        __block Example * acc1;
-        
-        beforeEach(^{
-            model = [DTTableViewManager new];
-            model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
-            model.tableView.dataSource = model;
-            model.tableView.delegate = model;
-            testModel = [Example new];
-            acc1 = [Example new];
-        });
-        
-        afterEach(^{
-            [model release];
-            [testModel release];
-        });
-        
-        beforeEach(^{
-            
-            [model.tableView reloadData];
-            
-            [model registerCellClass:[CellWithoutNib class]
-                       forModelClass:[Example class]];
-        });
-        
-        it(@"should create cell from code", ^{
-
-            [model addTableItem:acc1];
-            
-            [model verifyTableItem:acc1 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            
-            CellWithoutNib * cell = (CellWithoutNib *)[model.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            
-            cell.awakedFromNib should_not be_truthy;
-            cell.inittedWithStyle should be_truthy;
-        });
-        
-    
-    });
-    
-    describe(@"mapping from nib", ^{
-        
-        __block DTTableViewManager *model;
-        __block Example * testModel;
-        __block Example * acc1;
-        
-        
-        beforeEach(^{
-            model = [DTTableViewManager new];
-            model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
-            model.tableView.delegate = model;
-            model.tableView.dataSource = model;
-            testModel = [Example new];
-            acc1 = [Example new];
-        });
-        
-        afterEach(^{
-            [model release];
-            [testModel release];
-        });
-        
-        beforeEach(^{
-            
-            [model.tableView reloadData];
-            
-            [model registerCellClass:[CellWithNib class]
-                       forModelClass:[Example class]];
-        });
-        
-        it(@"should create cell from nib", ^{
-            
-            [model addTableItem:acc1];
-            
-            [model verifyTableItem:acc1 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            
-            CellWithNib * cell = (CellWithNib *)[model.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            
-            cell.awakedFromNib should be_truthy;
-            cell.inittedWithStyle should_not be_truthy;
-        });
-
-        
-    });
-    
-    describe(@"should throw an exception, if no nib found", ^{
-        __block DTTableViewManager *model;
-        __block Example * testModel;
-        
-        beforeEach(^{
-            model = [DTTableViewManager new];
-            model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
-            model.tableView.delegate = model;
-            model.tableView.dataSource = model;
-            testModel = [Example new];
-        });
-        
-        afterEach(^{
-            [model release];
-            [testModel release];
-        });
-        
-        beforeEach(^{
-            [model.tableView reloadData];
-        });
-        
-        it(@"should create cell from nib", ^{
-            ^{
-                [model registerNibNamed:@"NO-SUCH-NIB"
-                           forCellClass:[ExampleCell class]
-                             modelClass:[Example class]];
-            } should raise_exception;
-        });
-    });
-    
 });
 
 SPEC_END

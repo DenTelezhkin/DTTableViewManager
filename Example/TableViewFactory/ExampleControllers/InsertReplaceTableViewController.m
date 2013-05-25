@@ -40,7 +40,7 @@
     [super viewDidLoad];
     [self addInsertSection];
     [self addReplaceSection];
-    [self setSectionHeaderTitles:@[@"Insert rows", @"Replace rows"]];
+    [self.sectionHeaderTitles addObjectsFromArray:@[@"Insert rows", @"Replace rows"]];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

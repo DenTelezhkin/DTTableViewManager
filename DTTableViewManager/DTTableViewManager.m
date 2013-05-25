@@ -31,12 +31,6 @@
 
 @property (nonatomic,strong) NSMutableArray * sections;
 
-@property (nonatomic,strong) NSArray * sectionHeaderTitles;
-@property (nonatomic,strong) NSArray * sectionFooterTitles;
-
-@property (nonatomic,strong) NSArray * sectionHeaderModels;
-@property (nonatomic,strong) NSArray * sectionFooterModels;
-
 @property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewCellCreation> delegate;
 @end
 
@@ -94,7 +88,7 @@
 -(NSArray *)sectionHeaderTitles {
     if (!_sectionHeaderTitles)
     {
-        _sectionHeaderTitles = [NSArray new];
+        _sectionHeaderTitles = [NSMutableArray new];
     }
     return _sectionHeaderTitles;
 }
@@ -102,7 +96,7 @@
 -(NSArray *)sectionFooterTitles {
     if (!_sectionFooterTitles)
     {
-        _sectionFooterTitles = [NSArray new];
+        _sectionFooterTitles = [NSMutableArray new];
     }
     return _sectionFooterTitles;
 }
@@ -110,14 +104,14 @@
 -(NSArray *)sectionHeaderModels
 {
     if (!_sectionHeaderModels)
-        _sectionHeaderModels = [NSArray new];
+        _sectionHeaderModels = [NSMutableArray new];
     return _sectionHeaderModels;
 }
 
 -(NSArray *)sectionFooterModels
 {
     if (!_sectionFooterModels)
-        _sectionFooterModels = [NSArray new];
+        _sectionFooterModels = [NSMutableArray new];
     return _sectionFooterModels;
 }
 
@@ -160,6 +154,18 @@
 
 #pragma mark - mapping
 
+-(BOOL)nibExistsWIthNibName:(NSString *)nibName
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:nibName
+                                                     ofType:@"nib"];
+    
+    if (path)
+    {
+        return YES;
+    }
+    return NO;
+}
+
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
     [self checkClassForModelTransferProtocolSupport:cellClass];
@@ -170,14 +176,11 @@
                forCellReuseIdentifier:NSStringFromClass([modelClass class])];
     }
     
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:NSStringFromClass(cellClass) ofType:@"nib"];
-    
-    if (path)
+    if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
     {
-        UINib * nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:nil];
-        [self.tableView registerNib:nib
-             forCellReuseIdentifier:NSStringFromClass([modelClass class])];
+       [self registerNibNamed:NSStringFromClass(cellClass)
+                 forCellClass:cellClass
+                   modelClass:modelClass];
     }
     
     [[DTCellFactory sharedInstance] setCellClassMapping:cellClass
@@ -189,10 +192,8 @@
              modelClass:(Class)modelClass
 {
     [self checkClassForModelTransferProtocolSupport:cellClass];
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:nibName ofType:@"nib"];
-    
-    if (!path)
+
+    if (![self nibExistsWIthNibName:nibName])
     {
         NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
                              NSStringFromClass(cellClass)];
@@ -210,35 +211,33 @@
                                           forModelClass:modelClass];
 }
 
--(void)setNibMappingForHeaderClass:(Class)headerClass modelClass:(Class)modelClass
+-(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
 {
-    [self setNibMappingForHeaderNibName:NSStringFromClass(headerClass)
-                            headerClass:headerClass
-                             modelClass:modelClass];
+    [self registerNibNamed:NSStringFromClass(headerClass)
+            forHeaderClass:headerClass
+                modelClass:modelClass];
 }
 
--(void)setNibMappingForHeaderNibName:(NSString *)nibName headerClass:(Class)headerClass
+-(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass
                        modelClass:(Class)modelClass
 {
     [self checkClassForModelTransferProtocolSupport:headerClass];
+
+    if (![self nibExistsWIthNibName:nibName])
+    {
+        NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
+                             nibName];
+        NSException * exc =
+        [NSException exceptionWithName:@"DTTableViewManager API exception"
+                                reason:reason
+                              userInfo:nil];
+        [exc raise];
+    }
     
     if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
         [headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
-        UINib * nib = [UINib nibWithNibName:nibName bundle:nil];
-        
-        if (!nib)
-        {
-            NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
-                                 nibName];
-            NSException * exc =
-            [NSException exceptionWithName:@"DTTableViewManager API exception"
-                                    reason:reason
-                                  userInfo:nil];
-            [exc raise];
-        }
-        
-        [self.tableView registerNib:nib
+        [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
  forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
     }
     
@@ -246,36 +245,33 @@
                                             forModelClass:modelClass];
 }
 
--(void)setNibMappingForFooterClass:(Class)footerClass modelClass:(Class)modelClass
-
+-(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
 {
-    [self setNibMappingForFooterNibName:NSStringFromClass(footerClass)
-                            footerClass:footerClass
-                             modelClass:modelClass];
+    [self registerNibNamed:NSStringFromClass(footerClass)
+            forFooterClass:footerClass
+                modelClass:modelClass];
 }
 
--(void)setNibMappingForFooterNibName:(NSString *)nibName footerClass:(Class)footerClass
+-(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass
                        modelClass:(Class)modelClass
 {
     [self checkClassForModelTransferProtocolSupport:footerClass];
     
+    if (![self nibExistsWIthNibName:nibName])
+    {
+        NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
+                             nibName];
+        NSException * exc =
+        [NSException exceptionWithName:@"DTTableViewManager API exception"
+                                reason:reason
+                              userInfo:nil];
+        [exc raise];
+    }
+    
     if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
         [footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
-        UINib * nib = [UINib nibWithNibName:nibName bundle:nil];
-        
-        if (!nib)
-        {
-            NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
-                                 nibName];
-            NSException * exc =
-            [NSException exceptionWithName:@"DTTableViewManager API exception"
-                                    reason:reason
-                                  userInfo:nil];
-            [exc raise];
-        }
-        
-        [self.tableView registerNib:nib
+        [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
  forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
     }
     
@@ -495,6 +491,26 @@
         }
     }
     [self.tableView endUpdates];
+}
+
+-(void)setHeaderModels:(NSArray *)headerModels
+{
+    self.sectionHeaderModels = [headerModels mutableCopy];
+}
+
+-(void)setFooterModels:(NSArray *)footerModels
+{
+    self.sectionFooterModels = [footerModels mutableCopy];
+}
+
+-(void)addHeaderModel:(NSObject *)headerModel
+{
+    [self.sectionHeaderModels addObject:headerModel];
+}
+
+-(void)addFooterModel:(NSObject *)footerModel
+{
+    [self.sectionFooterModels addObject:footerModel];
 }
 
 #pragma mark - insert items
