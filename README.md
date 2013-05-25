@@ -1,7 +1,7 @@
 DTTableViewManager
 ================
 
-Powerful architecture for UITableView. The idea is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
+Powerful architecture for UITableView controllers. The idea is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
 
 
 ## Why?
@@ -24,7 +24,7 @@ Solution for this - separate datasource from view controller. DTTableViewManager
 
 In the end, view controller is left with following stuff:
 
-* Set mapping between data model class and cell class.
+* Register mapping between data model class and cell class.
 * Populate table view with data models
 
 When view controller manages insertion, deletion, or moves items, it always struggles to keep datasource and table view in sync. DTTableViewManager does this automatically. View controller handles data models - table view is automatically updated.
@@ -33,7 +33,15 @@ Okay, enough talking, let's dive into code!
 
 ## How?
 
-Simplest way for view controller is to subclass DTTableViewManager (it's not required, you can make it a separate object).
+Simplest way for view controller is to subclass DTTableViewManager, set it's tableView property, delegate, datasource and off you go!
+
+#### Mapping data models to cells
+	
+Registering cell mapping:
+
+	[self registerCellClass:[Cell class] forModelClass:[Model class]];
+	
+This will also register nib with "Cell" name, if it exists. 
 
 #### Adding data models to the table view
 
@@ -58,16 +66,6 @@ All methods above are just shortcuts to method:
 These methods are shortcuts to method:
 	
 	[self addTableItems:@[model1,model2] toSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
-	
-#### Mapping data models to cells
-	
-Creating cell in code:
-
-	[self setCellMapping:[Cell class] modelClass:[Model class]];
-	
-Custom XIB for cell:	
-	
-	[self setCellMappingForNib:@"nib" cellClass:[Cell class] modelCLass:[Model class]];
 	
 #### Removing data models
 
@@ -100,9 +98,9 @@ head on to documentation.
 ## Notes on implementation
 
 * This approach requires every table view cell to have it's data model object. 
-* Every cell after creation gets called with method updateWithModel: and receives data model to represent. Every cell needs to conform to DTTableViewModelTransfer protocol.
+* Every cell after creation gets called with method updateWithModel: and receives data model to represent. 
 * You can make your controller a subclass of DTTableViewManager, or you can make it a property on your controller and subclass from whatever you need. 
-* Any datasource/delegate method can be overridden in your controller. In case you are making DTTableViewManager a property on your UIViewController, datasource methods will be trampolined to your controller. 
+* Any datasource/delegate method can be overridden in your controller.  
 
 ## Requirements
 
@@ -121,10 +119,10 @@ Example project is available in Example folder.
 
 ## Documentation
 
-You can view documentation [online](http://denheadless.github.com/DTTableViewManager/) or you can install it locally using following atom link: [http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom](http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom).
+You can view documentation [online](http://denheadless.github.com/DTTableViewManager/) or you can install it locally using following atom link: [http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom](http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom). And, of course, [cocoadocs](http://www.cocoadocs.org) is also a great option!
 
 [Changelog](https://github.com/DenHeadless/DTTableViewManager/wiki/Changelog)
 		
 ## Thanks
 
-Special thanks to Alexey Belkevich (https://github.com/belkevich) for providing initial implementation of CellFactory.
+Special thanks to [Alexey Belkevich](https://github.com/belkevich) for providing initial implementation of CellFactory.
