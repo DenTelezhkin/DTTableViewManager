@@ -52,9 +52,9 @@
  
  ## Mapping cells
  
-    Use `registerCellClass:forModelClass` for mapping cell class to model. 'DTTableViewManager' will automatically check, if there's a nib with the same name as cellClass. If it is - this nib is registered for modelClass. If there's no nib - then cell will be created using initWithStyle: method on cellClass. If you need to have nib name for the cell have the different name, use `registerNibName:forCellClass:modelClass:`.
+ Use `registerCellClass:forModelClass` for mapping cell class to model. 'DTTableViewManager' will automatically check, if there's a nib with the same name as cellClass. If it is - this nib is registered for modelClass. If there's no nib - then cell will be created using initWithStyle: method on cellClass. If you need nib name for the cell to differ from cellClass name, use `registerNibName:forCellClass:modelClass:`.
  
- Discussion. Before executing setCellMappingForNib:cellClass:modelClass:, make sure that tableView property is set and tableView is created. Good spot to call `registerCellClass:forModelClass` is in viewDidLoad method.
+ Before executing setCellMappingForNib:cellClass:modelClass:, make sure that tableView property is set and tableView is created. Good spot to call `registerCellClass:forModelClass` is in viewDidLoad method.
  
  ## Loading headers/footers from NIB
  
@@ -137,6 +137,83 @@
  @return autoreleased DTTableViewManager object
  */
 +(id)managerWithDelegate:(id <UITableViewDelegate>)delegate andTableView:(UITableView *)tableView;
+
+
+///---------------------------------------
+/// @name Mapping
+///---------------------------------------
+
+/**
+ This method is used to register mapping from model class to custom cell class. It will automatically check for nib with the same name as `cellClass`. If it exists - nib will be registered instead of class.
+ 
+ @param cellClass Class of the cell you want to be created for model with modelClass.
+ 
+ @param modelClass Class of the model you want to be mapped to cellClass.
+ 
+ @discussion This is the designated mapping method. Best place to call it - in viewDidLoad method.
+ 
+ */
+-(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass;
+
+/**
+ This method is used, when your NIB for cell has a different name than `cellClass`. Otherwise you should use `registerCellClass:forModelClass:` method.
+ 
+ @param nibName Name of XIB that is used to create a cell.
+ 
+ @param cellClass Class of the cell you want to be created for model with modelClass.
+ 
+ @param modelClass Class of the model you want to be mapped to `cellClass`.
+ */
+-(void)registerNibNamed:(NSString *)nibName
+           forCellClass:(Class)cellClass
+             modelClass:(Class)modelClass;
+
+/**
+ This method registers nib with `headerClass` name. `headerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ 
+ @param headerClass headerClass to be mapped for `modelClass`
+ 
+ @param modelClass modelClass to be mapped to `headerClass`
+ */
+
+-(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass;
+
+/**
+ This method registers nib with `nibName` name. `headerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ 
+ @param nibName Name of custom XIB that is used to create a header.
+ 
+ @param headerClass headerClass to be mapped for `modelClass`
+ 
+ @param modelClass modelClass to be mapped to `headerClass`
+ */
+-(void)registerNibNamed:(NSString *)nibName
+         forHeaderClass:(Class)headerClass
+             modelClass:(Class)modelClass;
+
+/**
+ This method registers nib with `footerClass` name. `footerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ 
+ @param footerClass footerClass to be mapped for `modelClass`
+ 
+ @param modelClass modelClass to be mapped to `footerClass`
+ */
+
+-(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass;
+
+/**
+ This method registers nib with `nibName` name. `footerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ 
+ @param nibName Name of custom XIB that is used to create a header.
+ 
+ @param footerClass footerClass to be mapped for `modelClass`
+ 
+ @param modelClass modelClass to be mapped to `footerClass`
+ */
+-(void)registerNibNamed:(NSString *)nibName
+         forFooterClass:(Class)footerClass
+             modelClass:(Class)modelClass;
+
 
 ///---------------------------------------
 /// @name Search
@@ -451,83 +528,6 @@
  @param animation Row animation style to be used while deleting sections.
  */
 - (void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
-
-
-///---------------------------------------
-/// @name Mapping
-///---------------------------------------
-
-/**
- This method is used to register mapping from model class to custom cell class. It will automatically check for nib with the same name as `cellClass`. If it exists - nib will be registered instead of class.
- 
- @param cellClass Class of the cell you want to be created for model with modelClass.
- 
- @param modelClass Class of the model you want to be mapped to cellClass.
- 
- @discussion This is the designated mapping method. Best place to call it - in viewDidLoad method.
- 
- */
--(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass;
-
-/**
- This method is used, when your NIB for cell has a different name than `cellClass`. Otherwise you should use `registerCellClass:forModelClass:` method.
- 
- @param nibName Name of XIB that is used to create a cell.
- 
- @param cellClass Class of the cell you want to be created for model with modelClass.
- 
- @param modelClass Class of the model you want to be mapped to `cellClass`.
- */
--(void)registerNibNamed:(NSString *)nibName
-           forCellClass:(Class)cellClass
-             modelClass:(Class)modelClass;
-
-/**
- This method registers nib with `headerClass` name. `headerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
- 
- @param headerClass headerClass to be mapped for `modelClass`
- 
- @param modelClass modelClass to be mapped to `headerClass`
- */
-
--(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass;
-
-/**
- This method registers nib with `nibName` name. `headerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
- 
- @param nibName Name of custom XIB that is used to create a header.
- 
- @param headerClass headerClass to be mapped for `modelClass`
- 
- @param modelClass modelClass to be mapped to `headerClass`
- */
--(void)registerNibNamed:(NSString *)nibName
-         forHeaderClass:(Class)headerClass
-             modelClass:(Class)modelClass;
-
-/**
- This method registers nib with `footerClass` name. `footerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
- 
- @param footerClass footerClass to be mapped for `modelClass`
- 
- @param modelClass modelClass to be mapped to `footerClass`
- */
-
--(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass;
-
-/**
- This method registers nib with `nibName` name. `footerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
- 
- @param nibName Name of custom XIB that is used to create a header.
- 
- @param footerClass footerClass to be mapped for `modelClass`
- 
- @param modelClass modelClass to be mapped to `footerClass`
- */
--(void)registerNibNamed:(NSString *)nibName
-         forFooterClass:(Class)footerClass
-             modelClass:(Class)modelClass;
-
 
 
 @end

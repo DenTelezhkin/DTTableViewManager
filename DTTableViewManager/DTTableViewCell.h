@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "DTTableViewModelTransfer.h"
 
+/**
+ `DTTableViewCell` is a convinience UITableViewCell subclass, conforming to `DTTableViewModelTransfer` protocol.
+ */
+
+
 @interface DTTableViewCell : UITableViewCell <DTTableViewModelTransfer>
 
 @end

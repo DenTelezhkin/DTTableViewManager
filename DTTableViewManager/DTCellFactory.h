@@ -26,7 +26,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- `DTCellFactory` is a singleton object that is used to create cells for your tableView. 
+ `DTCellFactory` is a singleton object that is used to create cells for your tableView.
 
  You shouldn't call any of it's methods. Use `DTTableViewManager` API's.
  */
