@@ -27,46 +27,19 @@
 
 /**
  `DTCellFactory` is a singleton object that is used to create cells for your tableView. 
- 
- ## Mapping
- You should add mapping from model class to cell class, so that `DTCellFactory` could correctly create custom cells of the correct type, and pass them to `DTTableViewManager`. Use `setCellClassMapping:forModelClass:` for setting that connection.
+
+ You shouldn't call any of it's methods. Use `DTTableViewManager` API's.
  */
 
 @interface DTCellFactory : NSObject
 
-
-///---------------------------------------
-/// @name Accessing factory
-///---------------------------------------
-
-/**
- Singleton object of `DTCellFactory`
- */
 + (DTCellFactory *)sharedInstance;
-
-///---------------------------------------
-/// @name Mapping
-///---------------------------------------
-
-/**
- Designated mapping method.
- 
- @param cellClass Class of the cell you want to be created for model with `modelClass`.
- 
- @param modelClass Class of the model you want to be mapped to `cellClass`.
- 
- @warning If you want to use custom XIB for creating cells, use `[DTTableViewManager setCellMappingForNib:cellClass:modelClass:]` instead.
- */
 
 -(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
 
 -(void)setHeaderClassMapping:(Class)headerClass forModelClass:(Class)modelClass;
 
 -(void)setFooterClassMapping:(Class)footerClass forModelClass:(Class)modelClass;
-
-/**
- @name Internal use
- */
 
 - (UITableViewCell *)cellForModel:(NSObject *)model
                           inTable:(UITableView *)table

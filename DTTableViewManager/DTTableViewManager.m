@@ -219,7 +219,7 @@
 }
 
 -(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass
-                       modelClass:(Class)modelClass
+             modelClass:(Class)modelClass
 {
     [self checkClassForModelTransferProtocolSupport:headerClass];
 
@@ -253,7 +253,7 @@
 }
 
 -(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass
-                       modelClass:(Class)modelClass
+             modelClass:(Class)modelClass
 {
     [self checkClassForModelTransferProtocolSupport:footerClass];
     

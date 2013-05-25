@@ -30,13 +30,6 @@
 
 @interface DTCellFactory ()
 
-- (UITableViewCell *)reuseCellFromTable:(UITableView *)table
-                               forModel:(id)model
-                        reuseIdentifier:(NSString *)reuseIdentifier;
-
-- (UITableViewCell *)cellWithModel:(id)model
-                   reuseIdentifier:(NSString *)reuseIdentifier;
-
 @property (nonatomic,strong) NSMutableDictionary * cellMappingsDictionary;
 @property (nonatomic,strong) NSMutableDictionary * headerMappingsDictionary;
 @property (nonatomic,strong) NSMutableDictionary * footerMappingsDictionary;
