@@ -122,6 +122,12 @@ Example project is available in Example folder.
 You can view documentation [online](http://denheadless.github.com/DTTableViewManager/) or you can install it locally using following atom link: [http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom](http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom). And, of course, [cocoadocs](http://www.cocoadocs.org) is also a great option!
 
 [Changelog](https://github.com/DenHeadless/DTTableViewManager/wiki/Changelog)
+
+## Roadmap
+
+Features, that will be implemented in next version:
+
+- Easy search in UITableView.
 		
 ## Thanks
 

@@ -434,7 +434,7 @@
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
-				E6EA836C1615EE6000F8B8C3 /* TableViewFactory */,
+				E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */,
 				E6CB97B0161B26C900A7E936 /* CedarUnitTests */,
 				E6EA83651615EE6000F8B8C3 /* Frameworks */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
@@ -462,7 +462,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E6EA836C1615EE6000F8B8C3 /* TableViewFactory */ = {
+		E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */ = {
 			isa = PBXGroup;
 			children = (
 				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
@@ -477,6 +477,7 @@
 				95A3B4B316FF645600F5897E /* Resources */,
 				E6EA836D1615EE6000F8B8C3 /* Supporting Files */,
 			);
+			name = DTTableViewManagerExample;
 			path = TableViewFactory;
 			sourceTree = "<group>";
 		};
