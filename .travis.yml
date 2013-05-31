@@ -7,4 +7,4 @@ before_install:
     - brew install xctool --HEAD
     - cd Example && pod install
 
-script: ios_ci cedar --source-root . --workspace DTTableViewManager --scheme CedarUnitTests
+script: ios_ci cedar --source-root . --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --arch iphonesimluator
