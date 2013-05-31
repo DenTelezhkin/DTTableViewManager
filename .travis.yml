@@ -1,0 +1,10 @@
+language: objective-c
+
+before_install:
+    - sudo gem update --system
+    - brew install ios-sim
+    - sudo gem install ios_ci
+    - brew install xctool --HEAD
+    - cd Example && pod install && cd $TRAVIS_BUILD_DIR
+
+script: ios_ci cedar --source-root ./ --target CedarUnitTests
