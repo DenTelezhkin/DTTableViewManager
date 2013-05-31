@@ -5,6 +5,6 @@ before_install:
     - brew install ios-sim
     - sudo gem install ios_ci
     - brew install xctool --HEAD
-    - cd Example && pod install && cd $TRAVIS_BUILD_DIR
+    - cd Example && pod install
 
 script: ios_ci cedar --source-root ./Example --target CedarUnitTests
