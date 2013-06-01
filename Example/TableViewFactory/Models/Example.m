@@ -26,4 +26,10 @@
     return example;
 }
 
+-(BOOL)shouldShowInSearchResultsForSearchString:(NSString *)searchString
+                                   inScopeIndex:(int)scope
+{
+    
+}
+
 @end

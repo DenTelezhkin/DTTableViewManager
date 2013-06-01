@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DTTableViewManager.h"
 
-@interface Example : NSObject
+@interface Example : NSObject <DTTableViewModelSearching>
+
 @property (nonatomic,weak) Class controllerClass;
 @property (nonatomic,strong) NSString * text;
 @property (nonatomic,strong) NSString * details;
@@ -16,4 +18,5 @@
 +(Example *)exampleWithText:(NSString *)someText andDetails:(NSString *)details;
 
 +(Example *)exampleWithController:(Class)controllerClass andText:(NSString *)text;
+
 @end

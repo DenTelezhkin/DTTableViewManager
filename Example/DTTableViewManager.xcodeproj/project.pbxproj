@@ -17,6 +17,7 @@
 		95065A03174C03DF008AB32D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
 		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
+		955A66721759260F0065022B /* SearchSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 955A66711759260F0065022B /* SearchSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		95834EE516FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
 		95834EE616FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
 		95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EE716FF821900409396 /* CustomHeaderView.xib */; };
@@ -115,6 +116,8 @@
 		95065A01174C03DF008AB32D /* DTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCell.m; path = ../../DTTableViewManager/DTTableViewCell.m; sourceTree = "<group>"; };
 		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
 		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
+		955A66711759260F0065022B /* SearchSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SearchSpec.mm; sourceTree = "<group>"; };
+		955A667717592C1B0065022B /* DTTableViewModelSearching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelSearching.h; path = ../../DTTableViewManager/DTTableViewModelSearching.h; sourceTree = "<group>"; };
 		95834EE316FF820000409396 /* CustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderView.h; path = TableViewFactory/Cells/CustomHeaderView.h; sourceTree = "<group>"; };
 		95834EE416FF820000409396 /* CustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderView.m; path = TableViewFactory/Cells/CustomHeaderView.m; sourceTree = "<group>"; };
 		95834EE716FF821900409396 /* CustomHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderView.xib; path = TableViewFactory/Cells/CustomHeaderView.xib; sourceTree = "<group>"; };
@@ -415,6 +418,7 @@
 				E6915661168B382800C5F189 /* DTTableViewManager+UnitTests.m */,
 				E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */,
 				9589420D1750C7AD007CEB5E /* MappingSpec.mm */,
+				955A66711759260F0065022B /* SearchSpec.mm */,
 				E6CB97B1161B26C900A7E936 /* Supporting Files */,
 			);
 			path = CedarUnitTests;
@@ -434,6 +438,7 @@
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
+				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
 				E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */,
 				E6CB97B0161B26C900A7E936 /* CedarUnitTests */,
 				E6EA83651615EE6000F8B8C3 /* Frameworks */,
@@ -465,7 +470,6 @@
 		E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */ = {
 			isa = PBXGroup;
 			children = (
-				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
 				E638F1051619913B00694FBC /* Models */,
 				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
@@ -502,11 +506,13 @@
 				E60CA0161684AFEF00F4147E /* DTTableViewManager.h */,
 				E60CA0171684AFEF00F4147E /* DTTableViewManager.m */,
 				E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */,
+				955A667717592C1B0065022B /* DTTableViewModelSearching.h */,
 				E60CA0191684AFEF00F4147E /* DTGCDSingleton.h */,
 				95065A00174C03DF008AB32D /* DTTableViewCell.h */,
 				95065A01174C03DF008AB32D /* DTTableViewCell.m */,
 			);
 			name = DTTableViewManager;
+			path = TableViewFactory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -675,6 +681,7 @@
 				9589420E1750C7AD007CEB5E /* MappingSpec.mm in Sources */,
 				958942111750C901007CEB5E /* BaseHeaderFooterView.m in Sources */,
 				958942141750C937007CEB5E /* BaseHeaderView.m in Sources */,
+				955A66721759260F0065022B /* SearchSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

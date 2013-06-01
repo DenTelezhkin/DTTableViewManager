@@ -29,5 +29,4 @@
 */
 - (id)model;
 
-
 @end

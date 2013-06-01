@@ -25,6 +25,7 @@
 
 #import "DTTableViewModelTransfer.h"
 #import "DTTableViewCellCreation.h"
+#import "DTTableViewModelSearching.h"
 
 /**
  `DTTableViewManager` manages all `UITableView` datasource methods and provides API for managing your data models in the table. 
@@ -218,6 +219,9 @@
 ///---------------------------------------
 /// @name Search
 ///---------------------------------------
+
+-(void)filterTableItemsForSearchString:(NSString *)searchString
+                               inScope:(int)scopeNumber;
 
 /**
  If item exists at `indexPath`, it's model will be returned. If section or row does not exist, method will return `nil`.
