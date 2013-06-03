@@ -6,4 +6,4 @@ before_install:
     - sudo gem install ios_ci
     - cd Example
 
-script: ios_ci cedar --source-root . --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests
+script: ios_ci cedar --source-root . --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --build-path build
