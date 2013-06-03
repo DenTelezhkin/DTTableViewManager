@@ -4,7 +4,6 @@ before_install:
     - sudo gem update --system
     - brew install ios-sim
     - sudo gem install ios_ci
-    - brew install xctool --HEAD
     - cd Example
 
 script: ios_ci cedar --source-root . --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests
