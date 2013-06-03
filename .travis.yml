@@ -7,4 +7,4 @@ before_install:
     - brew install ios-sim
     - cd Example
 
-script: ios_ci cedar --source-root $TRAVIS_BUILD_DIR --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --build-path Build/Products
+script: ios_ci cedar --source-root $TRAVIS_BUILD_DIR/Example --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --build-path Build/Products
