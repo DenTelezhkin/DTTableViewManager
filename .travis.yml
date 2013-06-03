@@ -2,8 +2,9 @@ language: objective-c
 
 before_install:
     - sudo gem update --system
+    - sudo gem uninstall -Iax ios_ci
+    - sudo gem install ios_ci -v 1.0.3
     - brew install ios-sim
-    - sudo gem install ios_ci
     - cd Example
 
-script: ios_ci cedar --source-root . --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --build-path build
+script: ios_ci cedar --source-root . --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --build-path Build/Products
