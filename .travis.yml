@@ -2,8 +2,7 @@ language: objective-c
 
 before_install:
     - sudo gem update --system
-    - sudo gem uninstall -Iax ios_ci
-    - sudo gem install ios_ci -v 1.0.3
+    - sudo gem install ios_ci
     - brew install ios-sim
     - cd Example
 
