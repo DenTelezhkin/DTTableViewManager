@@ -1,5 +1,9 @@
 language: objective-c
 
+env:
+ global:
+  	- REPO=DenHeadless/DTTableViewManager
+  	- CI_HOME=`pwd`/$REPO 
 before_install:
     - sudo gem update --system
     - sudo gem uninstall -Iax ios_ci
@@ -7,4 +11,4 @@ before_install:
     - brew install ios-sim
     - cd Example
 
-script: ios_ci cedar --source-root . --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --build-path Build/Products
+script: ios_ci cedar --source-root $CI_HOME --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --build-path Build/Products
