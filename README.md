@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.png?branch=master,develop)
+
 DTTableViewManager
 ================
 
