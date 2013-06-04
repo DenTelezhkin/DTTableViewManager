@@ -30,6 +30,9 @@
 - (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
 
 @property (nonatomic,strong) NSMutableArray * sections;
+@property (nonatomic, strong) NSMutableArray * searchResultSections;
+@property (nonatomic, assign) int currentSearchScope;
+@property (nonatomic, copy) NSString * currentSearchString;
 
 @property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewCellCreation> delegate;
 @end
@@ -37,6 +40,15 @@
 @implementation DTTableViewManager
 
 #pragma mark - initialize, clean
+
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.currentSearchScope = -1;
+    }
+    return self;
+}
 
 -(id)initWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
 {
@@ -280,6 +292,24 @@
 }
 
 #pragma mark - search
+
+-(BOOL)isSearching
+{
+    // If search scope is selected, we are already searching, even if dataset is all items
+    if (((self.currentSearchString) && (![self.currentSearchString isEqualToString:@""]))
+        ||
+        self.currentSearchScope>-1)
+    {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)filterTableItemsForSearchString:(NSString *)searchString
+                               inScope:(int)scopeNumber
+{
+    
+}
 
 -(int)numberOfTableItemsInSection:(NSInteger)section
 {

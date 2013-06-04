@@ -1,0 +1,9 @@
+language: objective-c
+
+before_install:
+    - sudo gem update --system
+    - sudo gem install ios_ci
+    - brew install ios-sim
+    - cd Example
+
+script: ios_ci cedar --source-root $TRAVIS_BUILD_DIR/Example --workspace DTTableViewManager.xcworkspace --scheme CedarUnitTests --build-path Build/Products

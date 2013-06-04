@@ -29,7 +29,13 @@
 -(BOOL)shouldShowInSearchResultsForSearchString:(NSString *)searchString
                                    inScopeIndex:(int)scope
 {
+    if ([self.text rangeOfString:searchString].location == NSNotFound
+        && [self.details rangeOfString:searchString].location == NSNotFound)
+    {
+        return NO;
+    }
     
+    return YES;
 }
 
 @end
