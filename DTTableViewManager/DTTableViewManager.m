@@ -473,9 +473,25 @@
 
 - (NSIndexPath *)indexPathOfTableItem:(NSObject *)tableItem
 {
-    for (NSInteger i=0; i<self.sections.count; i++)
+    for (NSInteger i=0; i<[self currentSections].count; i++)
     {
         NSArray *section = [self tableItemsInSection:i];
+        NSInteger index = [section indexOfObject:tableItem];
+        if (index != NSNotFound)
+        {
+            return [NSIndexPath indexPathForRow:index inSection:i];
+        }
+    }
+    
+    NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+    return nil;
+}
+
+-(NSIndexPath *)originalIndexPathOfTableItem:(NSObject *)tableItem
+{
+    for (NSInteger i=0; i<self.sections.count; i++)
+    {
+        NSArray *section = [self tableItemsInOriginalSection:i];
         NSInteger index = [section indexOfObject:tableItem];
         if (index != NSNotFound)
         {
@@ -507,22 +523,23 @@
     return indexPaths;
 }
 
--(NSArray *)tableItemsArrayForIndexPaths:(NSArray *)indexPaths
+-(NSArray *)originalIndexPathArrayOfTableItems:(NSArray *)tableItems
 {
-    NSMutableArray * items = [[NSMutableArray alloc] initWithCapacity:[indexPaths count]];
+    NSMutableArray * indexPaths = [[NSMutableArray alloc] initWithCapacity:[tableItems count]];
     
-    for (NSIndexPath * path in indexPaths)
+    for (NSInteger i=0; i<[tableItems count]; i++)
     {
-        NSIndexPath * foundIndexPath = [self tableItemAtIndexPath:path];
-        if (foundIndexPath)
+        NSIndexPath * foundIndexPath = [self originalIndexPathOfTableItem:[tableItems objectAtIndex:i]];
+        if (!foundIndexPath)
         {
-            [items addObject:foundIndexPath];
+            NSLog(@"DTTableViewManager: object %@ not found",
+                  [tableItems objectAtIndex:i]);
         }
         else {
-            NSLog(@"DTTableViewManager: item not found at indexPath: %@",path);
+            [indexPaths addObject:foundIndexPath];
         }
     }
-    return items;
+    return indexPaths;
 }
 
 - (NSArray *)tableItemsInSection:(int)section

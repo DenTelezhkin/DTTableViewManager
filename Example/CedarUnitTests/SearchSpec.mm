@@ -214,6 +214,25 @@ describe(@"search in multiple sections", ^{
             
             expect([[model tableItemsInOriginalSection:2] lastObject]).to(equal(acc6));
         });
+        
+        it(@"should correctly work for index path of original table item", ^{
+            expect([model indexPathOfTableItem:acc2]).to(BeNil());
+            
+            expect([model originalIndexPathOfTableItem:acc2]).to(equal([NSIndexPath indexPathForRow:1 inSection:0]));
+            
+            expect([model originalIndexPathOfTableItem:acc3]).to(equal([NSIndexPath indexPathForRow:0 inSection:1]));
+        });
+        
+        it(@"should correctly work with index paths of original table items", ^{
+            NSArray * items =@[acc1,acc3];
+            expect([model indexPathArrayForTableItems:items]).to(equal(@[]));
+                    
+            expect([model originalIndexPathArrayOfTableItems:items]).to_not(BeNil());
+                    
+            expect([[model originalIndexPathArrayOfTableItems:items] lastObject]).to(equal([NSIndexPath indexPathForRow:0 inSection:1]));
+        });
+        
+        
     });
     
 });

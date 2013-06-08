@@ -247,6 +247,8 @@
  */
 - (NSIndexPath *)indexPathOfTableItem:(NSObject *)tableItem;
 
+- (NSIndexPath *)originalIndexPathOfTableItem:(NSObject *)tableItem;
+
 /**
  Searches for tableItems and returns `NSArray` of their indexPaths.
  
@@ -258,16 +260,7 @@
  */
 - (NSArray *)indexPathArrayForTableItems:(NSArray *)tableItems;
 
-/**
- Returns array of table items at indexPaths.
- 
- @param indexPaths indexPaths of array you want to find.
- 
- @discussion if `indexPath` is not found, it is skipped. This method uses `tableItemAtIndexPath:` internally.
- 
- @return array of table items at indexPaths
- */
-- (NSArray *)tableItemsArrayForIndexPaths:(NSArray *)indexPaths;
+- (NSArray *)originalIndexPathArrayOfTableItems:(NSArray *)tableItems;
 
 /**
  Returns array with table items in section

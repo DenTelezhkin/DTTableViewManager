@@ -110,20 +110,6 @@ describe(@"Datasource spec", ^{
         [indexPaths objectAtIndex:2] should equal(ip2);
     });
     
-    it(@"should return table items array", ^{
-        [model addTableItems:@[acc1,acc3,acc2,testModel]];
-        
-        NSIndexPath * ip1 = [model indexPathOfTableItem:acc1];
-        NSIndexPath * ip3 = [model indexPathOfTableItem:acc3];
-        NSIndexPath * testPath = [model indexPathOfTableItem:testModel];
-        
-        NSArray * tableItemsPaths = [model tableItemsArrayForIndexPaths:@[ip1,testPath,ip3]];
-        
-        [tableItemsPaths objectAtIndex:0] should equal(acc1);
-        [tableItemsPaths objectAtIndex:1] should equal(testModel);
-        [tableItemsPaths objectAtIndex:2] should equal(acc3);
-    });
-    
     it(@"should return correct number of table items", ^{
         [model addTableItem:testModel];
         [model addTableItem:testModel];
