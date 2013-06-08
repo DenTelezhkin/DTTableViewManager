@@ -220,6 +220,8 @@
 /// @name Search
 ///---------------------------------------
 
+-(void)filterTableItemsForSearchString:(NSString *)searchString;
+
 -(void)filterTableItemsForSearchString:(NSString *)searchString
                                inScope:(int)scopeNumber;
 
@@ -231,6 +233,9 @@
  @return model at indexPath. If section or row does not exist - `nil`.
  */
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath;
+
+-(id)tableItemAtOriginalIndexPath:(NSIndexPath *)indexPath;
+
 //this method returns lowest index item, that is equal to tableItem
 
 /**
@@ -273,12 +278,16 @@
  */
 - (NSArray *)tableItemsInSection:(int)section;
 
+-(NSArray *)tableItemsInOriginalSection:(int)section;
+
 /**
  Returns number of sections, contained in `DTTableViewManager`.
 
  @return number of sections in `DTTableViewManager`.
  */
 - (int)numberOfSections;
+
+-(int)numberOfOriginalSections;
 
 /**
  Returns number of table items in a given `section`.
@@ -288,6 +297,8 @@
  @return number of table items in a given `section`. 0, if section does not exist
  */
 - (int)numberOfTableItemsInSection:(NSInteger)section;
+
+- (int)numberOfTableItemsInOriginalSection:(NSInteger)section;
 
 ///---------------------------------------
 /// @name Add table items

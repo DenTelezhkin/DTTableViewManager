@@ -18,6 +18,9 @@ describe(@"Datasource spec", ^{
     
     
     beforeEach(^{
+        
+        [UIView setAnimationsEnabled:NO];
+        
         model = [DTTableViewManager new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
@@ -36,6 +39,8 @@ describe(@"Datasource spec", ^{
     afterEach(^{
         [model release];
         [testModel release];
+        
+        [UIView setAnimationsEnabled:YES];
     });
     
 #define TEST_1 @"test1"

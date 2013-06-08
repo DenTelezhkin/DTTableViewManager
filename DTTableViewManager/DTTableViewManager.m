@@ -127,6 +127,23 @@
     return _sectionFooterModels;
 }
 
+-(NSMutableArray *)searchResultSections
+{
+    if (!_searchResultSections)
+        _searchResultSections = [NSMutableArray array];
+    return _searchResultSections;
+}
+
+-(NSMutableArray *)currentSections
+{
+    if ([self isSearching]) {
+        return self.searchResultSections;
+    }
+    else {
+        return self.sections;
+    }
+}
+
 #pragma mark - check for features
 
 -(BOOL)tableViewRespondsToCellClassRegistration
@@ -306,9 +323,64 @@
 }
 
 -(void)filterTableItemsForSearchString:(NSString *)searchString
+{
+    [self filterTableItemsForSearchString:searchString inScope:-1];
+}
+
+-(void)filterTableItemsForSearchString:(NSString *)searchString
                                inScope:(int)scopeNumber
 {
+    BOOL wereSearching = [self isSearching];
     
+    if (![searchString isEqualToString:self.currentSearchString] ||
+        scopeNumber!=self.currentSearchScope)
+    {
+        self.currentSearchScope = scopeNumber;
+        self.currentSearchString = searchString;
+    }
+    else {
+        return;
+    }
+    
+    if (wereSearching && ![self isSearching])
+    {
+        [self.tableView reloadData];
+        return;
+    }
+    
+    [self.searchResultSections removeAllObjects];
+    
+    
+    for (int section = 0; section< [self numberOfOriginalSections]; section ++)
+    {
+        [self.searchResultSections addObject:[NSMutableArray array]];
+        
+        for (int row = 0; row < [self numberOfTableItemsInOriginalSection:section];row ++)
+        {
+            NSObject <DTTableViewModelSearching> * item;
+            
+            item = [self tableItemAtOriginalIndexPath:[NSIndexPath indexPathForRow:row
+                                                                         inSection:section]];
+            
+            if ([item respondsToSelector:@selector(shouldShowInSearchResultsForSearchString:inScopeIndex:)])
+            {
+                BOOL shouldShow = [item shouldShowInSearchResultsForSearchString:searchString
+                                                                    inScopeIndex:scopeNumber];
+                
+                if (shouldShow)
+                {
+                    [[self.searchResultSections lastObject] addObject:item];
+                }
+            }
+        }
+        
+        if (![[self.searchResultSections lastObject] count])
+        {
+            [self.searchResultSections removeLastObject];
+        }
+    }
+    
+    [self.tableView reloadData];
 }
 
 -(int)numberOfTableItemsInSection:(NSInteger)section
@@ -317,7 +389,18 @@
     return [itemsInSection count];
 }
 
+-(int)numberOfTableItemsInOriginalSection:(NSInteger)section
+{
+    NSArray * itemsInSection = [self tableItemsInOriginalSection:section];
+    return [itemsInSection count];
+}
+
 -(int)numberOfSections
+{
+    return [[self currentSections] count];
+}
+
+-(int)numberOfOriginalSections
 {
     return [self.sections count];
 }
@@ -349,9 +432,30 @@
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *section=nil;
-    if (indexPath.section < [self.sections count])
+    if (indexPath.section < [[self currentSections] count])
     {
         section = [self tableItemsInSection:indexPath.section];
+    }
+    else {
+        NSLog(@"DTTableViewManager: Section not found while searching for table item");
+        return nil;
+    }
+    if (indexPath.row < [section count])
+    {
+        return [section objectAtIndex:indexPath.row];
+    }
+    else {
+        NSLog(@"DTTableViewManager: Row not found while searching for table item");
+        return nil;
+    }
+}
+
+-(id)tableItemAtOriginalIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *section=nil;
+    if (indexPath.section < [self.sections count])
+    {
+        section = [self tableItemsInOriginalSection:indexPath.section];
     }
     else {
         NSLog(@"DTTableViewManager: Section not found while searching for table item");
@@ -422,6 +526,20 @@
 }
 
 - (NSArray *)tableItemsInSection:(int)section
+{
+    NSMutableArray * sectionsArray = [self currentSections];
+    
+    if (section<[sectionsArray count])
+    {
+        return [sectionsArray objectAtIndex:section];
+    }
+    else {
+        //        NSLog(@"DTTableViewManager: section %d not found",section);
+        return @[];
+    }
+}
+
+-(NSArray *)tableItemsInOriginalSection:(int)section
 {
     if (section<[self.sections count])
     {

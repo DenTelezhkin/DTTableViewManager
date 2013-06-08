@@ -21,25 +21,27 @@ describe(@"mapping tests", ^{
         __block Example * acc1;
         
         beforeEach(^{
+            
+            [UIView setAnimationsEnabled:NO];
+            
             model = [DTTableViewManager new];
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.dataSource = model;
             model.tableView.delegate = model;
             testModel = [Example new];
             acc1 = [Example new];
+            [model.tableView reloadData];
+            
+            [model registerCellClass:[CellWithoutNib class]
+                       forModelClass:[Example class]];
+            
         });
         
         afterEach(^{
             [model release];
             [testModel release];
-        });
-        
-        beforeEach(^{
             
-            [model.tableView reloadData];
-            
-            [model registerCellClass:[CellWithoutNib class]
-                       forModelClass:[Example class]];
+            [UIView setAnimationsEnabled:YES];
         });
         
         it(@"should create cell from code", ^{
@@ -65,20 +67,15 @@ describe(@"mapping tests", ^{
         
         
         beforeEach(^{
+            
+            [UIView setAnimationsEnabled:NO];
+            
             model = [DTTableViewManager new];
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
             testModel = [Example new];
             acc1 = [Example new];
-        });
-        
-        afterEach(^{
-            [model release];
-            [testModel release];
-        });
-        
-        beforeEach(^{
             
             [model.tableView reloadData];
             
@@ -86,6 +83,13 @@ describe(@"mapping tests", ^{
                        forModelClass:[Example class]];
         });
         
+        afterEach(^{
+            [model release];
+            [testModel release];
+            
+            [UIView setAnimationsEnabled:YES];
+        });
+
         it(@"should create cell from nib", ^{
             
             [model addTableItem:acc1];
@@ -106,20 +110,23 @@ describe(@"mapping tests", ^{
         __block Example * testModel;
         
         beforeEach(^{
+            
+            [UIView setAnimationsEnabled:NO];
+            
             model = [DTTableViewManager new];
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
             testModel = [Example new];
+            
+            [model.tableView reloadData];
         });
         
         afterEach(^{
             [model release];
             [testModel release];
-        });
-        
-        beforeEach(^{
-            [model.tableView reloadData];
+            
+            [UIView setAnimationsEnabled:YES];
         });
         
         it(@"should create cell from nib", ^{
@@ -137,20 +144,23 @@ describe(@"mapping tests", ^{
         __block Example * testModel;
         
         beforeEach(^{
+            
+            [UIView setAnimationsEnabled:NO];
+            
             model = [DTTableViewManager new];
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
             testModel = [Example new];
+            
+            [model.tableView reloadData];
         });
         
         afterEach(^{
             [model release];
             [testModel release];
-        });
-        
-        beforeEach(^{
-            [model.tableView reloadData];
+            
+            [UIView setAnimationsEnabled:YES];
         });
         
         it(@"should create header view from UIView", ^{
