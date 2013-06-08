@@ -1,3 +1,11 @@
+![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.png?branch=master,develop)
+
+![CocoaPod platform](http://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.png)
+
+![CocoaPod version](http://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png)
+
+
+
 DTTableViewManager
 ================
 
@@ -39,51 +47,66 @@ Simplest way for view controller is to subclass DTTableViewManager, set it's tab
 	
 Registering cell mapping:
 
-	[self registerCellClass:[Cell class] forModelClass:[Model class]];
-	
+```objective-c
+[self registerCellClass:[Cell class] forModelClass:[Model class]];
+```
+
 This will also register nib with "Cell" name, if it exists. 
 
 #### Adding data models to the table view
 
 ##### One item
+
+```objective-c
+[self addTableItem:model];
 	
-	[self addTableItem:model];
+[self addTableItem:model withRowAnimation:UITableViewRowAnimationAutomatic;
 	
-	[self addTableItem:model withRowAnimation:UITableViewRowAnimationAutomatic;
-	
-	[self addTableItem:model toSection:0];
+[self addTableItem:model toSection:0];
+```
 	
 All methods above are just shortcuts to method:
 
-	[self addTableItem:model toSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
+```objective-c
+[self addTableItem:model toSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
+```
 
 ##### Array of items
 
-	[self addTableItems:@[model1,model2]];
-	[self addTableItems:@[model1,model2] toSection:0];
-	[self addTableItems:@[model1,model2] withRowAnimation:UITableViewRowAnimationAutomatic];
-	
+```objective-c
+[self addTableItems:@[model1,model2]];
+[self addTableItems:@[model1,model2] toSection:0];
+[self addTableItems:@[model1,model2] withRowAnimation:UITableViewRowAnimationAutomatic];
+```
+
 These methods are shortcuts to method:
-	
-	[self addTableItems:@[model1,model2] toSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
-	
+
+```objective-c
+[self addTableItems:@[model1,model2] toSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
+```
+
 #### Removing data models
 
-	[self removeTableItem:model];
-	[self removeTableItem:model withRowAnimation:UITableViewRowAnimationAutomatic];
-	[self removeTableItems:@[model1,model2]];
-	[self removeTableItems:@[model1,model2] withRowAnimation:UITableViewRowAnimationAutomatic];
-	
+```objective-c
+[self removeTableItem:model];
+[self removeTableItem:model withRowAnimation:UITableViewRowAnimationAutomatic];
+[self removeTableItems:@[model1,model2]];
+[self removeTableItems:@[model1,model2] withRowAnimation:UITableViewRowAnimationAutomatic];
+```	
+
 #### Replacing data models
 
-	[self replaceTableItem:model1 withTableItem:model2];
-	[self replaceTableItem:model1 withTableItem:model2 andRowAnimation:UITableViewRowAnimationAutomatic];
-	
+```objective-c
+[self replaceTableItem:model1 withTableItem:model2];
+[self replaceTableItem:model1 withTableItem:model2 andRowAnimation:UITableViewRowAnimationAutomatic];
+```
+
 #### Inserting data models
 
-	[self insertTableItem:model toIndexPath:indexPath];
-	[self insertTableItem:model toIndexPath:indexPath withRowAnimation:UITableViewRowAnimationAutomatic];
-	
+```objective-c
+[self insertTableItem:model toIndexPath:indexPath];
+[self insertTableItem:model toIndexPath:indexPath withRowAnimation:UITableViewRowAnimationAutomatic];
+```	
 	
 ## What else do you have?
 
