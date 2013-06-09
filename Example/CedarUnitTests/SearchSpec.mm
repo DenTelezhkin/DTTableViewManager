@@ -4,14 +4,15 @@ using namespace Cedar::Matchers;
 
 SPEC_BEGIN(SearchSpec)
 
+__block DTTableViewManager *model;
+__block Example * acc1;
+__block Example * acc2;
+__block Example * acc3;
+__block Example * acc4;
+__block Example * acc5;
+__block Example * acc6;
+
 describe(@"search in first section", ^{
-    __block DTTableViewManager *model;
-    __block Example * acc1;
-    __block Example * acc2;
-    __block Example * acc3;
-    __block Example * acc4;
-    __block Example * acc5;
-    __block Example * acc6;
     
     beforeEach(^{
         
@@ -94,13 +95,6 @@ describe(@"search in first section", ^{
 });
 
 describe(@"search in multiple sections", ^{
-    __block DTTableViewManager *model;
-    __block Example * acc1;
-    __block Example * acc2;
-    __block Example * acc3;
-    __block Example * acc4;
-    __block Example * acc5;
-    __block Example * acc6;
     
     beforeEach(^{
         
@@ -235,6 +229,88 @@ describe(@"search in multiple sections", ^{
         
     });
     
+});
+
+describe(@"search in multiple sections", ^{
+   
+    beforeEach(^{
+        
+        [UIView setAnimationsEnabled:NO];
+        
+        acc1 = [Example exampleWithText:@"London" andDetails:@"England"];
+        acc2 = [Example exampleWithText:@"Tokyo" andDetails:@"Japan"];
+        
+        acc3 = [Example exampleWithText:@"Kyiv" andDetails:@"Ukraine"];
+        acc4 = [Example exampleWithText:@"Moscow" andDetails:@"Russia"];
+        
+        acc5 = [Example exampleWithText:@"Washington D.C." andDetails:@"USA"];
+        acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
+        
+        model = [DTTableViewManager new];
+        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
+        
+        [model addTableItems:@[acc1] toSection:0];
+        [model addTableItems:@[acc3] toSection:1];
+        [model addTableItems:@[acc5] toSection:2];
+        
+        [model filterTableItemsForSearchString:@"d"];
+    });
+    
+    afterEach(^{
+        [model release];
+        
+        [UIView setAnimationsEnabled:YES];
+    });
+    
+    it(@"should add table items to both tables", ^{
+        Example * testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
+        [model addTableItem:testModel toSection:0];
+        [model addTableItem:testModel toSection:1];
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(2));
+        expect([tableItems count]).to(equal(2));
+        
+        expect([originalTableItems lastObject]).to(equal(testModel));
+        expect([tableItems lastObject]).to(equal(testModel));
+       
+        originalTableItems = [model tableItemsInOriginalSection:1];
+        tableItems = [model tableItemsInSection:1];
+        
+        expect([originalTableItems count]).to(equal(1));
+        expect([tableItems count]).to(equal(1));
+        
+        expect([originalTableItems lastObject]).to(equal(testModel));
+        expect([tableItems lastObject]).to(equal(testModel));
+    });
+    
+    it(@"should add table items only to original table if filter unmatched", ^{
+    
+        [model addTableItem:acc2 toSection:0];
+        [model addTableItem:acc6 toSection:2];
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(2));
+        expect([tableItems count]).to(equal(1));
+        
+        expect([tableItems lastObject]).to(equal(acc1));
+        expect([originalTableItems lastObject]).to(equal(acc2));
+        
+        originalTableItems = [model tableItemsInOriginalSection:2];
+        tableItems = [model tableItemsInSection:2];
+        
+        expect([originalTableItems count]).to(equal(2));
+        expect([tableItems count]).to(equal(0));
+        
+        expect([originalTableItems lastObject]).to(equal(acc6));
+    });
+
 });
 
 SPEC_END

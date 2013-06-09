@@ -658,26 +658,6 @@
     [self.tableView endUpdates];
 }
 
--(void)setHeaderModels:(NSArray *)headerModels
-{
-    self.sectionHeaderModels = [headerModels mutableCopy];
-}
-
--(void)setFooterModels:(NSArray *)footerModels
-{
-    self.sectionFooterModels = [footerModels mutableCopy];
-}
-
--(void)addHeaderModel:(NSObject *)headerModel
-{
-    [self.sectionHeaderModels addObject:headerModel];
-}
-
--(void)addFooterModel:(NSObject *)footerModel
-{
-    [self.sectionFooterModels addObject:footerModel];
-}
-
 #pragma mark - insert items
 
 -(void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath
