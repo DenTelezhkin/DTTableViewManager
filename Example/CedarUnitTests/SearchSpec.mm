@@ -11,6 +11,7 @@ __block Example * acc3;
 __block Example * acc4;
 __block Example * acc5;
 __block Example * acc6;
+__block Example * testModel;
 
 describe(@"search in first section", ^{
     
@@ -246,6 +247,8 @@ describe(@"search in multiple sections", ^{
         acc5 = [Example exampleWithText:@"Washington D.C." andDetails:@"USA"];
         acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
         
+        testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
+        
         model = [DTTableViewManager new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.tableView.delegate = model;
@@ -265,9 +268,12 @@ describe(@"search in multiple sections", ^{
     });
     
     it(@"should add table items to both tables", ^{
-        Example * testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
+        
         [model addTableItem:testModel toSection:0];
         [model addTableItem:testModel toSection:1];
+        
+        expect([model numberOfOriginalSections]).to(equal(3));
+        expect([model numberOfSections]).to(equal(2));
         
         NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
         NSArray * tableItems = [model tableItemsInSection:0];
@@ -281,7 +287,7 @@ describe(@"search in multiple sections", ^{
         originalTableItems = [model tableItemsInOriginalSection:1];
         tableItems = [model tableItemsInSection:1];
         
-        expect([originalTableItems count]).to(equal(1));
+        expect([originalTableItems count]).to(equal(2));
         expect([tableItems count]).to(equal(1));
         
         expect([originalTableItems lastObject]).to(equal(testModel));
@@ -293,6 +299,9 @@ describe(@"search in multiple sections", ^{
         [model addTableItem:acc2 toSection:0];
         [model addTableItem:acc6 toSection:2];
         
+        expect([model numberOfOriginalSections]).to(equal(3));
+        expect([model numberOfSections]).to(equal(1));
+        
         NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
         NSArray * tableItems = [model tableItemsInSection:0];
         
@@ -303,14 +312,166 @@ describe(@"search in multiple sections", ^{
         expect([originalTableItems lastObject]).to(equal(acc2));
         
         originalTableItems = [model tableItemsInOriginalSection:2];
-        tableItems = [model tableItemsInSection:2];
         
         expect([originalTableItems count]).to(equal(2));
-        expect([tableItems count]).to(equal(0));
         
         expect([originalTableItems lastObject]).to(equal(acc6));
     });
 
+    it(@"should insert items to both tables", ^{
+        ^{
+            [model insertTableItem:testModel toIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        } should_not raise_exception;
+        
+        expect([model numberOfOriginalSections]).to(equal(3));
+        expect([model numberOfSections]).to(equal(1));
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(2));
+        expect([tableItems count]).to(equal(2));
+        
+        expect(originalTableItems[1]).to(equal(testModel));
+        expect([tableItems lastObject]).to(equal(testModel));
+        
+    });
+    
+    it(@"should insert items to both tables different section", ^{
+        ^{
+            [model insertTableItem:testModel toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        } should_not raise_exception;
+        
+        expect([model numberOfOriginalSections]).to(equal(3));
+        expect([model numberOfSections]).to(equal(2));
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(1));
+        expect([tableItems count]).to(equal(1));
+        
+        expect(originalTableItems[1]).to(equal(acc1));
+        expect([tableItems lastObject]).to(equal(acc1));
+        
+        originalTableItems = [model tableItemsInOriginalSection:1];
+        tableItems = [model tableItemsInSection:1];
+        
+        expect([originalTableItems count]).to(equal(2));
+        expect([tableItems count]).to(equal(1));
+        
+        expect(originalTableItems[1]).to(equal(acc3));
+        expect(originalTableItems[0]).to(equal(testModel));
+        expect([tableItems lastObject]).to(equal(testModel));
+        
+    });    
+    
+    it(@"should insert item only to original table", ^{
+        [model addTableItem:acc4 toSection:0];
+        ^{
+            [model insertTableItem:acc2 toIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        } should_not raise_exception;
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(3));
+        expect([tableItems count]).to(equal(1));
+        
+        expect(originalTableItems[1]).to(equal(testModel));
+        expect([tableItems lastObject]).to(equal(acc1));
+    });
+    
+    it(@"should replace table items in both tables", ^{
+        [model replaceTableItem:acc3 withTableItem:testModel];
+        
+        expect([model numberOfOriginalSections]).to(equal(3));
+        expect([model numberOfSections]).to(equal(2));
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(1));
+        expect([tableItems count]).to(equal(1));
+        
+        expect(originalTableItems[1]).to(equal(acc1));
+        expect([tableItems lastObject]).to(equal(acc1));
+        
+        originalTableItems = [model tableItemsInOriginalSection:1];
+        tableItems = [model tableItemsInSection:1];
+        
+        expect([originalTableItems count]).to(equal(1));
+        expect([tableItems count]).to(equal(1));
+        
+        expect(originalTableItems[0]).to(equal(testModel));
+        expect([tableItems lastObject]).to(equal(testModel));
+    });
+    
+    it(@"should replace table item only in original table", ^{
+        [model replaceTableItem:acc1 withTableItem:acc2];
+        
+        expect([model numberOfOriginalSections]).to(equal(3));
+        expect([model numberOfSections]).to(equal(0));
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(1));
+        expect([tableItems count]).to(equal(0));
+    });
+    
+    it(@"should remove tableItem in both tables", ^{
+        [model removeTableItem:acc1];
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(0));
+        expect([tableItems count]).to(equal(0));
+    });
+    
+    it(@"should remove tableItem in original table", ^{
+        [model removeTableItem:acc3];
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:1];
+        NSArray * tableItems = [model tableItemsInSection:1];
+        
+        expect([originalTableItems count]).to(equal(0));
+        expect([tableItems count]).to(equal(0));
+    });
+    
+    it(@"should move section to section", ^{
+        [model moveSection:0 toSection:1];
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(1));
+        expect([tableItems count]).to(equal(1));
+        
+        expect(originalTableItems[0]).to(equal(acc3));
+        expect(tableItems[0]).to(equal(acc1));
+        
+        originalTableItems = [model tableItemsInOriginalSection:1];
+        tableItems = [model tableItemsInSection:1];
+        
+        expect([originalTableItems count]).to(equal(1));
+        expect([tableItems count]).to(equal(0));
+        
+        expect(originalTableItems[1]).to(equal(acc1));
+    });
+    
+    it(@"should delete sections", ^{
+        [model deleteSections:[NSIndexSet indexSetWithIndex:0]];
+        
+        NSArray * originalTableItems = [model tableItemsInOriginalSection:0];
+        NSArray * tableItems = [model tableItemsInSection:0];
+        
+        expect([originalTableItems count]).to(equal(1));
+        expect([tableItems count]).to(equal(0));
+        
+        expect(originalTableItems[1]).to(equal(acc3));
+    });
 });
 
 SPEC_END
