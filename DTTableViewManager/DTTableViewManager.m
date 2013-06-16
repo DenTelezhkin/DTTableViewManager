@@ -699,18 +699,26 @@
     // Update datasource
     NSMutableArray *array = [self getValidTableSection:indexPath.section];
     
-    if ([[self tableItemsInSection:indexPath.section] count]<indexPath.row)
+    if ([array count] < indexPath.row)
     {
         NSLog(@"DTTableViewManager: failed to insert item for indexPath section: %d, row: %d, only %d items in section",
               indexPath.section,
               indexPath.row,
-              [[self tableItemsInSection:indexPath.section] count]);
+              [array count]);
         return;
     }
     [array insertObject:tableItem atIndex:indexPath.row];
     
-    // UPdate UI
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
+    
+    // Update UI
+    if ([self isSearching])
+    {
+        [self searchAndReload];
+        return;
+    }
+    else {
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
+    }
 }
 
 #pragma  mark - reload/replace items

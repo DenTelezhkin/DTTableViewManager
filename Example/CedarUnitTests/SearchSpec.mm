@@ -355,7 +355,7 @@ describe(@"search in multiple sections", ^{
         expect([originalTableItems count]).to(equal(1));
         expect([tableItems count]).to(equal(1));
         
-        expect(originalTableItems[1]).to(equal(acc1));
+        expect(originalTableItems[0]).to(equal(acc1));
         expect([tableItems lastObject]).to(equal(acc1));
         
         originalTableItems = [model tableItemsInOriginalSection:1];
@@ -364,10 +364,10 @@ describe(@"search in multiple sections", ^{
         expect([originalTableItems count]).to(equal(2));
         expect([tableItems count]).to(equal(1));
         
-        expect(originalTableItems[1]).to(equal(acc3));
         expect(originalTableItems[0]).to(equal(testModel));
-        expect([tableItems lastObject]).to(equal(testModel));
+        expect(originalTableItems[1]).to(equal(acc3));
         
+        expect([tableItems lastObject]).to(equal(testModel));
     });    
     
     it(@"should insert item only to original table", ^{
@@ -382,7 +382,7 @@ describe(@"search in multiple sections", ^{
         expect([originalTableItems count]).to(equal(3));
         expect([tableItems count]).to(equal(1));
         
-        expect(originalTableItems[1]).to(equal(testModel));
+        expect(originalTableItems[1]).to(equal(acc2));
         expect([tableItems lastObject]).to(equal(acc1));
     });
     
