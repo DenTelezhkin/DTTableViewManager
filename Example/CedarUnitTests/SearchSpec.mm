@@ -141,6 +141,8 @@ describe(@"search in multiple sections", ^{
     it(@"should have correct search results for y symbol", ^{
         [model filterTableItemsForSearchString:@"y"];
         
+        expect([model numberOfSections]).to(equal(2));
+        
         expect([[model tableItemsInSection:0] count]).to(equal(1));
         
         expect([[model tableItemsInSection:0] lastObject]).to(equal(acc2));
@@ -164,6 +166,8 @@ describe(@"search in multiple sections", ^{
     
     it(@"should have nothing for ost", ^{
         [model filterTableItemsForSearchString:@"ost"];
+        
+        expect([model numberOfSections]).to(equal(0));
         
         expect([[model tableItemsInSection:0] count]).to(equal(0));
         

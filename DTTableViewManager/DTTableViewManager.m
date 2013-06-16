@@ -27,7 +27,7 @@
 
 @interface DTTableViewManager ()
 
-- (NSMutableArray *)getValidTableSection:(NSInteger)index withAnimation:(UITableViewRowAnimation)animation;
+- (NSMutableArray *)getValidTableSection:(NSInteger)index;
 
 @property (nonatomic,strong) NSMutableArray * sections;
 @property (nonatomic, strong) NSMutableArray * searchResultSections;
@@ -348,37 +348,12 @@
         return;
     }
     
-    [self.searchResultSections removeAllObjects];
-    
-    
-    for (int section = 0; section< [self numberOfOriginalSections]; section ++)
-    {
-        [self.searchResultSections addObject:[NSMutableArray array]];
-        
-        for (int row = 0; row < [self numberOfTableItemsInOriginalSection:section];row ++)
-        {
-            NSObject <DTTableViewModelSearching> * item;
-            
-            item = [self tableItemAtOriginalIndexPath:[NSIndexPath indexPathForRow:row
-                                                                         inSection:section]];
-            
-            if ([item respondsToSelector:@selector(shouldShowInSearchResultsForSearchString:inScopeIndex:)])
-            {
-                BOOL shouldShow = [item shouldShowInSearchResultsForSearchString:searchString
-                                                                    inScopeIndex:scopeNumber];
-                
-                if (shouldShow)
-                {
-                    [[self.searchResultSections lastObject] addObject:item];
-                }
-            }
-        }
-        
-        if (![[self.searchResultSections lastObject] count])
-        {
-            [self.searchResultSections removeLastObject];
-        }
-    }
+    [self searchAndReload];
+}
+
+-(void)searchAndReload
+{
+    self.searchResultSections = [self searchResultsArray];
     
     [self.tableView reloadData];
 }
@@ -473,34 +448,28 @@
 
 - (NSIndexPath *)indexPathOfTableItem:(NSObject *)tableItem
 {
-    for (NSInteger i=0; i<[self currentSections].count; i++)
+    NSIndexPath * indexPath = [self indexPathOfItem:tableItem inArray:[self currentSections]];
+    if (!indexPath)
     {
-        NSArray *section = [self tableItemsInSection:i];
-        NSInteger index = [section indexOfObject:tableItem];
-        if (index != NSNotFound)
-        {
-            return [NSIndexPath indexPathForRow:index inSection:i];
-        }
+        NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+        return nil;
     }
-    
-    NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
-    return nil;
+    else {
+        return indexPath;
+    }
 }
 
 -(NSIndexPath *)originalIndexPathOfTableItem:(NSObject *)tableItem
 {
-    for (NSInteger i=0; i<self.sections.count; i++)
+    NSIndexPath * indexPath = [self indexPathOfItem:tableItem inArray:self.sections];
+    if (!indexPath)
     {
-        NSArray *section = [self tableItemsInOriginalSection:i];
-        NSInteger index = [section indexOfObject:tableItem];
-        if (index != NSNotFound)
-        {
-            return [NSIndexPath indexPathForRow:index inSection:i];
-        }
+        NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+        return nil;
     }
-    
-    NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
-    return nil;
+    else {
+        return indexPath;
+    }
 }
 
 //This implementation is not optimized, and may behave poorly over tables with lot of sections
@@ -568,6 +537,56 @@
     }
 }
 
+// Rebuild searchResultsArray from scratch
+-(NSMutableArray *)searchResultsArray
+{
+    NSMutableArray * searchResults = [NSMutableArray array];
+    
+    for (int section = 0; section < [self.sections count]; section ++)
+    {
+        [searchResults addObject:[NSMutableArray array]];
+        
+        NSMutableArray * rows = self.sections[section];
+        
+        for (int row = 0; row < [rows count];row ++)
+        {
+            NSObject <DTTableViewModelSearching> * item = rows[row];
+            
+            if ([item respondsToSelector:@selector(shouldShowInSearchResultsForSearchString:inScopeIndex:)])
+            {
+                BOOL shouldShow = [item shouldShowInSearchResultsForSearchString:self.currentSearchString
+                                                                    inScopeIndex:self.currentSearchScope];
+                
+                if (shouldShow)
+                {
+                    [[searchResults lastObject] addObject:item];
+                }
+            }
+        }
+        
+        if (![[searchResults lastObject] count])
+        {
+            [searchResults removeLastObject];
+        }
+    }
+    return searchResults;
+}
+
+-(NSIndexPath *)indexPathOfItem:(NSObject *)item inArray:(NSArray *)array
+{
+    for (NSInteger section=0; section<array.count; section++)
+    {
+        NSArray *rows = array[section];
+        NSInteger index = [rows indexOfObject:item];
+        
+        if (index != NSNotFound)
+        {
+            return [NSIndexPath indexPathForRow:index inSection:section];
+        }
+    }
+    return nil;
+}
+
 #pragma mark - add items
 
 - (void)addTableItem:(NSObject *)tableItem
@@ -599,21 +618,29 @@
           toSection:(NSInteger)section
    withRowAnimation:(UITableViewRowAnimation)animation
 {
-    // Update datasource
-    NSMutableArray *array = [self getValidTableSection:section withAnimation:animation];
+    // Update original datasource
+    NSMutableArray *array = [self getValidTableSection:section];
     
     int itemsCountInSection = [array count];
     
     [array addObject:tableItem];
     
-    //update UI
-    NSIndexPath * modelItemPath = [NSIndexPath indexPathForRow:itemsCountInSection
-                                                     inSection:section];
-    
-    UITableViewCell * modelCell = [self.tableView cellForRowAtIndexPath:modelItemPath];
-    if (!modelCell)
+    //update interface
+    if ([self isSearching])
     {
-        [self.tableView insertRowsAtIndexPaths:@[modelItemPath] withRowAnimation:animation];
+        [self searchAndReload];
+        return;
+    }
+    else {
+        // We are not searching, lets find out where we will insert tableItem
+        NSIndexPath * modelItemPath = [NSIndexPath indexPathForRow:itemsCountInSection
+                                                         inSection:section];
+        
+        UITableViewCell * modelCell = [self.tableView cellForRowAtIndexPath:modelItemPath];
+        if (!modelCell)
+        {
+            [self.tableView insertRowsAtIndexPaths:@[modelItemPath] withRowAnimation:animation];
+        }
     }
 }
 
@@ -630,7 +657,7 @@
     
     // We need to get a valid section before table updates
     // So we don't mess up animations
-    [self getValidTableSection:section withAnimation:animation];
+    [self getValidTableSection:section];
     
     
     [self.tableView beginUpdates];
@@ -645,7 +672,7 @@
                   toSection:(NSInteger)section
            withRowAnimation:(UITableViewRowAnimation)animation
 {
-    NSArray * validSection = [self getValidTableSection:section withAnimation:animation];
+    NSArray * validSection = [self getValidTableSection:section];
     
     [self.tableView beginUpdates];
     for (id model in tableItems)
@@ -670,8 +697,7 @@
       withRowAnimation:(UITableViewRowAnimation)animation
 {
     // Update datasource
-    NSMutableArray *array = [self getValidTableSection:indexPath.section
-                                         withAnimation:animation];
+    NSMutableArray *array = [self getValidTableSection:indexPath.section];
     
     if ([[self tableItemsInSection:indexPath.section] count]<indexPath.row)
     {
@@ -724,8 +750,7 @@
         return;
     }
     
-    NSMutableArray *section = [self getValidTableSection:indexPathToReplace.section
-                                           withAnimation:animation];
+    NSMutableArray *section = [self getValidTableSection:indexPathToReplace.section];
     
     [section replaceObjectAtIndex:indexPathToReplace.row withObject:replacingTableItem];
     
@@ -823,9 +848,8 @@
 
 -(void)moveSection:(int)indexFrom toSection:(int)indexTo
 {
-    NSMutableArray * validSectionFrom = [self getValidTableSection:indexFrom
-                                                      withAnimation:UITableViewRowAnimationNone];
-    [self getValidTableSection:indexTo withAnimation:UITableViewRowAnimationNone];
+    NSMutableArray * validSectionFrom = [self getValidTableSection:indexFrom];
+    [self getValidTableSection:indexTo];
     
     [self.sections removeObject:validSectionFrom];
     [self.sections insertObject:validSectionFrom atIndex:indexTo];
@@ -906,11 +930,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 #pragma mark - private
 
 - (NSMutableArray *)getValidTableSection:(NSInteger)index
-                           withAnimation:(UITableViewRowAnimation)animation
 {
     if (index < self.sections.count)
     {
-        return (NSMutableArray *)[self tableItemsInSection:index];
+        return (NSMutableArray *)self.sections[index];
     }
     else
     {
@@ -925,6 +948,27 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                           withRowAnimation:UITableViewRowAnimationNone];
         }
         return [self.sections lastObject];
+    }
+}
+
+-(NSMutableArray *)getValidSearchTableSection:(NSInteger)index
+{
+    if (index < [self.searchResultSections count])
+    {
+        return (NSMutableArray*) self.searchResultSections[index];
+    }
+    else {
+        for (int i = self.searchResultSections.count; i <= index ; i++)
+        {
+            //Update datasource
+            NSMutableArray *newSection = [NSMutableArray array];
+            [self.searchResultSections addObject:newSection];
+            
+            //Update UI
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i]
+                          withRowAnimation:UITableViewRowAnimationNone];
+        }
+        return [self.searchResultSections lastObject];
     }
 }
 
