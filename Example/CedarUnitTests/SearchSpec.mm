@@ -398,7 +398,7 @@ describe(@"search in multiple sections", ^{
         expect([originalTableItems count]).to(equal(1));
         expect([tableItems count]).to(equal(1));
         
-        expect(originalTableItems[1]).to(equal(acc1));
+        expect(originalTableItems[0]).to(equal(acc1));
         expect([tableItems lastObject]).to(equal(acc1));
         
         originalTableItems = [model tableItemsInOriginalSection:1];

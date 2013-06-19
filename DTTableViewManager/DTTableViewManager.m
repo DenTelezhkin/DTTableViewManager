@@ -714,7 +714,6 @@
     if ([self isSearching])
     {
         [self searchAndReload];
-        return;
     }
     else {
         [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
@@ -744,27 +743,28 @@
           withTableItem:(NSObject *)replacingTableItem
         andRowAnimation:(UITableViewRowAnimation)animation
 {
-    //Update datasource
-    NSIndexPath * indexPathToReplace = [self indexPathOfTableItem:tableItemToReplace];
+    NSIndexPath * originalIndexPath = [self originalIndexPathOfTableItem:tableItemToReplace];
     
-    if (!indexPathToReplace)
+    if (originalIndexPath && replacingTableItem)
     {
-        NSLog(@"DTTableViewManager: table item to replace not found.");
+        NSMutableArray *section = [self getValidTableSection:originalIndexPath.section];
+        
+        [section replaceObjectAtIndex:originalIndexPath.row withObject:replacingTableItem];
+    }
+    else {
+        NSLog(@"DTTableViewManager: failed to replace item %@ at indexPath: %@",replacingTableItem,originalIndexPath);
         return;
     }
-    if (!replacingTableItem)
+    
+    if ([self isSearching])
     {
-        NSLog(@"DTTableViewManager: replacing table item is nil.");
-        return;
+        [self searchAndReload];
     }
-    
-    NSMutableArray *section = [self getValidTableSection:indexPathToReplace.section];
-    
-    [section replaceObjectAtIndex:indexPathToReplace.row withObject:replacingTableItem];
-    
-    //Update UI
-    [self.tableView reloadRowsAtIndexPaths:@[indexPathToReplace]
-                          withRowAnimation:animation];
+    else {
+        //Update UI
+        [self.tableView reloadRowsAtIndexPaths:@[originalIndexPath]
+                              withRowAnimation:animation];
+    }
 }
 
 -(void)reloadTableItem:(NSObject *)tableItem
@@ -1016,6 +1016,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     }
     return NO;
 }
+
+#warning document this!
 
 - (void)tableView:(UITableView *)tableView
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
