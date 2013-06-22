@@ -132,7 +132,6 @@ describe(@"Datasource spec", ^{
         [model addTableItem:acc2 toSection:2];
         
         [model numberOfSections] should equal(4);
-        [model numberOfSectionsInTableView:model.tableView] should equal(4);
     });
     
     it(@"should set section titles", ^{

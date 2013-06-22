@@ -801,18 +801,27 @@
 
 -(void)removeTableItem:(NSObject *)tableItem withRowAnimation:(UITableViewRowAnimation)animation
 {
-    // Update datasource
-    NSIndexPath *indexPath = [self indexPathOfTableItem:tableItem];
+    NSIndexPath * originalIndexPath = [self originalIndexPathOfTableItem:tableItem];
     
-    if (indexPath)
+    if (originalIndexPath)
     {
-        //update datasource
-        [self removeTableItemAtIndexPath:indexPath];
-        
-        //Update UI
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
+        NSMutableArray * section = (NSMutableArray *)[self tableItemsInOriginalSection:originalIndexPath.section];
+        [section removeObjectAtIndex:originalIndexPath.row];
+    }
+    else {
+        NSLog(@"DTTableViewManager: item to delete: %@ was not found in table view",tableItem);
+        return;
     }
     
+    if ([self isSearching])
+    {
+        [self searchAndReload];
+    }
+    else
+    {
+       [self.tableView deleteRowsAtIndexPaths:@[originalIndexPath]
+                             withRowAnimation:animation];
+    }
 }
 
 -(void)removeTableItems:(NSArray *)tableItems
@@ -851,7 +860,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.sections.count;
+    return [self numberOfSections];
 }
 
 -(void)moveSection:(int)indexFrom toSection:(int)indexTo
@@ -862,13 +871,20 @@
     [self.sections removeObject:validSectionFrom];
     [self.sections insertObject:validSectionFrom atIndex:indexTo];
     
-    if (self.sections.count > self.tableView.numberOfSections)
+    
+    if ([self isSearching])
     {
-        //Row does not exist, moving section causes many sections to change, so we just reload
-        [self.tableView reloadData];
+        [self searchAndReload];
     }
     else {
-        [self.tableView moveSection:indexFrom toSection:indexTo];
+        if (self.sections.count > self.tableView.numberOfSections)
+        {
+            //Row does not exist, moving section causes many sections to change, so we just reload
+            [self.tableView reloadData];
+        }
+        else {
+            [self.tableView moveSection:indexFrom toSection:indexTo];
+        }
     }
 }
 
@@ -882,8 +898,16 @@
     // Update datasource
     [self.sections removeObjectsAtIndexes:indexSet];
     
-    // Update UI
-    [self.tableView deleteSections:indexSet withRowAnimation:animation];
+    
+    // Update interface
+    if ([self isSearching])
+    {
+        [self searchAndReload];
+    }
+    else
+    {
+        [self.tableView deleteSections:indexSet withRowAnimation:animation];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

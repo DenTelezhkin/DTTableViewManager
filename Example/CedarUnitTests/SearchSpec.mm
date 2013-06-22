@@ -462,7 +462,7 @@ describe(@"search in multiple sections", ^{
         expect([originalTableItems count]).to(equal(1));
         expect([tableItems count]).to(equal(0));
         
-        expect(originalTableItems[1]).to(equal(acc1));
+        expect(originalTableItems[0]).to(equal(acc1));
     });
     
     it(@"should delete sections", ^{
@@ -474,7 +474,7 @@ describe(@"search in multiple sections", ^{
         expect([originalTableItems count]).to(equal(1));
         expect([tableItems count]).to(equal(0));
         
-        expect(originalTableItems[1]).to(equal(acc3));
+        expect(originalTableItems[0]).to(equal(acc3));
     });
 });
 
