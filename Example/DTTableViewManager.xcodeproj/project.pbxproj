@@ -44,6 +44,8 @@
 		95A3B4BB16FF64AE00F5897E /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B916FF64AE00F5897E /* mochaGrunge.png */; };
 		95A3B4BE16FF6C1000F5897E /* CustomHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4BD16FF6C1000F5897E /* CustomHeaderFooterModel.m */; };
 		95A3B4BF16FF6C1000F5897E /* CustomHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4BD16FF6C1000F5897E /* CustomHeaderFooterModel.m */; };
+		95B336681775C01900AF0A57 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B336661775C01900AF0A57 /* SearchController.m */; };
+		95B336691775C01900AF0A57 /* SearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B336671775C01900AF0A57 /* SearchController.xib */; };
 		95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */; };
 		95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */; };
 		95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */; };
@@ -144,6 +146,9 @@
 		95A3B4B916FF64AE00F5897E /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mochaGrunge.png; sourceTree = "<group>"; };
 		95A3B4BC16FF6C1000F5897E /* CustomHeaderFooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterModel.h; path = TableViewFactory/Models/CustomHeaderFooterModel.h; sourceTree = "<group>"; };
 		95A3B4BD16FF6C1000F5897E /* CustomHeaderFooterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterModel.m; path = TableViewFactory/Models/CustomHeaderFooterModel.m; sourceTree = "<group>"; };
+		95B336651775C01900AF0A57 /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchController.h; path = ExampleControllers/SearchController.h; sourceTree = "<group>"; };
+		95B336661775C01900AF0A57 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchController.m; path = ExampleControllers/SearchController.m; sourceTree = "<group>"; };
+		95B336671775C01900AF0A57 /* SearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchController.xib; path = ExampleControllers/SearchController.xib; sourceTree = "<group>"; };
 		95BF2B9C16FF72580050D0A7 /* CustomHeaderFooterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterController.h; path = ExampleControllers/CustomHeaderFooterController.h; sourceTree = "<group>"; };
 		95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterController.m; path = ExampleControllers/CustomHeaderFooterController.m; sourceTree = "<group>"; };
 		95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterController.xib; path = ExampleControllers/CustomHeaderFooterController.xib; sourceTree = "<group>"; };
@@ -312,6 +317,16 @@
 			name = patterns;
 			sourceTree = "<group>";
 		};
+		95B336641775BFF300AF0A57 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				95B336651775C01900AF0A57 /* SearchController.h */,
+				95B336661775C01900AF0A57 /* SearchController.m */,
+				95B336671775C01900AF0A57 /* SearchController.xib */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		E638F1051619913B00694FBC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +363,7 @@
 		E6402F8E162D80EA00DDE2B3 /* Example controllers */ = {
 			isa = PBXGroup;
 			children = (
+				95B336641775BFF300AF0A57 /* Search */,
 				E6402FC1162D9A7800DDE2B3 /* MoveSection */,
 				E6402FB5162D8EF800DDE2B3 /* InsertReplace */,
 				E6402FA6162D8B1200DDE2B3 /* CustomCells */,
@@ -622,6 +638,7 @@
 				95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
 				95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */,
 				95834EEF16FF830A00409396 /* CustomHeaderController.xib in Resources */,
+				95B336691775C01900AF0A57 /* SearchController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +728,7 @@
 				95834EED16FF830A00409396 /* CustomHeaderController.m in Sources */,
 				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,
 				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
+				95B336681775C01900AF0A57 /* SearchController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

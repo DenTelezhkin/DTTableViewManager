@@ -14,6 +14,7 @@
 #import "MoveSectionTableViewController.h"
 #import "CustomHeaderFooterController.h"
 #import "CustomHeaderController.h"
+#import "SearchController.h"
 
 @interface ExampleTableViewController ()
 
@@ -69,6 +70,9 @@
                                                            andText:@"Insert/replace cells"]];
     [self.tableManager addTableItem:[Example exampleWithController:[MoveSectionTableViewController class]
                                                            andText:@"Move section"]];
+    
+    [self.tableManager addTableItem:[Example exampleWithController:[SearchController class]
+                                                           andText:@"Search"]];
 }
 
 #pragma mark - Table View

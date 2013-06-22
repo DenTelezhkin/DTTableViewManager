@@ -70,7 +70,9 @@
  */
 
 @interface DTTableViewManager : UIViewController
-                                     <UITableViewDataSource, UITableViewDelegate>
+                                     <UITableViewDataSource,
+                                        UITableViewDelegate,
+                                        UISearchBarDelegate>
 
 ///---------------------------------------
 /// @name Properties
@@ -83,6 +85,8 @@
 
 
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
+
+@property (nonatomic, strong) IBOutlet UISearchBar * searchBar;
 
 
 /**

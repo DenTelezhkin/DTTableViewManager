@@ -1104,4 +1104,17 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     }
     return UITableViewAutomaticDimension;
 }
+
+#pragma  mark - UISearchBarDelegate
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self filterTableItemsForSearchString:searchText];
+}
+
+-(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    [self filterTableItemsForSearchString:searchBar.text inScope:selectedScope];
+}
+
 @end
