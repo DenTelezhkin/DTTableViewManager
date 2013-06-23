@@ -33,8 +33,6 @@
 
 @interface DTCellFactory : NSObject
 
-+ (DTCellFactory *)sharedInstance;
-
 -(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
 
 -(void)setHeaderClassMapping:(Class)headerClass forModelClass:(Class)modelClass;

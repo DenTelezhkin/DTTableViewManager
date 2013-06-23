@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSMutableArray * searchResultSections;
 @property (nonatomic, assign) int currentSearchScope;
 @property (nonatomic, copy) NSString * currentSearchString;
+@property (nonatomic, retain) DTCellFactory * cellFactory;
 @end
 
 @implementation DTTableViewManager
@@ -49,6 +50,14 @@
 }
 
 #pragma mark - getters, setters
+
+-(DTCellFactory *)cellFactory {
+    if (!_cellFactory)
+    {
+        _cellFactory = [[DTCellFactory alloc] init];
+    }
+    return _cellFactory;
+}
 
 -(NSMutableArray *)sections
 {
@@ -174,8 +183,8 @@
                    modelClass:modelClass];
     }
     
-    [[DTCellFactory sharedInstance] setCellClassMapping:cellClass
-                                          forModelClass:modelClass];
+    [self.cellFactory setCellClassMapping:cellClass
+                            forModelClass:modelClass];
 }
 
 -(void)registerNibNamed:(NSString *)nibName
@@ -198,8 +207,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
          forCellReuseIdentifier:NSStringFromClass([modelClass class])];
     
-    [[DTCellFactory sharedInstance] setCellClassMapping:cellClass
-                                          forModelClass:modelClass];
+    [self.cellFactory setCellClassMapping:cellClass
+                            forModelClass:modelClass];
 }
 
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
@@ -232,8 +241,8 @@
  forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
     }
     
-    [[DTCellFactory sharedInstance] setHeaderClassMapping:headerClass
-                                            forModelClass:modelClass];
+    [self.cellFactory setHeaderClassMapping:headerClass
+                              forModelClass:modelClass];
 }
 
 -(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
@@ -266,8 +275,8 @@
  forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
     }
     
-    [[DTCellFactory sharedInstance] setFooterClassMapping:footerClass
-                                            forModelClass:modelClass];
+    [self.cellFactory setFooterClassMapping:footerClass
+                              forModelClass:modelClass];
 }
 
 #pragma mark - search
@@ -903,9 +912,9 @@
     if (self.doNotReuseCells)
         reuseIdentifier = nil;
     
-    UITableViewCell *cell = [[DTCellFactory sharedInstance] cellForModel:model
-                                                                 inTable:tableView
-                                                         reuseIdentifier:reuseIdentifier];
+    UITableViewCell *cell = [self.cellFactory cellForModel:model
+                                                   inTable:tableView
+                                           reuseIdentifier:reuseIdentifier];
     
     return cell;
 }
@@ -985,9 +994,9 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     
     NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
     
-    UIView * headerView = [[DTCellFactory sharedInstance] headerViewForModel:model
-                                                                 inTableView:tableView
-                                                             reuseIdentifier:reuseIdentifier];
+    UIView * headerView = [self.cellFactory headerViewForModel:model
+                                                   inTableView:tableView
+                                               reuseIdentifier:reuseIdentifier];
     return headerView;
 }
 
@@ -1001,9 +1010,9 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     
     NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
     
-    UIView * footerView = [[DTCellFactory sharedInstance] footerViewForModel:model
-                                                                 inTableView:tableView
-                                                             reuseIdentifier:reuseIdentifier];
+    UIView * footerView = [self.cellFactory footerViewForModel:model
+                                                   inTableView:tableView
+                                               reuseIdentifier:reuseIdentifier];
     return footerView;
 }
 

@@ -25,7 +25,6 @@
 
 #import "DTCellFactory.h"
 #import "DTTableViewModelTransfer.h"
-#import "DTGCDSingleton.h"
 #import "UIView+Loading.h"
 
 @interface DTCellFactory ()
@@ -37,13 +36,6 @@
 @end
 
 @implementation DTCellFactory
-
-+(DTCellFactory *)sharedInstance
-{
-    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
-        return [[self alloc] init];
-    });
-}
 
 - (NSMutableDictionary *)cellMappingsDictionary
 {
