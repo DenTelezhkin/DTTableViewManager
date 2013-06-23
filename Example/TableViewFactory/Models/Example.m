@@ -18,19 +18,11 @@
     return example;
 }
 
-+(Example *)exampleWithController:(Class)controllerClass andText:(NSString *)text
-{
-    Example * example = [[Example alloc] init];
-    example.text = text;
-    example.controllerClass = controllerClass;
-    return example;
-}
-
 -(BOOL)shouldShowInSearchResultsForSearchString:(NSString *)searchString
                                    inScopeIndex:(int)scope
 {
-    if ([self.text rangeOfString:searchString].location == NSNotFound
-        && [self.details rangeOfString:searchString].location == NSNotFound)
+    if ([self.text rangeOfString:searchString].location == NSNotFound &&
+        [self.details rangeOfString:searchString].location == NSNotFound)
     {
         return NO;
     }

@@ -15,6 +15,8 @@
 #import "CustomHeaderFooterController.h"
 #import "CustomHeaderController.h"
 #import "SearchController.h"
+#import "ControllerModel.h"
+#import "ControllerCell.h"
 
 @interface ExampleTableViewController ()
 
@@ -34,8 +36,8 @@
                                                            andTableView:self.tableView];
         
         // Recommended to add mappings right here, in tableManager getter
-        [self.tableManager registerCellClass:[ExampleCell class]
-                               forModelClass:[Example class]];
+        [self.tableManager registerCellClass:[ControllerCell class]
+                               forModelClass:[ControllerModel class]];
         
         // Uncomment this line if you want to NOT reuse cells.
         // self.doNotReuseCells = YES;
@@ -51,28 +53,30 @@
     
     self.title = @"Examples";
     
-    [self.tableManager addTableItem:[Example exampleWithController:[AddRemoveTableViewController class]
-                                                           andText:@"Add/Remove cells"]];
-    [self.tableManager addTableItem:[Example exampleWithController:[ReorderTableViewController class]
-                                                           andText:@"Reorder cells"]];
-    [self.tableManager addTableItem:[Example exampleWithController:[CustomCellsTableViewController class]
-                                                           andText:@"Custom cells from NIB"]];
-    [self.tableManager addTableItem:[Example exampleWithController:[CustomHeaderController class] andText:@"Custom header - iOS 5"]];
+    [self.tableManager addTableItem:[ControllerModel modelWithClass:[AddRemoveTableViewController class]
+                                                           andTitle:@"Add/Remove cells"]];
+    
+    [self.tableManager addTableItem:[ControllerModel modelWithClass:[ReorderTableViewController class]
+                                                           andTitle:@"Reorder cells"]];
+    [self.tableManager addTableItem:[ControllerModel modelWithClass:[CustomCellsTableViewController class]
+                                                           andTitle:@"Custom cells from NIB"]];
+    [self.tableManager addTableItem:[ControllerModel modelWithClass:[CustomHeaderController class]
+                                                            andTitle:@"Custom header - iOS 5"]];
     
     if ([UITableViewHeaderFooterView class])
     {
         // WE are running on iOS 6 and higher, which actually has reusable headers
-        [self.tableManager addTableItem:[Example exampleWithController:[CustomHeaderFooterController class]
-                                                               andText:@"Custom header - iOS 6"]];
+        [self.tableManager addTableItem:[ControllerModel modelWithClass:[CustomHeaderFooterController class]
+                                                               andTitle:@"Custom header - iOS 6"]];
     }
     
-    [self.tableManager addTableItem:[Example exampleWithController:[InsertReplaceTableViewController class]
-                                                           andText:@"Insert/replace cells"]];
-    [self.tableManager addTableItem:[Example exampleWithController:[MoveSectionTableViewController class]
-                                                           andText:@"Move section"]];
+    [self.tableManager addTableItem:[ControllerModel modelWithClass:[InsertReplaceTableViewController class]
+                                                           andTitle:@"Insert/replace cells"]];
+    [self.tableManager addTableItem:[ControllerModel modelWithClass:[MoveSectionTableViewController class]
+                                                           andTitle:@"Move section"]];
     
-    [self.tableManager addTableItem:[Example exampleWithController:[SearchController class]
-                                                           andText:@"Search"]];
+    [self.tableManager addTableItem:[ControllerModel modelWithClass:[SearchController class]
+                                                           andTitle:@"Search"]];
 }
 
 #pragma mark - Table View
@@ -81,11 +85,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     id model = [self.tableManager tableItemAtIndexPath:indexPath];
-    if ([model isKindOfClass:[Example class]])
+    if ([model isKindOfClass:[ControllerModel class]])
     {
-        Example * selectedExample = model;
+        ControllerModel * selectedController = model;
         
-        UIViewController * presentExampleClass = [[selectedExample.controllerClass alloc] init];
+        UIViewController * presentExampleClass = [[selectedController.controllerClass alloc] init];
         
         [self.navigationController pushViewController:presentExampleClass animated:YES];
     }

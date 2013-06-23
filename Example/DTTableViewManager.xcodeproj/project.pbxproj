@@ -47,6 +47,8 @@
 		95B336681775C01900AF0A57 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B336661775C01900AF0A57 /* SearchController.m */; };
 		95B336691775C01900AF0A57 /* SearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B336671775C01900AF0A57 /* SearchController.xib */; };
 		95B3366B1776D8CB00AF0A57 /* Capitals.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95B3366A1776D8CB00AF0A57 /* Capitals.plist */; };
+		95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B3366D1776E28800AF0A57 /* ControllerModel.m */; };
+		95BCE7DC1776E93200980281 /* ControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BCE7DB1776E93200980281 /* ControllerCell.m */; };
 		95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */; };
 		95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */; };
 		95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */; };
@@ -151,6 +153,10 @@
 		95B336661775C01900AF0A57 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchController.m; path = ExampleControllers/SearchController.m; sourceTree = "<group>"; };
 		95B336671775C01900AF0A57 /* SearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchController.xib; path = ExampleControllers/SearchController.xib; sourceTree = "<group>"; };
 		95B3366A1776D8CB00AF0A57 /* Capitals.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Capitals.plist; path = ExampleControllers/Capitals.plist; sourceTree = "<group>"; };
+		95B3366C1776E28800AF0A57 /* ControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerModel.h; path = TableViewFactory/ExampleControllers/ControllerModel.h; sourceTree = "<group>"; };
+		95B3366D1776E28800AF0A57 /* ControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControllerModel.m; path = TableViewFactory/ExampleControllers/ControllerModel.m; sourceTree = "<group>"; };
+		95BCE7DA1776E93200980281 /* ControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerCell.h; path = TableViewFactory/Cells/ControllerCell.h; sourceTree = "<group>"; };
+		95BCE7DB1776E93200980281 /* ControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControllerCell.m; path = TableViewFactory/Cells/ControllerCell.m; sourceTree = "<group>"; };
 		95BF2B9C16FF72580050D0A7 /* CustomHeaderFooterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterController.h; path = ExampleControllers/CustomHeaderFooterController.h; sourceTree = "<group>"; };
 		95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterController.m; path = ExampleControllers/CustomHeaderFooterController.m; sourceTree = "<group>"; };
 		95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterController.xib; path = ExampleControllers/CustomHeaderFooterController.xib; sourceTree = "<group>"; };
@@ -339,6 +345,8 @@
 				E666ACF2162C037B00A2DBF2 /* CustomModel.m */,
 				95A3B4BC16FF6C1000F5897E /* CustomHeaderFooterModel.h */,
 				95A3B4BD16FF6C1000F5897E /* CustomHeaderFooterModel.m */,
+				95B3366C1776E28800AF0A57 /* ControllerModel.h */,
+				95B3366D1776E28800AF0A57 /* ControllerModel.m */,
 			);
 			name = Models;
 			path = ..;
@@ -358,6 +366,8 @@
 				95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */,
 				95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */,
 				95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */,
+				95BCE7DA1776E93200980281 /* ControllerCell.h */,
+				95BCE7DB1776E93200980281 /* ControllerCell.m */,
 			);
 			name = Cells;
 			path = ..;
@@ -733,6 +743,8 @@
 				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,
 				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				95B336681775C01900AF0A57 /* SearchController.m in Sources */,
+				95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */,
+				95BCE7DC1776E93200980281 /* ControllerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
