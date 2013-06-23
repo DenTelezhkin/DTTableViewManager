@@ -497,10 +497,10 @@
 		E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */ = {
 			isa = PBXGroup;
 			children = (
-				E638F1051619913B00694FBC /* Models */,
-				E638F1061619914300694FBC /* Cells */,
 				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
 				E6EA83761615EE6000F8B8C3 /* AppDelegate.m */,
+				E638F1051619913B00694FBC /* Models */,
+				E638F1061619914300694FBC /* Cells */,
 				E6402F8E162D80EA00DDE2B3 /* Example controllers */,
 				E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */,
 				E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */,
@@ -527,10 +527,10 @@
 			isa = PBXGroup;
 			children = (
 				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
-				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,
-				E60CA0141684AFEF00F4147E /* DTCellFactory.m */,
 				E60CA0161684AFEF00F4147E /* DTTableViewManager.h */,
 				E60CA0171684AFEF00F4147E /* DTTableViewManager.m */,
+				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,
+				E60CA0141684AFEF00F4147E /* DTCellFactory.m */,
 				E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */,
 				95DB1C331763577500050536 /* DTTableViewModelSearching.h */,
 				95065A00174C03DF008AB32D /* DTTableViewCell.h */,

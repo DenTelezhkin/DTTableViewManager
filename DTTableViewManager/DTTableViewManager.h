@@ -32,19 +32,31 @@
  ## Setup
  
  # General steps
- - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model.
+ - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model (or `DTTableViewCell`, which is UITableViewCell subclass, that conforms to `DTTableViewModelTransfer` protocol)
  - Every cell class should be mapped to model class using mapping methods.
- - `UITableView` datasource and delegate is your DTTableViewManager subclass.
+ - `UITableView` datasource and delegate is your `DTTableViewManager` subclass.
   
  ## Managing table items
  
- Every action that is done to table items - add, delete, insert etc. is applied immediately. There's no need to manually reload data on your table view. Group insertion, addition or deletion is processed inside `UITableView` `beginUpdates` and `endUpdates` block.
+ Every action that is done to table items - add, delete, insert etc. is applied immediately. There's no need to manually reload data on your table view. Group insertion, addition or deletion is processed inside `UITableView` `beginUpdates` and `endUpdates` block. All methods for tableItems manipulation will automatically update both original tableView and filtered tableView, when search is active.
  
  ## Mapping cells
  
  Use `registerCellClass:forModelClass` for mapping cell class to model. 'DTTableViewManager' will automatically check, if there's a nib with the same name as cellClass. If it is - this nib is registered for modelClass. If there's no nib - then cell will be created using initWithStyle: method on cellClass. If you need nib name for the cell to differ from cellClass name, use `registerNibName:forCellClass:modelClass:`.
  
- Before executing setCellMappingForNib:cellClass:modelClass:, make sure that tableView property is set and tableView is created. Good spot to call `registerCellClass:forModelClass` is in viewDidLoad method.
+ Before executing mapping methods, make sure that tableView property is set and tableView is created. Good spot to call `registerCellClass:forModelClass` is in viewDidLoad method.
+
+ ## Search
+ 
+ Your data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewManager will know, when to show data models.
+ 
+ # Automatic
+ 
+ Attach UISearchBarDelegate to your `DTTableViewManager` subclass. That's it, you've got search implemented!
+ 
+ # Manual
+ 
+ Any time you need your models sorted, call method filterTableItemsForSearchString:. Every data model in the table will be called with method shouldShowInSearchResultsForSearchString:inScopeIndex: and tableView will be automatically updated with results.
  
  ## Loading headers/footers from NIB
  
@@ -56,7 +68,7 @@
  
  Also, `tableView:heightForHeaderInSection:` and `tableView:heightForFooterInSection:` methods need to be implemented for custom headers/footers to correctly work.
  
- */
+*/
 
 @interface DTTableViewManager : UIViewController
                                      <UITableViewDataSource,
@@ -75,6 +87,9 @@
 
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 
+/*
+ Property to store UISearchBar, attached to your UITableView. Attaching it to this property is completely optional.
+ */
 @property (nonatomic, strong) IBOutlet UISearchBar * searchBar;
 
 
@@ -185,13 +200,28 @@
 /// @name Search
 ///---------------------------------------
 
+
+/**
+ This method filters presented table items, using searchString as a criteria. All table items are queried with method `shouldShowInSearchResultsForSearchString:
+ inScopeIndex:`. All models, which return YES to that method, will be displayed. This method is used, when you want to sort table items manually. If you want to do that automatically, simply set UISearchBarDelegate to your DTTableViewManager subclass and this method will get called automatically, when search bar text changes. 
+ 
+ @param searchString Search string used as a criteria for filtering.
+ */
 -(void)filterTableItemsForSearchString:(NSString *)searchString;
 
+/**
+ This method filters presented table items, using searchString and scopeNumber as a criteria. All table items are queried with method `shouldShowInSearchResultsForSearchString:
+ inScopeIndex:`. All models, which return YES to that method, will be displayed. This method is used, when you want to sort table items manually. If you want to do that automatically, simply set UISearchBarDelegate to your DTTableViewManager subclass and this method will get called automatically, when search bar text or scope changes.
+ 
+ @param searchString Search string used as a criteria for filtering.
+ 
+ @param scopeNumber Scope number of UISearchBar
+ */
 -(void)filterTableItemsForSearchString:(NSString *)searchString
                                inScope:(int)scopeNumber;
 
 /**
- If item exists at `indexPath`, it's model will be returned. If section or row does not exist, method will return `nil`.
+ If item exists at `indexPath`, it's model will be returned. If section or row does not exist, method will return `nil`. If this method is called when search is active, it will return model with indexPath in filtered table.
  
  @param indexPath Index of the item you wish to retrieve. 
  
@@ -199,23 +229,37 @@
  */
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ If item exists at `indexPath`, it's model will be returned. If section or row does not exist, method will return `nil`. This method always returns tableItem, using indexPath for original array, not depending on whether search is active or not.
+ 
+ @param indexPath Index of the item you wish to retrieve.
+ 
+ @return model at indexPath. If section or row does not exist - `nil`.
+ */
 -(id)tableItemAtOriginalIndexPath:(NSIndexPath *)indexPath;
 
 //this method returns lowest index item, that is equal to tableItem
 
 /**
- Searches for tableItem and returns it's indexPath. If there are many equal tableItems, indexPath of the first one will be returned
+ Searches for tableItem and returns it's indexPath. If there are many equal tableItems, indexPath of the first one will be returned. If this method is called when search is active, it will return indexPath of the item in filtered table.
  
  @param tableItem Model of the item you wish to find.
  
- @return indexPath of `tableItem`.If there are many equal tableItems, indexPath of the first one will be returned
+ @return indexPath of `tableItem`. If there are many equal tableItems, indexPath of the first one will be returned.
  */
 - (NSIndexPath *)indexPathOfTableItem:(NSObject *)tableItem;
 
+/**
+ Searches for tableItem and returns it's indexPath. If there are many equal tableItems, indexPath of the first one will be returned. This method always returns indexPath for original array, not depending on whether search is active or not.
+ 
+ @param tableItem Model of the item you wish to find.
+ 
+ @return indexPath of `tableItem`. If there are many equal tableItems, indexPath of the first one will be returned.
+ */
 - (NSIndexPath *)originalIndexPathOfTableItem:(NSObject *)tableItem;
 
 /**
- Searches for tableItems and returns `NSArray` of their indexPaths.
+ Searches for tableItems and returns `NSArray` of their indexPaths. If search is active, this method will return NSArray of indexPaths in filtered table.
  
  @param tableItems Array of tableItems, that need to be found.
  
@@ -225,10 +269,19 @@
  */
 - (NSArray *)indexPathArrayForTableItems:(NSArray *)tableItems;
 
+/**
+ Searches for tableItems and returns `NSArray` of their indexPaths. This method always returns indexPaths for original array, not depending on whether search is active or not.
+ 
+ @param tableItems Array of tableItems, that need to be found.
+ 
+ @discussion This method uses `indexPathOfTableItem:` internally. If table item is not found, it's skipped.
+ 
+ @return Array of tableItem's indexes, that were found.
+ */
 - (NSArray *)originalIndexPathArrayOfTableItems:(NSArray *)tableItems;
 
 /**
- Returns array with table items in section
+ Returns array with table items in section. If search is active, this method will return tableItems in filtered table. Section numbers may differ, since empty sections are not shown in search results.
  
  @param section Number of the section in table.
  
@@ -236,19 +289,31 @@
  */
 - (NSArray *)tableItemsInSection:(int)section;
 
+/**
+ Returns array with table items in section. Always returns original section, not depending on whether search is active or not.
+ 
+ @param section Number of the section in table.
+ 
+ @return array of table items in section. Empty array if section does not exist.
+ */
 -(NSArray *)tableItemsInOriginalSection:(int)section;
 
 /**
- Returns number of sections, contained in `DTTableViewManager`.
+ Returns number of sections, contained in `DTTableViewManager`. When search is active, will return number of sections in filtered table.
 
  @return number of sections in `DTTableViewManager`.
  */
 - (int)numberOfSections;
 
+/**
+ Returns number of sections, contained in `DTTableViewManager`. This method will return number of sections for original section, not depending on search results.
+ 
+ @return number of sections in `DTTableViewManager`.
+ */
 -(int)numberOfOriginalSections;
 
 /**
- Returns number of table items in a given `section`.
+ Returns number of table items in a given `section`. When search is active, this method will return number of items in filtered table.
  
  @param section section, which items will be counted.
  
@@ -256,6 +321,13 @@
  */
 - (int)numberOfTableItemsInSection:(NSInteger)section;
 
+/**
+ Returns number of table items in a given `section`. This method will use original table, not depending on whether search is active or not.
+ 
+ @param section section, which items will be counted.
+ 
+ @return number of table items in a given `section`. 0, if section does not exist
+ */
 - (int)numberOfTableItemsInOriginalSection:(NSInteger)section;
 
 ///---------------------------------------
@@ -263,21 +335,21 @@
 ///---------------------------------------
 
 /**
- Add tableItem to section 0. Table will be automatically updated with UITableViewRowAnimationNone.
+ Add tableItem to section 0. Table will be automatically updated with `UITableViewRowAnimationNone` animation.
  
  @param tableItem Model you want to add to the table
  */
 - (void)addTableItem:(NSObject *)tableItem;
 
 /**
- Add table items to section 0. Table will be automatically updated using UITableViewRowAnimationNone.
+ Add table items to section 0. Table will be automatically updated using `UITableViewRowAnimationNone`` animation.
  
  @param tableItems models to add.
  */
 - (void)addTableItems:(NSArray *)tableItems;
 
 /**
- Add table items to section `section`. Table will be automatically updated using UITableViewRowAnimationNone.
+ Add table items to section `section`. Table will be automatically updated using `UITableViewRowAnimationNone` animation.
  
  @param tableItem Model to add.
  
@@ -286,7 +358,7 @@
 - (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)section;
 
 /**
- Add table items to section `section`. Table will be automatically updated using UITableViewRowAnimationNone.
+ Add table items to section `section`. Table will be automatically updated using `UITableViewRowAnimationNone` animation.
  
  @param tableItems Models to add.
  
