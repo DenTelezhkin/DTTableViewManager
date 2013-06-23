@@ -8,11 +8,20 @@
 
 #import "BaseHeaderFooterView.h"
 
+@interface BaseHeaderFooterView()
+@property (nonatomic, retain) id viewModel;
+@end
+
 @implementation BaseHeaderFooterView
 
 -(void)updateWithModel:(id)model
 {
-    
+    self.viewModel = model;
+}
+
+-(id)model
+{
+    return self.viewModel;
 }
 
 @end

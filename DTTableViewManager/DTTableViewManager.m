@@ -31,6 +31,10 @@
 
 @property (nonatomic,strong) NSMutableArray * sections;
 @property (nonatomic, strong) NSMutableArray * searchResultSections;
+@property (nonatomic, strong) NSMutableArray * searchSectionHeaderTitles;
+@property (nonatomic, strong) NSMutableArray * searchSectionFooterTitles;
+@property (nonatomic, strong) NSMutableArray * searchSectionHeaderModels;
+@property (nonatomic, strong) NSMutableArray * searchSectionFooterModels;
 @property (nonatomic, assign) int currentSearchScope;
 @property (nonatomic, copy) NSString * currentSearchString;
 @property (nonatomic, retain) DTCellFactory * cellFactory;
@@ -68,7 +72,7 @@
     return _sections;
 }
 
--(NSArray *)sectionHeaderTitles {
+-(NSMutableArray *)sectionHeaderTitles {
     if (!_sectionHeaderTitles)
     {
         _sectionHeaderTitles = [NSMutableArray new];
@@ -76,7 +80,15 @@
     return _sectionHeaderTitles;
 }
 
--(NSArray *)sectionFooterTitles {
+-(NSMutableArray *)searchSectionHeaderTitles
+{
+    if (!_searchSectionHeaderTitles) {
+        _searchSectionHeaderTitles = [NSMutableArray new];
+    }
+    return _searchSectionHeaderTitles;
+}
+
+-(NSMutableArray *)sectionFooterTitles {
     if (!_sectionFooterTitles)
     {
         _sectionFooterTitles = [NSMutableArray new];
@@ -84,18 +96,42 @@
     return _sectionFooterTitles;
 }
 
--(NSArray *)sectionHeaderModels
+-(NSMutableArray *)searchSectionFooterTitles {
+    if (!_searchSectionFooterTitles)
+    {
+        _searchSectionFooterTitles = [NSMutableArray new];
+    }
+    return _searchSectionFooterTitles;
+}
+
+-(NSMutableArray *)sectionHeaderModels
 {
     if (!_sectionHeaderModels)
         _sectionHeaderModels = [NSMutableArray new];
     return _sectionHeaderModels;
 }
 
--(NSArray *)sectionFooterModels
+-(NSMutableArray *)searchSectionHeaderModels {
+    if (!_searchSectionHeaderModels)
+    {
+        _searchSectionHeaderModels = [NSMutableArray new];
+    }
+    return _searchSectionHeaderModels;
+}
+
+-(NSMutableArray *)sectionFooterModels
 {
     if (!_sectionFooterModels)
         _sectionFooterModels = [NSMutableArray new];
     return _sectionFooterModels;
+}
+
+-(NSMutableArray *)searchSectionFooterModels {
+    if (!_searchSectionFooterModels)
+    {
+        _searchSectionFooterModels = [NSMutableArray new];
+    }
+    return _searchSectionFooterModels;
 }
 
 -(NSMutableArray *)searchResultSections
@@ -353,26 +389,42 @@
 
 -(id)headerItemAtIndex:(int)index
 {
-    if (index<[self.sectionHeaderModels count])
+    if ([self isSearching])
     {
-        return self.sectionHeaderModels[index];
+        if (index<[self.searchSectionHeaderModels count])
+        {
+            return self.searchSectionHeaderModels[index];
+        }
     }
-    else {
-//        NSLog(@"DTTableViewManager: Header not found at index: %d",index);
-        return nil;
+    else
+    {
+        if (index<[self.sectionHeaderModels count])
+        {
+            return self.sectionHeaderModels[index];
+        }
     }
+    
+    return nil;
 }
 
 -(id)footerItemAtIndex:(int)index
 {
-    if (index<[self.sectionFooterModels count])
+    if ([self isSearching])
     {
-        return self.sectionFooterModels[index];
+        if (index<[self.searchSectionFooterModels count])
+        {
+            return self.searchSectionFooterModels[index];
+        }
     }
-    else {
-//        NSLog(@"DTTableViewManager: Footer not found at index: %d",index);
-        return nil;
+    else
+    {
+        if (index<[self.sectionFooterModels count])
+        {
+            return self.sectionFooterModels[index];
+        }
     }
+    
+    return nil;
 }
 
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath
@@ -508,11 +560,38 @@
     }
 }
 
+-(void)clearSearchHeadersFooters {
+    [self.searchSectionFooterModels removeAllObjects];
+    [self.searchSectionHeaderModels removeAllObjects];
+    [self.searchSectionFooterTitles removeAllObjects];
+    [self.searchSectionHeaderTitles removeAllObjects];
+}
+
+-(void)addSectionHeaderFootersForSection:(int)section
+{
+    if (section<[self.sectionHeaderTitles count])
+    {
+        [self.searchSectionHeaderTitles addObject:self.sectionHeaderTitles[section]];
+    }
+    if (section<[self.sectionFooterTitles count])
+    {
+        [self.searchSectionFooterTitles addObject:self.sectionFooterTitles[section]];
+    }
+    if (section<[self.sectionHeaderModels count])
+    {
+        [self.searchSectionHeaderModels addObject:self.sectionHeaderModels[section]];
+    }
+    if (section<[self.sectionFooterModels count])
+    {
+        [self.searchSectionFooterModels addObject:self.sectionFooterModels[section]];
+    }
+}
+
 // Rebuild searchResultsArray from scratch
 -(NSMutableArray *)searchResultsArray
 {
     NSMutableArray * searchResults = [NSMutableArray array];
-    
+    [self clearSearchHeadersFooters];
     for (int section = 0; section < [self.sections count]; section ++)
     {
         [searchResults addObject:[NSMutableArray array]];
@@ -538,6 +617,10 @@
         if (![[searchResults lastObject] count])
         {
             [searchResults removeLastObject];
+        }
+        else {
+            // Add section header-footer stuff
+            [self addSectionHeaderFootersForSection:section];
         }
     }
     return searchResults;
@@ -889,12 +972,24 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return (section < self.sectionHeaderTitles.count) ? [self.sectionHeaderTitles objectAtIndex:section] : nil;
+    if ([self isSearching])
+    {
+       return (section < self.searchSectionHeaderTitles.count) ? [self.searchSectionHeaderTitles objectAtIndex:section] : nil;
+    }
+    else {
+        return (section < self.sectionHeaderTitles.count) ? [self.sectionHeaderTitles objectAtIndex:section] : nil;
+    }
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return (section < self.sectionFooterTitles.count) ? [self.sectionFooterTitles objectAtIndex:section] : nil;
+    if ([self isSearching])
+    {
+        return (section < self.searchSectionFooterTitles.count) ? [self.searchSectionFooterTitles objectAtIndex:section] : nil;
+    }
+    else {
+        return (section < self.sectionFooterTitles.count) ? [self.sectionFooterTitles objectAtIndex:section] : nil;
+    }
 }
 
 -(NSString *)defaultReuseIdentifierForModel:(id)model

@@ -1,4 +1,5 @@
 #import "DTTableViewManager.h"
+#import "MockTableHeaderFooterView.h"
 
 using namespace Cedar::Matchers;
 
@@ -476,6 +477,121 @@ describe(@"search in multiple sections", ^{
         
         expect(originalTableItems[0]).to(equal(acc3));
     });
+});
+
+describe(@"section headers/footers titles", ^{
+   
+    beforeEach(^{
+        
+        [UIView setAnimationsEnabled:NO];
+        
+        acc1 = [Example exampleWithText:@"London" andDetails:@"England"];
+        acc2 = [Example exampleWithText:@"Tokyo" andDetails:@"Japan"];
+        
+        acc3 = [Example exampleWithText:@"Kyiv" andDetails:@"Ukraine"];
+        acc4 = [Example exampleWithText:@"Moscow" andDetails:@"Russia"];
+        
+        acc5 = [Example exampleWithText:@"Washington D.C." andDetails:@"USA"];
+        acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
+        
+        testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
+        
+        model = [DTTableViewManager new];
+        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
+        
+        [model.sectionHeaderTitles addObjectsFromArray:@[@"header1",
+                                                         @"header2",
+                                                         @"header3"]];
+        
+        [model.sectionFooterTitles addObjectsFromArray:@[@"footer1",
+                                                         @"footer2",
+                                                         @"footer3"]];
+        
+        [model addTableItems:@[acc1,acc2] toSection:0];
+        [model addTableItems:@[acc3,acc4] toSection:1];
+        [model addTableItems:@[acc5,acc6] toSection:2];
+        
+        [model filterTableItemsForSearchString:@"s"];
+    });
+    
+    afterEach(^{
+        [model release];
+        
+        [UIView setAnimationsEnabled:YES];
+    });
+    
+    it(@"should have correct header titles", ^{
+        expect([model tableView:model.tableView titleForHeaderInSection:0]).to(equal(@"header2"));
+        expect([model tableView:model.tableView titleForHeaderInSection:1]).to(equal(@"header3"));
+    });
+    
+    it(@"should have correct footer titles", ^{
+        expect([model tableView:model.tableView titleForFooterInSection:0]).to(equal(@"footer2"));
+        expect([model tableView:model.tableView titleForFooterInSection:1]).to(equal(@"footer3"));
+    });
+
+});
+
+describe(@"section headers/footers models", ^{
+    
+    beforeEach(^{
+        
+        [UIView setAnimationsEnabled:NO];
+        
+        acc1 = [Example exampleWithText:@"London" andDetails:@"England"];
+        acc2 = [Example exampleWithText:@"Tokyo" andDetails:@"Japan"];
+        
+        acc3 = [Example exampleWithText:@"Kyiv" andDetails:@"Ukraine"];
+        acc4 = [Example exampleWithText:@"Moscow" andDetails:@"Russia"];
+        
+        acc5 = [Example exampleWithText:@"Washington D.C." andDetails:@"USA"];
+        acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
+        
+        testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
+        
+        model = [DTTableViewManager new];
+        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
+        
+        [model registerHeaderClass:[MockTableHeaderFooterView class]
+                     forModelClass:[Example class]];
+        [model registerFooterClass:[MockTableHeaderFooterView class]
+                     forModelClass:[Example class]];
+        
+        [model.sectionHeaderModels addObjectsFromArray:@[acc1,acc3,acc5]];
+        [model.sectionFooterModels addObjectsFromArray:@[acc2,acc4,acc6]];
+        [model addTableItems:@[acc1,acc2] toSection:0];
+        [model addTableItems:@[acc3,acc4] toSection:1];
+        [model addTableItems:@[acc5,acc6] toSection:2];
+        
+        [model filterTableItemsForSearchString:@"s"];
+    });
+    
+    afterEach(^{
+        [model release];
+        
+        [UIView setAnimationsEnabled:YES];
+    });
+    
+    it(@"should have correct header models", ^{
+        UIView * view = [model tableView:model.tableView viewForHeaderInSection:0];
+        expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc3));
+        
+        view = [model tableView:model.tableView viewForHeaderInSection:1];
+        expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc5));
+    });
+    
+    it(@"should have correct footer models", ^{
+        UIView * view = [model tableView:model.tableView viewForFooterInSection:0];
+        expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc4));
+        
+        view = [model tableView:model.tableView viewForFooterInSection:1];
+        expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc6));
+    });
+    
 });
 
 SPEC_END

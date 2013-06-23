@@ -243,14 +243,8 @@
 		950659F1174C01CD008AB32D /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				95BCE7DD17770D8D00980281 /* Cells */,
 				958941FC1750B992007CEB5E /* Header footer mocks */,
-				950659F2174C01EF008AB32D /* CellWithoutNib.h */,
-				950659F3174C01EF008AB32D /* CellWithoutNib.m */,
-				950659F5174C0201008AB32D /* CellWithNib.h */,
-				950659F6174C0201008AB32D /* CellWithNib.m */,
-				950659F8174C0219008AB32D /* CellWithNib.xib */,
-				950659FA174C027F008AB32D /* BaseMockCell.h */,
-				950659FB174C027F008AB32D /* BaseMockCell.m */,
 			);
 			name = Mocks;
 			sourceTree = "<group>";
@@ -280,20 +274,8 @@
 		958941FC1750B992007CEB5E /* Header footer mocks */ = {
 			isa = PBXGroup;
 			children = (
-				958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */,
-				958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */,
-				958942001750B9E3007CEB5E /* MockTableHeaderView.xib */,
-				958942021750BAAA007CEB5E /* NiblessTableHeaderView.h */,
-				958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */,
-				958942051750BC08007CEB5E /* MockTableHeaderFooterView.h */,
-				958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */,
-				958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */,
-				9589420A1750BC63007CEB5E /* NiblessTableHeaderFooterView.h */,
-				9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */,
-				9589420F1750C900007CEB5E /* BaseHeaderFooterView.h */,
-				958942101750C901007CEB5E /* BaseHeaderFooterView.m */,
-				958942121750C937007CEB5E /* BaseHeaderView.h */,
-				958942131750C937007CEB5E /* BaseHeaderView.m */,
+				95BCE7DF17770DA400980281 /* iOS 6 */,
+				95BCE7DE17770D9D00980281 /* iOS 5 */,
 			);
 			name = "Header footer mocks";
 			sourceTree = "<group>";
@@ -332,6 +314,48 @@
 				95B3366A1776D8CB00AF0A57 /* Capitals.plist */,
 			);
 			name = Search;
+			sourceTree = "<group>";
+		};
+		95BCE7DD17770D8D00980281 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				950659F2174C01EF008AB32D /* CellWithoutNib.h */,
+				950659F3174C01EF008AB32D /* CellWithoutNib.m */,
+				950659F5174C0201008AB32D /* CellWithNib.h */,
+				950659F6174C0201008AB32D /* CellWithNib.m */,
+				950659F8174C0219008AB32D /* CellWithNib.xib */,
+				950659FA174C027F008AB32D /* BaseMockCell.h */,
+				950659FB174C027F008AB32D /* BaseMockCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		95BCE7DE17770D9D00980281 /* iOS 5 */ = {
+			isa = PBXGroup;
+			children = (
+				958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */,
+				958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */,
+				958942001750B9E3007CEB5E /* MockTableHeaderView.xib */,
+				958942021750BAAA007CEB5E /* NiblessTableHeaderView.h */,
+				958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */,
+				958942121750C937007CEB5E /* BaseHeaderView.h */,
+				958942131750C937007CEB5E /* BaseHeaderView.m */,
+			);
+			name = "iOS 5";
+			sourceTree = "<group>";
+		};
+		95BCE7DF17770DA400980281 /* iOS 6 */ = {
+			isa = PBXGroup;
+			children = (
+				958942051750BC08007CEB5E /* MockTableHeaderFooterView.h */,
+				958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */,
+				958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */,
+				9589420A1750BC63007CEB5E /* NiblessTableHeaderFooterView.h */,
+				9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */,
+				9589420F1750C900007CEB5E /* BaseHeaderFooterView.h */,
+				958942101750C901007CEB5E /* BaseHeaderFooterView.m */,
+			);
+			name = "iOS 6";
 			sourceTree = "<group>";
 		};
 		E638F1051619913B00694FBC /* Models */ = {
