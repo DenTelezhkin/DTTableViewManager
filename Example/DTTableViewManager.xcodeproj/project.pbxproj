@@ -164,7 +164,6 @@
 		95DB1C331763577500050536 /* DTTableViewModelSearching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelSearching.h; path = ../../DTTableViewManager/DTTableViewModelSearching.h; sourceTree = "<group>"; };
 		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
-		E60CA0151684AFEF00F4147E /* DTTableViewCellCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCellCreation.h; path = ../../DTTableViewManager/DTTableViewCellCreation.h; sourceTree = "<group>"; };
 		E60CA0161684AFEF00F4147E /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
 		E60CA0171684AFEF00F4147E /* DTTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewManager.m; path = ../../DTTableViewManager/DTTableViewManager.m; sourceTree = "<group>"; };
 		E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelTransfer.h; path = ../../DTTableViewManager/DTTableViewModelTransfer.h; sourceTree = "<group>"; };
@@ -531,7 +530,6 @@
 				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
 				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,
 				E60CA0141684AFEF00F4147E /* DTCellFactory.m */,
-				E60CA0151684AFEF00F4147E /* DTTableViewCellCreation.h */,
 				E60CA0161684AFEF00F4147E /* DTTableViewManager.h */,
 				E60CA0171684AFEF00F4147E /* DTTableViewManager.m */,
 				E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */,

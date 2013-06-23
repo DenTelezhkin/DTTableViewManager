@@ -46,12 +46,6 @@ describe(@"Datasource spec", ^{
 #define TEST_1 @"test1"
 #define TEST_2 @"test2"
     
-    it(@"should raise exception on init with invalid tableView", ^{
-        ^{
-            [DTTableViewManager managerWithDelegate:model andTableView:nil];
-        } should raise_exception;
-    });
-    
     it(@"should return correct tableItem", ^{
         [model addTableItems:@[acc3,acc2,acc1,acc6,acc4]];
         
@@ -440,16 +434,6 @@ describe(@"Datasource spec", ^{
         
         [model verifyTableItem:acc3
                    atIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] should be_truthy;
-    });
-    
-    
-    it(@"should support all datasource methods", ^{
-        [model respondsToSelector:@selector(tableView:
-                                            commitEditingStyle:
-                                            forRowAtIndexPath:)] should equal(YES);
-        [model respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)] should equal(YES);
-        [model respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)] should equal(YES);
-        [model respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)] should equal(YES);
     });
     
     it(@"should not throw exception if inserting at illegal indexPath", ^{

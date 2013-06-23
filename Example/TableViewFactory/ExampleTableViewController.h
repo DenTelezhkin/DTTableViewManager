@@ -8,11 +8,6 @@
 
 #import "DTTableViewManager.h"
 
-@interface ExampleTableViewController : UIViewController <UITableViewDelegate,
-                                                          UITableViewDataSource,
-                                                          DTTableViewCellCreation>
-{
-}
+@interface ExampleTableViewController : DTTableViewManager
 
-@property (nonatomic,strong) IBOutlet UITableView * tableView;
 @end

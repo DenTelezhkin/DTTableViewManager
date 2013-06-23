@@ -33,8 +33,6 @@
 @property (nonatomic, strong) NSMutableArray * searchResultSections;
 @property (nonatomic, assign) int currentSearchScope;
 @property (nonatomic, copy) NSString * currentSearchString;
-
-@property (nonatomic,weak) id <UITableViewDelegate,UITableViewDataSource, DTTableViewCellCreation> delegate;
 @end
 
 @implementation DTTableViewManager
@@ -48,42 +46,6 @@
         self.currentSearchScope = -1;
     }
     return self;
-}
-
--(id)initWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
-{
-    self = [super init];
-    if (self)
-    {
-        self.delegate =(id <DTTableViewCellCreation, UITableViewDelegate,UITableViewDataSource>) delegate;
-        self.tableView = tableView;
-        tableView.dataSource = self;
-        tableView.delegate = delegate;
-        
-        if (!tableView)
-        {
-            NSLog(@"delegate:%@ has not created tableView before allocating DTTableViewManager",
-                            delegate);
-            NSException * exc =
-                        [NSException exceptionWithName:@"DTTableViewManager: Check your tableView"
-                                                reason:@"Datasource and delegate cannot be nil"
-                                              userInfo:nil];
-            [exc raise];
-        }
-        
-        if (!delegate)
-        {
-            NSLog(@"nil delegate passed to DTTableViewManager");
-        }
-    }
-    return self;
-}
-
-+(id)managerWithDelegate:(id<UITableViewDelegate>)delegate andTableView:(UITableView *)tableView
-{
-    DTTableViewManager * manager = [[DTTableViewManager alloc] initWithDelegate:delegate
-                                                                   andTableView:tableView];
-    return manager;
 }
 
 #pragma mark - getters, setters
@@ -945,11 +907,6 @@
                                                                  inTable:tableView
                                                          reuseIdentifier:reuseIdentifier];
     
-    if ([self.delegate respondsToSelector:@selector(createdCell:forTableView:forRowAtIndexPath:)])
-    {
-        [self.delegate createdCell:cell forTableView:tableView forRowAtIndexPath:indexPath];
-    }
-    
     return cell;
 }
 
@@ -1002,43 +959,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         }
         return [self.searchResultSections lastObject];
     }
-}
-
-#pragma mark - Datasource methods, trampoline to our delegate
-
--(BOOL)delegateRespondsToSelector:(SEL)selector
-{
-    return [self.delegate respondsToSelector:selector];
-}
-
--(void)tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self delegateRespondsToSelector:_cmd])
-    {
-        [self.delegate tableView:tableView
-              commitEditingStyle:editingStyle
-               forRowAtIndexPath:indexPath];
-    }
-}
-
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self delegateRespondsToSelector:_cmd])
-    {
-        return [self.delegate tableView:tableView canEditRowAtIndexPath:indexPath];
-    }
-    return NO;
-}
-
--(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self delegateRespondsToSelector:_cmd])
-    {
-        return [self.delegate tableView:tableView canMoveRowAtIndexPath:indexPath];
-    }
-    return NO;
 }
 
 #warning document this!

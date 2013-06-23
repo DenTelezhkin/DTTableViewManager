@@ -24,7 +24,6 @@
 // THE SOFTWARE.
 
 #import "DTTableViewModelTransfer.h"
-#import "DTTableViewCellCreation.h"
 #import "DTTableViewModelSearching.h"
 
 /**
@@ -35,18 +34,8 @@
  # General steps
  - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model.
  - Every cell class should be mapped to model class using mapping methods.
- - `UITableView` datasource should be set to DTTableViewManager object.
- 
- # Subclassing
- 
- This is recommended and easier approach. In this case `UITableView` delegate and datasource is your controller. Any `UITableViewDatasource` and `UITableViewDelegate` method can be overridden in your controller.
- 
- # Separate manager
- 
- This is needed, when your controller inherits from custom class, and you need to have `DTTableViewManager` as a separate object. In this case you should create `DTTableViewManager` object using [DTTableViewManager managerWithDelegate:andTableView:], and make it a property in your controller. Current implementation sets `UITableView`'s delegate and datasource property to `DTTableViewManager` object. Delegate methods are then trampolined to your controller if it implements them.
- 
- There's a `DTTableViewCellCreation` protocol that can be used to modify cell after it has been created.
- 
+ - `UITableView` datasource and delegate is your DTTableViewManager subclass.
+  
  ## Managing table items
  
  Every action that is done to table items - add, delete, insert etc. is applied immediately. There's no need to manually reload data on your table view. Group insertion, addition or deletion is processed inside `UITableView` `beginUpdates` and `endUpdates` block.
@@ -115,34 +104,6 @@
  Array of footer models, used in UITableViewDelegate `tableView:viewForFooterInSection:` method. All views, that will be created for these models, should conform to `DTTableViewModelTransfer` protocol and will be called with `updateWithModel:` method. After header/footer models are set, you will need to manually reload table with `reloadData` or `reloadSections:withRowAnimation` method.
  */
 @property (nonatomic,strong) NSMutableArray * sectionFooterModels;
-
-
-///---------------------------------------
-/// @name Initialization
-///---------------------------------------
-
-/**
- Initializer for DTTableViewManager. Can be used when you are using it as a separate object.
- 
- @param delegate Your controller, that wishes to get delegate and datasource calls from `DTTableViewManager`.
- 
- @param tableView tableView on your controller you want to manager.
- 
- @return DTTableViewManager object
- */
--(id)initWithDelegate:(id <UITableViewDelegate>)delegate andTableView:(UITableView *)tableView;
-
-/**
- Returns autoreleased DTTableViewManager object. Can be used when you are using it as a separate object.
- 
- @param delegate Your controller, that wishes to get delegate and datasource calls from `DTTableViewmanager`.
- 
- @param tableView tableView on your controller you want to manager.
- 
- @return autoreleased DTTableViewManager object
- */
-+(id)managerWithDelegate:(id <UITableViewDelegate>)delegate andTableView:(UITableView *)tableView;
-
 
 ///---------------------------------------
 /// @name Mapping
