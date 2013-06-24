@@ -52,7 +52,7 @@
  
  # Automatic
  
- Attach UISearchBarDelegate to your `DTTableViewManager` subclass. That's it, you've got search implemented!
+Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That's it, you've got search implemented!
  
  # Manual
  

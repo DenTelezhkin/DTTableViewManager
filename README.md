@@ -11,10 +11,17 @@ DTTableViewManager
 
 Powerful architecture for UITableView controllers. The idea is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
 
+## Features
 
-## Why?
+* Simple handling of custom table view cells, headers and footers
+* Super easy search 
+* Automatic datasource and interface synchronization
+* Dramatic decrease of code amount needed for any UITableView implementation.
 
-But first off, why do we need this? 
+The best way to understand, what we are trying to achieve here, is to take a look at example, provided in Example folder.
+
+
+## How?
 
 Lets imagine view controller, that manages table view presentation on itself. 
 
@@ -35,33 +42,32 @@ In the end, view controller is left with following stuff:
 * Register mapping between data model class and cell class.
 * Populate table view with data models
 
-When view controller manages insertion, deletion, or moves items, it always struggles to keep datasource and table view in sync. DTTableViewManager does this automatically. View controller handles data models - table view is automatically updated.
+Okay, enough talking, let's dive into code. Simplest way for view controller is to subclass DTTableViewManager, set it's tableView property, delegate, datasource and off you go!
 
-Okay, enough talking, let's dive into code!  
+## Mapping
 
-## How?
-
-Simplest way for view controller is to subclass DTTableViewManager, set it's tableView property, delegate, datasource and off you go!
-
-#### Mapping data models to cells
-	
-Registering cell mapping:
+* Cells
 
 ```objective-c
 [self registerCellClass:[Cell class] forModelClass:[Model class]];
 ```
 
-This will also register nib with "Cell" name, if it exists. 
+* Headers/Footers
 
-#### Adding data models to the table view
+```objective-c
+[self registerHeaderClass:[HeaderView class] forModelClass:[Model class]];
+[self registerFooterClass:[FooterView class] forModelClass:[Model class]];
+```
 
-##### One item
+This will also register nibs with "Cell", "HeaderView" and "FooterView" name, if any of them exist. 
+
+## Managing table items
+
+##### Adding one item
 
 ```objective-c
 [self addTableItem:model];
-	
 [self addTableItem:model withRowAnimation:UITableViewRowAnimationAutomatic;
-	
 [self addTableItem:model toSection:0];
 ```
 	
@@ -71,7 +77,7 @@ All methods above are just shortcuts to method:
 [self addTableItem:model toSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
 ```
 
-##### Array of items
+##### Adding array of items
 
 ```objective-c
 [self addTableItems:@[model1,model2]];
@@ -107,14 +113,26 @@ These methods are shortcuts to method:
 [self insertTableItem:model toIndexPath:indexPath];
 [self insertTableItem:model toIndexPath:indexPath withRowAnimation:UITableViewRowAnimationAutomatic];
 ```	
+
+## Awesome search!
 	
+There are two ways of using search. In both cases your data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewManager will know, when to show data models.
+
+#### Automatic
+
+Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That's it, you've got search implemented!
+
+#### Manual
+
+Any time you need your models sorted, call method filterTableItemsForSearchString:. Every data model in the table will be called with method shouldShowInSearchResultsForSearchString:inScopeIndex: and tableView will be automatically updated with results.
+
 ## What else do you have?
 
 List is not full, for additional features like:
 
-* Search for tableItem / tableItems, getting all items from one section etc.
 * Section headers/footers titles and custom views
 * Section manipulations (delete, reload, move)
+* Search for tableItem / tableItems, getting all items from one section etc.
 
 head on to documentation.
 	
@@ -122,7 +140,6 @@ head on to documentation.
 
 * This approach requires every table view cell to have it's data model object. 
 * Every cell after creation gets called with method updateWithModel: and receives data model to represent. 
-* You can make your controller a subclass of DTTableViewManager, or you can make it a property on your controller and subclass from whatever you need. 
 * Any datasource/delegate method can be overridden in your controller.  
 
 ## Requirements
@@ -135,10 +152,6 @@ head on to documentation.
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
 	pod 'DTTableViewManager'
-	
-## Example 
-
-Example project is available in Example folder. 
 
 ## Documentation
 
@@ -148,9 +161,7 @@ You can view documentation [online](http://denheadless.github.com/DTTableViewMan
 
 ## Roadmap
 
-Features, that will be implemented in next version:
-
-- Easy search in UITableView.
+- NSFetchedResultsController and CoreData support
 		
 ## Thanks
 
