@@ -885,10 +885,10 @@
 				GCC_PREFIX_HEADER = "TableViewFactory/DTTableViewManager-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "TableViewFactory/DTTableViewManager-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -904,11 +904,11 @@
 				GCC_PREFIX_HEADER = "TableViewFactory/DTTableViewManager-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "TableViewFactory/DTTableViewManager-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

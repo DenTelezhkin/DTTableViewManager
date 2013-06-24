@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
 //
 
-#import "DTTableViewManager.h"
+#import "BaseExampleController.h"
 
-@interface CustomHeaderController : DTTableViewManager
+@interface CustomHeaderController : BaseExampleController
 
 @end
