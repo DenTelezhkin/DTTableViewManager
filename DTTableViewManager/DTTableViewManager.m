@@ -1065,8 +1065,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     }
 }
 
-#warning document this!
-
 - (void)tableView:(UITableView *)tableView
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
       toIndexPath:(NSIndexPath *)destinationIndexPath
