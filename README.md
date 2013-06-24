@@ -17,6 +17,7 @@ Powerful architecture for UITableView controllers. The idea is to move all datas
 * Super easy search 
 * Automatic datasource and interface synchronization
 * Dramatic decrease of code amount needed for any UITableView implementation.
+* Good unit test coverage
 
 The best way to understand, what we are trying to achieve here, is to take a look at example, provided in Example folder.
 
@@ -124,7 +125,19 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
 
 #### Manual
 
-Any time you need your models sorted, call method filterTableItemsForSearchString:. Every data model in the table will be called with method shouldShowInSearchResultsForSearchString:inScopeIndex: and tableView will be automatically updated with results.
+Any time you need your models sorted, call method 
+
+```objective-c
+filterTableItemsForSearchString:
+```
+
+Every data model in the table will be called with method 
+
+```objective-c
+shouldShowInSearchResultsForSearchString:inScopeIndex:
+```
+
+and tableView will be automatically updated with results.
 
 ## What else do you have?
 
