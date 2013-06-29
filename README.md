@@ -168,7 +168,7 @@ Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
 ## Documentation
 
-You can view documentation [online](http://denheadless.github.com/DTTableViewManager/) or you can install it locally using following atom link: [http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom](http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom). And, of course, [cocoadocs](http://www.cocoadocs.org) is also a great option!
+You can view documentation [online](http://denheadless.github.com/DTTableViewManager/) or you can install it locally using following atom link: [http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom](http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom). And, of course, [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager/1.0.0/) is also a great option!
 
 [Changelog](https://github.com/DenHeadless/DTTableViewManager/wiki/Changelog)
 
