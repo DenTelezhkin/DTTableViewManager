@@ -70,12 +70,7 @@ This will also register nibs with "Cell", "HeaderView" and "FooterView" name, if
 [self addTableItem:model];
 [self addTableItem:model withRowAnimation:UITableViewRowAnimationAutomatic;
 [self addTableItem:model toSection:0];
-```
-	
-All methods above are just shortcuts to method:
-
-```objective-c
-[self addTableItem:model toSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
+[self addTableItem:model toSection:0 withRowAnimation:UITableViewRowAnimationFade];
 ```
 
 ##### Adding array of items
@@ -83,12 +78,7 @@ All methods above are just shortcuts to method:
 ```objective-c
 [self addTableItems:@[model1,model2]];
 [self addTableItems:@[model1,model2] toSection:0];
-[self addTableItems:@[model1,model2] withRowAnimation:UITableViewRowAnimationAutomatic];
-```
-
-These methods are shortcuts to method:
-
-```objective-c
+[self addTableItems:@[model1,model2] withRowAnimation:UITableViewRowAnimationFade];
 [self addTableItems:@[model1,model2] toSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
 ```
 
