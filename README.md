@@ -142,7 +142,7 @@ head on to documentation.
 ## Notes on implementation
 
 * This approach requires every table view cell to have it's data model object. 
-* Every cell after creation gets called with method updateWithModel: and receives data model to represent. 
+* Every cell, header or footer view after creation gets called with method updateWithModel: and receives data model to represent. 
 * Any datasource/delegate method can be overridden in your controller.  
 
 ## Requirements

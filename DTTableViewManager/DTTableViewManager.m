@@ -26,9 +26,6 @@
 #import "DTCellFactory.h"
 
 @interface DTTableViewManager ()
-
-- (NSMutableArray *)getValidTableSection:(NSInteger)index;
-
 @property (nonatomic,strong) NSMutableArray * sections;
 @property (nonatomic, strong) NSMutableArray * searchResultSections;
 @property (nonatomic, strong) NSMutableArray * searchSectionHeaderTitles;
@@ -58,7 +55,7 @@
 -(DTCellFactory *)cellFactory {
     if (!_cellFactory)
     {
-        _cellFactory = [[DTCellFactory alloc] init];
+        _cellFactory = [DTCellFactory new];
     }
     return _cellFactory;
 }
@@ -137,7 +134,7 @@
 -(NSMutableArray *)searchResultSections
 {
     if (!_searchResultSections)
-        _searchResultSections = [NSMutableArray array];
+        _searchResultSections = [NSMutableArray new];
     return _searchResultSections;
 }
 
@@ -155,7 +152,6 @@
 
 -(BOOL)tableViewRespondsToCellClassRegistration
 {
-    // iOS 6.0
     if ([self.tableView respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)])
     {
         return YES;
@@ -194,12 +190,22 @@
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:nibName
                                                      ofType:@"nib"];
-    
     if (path)
     {
         return YES;
     }
     return NO;
+}
+
+-(void)throwCannotFindNibExceptionForNibName:(NSString *)nibName
+{
+    NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
+                         nibName];
+    NSException * exc =
+    [NSException exceptionWithName:@"DTTableViewManager API exception"
+                            reason:reason
+                          userInfo:nil];
+    [exc raise];
 }
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
@@ -231,13 +237,7 @@
 
     if (![self nibExistsWIthNibName:nibName])
     {
-        NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
-                             NSStringFromClass(cellClass)];
-        NSException * exc =
-        [NSException exceptionWithName:@"DTTableViewManager API exception"
-                                reason:reason
-                              userInfo:nil];
-        [exc raise];
+        [self throwCannotFindNibExceptionForNibName:nibName];
     }
     
     [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
@@ -261,13 +261,7 @@
 
     if (![self nibExistsWIthNibName:nibName])
     {
-        NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
-                             nibName];
-        NSException * exc =
-        [NSException exceptionWithName:@"DTTableViewManager API exception"
-                                reason:reason
-                              userInfo:nil];
-        [exc raise];
+        [self throwCannotFindNibExceptionForNibName:nibName];
     }
     
     if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
@@ -295,13 +289,7 @@
     
     if (![self nibExistsWIthNibName:nibName])
     {
-        NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
-                             nibName];
-        NSException * exc =
-        [NSException exceptionWithName:@"DTTableViewManager API exception"
-                                reason:reason
-                              userInfo:nil];
-        [exc raise];
+        [self throwCannotFindNibExceptionForNibName:nibName];
     }
     
     if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
@@ -590,12 +578,13 @@
 // Rebuild searchResultsArray from scratch
 -(NSMutableArray *)searchResultsArray
 {
-    NSMutableArray * searchResults = [NSMutableArray array];
     [self clearSearchHeadersFooters];
+    
+    NSMutableArray * searchResults = [NSMutableArray array];
+    
     for (int section = 0; section < [self.sections count]; section ++)
     {
         [searchResults addObject:[NSMutableArray array]];
-        
         NSMutableArray * rows = self.sections[section];
         
         for (int row = 0; row < [rows count];row ++)
@@ -606,7 +595,6 @@
             {
                 BOOL shouldShow = [item shouldShowInSearchResultsForSearchString:self.currentSearchString
                                                                     inScopeIndex:self.currentSearchScope];
-                
                 if (shouldShow)
                 {
                     [[searchResults lastObject] addObject:item];
@@ -776,15 +764,6 @@
 
 #pragma  mark - reload/replace items
 
--(void)reloadTableSections
-{
-    for (int i = 0; i<self.sections.count ; i++)
-    {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:i]
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
 -(void)replaceTableItem:(NSObject *)tableItemToReplace
           withTableItem:(NSObject *)replacingTableItem
 {
@@ -925,7 +904,6 @@
     [self.sections removeObject:validSectionFrom];
     [self.sections insertObject:validSectionFrom atIndex:indexTo];
     
-    
     if ([self isSearching])
     {
         [self searchAndReload];
@@ -952,7 +930,6 @@
     // Update datasource
     [self.sections removeObjectsAtIndexes:indexSet];
     
-    
     // Update interface
     if ([self isSearching])
     {
@@ -966,8 +943,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *sectionArray = [self tableItemsInSection:section];
-    return sectionArray.count;
+    return [[self tableItemsInSection:section] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -1000,12 +976,6 @@
     UITableViewCell *cell = [self.cellFactory cellForModel:model
                                                    inTable:tableView];
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark - private

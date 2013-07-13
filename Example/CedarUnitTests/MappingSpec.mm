@@ -277,7 +277,12 @@ describe(@"Foundation class clusters", ^{
     describe(@"NSString", ^{
        
         beforeEach(^{
-            [model registerCellClass:[CellWithNib class] forModelClass:[NSString class]];
+            [model registerCellClass:[CellWithNib class]
+                       forModelClass:[NSString class]];
+            [model registerHeaderClass:[MockTableHeaderView class]
+                         forModelClass:[NSString class]];
+            [model registerFooterClass:[MockTableHeaderView class]
+                         forModelClass:[NSString class]];
         });
         
         it(@"should accept constant strings", ^{
@@ -297,6 +302,20 @@ describe(@"Foundation class clusters", ^{
                 NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
                 [string appendString:@",second"];
                 [model addTableItem:string];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSString header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:@"foo"];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSString footer ", ^{
+            ^{
+                [model.sectionFooterModels addObject:@"bar"];
+                [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
     });
@@ -304,6 +323,8 @@ describe(@"Foundation class clusters", ^{
     describe(@"NSMutableString", ^{
         beforeEach(^{
             [model registerCellClass:[CellWithNib class] forModelClass:[NSMutableString class]];
+            [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSMutableString class]];
+            [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSMutableString class]];
         });
         
         it(@"should accept constant strings", ^{
@@ -323,6 +344,21 @@ describe(@"Foundation class clusters", ^{
                 NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
                 [string appendString:@",second"];
                 [model addTableItem:string];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableString header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:@"foo"];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableString footer ", ^{
+            ^{
+                [model.sectionFooterModels addObject:@"bar"];
+                [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
     });

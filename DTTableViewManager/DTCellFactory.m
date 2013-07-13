@@ -63,19 +63,19 @@
 - (void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass
 {
     [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
-                                    forKey:NSStringFromClass(modelClass)];
+                                    forKey:[self reuseIdentifierForClass:modelClass]];
 }
 
 -(void)setHeaderClassMapping:(Class)headerClass forModelClass:(Class)modelClass
 {
     [self.headerMappingsDictionary setObject:NSStringFromClass(headerClass)
-                                      forKey:NSStringFromClass(modelClass)];
+                                      forKey:[self reuseIdentifierForClass:modelClass]];
 }
 
 -(void)setFooterClassMapping:(Class)footerClass forModelClass:(Class)modelClass
 {
     [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
-                                      forKey:NSStringFromClass(modelClass)];
+                                      forKey:[self reuseIdentifierForClass:modelClass]];
 }
 
 #pragma mark - reuse
@@ -96,7 +96,7 @@
                                   forModel:(id)model
                            reuseIdentifier:(NSString *)reuseIdentifier
 {
-   if ([table respondsToSelector:@selector(dequeueReusableHeaderFooterViewWithIdentifier:)])
+   if ([UITableViewHeaderFooterView class])
    {
        UIView <DTTableViewModelTransfer> * view =
        [table dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];

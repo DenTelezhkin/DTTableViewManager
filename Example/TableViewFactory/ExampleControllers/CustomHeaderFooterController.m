@@ -22,7 +22,7 @@
                 forModelClass:[CustomHeaderFooterModel class]];
     
     [self registerFooterClass:[CustomHeaderFooterView class]
-                           forModelClass:[CustomHeaderFooterModel class]];
+                forModelClass:[CustomHeaderFooterModel class]];
     
     [self addTableItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
     [self addTableItem:[Example exampleWithText:@"Section 2" andDetails:nil]
