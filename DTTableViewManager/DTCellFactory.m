@@ -112,8 +112,9 @@
 
 - (UITableViewCell *)cellForModel:(NSObject *)model
                           inTable:(UITableView *)table
-                  reuseIdentifier:(NSString *)reuseIdentifier
 {
+    NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
+    
     UITableViewCell *cell = [self reuseCellFromTable:table
                                             forModel:model
                                      reuseIdentifier:reuseIdentifier];
@@ -123,27 +124,29 @@
 
 -(UIView *)headerViewForModel:(id)model
                   inTableView:(UITableView *)tableView
-              reuseIdentifier:(NSString *)reuseIdentifier
 {
+    NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
+    
     UIView * view = [self reuseHeaderFooterViewFromTable:tableView
                                                 forModel:model
                                          reuseIdentifier:reuseIdentifier];
-    return view ? view : [self headerViewForModel:model inTableView:tableView];
+    return view ? view : [self headerViewFromXibForModel:model];
 }
 
 -(UIView *)footerViewForModel:(id)model
                   inTableView:(UITableView *)tableView
-              reuseIdentifier:(NSString *)reuseIdentifier
 {
+    NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
+    
     UIView * view = [self reuseHeaderFooterViewFromTable:tableView forModel:model
                                          reuseIdentifier:reuseIdentifier];
     
-    return view? view : [self footerViewForModel:model inTableView:tableView];
+    return view? view : [self footerViewFromXibForModel:model];
 }
 
 - (Class)cellClassForModel:(NSObject *)model
 {
-    NSString *modelClassName = [self classStringForModel:model];
+    NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
     if ([self.cellMappingsDictionary objectForKey:modelClassName])
     {
         return NSClassFromString([self.cellMappingsDictionary objectForKey:modelClassName]);
@@ -159,7 +162,7 @@
 
 -(Class)headerClassForModel:(id)model
 {
-    NSString *modelClassName = NSStringFromClass([model class]);
+    NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
     if ([self.headerMappingsDictionary objectForKey:modelClassName])
     {
         return NSClassFromString([self.headerMappingsDictionary objectForKey:modelClassName]);
@@ -174,7 +177,7 @@
 
 -(Class)footerClassForModel:(id)model
 {
-    NSString *modelClassName = NSStringFromClass([model class]);
+    NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
     if ([self.footerMappingsDictionary objectForKey:modelClassName])
     {
         return NSClassFromString([self.footerMappingsDictionary objectForKey:modelClassName]);
@@ -189,9 +192,27 @@
 
 #pragma mark -
 
--(NSString *)classStringForModel:(id)model
+// http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CocoaFundamentals/CocoaObjects/CocoaObjects.html#//apple_ref/doc/uid/TP40002974-CH4-SW34
+
+-(NSString *)reuseIdentifierForClass:(Class)class
 {
-    return NSStringFromClass([model class]);
+    NSString * classString = NSStringFromClass(class);
+    
+    if ([classString isEqualToString:@"__NSCFConstantString"] ||
+        [classString isEqualToString:@"__NSCFString"] ||
+        class == [NSMutableString class])
+    {
+        return @"NSString";
+    }
+    return classString;
+}
+
+-(void)throwModelProtocolExceptionForClass:(Class)class
+{
+    NSString *reason = [NSString stringWithFormat:@"class '%@' does not conform to DTTableViewModelProtocol",
+                        class];
+    @throw [NSException exceptionWithName:@"API misuse"
+                                   reason:reason userInfo:nil];
 }
 
 - (UITableViewCell *)cellWithModel:(id)model reuseIdentifier:(NSString *)reuseIdentifier
@@ -209,16 +230,12 @@
         
         return cell;
     }
-    NSString *reason = [NSString stringWithFormat:@"cell class '%@' does not conform DTTableViewModelProtocol",
-                        cellClass];
-    @throw [NSException exceptionWithName:@"API misuse"
-                                   reason:reason userInfo:nil];
     
+    [self throwModelProtocolExceptionForClass:cellClass];
     return nil;
 }
 
--(UIView *)headerViewForModel:(id)model
-                  inTableView:(UITableView *)tableView
+-(UIView *)headerViewFromXibForModel:(id)model
 {
     Class headerClass = [self headerClassForModel:model];
     
@@ -231,15 +248,12 @@
         
         return headerView;
     }
-    NSString *reason = [NSString stringWithFormat:@"header class '%@' does not conform DTTableViewModelProtocol",
-                        headerClass];
-    @throw [NSException exceptionWithName:@"API misuse"
-                                   reason:reason userInfo:nil];
     
+    [self throwModelProtocolExceptionForClass:headerClass];
     return nil;
 }
 
--(UIView *)footerViewForModel:(id)model inTableView:(UITableView *)tableView
+-(UIView *)footerViewFromXibForModel:(id)model
 {
     Class footerClass = [self footerClassForModel:model];
     
@@ -252,11 +266,7 @@
         
         return footerView;
     }
-    NSString *reason = [NSString stringWithFormat:@"footer class '%@' does not conform DTTableViewModelProtocol",
-                        footerClass];
-    @throw [NSException exceptionWithName:@"API misuse"
-                                   reason:reason userInfo:nil];
-    
+    [self throwModelProtocolExceptionForClass:footerClass];
     return nil;
 }
 

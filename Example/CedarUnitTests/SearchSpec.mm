@@ -556,18 +556,20 @@ describe(@"section headers/footers models", ^{
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
         
-        [model registerHeaderClass:[MockTableHeaderFooterView class]
-                     forModelClass:[Example class]];
-        [model registerFooterClass:[MockTableHeaderFooterView class]
-                     forModelClass:[Example class]];
-        
-        [model.sectionHeaderModels addObjectsFromArray:@[acc1,acc3,acc5]];
-        [model.sectionFooterModels addObjectsFromArray:@[acc2,acc4,acc6]];
-        [model addTableItems:@[acc1,acc2] toSection:0];
-        [model addTableItems:@[acc3,acc4] toSection:1];
-        [model addTableItems:@[acc5,acc6] toSection:2];
-        
-        [model filterTableItemsForSearchString:@"s"];
+        if ([UITableViewHeaderFooterView class]) { // iOS 6 and higher test
+            [model registerHeaderClass:[MockTableHeaderFooterView class]
+                         forModelClass:[Example class]];
+            [model registerFooterClass:[MockTableHeaderFooterView class]
+                         forModelClass:[Example class]];
+            
+            [model.sectionHeaderModels addObjectsFromArray:@[acc1,acc3,acc5]];
+            [model.sectionFooterModels addObjectsFromArray:@[acc2,acc4,acc6]];
+            [model addTableItems:@[acc1,acc2] toSection:0];
+            [model addTableItems:@[acc3,acc4] toSection:1];
+            [model addTableItems:@[acc5,acc6] toSection:2];
+            
+            [model filterTableItemsForSearchString:@"s"];
+        }
     });
     
     afterEach(^{
@@ -577,19 +579,23 @@ describe(@"section headers/footers models", ^{
     });
     
     it(@"should have correct header models", ^{
-        UIView * view = [model tableView:model.tableView viewForHeaderInSection:0];
-        expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc3));
-        
-        view = [model tableView:model.tableView viewForHeaderInSection:1];
-        expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc5));
+        if ([UITableViewHeaderFooterView class]) {
+            UIView * view = [model tableView:model.tableView viewForHeaderInSection:0];
+            expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc3));
+            
+            view = [model tableView:model.tableView viewForHeaderInSection:1];
+            expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc5));
+        }
     });
     
     it(@"should have correct footer models", ^{
-        UIView * view = [model tableView:model.tableView viewForFooterInSection:0];
-        expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc4));
-        
-        view = [model tableView:model.tableView viewForFooterInSection:1];
-        expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc6));
+        if ([UITableViewHeaderFooterView class]) {
+            UIView * view = [model tableView:model.tableView viewForFooterInSection:0];
+            expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc4));
+            
+            view = [model tableView:model.tableView viewForFooterInSection:1];
+            expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc6));
+        }
     });
     
 });

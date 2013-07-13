@@ -92,14 +92,6 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  */
 @property (nonatomic, strong) IBOutlet UISearchBar * searchBar;
 
-
-/**
- Set this property to YES if you don't want to reuse cells.
- 
- @warning By default, `reuseIdentifier` for cells is set to `NSStringFromClass(<model class>)`
- */
-@property (nonatomic,assign) BOOL doNotReuseCells;
-
 /**
  Array of NSString header titles, used in UITableViewDatasource `tableView:titleForHeaderInSection:` method.
  */

@@ -209,7 +209,7 @@
     if ([self tableViewRespondsToCellClassRegistration])
     {
         [self.tableView registerClass:cellClass
-               forCellReuseIdentifier:NSStringFromClass([modelClass class])];
+               forCellReuseIdentifier:[self.cellFactory reuseIdentifierForClass:modelClass]];
     }
     
     if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
@@ -241,7 +241,7 @@
     }
     
     [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
-         forCellReuseIdentifier:NSStringFromClass([modelClass class])];
+         forCellReuseIdentifier:[self.cellFactory reuseIdentifierForClass:modelClass]];
     
     [self.cellFactory setCellClassMapping:cellClass
                             forModelClass:modelClass];
@@ -274,7 +274,7 @@
         [headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
- forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
+ forHeaderFooterViewReuseIdentifier:[self.cellFactory reuseIdentifierForClass:modelClass]];
     }
     
     [self.cellFactory setHeaderClassMapping:headerClass
@@ -308,7 +308,7 @@
         [footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
- forHeaderFooterViewReuseIdentifier:NSStringFromClass([modelClass class])];
+ forHeaderFooterViewReuseIdentifier:[self.cellFactory reuseIdentifierForClass:modelClass]];
     }
     
     [self.cellFactory setFooterClassMapping:footerClass
@@ -992,25 +992,13 @@
     }
 }
 
--(NSString *)defaultReuseIdentifierForModel:(id)model
-{
-    return NSStringFromClass([model class]);
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSObject *model = [self tableItemAtIndexPath:indexPath];
-    
-    NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
-    
-    if (self.doNotReuseCells)
-        reuseIdentifier = nil;
-    
+
     UITableViewCell *cell = [self.cellFactory cellForModel:model
-                                                   inTable:tableView
-                                           reuseIdentifier:reuseIdentifier];
-    
+                                                   inTable:tableView];
     return cell;
 }
 
@@ -1085,11 +1073,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
         return nil;
     }
     
-    NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
-    
     UIView * headerView = [self.cellFactory headerViewForModel:model
-                                                   inTableView:tableView
-                                               reuseIdentifier:reuseIdentifier];
+                                                   inTableView:tableView];
     return headerView;
 }
 
@@ -1100,12 +1085,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     if (!model) {
         return nil;
     }
-    
-    NSString * reuseIdentifier = [self defaultReuseIdentifierForModel:model];
-    
     UIView * footerView = [self.cellFactory footerViewForModel:model
-                                                   inTableView:tableView
-                                               reuseIdentifier:reuseIdentifier];
+                                                   inTableView:tableView];
     return footerView;
 }
 

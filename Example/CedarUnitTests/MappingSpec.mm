@@ -253,4 +253,79 @@ describe(@"mapping tests", ^{
     
 });
 
+describe(@"Foundation class clusters", ^{
+    
+    __block DTTableViewManager *model;
+    
+    beforeEach(^{
+        
+        [UIView setAnimationsEnabled:NO];
+        
+        model = [DTTableViewManager new];
+        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView.dataSource = model;
+        model.tableView.delegate = model;
+        [model.tableView reloadData];
+        
+    });
+    
+    afterEach(^{
+        [model release];
+        [UIView setAnimationsEnabled:YES];
+    });
+    
+    describe(@"NSString", ^{
+       
+        beforeEach(^{
+            [model registerCellClass:[CellWithNib class] forModelClass:[NSString class]];
+        });
+        
+        it(@"should accept constant strings", ^{
+            ^{
+                [model addTableItem:@""];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept non-empty strings", ^{
+            ^{
+                [model addTableItem:@"not empty"];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept mutable string", ^{
+            ^{
+                NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
+                [string appendString:@",second"];
+                [model addTableItem:string];
+            } should_not raise_exception;
+        });
+    });
+    
+    describe(@"NSMutableString", ^{
+        beforeEach(^{
+            [model registerCellClass:[CellWithNib class] forModelClass:[NSMutableString class]];
+        });
+        
+        it(@"should accept constant strings", ^{
+            ^{
+                [model addTableItem:@""];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept non-empty strings", ^{
+            ^{
+                [model addTableItem:@"not empty"];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept mutable string", ^{
+            ^{
+                NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
+                [string appendString:@",second"];
+                [model addTableItem:string];
+            } should_not raise_exception;
+        });
+    });
+});
+
 SPEC_END

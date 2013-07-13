@@ -40,18 +40,14 @@
 -(void)setFooterClassMapping:(Class)footerClass forModelClass:(Class)modelClass;
 
 - (UITableViewCell *)cellForModel:(NSObject *)model
-                          inTable:(UITableView *)table
-                  reuseIdentifier:(NSString *)reuseIdentifier;
+                          inTable:(UITableView *)table;
 
 -(UIView *)headerViewForModel:(id)model
-                  inTableView:(UITableView *)tableView
-              reuseIdentifier:(NSString *)reuseIdentifier;
+                  inTableView:(UITableView *)tableView;
 
 -(UIView *)footerViewForModel:(id)model
-                  inTableView:(UITableView*)tableView
-              reuseIdentifier:(NSString *)reuseIdentifier;
+                  inTableView:(UITableView*)tableView;
 
-
-- (Class)cellClassForModel:(NSObject *)model;
+-(NSString *)reuseIdentifierForClass:(Class)class;
 
 @end
