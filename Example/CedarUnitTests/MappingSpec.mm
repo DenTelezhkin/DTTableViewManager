@@ -321,6 +321,7 @@ describe(@"Foundation class clusters", ^{
     });
     
     describe(@"NSMutableString", ^{
+        
         beforeEach(^{
             [model registerCellClass:[CellWithNib class] forModelClass:[NSMutableString class]];
             [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSMutableString class]];
@@ -358,6 +359,55 @@ describe(@"Foundation class clusters", ^{
         it(@"should accept NSMutableString footer ", ^{
             ^{
                 [model.sectionFooterModels addObject:@"bar"];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+    });
+    
+    describe(@"NSNumber", ^{
+       
+        beforeEach(^{
+            [model registerCellClass:[CellWithNib class] forModelClass:[NSNumber class]];
+            [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSNumber class]];
+            [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSNumber class]];
+        });
+        
+        it(@"should accept nsnumber for cells", ^{
+            ^{
+                [model addTableItem:@5];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept bool number for cells", ^{
+            ^{
+                [model addTableItem:@YES];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept number for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:@5];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept number for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:@5];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept BOOL for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:@YES];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept bool for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:@YES];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });

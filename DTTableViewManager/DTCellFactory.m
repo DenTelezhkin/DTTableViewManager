@@ -204,6 +204,11 @@
     {
         return @"NSString";
     }
+    if ([classString isEqualToString:@"__NSCFNumber"] ||
+        [classString isEqualToString:@"__NSCFBoolean"])
+    {
+        return @"NSNumber";
+    }
     return classString;
 }
 
