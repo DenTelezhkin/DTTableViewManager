@@ -209,6 +209,12 @@
     {
         return @"NSNumber";
     }
+    if ([classString isEqualToString:@"__NSDictionaryI"] ||
+        [classString isEqualToString:@"__NSDictionaryM"] ||
+        class == [NSMutableDictionary class])
+    {
+        return @"NSDictionary";
+    }
     return classString;
 }
 

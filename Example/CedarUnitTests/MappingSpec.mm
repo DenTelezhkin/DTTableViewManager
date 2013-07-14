@@ -412,6 +412,104 @@ describe(@"Foundation class clusters", ^{
             } should_not raise_exception;
         });
     });
+    
+    describe(@"NSDictionary", ^{
+        
+        beforeEach(^{
+            [model registerCellClass:[CellWithNib class] forModelClass:[NSDictionary class]];
+            [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSDictionary class]];
+            [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSDictionary class]];
+        });
+        
+        it(@"should accept nsdictionary for cells", ^{
+            ^{
+                [model addTableItem:@{@1:@2}];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept nsdictionary for cells", ^{
+            ^{
+                [model addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSDictionary for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:@{}];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSDictionary for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:@{}];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableDictionary for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:[[@{} mutableCopy] autorelease]];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableDictionary for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:[[@{} mutableCopy] autorelease]];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+    });
+    
+    describe(@"NSMutableDictionary", ^{
+        
+        beforeEach(^{
+            [model registerCellClass:[CellWithNib class] forModelClass:[NSMutableDictionary class]];
+            [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSMutableDictionary class]];
+            [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSMutableDictionary class]];
+        });
+        
+        it(@"should accept nsdictionary for cells", ^{
+            ^{
+                [model addTableItem:@{@1:@2}];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept nsdictionary for cells", ^{
+            ^{
+                [model addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSDictionary for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:@{}];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSDictionary for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:@{}];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableDictionary for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:[[@{} mutableCopy] autorelease]];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableDictionary for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:[[@{} mutableCopy] autorelease]];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+    });
 });
 
 SPEC_END
