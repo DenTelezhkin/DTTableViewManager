@@ -421,13 +421,13 @@ describe(@"Foundation class clusters", ^{
             [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSDictionary class]];
         });
         
-        it(@"should accept nsdictionary for cells", ^{
+        it(@"should accept NSDictionary for cells", ^{
             ^{
                 [model addTableItem:@{@1:@2}];
             } should_not raise_exception;
         });
         
-        it(@"should accept nsdictionary for cells", ^{
+        it(@"should accept NSMutableDictionary for cells", ^{
             ^{
                 [model addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
             } should_not raise_exception;
@@ -470,13 +470,13 @@ describe(@"Foundation class clusters", ^{
             [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSMutableDictionary class]];
         });
         
-        it(@"should accept nsdictionary for cells", ^{
+        it(@"should accept NSDictionary for cells", ^{
             ^{
                 [model addTableItem:@{@1:@2}];
             } should_not raise_exception;
         });
         
-        it(@"should accept nsdictionary for cells", ^{
+        it(@"should accept NSDictionary for cells", ^{
             ^{
                 [model addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
             } should_not raise_exception;
@@ -509,6 +509,106 @@ describe(@"Foundation class clusters", ^{
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
+    });
+    
+    describe(@"NSArray", ^{
+        
+        beforeEach(^{
+            [model registerCellClass:[CellWithNib class] forModelClass:[NSArray class]];
+            [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSArray class]];
+            [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSArray class]];
+        });
+        
+        it(@"should accept NSArray for cells", ^{
+            ^{
+                [model addTableItem:@[]];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableArray for cells", ^{
+            ^{
+                [model addTableItem:[[@[] mutableCopy] autorelease]];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSArray for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:@[]];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableArray for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:[[@[] mutableCopy] autorelease]];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSArray for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:@[]];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableArray for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:[[@[] mutableCopy] autorelease]];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+        
+    });
+    
+    describe(@"NSMutableArray", ^{
+        
+        beforeEach(^{
+            [model registerCellClass:[CellWithNib class] forModelClass:[NSMutableArray class]];
+            [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSMutableArray class]];
+            [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSMutableArray class]];
+        });
+        
+        it(@"should accept NSArray for cells", ^{
+            ^{
+                [model addTableItem:@[]];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableArray for cells", ^{
+            ^{
+                [model addTableItem:[[@[] mutableCopy] autorelease]];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSArray for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:@[]];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableArray for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:[[@[] mutableCopy] autorelease]];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSArray for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:@[]];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSMutableArray for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:[[@[] mutableCopy] autorelease]];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+        
     });
 });
 

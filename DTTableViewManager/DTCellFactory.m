@@ -215,6 +215,12 @@
     {
         return @"NSDictionary";
     }
+    if ([classString isEqualToString:@"__NSArrayI"] ||
+        [classString isEqualToString:@"__NSArrayM"] ||
+        class == [NSMutableArray class])
+    {
+        return @"NSArray";
+    }
     return classString;
 }
 
