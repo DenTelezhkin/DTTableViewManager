@@ -7,24 +7,25 @@
 //
 
 #import "CustomHeaderView.h"
-#import "CustomHeaderFooterModel.h"
 @implementation CustomHeaderView
 
 -(void)updateWithModel:(id)model
 {
-    CustomHeaderFooterModel * customModel = model;
+    NSNumber * headerKindNumber = model;
     
-    if (customModel.viewKind == kHeaderKind)
-    {
-        self.backgroundColor = [UIColor colorWithPatternImage:
-                                                      [UIImage imageNamed:@"textured_paper.png"]];
-        self.titleLabel.text = @"Awesome custom header";
-    }
-    if (customModel.viewKind == kFooterKind)
-    {
-        self.backgroundColor = [UIColor colorWithPatternImage:
-                                                      [UIImage imageNamed:@"mochaGrunge.png"]];
-        self.titleLabel.text = @"Not so awesome custom footer";
+    switch ([headerKindNumber intValue]) {
+        case kHeaderKind:
+            self.backgroundColor = [UIColor colorWithPatternImage:
+                                    [UIImage imageNamed:@"textured_paper.png"]];
+            self.titleLabel.text = @"Awesome custom header";
+            break;
+        case  kFooterKind:
+            self.backgroundColor = [UIColor colorWithPatternImage:
+                                    [UIImage imageNamed:@"mochaGrunge.png"]];
+            self.titleLabel.text = @"Not so awesome custom footer";
+            break;
+        default:
+            break;
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DTTableViewModelTransfer.h"
+#import "CustomHeaderView.h"
 
 @interface CustomHeaderFooterView : UITableViewHeaderFooterView
                                     <DTTableViewModelTransfer>

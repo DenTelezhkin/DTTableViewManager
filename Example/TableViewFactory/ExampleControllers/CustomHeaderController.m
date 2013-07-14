@@ -7,7 +7,6 @@
 //
 
 #import "CustomHeaderController.h"
-#import "CustomHeaderFooterModel.h"
 #import "CustomHeaderView.h"
 
 @implementation CustomHeaderController
@@ -19,27 +18,16 @@
     self.title = @"Custom header/footer";
     
     [self registerHeaderClass:[CustomHeaderView class]
-                forModelClass:[CustomHeaderFooterModel class]];
+                forModelClass:[NSNumber class]];
     [self registerFooterClass:[CustomHeaderView class]
-                forModelClass:[CustomHeaderFooterModel class]];
+                forModelClass:[NSNumber class]];
     
     [self addTableItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
     [self addTableItem:[Example exampleWithText:@"Section 2" andDetails:nil]
              toSection:1];
     
-    [self.sectionHeaderModels addObjectsFromArray:
-        @[
-            [CustomHeaderFooterModel headerModel],
-            [CustomHeaderFooterModel headerModel]
-        ]
-     ];
-    [self.sectionFooterModels addObjectsFromArray:
-        @[
-            [CustomHeaderFooterModel footerModel],
-            [CustomHeaderFooterModel footerModel]
-        ]
-     ];
-    
+    [self.sectionHeaderModels addObjectsFromArray:@[@(kHeaderKind),@(kHeaderKind)]];
+    [self.sectionFooterModels addObjectsFromArray:@[@(kFooterKind),@(kFooterKind)]];
     [self.tableView reloadData];
 }
 
