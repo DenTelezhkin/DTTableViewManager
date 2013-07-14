@@ -4,12 +4,10 @@
 
 ![CocoaPod version](http://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png)
 
-
-
 DTTableViewManager
 ================
 
-Powerful architecture for UITableView controllers. The idea is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
+The idea of this project is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
 
 ## Features
 
@@ -61,6 +59,8 @@ Okay, enough talking, let's dive into code. Simplest way for view controller is 
 ```
 
 This will also register nibs with "Cell", "HeaderView" and "FooterView" name, if any of them exist. 
+
+[Note](https://github.com/DenHeadless/DTTableViewManager/wiki/Foundation-classes-as-data-models-for-DTTableViewManager) on using Foundation classes as data models.
 
 ## Managing table items
 
@@ -154,7 +154,7 @@ head on to documentation.
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager'
+	pod 'DTTableViewManager', '~> 1.2.0'
 
 ## Documentation
 
