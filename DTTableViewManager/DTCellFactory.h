@@ -31,23 +31,28 @@
  You shouldn't call any of it's methods. Use `DTTableViewManager` API's.
  */
 
+@protocol DTTableViewFactoryDelegate
+-(UITableView *)tableView;
+@end
+
 @interface DTCellFactory : NSObject
 
--(void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass;
+-(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass;
+-(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass;
+-(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass;
 
--(void)setHeaderClassMapping:(Class)headerClass forModelClass:(Class)modelClass;
+-(void)registerNibNamed:(NSString *)nibName forCellClass:(Class)cellClass modelClass:(Class)modelClass;
 
--(void)setFooterClassMapping:(Class)footerClass forModelClass:(Class)modelClass;
+-(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass modelClass:(Class)modelClass;
 
-- (UITableViewCell *)cellForModel:(NSObject *)model
-                          inTable:(UITableView *)table;
+-(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass modelClass:(Class)modelClass;
 
--(UIView *)headerViewForModel:(id)model
-                  inTableView:(UITableView *)tableView;
+- (UITableViewCell *)cellForModel:(NSObject *)model;
 
--(UIView *)footerViewForModel:(id)model
-                  inTableView:(UITableView*)tableView;
+-(UIView *)headerViewForModel:(id)model;
 
--(NSString *)reuseIdentifierForClass:(Class)class;
+-(UIView *)footerViewForModel:(id)model;
+
+@property (nonatomic, weak) id <DTTableViewFactoryDelegate> delegate;
 
 @end

@@ -58,17 +58,158 @@
     return _footerMappingsDictionary;
 }
 
+#pragma mark - check for features
+
+-(BOOL)tableViewRespondsToCellClassRegistration
+{
+    if ([[self.delegate tableView] respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)])
+    {
+        return YES;
+    }
+    return NO;
+}
+
+-(BOOL)tableViewRespondsToHeaderFooterViewNibRegistration
+{
+    if ([[self.delegate tableView] respondsToSelector:
+         @selector(registerNib:forHeaderFooterViewReuseIdentifier:)])
+    {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)checkClassForModelTransferProtocolSupport:(Class)class
+{
+    if (![class conformsToProtocol:@protocol(DTTableViewModelTransfer)])
+    {
+        NSString * reason = [NSString stringWithFormat:@"class %@ should conform\n"
+                             "to DTTableViewModelTransfer protocol",
+                             NSStringFromClass(class)];
+        NSException * exc =
+        [NSException exceptionWithName:@"DTTableViewManager API exception"
+                                reason:reason
+                              userInfo:nil];
+        [exc raise];
+    }
+}
+
+-(BOOL)nibExistsWIthNibName:(NSString *)nibName
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:nibName
+                                                     ofType:@"nib"];
+    if (path)
+    {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)throwCannotFindNibExceptionForNibName:(NSString *)nibName
+{
+    NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
+                         nibName];
+    NSException * exc =
+    [NSException exceptionWithName:@"DTTableViewManager API exception"
+                            reason:reason
+                          userInfo:nil];
+    [exc raise];
+}
+
 #pragma mark - class mapping
 
-- (void)setCellClassMapping:(Class)cellClass forModelClass:(Class)modelClass
+-(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
+    [self checkClassForModelTransferProtocolSupport:cellClass];
+    
+    if ([self tableViewRespondsToCellClassRegistration])
+    {
+        [[self.delegate tableView] registerClass:cellClass
+               forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+    }
+    
+    if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
+    {
+        [self registerNibNamed:NSStringFromClass(cellClass)
+                  forCellClass:cellClass
+                    modelClass:modelClass];
+    }
+    
     [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
                                     forKey:[self reuseIdentifierForClass:modelClass]];
 }
 
--(void)setHeaderClassMapping:(Class)headerClass forModelClass:(Class)modelClass
+-(void)registerNibNamed:(NSString *)nibName
+           forCellClass:(Class)cellClass
+             modelClass:(Class)modelClass
 {
+    [self checkClassForModelTransferProtocolSupport:cellClass];
+    
+    if (![self nibExistsWIthNibName:nibName])
+    {
+        [self throwCannotFindNibExceptionForNibName:nibName];
+    }
+    
+    [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
+         forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+    
+    [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
+                                    forKey:[self reuseIdentifierForClass:modelClass]];
+}
+
+-(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
+{
+    [self registerNibNamed:NSStringFromClass(headerClass)
+            forHeaderClass:headerClass
+                modelClass:modelClass];
+}
+
+-(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass
+             modelClass:(Class)modelClass
+{
+    [self checkClassForModelTransferProtocolSupport:headerClass];
+    
+    if (![self nibExistsWIthNibName:nibName])
+    {
+        [self throwCannotFindNibExceptionForNibName:nibName];
+    }
+    
+    if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
+        [headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
+    {
+        [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
+ forHeaderFooterViewReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+    }
+    
     [self.headerMappingsDictionary setObject:NSStringFromClass(headerClass)
+                                      forKey:[self reuseIdentifierForClass:modelClass]];
+}
+
+-(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
+{
+    [self registerNibNamed:NSStringFromClass(footerClass)
+            forFooterClass:footerClass
+                modelClass:modelClass];
+}
+
+-(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass
+             modelClass:(Class)modelClass
+{
+    [self checkClassForModelTransferProtocolSupport:footerClass];
+    
+    if (![self nibExistsWIthNibName:nibName])
+    {
+        [self throwCannotFindNibExceptionForNibName:nibName];
+    }
+    
+    if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
+        [footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
+    {
+        [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
+ forHeaderFooterViewReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+    }
+    
+    [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
                                       forKey:[self reuseIdentifierForClass:modelClass]];
 }
 
@@ -80,11 +221,10 @@
 
 #pragma mark - reuse
 
-- (UITableViewCell *)reuseCellFromTable:(UITableView *)table
-                               forModel:(id)model
+- (UITableViewCell *)reuseCellforModel:(id)model
                         reuseIdentifier:(NSString *)reuseIdentifier
 {
-    UITableViewCell <DTTableViewModelTransfer> * cell =  [table dequeueReusableCellWithIdentifier:
+    UITableViewCell <DTTableViewModelTransfer> * cell =  [[self.delegate tableView] dequeueReusableCellWithIdentifier:
                                                           reuseIdentifier];
     [cell updateWithModel:model];
     return cell;
@@ -92,14 +232,13 @@
 
 
 //This method should return nil if no class is registered
--(UIView *)reuseHeaderFooterViewFromTable:(UITableView *)table
-                                  forModel:(id)model
+-(UIView *)reuseHeaderFooterViewForModel:(id)model
                            reuseIdentifier:(NSString *)reuseIdentifier
 {
    if ([UITableViewHeaderFooterView class])
    {
        UIView <DTTableViewModelTransfer> * view =
-       [table dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+       [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
        
        [view updateWithModel:model];
        
@@ -111,34 +250,29 @@
 #pragma mark - actions
 
 - (UITableViewCell *)cellForModel:(NSObject *)model
-                          inTable:(UITableView *)table
 {
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
     
-    UITableViewCell *cell = [self reuseCellFromTable:table
-                                            forModel:model
+    UITableViewCell *cell = [self reuseCellforModel:model
                                      reuseIdentifier:reuseIdentifier];
 
     return cell ? cell : [self cellWithModel:model reuseIdentifier:reuseIdentifier];
 }
 
 -(UIView *)headerViewForModel:(id)model
-                  inTableView:(UITableView *)tableView
 {
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
     
-    UIView * view = [self reuseHeaderFooterViewFromTable:tableView
-                                                forModel:model
+    UIView * view = [self reuseHeaderFooterViewForModel:model
                                          reuseIdentifier:reuseIdentifier];
     return view ? view : [self headerViewFromXibForModel:model];
 }
 
 -(UIView *)footerViewForModel:(id)model
-                  inTableView:(UITableView *)tableView
 {
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
     
-    UIView * view = [self reuseHeaderFooterViewFromTable:tableView forModel:model
+    UIView * view = [self reuseHeaderFooterViewForModel:model
                                          reuseIdentifier:reuseIdentifier];
     
     return view? view : [self footerViewFromXibForModel:model];

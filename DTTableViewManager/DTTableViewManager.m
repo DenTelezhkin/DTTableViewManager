@@ -26,6 +26,7 @@
 #import "DTCellFactory.h"
 
 @interface DTTableViewManager ()
+<DTTableViewFactoryDelegate>
 @property (nonatomic,strong) NSMutableArray * sections;
 @property (nonatomic, strong) NSMutableArray * searchResultSections;
 @property (nonatomic, strong) NSMutableArray * searchSectionHeaderTitles;
@@ -58,6 +59,7 @@ static BOOL loggingEnabled = YES;
     if (!_cellFactory)
     {
         _cellFactory = [DTCellFactory new];
+        _cellFactory.delegate = self;
     }
     return _cellFactory;
 }
@@ -150,159 +152,42 @@ static BOOL loggingEnabled = YES;
     }
 }
 
-#pragma mark - check for features
-
--(BOOL)tableViewRespondsToCellClassRegistration
-{
-    if ([self.tableView respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)])
-    {
-        return YES;
-    }
-    return NO;
-}
-
--(BOOL)tableViewRespondsToHeaderFooterViewNibRegistration
-{
-    if ([self.tableView respondsToSelector:
-         @selector(registerNib:forHeaderFooterViewReuseIdentifier:)])
-    {
-        return YES;
-    }
-    return NO;
-}
-
--(void)checkClassForModelTransferProtocolSupport:(Class)class
-{
-    if (![class conformsToProtocol:@protocol(DTTableViewModelTransfer)])
-    {
-        NSString * reason = [NSString stringWithFormat:@"class %@ should conform\n"
-                             "to DTTableViewModelTransfer protocol",
-                             NSStringFromClass(class)];
-        NSException * exc =
-        [NSException exceptionWithName:@"DTTableViewManager API exception"
-                                reason:reason
-                              userInfo:nil];
-        [exc raise];
-    }
-}
-
 #pragma mark - mapping
-
--(BOOL)nibExistsWIthNibName:(NSString *)nibName
-{
-    NSString *path = [[NSBundle mainBundle] pathForResource:nibName
-                                                     ofType:@"nib"];
-    if (path)
-    {
-        return YES;
-    }
-    return NO;
-}
-
--(void)throwCannotFindNibExceptionForNibName:(NSString *)nibName
-{
-    NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
-                         nibName];
-    NSException * exc =
-    [NSException exceptionWithName:@"DTTableViewManager API exception"
-                            reason:reason
-                          userInfo:nil];
-    [exc raise];
-}
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
-    [self checkClassForModelTransferProtocolSupport:cellClass];
-    
-    if ([self tableViewRespondsToCellClassRegistration])
-    {
-        [self.tableView registerClass:cellClass
-               forCellReuseIdentifier:[self.cellFactory reuseIdentifierForClass:modelClass]];
-    }
-    
-    if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
-    {
-       [self registerNibNamed:NSStringFromClass(cellClass)
-                 forCellClass:cellClass
-                   modelClass:modelClass];
-    }
-    
-    [self.cellFactory setCellClassMapping:cellClass
-                            forModelClass:modelClass];
-}
-
--(void)registerNibNamed:(NSString *)nibName
-           forCellClass:(Class)cellClass
-             modelClass:(Class)modelClass
-{
-    [self checkClassForModelTransferProtocolSupport:cellClass];
-
-    if (![self nibExistsWIthNibName:nibName])
-    {
-        [self throwCannotFindNibExceptionForNibName:nibName];
-    }
-    
-    [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
-         forCellReuseIdentifier:[self.cellFactory reuseIdentifierForClass:modelClass]];
-    
-    [self.cellFactory setCellClassMapping:cellClass
-                            forModelClass:modelClass];
+    [self.cellFactory registerCellClass:cellClass forModelClass:modelClass];
 }
 
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
 {
-    [self registerNibNamed:NSStringFromClass(headerClass)
-            forHeaderClass:headerClass
-                modelClass:modelClass];
-}
-
--(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass
-             modelClass:(Class)modelClass
-{
-    [self checkClassForModelTransferProtocolSupport:headerClass];
-
-    if (![self nibExistsWIthNibName:nibName])
-    {
-        [self throwCannotFindNibExceptionForNibName:nibName];
-    }
-    
-    if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
-        [headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
-    {
-        [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
- forHeaderFooterViewReuseIdentifier:[self.cellFactory reuseIdentifierForClass:modelClass]];
-    }
-    
-    [self.cellFactory setHeaderClassMapping:headerClass
-                              forModelClass:modelClass];
+    [self.cellFactory registerHeaderClass:headerClass forModelClass:modelClass];
 }
 
 -(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
 {
-    [self registerNibNamed:NSStringFromClass(footerClass)
-            forFooterClass:footerClass
-                modelClass:modelClass];
+    [self.cellFactory registerFooterClass:footerClass forModelClass:modelClass];
 }
 
--(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass
-             modelClass:(Class)modelClass
+-(void)registerNibNamed:(NSString *)nibName forCellClass:(Class)cellClass modelClass:(Class)modelClass
 {
-    [self checkClassForModelTransferProtocolSupport:footerClass];
-    
-    if (![self nibExistsWIthNibName:nibName])
-    {
-        [self throwCannotFindNibExceptionForNibName:nibName];
-    }
-    
-    if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
-        [footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
-    {
-        [self.tableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
- forHeaderFooterViewReuseIdentifier:[self.cellFactory reuseIdentifierForClass:modelClass]];
-    }
-    
-    [self.cellFactory setFooterClassMapping:footerClass
-                              forModelClass:modelClass];
+    [self.cellFactory registerNibNamed:nibName
+                          forCellClass:cellClass
+                            modelClass:modelClass];
+}
+
+-(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass modelClass:(Class)modelClass
+{
+    [self.cellFactory registerNibNamed:nibName
+                        forHeaderClass:headerClass
+                            modelClass:modelClass];
+}
+
+-(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass modelClass:(Class)modelClass
+{
+    [self.cellFactory registerNibNamed:nibName
+                        forFooterClass:footerClass
+                            modelClass:modelClass];
 }
 
 #pragma mark - search
@@ -995,8 +880,7 @@ static BOOL loggingEnabled = YES;
 {
     NSObject *model = [self tableItemAtIndexPath:indexPath];
 
-    UITableViewCell *cell = [self.cellFactory cellForModel:model
-                                                   inTable:tableView];
+    UITableViewCell *cell = [self.cellFactory cellForModel:model];
     return cell;
 }
 
@@ -1065,8 +949,7 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
         return nil;
     }
     
-    UIView * headerView = [self.cellFactory headerViewForModel:model
-                                                   inTableView:tableView];
+    UIView * headerView = [self.cellFactory headerViewForModel:model];
     return headerView;
 }
 
@@ -1077,8 +960,7 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     if (!model) {
         return nil;
     }
-    UIView * footerView = [self.cellFactory footerViewForModel:model
-                                                   inTableView:tableView];
+    UIView * footerView = [self.cellFactory footerViewForModel:model];
     return footerView;
 }
 
@@ -1111,6 +993,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 {
     [self filterTableItemsForSearchString:searchBar.text inScope:selectedScope];
 }
+
+#pragma mark - logging
 
 +(void)setLogging:(BOOL)isEnabled
 {

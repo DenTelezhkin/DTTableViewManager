@@ -36,5 +36,20 @@
     [self.searchBar resignFirstResponder];
 }
 
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [self.searchBar setShowsCancelButton:YES animated:YES];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self.searchBar resignFirstResponder];
+}
+
 
 @end
