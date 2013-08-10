@@ -14,6 +14,9 @@ SPEC_BEGIN(MappingSpecs)
 
 describe(@"mapping tests", ^{
     
+    
+    [DTTableViewManager setLogging:NO];
+    
     describe(@"cell mapping from code", ^{
         
         __block DTTableViewManager *model;

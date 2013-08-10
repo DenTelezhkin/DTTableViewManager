@@ -14,6 +14,9 @@ __block Example * acc5;
 __block Example * acc6;
 __block Example * testModel;
 
+
+[DTTableViewManager setLogging:NO];
+
 describe(@"search in first section", ^{
     
     beforeEach(^{

@@ -83,8 +83,6 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  
  Table view that will present your data models.
  */
-
-
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 
 /*
@@ -566,5 +564,9 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  */
 - (void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
+/**
+ Method to enable/disable logging. Logging is on by default, and will print out any critical messages, that DTTableViewManager is encountering. Call this method, if you want to turn logging off. It is enough to call this method once, and this value will be used by all instances of DTTableViewManager.
+ */
++(void)setLogging:(BOOL)isEnabled;
 
 @end

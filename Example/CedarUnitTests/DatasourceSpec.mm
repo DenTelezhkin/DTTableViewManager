@@ -16,9 +16,9 @@ describe(@"Datasource spec", ^{
     __block Example * acc5;
     __block Example * acc6;
     
+    [DTTableViewManager setLogging:NO];
     
     beforeEach(^{
-        
         [UIView setAnimationsEnabled:NO];
         
         model = [DTTableViewManager new];

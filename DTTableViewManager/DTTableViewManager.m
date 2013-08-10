@@ -37,6 +37,8 @@
 @property (nonatomic, retain) DTCellFactory * cellFactory;
 @end
 
+static BOOL loggingEnabled = YES;
+
 @implementation DTTableViewManager
 
 #pragma mark - initialize, clean
@@ -423,7 +425,9 @@
         section = [self tableItemsInSection:indexPath.section];
     }
     else {
-        NSLog(@"DTTableViewManager: Section not found while searching for table item");
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: Section not found while searching for table item");
+        }
         return nil;
     }
     if (indexPath.row < [section count])
@@ -431,7 +435,9 @@
         return [section objectAtIndex:indexPath.row];
     }
     else {
-        NSLog(@"DTTableViewManager: Row not found while searching for table item");
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: Row not found while searching for table item");
+        }
         return nil;
     }
 }
@@ -444,7 +450,9 @@
         section = [self tableItemsInOriginalSection:indexPath.section];
     }
     else {
-        NSLog(@"DTTableViewManager: Section not found while searching for table item");
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: Section not found while searching for table item");
+        }
         return nil;
     }
     if (indexPath.row < [section count])
@@ -452,7 +460,9 @@
         return [section objectAtIndex:indexPath.row];
     }
     else {
-        NSLog(@"DTTableViewManager: Row not found while searching for table item");
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: Row not found while searching for table item");
+        }
         return nil;
     }
 }
@@ -462,7 +472,9 @@
     NSIndexPath * indexPath = [self indexPathOfItem:tableItem inArray:[self currentSections]];
     if (!indexPath)
     {
-        NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+        }
         return nil;
     }
     else {
@@ -475,7 +487,9 @@
     NSIndexPath * indexPath = [self indexPathOfItem:tableItem inArray:self.sections];
     if (!indexPath)
     {
-        NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+        }
         return nil;
     }
     else {
@@ -493,8 +507,10 @@
         NSIndexPath * foundIndexPath = [self indexPathOfTableItem:[tableItems objectAtIndex:i]];
         if (!foundIndexPath)
         {
-            NSLog(@"DTTableViewManager: object %@ not found",
+            if ([self loggingEnabled]) {
+                NSLog(@"DTTableViewManager: object %@ not found",
                   [tableItems objectAtIndex:i]);
+            }
         }
         else {
             [indexPaths addObject:foundIndexPath];
@@ -512,8 +528,10 @@
         NSIndexPath * foundIndexPath = [self originalIndexPathOfTableItem:[tableItems objectAtIndex:i]];
         if (!foundIndexPath)
         {
-            NSLog(@"DTTableViewManager: object %@ not found",
+            if ([self loggingEnabled]) {
+                NSLog(@"DTTableViewManager: object %@ not found",
                   [tableItems objectAtIndex:i]);
+            }
         }
         else {
             [indexPaths addObject:foundIndexPath];
@@ -531,7 +549,6 @@
         return [sectionsArray objectAtIndex:section];
     }
     else {
-        //        NSLog(@"DTTableViewManager: section %d not found",section);
         return @[];
     }
 }
@@ -543,7 +560,6 @@
         return [self.sections objectAtIndex:section];
     }
     else {
-        //        NSLog(@"DTTableViewManager: section %d not found",section);
         return @[];
     }
 }
@@ -743,10 +759,12 @@
     
     if ([array count] < indexPath.row)
     {
-        NSLog(@"DTTableViewManager: failed to insert item for indexPath section: %d, row: %d, only %d items in section",
-              indexPath.section,
-              indexPath.row,
-              [array count]);
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: failed to insert item for indexPath section: %d, row: %d, only %d items in section",
+                                                              indexPath.section,
+                                                              indexPath.row,
+                                                              [array count]);
+        }
         return;
     }
     [array insertObject:tableItem atIndex:indexPath.row];
@@ -785,7 +803,9 @@
         [section replaceObjectAtIndex:originalIndexPath.row withObject:replacingTableItem];
     }
     else {
-        NSLog(@"DTTableViewManager: failed to replace item %@ at indexPath: %@",replacingTableItem,originalIndexPath);
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: failed to replace item %@ at indexPath: %@",replacingTableItem,originalIndexPath);
+        }
         return;
     }
     
@@ -842,7 +862,9 @@
         [section removeObjectAtIndex:originalIndexPath.row];
     }
     else {
-        NSLog(@"DTTableViewManager: item to delete: %@ was not found in table view",tableItem);
+        if ([self loggingEnabled]) {
+            NSLog(@"DTTableViewManager: item to delete: %@ was not found in table view",tableItem);
+        }
         return;
     }
     
@@ -1088,6 +1110,16 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 -(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     [self filterTableItemsForSearchString:searchBar.text inScope:selectedScope];
+}
+
++(void)setLogging:(BOOL)isEnabled
+{
+    loggingEnabled = isEnabled;
+}
+
+-(BOOL)loggingEnabled
+{
+    return loggingEnabled;
 }
 
 @end
