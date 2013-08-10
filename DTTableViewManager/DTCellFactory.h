@@ -26,14 +26,18 @@
 #import <Foundation/Foundation.h>
 
 /**
- `DTCellFactory` is a singleton object that is used to create cells for your tableView.
-
- You shouldn't call any of it's methods. Use `DTTableViewManager` API's.
+ Protocol, used by DTCellFactory to access tableView property on DTTableViewManager instance.
  */
 
 @protocol DTTableViewFactoryDelegate
 -(UITableView *)tableView;
 @end
+
+/**
+ `DTCellFactory` is a singleton object that is used to create cells for your tableView.
+ 
+ You shouldn't call any of it's methods. Use `DTTableViewManager` API's.
+ */
 
 @interface DTCellFactory : NSObject
 
