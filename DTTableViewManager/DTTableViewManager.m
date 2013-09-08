@@ -429,23 +429,35 @@ static BOOL loggingEnabled = YES;
 {
     NSMutableArray * sectionsArray = [self currentSections];
     
-    if (section<[sectionsArray count])
+    if ([sectionsArray count] > section)
     {
-        return [sectionsArray objectAtIndex:section];
+        return sectionsArray[section];
     }
-    else {
-        return @[];
+    else if ([sectionsArray count] == section)
+    {
+        [sectionsArray addObject:[NSMutableArray array]];
+        return [sectionsArray lastObject];
+    }
+    else
+    {
+        return nil;
     }
 }
 
 -(NSArray *)tableItemsInOriginalSection:(int)section
 {
-    if (section<[self.sections count])
+    if ([self.sections count] > section)
     {
-        return [self.sections objectAtIndex:section];
+        return self.sections[section];
     }
-    else {
-        return @[];
+    else if ([self.sections count] == section)
+    {
+        [self.sections addObject:[NSMutableArray array]];
+        return [self.sections lastObject];
+    }
+    else
+    {
+        return nil;
     }
 }
 
