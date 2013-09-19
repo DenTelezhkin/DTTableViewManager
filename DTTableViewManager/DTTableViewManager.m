@@ -210,7 +210,7 @@ static BOOL loggingEnabled = YES;
 }
 
 -(void)filterTableItemsForSearchString:(NSString *)searchString
-                               inScope:(int)scopeNumber
+                               inScope:(NSInteger)scopeNumber
 {
     BOOL wereSearching = [self isSearching];
     
@@ -240,29 +240,29 @@ static BOOL loggingEnabled = YES;
     [self.tableView reloadData];
 }
 
--(int)numberOfTableItemsInSection:(NSInteger)section
+-(NSInteger)numberOfTableItemsInSection:(NSInteger)section
 {
     NSArray * itemsInSection = [self tableItemsInSection:section];
     return [itemsInSection count];
 }
 
--(int)numberOfTableItemsInOriginalSection:(NSInteger)section
+-(NSInteger)numberOfTableItemsInOriginalSection:(NSInteger)section
 {
     NSArray * itemsInSection = [self tableItemsInOriginalSection:section];
     return [itemsInSection count];
 }
 
--(int)numberOfSections
+-(NSInteger)numberOfSections
 {
     return [[self currentSections] count];
 }
 
--(int)numberOfOriginalSections
+-(NSInteger)numberOfOriginalSections
 {
     return [self.sections count];
 }
 
--(id)headerItemAtIndex:(int)index
+-(id)headerItemAtIndex:(NSInteger)index
 {
     if ([self isSearching])
     {
@@ -282,7 +282,7 @@ static BOOL loggingEnabled = YES;
     return nil;
 }
 
--(id)footerItemAtIndex:(int)index
+-(id)footerItemAtIndex:(NSInteger)index
 {
     if ([self isSearching])
     {
@@ -425,7 +425,7 @@ static BOOL loggingEnabled = YES;
     return indexPaths;
 }
 
-- (NSArray *)tableItemsInSection:(int)section
+- (NSArray *)tableItemsInSection:(NSInteger)section
 {
     NSMutableArray * sectionsArray = [self currentSections];
     
@@ -444,7 +444,7 @@ static BOOL loggingEnabled = YES;
     }
 }
 
--(NSArray *)tableItemsInOriginalSection:(int)section
+-(NSArray *)tableItemsInOriginalSection:(NSInteger)section
 {
     if ([self.sections count] > section)
     {
@@ -468,7 +468,7 @@ static BOOL loggingEnabled = YES;
     [self.searchSectionHeaderTitles removeAllObjects];
 }
 
--(void)addSectionHeaderFootersForSection:(int)section
+-(void)addSectionHeaderFootersForSection:(NSInteger)section
 {
     if (section<[self.sectionHeaderTitles count])
     {
@@ -576,7 +576,7 @@ static BOOL loggingEnabled = YES;
     // Update original datasource
     NSMutableArray *array = [self getValidTableSection:section];
     
-    int itemsCountInSection = [array count];
+    NSInteger itemsCountInSection = [array count];
     
     [array addObject:tableItem];
     
@@ -657,10 +657,10 @@ static BOOL loggingEnabled = YES;
     if ([array count] < indexPath.row)
     {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: failed to insert item for indexPath section: %d, row: %d, only %d items in section",
-                                                              indexPath.section,
-                                                              indexPath.row,
-                                                              [array count]);
+            NSLog(@"DTTableViewManager: failed to insert item for indexPath section: %ld, row: %ld, only %lu items in section",
+                                                              (long)indexPath.section,
+                                                              (long)indexPath.row,
+                                                              (unsigned long)[array count]);
         }
         return;
     }
@@ -815,7 +815,7 @@ static BOOL loggingEnabled = YES;
     return [self numberOfSections];
 }
 
--(void)moveSection:(int)indexFrom toSection:(int)indexTo
+-(void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo
 {
     NSMutableArray * validSectionFrom = [self getValidTableSection:indexFrom];
     [self getValidTableSection:indexTo];
@@ -906,7 +906,7 @@ static BOOL loggingEnabled = YES;
     }
     else
     {
-        for (int i = self.sections.count; i <= index ; i++)
+        for (NSInteger i = self.sections.count; i <= index ; i++)
         {
             //Update datasource
             NSMutableArray *newSection = [NSMutableArray array];
@@ -927,7 +927,7 @@ static BOOL loggingEnabled = YES;
         return (NSMutableArray*) self.searchResultSections[index];
     }
     else {
-        for (int i = self.searchResultSections.count; i <= index ; i++)
+        for (NSInteger i = self.searchResultSections.count; i <= index ; i++)
         {
             //Update datasource
             NSMutableArray *newSection = [NSMutableArray array];

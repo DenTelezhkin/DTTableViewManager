@@ -208,7 +208,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  @param scopeNumber Scope number of UISearchBar
  */
 -(void)filterTableItemsForSearchString:(NSString *)searchString
-                               inScope:(int)scopeNumber;
+                               inScope:(NSInteger)scopeNumber;
 
 /**
  If item exists at `indexPath`, it's model will be returned. If section or row does not exist, method will return `nil`. If this method is called when search is active, it will return model with indexPath in filtered table.
@@ -277,7 +277,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  
  @return array of table items in section. Empty array if section does not exist.
  */
-- (NSArray *)tableItemsInSection:(int)section;
+- (NSArray *)tableItemsInSection:(NSInteger)section;
 
 /**
  Returns array with table items in section. Always returns original section, not depending on whether search is active or not.
@@ -286,21 +286,21 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  
  @return array of table items in section. Empty array if section does not exist.
  */
--(NSArray *)tableItemsInOriginalSection:(int)section;
+-(NSArray *)tableItemsInOriginalSection:(NSInteger)section;
 
 /**
  Returns number of sections, contained in `DTTableViewManager`. When search is active, will return number of sections in filtered table.
 
  @return number of sections in `DTTableViewManager`.
  */
-- (int)numberOfSections;
+- (NSInteger)numberOfSections;
 
 /**
  Returns number of sections, contained in `DTTableViewManager`. This method will return number of sections for original section, not depending on search results.
  
  @return number of sections in `DTTableViewManager`.
  */
--(int)numberOfOriginalSections;
+-(NSInteger)numberOfOriginalSections;
 
 /**
  Returns number of table items in a given `section`. When search is active, this method will return number of items in filtered table.
@@ -309,7 +309,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  
  @return number of table items in a given `section`. 0, if section does not exist
  */
-- (int)numberOfTableItemsInSection:(NSInteger)section;
+- (NSInteger)numberOfTableItemsInSection:(NSInteger)section;
 
 /**
  Returns number of table items in a given `section`. This method will use original table, not depending on whether search is active or not.
@@ -318,7 +318,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  
  @return number of table items in a given `section`. 0, if section does not exist
  */
-- (int)numberOfTableItemsInOriginalSection:(NSInteger)section;
+- (NSInteger)numberOfTableItemsInOriginalSection:(NSInteger)section;
 
 ///---------------------------------------
 /// @name Add table items
@@ -546,7 +546,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  
  @param indexTo The index in the table view that is the destination of the move for the section. The existing section at that location slides up or down to an adjoining index position to make room for it.
  */
-- (void)moveSection:(int)indexFrom toSection:(int)indexTo;
+- (void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo;
 
 /**
  Deletes one or more sections in the receiver, with `UITableViewRowAnimationNone` animation. 
