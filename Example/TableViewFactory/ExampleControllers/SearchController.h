@@ -9,5 +9,6 @@
 #import "BaseExampleController.h"
 
 @interface SearchController : BaseExampleController
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end

@@ -13,6 +13,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [[self navigationController] navigationBar].translucent = NO;
     
     NSString * path = [[NSBundle mainBundle] pathForResource:@"Capitals" ofType:@"plist"];
     NSArray * continents = [NSArray arrayWithContentsOfFile:path];
