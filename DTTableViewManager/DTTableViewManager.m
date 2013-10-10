@@ -53,6 +53,13 @@ static BOOL loggingEnabled = YES;
     return self;
 }
 
+-(void)dealloc
+{
+    self.tableView.delegate = nil;
+    self.tableView.dataSource = nil;
+    self.searchBar.delegate = nil;
+}
+
 #pragma mark - getters, setters
 
 -(DTCellFactory *)cellFactory {
