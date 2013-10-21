@@ -1,4 +1,4 @@
-xcodeproj 'DTTableViewManager.xcodeproj'
+xcodeproj 'DTTableViewController.xcodeproj'
 platform :ios, 5.0
 
 target :CedarUnitTests do

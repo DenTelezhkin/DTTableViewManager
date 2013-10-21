@@ -1,6 +1,6 @@
 //
 //  DTTableViewCell.m
-//  DTTableViewManager
+//  DTTableViewController
 //
 //  Created by Denys Telezhkin on 21.05.13.
 //  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
@@ -15,7 +15,7 @@
     NSString * reason = [NSString stringWithFormat:@"cell %@ should implement updateWithModel: method\n",
                          NSStringFromClass([self class])];
     NSException * exc =
-    [NSException exceptionWithName:@"DTTableViewManager API exception"
+    [NSException exceptionWithName:@"DTTableViewController API exception"
                             reason:reason
                           userInfo:nil];
     [exc raise];

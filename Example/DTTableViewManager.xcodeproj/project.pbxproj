@@ -56,8 +56,8 @@
 		DB055626E6234FD19677281D /* libPods-CedarUnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8F7029536743B48E68DC01 /* libPods-CedarUnitTests.a */; };
 		E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
 		E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
-		E60CA01C1684AFEF00F4147E /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewManager.m */; };
-		E60CA01D1684AFEF00F4147E /* DTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewManager.m */; };
+		E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
+		E60CA01D1684AFEF00F4147E /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
 		E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */; };
@@ -86,7 +86,7 @@
 		E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
 		E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
 		E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
-		E6915662168B382800C5F189 /* DTTableViewManager+UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6915661168B382800C5F189 /* DTTableViewManager+UnitTests.m */; };
+		E6915662168B382800C5F189 /* DTTableViewController+UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */; };
 		E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6CB97B3161B26C900A7E936 /* InfoPlist.strings */; };
 		E6CB97B7161B26C900A7E936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97B6161B26C900A7E936 /* main.m */; };
 		E6CB97D9161B27B800A7E936 /* DatasourceSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -156,8 +156,8 @@
 		95DB1C331763577500050536 /* DTTableViewModelSearching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelSearching.h; path = ../../DTTableViewManager/DTTableViewModelSearching.h; sourceTree = "<group>"; };
 		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
-		E60CA0161684AFEF00F4147E /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
-		E60CA0171684AFEF00F4147E /* DTTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewManager.m; path = ../../DTTableViewManager/DTTableViewManager.m; sourceTree = "<group>"; };
+		E60CA0161684AFEF00F4147E /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/DTTableViewController.h; sourceTree = "<group>"; };
+		E60CA0171684AFEF00F4147E /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../DTTableViewManager/DTTableViewController.m; sourceTree = "<group>"; };
 		E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelTransfer.h; path = ../../DTTableViewManager/DTTableViewModelTransfer.h; sourceTree = "<group>"; };
 		E638F1071619916B00694FBC /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = TableViewFactory/Models/Example.h; sourceTree = "<group>"; };
 		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 		E666ACEE162C034000A2DBF2 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = TableViewFactory/Cells/CustomCell.m; sourceTree = "<group>"; };
 		E666ACF1162C037B00A2DBF2 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomModel.h; path = TableViewFactory/Models/CustomModel.h; sourceTree = "<group>"; };
 		E666ACF2162C037B00A2DBF2 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomModel.m; path = TableViewFactory/Models/CustomModel.m; sourceTree = "<group>"; };
-		E6915660168B382800C5F189 /* DTTableViewManager+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTTableViewManager+UnitTests.h"; sourceTree = "<group>"; };
-		E6915661168B382800C5F189 /* DTTableViewManager+UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTTableViewManager+UnitTests.m"; sourceTree = "<group>"; };
+		E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTTableViewController+UnitTests.h"; sourceTree = "<group>"; };
+		E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTTableViewController+UnitTests.m"; sourceTree = "<group>"; };
 		E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CedarUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CB97B2161B26C900A7E936 /* CedarUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CedarUnitTests-Info.plist"; sourceTree = "<group>"; };
 		E6CB97B4161B26C900A7E936 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -446,8 +446,8 @@
 			isa = PBXGroup;
 			children = (
 				950659F1174C01CD008AB32D /* Mocks */,
-				E6915660168B382800C5F189 /* DTTableViewManager+UnitTests.h */,
-				E6915661168B382800C5F189 /* DTTableViewManager+UnitTests.m */,
+				E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */,
+				E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */,
 				E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */,
 				95D51FC5175E78BA00FD2292 /* SearchSpec.mm */,
 				9589420D1750C7AD007CEB5E /* MappingSpec.mm */,
@@ -530,8 +530,8 @@
 			isa = PBXGroup;
 			children = (
 				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
-				E60CA0161684AFEF00F4147E /* DTTableViewManager.h */,
-				E60CA0171684AFEF00F4147E /* DTTableViewManager.m */,
+				E60CA0161684AFEF00F4147E /* DTTableViewController.h */,
+				E60CA0171684AFEF00F4147E /* DTTableViewController.m */,
 				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,
 				E60CA0141684AFEF00F4147E /* DTCellFactory.m */,
 				E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */,
@@ -692,8 +692,8 @@
 				E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */,
-				E60CA01D1684AFEF00F4147E /* DTTableViewManager.m in Sources */,
-				E6915662168B382800C5F189 /* DTTableViewManager+UnitTests.m in Sources */,
+				E60CA01D1684AFEF00F4147E /* DTTableViewController.m in Sources */,
+				E6915662168B382800C5F189 /* DTTableViewController+UnitTests.m in Sources */,
 				9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
 				95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
@@ -732,7 +732,7 @@
 				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */,
-				E60CA01C1684AFEF00F4147E /* DTTableViewManager.m in Sources */,
+				E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */,
 				9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
 				95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,

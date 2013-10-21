@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Denys Telezhkin. All rights reserved.
 //
 
-#import "DTTableViewManager.h"
+#import "DTTableViewController.h"
 
-@interface CustomCellsTableViewController : DTTableViewManager
+@interface CustomCellsTableViewController : DTTableViewController
 
 @end

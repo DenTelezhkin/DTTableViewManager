@@ -1,11 +1,11 @@
-#import "DTTableViewManager.h"
+#import "DTTableViewController.h"
 #import "MockTableHeaderFooterView.h"
 
 using namespace Cedar::Matchers;
 
 SPEC_BEGIN(SearchSpec)
 
-__block DTTableViewManager *model;
+__block DTTableViewController *model;
 __block Example * acc1;
 __block Example * acc2;
 __block Example * acc3;
@@ -15,7 +15,7 @@ __block Example * acc6;
 __block Example * testModel;
 
 
-[DTTableViewManager setLogging:NO];
+[DTTableViewController setLogging:NO];
 
 describe(@"search in first section", ^{
     
@@ -30,7 +30,7 @@ describe(@"search in first section", ^{
         acc5 = [Example exampleWithText:@"Washington D.C." andDetails:@"USA"];
         acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
         
-        model = [DTTableViewManager new];
+        model = [DTTableViewController new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
@@ -114,7 +114,7 @@ describe(@"search in multiple sections", ^{
         acc5 = [Example exampleWithText:@"Washington D.C." andDetails:@"USA"];
         acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
         
-        model = [DTTableViewManager new];
+        model = [DTTableViewController new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
@@ -257,7 +257,7 @@ describe(@"search in multiple sections", ^{
         
         testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
-        model = [DTTableViewManager new];
+        model = [DTTableViewController new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
@@ -499,7 +499,7 @@ describe(@"section headers/footers titles", ^{
         
         testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
-        model = [DTTableViewManager new];
+        model = [DTTableViewController new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
@@ -554,7 +554,7 @@ describe(@"section headers/footers models", ^{
         
         testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
-        model = [DTTableViewManager new];
+        model = [DTTableViewController new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;

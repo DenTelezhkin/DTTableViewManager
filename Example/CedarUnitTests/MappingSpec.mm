@@ -1,5 +1,5 @@
-#import "DTTableViewManager.h"
-#import "DTTableViewManager+UnitTests.h"
+#import "DTTableViewController.h"
+#import "DTTableViewController+UnitTests.h"
 #import <Foundation/Foundation.h>
 #import "CellWithNib.h"
 #import "CellWithoutNib.h"
@@ -15,11 +15,11 @@ SPEC_BEGIN(MappingSpecs)
 describe(@"mapping tests", ^{
     
     
-    [DTTableViewManager setLogging:NO];
+    [DTTableViewController setLogging:NO];
     
     describe(@"cell mapping from code", ^{
         
-        __block DTTableViewManager *model;
+        __block DTTableViewController *model;
         __block Example * testModel;
         __block Example * acc1;
         
@@ -27,7 +27,7 @@ describe(@"mapping tests", ^{
             
             [UIView setAnimationsEnabled:NO];
             
-            model = [DTTableViewManager new];
+            model = [DTTableViewController new];
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.dataSource = model;
             model.tableView.delegate = model;
@@ -64,7 +64,7 @@ describe(@"mapping tests", ^{
     
     describe(@"cell mapping from nib", ^{
         
-        __block DTTableViewManager *model;
+        __block DTTableViewController *model;
         __block Example * testModel;
         __block Example * acc1;
         
@@ -73,7 +73,7 @@ describe(@"mapping tests", ^{
             
             [UIView setAnimationsEnabled:NO];
             
-            model = [DTTableViewManager new];
+            model = [DTTableViewController new];
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -109,14 +109,14 @@ describe(@"mapping tests", ^{
     });
     
     describe(@"cell mapping should throw an exception, if no nib found", ^{
-        __block DTTableViewManager *model;
+        __block DTTableViewController *model;
         __block Example * testModel;
         
         beforeEach(^{
             
             [UIView setAnimationsEnabled:NO];
             
-            model = [DTTableViewManager new];
+            model = [DTTableViewController new];
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -143,14 +143,14 @@ describe(@"mapping tests", ^{
     
     describe(@"header/footer mapping", ^{
         
-        __block DTTableViewManager *model;
+        __block DTTableViewController *model;
         __block Example * testModel;
         
         beforeEach(^{
             
             [UIView setAnimationsEnabled:NO];
             
-            model = [DTTableViewManager new];
+            model = [DTTableViewController new];
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -258,13 +258,13 @@ describe(@"mapping tests", ^{
 
 describe(@"Foundation class clusters", ^{
     
-    __block DTTableViewManager *model;
+    __block DTTableViewController *model;
     
     beforeEach(^{
         
         [UIView setAnimationsEnabled:NO];
         
-        model = [DTTableViewManager new];
+        model = [DTTableViewController new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.tableView.dataSource = model;
         model.tableView.delegate = model;

@@ -1,6 +1,6 @@
 //
 //  DTCellFactory.h
-//  DTTableViewManager
+//  DTTableViewController
 //
 //  Created by Denys Telezhkin on 6/19/12.
 //  Copyright (c) 2012 MLSDev. All rights reserved.
@@ -26,7 +26,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- Protocol, used by DTCellFactory to access tableView property on DTTableViewManager instance.
+ Protocol, used by DTCellFactory to access tableView property on DTTableViewController instance.
  */
 
 @protocol DTTableViewFactoryDelegate
@@ -36,7 +36,7 @@
 /**
  `DTCellFactory` is a singleton object that is used to create cells for your tableView.
  
- You shouldn't call any of it's methods. Use `DTTableViewManager` API's.
+ You shouldn't call any of it's methods. Use `DTTableViewController` API's.
  */
 
 @interface DTCellFactory : NSObject

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DTTableViewManager.h"
+#import "DTTableViewController.h"
 
 @interface Example : NSObject <DTTableViewModelSearching>
 

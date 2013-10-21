@@ -1,5 +1,5 @@
 //
-//  DTTableViewManager.m
+//  DTTableViewController.m
 //
 //  Created by Denys Telezhkin on 6/19/12.
 //  Copyright (c) 2012 MLSDev. All rights reserved.
@@ -22,10 +22,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTTableViewManager.h"
+#import "DTTableViewController.h"
 #import "DTCellFactory.h"
 
-@interface DTTableViewManager ()
+@interface DTTableViewController ()
 <DTTableViewFactoryDelegate>
 @property (nonatomic,strong) NSMutableArray * sections;
 @property (nonatomic, strong) NSMutableArray * searchResultSections;
@@ -40,7 +40,7 @@
 
 static BOOL loggingEnabled = YES;
 
-@implementation DTTableViewManager
+@implementation DTTableViewController
 
 #pragma mark - initialize, clean
 
@@ -318,7 +318,7 @@ static BOOL loggingEnabled = YES;
     }
     else {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: Section not found while searching for table item");
+            NSLog(@"DTTableViewController: Section not found while searching for table item");
         }
         return nil;
     }
@@ -328,7 +328,7 @@ static BOOL loggingEnabled = YES;
     }
     else {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: Row not found while searching for table item");
+            NSLog(@"DTTableViewController: Row not found while searching for table item");
         }
         return nil;
     }
@@ -343,7 +343,7 @@ static BOOL loggingEnabled = YES;
     }
     else {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: Section not found while searching for table item");
+            NSLog(@"DTTableViewController: Section not found while searching for table item");
         }
         return nil;
     }
@@ -353,7 +353,7 @@ static BOOL loggingEnabled = YES;
     }
     else {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: Row not found while searching for table item");
+            NSLog(@"DTTableViewController: Row not found while searching for table item");
         }
         return nil;
     }
@@ -365,7 +365,7 @@ static BOOL loggingEnabled = YES;
     if (!indexPath)
     {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+            NSLog(@"DTTableViewController: table item not found, cannot return it's indexPath");
         }
         return nil;
     }
@@ -380,7 +380,7 @@ static BOOL loggingEnabled = YES;
     if (!indexPath)
     {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: table item not found, cannot return it's indexPath");
+            NSLog(@"DTTableViewController: table item not found, cannot return it's indexPath");
         }
         return nil;
     }
@@ -400,7 +400,7 @@ static BOOL loggingEnabled = YES;
         if (!foundIndexPath)
         {
             if ([self loggingEnabled]) {
-                NSLog(@"DTTableViewManager: object %@ not found",
+                NSLog(@"DTTableViewController: object %@ not found",
                   [tableItems objectAtIndex:i]);
             }
         }
@@ -421,7 +421,7 @@ static BOOL loggingEnabled = YES;
         if (!foundIndexPath)
         {
             if ([self loggingEnabled]) {
-                NSLog(@"DTTableViewManager: object %@ not found",
+                NSLog(@"DTTableViewController: object %@ not found",
                   [tableItems objectAtIndex:i]);
             }
         }
@@ -664,7 +664,7 @@ static BOOL loggingEnabled = YES;
     if ([array count] < indexPath.row)
     {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: failed to insert item for indexPath section: %ld, row: %ld, only %lu items in section",
+            NSLog(@"DTTableViewController: failed to insert item for indexPath section: %ld, row: %ld, only %lu items in section",
                                                               (long)indexPath.section,
                                                               (long)indexPath.row,
                                                               (unsigned long)[array count]);
@@ -708,7 +708,7 @@ static BOOL loggingEnabled = YES;
     }
     else {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: failed to replace item %@ at indexPath: %@",replacingTableItem,originalIndexPath);
+            NSLog(@"DTTableViewController: failed to replace item %@ at indexPath: %@",replacingTableItem,originalIndexPath);
         }
         return;
     }
@@ -767,7 +767,7 @@ static BOOL loggingEnabled = YES;
     }
     else {
         if ([self loggingEnabled]) {
-            NSLog(@"DTTableViewManager: item to delete: %@ was not found in table view",tableItem);
+            NSLog(@"DTTableViewController: item to delete: %@ was not found in table view",tableItem);
         }
         return;
     }

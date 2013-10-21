@@ -1,6 +1,6 @@
 //
-//  DTTableViewManager.h
-//  DTTableViewManager
+//  DTTableViewController.h
+//  DTTableViewController
 //
 //  Created by Denys Telezhkin on 6/19/12.
 //  Copyright (c) 2012 MLSDev. All rights reserved.
@@ -27,14 +27,14 @@
 #import "DTTableViewModelSearching.h"
 
 /**
- `DTTableViewManager` manages all `UITableView` datasource methods and provides API for managing your data models in the table. 
+ `DTTableViewController` manages all `UITableView` datasource methods and provides API for managing your data models in the table. 
  
  ## Setup
  
  # General steps
  - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model (or `DTTableViewCell`, which is UITableViewCell subclass, that conforms to `DTTableViewModelTransfer` protocol)
  - Every cell class should be mapped to model class using mapping methods.
- - `UITableView` datasource and delegate is your `DTTableViewManager` subclass.
+ - `UITableView` datasource and delegate is your `DTTableViewController` subclass.
   
  ## Managing table items
  
@@ -42,17 +42,17 @@
  
  ## Mapping cells
  
- Use `registerCellClass:forModelClass` for mapping cell class to model. 'DTTableViewManager' will automatically check, if there's a nib with the same name as cellClass. If it is - this nib is registered for modelClass. If there's no nib - then cell will be created using initWithStyle: method on cellClass. If you need nib name for the cell to differ from cellClass name, use `registerNibName:forCellClass:modelClass:`.
+ Use `registerCellClass:forModelClass` for mapping cell class to model. 'DTTableViewController' will automatically check, if there's a nib with the same name as cellClass. If it is - this nib is registered for modelClass. If there's no nib - then cell will be created using initWithStyle: method on cellClass. If you need nib name for the cell to differ from cellClass name, use `registerNibName:forCellClass:modelClass:`.
  
  Before executing mapping methods, make sure that tableView property is set and tableView is created. Good spot to call `registerCellClass:forModelClass` is in viewDidLoad method.
 
  ## Search
  
- Your data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewManager will know, when to show data models.
+ Your data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewController will know, when to show data models.
  
  # Automatic
  
-Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That's it, you've got search implemented!
+Set UISearchBar's delegate property to your `DTTableViewController` subclass. That's it, you've got search implemented!
  
  # Manual
  
@@ -62,7 +62,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  
  To register custom NIB for header/footer use methods `registerHeaderClass:modelClass:` and `registerFooterClass:modelClass:` methods. If nib name is different from the class name, use `registerNibName:forHeaderClass:modelClass:` or `registerNibName:forFooterClass:modelClass:` method.
  
- For iOS 6 and higher, UITableView's `registerNib:forHeaderFooterViewReuseIdentifier:` will be used. For iOS 5, `DTTableViewManager` will use `loadFromNibName:bundle:` method. `DTTableViewManager` will automatically figure out, which view class is used.
+ For iOS 6 and higher, UITableView's `registerNib:forHeaderFooterViewReuseIdentifier:` will be used. For iOS 5, `DTTableViewController` will use `loadFromNibName:bundle:` method. `DTTableViewController` will automatically figure out, which view class is used.
  
  To set header/footer models on the  tableView, use `sectionHeaderModels` and `sectionFooterModels` properties. Keep in mind, there's no public method to reload header/footer views, so after header/footer models are set, you will need to manually reload table with `reloadData` or `reloadSections:withRowAnimation` method.
  
@@ -70,7 +70,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
  
 */
 
-@interface DTTableViewManager : UIViewController
+@interface DTTableViewController : UIViewController
                                      <UITableViewDataSource,
                                         UITableViewDelegate,
                                         UISearchBarDelegate>
@@ -193,7 +193,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
 
 /**
  This method filters presented table items, using searchString as a criteria. All table items are queried with method `shouldShowInSearchResultsForSearchString:
- inScopeIndex:`. All models, which return YES to that method, will be displayed. This method is used, when you want to sort table items manually. If you want to do that automatically, simply set UISearchBarDelegate to your DTTableViewManager subclass and this method will get called automatically, when search bar text changes. 
+ inScopeIndex:`. All models, which return YES to that method, will be displayed. This method is used, when you want to sort table items manually. If you want to do that automatically, simply set UISearchBarDelegate to your DTTableViewController subclass and this method will get called automatically, when search bar text changes. 
  
  @param searchString Search string used as a criteria for filtering.
  */
@@ -201,7 +201,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
 
 /**
  This method filters presented table items, using searchString and scopeNumber as a criteria. All table items are queried with method `shouldShowInSearchResultsForSearchString:
- inScopeIndex:`. All models, which return YES to that method, will be displayed. This method is used, when you want to sort table items manually. If you want to do that automatically, simply set UISearchBarDelegate to your DTTableViewManager subclass and this method will get called automatically, when search bar text or scope changes.
+ inScopeIndex:`. All models, which return YES to that method, will be displayed. This method is used, when you want to sort table items manually. If you want to do that automatically, simply set UISearchBarDelegate to your DTTableViewController subclass and this method will get called automatically, when search bar text or scope changes.
  
  @param searchString Search string used as a criteria for filtering.
  
@@ -289,16 +289,16 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
 -(NSArray *)tableItemsInOriginalSection:(NSInteger)section;
 
 /**
- Returns number of sections, contained in `DTTableViewManager`. When search is active, will return number of sections in filtered table.
+ Returns number of sections, contained in `DTTableViewController`. When search is active, will return number of sections in filtered table.
 
- @return number of sections in `DTTableViewManager`.
+ @return number of sections in `DTTableViewController`.
  */
 - (NSInteger)numberOfSections;
 
 /**
- Returns number of sections, contained in `DTTableViewManager`. This method will return number of sections for original section, not depending on search results.
+ Returns number of sections, contained in `DTTableViewController`. This method will return number of sections for original section, not depending on search results.
  
- @return number of sections in `DTTableViewManager`.
+ @return number of sections in `DTTableViewController`.
  */
 -(NSInteger)numberOfOriginalSections;
 
@@ -565,7 +565,7 @@ Set UISearchBar's delegate property to your `DTTableViewManager` subclass. That'
 - (void)deleteSections:(NSIndexSet *)indexSet withRowAnimation:(UITableViewRowAnimation)animation;
 
 /**
- Method to enable/disable logging. Logging is on by default, and will print out any critical messages, that DTTableViewManager is encountering. Call this method, if you want to turn logging off. It is enough to call this method once, and this value will be used by all instances of DTTableViewManager.
+ Method to enable/disable logging. Logging is on by default, and will print out any critical messages, that DTTableViewController is encountering. Call this method, if you want to turn logging off. It is enough to call this method once, and this value will be used by all instances of DTTableViewController.
  
   @param isEnabled Flag, that indicates, whether logging is enabled.
  */

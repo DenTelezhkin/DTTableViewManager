@@ -1,5 +1,5 @@
-#import "DTTableViewManager.h"
-#import "DTTableViewManager+UnitTests.h"
+#import "DTTableViewController.h"
+#import "DTTableViewController+UnitTests.h"
 #import <Foundation/Foundation.h>
 
 using namespace Cedar::Matchers;
@@ -7,7 +7,7 @@ using namespace Cedar::Matchers;
 SPEC_BEGIN(DatasourceSpecs)
 
 describe(@"Datasource spec", ^{
-    __block DTTableViewManager *model;
+    __block DTTableViewController *model;
     __block Example * testModel;
     __block Example * acc1;
     __block Example * acc2;
@@ -16,12 +16,12 @@ describe(@"Datasource spec", ^{
     __block Example * acc5;
     __block Example * acc6;
     
-    [DTTableViewManager setLogging:NO];
+    [DTTableViewController setLogging:NO];
     
     beforeEach(^{
         [UIView setAnimationsEnabled:NO];
         
-        model = [DTTableViewManager new];
+        model = [DTTableViewController new];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
         model.tableView.delegate = model;

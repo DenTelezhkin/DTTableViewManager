@@ -1,13 +1,13 @@
 //
 //  BaseExampleController.h
-//  DTTableViewManager
+//  DTTableViewController
 //
 //  Created by Denys Telezhkin on 19.05.13.
 //  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
 //
 
-#import "DTTableViewManager.h"
+#import "DTTableViewController.h"
 
-@interface BaseExampleController : DTTableViewManager
+@interface BaseExampleController : DTTableViewController
 
 @end

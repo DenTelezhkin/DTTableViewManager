@@ -1,6 +1,6 @@
 //
 //  DTTableViewModelSearching.h
-//  DTTableViewManager
+//  DTTableViewController
 //
 //  Created by Denys Telezhkin on 31.05.13.
 //  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- `DTTableViewModelSearching` protocol is used to search within UITableView models. If model does not implement methods of this protocol, DTTableViewManager will not add model to search results. Methods of this protocol are invoked for every model every time search occurs.
+ `DTTableViewModelSearching` protocol is used to search within UITableView models. If model does not implement methods of this protocol, DTTableViewController will not add model to search results. Methods of this protocol are invoked for every model every time search occurs.
  */
 
 

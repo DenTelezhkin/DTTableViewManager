@@ -1,6 +1,6 @@
 //
 //  DTCellFactory.m
-//  DTTableViewManager
+//  DTTableViewController
 //
 //  Created by Denys Telezhkin on 6/19/12.
 //  Copyright (c) 2012 MLSDev. All rights reserved.
@@ -87,7 +87,7 @@
                              "to DTTableViewModelTransfer protocol",
                              NSStringFromClass(class)];
         NSException * exc =
-        [NSException exceptionWithName:@"DTTableViewManager API exception"
+        [NSException exceptionWithName:@"DTTableViewController API exception"
                                 reason:reason
                               userInfo:nil];
         [exc raise];
@@ -110,7 +110,7 @@
     NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
                          nibName];
     NSException * exc =
-    [NSException exceptionWithName:@"DTTableViewManager API exception"
+    [NSException exceptionWithName:@"DTTableViewController API exception"
                             reason:reason
                           userInfo:nil];
     [exc raise];
