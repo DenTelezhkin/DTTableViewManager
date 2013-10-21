@@ -65,9 +65,6 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
  For iOS 6 and higher, UITableView's `registerNib:forHeaderFooterViewReuseIdentifier:` will be used. For iOS 5, `DTTableViewController` will use `loadFromNibName:bundle:` method. `DTTableViewController` will automatically figure out, which view class is used.
  
  To set header/footer models on the  tableView, use `sectionHeaderModels` and `sectionFooterModels` properties. Keep in mind, there's no public method to reload header/footer views, so after header/footer models are set, you will need to manually reload table with `reloadData` or `reloadSections:withRowAnimation` method.
- 
- Also, `tableView:heightForHeaderInSection:` and `tableView:heightForFooterInSection:` methods need to be implemented for custom headers/footers to correctly work.
- 
 */
 
 @interface DTTableViewController : UIViewController
