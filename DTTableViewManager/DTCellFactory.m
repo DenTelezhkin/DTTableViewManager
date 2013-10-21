@@ -60,25 +60,6 @@
 
 #pragma mark - check for features
 
--(BOOL)tableViewRespondsToCellClassRegistration
-{
-    if ([[self.delegate tableView] respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)])
-    {
-        return YES;
-    }
-    return NO;
-}
-
--(BOOL)tableViewRespondsToHeaderFooterViewNibRegistration
-{
-    if ([[self.delegate tableView] respondsToSelector:
-         @selector(registerNib:forHeaderFooterViewReuseIdentifier:)])
-    {
-        return YES;
-    }
-    return NO;
-}
-
 -(void)checkClassForModelTransferProtocolSupport:(Class)class
 {
     if (![class conformsToProtocol:@protocol(DTTableViewModelTransfer)])
@@ -122,11 +103,8 @@
 {
     [self checkClassForModelTransferProtocolSupport:cellClass];
     
-    if ([self tableViewRespondsToCellClassRegistration])
-    {
-        [[self.delegate tableView] registerClass:cellClass
-               forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
-    }
+    [[self.delegate tableView] registerClass:cellClass
+                      forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
     
     if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
     {
@@ -174,11 +152,10 @@
         [self throwCannotFindNibExceptionForNibName:nibName];
     }
     
-    if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
-        [headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
+    if ([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
- forHeaderFooterViewReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+            forHeaderFooterViewReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
     }
     
     [self.headerMappingsDictionary setObject:NSStringFromClass(headerClass)
@@ -202,11 +179,10 @@
         [self throwCannotFindNibExceptionForNibName:nibName];
     }
     
-    if ([self tableViewRespondsToHeaderFooterViewNibRegistration] &&
-        [footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
+    if ([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
- forHeaderFooterViewReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+            forHeaderFooterViewReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
     }
     
     [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
@@ -235,16 +211,12 @@
 -(UIView *)reuseHeaderFooterViewForModel:(id)model
                            reuseIdentifier:(NSString *)reuseIdentifier
 {
-   if ([UITableViewHeaderFooterView class])
-   {
-       UIView <DTTableViewModelTransfer> * view =
-       [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
-       
-       [view updateWithModel:model];
-       
-       return view;
-   }
-    return nil;
+   UIView <DTTableViewModelTransfer> * view =
+   [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+   
+   [view updateWithModel:model];
+   
+   return view;
 }
 
 #pragma mark - actions
