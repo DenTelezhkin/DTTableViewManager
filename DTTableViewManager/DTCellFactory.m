@@ -327,6 +327,10 @@
     {
         return @"NSArray";
     }
+    if ([classString isEqualToString:@"__NSDate"] || class == [NSDate class])
+    {
+        return @"NSDate";
+    }
     return classString;
 }
 

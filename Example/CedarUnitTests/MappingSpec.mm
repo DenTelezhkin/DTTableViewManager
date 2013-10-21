@@ -613,6 +613,36 @@ describe(@"Foundation class clusters", ^{
         });
         
     });
+    
+    describe(@"NSDate", ^{
+        
+        beforeEach(^{
+            [model registerCellClass:[CellWithNib class] forModelClass:[NSDate class]];
+            [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSDate class]];
+            [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSDate class]];
+        });
+        
+        it(@"should accept NSDate for cells", ^{
+            ^{
+                [model addTableItem:[NSDate date]];
+            } should_not raise_exception;
+        });
+
+        it(@"should accept NSDate for header", ^{
+            ^{
+                [model.sectionHeaderModels addObject:[NSDate date]];
+                [model tableView:model.tableView viewForHeaderInSection:0];
+            } should_not raise_exception;
+        });
+        
+        it(@"should accept NSDate for footer", ^{
+            ^{
+                [model.sectionFooterModels addObject:[NSDate date]];
+                [model tableView:model.tableView viewForFooterInSection:0];
+            } should_not raise_exception;
+        });
+       
+    });
 });
 
 SPEC_END
