@@ -985,20 +985,50 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section>[self.sectionHeaderTitles count])
+    // Default table view section header titles, size defined by UILabel sizeToFit method
+    if ([self.sectionHeaderTitles count])
     {
+        if (section>=[self.sectionHeaderTitles count] )
+        {
+            return 0;
+        }
+        else {
+            return UITableViewAutomaticDimension;
+        }
+    }
+    
+    // Custom table view headers
+    if (section < [self.sectionHeaderModels count])
+    {
+        return self.tableView.sectionHeaderHeight;
+    }
+    else {
         return 0;
     }
-    return UITableViewAutomaticDimension;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section>[self.sectionFooterTitles count])
+    // Default table view section footer titles, size defined by UILabel sizeToFit method
+    if ([self.sectionFooterTitles count])
     {
+        if (section>=[self.sectionFooterTitles count] )
+        {
+            return 0;
+        }
+        else {
+            return UITableViewAutomaticDimension;
+        }
+    }
+    
+    // Custom table view footers
+    if (section < [self.sectionFooterModels count])
+    {
+        return self.tableView.sectionFooterHeight;
+    }
+    else {
         return 0;
     }
-    return UITableViewAutomaticDimension;
 }
 
 #pragma  mark - UISearchBarDelegate

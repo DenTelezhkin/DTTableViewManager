@@ -39,14 +39,10 @@
     [self addTableItem:[ControllerModel modelWithClass:[CustomCellsTableViewController class]
                                               andTitle:@"Custom cells from NIB"]];
     [self addTableItem:[ControllerModel modelWithClass:[CustomHeaderController class]
-                                              andTitle:@"Custom header - iOS 5"]];
+                                              andTitle:@"Custom header/footer"]];
     
-    if ([UITableViewHeaderFooterView class])
-    {
-        // WE are running on iOS 6 and higher, which actually has reusable headers
-        [self addTableItem:[ControllerModel modelWithClass:[CustomHeaderFooterController class]
-                                                  andTitle:@"Custom header - iOS 6"]];
-    }
+    [self addTableItem:[ControllerModel modelWithClass:[CustomHeaderFooterController class]
+                                              andTitle:@"UITableViewHeaderFooterView"]];
     
     [self addTableItem:[ControllerModel modelWithClass:[InsertReplaceTableViewController class]
                                               andTitle:@"Insert/replace cells"]];
