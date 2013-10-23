@@ -7,7 +7,7 @@
 //
 
 #import "StoryboardController.h"
-#import "TextCell.h"
+#import "PrototypedCell.h"
 
 @implementation StoryboardController
 
@@ -16,7 +16,7 @@
 {
     [super viewDidLoad];
 	
-    [self registerCellClass:[TextCell class]
+    [self registerCellClass:[PrototypedCell class]
               forModelClass:[NSString class]];
     
     [self addTableItems:@[@"Row 1", @"Row 2", @"Row 3"]];
