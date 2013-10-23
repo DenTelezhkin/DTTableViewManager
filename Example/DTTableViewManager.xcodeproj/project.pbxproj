@@ -53,6 +53,9 @@
 		95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */; };
 		95BF2BA216FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */; };
 		95D51FC6175E78BA00FD2292 /* SearchSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95D51FC5175E78BA00FD2292 /* SearchSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93F618186A3F003225B7 /* StoryboardController.m */; };
+		95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */; };
+		95FC93FC18186BB1003225B7 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* TextCell.m */; };
 		DB055626E6234FD19677281D /* libPods-CedarUnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8F7029536743B48E68DC01 /* libPods-CedarUnitTests.a */; };
 		E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
 		E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
@@ -154,6 +157,11 @@
 		95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterController.xib; path = ExampleControllers/CustomHeaderFooterController.xib; sourceTree = "<group>"; };
 		95D51FC5175E78BA00FD2292 /* SearchSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SearchSpec.mm; sourceTree = "<group>"; };
 		95DB1C331763577500050536 /* DTTableViewModelSearching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelSearching.h; path = ../../DTTableViewManager/DTTableViewModelSearching.h; sourceTree = "<group>"; };
+		95FC93F518186A3F003225B7 /* StoryboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryboardController.h; path = ExampleControllers/StoryboardController.h; sourceTree = "<group>"; };
+		95FC93F618186A3F003225B7 /* StoryboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryboardController.m; path = ExampleControllers/StoryboardController.m; sourceTree = "<group>"; };
+		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
+		95FC93FA18186BB1003225B7 /* TextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextCell.h; path = TableViewFactory/Cells/TextCell.h; sourceTree = "<group>"; };
+		95FC93FB18186BB1003225B7 /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextCell.m; path = TableViewFactory/Cells/TextCell.m; sourceTree = "<group>"; };
 		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
 		E60CA0161684AFEF00F4147E /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/DTTableViewController.h; sourceTree = "<group>"; };
@@ -341,6 +349,16 @@
 			name = "iOS 6";
 			sourceTree = "<group>";
 		};
+		95FC93F418186A21003225B7 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				95FC93F518186A3F003225B7 /* StoryboardController.h */,
+				95FC93F618186A3F003225B7 /* StoryboardController.m */,
+				95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
 		E638F1051619913B00694FBC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +389,8 @@
 				95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */,
 				95BCE7DA1776E93200980281 /* ControllerCell.h */,
 				95BCE7DB1776E93200980281 /* ControllerCell.m */,
+				95FC93FA18186BB1003225B7 /* TextCell.h */,
+				95FC93FB18186BB1003225B7 /* TextCell.m */,
 			);
 			name = Cells;
 			path = ..;
@@ -386,6 +406,7 @@
 				9545FBA016FF61A00042A1A3 /* Custom headers/footers */,
 				E6402F90162D80FE00DDE2B3 /* Reorder */,
 				E6402F8F162D80F300DDE2B3 /* AddRemove */,
+				95FC93F418186A21003225B7 /* Storyboard */,
 				950659EC1749030C008AB32D /* BaseExampleController.h */,
 				950659ED1749030C008AB32D /* BaseExampleController.m */,
 			);
@@ -650,6 +671,7 @@
 				95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
 				95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */,
 				95834EEF16FF830A00409396 /* CustomHeaderController.xib in Resources */,
+				95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */,
 				95B336691775C01900AF0A57 /* SearchController.xib in Resources */,
 				95B3366B1776D8CB00AF0A57 /* Capitals.plist in Resources */,
 				95BCE7301792C7B300526954 /* Default-568h@2x.png in Resources */,
@@ -720,6 +742,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6EA83731615EE6000F8B8C3 /* main.m in Sources */,
+				95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */,
 				E6EA83771615EE6000F8B8C3 /* AppDelegate.m in Sources */,
 				E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */,
 				E638F1091619916B00694FBC /* Example.m in Sources */,
@@ -738,6 +761,7 @@
 				95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
 				95834EE516FF820000409396 /* CustomHeaderView.m in Sources */,
 				95834EED16FF830A00409396 /* CustomHeaderController.m in Sources */,
+				95FC93FC18186BB1003225B7 /* TextCell.m in Sources */,
 				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,
 				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				95B336681775C01900AF0A57 /* SearchController.m in Sources */,

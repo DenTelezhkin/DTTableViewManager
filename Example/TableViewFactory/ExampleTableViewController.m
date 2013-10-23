@@ -17,6 +17,7 @@
 #import "SearchController.h"
 #import "ControllerModel.h"
 #import "ControllerCell.h"
+#import "StoryboardController.h"
 
 @implementation ExampleTableViewController
 
@@ -51,6 +52,8 @@
     
     [self addTableItem:[ControllerModel modelWithClass:[SearchController class]
                                               andTitle:@"Search"]];
+    [self addTableItem:[ControllerModel modelWithClass:[StoryboardController class]
+                                              andTitle:@"Storyboard"]];
 }
 
 #pragma mark - Table View
@@ -62,10 +65,18 @@
     if ([model isKindOfClass:[ControllerModel class]])
     {
         ControllerModel * selectedController = model;
-        
-        UIViewController * presentExampleClass = [[selectedController.controllerClass alloc] init];
-        
-        [self.navigationController pushViewController:presentExampleClass animated:YES];
+     
+        if (selectedController.controllerClass == [StoryboardController class])
+        {
+            UIStoryboard * exampleStoryBoard = [UIStoryboard storyboardWithName:@"ExampleStoryboard" bundle:[NSBundle mainBundle]];
+            UIViewController * presentExampleClass = [exampleStoryBoard instantiateInitialViewController];
+            [self.navigationController pushViewController:presentExampleClass animated:YES];
+        }
+        else {
+            UIViewController * presentExampleClass = [[selectedController.controllerClass alloc] init];
+            
+            [self.navigationController pushViewController:presentExampleClass animated:YES];
+        }
     }
 }
 

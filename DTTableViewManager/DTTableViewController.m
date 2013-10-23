@@ -53,6 +53,15 @@ static BOOL loggingEnabled = YES;
     return self;
 }
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        self.currentSearchScope = -1;
+    }
+    return self;
+}
+
 -(void)dealloc
 {
     self.tableView.delegate = nil;
