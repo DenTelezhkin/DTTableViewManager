@@ -1,5 +1,5 @@
 ![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.png?branch=master,develop) &nbsp;
-![CocoaPod platform](http://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.png) &nbsp; ![CocoaPod version](http://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png)
+![CocoaPod platform](https://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.png) &nbsp; ![CocoaPod version](https://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png)
 
 DTTableViewManager
 ================
@@ -10,13 +10,13 @@ The idea of this project is to move all datasource methods to separate class, an
 ## Features
 
 * Simple handling of custom table view cells, headers and footers
+* Support for creating cells from code, XIBs or storyboards!
 * Super easy search 
 * Automatic datasource and interface synchronization
 * Dramatic decrease of code amount needed for any UITableView implementation.
 * Good unit test coverage
 
 The best way to understand, what we are trying to achieve here, is to take a look at example, provided in Example folder.
-
 
 ## How?
 
@@ -127,6 +127,12 @@ shouldShowInSearchResultsForSearchString:inScopeIndex:
 
 and tableView will be automatically updated with results.
 
+## Storyboard prototype cells
+
+To use storyboard prototype cells, set reuseIdentifier for table cell with the name of your model class. Call registerCellClass:forModelClass: just as for xib registration. 
+
+You can also take a look at example, which contains storyboard table view with prototyped cell.
+
 ## What else do you have?
 
 List is not full, for additional features like:
@@ -145,25 +151,19 @@ head on to documentation.
 
 ## Requirements
 
-* iOS 5.0
+* iOS 6.0
 * ARC
         
 ## Installation
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 1.2.0'
+	pod 'DTTableViewManager', '~> 1.3.0'
 
 ## Documentation
 
-You can view documentation [online](http://denheadless.github.com/DTTableViewManager/) or you can install it locally using following atom link: [http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom](http://denheadless.github.com/DTTableViewManager/DTTableViewManager.atom). And, of course, [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager) is also a great option!
+You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
 
-[Changelog](https://github.com/DenHeadless/DTTableViewManager/wiki/Changelog)
-
-## Roadmap
-
-- NSFetchedResultsController and CoreData support
-		
 ## Thanks
 
 Special thanks to [Alexey Belkevich](https://github.com/belkevich) for providing initial implementation of CellFactory.
