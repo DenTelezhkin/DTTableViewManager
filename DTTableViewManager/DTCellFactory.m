@@ -103,16 +103,22 @@
 {
     [self checkClassForModelTransferProtocolSupport:cellClass];
     
-    [[self.delegate tableView] registerClass:cellClass
-                      forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+    UITableViewCell * tableCell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:[self reuseIdentifierForClass:modelClass]];
     
-    if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
+    if (!tableCell)
     {
-        [self registerNibNamed:NSStringFromClass(cellClass)
-                  forCellClass:cellClass
-                    modelClass:modelClass];
+        // Storyboard prototype cell
+        [[self.delegate tableView] registerClass:cellClass
+                          forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+        
+        if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
+        {
+            [self registerNibNamed:NSStringFromClass(cellClass)
+                      forCellClass:cellClass
+                        modelClass:modelClass];
+        }
     }
-    
+
     [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
                                     forKey:[self reuseIdentifierForClass:modelClass]];
 }
