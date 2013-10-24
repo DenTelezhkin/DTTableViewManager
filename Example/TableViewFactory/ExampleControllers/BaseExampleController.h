@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
 //
 
-#import "DTTableViewController.h"
+#import "DTTableViewManager.h"
 
 @interface BaseExampleController : DTTableViewController
 
