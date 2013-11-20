@@ -62,7 +62,7 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
  
  To register custom NIB for header/footer use methods `registerHeaderClass:modelClass:` and `registerFooterClass:modelClass:` methods. If nib name is different from the class name, use `registerNibName:forHeaderClass:modelClass:` or `registerNibName:forFooterClass:modelClass:` method.
  
- For iOS 6 and higher, UITableView's `registerNib:forHeaderFooterViewReuseIdentifier:` will be used. For iOS 5, `DTTableViewController` will use `loadFromNibName:bundle:` method. `DTTableViewController` will automatically figure out, which view class is used.
+ For iOS 6 and higher, UITableView's `registerNib:forHeaderFooterViewReuseIdentifier:` will be used. 
  
  To set header/footer models on the  tableView, use `sectionHeaderModels` and `sectionFooterModels` properties. Keep in mind, there's no public method to reload header/footer views, so after header/footer models are set, you will need to manually reload table with `reloadData` or `reloadSections:withRowAnimation` method.
 */
