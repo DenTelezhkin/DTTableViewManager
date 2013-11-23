@@ -903,72 +903,6 @@ static BOOL loggingEnabled = YES;
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSObject *model = [self tableItemAtIndexPath:indexPath];
-
-    UITableViewCell *cell = [self.cellFactory cellForModel:model];
-    return cell;
-}
-
-#pragma mark - private
-
-- (NSMutableArray *)getValidTableSection:(NSInteger)index
-{
-    if (index < self.sections.count)
-    {
-        return (NSMutableArray *)self.sections[index];
-    }
-    else
-    {
-        for (NSInteger i = self.sections.count; i <= index ; i++)
-        {
-            //Update datasource
-            NSMutableArray *newSection = [NSMutableArray array];
-            [self.sections addObject:newSection];
-            
-            //Update UI
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i]
-                          withRowAnimation:UITableViewRowAnimationNone];
-        }
-        return [self.sections lastObject];
-    }
-}
-
--(NSMutableArray *)getValidSearchTableSection:(NSInteger)index
-{
-    if (index < [self.searchResultSections count])
-    {
-        return (NSMutableArray*) self.searchResultSections[index];
-    }
-    else {
-        for (NSInteger i = self.searchResultSections.count; i <= index ; i++)
-        {
-            //Update datasource
-            NSMutableArray *newSection = [NSMutableArray array];
-            [self.searchResultSections addObject:newSection];
-            
-            //Update UI
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i]
-                          withRowAnimation:UITableViewRowAnimationNone];
-        }
-        return [self.searchResultSections lastObject];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView
-moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-      toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    NSMutableArray *array = [self.sections objectAtIndex:sourceIndexPath.section];
-    id tableItem = [self tableItemAtIndexPath:sourceIndexPath];
-    [array removeObjectAtIndex:sourceIndexPath.row];
-    
-    array = [self.sections objectAtIndex:destinationIndexPath.section];
-    [array insertObject:tableItem atIndex:destinationIndexPath.row];
-}
-
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     id model = [self headerItemAtIndex:section];
@@ -1038,6 +972,72 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     else {
         return 0;
     }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSObject *model = [self tableItemAtIndexPath:indexPath];
+
+    UITableViewCell *cell = [self.cellFactory cellForModel:model];
+    return cell;
+}
+
+#pragma mark - private
+
+- (NSMutableArray *)getValidTableSection:(NSInteger)index
+{
+    if (index < self.sections.count)
+    {
+        return (NSMutableArray *)self.sections[index];
+    }
+    else
+    {
+        for (NSInteger i = self.sections.count; i <= index ; i++)
+        {
+            //Update datasource
+            NSMutableArray *newSection = [NSMutableArray array];
+            [self.sections addObject:newSection];
+            
+            //Update UI
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i]
+                          withRowAnimation:UITableViewRowAnimationNone];
+        }
+        return [self.sections lastObject];
+    }
+}
+
+-(NSMutableArray *)getValidSearchTableSection:(NSInteger)index
+{
+    if (index < [self.searchResultSections count])
+    {
+        return (NSMutableArray*) self.searchResultSections[index];
+    }
+    else {
+        for (NSInteger i = self.searchResultSections.count; i <= index ; i++)
+        {
+            //Update datasource
+            NSMutableArray *newSection = [NSMutableArray array];
+            [self.searchResultSections addObject:newSection];
+            
+            //Update UI
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i]
+                          withRowAnimation:UITableViewRowAnimationNone];
+        }
+        return [self.searchResultSections lastObject];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView
+moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+      toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    NSMutableArray *array = [self.sections objectAtIndex:sourceIndexPath.section];
+    id tableItem = [self tableItemAtIndexPath:sourceIndexPath];
+    [array removeObjectAtIndex:sourceIndexPath.row];
+    
+    array = [self.sections objectAtIndex:destinationIndexPath.section];
+    [array insertObject:tableItem atIndex:destinationIndexPath.row];
 }
 
 #pragma  mark - UISearchBarDelegate
