@@ -1,5 +1,7 @@
 ![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.png?branch=master,develop) &nbsp;
-![CocoaPod platform](https://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.png) &nbsp; ![CocoaPod version](https://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png)
+![CocoaPod platform](https://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.png) &nbsp; 
+![CocoaPod version](https://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png) &nbsp; 
+![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)
 
 DTTableViewManager
 ================
