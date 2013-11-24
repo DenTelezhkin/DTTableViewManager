@@ -169,3 +169,7 @@ You can view documentation online or you can install it locally using [cocoadocs
 ## Thanks
 
 Special thanks to [Alexey Belkevich](https://github.com/belkevich) for providing initial implementation of CellFactory.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/DenHeadless/dttableviewmanager/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
