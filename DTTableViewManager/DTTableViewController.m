@@ -24,9 +24,9 @@
 
 #import "DTTableViewController.h"
 #import "DTCellFactory.h"
-
 @interface DTTableViewController ()
 <DTTableViewFactoryDelegate>
+
 @property (nonatomic,strong) NSMutableArray * sections;
 @property (nonatomic, strong) NSMutableArray * searchResultSections;
 @property (nonatomic, strong) NSMutableArray * searchSectionHeaderTitles;
@@ -1062,6 +1062,11 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 -(BOOL)loggingEnabled
 {
     return loggingEnabled;
+}
+
+-(void)performUpdate:(DTTableViewUpdate *)update
+{
+#warning perform update implementation
 }
 
 @end

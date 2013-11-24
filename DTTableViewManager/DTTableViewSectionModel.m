@@ -10,6 +10,15 @@
 
 @implementation DTTableViewSectionModel
 
+-(NSMutableArray *)objects
+{
+    if (!_objects)
+    {
+        _objects = [NSMutableArray array];
+    }
+    return _objects;
+}
+
 -(NSUInteger)numberOfObjects
 {
     return [self.objects count];

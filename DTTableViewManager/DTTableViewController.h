@@ -25,6 +25,7 @@
 
 #import "DTTableViewModelTransfer.h"
 #import "DTTableViewModelSearching.h"
+#import "DTTableViewDataStorage.h"
 
 /**
  `DTTableViewController` manages all `UITableView` datasource methods and provides API for managing your data models in the table. 
@@ -68,9 +69,10 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
 */
 
 @interface DTTableViewController : UIViewController
-                                     <UITableViewDataSource,
+                                       <UITableViewDataSource,
                                         UITableViewDelegate,
-                                        UISearchBarDelegate>
+                                        UISearchBarDelegate,
+                                        DTTableViewDataStorageUpdating>
 
 ///---------------------------------------
 /// @name Properties
@@ -81,6 +83,13 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
  Table view that will present your data models.
  */
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
+
+/**
+ Data storage object. DTTableViewMemory storage used by default.
+ */
+
+@property (nonatomic, strong) id <DTTableViewDataStorage> dataStorage;
+
 
 /*
  Property to store UISearchBar, attached to your UITableView. Attaching it to this property is completely optional.

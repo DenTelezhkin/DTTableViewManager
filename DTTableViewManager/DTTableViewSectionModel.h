@@ -11,7 +11,7 @@
 
 @interface DTTableViewSectionModel : NSObject <DTTableViewSectionProtocol>
 
-@property (nonatomic, strong) NSArray * objects;
+@property (nonatomic, strong) NSMutableArray * objects;
 @property (nonatomic, readonly) NSUInteger numberOfObjects;
 
 @property (nonatomic, strong) NSString * name;
