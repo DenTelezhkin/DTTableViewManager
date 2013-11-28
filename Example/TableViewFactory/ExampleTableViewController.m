@@ -18,6 +18,8 @@
 #import "ControllerModel.h"
 #import "ControllerCell.h"
 #import "StoryboardController.h"
+#import "DTTableViewMemoryStorage.h"
+#import "DTTableViewSectionModel.h"
 
 @implementation ExampleTableViewController
 
@@ -31,28 +33,31 @@
               forModelClass:[ControllerModel class]];
     
     self.title = @"Examples";
+    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
     
-    [self addTableItem:[ControllerModel modelWithClass:[AddRemoveTableViewController class]
+    DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
+    
+    [storage addTableItem:[ControllerModel modelWithClass:[AddRemoveTableViewController class]
                                               andTitle:@"Add/Remove cells"]];
     
-    [self addTableItem:[ControllerModel modelWithClass:[ReorderTableViewController class]
+    [storage addTableItem:[ControllerModel modelWithClass:[ReorderTableViewController class]
                                               andTitle:@"Reorder cells"]];
-    [self addTableItem:[ControllerModel modelWithClass:[CustomCellsTableViewController class]
+    [storage addTableItem:[ControllerModel modelWithClass:[CustomCellsTableViewController class]
                                               andTitle:@"Custom cells from NIB"]];
-    [self addTableItem:[ControllerModel modelWithClass:[CustomHeaderController class]
+    [storage addTableItem:[ControllerModel modelWithClass:[CustomHeaderController class]
                                               andTitle:@"Custom header/footer"]];
     
-    [self addTableItem:[ControllerModel modelWithClass:[CustomHeaderFooterController class]
+    [storage addTableItem:[ControllerModel modelWithClass:[CustomHeaderFooterController class]
                                               andTitle:@"UITableViewHeaderFooterView"]];
     
-    [self addTableItem:[ControllerModel modelWithClass:[InsertReplaceTableViewController class]
+    [storage addTableItem:[ControllerModel modelWithClass:[InsertReplaceTableViewController class]
                                               andTitle:@"Insert/replace cells"]];
-    [self addTableItem:[ControllerModel modelWithClass:[MoveSectionTableViewController class]
+    [storage addTableItem:[ControllerModel modelWithClass:[MoveSectionTableViewController class]
                                               andTitle:@"Move section"]];
     
-    [self addTableItem:[ControllerModel modelWithClass:[SearchController class]
+    [storage addTableItem:[ControllerModel modelWithClass:[SearchController class]
                                               andTitle:@"Search"]];
-    [self addTableItem:[ControllerModel modelWithClass:[StoryboardController class]
+    [storage addTableItem:[ControllerModel modelWithClass:[StoryboardController class]
                                               andTitle:@"Storyboard"]];
 }
 
@@ -61,7 +66,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    id model = [self tableItemAtIndexPath:indexPath];
+    
+    DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
+    id model = [[storage sections][indexPath.section] objects][indexPath.row];
     if ([model isKindOfClass:[ControllerModel class]])
     {
         ControllerModel * selectedController = model;

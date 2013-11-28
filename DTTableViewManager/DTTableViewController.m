@@ -24,6 +24,9 @@
 
 #import "DTTableViewController.h"
 #import "DTCellFactory.h"
+#import "DTTableViewSectionModel.h"
+#import "DTTableViewMemoryStorage.h"
+
 @interface DTTableViewController ()
 <DTTableViewFactoryDelegate>
 
@@ -828,6 +831,10 @@ static BOOL loggingEnabled = YES;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (self.dataStorage)
+    {
+        return [[self.dataStorage sections] count];
+    }
     return [self numberOfSections];
 }
 
@@ -878,6 +885,11 @@ static BOOL loggingEnabled = YES;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.dataStorage)
+    {
+        DTTableViewSectionModel * sectionModel = [self.dataStorage sections][section];
+        return [sectionModel numberOfObjects];
+    }
     return [[self tableItemsInSection:section] count];
 }
 
@@ -977,6 +989,13 @@ static BOOL loggingEnabled = YES;
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.dataStorage)
+    {
+        DTTableViewSectionModel * sectionModel = [self.dataStorage sections][indexPath.section];
+        id model = [sectionModel objects][indexPath.row];
+        return [self.cellFactory cellForModel:model];
+    }
+    
     NSObject *model = [self tableItemAtIndexPath:indexPath];
 
     UITableViewCell *cell = [self.cellFactory cellForModel:model];
@@ -1066,7 +1085,23 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 -(void)performUpdate:(DTTableViewUpdate *)update
 {
-#warning perform update implementation
+    [self.tableView beginUpdates];
+    
+    [self.tableView deleteSections:update.deletedSectionIndexes
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertSections:update.insertedSectionIndexes
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadSections:update.updatedSectionIndexes
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView deleteRowsAtIndexPaths:update.deletedRowIndexPaths
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertRowsAtIndexPaths:update.insertedRowIndexPaths
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadRowsAtIndexPaths:update.updatedRowIndexPaths
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView endUpdates];
 }
 
 @end

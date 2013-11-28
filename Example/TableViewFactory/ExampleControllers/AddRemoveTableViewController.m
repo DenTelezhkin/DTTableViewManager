@@ -7,6 +7,7 @@
 //
 
 #import "AddRemoveTableViewController.h"
+#import "DTTableViewMemoryStorage.h"
 
 @interface AddRemoveTableViewController ()
 
@@ -20,14 +21,17 @@
 {
     self.rowCount ++;
     NSString * rowText = [NSString stringWithFormat:@"Row # %d",self.rowCount];
-        
-    [self addTableItem:[Example exampleWithText:rowText andDetails:nil]
-      withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
+    
+    [storage addTableItem:[Example exampleWithText:rowText andDetails:nil]];
 }
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
     
     UIBarButtonItem * barItem = [[UIBarButtonItem alloc]
                                             initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
