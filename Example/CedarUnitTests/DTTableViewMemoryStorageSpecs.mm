@@ -5,7 +5,7 @@ using namespace Cedar::Matchers;
 
 SPEC_BEGIN(DTTableViewMemoryStorageSpecs)
 
-describe(@"DTTableViewMemoryStorage search specs", ^{
+describe(@"Storage search specs", ^{
     __block DTTableViewMemoryStorage *storage;
     
     beforeEach(^{
@@ -48,7 +48,7 @@ describe(@"DTTableViewMemoryStorage search specs", ^{
     
 });
 
-describe(@"DTTableViewMemoryStorage Add specs", ^{
+describe(@"Storage Add specs", ^{
     __block DTTableViewMemoryStorage *storage;
     __block OCMockObject * delegate;
 
@@ -92,7 +92,7 @@ describe(@"DTTableViewMemoryStorage Add specs", ^{
     });
 });
 
-describe(@"DTTableViewMemoryStorage insert specs", ^{
+describe(@"Storage edit specs", ^{
     __block DTTableViewMemoryStorage *storage;
     __block OCMockObject * delegate;
     __block Example * acc1;
@@ -224,6 +224,23 @@ describe(@"DTTableViewMemoryStorage insert specs", ^{
         
         [[storage tableItemsInSection:0] count] should equal(0);
         [[storage tableItemsInSection:1] count] should equal(1);
+    });
+    
+    it(@"should delete sections", ^{
+        [storage addTableItem:acc1];
+        [storage addTableItem:acc2 toSection:1];
+        [storage addTableItem:acc3 toSection:2];
+        
+        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        [update.deletedSectionIndexes addIndex:1];
+        
+        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+            return [update isEqual:obj];
+        }]];
+        [storage deleteSections:[NSIndexSet indexSetWithIndex:1]];
+        [delegate verify];
+        
+        [[storage sections] count] should equal(2);
     });
 });
 

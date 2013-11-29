@@ -194,6 +194,33 @@
     [self.sections removeAllObjects];
 }
 
+#pragma mark - Section management
+
+-(void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo
+{
+    DTTableViewSectionModel * validSectionFrom = [self getValidSection:indexFrom];
+    [self getValidSection:indexTo];
+    
+    [self.sections removeObject:validSectionFrom];
+    [self.sections insertObject:validSectionFrom atIndex:indexTo];
+    
+    [self.delegate performAnimation:^(UITableView * tableView) {
+        [tableView moveSection:indexFrom toSection:indexTo];
+    }];
+}
+
+-(void)deleteSections:(NSIndexSet *)indexSet
+{
+    [self startUpdate];
+    // Update datasource
+    [self.sections removeObjectsAtIndexes:indexSet];
+    
+    // Update interface
+    [self.currentUpdate.deletedSectionIndexes addIndexes:indexSet];
+    
+    [self finishUpdate];
+}
+
 #pragma mark - Search
 
 -(id)tableItemAtIndexPath:(NSIndexPath *)indexPath

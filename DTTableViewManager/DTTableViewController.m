@@ -1104,4 +1104,9 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     [self.tableView endUpdates];
 }
 
+-(void)performAnimation:(void (^)(UITableView *))animationBlock
+{
+    animationBlock(self.tableView);
+}
+
 @end

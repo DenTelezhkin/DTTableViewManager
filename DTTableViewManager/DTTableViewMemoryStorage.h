@@ -120,6 +120,26 @@
 - (void)removeAllTableItems;
 
 ///---------------------------------------
+/// @name Managing sections
+///---------------------------------------
+
+/**
+ Moves a section to a new location in the table view.
+ 
+ @param indexFrom The index of the section to move.
+ 
+ @param indexTo The index in the table view that is the destination of the move for the section. The existing section at that location slides up or down to an adjoining index position to make room for it.
+ */
+- (void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo;
+
+/**
+ Deletes one or more sections in the receiver, with `UITableViewRowAnimationNone` animation.
+ 
+ @param indexSet An index set that specifies the sections to delete from the receiving table view. If a section exists after the specified index location, it is moved up one index location.
+ */
+- (void)deleteSections:(NSIndexSet *)indexSet;
+
+///---------------------------------------
 /// @name Search
 ///---------------------------------------
 

@@ -13,6 +13,8 @@
 
 -(void)performUpdate:(DTTableViewUpdate *)update;
 
+@optional
+-(void)performAnimation:(void(^)(UITableView *))animationBlock;
 @end
 
 @protocol DTTableViewDataStorage
