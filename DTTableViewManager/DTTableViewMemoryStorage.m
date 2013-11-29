@@ -105,6 +105,45 @@
     [self finishUpdate];
 }
 
+-(void)reloadTableItem:(NSObject *)tableItem
+{
+    [self startUpdate];
+    
+    NSIndexPath * indexPathToReload = [self indexPathOfTableItem:tableItem];
+    
+    if (indexPathToReload)
+    {
+        [self.currentUpdate.updatedRowIndexPaths addObject:indexPathToReload];
+    }
+    
+    [self finishUpdate];
+}
+
+- (void)replaceTableItem:(NSObject *)tableItemToReplace
+           withTableItem:(NSObject *)replacingTableItem
+{
+    [self startUpdate];
+    
+    NSIndexPath * originalIndexPath = [self indexPathOfTableItem:tableItemToReplace];
+    if (originalIndexPath && replacingTableItem)
+    {
+        DTTableViewSectionModel *section = [self getValidSection:originalIndexPath.section];
+        
+        [section.objects replaceObjectAtIndex:originalIndexPath.row
+                                   withObject:replacingTableItem];
+    }
+    else {
+        if ([[DTTableViewController class] loggingEnabled]) {
+            NSLog(@"DTTableViewMemoryStorage: failed to replace item %@ at indexPath: %@",replacingTableItem,originalIndexPath);
+        }
+        return;
+    }
+    
+    [self.currentUpdate.updatedRowIndexPaths addObject:originalIndexPath];
+    
+    [self finishUpdate];
+}
+
 #pragma mark - Search
 
 -(id)tableItemAtIndexPath:(NSIndexPath *)indexPath

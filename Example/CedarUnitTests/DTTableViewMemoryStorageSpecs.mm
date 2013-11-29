@@ -142,6 +142,40 @@ describe(@"DTTableViewMemoryStorage insert specs", ^{
         
         [delegate verify];
     });
+    
+    it(@"should reload table view rows", ^{
+        
+        [storage addTableItems:@[acc2,acc4,acc6]];
+        
+        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        [update.updatedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
+                                                                  inSection:0]];
+        
+        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+            return [update isEqual:obj];
+        }]];
+        
+        [storage reloadTableItem:acc4];
+        
+        [delegate verify];
+    });
+    
+    it(@"should reload table view rows", ^{
+        
+        [storage addTableItems:@[acc2,acc4,acc6]];
+        
+        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        [update.updatedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
+                                                                  inSection:0]];
+        
+        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+            return [update isEqual:obj];
+        }]];
+        
+        [storage replaceTableItem:acc4 withTableItem:acc5];
+        
+        [delegate verify];
+    });
 });
 
 

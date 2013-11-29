@@ -72,6 +72,26 @@
  */
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ Reload UITableViewCell, that currently displays `tableItem`.
+ 
+ @param tableItem model, which needs to be reloaded in the cell
+ 
+ @param animation animation, that will be applied while cell is reloading
+ */
+
+-(void)reloadTableItem:(NSObject *)tableItem;
+
+/**
+ Replace tableItemToReplace with replacingTableItem. Table is immediately updated with `UITableViewRowAnimationNone` animation. If tableItemToReplace is not found, or replacingTableItem is `nil`, this method does nothing.
+ 
+ @param tableItemToReplace Model object you want to replace.
+ 
+ @param replacingTableItem Model object you are replacing it with.
+ */
+- (void)replaceTableItem:(NSObject *)tableItemToReplace
+           withTableItem:(NSObject *)replacingTableItem;
+
 ///---------------------------------------
 /// @name Search
 ///---------------------------------------
