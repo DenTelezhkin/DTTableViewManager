@@ -105,6 +105,8 @@
     [self finishUpdate];
 }
 
+#pragma mark - reloading, replacing items
+
 -(void)reloadTableItem:(NSObject *)tableItem
 {
     [self startUpdate];
@@ -142,6 +144,54 @@
     [self.currentUpdate.updatedRowIndexPaths addObject:originalIndexPath];
     
     [self finishUpdate];
+}
+
+#pragma mark - Removing items
+
+- (void)removeTableItem:(NSObject *)tableItem
+{
+    [self startUpdate];
+    
+    NSIndexPath * indexPath = [self indexPathOfTableItem:tableItem];
+    
+    if (indexPath)
+    {
+        DTTableViewSectionModel * section = [self getValidSection:indexPath.section];
+        [section.objects removeObjectAtIndex:indexPath.row];
+    }
+    else {
+        if ([[self class] loggingEnabled]) {
+            NSLog(@"DTTableViewMemoryStorage: item to delete: %@ was not found in table view",tableItem);
+        }
+        return;
+    }
+    [self.currentUpdate.deletedRowIndexPaths addObject:indexPath];
+    [self finishUpdate];
+}
+
+- (void)removeTableItems:(NSArray *)tableItems
+{
+    [self startUpdate];
+    
+    NSArray * indexPaths = [self indexPathArrayForTableItems:tableItems];
+    
+    for (NSObject * item in tableItems)
+    {
+        NSIndexPath *indexPath = [self indexPathOfTableItem:item];
+        
+        if (indexPath)
+        {
+            DTTableViewSectionModel * section = [self getValidSection:indexPath.section];
+            [section.objects removeObjectAtIndex:indexPath.row];
+        }
+    }
+    [self.currentUpdate.deletedRowIndexPaths addObjectsFromArray:indexPaths];
+    [self finishUpdate];
+}
+
+- (void)removeAllTableItems
+{
+    [self.sections removeAllObjects];
 }
 
 #pragma mark - Search
@@ -225,6 +275,28 @@
         }
         return [self.sections lastObject];
     }
+}
+
+//This implementation is not optimized, and may behave poorly over tables with lot of sections
+-(NSArray *)indexPathArrayForTableItems:(NSArray *)tableItems
+{
+    NSMutableArray * indexPaths = [[NSMutableArray alloc] initWithCapacity:[tableItems count]];
+    
+    for (NSInteger i=0; i<[tableItems count]; i++)
+    {
+        NSIndexPath * foundIndexPath = [self indexPathOfTableItem:[tableItems objectAtIndex:i]];
+        if (!foundIndexPath)
+        {
+            if ([[DTTableViewController class] loggingEnabled]) {
+                NSLog(@"DTTableViewMemoryStorage: object %@ not found",
+                      [tableItems objectAtIndex:i]);
+            }
+        }
+        else {
+            [indexPaths addObject:foundIndexPath];
+        }
+    }
+    return indexPaths;
 }
 
 @end

@@ -176,6 +176,55 @@ describe(@"DTTableViewMemoryStorage insert specs", ^{
         
         [delegate verify];
     });
+    
+    it(@"should remove table item", ^{
+        [storage addTableItems:@[acc2,acc4,acc6]];
+        [storage addTableItem:acc5 toSection:1];
+        
+        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
+                                                                  inSection:0]];
+        
+        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+            return [update isEqual:obj];
+        }]];
+        [storage removeTableItem:acc2];
+        [delegate verify];
+        
+        update = [DTTableViewUpdate new];
+        [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
+                                                                  inSection:1]];
+        
+        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+            return [update isEqual:obj];
+        }]];
+        [storage removeTableItem:acc5];
+        [delegate verify];
+    });
+    
+    it(@"should remove table items", ^{
+        [storage addTableItems:@[acc1,acc3] toSection:0];
+        [storage addTableItems:@[acc2,acc4] toSection:1];
+        
+        
+        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
+                                                                  inSection:0]];
+        [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
+                                                                  inSection:1]];
+        [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
+                                                                  inSection:0]];
+        
+        
+        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+            return [update isEqual:obj];
+        }]];
+        [storage removeTableItems:@[acc1,acc4,acc3,acc5]];
+        [delegate verify];
+        
+        [[storage tableItemsInSection:0] count] should equal(0);
+        [[storage tableItemsInSection:1] count] should equal(1);
+    });
 });
 
 

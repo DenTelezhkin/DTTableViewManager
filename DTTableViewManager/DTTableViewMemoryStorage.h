@@ -72,6 +72,10 @@
  */
 - (void)insertTableItem:(NSObject *)tableItem toIndexPath:(NSIndexPath *)indexPath;
 
+///---------------------------------------
+/// @name Reloading, replacing table items
+///---------------------------------------
+
 /**
  Reload UITableViewCell, that currently displays `tableItem`.
  
@@ -91,6 +95,29 @@
  */
 - (void)replaceTableItem:(NSObject *)tableItemToReplace
            withTableItem:(NSObject *)replacingTableItem;
+
+///---------------------------------------
+/// @name Removing table items
+///---------------------------------------
+
+/**
+ Removing tableItem. Table is immediately updated with `UITableViewRowAnimationNone` animation. If tableItem is not found,  this method does nothing.
+ 
+ @param tableItem Model object you want to remove.
+ */
+- (void)removeTableItem:(NSObject *)tableItem;
+
+/**
+ Removing tableItems. All deletions are made inside beginUpdates and endUpdates tableView block. After all deletions are made, `UITableViewRowAnimationNone` animation is applied. If some tableItem is not found, it is skipped.
+ 
+ @param tableItems Models you want to remove.
+ */
+- (void)removeTableItems:(NSArray *)tableItems;
+
+/**
+ Removes all tableItems. This method DOES NOT reload data on tableView.
+ */
+- (void)removeAllTableItems;
 
 ///---------------------------------------
 /// @name Search
