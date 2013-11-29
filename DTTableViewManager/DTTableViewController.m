@@ -329,7 +329,7 @@ static BOOL loggingEnabled = YES;
         section = [self tableItemsInSection:indexPath.section];
     }
     else {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: Section not found while searching for table item");
         }
         return nil;
@@ -339,7 +339,7 @@ static BOOL loggingEnabled = YES;
         return [section objectAtIndex:indexPath.row];
     }
     else {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: Row not found while searching for table item");
         }
         return nil;
@@ -354,7 +354,7 @@ static BOOL loggingEnabled = YES;
         section = [self tableItemsInOriginalSection:indexPath.section];
     }
     else {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: Section not found while searching for table item");
         }
         return nil;
@@ -364,7 +364,7 @@ static BOOL loggingEnabled = YES;
         return [section objectAtIndex:indexPath.row];
     }
     else {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: Row not found while searching for table item");
         }
         return nil;
@@ -376,7 +376,7 @@ static BOOL loggingEnabled = YES;
     NSIndexPath * indexPath = [self indexPathOfItem:tableItem inArray:[self currentSections]];
     if (!indexPath)
     {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: table item not found, cannot return it's indexPath");
         }
         return nil;
@@ -391,7 +391,7 @@ static BOOL loggingEnabled = YES;
     NSIndexPath * indexPath = [self indexPathOfItem:tableItem inArray:self.sections];
     if (!indexPath)
     {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: table item not found, cannot return it's indexPath");
         }
         return nil;
@@ -411,7 +411,7 @@ static BOOL loggingEnabled = YES;
         NSIndexPath * foundIndexPath = [self indexPathOfTableItem:[tableItems objectAtIndex:i]];
         if (!foundIndexPath)
         {
-            if ([self loggingEnabled]) {
+            if ([[self class] loggingEnabled]) {
                 NSLog(@"DTTableViewController: object %@ not found",
                   [tableItems objectAtIndex:i]);
             }
@@ -432,7 +432,7 @@ static BOOL loggingEnabled = YES;
         NSIndexPath * foundIndexPath = [self originalIndexPathOfTableItem:[tableItems objectAtIndex:i]];
         if (!foundIndexPath)
         {
-            if ([self loggingEnabled]) {
+            if ([[self class] loggingEnabled]) {
                 NSLog(@"DTTableViewController: object %@ not found",
                   [tableItems objectAtIndex:i]);
             }
@@ -675,7 +675,7 @@ static BOOL loggingEnabled = YES;
     
     if ([array count] < indexPath.row)
     {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: failed to insert item for indexPath section: %ld, row: %ld, only %lu items in section",
                                                               (long)indexPath.section,
                                                               (long)indexPath.row,
@@ -719,7 +719,7 @@ static BOOL loggingEnabled = YES;
         [section replaceObjectAtIndex:originalIndexPath.row withObject:replacingTableItem];
     }
     else {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: failed to replace item %@ at indexPath: %@",replacingTableItem,originalIndexPath);
         }
         return;
@@ -778,7 +778,7 @@ static BOOL loggingEnabled = YES;
         [section removeObjectAtIndex:originalIndexPath.row];
     }
     else {
-        if ([self loggingEnabled]) {
+        if ([[self class] loggingEnabled]) {
             NSLog(@"DTTableViewController: item to delete: %@ was not found in table view",tableItem);
         }
         return;
@@ -1078,7 +1078,7 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     loggingEnabled = isEnabled;
 }
 
--(BOOL)loggingEnabled
++(BOOL)loggingEnabled
 {
     return loggingEnabled;
 }

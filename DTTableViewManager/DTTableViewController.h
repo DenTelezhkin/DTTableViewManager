@@ -577,4 +577,6 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
  */
 +(void)setLogging:(BOOL)isEnabled;
 
++(BOOL)loggingEnabled;
+
 @end
