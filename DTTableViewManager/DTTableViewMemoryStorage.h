@@ -123,6 +123,11 @@
 /// @name Managing sections
 ///---------------------------------------
 
+-(void)setSectionHeaderModels:(NSArray *)headerModels;
+-(void)setSectionHeaderTitles:(NSArray *)headerTitles;
+-(void)setSectionFooterModels:(NSArray *)footerModels;
+-(void)setSectionFooterTitles:(NSArray *)footerTitles;
+
 /**
  Moves a section to a new location in the table view.
  

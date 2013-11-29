@@ -196,6 +196,49 @@
 
 #pragma mark - Section management
 
+-(void)setSectionHeaderModels:(NSArray *)headerModels
+{
+    [self getValidSection:([headerModels count]-1)];
+    
+    for (int sectionNumber = 0; sectionNumber < [headerModels count]; sectionNumber++)
+    {
+        DTTableViewSectionModel * section = self.sections[sectionNumber];
+        section.headerModel = headerModels[sectionNumber];
+    }
+}
+
+-(void)setSectionHeaderTitles:(NSArray *)headerTitles
+{
+    [self getValidSection:([headerTitles count]-1)];
+    
+    for (int sectionNumber = 0; sectionNumber < [headerTitles count]; sectionNumber++)
+    {
+        DTTableViewSectionModel * section = self.sections[sectionNumber];
+        section.headerTitle = headerTitles[sectionNumber];
+    }
+}
+
+-(void)setSectionFooterModels:(NSArray *)footerModels
+{
+    [self getValidSection:([footerModels count]-1)];
+    
+    for (int sectionNumber = 0; sectionNumber < [footerModels count]; sectionNumber++)
+    {
+        DTTableViewSectionModel * section = self.sections[sectionNumber];
+        section.footerModel = footerModels[sectionNumber];
+    }
+}
+
+-(void)setSectionFooterTitles:(NSArray *)footerTitles
+{
+    [self getValidSection:([footerTitles count]-1)];
+    for (int sectionNumber = 0; sectionNumber < [footerTitles count]; sectionNumber++)
+    {
+        DTTableViewSectionModel * section = self.sections[sectionNumber];
+        section.footerTitle = footerTitles[sectionNumber];
+    }
+}
+
 -(void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo
 {
     DTTableViewSectionModel * validSectionFrom = [self getValidSection:indexFrom];

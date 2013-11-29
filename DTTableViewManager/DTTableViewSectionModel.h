@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DTTableViewSectionProtocol.h"
 
-@interface DTTableViewSectionModel : NSObject <DTTableViewSectionProtocol>
+@interface DTTableViewSectionModel : NSObject
 
 @property (nonatomic, strong) NSMutableArray * objects;
 @property (nonatomic, readonly) NSUInteger numberOfObjects;
 
-@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSString * headerTitle;
+@property (nonatomic, strong) NSString * footerTitle;
+
 @property (nonatomic, strong) NSString * indexTitle;
 
 @property (nonatomic, strong) id headerModel;

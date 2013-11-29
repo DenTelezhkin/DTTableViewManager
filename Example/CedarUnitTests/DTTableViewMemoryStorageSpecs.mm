@@ -1,9 +1,10 @@
 #import "DTTableViewMemoryStorage.h"
 #import "OCMock.h"
+#import "DTTableViewSectionModel.h"
 
 using namespace Cedar::Matchers;
 
-SPEC_BEGIN(DTTableViewMemoryStorageSpecs)
+SPEC_BEGIN(MemoryStorageSpecs)
 
 describe(@"Storage search specs", ^{
     __block DTTableViewMemoryStorage *storage;
@@ -241,6 +242,46 @@ describe(@"Storage edit specs", ^{
         [delegate verify];
         
         [[storage sections] count] should equal(2);
+    });
+    
+    it(@"should set section header titles", ^{
+        [storage setSectionHeaderTitles:@[@"1",@"2",@"3"]];
+        
+        [[storage sections] count] should equal(3);
+        
+        [[storage sections][0] headerTitle] should equal(@"1");
+        [[storage sections][1] headerTitle] should equal(@"2");
+        [[storage sections][2] headerTitle] should equal(@"3");
+    });
+    
+    it(@"should set section header models", ^{
+        [storage setSectionHeaderModels:@[@"1",@"2",@"3"]];
+        
+        [[storage sections] count] should equal(3);
+        
+        [[storage sections][0] headerModel] should equal(@"1");
+        [[storage sections][1] headerModel] should equal(@"2");
+        [[storage sections][2] headerModel] should equal(@"3");
+    });
+    
+    it(@"should set section footer titles", ^{
+        [storage setSectionFooterTitles:@[@"1",@"2",@"3"]];
+        
+        [[storage sections] count] should equal(3);
+        
+        [[storage sections][0] footerTitle] should equal(@"1");
+        [[storage sections][1] footerTitle] should equal(@"2");
+        [[storage sections][2] footerTitle] should equal(@"3");
+    });
+    
+    it(@"should set section footer models", ^{
+        [storage setSectionFooterModels:@[@"1",@"2",@"3"]];
+        
+        [[storage sections] count] should equal(3);
+        
+        [[storage sections][0] footerModel] should equal(@"1");
+        [[storage sections][1] footerModel] should equal(@"2");
+        [[storage sections][2] footerModel] should equal(@"3");
     });
 });
 
