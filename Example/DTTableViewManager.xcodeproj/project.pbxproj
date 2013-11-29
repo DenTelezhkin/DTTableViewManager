@@ -178,6 +178,7 @@
 		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
 		95FC93FA18186BB1003225B7 /* PrototypedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrototypedCell.h; path = TableViewFactory/Cells/PrototypedCell.h; sourceTree = "<group>"; };
 		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
+		AA01B5301848DF14009B3041 /* DTTableViewSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTTableViewSection.h; path = ../../DTTableViewManager/DTTableViewSection.h; sourceTree = "<group>"; };
 		AA1972EC18190CF200B81302 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
 		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
@@ -576,6 +577,7 @@
 				955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */,
 				955EB1A618414B4F00EAE855 /* DTTableViewUpdate.h */,
 				955EB1A718414B4F00EAE855 /* DTTableViewUpdate.m */,
+				AA01B5301848DF14009B3041 /* DTTableViewSection.h */,
 				955EB1A11841325D00EAE855 /* DTTableViewSectionModel.h */,
 				955EB1A21841325D00EAE855 /* DTTableViewSectionModel.m */,
 				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,

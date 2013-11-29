@@ -907,31 +907,60 @@ static BOOL loggingEnabled = YES;
     return [[self tableItemsInSection:section] count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectionNumber
 {
+    if (self.dataStorage && self.sectionHeaderStyle == DTTableViewSectionStyleTitle)
+    {
+        id <DTTableViewSection> section = [self.dataStorage sections][sectionNumber];
+        if ([section respondsToSelector:@selector(headerTitle)])
+        {
+            return [section headerTitle];
+        }
+    }
+    
     if ([self isSearching])
     {
-       return (section < self.searchSectionHeaderTitles.count) ? [self.searchSectionHeaderTitles objectAtIndex:section] : nil;
+       return (sectionNumber < self.searchSectionHeaderTitles.count) ? [self.searchSectionHeaderTitles objectAtIndex:sectionNumber] : nil;
     }
     else {
-        return (section < self.sectionHeaderTitles.count) ? [self.sectionHeaderTitles objectAtIndex:section] : nil;
+        return (sectionNumber < self.sectionHeaderTitles.count) ? [self.sectionHeaderTitles objectAtIndex:sectionNumber] : nil;
     }
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)sectionNumber
 {
+    if (self.dataStorage && self.sectionFooterStyle == DTTableViewSectionStyleTitle)
+    {
+        id <DTTableViewSection> section = [self.dataStorage sections][sectionNumber];
+        if ([section respondsToSelector:@selector(footerTitle)])
+        {
+            return [section footerTitle];
+        }
+    }
+    
     if ([self isSearching])
     {
-        return (section < self.searchSectionFooterTitles.count) ? [self.searchSectionFooterTitles objectAtIndex:section] : nil;
+        return (sectionNumber < self.searchSectionFooterTitles.count) ? [self.searchSectionFooterTitles objectAtIndex:sectionNumber] : nil;
     }
     else {
-        return (section < self.sectionFooterTitles.count) ? [self.sectionFooterTitles objectAtIndex:section] : nil;
+        return (sectionNumber < self.sectionFooterTitles.count) ? [self.sectionFooterTitles objectAtIndex:sectionNumber] : nil;
     }
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)sectionNumber
 {
-    id model = [self headerItemAtIndex:section];
+    id model = nil;
+    if (self.dataStorage && self.sectionHeaderStyle == DTTableViewSectionStyleView)
+    {
+        id <DTTableViewSection> section = [self.dataStorage sections][sectionNumber];
+        if ([section respondsToSelector:@selector(headerModel)])
+        {
+            model = [section headerModel];
+        }
+    }
+    else {
+        model = [self headerItemAtIndex:sectionNumber];
+    }
     
     if (!model) {
         return nil;
@@ -941,9 +970,20 @@ static BOOL loggingEnabled = YES;
     return headerView;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)sectionNumber
 {
-    id model = [self footerItemAtIndex:section];
+    id model = nil;
+    if (self.dataStorage && self.sectionFooterStyle == DTTableViewSectionStyleView)
+    {
+        id <DTTableViewSection> section = [self.dataStorage sections][sectionNumber];
+        if ([section respondsToSelector:@selector(footerModel)])
+        {
+            model = [section footerModel];
+        }
+    }
+    else {
+        model = [self footerItemAtIndex:sectionNumber];
+    }
     
     if (!model) {
         return nil;
