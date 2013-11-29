@@ -27,6 +27,12 @@
 #import "DTTableViewModelSearching.h"
 #import "DTTableViewDataStorage.h"
 
+typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
+{
+    DTTableViewSectionStyleTitle = 1,
+    DTTableViewSectionStyleView
+};
+
 /**
  `DTTableViewController` manages all `UITableView` datasource methods and provides API for managing your data models in the table. 
  
@@ -115,6 +121,17 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
  Array of footer models, used in UITableViewDelegate `tableView:viewForFooterInSection:` method. All views, that will be created for these models, should conform to `DTTableViewModelTransfer` protocol and will be called with `updateWithModel:` method. After header/footer models are set, you will need to manually reload table with `reloadData` or `reloadSections:withRowAnimation` method.
  */
 @property (nonatomic,strong) NSMutableArray * sectionFooterModels;
+
+@property (nonatomic, assign) DTTableViewSectionStyle sectionHeaderStyle;
+@property (nonatomic, assign) DTTableViewSectionStyle sectionFooterStyle;
+
+@property (nonatomic, assign) UITableViewRowAnimation insertSectionAnimation;
+@property (nonatomic, assign) UITableViewRowAnimation deleteSectionAnimation;
+@property (nonatomic, assign) UITableViewRowAnimation reloadSectionAnimation;
+
+@property (nonatomic, assign) UITableViewRowAnimation insertRowAnimation;
+@property (nonatomic, assign) UITableViewRowAnimation deleteRowAnimation;
+@property (nonatomic, assign) UITableViewRowAnimation reloadRowAnimation;
 
 ///---------------------------------------
 /// @name Mapping

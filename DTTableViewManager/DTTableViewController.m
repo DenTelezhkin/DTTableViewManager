@@ -51,7 +51,7 @@ static BOOL loggingEnabled = YES;
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
-        self.currentSearchScope = -1;
+        [self setup];
     }
     return self;
 }
@@ -60,7 +60,7 @@ static BOOL loggingEnabled = YES;
 {
     if (self = [super initWithCoder:aDecoder])
     {
-        self.currentSearchScope = -1;
+        [self setup];
     }
     return self;
 }
@@ -70,6 +70,20 @@ static BOOL loggingEnabled = YES;
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
     self.searchBar.delegate = nil;
+}
+
+-(void)setup
+{
+    _currentSearchScope = -1;
+    _sectionHeaderStyle = DTTableViewSectionStyleView;
+    _sectionFooterStyle = DTTableViewSectionStyleView;
+    _insertSectionAnimation = UITableViewRowAnimationNone;
+    _deleteSectionAnimation = UITableViewRowAnimationAutomatic;
+    _reloadSectionAnimation = UITableViewRowAnimationAutomatic;
+    
+    _insertRowAnimation = UITableViewRowAnimationAutomatic;
+    _deleteRowAnimation = UITableViewRowAnimationAutomatic;
+    _reloadRowAnimation = UITableViewRowAnimationAutomatic;
 }
 
 #pragma mark - getters, setters
@@ -1088,18 +1102,18 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     [self.tableView beginUpdates];
     
     [self.tableView deleteSections:update.deletedSectionIndexes
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                  withRowAnimation:self.deleteSectionAnimation];
     [self.tableView insertSections:update.insertedSectionIndexes
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                  withRowAnimation:self.insertSectionAnimation];
     [self.tableView reloadSections:update.updatedSectionIndexes
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                  withRowAnimation:self.reloadSectionAnimation];
     
     [self.tableView deleteRowsAtIndexPaths:update.deletedRowIndexPaths
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                          withRowAnimation:self.deleteRowAnimation];
     [self.tableView insertRowsAtIndexPaths:update.insertedRowIndexPaths
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                          withRowAnimation:self.insertRowAnimation];
     [self.tableView reloadRowsAtIndexPaths:update.updatedRowIndexPaths
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                          withRowAnimation:self.reloadRowAnimation];
     
     [self.tableView endUpdates];
 }
