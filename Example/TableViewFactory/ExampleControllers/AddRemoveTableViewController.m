@@ -42,8 +42,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self removeTableItem:[self tableItemAtIndexPath:indexPath]
-         withRowAnimation:UITableViewRowAnimationAutomatic];
+    DTTableViewMemoryStorage * storage = self.dataStorage;
+    [storage removeTableItem:[storage tableItemAtIndexPath:indexPath]];
 }
 
 @end

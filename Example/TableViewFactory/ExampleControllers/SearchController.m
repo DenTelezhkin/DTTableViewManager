@@ -13,24 +13,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
+    
     [[self navigationController] navigationBar].translucent = NO;
     
     NSString * path = [[NSBundle mainBundle] pathForResource:@"Capitals" ofType:@"plist"];
     NSArray * continents = [NSArray arrayWithContentsOfFile:path];
-    
+    NSMutableArray * headerTitles = [NSMutableArray array];
     for (int section=0;section <[continents count]; section ++)
     {
         NSDictionary * continent = continents[section];
         NSDictionary * capitals = [[continents[section] allValues] lastObject];
         for (NSString * country in [capitals allKeys])
         {
-            [self addTableItem:[Example exampleWithText:capitals[country]
+            [(DTTableViewMemoryStorage *)self.dataStorage addTableItem:[Example exampleWithText:capitals[country]
                                              andDetails:country]
                      toSection:section];
         }
-        [self.sectionHeaderTitles addObject:[[continent allKeys] lastObject]];
+        
+        [headerTitles addObject:[[continent allKeys] lastObject]];
     }
+    [(DTTableViewMemoryStorage *)self.dataStorage setSectionHeaderModels:headerTitles];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

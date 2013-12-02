@@ -17,16 +17,22 @@
     
     self.title = @"Custom header/footer";
     
+    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
+    
     [self registerHeaderClass:[CustomHeaderView class]
                 forModelClass:[NSNumber class]];
     [self registerFooterClass:[CustomHeaderView class]
                 forModelClass:[NSNumber class]];
     
-    [self.sectionHeaderModels addObjectsFromArray:@[@(kHeaderKind),@(kHeaderKind)]];
-    [self.sectionFooterModels addObjectsFromArray:@[@(kFooterKind),@(kFooterKind)]];
+    DTTableViewMemoryStorage * storage = self.dataStorage;
     
-    [self addTableItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
-    [self addTableItem:[Example exampleWithText:@"Section 2" andDetails:nil]
+    [storage setSectionHeaderModels:@[@(kHeaderKind),@(kHeaderKind)]];
+    [storage setSectionFooterModels:@[@(kFooterKind),@(kFooterKind)]];
+    self.sectionHeaderStyle = DTTableViewSectionStyleView;
+    self.sectionFooterStyle = DTTableViewSectionStyleView;
+
+    [storage addTableItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
+    [storage addTableItem:[Example exampleWithText:@"Section 2" andDetails:nil]
              toSection:1];
 }
 

@@ -271,6 +271,8 @@ describe(@"section headers/footers models", ^{
         
         model = [DTTableViewController new];
         storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+        model.sectionHeaderStyle = DTTableViewSectionStyleView;
+        model.sectionFooterStyle = DTTableViewSectionStyleView;
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];

@@ -16,10 +16,12 @@
 {
     [super viewDidLoad];
 	
+    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
+    
     [self registerCellClass:[PrototypedCell class]
               forModelClass:[NSString class]];
     
-    [self addTableItems:@[@"Row 1", @"Row 2", @"Row 3"]];
+    [(DTTableViewMemoryStorage *)self.dataStorage addTableItems:@[@"Row 1", @"Row 2", @"Row 3"]];
 }
 
 @end

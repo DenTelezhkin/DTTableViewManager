@@ -75,8 +75,8 @@ static BOOL loggingEnabled = YES;
 -(void)setup
 {
     _currentSearchScope = -1;
-    _sectionHeaderStyle = DTTableViewSectionStyleView;
-    _sectionFooterStyle = DTTableViewSectionStyleView;
+    _sectionHeaderStyle = DTTableViewSectionStyleTitle;
+    _sectionFooterStyle = DTTableViewSectionStyleTitle;
     _insertSectionAnimation = UITableViewRowAnimationNone;
     _deleteSectionAnimation = UITableViewRowAnimationAutomatic;
     _reloadSectionAnimation = UITableViewRowAnimationAutomatic;
@@ -1121,12 +1121,14 @@ static BOOL loggingEnabled = YES;
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
       toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    NSMutableArray *array = [self.sections objectAtIndex:sourceIndexPath.section];
-    id tableItem = [self tableItemAtIndexPath:sourceIndexPath];
-    [array removeObjectAtIndex:sourceIndexPath.row];
+    id <DTTableViewDataStorage> currentStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
+
+    DTTableViewSectionModel * fromSection = [currentStorage sections][sourceIndexPath.section];
+    DTTableViewSectionModel * toSection = [currentStorage sections][destinationIndexPath.section];
+    id tableItem = fromSection.objects[sourceIndexPath.row];
     
-    array = [self.sections objectAtIndex:destinationIndexPath.section];
-    [array insertObject:tableItem atIndex:destinationIndexPath.row];
+    [fromSection.objects removeObjectAtIndex:sourceIndexPath.row];
+    [toSection.objects insertObject:tableItem atIndex:destinationIndexPath.row];
 }
 
 #pragma  mark - UISearchBarDelegate

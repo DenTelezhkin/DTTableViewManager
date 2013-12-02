@@ -148,6 +148,8 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
+            model.sectionHeaderStyle = DTTableViewSectionStyleView;
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
             storage = [DTTableViewMemoryStorage storageWithDelegate:model];
             model.dataStorage = storage;
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
@@ -265,6 +267,7 @@ describe(@"Foundation class clusters", ^{
         [UIView setAnimationsEnabled:NO];
         
         model = [DTTableViewController new];
+        model.sectionHeaderStyle = DTTableViewSectionStyleView;
         storage = [DTTableViewMemoryStorage storageWithDelegate:model];
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];

@@ -9,6 +9,7 @@
 #import "CustomCellsTableViewController.h"
 #import "CustomCell.h"
 #import "CustomModel.h"
+#import "DTTableViewManager.h"
 
 @implementation CustomCellsTableViewController
 
@@ -16,16 +17,17 @@
 {
     [super viewDidLoad];
     
+    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
     self.title = @"Custom NIB";
     
     // CustomCell is created from NIB
     [self registerCellClass:[CustomCell class]
               forModelClass:[CustomModel class]];
     
-    [self addTableItem:[CustomModel modelWithText1:@"Very"
-                                             text2:@"Custom"
-                                             text3:@"Table"
-                                             text4:@"Cell"]];
+    [(DTTableViewMemoryStorage *)self.dataStorage addTableItem:[CustomModel modelWithText1:@"Very"
+                                                                                     text2:@"Custom"
+                                                                                     text3:@"Table"
+                                                                                     text4:@"Cell"]];
 }
 
 @end

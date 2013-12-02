@@ -23,41 +23,44 @@
 
 -(void)addInsertSection
 {
-    [self addTableItem:[Example exampleWithText:@"Tap me to insert wonderful cell" andDetails:nil]];
+    DTTableViewMemoryStorage * storage = self.dataStorage;
+    [storage addTableItem:[Example exampleWithText:@"Tap me to insert wonderful cell" andDetails:nil]];
 }
 
 -(void)addReplaceSection
 {
-    [self addTableItem:[Example exampleWithText:@"Tap me to replace with wonderful cell"
+    DTTableViewMemoryStorage * storage = self.dataStorage;
+    [storage addTableItem:[Example exampleWithText:@"Tap me to replace with wonderful cell"
                                      andDetails:nil]
              toSection:1];
-    [self addTableItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
-    [self addTableItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
+    [storage addTableItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
+    [storage addTableItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
     [self addInsertSection];
     [self addReplaceSection];
-    [self.sectionHeaderTitles addObjectsFromArray:@[@"Insert rows", @"Replace rows"]];
+    DTTableViewMemoryStorage * storage = self.dataStorage;
+    [storage setSectionHeaderModels:@[@"Insert rows", @"Replace rows"]];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    DTTableViewMemoryStorage * storage = self.dataStorage;
     if (indexPath.section)
     {
         //replace
-        [self replaceTableItem:[self tableItemAtIndexPath:indexPath]
-                 withTableItem:self.wonderfulExample
-               andRowAnimation:UITableViewRowAnimationRight];
+        [storage replaceTableItem:[storage tableItemAtIndexPath:indexPath]
+                 withTableItem:self.wonderfulExample];
     }
     else
     {
         //insert
-        [self insertTableItem:self.wonderfulExample
-                  toIndexPath:indexPath
-             withRowAnimation:UITableViewRowAnimationLeft];
+        [storage insertTableItem:self.wonderfulExample
+                  toIndexPath:indexPath];
     }
 }
 

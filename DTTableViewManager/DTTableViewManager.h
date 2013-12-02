@@ -24,6 +24,7 @@
 // THE SOFTWARE.
 
 #import "DTTableViewController.h"
+#import "DTTableViewMemoryStorage.h"
 
 #import "DTTableViewCell.h"
 
