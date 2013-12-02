@@ -7,12 +7,13 @@
 //
 
 #import "DTTableViewController+UnitTests.h"
+#import "DTTableViewMemoryStorage.h"
 
 @implementation DTTableViewController (UnitTests)
 
 -(BOOL)verifyTableItem:(id)item atIndexPath:(NSIndexPath *)path
 {
-    id itemDatasource = [self tableItemAtIndexPath:path];
+    id itemDatasource = [(DTTableViewMemoryStorage *)self.dataStorage tableItemAtIndexPath:path];
     id itemTable = [(id <DTTableViewModelTransfer>)[self tableView:self.tableView cellForRowAtIndexPath:path] model];
     
     if (![item isEqual:itemDatasource])

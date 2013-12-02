@@ -90,7 +90,7 @@
     
     if ([section.objects count] < indexPath.row)
     {
-        if ([[self class] loggingEnabled]) {
+        if ([[DTTableViewController class] loggingEnabled]) {
             NSLog(@"DTTableViewMemoryStorage: failed to insert item for indexPath section: %ld, row: %ld, only %lu items in section",
                   (long)indexPath.section,
                   (long)indexPath.row,
@@ -160,7 +160,7 @@
         [section.objects removeObjectAtIndex:indexPath.row];
     }
     else {
-        if ([[self class] loggingEnabled]) {
+        if ([[DTTableViewController class] loggingEnabled]) {
             NSLog(@"DTTableViewMemoryStorage: item to delete: %@ was not found in table view",tableItem);
         }
         return;
@@ -286,7 +286,7 @@
         return [section objectAtIndex:indexPath.row];
     }
     else {
-        if ([[self class] loggingEnabled]) {
+        if ([[DTTableViewController class] loggingEnabled]) {
             NSLog(@"DTTableViewMemoryStorage: Row not found while searching for table item");
         }
         return nil;

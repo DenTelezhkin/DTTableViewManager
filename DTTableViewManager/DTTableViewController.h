@@ -326,15 +326,6 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
 -(NSInteger)numberOfOriginalSections;
 
 /**
- Returns number of table items in a given `section`. When search is active, this method will return number of items in filtered table.
- 
- @param section section, which items will be counted.
- 
- @return number of table items in a given `section`. 0, if section does not exist
- */
-- (NSInteger)numberOfTableItemsInSection:(NSInteger)section;
-
-/**
  Returns number of table items in a given `section`. This method will use original table, not depending on whether search is active or not.
  
  @param section section, which items will be counted.

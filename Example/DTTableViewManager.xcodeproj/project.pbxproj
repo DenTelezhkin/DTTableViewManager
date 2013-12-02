@@ -180,6 +180,7 @@
 		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
 		AA01B5301848DF14009B3041 /* DTTableViewSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTTableViewSection.h; path = ../../DTTableViewManager/DTTableViewSection.h; sourceTree = "<group>"; };
 		AA1972EC18190CF200B81302 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
+		AAB09060184C845A008B7665 /* DTTableViewMemoryStorage+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTTableViewMemoryStorage+UnitTests.h"; sourceTree = "<group>"; };
 		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
 		E60CA0161684AFEF00F4147E /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/DTTableViewController.h; sourceTree = "<group>"; };
@@ -487,6 +488,7 @@
 				950659F1174C01CD008AB32D /* Mocks */,
 				E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */,
 				E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */,
+				AAB09060184C845A008B7665 /* DTTableViewMemoryStorage+UnitTests.h */,
 				9591074B18424AAC0012B07E /* DTTableViewMemoryStorageSpecs.mm */,
 				E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */,
 				95D51FC5175E78BA00FD2292 /* SearchSpec.mm */,

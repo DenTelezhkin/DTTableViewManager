@@ -273,12 +273,6 @@ static BOOL loggingEnabled = YES;
     [self.tableView reloadData];
 }
 
--(NSInteger)numberOfTableItemsInSection:(NSInteger)section
-{
-    NSArray * itemsInSection = [self tableItemsInSection:section];
-    return [itemsInSection count];
-}
-
 -(NSInteger)numberOfTableItemsInOriginalSection:(NSInteger)section
 {
     NSArray * itemsInSection = [self tableItemsInOriginalSection:section];
