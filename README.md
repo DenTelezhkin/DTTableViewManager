@@ -160,7 +160,7 @@ head on to documentation.
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 1.3.0'
+	pod 'DTTableViewManager', '~> 1.3.1'
 
 ## Documentation
 
