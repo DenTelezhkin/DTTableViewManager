@@ -25,7 +25,7 @@ The best way to understand, what we are trying to achieve here, is to take a loo
 Lets imagine view controller, that manages table view presentation on itself. 
 
 <p align="center" >
-  <img src="https://github.com/DenHeadless/DTTableViewManager/raw/gh-pages/without.png" alt="without" title="without.png">
+  <img src="without.png" alt="without" title="without.png">
 </p>
 
 Clearly, there are way to many connections, that your view controller needs to handle. And we only show table view stuff, however most likely your view controller is also doing other things, which will make this graph even more complicated. 
@@ -33,7 +33,7 @@ Clearly, there are way to many connections, that your view controller needs to h
 Solution for this - separate datasource from view controller. DTTableViewManager does just that. Here's how picture looks, when we use it:
 
 <p align="center" >
-  <img src="https://github.com/DenHeadless/DTTableViewManager/raw/gh-pages/with.png" alt="with" title="with.png">
+  <img src="with.png" alt="with" title="with.png">
 </p>
 
 In the end, view controller is left with following stuff:
