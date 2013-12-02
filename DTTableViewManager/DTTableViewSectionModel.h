@@ -13,9 +13,6 @@
 
 @property (nonatomic, strong) NSMutableArray * objects;
 
-@property (nonatomic, strong) NSString * headerTitle;
-@property (nonatomic, strong) NSString * footerTitle;
-
 @property (nonatomic, strong) NSString * indexTitle;
 
 @property (nonatomic, strong) id headerModel;

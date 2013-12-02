@@ -96,6 +96,7 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
 
 @property (nonatomic, strong) id <DTTableViewDataStorage> dataStorage;
 
+@property (nonatomic, strong) id <DTTableViewDataStorage> searchingDataStorage;
 
 /*
  Property to store UISearchBar, attached to your UITableView. Attaching it to this property is completely optional.

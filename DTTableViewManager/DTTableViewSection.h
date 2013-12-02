@@ -16,9 +16,6 @@
 
 @optional
 
-- (NSString *)headerTitle;
-- (NSString *)footerTitle;
-
 - (NSString *)indexTitle;
 
 - (id)headerModel;

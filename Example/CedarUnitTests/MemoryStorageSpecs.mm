@@ -244,15 +244,6 @@ describe(@"Storage edit specs", ^{
         [[storage sections] count] should equal(2);
     });
     
-    it(@"should set section header titles", ^{
-        [storage setSectionHeaderTitles:@[@"1",@"2",@"3"]];
-        
-        [[storage sections] count] should equal(3);
-        
-        [[storage sections][0] headerTitle] should equal(@"1");
-        [[storage sections][1] headerTitle] should equal(@"2");
-        [[storage sections][2] headerTitle] should equal(@"3");
-    });
     
     it(@"should set section header models", ^{
         [storage setSectionHeaderModels:@[@"1",@"2",@"3"]];
@@ -262,16 +253,6 @@ describe(@"Storage edit specs", ^{
         [[storage sections][0] headerModel] should equal(@"1");
         [[storage sections][1] headerModel] should equal(@"2");
         [[storage sections][2] headerModel] should equal(@"3");
-    });
-    
-    it(@"should set section footer titles", ^{
-        [storage setSectionFooterTitles:@[@"1",@"2",@"3"]];
-        
-        [[storage sections] count] should equal(3);
-        
-        [[storage sections][0] footerTitle] should equal(@"1");
-        [[storage sections][1] footerTitle] should equal(@"2");
-        [[storage sections][2] footerTitle] should equal(@"3");
     });
     
     it(@"should set section footer models", ^{

@@ -124,9 +124,7 @@
 ///---------------------------------------
 
 -(void)setSectionHeaderModels:(NSArray *)headerModels;
--(void)setSectionHeaderTitles:(NSArray *)headerTitles;
 -(void)setSectionFooterModels:(NSArray *)footerModels;
--(void)setSectionFooterTitles:(NSArray *)footerTitles;
 
 /**
  Moves a section to a new location in the table view.
@@ -175,6 +173,8 @@
  */
 - (NSArray *)tableItemsInSection:(NSInteger)section;
 
+-(instancetype)searchingStorageForSearchString:(NSString *)searchString
+                                 inSearchScope:(NSInteger)searchScope;
 
 
 @end

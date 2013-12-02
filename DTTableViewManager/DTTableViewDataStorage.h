@@ -9,15 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "DTTableViewUpdate.h"
 
+
+
 @protocol DTTableViewDataStorageUpdating
 
 -(void)performUpdate:(DTTableViewUpdate *)update;
 
 @optional
+
 -(void)performAnimation:(void(^)(UITableView *))animationBlock;
+
 @end
 
-@protocol DTTableViewDataStorage
+
+
+@protocol DTTableViewDataStorage <NSObject>
 
 /**
  Returns array of sections, conforming to DTTableViewSectionModel protocol.
@@ -32,5 +38,10 @@
  */
 
 +(instancetype)storageWithDelegate:(id <DTTableViewDataStorageUpdating>)delegate;
+
+@optional
+
+-(instancetype)searchingStorageForSearchString:(NSString *)searchString
+                                 inSearchScope:(NSInteger)searchScope;
 
 @end

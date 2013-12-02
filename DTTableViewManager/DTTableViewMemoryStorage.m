@@ -27,6 +27,58 @@
     return storage;
 }
 
+#pragma mark - Searching
+
+-(instancetype)searchingStorageForSearchString:(NSString *)searchString
+                                 inSearchScope:(NSInteger)searchScope
+{
+    DTTableViewMemoryStorage * storage = [[self class] storageWithDelegate:self.delegate];
+    
+    for (int sectionNumber = 0; sectionNumber < [self.sections count]; sectionNumber++)
+    {
+        DTTableViewSectionModel * searchSection = [self filterSection:self.sections[sectionNumber]
+                                                     withSearchString:searchString
+                                                          searchScope:searchScope];
+        if (searchSection)
+        {
+            [storage.sections addObject:searchSection];
+        }
+    }
+    
+    return storage;
+}
+
+-(DTTableViewSectionModel *)filterSection:(DTTableViewSectionModel*)section
+                         withSearchString:(NSString *)searchString
+                              searchScope:(NSInteger)searchScope
+{
+    NSMutableArray * searchResults = [NSMutableArray array];
+    for (int row = 0; row < section.objects.count ; row++)
+    {
+        NSObject <DTTableViewModelSearching> * item = section.objects[row];
+        
+        if ([item respondsToSelector:@selector(shouldShowInSearchResultsForSearchString:inScopeIndex:)])
+        {
+            BOOL shouldShow = [item shouldShowInSearchResultsForSearchString:searchString
+                                                                inScopeIndex:searchScope];
+            if (shouldShow)
+            {
+                [searchResults addObject:item];
+            }
+        }
+    }
+    if ([searchResults count])
+    {
+        DTTableViewSectionModel * searchSection = [DTTableViewSectionModel new];
+        searchSection.objects = searchResults;
+        searchSection.headerModel = section.headerModel;
+        searchSection.footerModel = section.footerModel;
+        searchSection.indexTitle = section.indexTitle;
+        return searchSection;
+    }
+    return nil;
+}
+
 #pragma mark - Updates
 
 -(void)startUpdate
@@ -207,17 +259,6 @@
     }
 }
 
--(void)setSectionHeaderTitles:(NSArray *)headerTitles
-{
-    [self getValidSection:([headerTitles count]-1)];
-    
-    for (int sectionNumber = 0; sectionNumber < [headerTitles count]; sectionNumber++)
-    {
-        DTTableViewSectionModel * section = self.sections[sectionNumber];
-        section.headerTitle = headerTitles[sectionNumber];
-    }
-}
-
 -(void)setSectionFooterModels:(NSArray *)footerModels
 {
     [self getValidSection:([footerModels count]-1)];
@@ -226,16 +267,6 @@
     {
         DTTableViewSectionModel * section = self.sections[sectionNumber];
         section.footerModel = footerModels[sectionNumber];
-    }
-}
-
--(void)setSectionFooterTitles:(NSArray *)footerTitles
-{
-    [self getValidSection:([footerTitles count]-1)];
-    for (int sectionNumber = 0; sectionNumber < [footerTitles count]; sectionNumber++)
-    {
-        DTTableViewSectionModel * section = self.sections[sectionNumber];
-        section.footerTitle = footerTitles[sectionNumber];
     }
 }
 

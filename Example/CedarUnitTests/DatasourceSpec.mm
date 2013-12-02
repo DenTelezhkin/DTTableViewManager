@@ -135,14 +135,14 @@ describe(@"Datasource spec", ^{
     
     it(@"should set section titles", ^{
         model.sectionHeaderStyle = DTTableViewSectionStyleTitle;
-        [storage setSectionHeaderTitles:[@[ TEST_1, TEST_2 ] mutableCopy]];
+        [storage setSectionHeaderModels:[@[ TEST_1, TEST_2 ] mutableCopy]];
         [model tableView:model.tableView titleForHeaderInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForHeaderInSection:1] should equal(TEST_2);
     });
     
     it(@"should set section footers", ^{
         model.sectionFooterStyle = DTTableViewSectionStyleTitle;
-        [storage setSectionFooterTitles:[@[ TEST_1, TEST_2 ] mutableCopy]];
+        [storage setSectionFooterModels:[@[ TEST_1, TEST_2 ] mutableCopy]];
         
         [model tableView:model.tableView titleForFooterInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForFooterInSection:1] should equal(TEST_2);

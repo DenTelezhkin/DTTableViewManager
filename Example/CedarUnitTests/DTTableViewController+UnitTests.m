@@ -9,11 +9,16 @@
 #import "DTTableViewController+UnitTests.h"
 #import "DTTableViewMemoryStorage.h"
 
+@interface DTTableViewController()
+-(BOOL)isSearching;
+@end
+
 @implementation DTTableViewController (UnitTests)
 
 -(BOOL)verifyTableItem:(id)item atIndexPath:(NSIndexPath *)path
 {
-    id itemDatasource = [(DTTableViewMemoryStorage *)self.dataStorage tableItemAtIndexPath:path];
+    DTTableViewMemoryStorage * currentStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
+    id itemDatasource = [currentStorage tableItemAtIndexPath:path];
     id itemTable = [(id <DTTableViewModelTransfer>)[self tableView:self.tableView cellForRowAtIndexPath:path] model];
     
     if (![item isEqual:itemDatasource])
