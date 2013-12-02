@@ -7,6 +7,7 @@
 #import "NiblessTableHeaderView.h"
 #import "MockTableHeaderFooterView.h"
 #import "NiblessTableHeaderFooterView.h"
+#import "DTTableViewMemoryStorage.h"
 
 using namespace Cedar::Matchers;
 
@@ -14,20 +15,22 @@ SPEC_BEGIN(MappingSpecs)
 
 describe(@"mapping tests", ^{
     
+    __block DTTableViewController *model;
+    __block DTTableViewMemoryStorage * storage;
+    __block Example * testModel;
+    __block Example * acc1;
     
     [DTTableViewController setLogging:NO];
     
     describe(@"cell mapping from code", ^{
-        
-        __block DTTableViewController *model;
-        __block Example * testModel;
-        __block Example * acc1;
         
         beforeEach(^{
             
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
+            storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+            model.dataStorage = storage;
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.dataSource = model;
             model.tableView.delegate = model;
@@ -49,7 +52,7 @@ describe(@"mapping tests", ^{
         
         it(@"should create cell from code", ^{
             
-            [model addTableItem:acc1];
+            [storage addTableItem:acc1];
             
             [model verifyTableItem:acc1 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             
@@ -64,16 +67,13 @@ describe(@"mapping tests", ^{
     
     describe(@"cell mapping from nib", ^{
         
-        __block DTTableViewController *model;
-        __block Example * testModel;
-        __block Example * acc1;
-        
-        
         beforeEach(^{
             
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
+            storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+            model.dataStorage = storage;
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -95,7 +95,7 @@ describe(@"mapping tests", ^{
 
         it(@"should create cell from nib", ^{
             
-            [model addTableItem:acc1];
+            [storage addTableItem:acc1];
             
             [model verifyTableItem:acc1 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             
@@ -109,14 +109,14 @@ describe(@"mapping tests", ^{
     });
     
     describe(@"cell mapping should throw an exception, if no nib found", ^{
-        __block DTTableViewController *model;
-        __block Example * testModel;
         
         beforeEach(^{
             
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
+            storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+            model.dataStorage = storage;
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -143,14 +143,13 @@ describe(@"mapping tests", ^{
     
     describe(@"header/footer mapping", ^{
         
-        __block DTTableViewController *model;
-        __block Example * testModel;
-        
         beforeEach(^{
             
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
+            storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+            model.dataStorage = storage;
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -170,7 +169,7 @@ describe(@"mapping tests", ^{
             [model registerHeaderClass:[MockTableHeaderView class]
                          forModelClass:[Example class]];
             
-            [model.sectionHeaderModels addObject:[[Example new] autorelease]];
+            [storage setSectionHeaderModels:@[[[Example new] autorelease]]];
             
             UIView * headerView = [model tableView:model.tableView viewForHeaderInSection:0];
             
@@ -181,7 +180,7 @@ describe(@"mapping tests", ^{
            [model registerFooterClass:[MockTableHeaderView class]
                         forModelClass:[Example class]];
             
-            [model.sectionFooterModels addObject:[[Example new] autorelease]];
+           [storage setSectionFooterModels:@[[[Example new] autorelease]]];
             
             UIView * footerView = [model tableView:model.tableView viewForFooterInSection:0];
             
@@ -194,7 +193,7 @@ describe(@"mapping tests", ^{
                 [model registerHeaderClass:[MockTableHeaderFooterView class]
                              forModelClass:[Example class]];
                 
-                [model.sectionHeaderModels addObject:[[Example new] autorelease]];
+                [storage setSectionHeaderModels:@[[[Example new] autorelease]]];
                 
                 UIView * headerView = [model tableView:model.tableView viewForHeaderInSection:0];
                 
@@ -209,7 +208,7 @@ describe(@"mapping tests", ^{
                 [model registerFooterClass:[MockTableHeaderFooterView class]
                              forModelClass:[Example class]];
                 
-                [model.sectionFooterModels addObject:[[Example new] autorelease]];
+                [storage setSectionFooterModels:@[[[Example new] autorelease]]];
                 
                 UIView * footerView = [model tableView:model.tableView viewForFooterInSection:0];
                 
@@ -259,17 +258,19 @@ describe(@"mapping tests", ^{
 describe(@"Foundation class clusters", ^{
     
     __block DTTableViewController *model;
+    __block DTTableViewMemoryStorage * storage;
     
     beforeEach(^{
         
         [UIView setAnimationsEnabled:NO];
         
         model = [DTTableViewController new];
+        storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+        model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.tableView.dataSource = model;
         model.tableView.delegate = model;
         [model.tableView reloadData];
-        
     });
     
     afterEach(^{
@@ -290,13 +291,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept constant strings", ^{
             ^{
-                [model addTableItem:@""];
+                [storage addTableItem:@""];
             } should_not raise_exception;
         });
         
         it(@"should accept non-empty strings", ^{
             ^{
-                [model addTableItem:@"not empty"];
+                [storage addTableItem:@"not empty"];
             } should_not raise_exception;
         });
         
@@ -304,20 +305,20 @@ describe(@"Foundation class clusters", ^{
             ^{
                 NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
                 [string appendString:@",second"];
-                [model addTableItem:string];
+                [storage addTableItem:string];
             } should_not raise_exception;
         });
         
         it(@"should accept NSString header", ^{
             ^{
-                [model.sectionHeaderModels addObject:@"foo"];
+                [storage setSectionHeaderModels:@[@"foo"]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSString footer ", ^{
             ^{
-                [model.sectionFooterModels addObject:@"bar"];
+                [storage setSectionFooterModels:@[@"bar"]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
@@ -333,13 +334,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept constant strings", ^{
             ^{
-                [model addTableItem:@""];
+                [storage addTableItem:@""];
             } should_not raise_exception;
         });
         
         it(@"should accept non-empty strings", ^{
             ^{
-                [model addTableItem:@"not empty"];
+                [storage addTableItem:@"not empty"];
             } should_not raise_exception;
         });
         
@@ -347,13 +348,13 @@ describe(@"Foundation class clusters", ^{
             ^{
                 NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
                 [string appendString:@",second"];
-                [model addTableItem:string];
+                [storage addTableItem:string];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableString header", ^{
             ^{
-                [model.sectionHeaderModels addObject:@"foo"];
+                [storage setSectionHeaderModels:@[@"foo"]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
 
             } should_not raise_exception;
@@ -361,7 +362,7 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSMutableString footer ", ^{
             ^{
-                [model.sectionFooterModels addObject:@"bar"];
+                [storage setSectionFooterModels:@[@"bar"]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
@@ -377,40 +378,40 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept nsnumber for cells", ^{
             ^{
-                [model addTableItem:@5];
+                [storage addTableItem:@5];
             } should_not raise_exception;
         });
         
         it(@"should accept bool number for cells", ^{
             ^{
-                [model addTableItem:@YES];
+                [storage addTableItem:@YES];
             } should_not raise_exception;
         });
         
         it(@"should accept number for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:@5];
+                [storage setSectionHeaderModels:@[@5]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept number for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:@5];
+                [storage setSectionFooterModels:@[@5]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept BOOL for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:@YES];
+                [storage setSectionHeaderModels:@[@YES]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept bool for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:@YES];
+                [storage setSectionFooterModels:@[@YES]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
@@ -426,40 +427,40 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSDictionary for cells", ^{
             ^{
-                [model addTableItem:@{@1:@2}];
+                [storage addTableItem:@{@1:@2}];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableDictionary for cells", ^{
             ^{
-                [model addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
+                [storage addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
             } should_not raise_exception;
         });
         
         it(@"should accept NSDictionary for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:@{}];
+                [storage setSectionHeaderModels:@[@{}]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSDictionary for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:@{}];
+                [storage setSectionFooterModels:@[@{}]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableDictionary for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:[[@{} mutableCopy] autorelease]];
+                [storage setSectionHeaderModels:@[[[@{} mutableCopy] autorelease]]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableDictionary for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:[[@{} mutableCopy] autorelease]];
+                [storage setSectionFooterModels:@[[[@{} mutableCopy] autorelease]]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
@@ -475,40 +476,40 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSDictionary for cells", ^{
             ^{
-                [model addTableItem:@{@1:@2}];
+                [storage addTableItem:@{@1:@2}];
             } should_not raise_exception;
         });
         
         it(@"should accept NSDictionary for cells", ^{
             ^{
-                [model addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
+                [storage addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
             } should_not raise_exception;
         });
         
         it(@"should accept NSDictionary for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:@{}];
+                [storage setSectionHeaderModels:@[@{}]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSDictionary for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:@{}];
+                [storage setSectionFooterModels:@[@{}]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableDictionary for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:[[@{} mutableCopy] autorelease]];
+                [storage setSectionHeaderModels:@[[[@{} mutableCopy] autorelease]]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableDictionary for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:[[@{} mutableCopy] autorelease]];
+                [storage setSectionFooterModels:@[[[@{} mutableCopy] autorelease]]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
@@ -524,40 +525,40 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSArray for cells", ^{
             ^{
-                [model addTableItem:@[]];
+                [storage addTableItem:@[]];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableArray for cells", ^{
             ^{
-                [model addTableItem:[[@[] mutableCopy] autorelease]];
+                [storage addTableItem:[[@[] mutableCopy] autorelease]];
             } should_not raise_exception;
         });
         
         it(@"should accept NSArray for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:@[]];
+                [storage setSectionHeaderModels:@[@[]]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableArray for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:[[@[] mutableCopy] autorelease]];
+                [storage setSectionHeaderModels:@[[[@[] mutableCopy] autorelease]]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSArray for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:@[]];
+                [storage setSectionFooterModels:@[@[]]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableArray for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:[[@[] mutableCopy] autorelease]];
+                [storage setSectionFooterModels:@[[[@[] mutableCopy] autorelease]]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
@@ -574,40 +575,40 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSArray for cells", ^{
             ^{
-                [model addTableItem:@[]];
+                [storage addTableItem:@[]];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableArray for cells", ^{
             ^{
-                [model addTableItem:[[@[] mutableCopy] autorelease]];
+                [storage addTableItem:[[@[] mutableCopy] autorelease]];
             } should_not raise_exception;
         });
         
         it(@"should accept NSArray for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:@[]];
+                [storage setSectionHeaderModels:@[@[]]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableArray for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:[[@[] mutableCopy] autorelease]];
+                [storage setSectionHeaderModels:@[[[@[] mutableCopy] autorelease]]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSArray for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:@[]];
+                [storage setSectionFooterModels:@[@[]]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableArray for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:[[@[] mutableCopy] autorelease]];
+                [storage setSectionFooterModels:@[[[@[] mutableCopy] autorelease]]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });
@@ -624,20 +625,20 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSDate for cells", ^{
             ^{
-                [model addTableItem:[NSDate date]];
+                [storage addTableItem:[NSDate date]];
             } should_not raise_exception;
         });
 
         it(@"should accept NSDate for header", ^{
             ^{
-                [model.sectionHeaderModels addObject:[NSDate date]];
+                [storage setSectionHeaderModels:@[[NSDate date]]];
                 [model tableView:model.tableView viewForHeaderInSection:0];
             } should_not raise_exception;
         });
         
         it(@"should accept NSDate for footer", ^{
             ^{
-                [model.sectionFooterModels addObject:[NSDate date]];
+                [storage setSectionFooterModels:@[[NSDate date]]];
                 [model tableView:model.tableView viewForFooterInSection:0];
             } should_not raise_exception;
         });

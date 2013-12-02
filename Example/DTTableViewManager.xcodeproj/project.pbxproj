@@ -40,7 +40,7 @@
 		9589420E1750C7AD007CEB5E /* MappingSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9589420D1750C7AD007CEB5E /* MappingSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		958942111750C901007CEB5E /* BaseHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942101750C901007CEB5E /* BaseHeaderFooterView.m */; };
 		958942141750C937007CEB5E /* BaseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942131750C937007CEB5E /* BaseHeaderView.m */; };
-		9591074C18424AAC0012B07E /* DTTableViewMemoryStorageSpecs.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9591074B18424AAC0012B07E /* DTTableViewMemoryStorageSpecs.mm */; };
+		9591074C18424AAC0012B07E /* MemoryStorageSpecs.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */; };
 		95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
 		95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
 		95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */; };
@@ -153,7 +153,7 @@
 		958942121750C937007CEB5E /* BaseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseHeaderView.h; path = "mocks/Header:footer mocks/BaseHeaderView.h"; sourceTree = "<group>"; };
 		958942131750C937007CEB5E /* BaseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderView.m; path = "mocks/Header:footer mocks/BaseHeaderView.m"; sourceTree = "<group>"; };
 		9591074A18423AC50012B07E /* DTTableViewDataStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTTableViewDataStorage.h; path = ../../DTTableViewManager/DTTableViewDataStorage.h; sourceTree = "<group>"; };
-		9591074B18424AAC0012B07E /* DTTableViewMemoryStorageSpecs.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DTTableViewMemoryStorageSpecs.mm; sourceTree = "<group>"; };
+		9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MemoryStorageSpecs.mm; sourceTree = "<group>"; };
 		95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterView.h; path = TableViewFactory/Cells/CustomHeaderFooterView.h; sourceTree = "<group>"; };
 		95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterView.m; path = TableViewFactory/Cells/CustomHeaderFooterView.m; sourceTree = "<group>"; };
 		95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = TableViewFactory/Cells/CustomHeaderFooterView.xib; sourceTree = "<group>"; };
@@ -378,6 +378,16 @@
 			name = Storyboard;
 			sourceTree = "<group>";
 		};
+		AAB09063184C9016008B7665 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */,
+				E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */,
+				AAB09060184C845A008B7665 /* DTTableViewMemoryStorage+UnitTests.h */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		E638F1051619913B00694FBC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,11 +495,9 @@
 		E6CB97B0161B26C900A7E936 /* CedarUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				AAB09063184C9016008B7665 /* Extensions */,
 				950659F1174C01CD008AB32D /* Mocks */,
-				E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */,
-				E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */,
-				AAB09060184C845A008B7665 /* DTTableViewMemoryStorage+UnitTests.h */,
-				9591074B18424AAC0012B07E /* DTTableViewMemoryStorageSpecs.mm */,
+				9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */,
 				E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */,
 				95D51FC5175E78BA00FD2292 /* SearchSpec.mm */,
 				9589420D1750C7AD007CEB5E /* MappingSpec.mm */,
@@ -739,7 +747,7 @@
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
 				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
-				9591074C18424AAC0012B07E /* DTTableViewMemoryStorageSpecs.mm in Sources */,
+				9591074C18424AAC0012B07E /* MemoryStorageSpecs.mm in Sources */,
 				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
 				E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
