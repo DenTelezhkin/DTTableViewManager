@@ -31,8 +31,6 @@
 {
     [super viewDidLoad];
     
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
-    
     UIBarButtonItem * barItem = [[UIBarButtonItem alloc]
                                             initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                  target:self

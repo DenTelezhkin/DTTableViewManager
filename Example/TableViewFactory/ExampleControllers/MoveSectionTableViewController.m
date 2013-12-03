@@ -35,8 +35,6 @@
 {
     [super viewDidLoad];
     
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
-    
     self.title = @"Move section";
 
     UIBarButtonItem * moveButton = [[UIBarButtonItem alloc] initWithTitle:@"Move!"

@@ -14,8 +14,6 @@
 {
     [super viewDidLoad];
     
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
-    
     [[self navigationController] navigationBar].translucent = NO;
     
     NSString * path = [[NSBundle mainBundle] pathForResource:@"Capitals" ofType:@"plist"];

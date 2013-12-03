@@ -17,8 +17,6 @@
     
     self.title = @"Custom header/footer";
     
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
-    
     [self registerHeaderClass:[CustomHeaderView class]
                 forModelClass:[NSNumber class]];
     [self registerFooterClass:[CustomHeaderView class]

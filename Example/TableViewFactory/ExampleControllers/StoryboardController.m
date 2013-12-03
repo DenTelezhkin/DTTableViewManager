@@ -11,12 +11,9 @@
 
 @implementation StoryboardController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
     
     [self registerCellClass:[PrototypedCell class]
               forModelClass:[NSString class]];

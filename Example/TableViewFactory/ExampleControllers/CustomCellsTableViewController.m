@@ -17,7 +17,6 @@
 {
     [super viewDidLoad];
     
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
     self.title = @"Custom NIB";
     
     // CustomCell is created from NIB

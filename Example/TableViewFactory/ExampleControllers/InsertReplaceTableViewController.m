@@ -40,7 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
+    
     [self addInsertSection];
     [self addReplaceSection];
     DTTableViewMemoryStorage * storage = self.dataStorage;

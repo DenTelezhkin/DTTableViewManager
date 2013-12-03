@@ -84,6 +84,8 @@ static BOOL loggingEnabled = YES;
     _insertRowAnimation = UITableViewRowAnimationAutomatic;
     _deleteRowAnimation = UITableViewRowAnimationAutomatic;
     _reloadRowAnimation = UITableViewRowAnimationAutomatic;
+    
+    _dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
 }
 
 #pragma mark - getters, setters

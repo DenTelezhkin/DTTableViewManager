@@ -33,7 +33,6 @@
               forModelClass:[ControllerModel class]];
     
     self.title = @"Examples";
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
     
     DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
     

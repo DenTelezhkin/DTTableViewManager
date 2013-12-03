@@ -63,7 +63,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
+    
     self.title = @"Reorder";
     
     [self addExampleCells];
