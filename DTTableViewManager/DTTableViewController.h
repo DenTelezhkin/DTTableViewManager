@@ -219,6 +219,14 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
  
   @param isEnabled Flag, that indicates, whether logging is enabled.
  */
+
+/**
+ Returns whether search is active, based on current searchString and searchScope, retrieved from UISearchBarDelegate methods.
+ */
+
+-(BOOL)isSearching;
+
+
 +(void)setLogging:(BOOL)isEnabled;
 
 +(BOOL)loggingEnabled;
