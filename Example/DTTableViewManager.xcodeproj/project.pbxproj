@@ -15,6 +15,8 @@
 		950659FC174C0280008AB32D /* BaseMockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659FB174C027F008AB32D /* BaseMockCell.m */; };
 		95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
 		95065A03174C03DF008AB32D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
+		952112B31853719700063EA8 /* DTTableViewCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112B21853719700063EA8 /* DTTableViewCoreDataStorage.m */; };
+		952112B41853719700063EA8 /* DTTableViewCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112B21853719700063EA8 /* DTTableViewCoreDataStorage.m */; };
 		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		955EB19F18412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */; };
@@ -127,6 +129,8 @@
 		950659FB174C027F008AB32D /* BaseMockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseMockCell.m; path = mocks/BaseMockCell.m; sourceTree = "<group>"; };
 		95065A00174C03DF008AB32D /* DTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCell.h; path = ../../DTTableViewManager/DTTableViewCell.h; sourceTree = "<group>"; };
 		95065A01174C03DF008AB32D /* DTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCell.m; path = ../../DTTableViewManager/DTTableViewCell.m; sourceTree = "<group>"; };
+		952112B11853719700063EA8 /* DTTableViewCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCoreDataStorage.h; path = ../../DTTableViewManager/DTTableViewCoreDataStorage.h; sourceTree = "<group>"; };
+		952112B21853719700063EA8 /* DTTableViewCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCoreDataStorage.m; path = ../../DTTableViewManager/DTTableViewCoreDataStorage.m; sourceTree = "<group>"; };
 		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
 		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
 		955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewMemoryStorage.h; path = ../../DTTableViewManager/DTTableViewMemoryStorage.h; sourceTree = "<group>"; };
@@ -607,6 +611,8 @@
 				E60CA0161684AFEF00F4147E /* DTTableViewController.h */,
 				E60CA0171684AFEF00F4147E /* DTTableViewController.m */,
 				9591074A18423AC50012B07E /* DTTableViewDataStorage.h */,
+				952112B11853719700063EA8 /* DTTableViewCoreDataStorage.h */,
+				952112B21853719700063EA8 /* DTTableViewCoreDataStorage.m */,
 				955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */,
 				955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */,
 				955EB1A618414B4F00EAE855 /* DTTableViewUpdate.h */,
@@ -774,6 +780,7 @@
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				9591074C18424AAC0012B07E /* MemoryStorageSpecs.mm in Sources */,
 				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
+				952112B41853719700063EA8 /* DTTableViewCoreDataStorage.m in Sources */,
 				E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
@@ -819,6 +826,7 @@
 				E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */,
 				E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
+				952112B31853719700063EA8 /* DTTableViewCoreDataStorage.m in Sources */,
 				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				955EB1A818414B4F00EAE855 /* DTTableViewUpdate.m in Sources */,
