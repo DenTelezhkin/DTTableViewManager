@@ -1,0 +1,4 @@
+ [{ "name": "Bank1", "city": "City1", "state": "State1", "zip": 11111, "closeDate": "01/01/11" },
+  { "name": "Bank2", "city": "City2", "state": "State2", "zip": 22222, "closeDate": "02/02/12" },
+  { "name": "Bank3", "city": "City3", "state": "State3", "zip": 33333, "closeDate": "03/03/13" },
+  { "name": "Bank4", "city": "City4", "state": "State4", "zip": 44444, "closeDate": "04/04/14" }]

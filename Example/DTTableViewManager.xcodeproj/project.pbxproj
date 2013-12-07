@@ -41,6 +41,10 @@
 		958942111750C901007CEB5E /* BaseHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942101750C901007CEB5E /* BaseHeaderFooterView.m */; };
 		958942141750C937007CEB5E /* BaseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942131750C937007CEB5E /* BaseHeaderView.m */; };
 		9591074C18424AAC0012B07E /* MemoryStorageSpecs.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */; };
+		9591074E18535AE40012B07E /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9591074D18535AE30012B07E /* Banks.json */; };
+		9591075218535C600012B07E /* BanksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9591075118535C600012B07E /* BanksCoreDataManager.m */; };
+		959107A2185361CA0012B07E /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 959107A0185361CA0012B07E /* Banks.xcdatamodeld */; };
+		959107A51853624A0012B07E /* Bank.m in Sources */ = {isa = PBXBuildFile; fileRef = 959107A41853624A0012B07E /* Bank.m */; };
 		95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
 		95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
 		95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */; };
@@ -154,6 +158,12 @@
 		958942131750C937007CEB5E /* BaseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderView.m; path = "mocks/Header:footer mocks/BaseHeaderView.m"; sourceTree = "<group>"; };
 		9591074A18423AC50012B07E /* DTTableViewDataStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTTableViewDataStorage.h; path = ../../DTTableViewManager/DTTableViewDataStorage.h; sourceTree = "<group>"; };
 		9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MemoryStorageSpecs.mm; sourceTree = "<group>"; };
+		9591074D18535AE30012B07E /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = Resources/Banks.json; sourceTree = "<group>"; };
+		9591075018535C600012B07E /* BanksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataManager.h; path = CoreData/BanksCoreDataManager.h; sourceTree = "<group>"; };
+		9591075118535C600012B07E /* BanksCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataManager.m; path = CoreData/BanksCoreDataManager.m; sourceTree = "<group>"; };
+		959107A1185361CA0012B07E /* Banks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banks.xcdatamodel; sourceTree = "<group>"; };
+		959107A31853624A0012B07E /* Bank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bank.h; path = CoreData/Bank.h; sourceTree = "<group>"; };
+		959107A41853624A0012B07E /* Bank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bank.m; path = CoreData/Bank.m; sourceTree = "<group>"; };
 		95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterView.h; path = TableViewFactory/Cells/CustomHeaderFooterView.h; sourceTree = "<group>"; };
 		95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterView.m; path = TableViewFactory/Cells/CustomHeaderFooterView.m; sourceTree = "<group>"; };
 		95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = TableViewFactory/Cells/CustomHeaderFooterView.xib; sourceTree = "<group>"; };
@@ -290,10 +300,23 @@
 			name = "Header footer mocks";
 			sourceTree = "<group>";
 		};
+		9591074F18535C290012B07E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				959107A31853624A0012B07E /* Bank.h */,
+				959107A41853624A0012B07E /* Bank.m */,
+				9591075018535C600012B07E /* BanksCoreDataManager.h */,
+				9591075118535C600012B07E /* BanksCoreDataManager.m */,
+				959107A0185361CA0012B07E /* Banks.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		95A3B4B316FF645600F5897E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				95A3B4B416FF646200F5897E /* Images */,
+				9591074D18535AE30012B07E /* Banks.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -555,6 +578,7 @@
 				E638F1051619913B00694FBC /* Models */,
 				E638F1061619914300694FBC /* Cells */,
 				E6402F8E162D80EA00DDE2B3 /* Example controllers */,
+				9591074F18535C290012B07E /* CoreData */,
 				E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */,
 				E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */,
 				E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */,
@@ -706,6 +730,7 @@
 				E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
 				95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */,
 				95A3B4B716FF649100F5897E /* textured_paper.png in Resources */,
+				9591074E18535AE40012B07E /* Banks.json in Resources */,
 				95A3B4BA16FF64AE00F5897E /* mochaGrunge.png in Resources */,
 				95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
 				95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */,
@@ -784,6 +809,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9591075218535C600012B07E /* BanksCoreDataManager.m in Sources */,
 				E6EA83731615EE6000F8B8C3 /* main.m in Sources */,
 				95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */,
 				E6EA83771615EE6000F8B8C3 /* AppDelegate.m in Sources */,
@@ -812,7 +838,9 @@
 				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				95B336681775C01900AF0A57 /* SearchController.m in Sources */,
 				95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */,
+				959107A51853624A0012B07E /* Bank.m in Sources */,
 				95BCE7DC1776E93200980281 /* ControllerCell.m in Sources */,
+				959107A2185361CA0012B07E /* Banks.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,6 +1027,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		959107A0185361CA0012B07E /* Banks.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				959107A1185361CA0012B07E /* Banks.xcdatamodel */,
+			);
+			currentVersion = 959107A1185361CA0012B07E /* Banks.xcdatamodel */;
+			name = Banks.xcdatamodeld;
+			path = CoreData/Banks.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E6EA83591615EE6000F8B8C3 /* Project object */;
 }

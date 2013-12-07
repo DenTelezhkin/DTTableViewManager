@@ -8,9 +8,10 @@
 
 #import "AppDelegate.h"
 #import "ExampleTableViewController.h"
+#import "BanksCoreDataManager.h"
+@import CoreData;
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -20,11 +21,17 @@
 
     UINavigationController * navController = [[UINavigationController alloc]
                                                     initWithRootViewController:exampleController];
-    self.viewController = navController;
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     
+    [[BanksCoreDataManager sharedInstance] preloadData];
+    
     return YES;
+}
+
+-(void)applicationWillTerminate:(UIApplication *)application
+{
+    [[BanksCoreDataManager sharedInstance] saveContext];
 }
 
 @end
