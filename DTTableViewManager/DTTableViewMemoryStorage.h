@@ -12,6 +12,12 @@
 @interface DTTableViewMemoryStorage : NSObject <DTTableViewDataStorage>
 
 /**
+ Creates DTTableViewMemoryStorage with default configuration. It's delegate must be corresponding DTTableViewController istance.
+ */
+
++(instancetype)storage;
+
+/**
  Contains array of DTTableViewSectionModel's.
  */
 

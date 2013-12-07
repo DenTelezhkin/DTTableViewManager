@@ -31,7 +31,8 @@
 -(instancetype)searchingStorageForSearchString:(NSString *)searchString
                                  inSearchScope:(NSInteger)searchScope
 {
-    DTTableViewMemoryStorage * storage = [[self class] storage];
+    DTTableViewMemoryStorage * storage = [[self class] storage
+                                          ];
     
     for (int sectionNumber = 0; sectionNumber < [self.sections count]; sectionNumber++)
     {
@@ -246,6 +247,18 @@
 }
 
 #pragma mark - Section management
+
+-(id)headerModelAtIndex:(NSInteger)index
+{
+    DTTableViewSectionModel * section = self.sections[index];
+    return section.headerModel;
+}
+
+-(id)footerModelAtIndex:(NSInteger)index
+{
+    DTTableViewSectionModel * section = self.sections[index];
+    return section.footerModel;
+}
 
 -(void)setSectionHeaderModels:(NSArray *)headerModels
 {

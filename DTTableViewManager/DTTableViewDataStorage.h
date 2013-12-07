@@ -33,15 +33,12 @@
 
 @property (nonatomic, weak) id <DTTableViewDataStorageUpdating> delegate;
 
-/**
- Creates DTTableViewMemoryStorage with default configuration. It's delegate must be corresponding DTTableViewController istance.
- */
-
-+(instancetype)storage;
-
 @optional
 
 -(instancetype)searchingStorageForSearchString:(NSString *)searchString
                                  inSearchScope:(NSInteger)searchScope;
+
+- (id)headerModelAtIndex:(NSInteger)index;
+- (id)footerModelAtIndex:(NSInteger)index;
 
 @end

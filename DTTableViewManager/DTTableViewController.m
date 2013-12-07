@@ -195,21 +195,18 @@ static BOOL loggingEnabled = YES;
 {
     if ([self isSearching])
     {
-        id <DTTableViewSection> section = [self.searchingDataStorage sections][index];
-        if ([section respondsToSelector:@selector(headerModel)])
+        if ([self.searchingDataStorage respondsToSelector:@selector(headerModelAtIndex:)])
         {
-            return [section headerModel];
+            return [self.searchingDataStorage headerModelAtIndex:index];
         }
     }
     else
     {
-        id <DTTableViewSection> section = [self.dataStorage sections][index];
-        if ([section respondsToSelector:@selector(headerModel)])
+        if ([self.dataStorage respondsToSelector:@selector(headerModelAtIndex:)])
         {
-            return [section headerModel];
+            return [self.dataStorage headerModelAtIndex:index];
         }
     }
-    
     return nil;
 }
 
@@ -217,21 +214,18 @@ static BOOL loggingEnabled = YES;
 {
     if ([self isSearching])
     {
-        id <DTTableViewSection> section = [self.searchingDataStorage sections][index];
-        if ([section respondsToSelector:@selector(footerModel)])
+        if ([self.searchingDataStorage respondsToSelector:@selector(footerModelAtIndex:)])
         {
-            return [section footerModel];
+            return [self.searchingDataStorage footerModelAtIndex:index];
         }
     }
     else
     {
-        id <DTTableViewSection> section = [self.dataStorage sections][index];
-        if ([section respondsToSelector:@selector(footerModel)])
+        if ([self.dataStorage respondsToSelector:@selector(footerModelAtIndex:)])
         {
-            return [section footerModel];
+            return [self.dataStorage footerModelAtIndex:index];
         }
     }
-    
     return nil;
 }
 
@@ -263,53 +257,46 @@ static BOOL loggingEnabled = YES;
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectionNumber
 {
+    if (!(self.sectionHeaderStyle == DTTableViewSectionStyleTitle))
+    {
+        return nil;
+    }
+    
     if ([self isSearching])
     {
-        if (self.sectionHeaderStyle == DTTableViewSectionStyleTitle)
+        if ([self.searchingDataStorage respondsToSelector:@selector(headerModelAtIndex:)])
         {
-            id <DTTableViewSection> section = [self.searchingDataStorage sections][sectionNumber];
-            if ([section respondsToSelector:@selector(headerModel)])
-            {
-                return [section headerModel];
-            }
+            return [self.searchingDataStorage headerModelAtIndex:sectionNumber];
         }
-    }
+     }
     else {
-        id <DTTableViewSection> section = [self.dataStorage sections][sectionNumber];
-        
-        if (self.sectionHeaderStyle == DTTableViewSectionStyleTitle)
+        if ([self.dataStorage respondsToSelector:@selector(headerModelAtIndex:)])
         {
-            if ([section respondsToSelector:@selector(headerModel)])
-            {
-                return [section headerModel];
-            }
+            return [self.dataStorage headerModelAtIndex:sectionNumber];
         }
-    }
+     }
     
     return nil;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)sectionNumber
 {
+    if (!(self.sectionFooterStyle == DTTableViewSectionStyleTitle))
+    {
+        return nil;
+    }
+    
     if ([self isSearching])
     {
-        if (self.sectionFooterStyle == DTTableViewSectionStyleTitle)
+        if ([self.searchingDataStorage respondsToSelector:@selector(footerModelAtIndex:)])
         {
-            id <DTTableViewSection> section = [self.searchingDataStorage sections][sectionNumber];
-            if ([section respondsToSelector:@selector(footerModel)])
-            {
-                return [section footerModel];
-            }
+            return [self.searchingDataStorage footerModelAtIndex:sectionNumber];
         }
     }
     else {
-        if (self.sectionFooterStyle == DTTableViewSectionStyleTitle)
+        if ([self.dataStorage respondsToSelector:@selector(footerModelAtIndex:)])
         {
-            id <DTTableViewSection> section = [self.dataStorage sections][sectionNumber];
-            if ([section respondsToSelector:@selector(footerModel)])
-            {
-                return [section footerModel];
-            }
+            return [self.dataStorage footerModelAtIndex:sectionNumber];
         }
     }
     

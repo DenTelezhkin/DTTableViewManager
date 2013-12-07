@@ -14,11 +14,4 @@
 
 - (NSUInteger)numberOfObjects;
 
-@optional
-
-- (NSString *)indexTitle;
-
-- (id)headerModel;
-- (id)footerModel;
-
 @end
