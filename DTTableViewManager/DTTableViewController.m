@@ -79,7 +79,8 @@ static BOOL loggingEnabled = YES;
     _deleteRowAnimation = UITableViewRowAnimationAutomatic;
     _reloadRowAnimation = UITableViewRowAnimationAutomatic;
     
-    _dataStorage = [DTTableViewMemoryStorage storageWithDelegate:self];
+    _dataStorage = [DTTableViewMemoryStorage storage];
+    _dataStorage.delegate = self;
 }
 
 #pragma mark - getters, setters
@@ -91,6 +92,18 @@ static BOOL loggingEnabled = YES;
         _cellFactory.delegate = self;
     }
     return _cellFactory;
+}
+
+-(void)setDataStorage:(id<DTTableViewDataStorage>)dataStorage
+{
+    _dataStorage = dataStorage;
+    _dataStorage.delegate = self;
+}
+
+-(void)setSearchingDataStorage:(id<DTTableViewDataStorage>)searchingDataStorage
+{
+    _searchingDataStorage = searchingDataStorage;
+    _searchingDataStorage.delegate = self;
 }
 
 #pragma mark - mapping

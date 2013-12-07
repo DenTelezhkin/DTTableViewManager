@@ -10,7 +10,8 @@ describe(@"Storage search specs", ^{
     __block DTTableViewMemoryStorage *storage;
     
     beforeEach(^{
-        storage = [DTTableViewMemoryStorage storageWithDelegate:[OCMockObject niceMockForClass:[DTTableViewController class]]];
+        storage = [DTTableViewMemoryStorage storage];
+        storage.delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
     });
     
     it(@"should correctly return item at indexPath", ^{
@@ -55,7 +56,8 @@ describe(@"Storage Add specs", ^{
 
     beforeEach(^{
         delegate = [OCMockObject mockForClass:[DTTableViewController class]];
-        storage = [DTTableViewMemoryStorage storageWithDelegate:(id <DTTableViewDataStorageUpdating>)delegate];
+        storage = [DTTableViewMemoryStorage storage];
+        storage.delegate = (id <DTTableViewDataStorageUpdating>)delegate;
     });
     
     it(@"should receive correct update call when adding table item",
@@ -105,7 +107,8 @@ describe(@"Storage edit specs", ^{
     
     beforeEach(^{
         delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
-        storage = [DTTableViewMemoryStorage storageWithDelegate:(id <DTTableViewDataStorageUpdating>)delegate];
+        storage = [DTTableViewMemoryStorage storage];
+        storage.delegate = (id <DTTableViewDataStorageUpdating>)delegate;
         
         acc1 = [Example new];
         acc2 = [Example new];

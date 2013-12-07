@@ -17,11 +17,10 @@
 
 @implementation DTTableViewMemoryStorage
 
-+(instancetype)storageWithDelegate:(id<DTTableViewDataStorageUpdating>)delegate
++(instancetype)storage
 {
     DTTableViewMemoryStorage * storage = [self new];
-    
-    storage.delegate = delegate;
+
     storage.sections = [NSMutableArray array];
     
     return storage;
@@ -32,7 +31,7 @@
 -(instancetype)searchingStorageForSearchString:(NSString *)searchString
                                  inSearchScope:(NSInteger)searchScope
 {
-    DTTableViewMemoryStorage * storage = [[self class] storageWithDelegate:self.delegate];
+    DTTableViewMemoryStorage * storage = [[self class] storage];
     
     for (int sectionNumber = 0; sectionNumber < [self.sections count]; sectionNumber++)
     {

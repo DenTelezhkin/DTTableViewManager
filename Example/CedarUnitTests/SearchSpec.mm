@@ -35,7 +35,7 @@ describe(@"search in first section", ^{
         
         model = [DTTableViewController new];
         
-        storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+        storage = [DTTableViewMemoryStorage storage];
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
@@ -126,7 +126,7 @@ describe(@"search in multiple sections", ^{
         acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
         
         model = [DTTableViewController new];
-        storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+        storage = [DTTableViewMemoryStorage storage];
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
@@ -210,7 +210,7 @@ describe(@"section headers/footers titles", ^{
         testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
         model = [DTTableViewController new];
-        storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+        storage = [DTTableViewMemoryStorage storage];
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.sectionHeaderStyle = DTTableViewSectionStyleTitle;
@@ -270,7 +270,7 @@ describe(@"section headers/footers models", ^{
         testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
         model = [DTTableViewController new];
-        storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+        storage = [DTTableViewMemoryStorage storage];
         model.sectionHeaderStyle = DTTableViewSectionStyleView;
         model.sectionFooterStyle = DTTableViewSectionStyleView;
         model.dataStorage = storage;

@@ -37,7 +37,7 @@
  Creates DTTableViewMemoryStorage with default configuration. It's delegate must be corresponding DTTableViewController istance.
  */
 
-+(instancetype)storageWithDelegate:(id <DTTableViewDataStorageUpdating>)delegate;
++(instancetype)storage;
 
 @optional
 

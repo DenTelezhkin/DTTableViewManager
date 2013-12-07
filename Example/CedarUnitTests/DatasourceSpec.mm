@@ -24,7 +24,7 @@ describe(@"Datasource spec", ^{
         [UIView setAnimationsEnabled:NO];
         
         model = [DTTableViewController new];
-        storage = [DTTableViewMemoryStorage storageWithDelegate:model];
+        storage = [DTTableViewMemoryStorage storage];
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
