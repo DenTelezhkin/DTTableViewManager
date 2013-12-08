@@ -23,39 +23,85 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
 #import "DTTableViewUpdate.h"
 
-
+/**
+ `DTTableViewDataStorageUpdating` protocol is used to transfer data storage updates to `DTTableViewController` object.
+ */
 
 @protocol DTTableViewDataStorageUpdating
 
--(void)performUpdate:(DTTableViewUpdate *)update;
+/**
+ This method transfers data storage updates to `DTTableViewController` object. Then `DTTableViewController` object is expected to perform all animations required to synchronize datasource and UI.
+ 
+ @param update `DTTableViewUpdate` instance, that incapsulates all changes, happened in data storage.
+ */
+- (void)performUpdate:(DTTableViewUpdate *)update;
 
 @optional
 
--(void)performAnimation:(void(^)(UITableView *))animationBlock;
+/**
+ This method allows to perform animations you need for changes in UITableView. Performing manual animations requires to manually change datasource objects before animation method is called.
+ 
+ @param animationBlock AnimationBlock to be executed with UITableView.
+ 
+ @warning You need to update data storage object before executing this method.
+ */
+- (void)performAnimation:(void(^)(UITableView *))animationBlock;
 
 @end
 
-
+/**
+ `DTTableViewDataStorage` protocol is used to define common interface for data storage objects used by `DTTableViewController` instance. `DTTableViewManager` provides 2 implementations - `DTTableViewMemoryStorage` and `DTTableViewCoreDataStorage`. `DTTableViewMemoryStorage` is used by default.
+ */
 
 @protocol DTTableViewDataStorage <NSObject>
 
 /**
- Returns array of sections, conforming to DTTableViewSectionModel protocol.
+ Array of sections, conforming to DTTableViewSection protocol. Depending on data storage used, section objects may be different.
+ 
+ @return NSArray of id <DTTableViewSection> objects.
  */
 
--(NSArray*)sections;
+- (NSArray*)sections;
+
+/**
+ Delegate property used to transfer current data storage changes to `DTTableViewController` object. It is expected to update UI with appropriate animations.
+ */
 
 @property (nonatomic, weak) id <DTTableViewDataStorageUpdating> delegate;
 
 @optional
 
--(instancetype)searchingStorageForSearchString:(NSString *)searchString
+/**
+ Method to create searching data storage, based on current data storage. This method will be called automatically by `DTTableViewController` instance.
+ 
+ @param searchString String, used to search in data storage
+ 
+ @param searchScope Search scope for current search.
+ 
+ @return searching data storage.
+ */
+
+- (instancetype)searchingStorageForSearchString:(NSString *)searchString
                                  inSearchScope:(NSInteger)searchScope;
 
+/**
+ Getter method for header model for current section.
+ 
+ @param index Number of section.
+ 
+ @return Header model for section at index.
+ */
 - (id)headerModelAtIndex:(NSInteger)index;
+
+/**
+ Getter method for footer model for current section.
+ 
+ @param index Number of section.
+ 
+ @return Footer model for section at index.
+ */
 - (id)footerModelAtIndex:(NSInteger)index;
 
 @end
