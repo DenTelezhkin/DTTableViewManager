@@ -26,20 +26,31 @@
 #import <Foundation/Foundation.h>
 #import "DTTableViewDataStorage.h"
 
+/**
+ This class is used as a default storage for table view models. To populate this storage with data, call one of many add or insert methods available below. Every change in data storage causes delegate call to `DTTableViewController` instance with `DTTableViewUpdate` instance. It is then expected to update UITableView with appropriate animations.
+ 
+ ## Searching
+ 
+ To implement search, your data models should implement `DTTableViewModelSearching` protocol. Specifically, on every change in UISearchBar, every model will get called with `shouldShowInSearchResultsForSearchString:inScopeIndex:` method. Based on the results, new searching storage will be created and used by `DTTableViewController` instance.
+ */
+
 @interface DTTableViewMemoryStorage : NSObject <DTTableViewDataStorage>
 
 /**
- Creates DTTableViewMemoryStorage with default configuration. It's delegate must be corresponding DTTableViewController istance.
+ Creates DTTableViewMemoryStorage with default configuration.
  */
 
 +(instancetype)storage;
 
 /**
- Contains array of DTTableViewSectionModel's.
+ Contains array of DTTableViewSectionModel's. Every DTTableViewSectionModel contains NSMutableArray of objects - there all table view models are stored. Every DTTableViewSectionModel also contains header and footer models for sections.
  */
 
 @property (nonatomic, strong) NSMutableArray * sections;
 
+/**
+ Delegate object, that gets notified about data storage updates. This property is automatically set by `DTTableViewController` instance, when setter for dataStorage property is called.
+ */
 @property (nonatomic, weak) id <DTTableViewDataStorageUpdating> delegate;
 
 
@@ -48,14 +59,14 @@
 ///---------------------------------------
 
 /**
- Add tableItem to section 0. Table will be automatically updated with `UITableViewRowAnimationNone` animation.
+ Add tableItem to section 0.
  
  @param tableItem Model you want to add to the table
  */
 - (void)addTableItem:(NSObject *)tableItem;
 
 /**
- Add table items to section `section`. Table will be automatically updated using `UITableViewRowAnimationNone` animation.
+ Add table items to section `section`.
  
  @param tableItem Model to add.
  
@@ -64,14 +75,14 @@
 - (void)addTableItem:(NSObject *)tableItem toSection:(NSInteger)sectionNumber;
 
 /**
- Add table items to section 0. Table will be automatically updated using `UITableViewRowAnimationNone`` animation.
+ Add table items to section 0.
  
  @param tableItems models to add.
  */
 - (void)addTableItems:(NSArray *)tableItems;
 
 /**
- Add table items to section `section`. Table will be automatically updated using `UITableViewRowAnimationNone` animation.
+ Add table items to section `section`.
  
  @param tableItems Models to add.
  
@@ -85,7 +96,7 @@
 ///---------------------------------------
 
 /**
- Insert table item to indexPath `indexPath`. Table will be automatically updated using `UITableViewRowAnimationNone` style.
+ Insert table item to indexPath `indexPath`.
  
  @param tableItem model to insert.
  
@@ -110,7 +121,7 @@
 -(void)reloadTableItem:(NSObject *)tableItem;
 
 /**
- Replace tableItemToReplace with replacingTableItem. Table is immediately updated with `UITableViewRowAnimationNone` animation. If tableItemToReplace is not found, or replacingTableItem is `nil`, this method does nothing.
+ Replace tableItemToReplace with replacingTableItem. If tableItemToReplace is not found, or replacingTableItem is `nil`, this method does nothing.
  
  @param tableItemToReplace Model object you want to replace.
  
@@ -124,14 +135,14 @@
 ///---------------------------------------
 
 /**
- Removing tableItem. Table is immediately updated with `UITableViewRowAnimationNone` animation. If tableItem is not found,  this method does nothing.
+ Removing tableItem. If tableItem is not found,  this method does nothing.
  
  @param tableItem Model object you want to remove.
  */
 - (void)removeTableItem:(NSObject *)tableItem;
 
 /**
- Removing tableItems. All deletions are made inside beginUpdates and endUpdates tableView block. After all deletions are made, `UITableViewRowAnimationNone` animation is applied. If some tableItem is not found, it is skipped.
+ Removing tableItems. If some tableItem is not found, it is skipped.
  
  @param tableItems Models you want to remove.
  */
@@ -146,7 +157,18 @@
 /// @name Managing sections
 ///---------------------------------------
 
+/**
+ Set header models for UITableView sections. `DTTableViewSectionModel` objects are created automatically, if they don't exist already.
+ 
+ @param headerModels Section header models to use.
+ */
 -(void)setSectionHeaderModels:(NSArray *)headerModels;
+
+/**
+ Set footer models for UITableView sections. `DTTableViewSectionModel` objects are created automatically, if they don't exist already.
+ 
+ @param footerModels Section footer models to use.
+ */
 -(void)setSectionFooterModels:(NSArray *)footerModels;
 
 /**
@@ -159,7 +181,7 @@
 - (void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo;
 
 /**
- Deletes one or more sections in the receiver, with `UITableViewRowAnimationNone` animation.
+ Deletes one or more sections in the receiver.
  
  @param indexSet An index set that specifies the sections to delete from the receiving table view. If a section exists after the specified index location, it is moved up one index location.
  */
@@ -170,7 +192,7 @@
 ///---------------------------------------
 
 /**
- If item exists at `indexPath`, it's model will be returned. If section or row does not exist, method will return `nil`. If this method is called when search is active, it will return model with indexPath in filtered table.
+ If item exists at `indexPath`, it's model will be returned. If section or row does not exist, method will return `nil`.
  
  @param indexPath Index of the item you wish to retrieve.
  
@@ -179,7 +201,7 @@
 - (id)tableItemAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- Searches for tableItem and returns it's indexPath. If there are many equal tableItems, indexPath of the first one will be returned. If this method is called when search is active, it will return indexPath of the item in filtered table.
+ Searches for tableItem and returns it's indexPath. If there are many equal tableItems, indexPath of the first one will be returned.
  
  @param tableItem Model of the item you wish to find.
  
@@ -188,16 +210,12 @@
 - (NSIndexPath *)indexPathOfTableItem:(NSObject *)tableItem;
 
 /**
- Returns array with table items in section. If search is active, this method will return tableItems in filtered table. Section numbers may differ, since empty sections are not shown in search results.
+ Returns array with table items in section.
  
  @param section Number of the section in table.
  
  @return array of table items in section. Empty array if section does not exist.
  */
 - (NSArray *)tableItemsInSection:(NSInteger)section;
-
--(instancetype)searchingStorageForSearchString:(NSString *)searchString
-                                 inSearchScope:(NSInteger)searchScope;
-
 
 @end
