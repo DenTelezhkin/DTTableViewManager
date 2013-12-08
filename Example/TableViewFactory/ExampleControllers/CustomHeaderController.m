@@ -8,6 +8,7 @@
 
 #import "CustomHeaderController.h"
 #import "CustomHeaderView.h"
+#import "Example.h"
 
 @implementation CustomHeaderController
 

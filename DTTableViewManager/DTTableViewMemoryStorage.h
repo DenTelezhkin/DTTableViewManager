@@ -25,6 +25,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DTTableViewDataStorage.h"
+#import "DTTableViewModelSearching.h"
 
 /**
  This class is used as a default storage for table view models. To populate this storage with data, call one of many add or insert methods available below. Every change in data storage causes delegate call to `DTTableViewController` instance with `DTTableViewUpdate` instance. It is then expected to update UITableView with appropriate animations.

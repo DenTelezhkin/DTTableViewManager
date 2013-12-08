@@ -8,6 +8,7 @@
 
 #import "CustomHeaderFooterController.h"
 #import "CustomHeaderFooterView.h"
+#import "Example.h"
 
 @implementation CustomHeaderFooterController
 

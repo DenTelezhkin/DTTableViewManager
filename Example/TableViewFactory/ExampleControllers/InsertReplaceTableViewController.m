@@ -7,6 +7,7 @@
 //
 
 #import "InsertReplaceTableViewController.h"
+#import "Example.h"
 
 @interface InsertReplaceTableViewController ()
 @property (nonatomic,strong) Example * wonderfulExample;

@@ -8,6 +8,7 @@
 
 #import "ReorderTableViewController.h"
 #import "DTTableViewSectionModel.h"
+#import "Example.h"
 
 @implementation ReorderTableViewController
 

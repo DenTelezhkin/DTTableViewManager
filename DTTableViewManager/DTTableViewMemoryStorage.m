@@ -25,6 +25,7 @@
 
 #import "DTTableViewMemoryStorage.h"
 #import "DTTableViewSectionModel.h"
+#import "DTTableViewController.h"
 
 @interface DTTableViewMemoryStorage()
 

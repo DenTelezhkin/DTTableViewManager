@@ -8,6 +8,7 @@
 
 #import "AddRemoveTableViewController.h"
 #import "DTTableViewMemoryStorage.h"
+#import "Example.h"
 
 @interface AddRemoveTableViewController ()
 

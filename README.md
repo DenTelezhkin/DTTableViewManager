@@ -167,7 +167,7 @@ You will need to provide a storage with NSFetchedResultsController and appropria
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 1.3.1'
+	pod 'DTTableViewManager', '~> 2.0.0-RC1'
 
 ## Documentation
 

@@ -7,6 +7,8 @@
 //
 
 #import "BaseExampleController.h"
+#import "ExampleCell.h"
+#import "Example.h"
 
 @interface BaseExampleController ()
 

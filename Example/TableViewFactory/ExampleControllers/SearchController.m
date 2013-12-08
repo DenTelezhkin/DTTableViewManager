@@ -7,6 +7,7 @@
 //
 
 #import "SearchController.h"
+#import "Example.h"
 
 @implementation SearchController
 
