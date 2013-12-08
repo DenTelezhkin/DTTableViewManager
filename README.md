@@ -29,7 +29,7 @@ DTTableViewManager 2.0 is a major update to the framework, introducing big chang
 
 The best way to understand, what we are trying to achieve here, is to take a look at example, that shows most common use cases for framework. It is provided in Example folder. Don't miss CoreData examples, they are awesome!
 
-## How?
+## Picture time!
 
 Lets imagine view controller, that manages table view presentation on itself. 
 
