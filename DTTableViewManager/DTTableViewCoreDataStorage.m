@@ -66,7 +66,7 @@
 }
 
 /*
- Thanks to Michael Rooni for NSFetchedResultsController updates done right!
+ Thanks to Michael Fey for NSFetchedResultsController updates done right!
  http://www.fruitstandsoftware.com/blog/2013/02/uitableview-and-nsfetchedresultscontroller-updates-done-right/
  */
 
