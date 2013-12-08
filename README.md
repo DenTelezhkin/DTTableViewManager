@@ -27,7 +27,7 @@ DTTableViewManager 2.0 is a major update to the framework, introducing big chang
 * Easy UITableView search 
 * Core data / NSFetchedResultsController support
 
-The best way to understand, what we are trying to achieve here, is to take a look at example, provided in Example folder.
+The best way to understand, what we are trying to achieve here, is to take a look at example, that shows most common use cases for framework. It is provided in Example folder. Don't miss CoreData examples, they are awesome!
 
 ## How?
 
@@ -48,7 +48,7 @@ Solution for this - separate datasource from view controller. DTTableViewManager
 In the end, view controller is left with following stuff:
 
 * Register mapping between data model class and cell class.
-* Populate table view with data models
+* Populate data storage with data models
 
 Okay, enough talking, let's dive into code. Simplest way for view controller is to subclass DTTableViewController, set it's tableView property, delegate, datasource and off you go!
 
@@ -164,10 +164,6 @@ Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 ## Documentation
 
 You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
-
-## Example
-
-Take a look at example application, it shows most common use cases for framework and how DTTableViewManager handles different situations. Don't miss CoreData examples, they are awesome =)
 
 ## Thanks
 
