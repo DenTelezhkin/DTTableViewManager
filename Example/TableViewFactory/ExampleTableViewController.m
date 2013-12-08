@@ -21,6 +21,7 @@
 #import "DTTableViewMemoryStorage.h"
 #import "DTTableViewSectionModel.h"
 #import "AppleCoreDataExampleController.h"
+#import "BanksCoreDataViewController.h"
 
 @implementation ExampleTableViewController
 
@@ -60,7 +61,9 @@
     [storage addTableItem:[ControllerModel modelWithClass:[StoryboardController class]
                                               andTitle:@"Storyboard"]];
     [storage addTableItem:[ControllerModel modelWithClass:[AppleCoreDataExampleController class]
-                                                 andTitle:@"Apple CoreData"]];
+                                                 andTitle:@"Simple CoreData"]];
+    [storage addTableItem:[ControllerModel modelWithClass:[BanksCoreDataViewController class]
+                                                 andTitle:@"CoreData search"]];
 }
 
 #pragma mark - Table View

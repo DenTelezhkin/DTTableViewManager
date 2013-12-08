@@ -372,22 +372,6 @@ static BOOL loggingEnabled = YES;
 
 #pragma mark - private
 
-#warning moving item requires explicit knowing about datastorage class, which is not desired
-/*
-- (void)tableView:(UITableView *)tableView
-moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-      toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    id <DTTableViewDataStorage> currentStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
-
-    id <DTTableViewSection> fromSection = [currentStorage sections][sourceIndexPath.section];
-    id <DTTableViewSection> toSection = [currentStorage sections][destinationIndexPath.section];
-    id tableItem = fromSection.objects[sourceIndexPath.row];
-    
-    [fromSection.objects removeObjectAtIndex:sourceIndexPath.row];
-    [toSection.objects insertObject:tableItem atIndex:destinationIndexPath.row];
-}*/
-
 #pragma  mark - UISearchBarDelegate
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText

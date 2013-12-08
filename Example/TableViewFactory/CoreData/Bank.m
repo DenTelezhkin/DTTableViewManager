@@ -12,17 +12,15 @@
 
 @dynamic name;
 @dynamic city;
-@dynamic closeDate;
 @dynamic zip;
+@dynamic state;
 
 +(instancetype)insertBankWithInfo:(NSDictionary *)info
            inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Bank * newBank = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([self class])
                                                    inManagedObjectContext:context];
-    
     [newBank fillBankWithInfo:info];
-    
     return newBank;
 }
 
@@ -31,16 +29,7 @@
     self.name = info[@"name"];
     self.city = info[@"city"];
     self.zip = info[@"zip"];
-    self.closeDate = [self dateFromString:info[@"closeDate"]
-                               withFormat:@"dd/MM/yy"];
-}
-
--(NSDate *)dateFromString:(NSString*)stringDate withFormat:(NSString *)format
-{
-    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:format];
-    return [dateFormatter dateFromString:stringDate];
+    self.state = info[@"state"];
 }
 
 @end

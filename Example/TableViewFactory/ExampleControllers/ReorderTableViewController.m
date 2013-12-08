@@ -7,6 +7,7 @@
 //
 
 #import "ReorderTableViewController.h"
+#import "DTTableViewSectionModel.h"
 
 @implementation ReorderTableViewController
 
@@ -24,38 +25,11 @@
     [storage setSectionHeaderModels:@[@"Section 1", @"Section 2", @" Section 3"]];
 }
 
-#pragma  mark - edit button
-
--(void)setEditNavigationButton
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
-    UIBarButtonItem * editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(editModeTapped:)];
-    self.navigationItem.rightBarButtonItem = editButton;
-}
-
--(void)setDoneNavigationButton
-{
-    UIBarButtonItem * editButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                    style:UIBarButtonItemStyleDone
-                                                                   target:self
-                                                                   action:@selector(doneTapped:)];
-    self.navigationItem.rightBarButtonItem = editButton;
-}
-
-
-
--(void)editModeTapped:(UIBarButtonItem *)editButton
-{
-    [self.tableView setEditing:YES animated:YES];
-    [self setDoneNavigationButton];
-}
-
--(void)doneTapped:(UIBarButtonItem *)editButton
-{
-    [self.tableView setEditing:NO animated:YES];
-    [self setEditNavigationButton];
+    [super setEditing:editing animated:animated];
+    
+    [self.tableView setEditing:editing animated:animated];
 }
 
 #pragma  mark - view activity
@@ -68,7 +42,7 @@
     
     [self addExampleCells];
     
-    [self setEditNavigationButton];
+    self.navigationItem.rightBarButtonItem = [self editButtonItem];
 }
 
 #pragma mark - TableView delegate methods
@@ -88,5 +62,18 @@
     return UITableViewCellEditingStyleNone;
 }
 
+- (void)tableView:(UITableView *)tableView
+moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    DTTableViewMemoryStorage * storage = self.dataStorage;
+
+    DTTableViewSectionModel * fromSection = [storage sections][sourceIndexPath.section];
+    DTTableViewSectionModel * toSection = [storage sections][destinationIndexPath.section];
+    id tableItem = fromSection.objects[sourceIndexPath.row];
+
+    [fromSection.objects removeObjectAtIndex:sourceIndexPath.row];
+    [toSection.objects insertObject:tableItem atIndex:destinationIndexPath.row];
+}
 
 @end

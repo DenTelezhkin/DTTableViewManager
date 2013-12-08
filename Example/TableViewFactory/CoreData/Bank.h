@@ -13,8 +13,9 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * city;
-@property (nonatomic, retain) NSDate * closeDate;
 @property (nonatomic, retain) NSNumber * zip;
+@property (nonatomic, strong) NSString * state;
+
 
 +(instancetype)insertBankWithInfo:(NSDictionary *)info
            inManagedObjectContext:(NSManagedObjectContext *)context;

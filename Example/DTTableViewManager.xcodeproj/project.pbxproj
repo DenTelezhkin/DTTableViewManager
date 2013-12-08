@@ -27,6 +27,14 @@
 		952112C2185491E500063EA8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C0185491E500063EA8 /* Event.m */; };
 		952112C51854929300063EA8 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C41854929300063EA8 /* EventCell.m */; };
 		952112C61854929300063EA8 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C41854929300063EA8 /* EventCell.m */; };
+		952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C91854A4DD00063EA8 /* BanksCoreDataViewController.m */; };
+		952112CC1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C91854A4DD00063EA8 /* BanksCoreDataViewController.m */; };
+		952112CD1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952112CA1854A4DD00063EA8 /* BanksCoreDataViewController.xib */; };
+		952112CE1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952112CA1854A4DD00063EA8 /* BanksCoreDataViewController.xib */; };
+		952112D11854A82100063EA8 /* BankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D01854A82100063EA8 /* BankCell.m */; };
+		952112D21854A82100063EA8 /* BankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D01854A82100063EA8 /* BankCell.m */; };
+		952112D51854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */; };
+		952112D61854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */; };
 		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		955EB19F18412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */; };
@@ -35,6 +43,7 @@
 		955EB1A41841325D00EAE855 /* DTTableViewSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB1A21841325D00EAE855 /* DTTableViewSectionModel.m */; };
 		955EB1A818414B4F00EAE855 /* DTTableViewUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB1A718414B4F00EAE855 /* DTTableViewUpdate.m */; };
 		955EB1A918414B4F00EAE855 /* DTTableViewUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB1A718414B4F00EAE855 /* DTTableViewUpdate.m */; };
+		956C39BB1854BA6400FC1A5B /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956C39BA1854BA6400FC1A5B /* BankCell.xib */; };
 		95834EE516FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
 		95834EE616FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
 		95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EE716FF821900409396 /* CustomHeaderView.xib */; };
@@ -148,6 +157,13 @@
 		952112C0185491E500063EA8 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = CoreData/Event.m; sourceTree = "<group>"; };
 		952112C31854929300063EA8 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventCell.h; path = TableViewFactory/Cells/EventCell.h; sourceTree = "<group>"; };
 		952112C41854929300063EA8 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventCell.m; path = TableViewFactory/Cells/EventCell.m; sourceTree = "<group>"; };
+		952112C81854A4DD00063EA8 /* BanksCoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataViewController.h; path = ExampleControllers/BanksCoreDataViewController.h; sourceTree = "<group>"; };
+		952112C91854A4DD00063EA8 /* BanksCoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataViewController.m; path = ExampleControllers/BanksCoreDataViewController.m; sourceTree = "<group>"; };
+		952112CA1854A4DD00063EA8 /* BanksCoreDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BanksCoreDataViewController.xib; path = ExampleControllers/BanksCoreDataViewController.xib; sourceTree = "<group>"; };
+		952112CF1854A82100063EA8 /* BankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BankCell.h; path = TableViewFactory/Cells/BankCell.h; sourceTree = "<group>"; };
+		952112D01854A82100063EA8 /* BankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BankCell.m; path = TableViewFactory/Cells/BankCell.m; sourceTree = "<group>"; };
+		952112D31854B59E00063EA8 /* BanksCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataStorage.h; path = CoreData/BanksCoreDataStorage.h; sourceTree = "<group>"; };
+		952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataStorage.m; path = CoreData/BanksCoreDataStorage.m; sourceTree = "<group>"; };
 		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
 		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
 		955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewMemoryStorage.h; path = ../../DTTableViewManager/DTTableViewMemoryStorage.h; sourceTree = "<group>"; };
@@ -156,6 +172,7 @@
 		955EB1A21841325D00EAE855 /* DTTableViewSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewSectionModel.m; path = ../../DTTableViewManager/DTTableViewSectionModel.m; sourceTree = "<group>"; };
 		955EB1A618414B4F00EAE855 /* DTTableViewUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewUpdate.h; path = ../../DTTableViewManager/DTTableViewUpdate.h; sourceTree = "<group>"; };
 		955EB1A718414B4F00EAE855 /* DTTableViewUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewUpdate.m; path = ../../DTTableViewManager/DTTableViewUpdate.m; sourceTree = "<group>"; };
+		956C39BA1854BA6400FC1A5B /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = TableViewFactory/Cells/BankCell.xib; sourceTree = "<group>"; };
 		95834EE316FF820000409396 /* CustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderView.h; path = TableViewFactory/Cells/CustomHeaderView.h; sourceTree = "<group>"; };
 		95834EE416FF820000409396 /* CustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderView.m; path = TableViewFactory/Cells/CustomHeaderView.m; sourceTree = "<group>"; };
 		95834EE716FF821900409396 /* CustomHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderView.xib; path = TableViewFactory/Cells/CustomHeaderView.xib; sourceTree = "<group>"; };
@@ -298,6 +315,18 @@
 				952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */,
 			);
 			name = "Apple CoreData example";
+			sourceTree = "<group>";
+		};
+		952112C71854A4B900063EA8 /* Banks CoreData example */ = {
+			isa = PBXGroup;
+			children = (
+				952112C81854A4DD00063EA8 /* BanksCoreDataViewController.h */,
+				952112C91854A4DD00063EA8 /* BanksCoreDataViewController.m */,
+				952112CA1854A4DD00063EA8 /* BanksCoreDataViewController.xib */,
+				952112D31854B59E00063EA8 /* BanksCoreDataStorage.h */,
+				952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */,
+			);
+			name = "Banks CoreData example";
 			sourceTree = "<group>";
 		};
 		9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */ = {
@@ -478,6 +507,9 @@
 				95FC93FB18186BB1003225B7 /* PrototypedCell.m */,
 				952112C31854929300063EA8 /* EventCell.h */,
 				952112C41854929300063EA8 /* EventCell.m */,
+				952112CF1854A82100063EA8 /* BankCell.h */,
+				952112D01854A82100063EA8 /* BankCell.m */,
+				956C39BA1854BA6400FC1A5B /* BankCell.xib */,
 			);
 			name = Cells;
 			path = ..;
@@ -486,6 +518,7 @@
 		E6402F8E162D80EA00DDE2B3 /* Example controllers */ = {
 			isa = PBXGroup;
 			children = (
+				952112C71854A4B900063EA8 /* Banks CoreData example */,
 				952112B51854881D00063EA8 /* Apple CoreData example */,
 				95B336641775BFF300AF0A57 /* Search */,
 				E6402FC1162D9A7800DDE2B3 /* MoveSection */,
@@ -747,6 +780,7 @@
 				95A3B4BB16FF64AE00F5897E /* mochaGrunge.png in Resources */,
 				95BF2BA216FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
 				95834EE916FF821900409396 /* CustomHeaderView.xib in Resources */,
+				952112CE1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */,
 				95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */,
 				950659F9174C0219008AB32D /* CellWithNib.xib in Resources */,
 				958942011750B9E3007CEB5E /* MockTableHeaderView.xib in Resources */,
@@ -762,6 +796,7 @@
 				952112BB1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */,
 				E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */,
 				E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */,
+				956C39BB1854BA6400FC1A5B /* BankCell.xib in Resources */,
 				E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */,
 				E6402F8C162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
 				E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
@@ -779,6 +814,7 @@
 				95B336691775C01900AF0A57 /* SearchController.xib in Resources */,
 				95B3366B1776D8CB00AF0A57 /* Capitals.plist in Resources */,
 				95BCE7301792C7B300526954 /* Default-568h@2x.png in Resources */,
+				952112CD1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,6 +859,8 @@
 				E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01D1684AFEF00F4147E /* DTTableViewController.m in Sources */,
 				952112BD18548F8C00063EA8 /* BanksCoreDataManager.m in Sources */,
+				952112D21854A82100063EA8 /* BankCell.m in Sources */,
+				952112D61854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */,
 				E6915662168B382800C5F189 /* DTTableViewController+UnitTests.m in Sources */,
 				9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
 				95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
@@ -831,6 +869,7 @@
 				952112C61854929300063EA8 /* EventCell.m in Sources */,
 				95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */,
 				950659EF1749030D008AB32D /* BaseExampleController.m in Sources */,
+				952112CC1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
 				950659F4174C01EF008AB32D /* CellWithoutNib.m in Sources */,
 				950659F7174C0202008AB32D /* CellWithNib.m in Sources */,
 				950659FC174C0280008AB32D /* BaseMockCell.m in Sources */,
@@ -855,6 +894,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				952112D51854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */,
 				9591075218535C600012B07E /* BanksCoreDataManager.m in Sources */,
 				E6EA83731615EE6000F8B8C3 /* main.m in Sources */,
 				95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */,
@@ -866,12 +906,14 @@
 				E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
 				952112B31853719700063EA8 /* DTTableViewCoreDataStorage.m in Sources */,
+				952112D11854A82100063EA8 /* BankCell.m in Sources */,
 				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				955EB1A818414B4F00EAE855 /* DTTableViewUpdate.m in Sources */,
 				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				952112C51854929300063EA8 /* EventCell.m in Sources */,
+				952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
 				E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */,
 				9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
