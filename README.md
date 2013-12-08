@@ -122,7 +122,7 @@ DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorag
 
 ### Search
 	
-Set UISearchBar's delegate property to your `DTTableViewManager` subclass. 	
+Set UISearchBar's delegate property to your `DTTableViewController` subclass. 	
 Data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewManager will know, when to show data models.
 
 Searching data storage will be created automatically for current search, and it will be used as a datasource for UITableView.
