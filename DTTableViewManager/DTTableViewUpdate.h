@@ -23,24 +23,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+/**
+ This class encapsulates changes, that happened in DTTableViewDataStorage object.
+ */
 
 @interface DTTableViewUpdate : NSObject
 
 /**
- Section updates
+ Indexes of deleted sections for current update.
  */
-
 @property (nonatomic, strong) NSMutableIndexSet *deletedSectionIndexes;
+
+/**
+ Indexes of inserted sections for current update.
+ */
 @property (nonatomic, strong) NSMutableIndexSet *insertedSectionIndexes;
+
+/**
+ Indexes of updated sections for current update.
+ */
 @property (nonatomic, strong) NSMutableIndexSet *updatedSectionIndexes;
 
 /**
- Row updates
+ Index paths of deleted rows for current update.
  */
-
 @property (nonatomic, strong) NSMutableArray *deletedRowIndexPaths;
+
+/**
+ Index paths of inserted rows for current update.
+ */
 @property (nonatomic, strong) NSMutableArray *insertedRowIndexPaths;
+
+/**
+ Index paths of updated rows for current update.
+ */
 @property (nonatomic, strong) NSMutableArray *updatedRowIndexPaths;
 
 @end
