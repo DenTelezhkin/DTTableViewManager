@@ -1,5 +1,5 @@
 //
-//  UIView+Laoding.m
+//  UIView+Loading.m
 //
 //  Created by Denys Telezhkin on 10/24/13.
 //  Copyright (c) 2013 MLSDev. All rights reserved.
