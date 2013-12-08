@@ -90,7 +90,6 @@
         searchSection.objects = searchResults;
         searchSection.headerModel = section.headerModel;
         searchSection.footerModel = section.footerModel;
-        searchSection.indexTitle = section.indexTitle;
         return searchSection;
     }
     return nil;

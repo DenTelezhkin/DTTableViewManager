@@ -26,13 +26,25 @@
 #import <Foundation/Foundation.h>
 #import "DTTableViewSection.h"
 
+/**
+ This class represents data of the section used by `DTTableViewMemoryStorage`.
+ */
+
 @interface DTTableViewSectionModel : NSObject <DTTableViewSection>
 
+/**
+ Table items for current section
+ */
 @property (nonatomic, strong) NSMutableArray * objects;
 
-@property (nonatomic, strong) NSString * indexTitle;
-
+/**
+ Header model for current section. Header presentation depends on `DTTableViewController` sectionHeaderStyle property.
+ */
 @property (nonatomic, strong) id headerModel;
+
+/**
+ Footer model for current section. Footer presentation depends on `DTTableViewController` sectionFooterStyle property.
+ */
 @property (nonatomic, strong) id footerModel;
 
 @end
