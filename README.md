@@ -7,7 +7,7 @@ DTTableViewManager
 ================
 > This is a sister-project for [DTCollectionViewManager](https://github.com/DenHeadless/DTCollectionViewManager) - great tool for UICollectionView management, built on the same principles.
 
-The idea of this project is to move all datasource methods to separate class, and add many helper methods to manage presentation of your data models.
+Target of this project is to create powerful architecture for UITableView сontrollers. It combines several ideas to make UITableView management easy, clean, and delightful. 
 
 ## 2.0
 
