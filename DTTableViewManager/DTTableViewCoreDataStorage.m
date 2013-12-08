@@ -27,6 +27,7 @@
 
 @interface DTTableViewCoreDataStorage()
 @property (nonatomic, strong) DTTableViewUpdate * currentUpdate;
+@property (nonatomic, strong, readwrite) NSFetchedResultsController * fetchedResultsController;
 @end
 
 @implementation DTTableViewCoreDataStorage
