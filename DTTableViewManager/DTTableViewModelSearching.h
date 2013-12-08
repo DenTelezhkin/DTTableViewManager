@@ -26,9 +26,8 @@
 #import <Foundation/Foundation.h>
 
 /**
- `DTTableViewModelSearching` protocol is used to search within UITableView models. If model does not implement methods of this protocol, DTTableViewController will not add model to search results. Methods of this protocol are invoked for every model every time search occurs.
+ `DTTableViewModelSearching` protocol is used to search within UITableView models. It is used with `DTTableViewMemoryStorage` data storage. If model does not implement methods of this protocol, DTTableViewController will not add model to search results. Methods of this protocol are invoked for every model every time search occurs.
  */
-
 
 @protocol DTTableViewModelSearching
 

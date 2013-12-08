@@ -24,9 +24,12 @@
 // THE SOFTWARE.
 
 #import "DTTableViewController.h"
-#import "DTTableViewMemoryStorage.h"
-#import "DTTableViewCoreDataStorage.h"
 #import "DTTableViewCell.h"
+
+#import "DTTableViewMemoryStorage.h"
+#import "DTTableViewSectionModel.h"
+
+#import "DTTableViewCoreDataStorage.h"
 
 #import "DTTableViewModelTransfer.h"
 #import "DTTableViewModelSearching.h"
