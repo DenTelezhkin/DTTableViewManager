@@ -77,7 +77,7 @@ If you use storyboards and prototype cells/headers/footers, you will need to set
 
 Starting with 2.0, DTTableViewManager supports custom data storage objects to provide data models. It also provides two default data storage classes, that can be used. Let's start with DTTableViewMemoryStorage, that is used by default.
 
-## DTTableViewMemoryStorage
+### Memory storage
 
 DTTableViewMemoryStorage encapsulates storage of table view data models in memory. It's basically NSArray of DTTableViewSectionModel objects, which contain array of objects for current section, section header and footer model.
 
@@ -87,55 +87,63 @@ To work with memory storage, you will need to get it's instance from your DTTabl
 DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
 ```
 
-##### Adding one item
+##### Adding items 
 
 ```objective-c
 [storage addTableItem:model];
 [storage addTableItem:model toSection:0];
-```
 
-##### Adding array of items
-
-```objective-c
 [storage addTableItems:@[model1,model2]];
 [storage addTableItems:@[model1,model2] toSection:0];
+
+[storage insertTableItem:model toIndexPath:indexPath];
 ```
 
-#### Removing data models
+##### Remove / replace
 
 ```objective-c
 [storage removeTableItem:model];
 [storage removeTableItems:@[model1,model2]];
+
+[storage replaceTableItem:model1 withTableItem:model2];
 ```	
 
-#### Replacing data models
+##### Managing sections 
 
 ```objective-c
-[storage replaceTableItem:model1 withTableItem:model2];
+[storage setSectionHeaderModels:@[@"A",@"B",@"C"]];
+[storage setSectionFooterModels:@[@"A",@"B",@"C"]];
+
+[storage moveSection:1 toSection:2];
+[storage deleteSections:[NSIndexSet indexSetWithIndex:1]];
 ```
 
-#### Inserting data models
+#### Retrieving items
 
 ```objective-c
-[storage insertTableItem:model toIndexPath:indexPath];
-```	
+id tableItem = [storage tableItemAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
 
-### Search
+NSIndexPath * indexPath = [storage indexPathOfTableItem:model];
+
+NSArray * tableItemsInSection = [storage tableItemsInSection:0];
+```
+
+##### Search
 	
 Set UISearchBar's delegate property to your `DTTableViewController` subclass. 	
 Data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewManager will know, when to show data models.
 
 Searching data storage will be created automatically for current search, and it will be used as a datasource for UITableView.
 	
-## DTTableViewCoreDataStorage
+### Core Data storage
 
-This storage is meant to be used with NSFetchedResultsController. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it's changes. All you need to do to display CoreData models in your UITableView, is create DTTableVIewCoreDataStorage object and set it on your DTTableViewController subclass.
+DTTableViewCoreDataStorage is meant to be used with NSFetchedResultsController. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it's changes. All you need to do to display CoreData models in your UITableView, is create DTTableVIewCoreDataStorage object and set it on your DTTableViewController subclass.
 
 ```objective-c
 self.dataStorage = [DTTableViewCoreDataStorage storageWithFetchResultsController:controller];
 ```	
 
-### Search
+##### Search
 
 Subclass DTTableViewCoreDataStorage and implement single method 
 ```objective-c
