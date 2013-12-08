@@ -35,8 +35,8 @@
 		952112D21854A82100063EA8 /* BankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D01854A82100063EA8 /* BankCell.m */; };
 		952112D51854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */; };
 		952112D61854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */; };
-		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
-		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
+		9545FB9E16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
+		9545FB9F16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
 		955EB19F18412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */; };
 		955EB1A018412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */; };
 		955EB1A31841325D00EAE855 /* DTTableViewSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB1A21841325D00EAE855 /* DTTableViewSectionModel.m */; };
@@ -164,8 +164,8 @@
 		952112D01854A82100063EA8 /* BankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BankCell.m; path = TableViewFactory/Cells/BankCell.m; sourceTree = "<group>"; };
 		952112D31854B59E00063EA8 /* BanksCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataStorage.h; path = CoreData/BanksCoreDataStorage.h; sourceTree = "<group>"; };
 		952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataStorage.m; path = CoreData/BanksCoreDataStorage.m; sourceTree = "<group>"; };
-		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
-		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
+		9545FB9C16FDC8EF0042A1A3 /* UIView+DTLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DTLoading.h"; path = "../../DTTableViewManager/UIView+DTLoading.h"; sourceTree = "<group>"; };
+		9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DTLoading.m"; path = "../../DTTableViewManager/UIView+DTLoading.m"; sourceTree = "<group>"; };
 		955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewMemoryStorage.h; path = ../../DTTableViewManager/DTTableViewMemoryStorage.h; sourceTree = "<group>"; };
 		955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewMemoryStorage.m; path = ../../DTTableViewManager/DTTableViewMemoryStorage.m; sourceTree = "<group>"; };
 		955EB1A11841325D00EAE855 /* DTTableViewSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewSectionModel.h; path = ../../DTTableViewManager/DTTableViewSectionModel.h; sourceTree = "<group>"; };
@@ -332,8 +332,8 @@
 		9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */ = {
 			isa = PBXGroup;
 			children = (
-				9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */,
-				9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */,
+				9545FB9C16FDC8EF0042A1A3 /* UIView+DTLoading.h */,
+				9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */,
 			);
 			name = "UIView+loadFromXib";
 			sourceTree = "<group>";
@@ -862,7 +862,7 @@
 				952112D21854A82100063EA8 /* BankCell.m in Sources */,
 				952112D61854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */,
 				E6915662168B382800C5F189 /* DTTableViewController+UnitTests.m in Sources */,
-				9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
+				9545FB9F16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
 				95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
 				95834EE616FF820000409396 /* CustomHeaderView.m in Sources */,
@@ -916,7 +916,7 @@
 				952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
 				E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */,
-				9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
+				9545FB9E16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
 				95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				955EB1A31841325D00EAE855 /* DTTableViewSectionModel.m in Sources */,
 				95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,

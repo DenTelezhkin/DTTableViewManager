@@ -29,7 +29,7 @@
  
  */
 
-@interface UIView (Loading)
+@interface UIView (DTLoading)
 
 /**
  Loads view object from <xibName>.xib file.
@@ -39,7 +39,7 @@
  @return view object
  */
 
-+ (id) loadFromXibNamed:(NSString *) xibName;
++ (id) dt_loadFromXibNamed:(NSString *) xibName;
 
 /**
  Loads view from xib with name identical to name of the current view class
@@ -47,5 +47,6 @@
  @return view object
  */
 
-+ (id) loadFromXib;
++ (id) dt_loadFromXib;
+
 @end

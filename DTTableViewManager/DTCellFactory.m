@@ -25,7 +25,7 @@
 
 #import "DTCellFactory.h"
 #import "DTTableViewModelTransfer.h"
-#import "UIView+Loading.h"
+#import "UIView+DTLoading.h"
 
 @interface DTCellFactory ()
 
@@ -376,7 +376,7 @@
     {
         UIView <DTTableViewModelTransfer> * headerView;
         
-        headerView = [headerClass loadFromXib];
+        headerView = [headerClass dt_loadFromXib];
         [headerView updateWithModel:model];
         
         return headerView;
@@ -394,7 +394,7 @@
     {
         UIView <DTTableViewModelTransfer> * footerView;
         
-        footerView = [footerClass loadFromXib];
+        footerView = [footerClass dt_loadFromXib];
         [footerView updateWithModel:model];
         
         return footerView;

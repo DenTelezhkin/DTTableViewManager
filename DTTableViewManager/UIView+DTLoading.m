@@ -22,11 +22,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "UIView+Loading.h"
+#import "UIView+DTLoading.h"
 
-@implementation UIView (Loading)
+@implementation UIView (DTLoading)
 
-+ (id) loadFromXibNamed:(NSString *) xibName {
++ (id) dt_loadFromXibNamed:(NSString *) xibName {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:xibName 
                                                              owner:nil 
                                                            options:nil];
@@ -38,8 +38,8 @@
     return nil;
 }
 
-+ (id) loadFromXib {
-    return [self loadFromXibNamed:NSStringFromClass(self)];
++ (id) dt_loadFromXib {
+    return [self dt_loadFromXibNamed:NSStringFromClass(self)];
 }
 
 @end
