@@ -17,6 +17,16 @@
 		95065A03174C03DF008AB32D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
 		952112B31853719700063EA8 /* DTTableViewCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112B21853719700063EA8 /* DTTableViewCoreDataStorage.m */; };
 		952112B41853719700063EA8 /* DTTableViewCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112B21853719700063EA8 /* DTTableViewCoreDataStorage.m */; };
+		952112B91854886400063EA8 /* AppleCoreDataExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112B71854886400063EA8 /* AppleCoreDataExampleController.m */; };
+		952112BA1854886400063EA8 /* AppleCoreDataExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112B71854886400063EA8 /* AppleCoreDataExampleController.m */; };
+		952112BB1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */; };
+		952112BC1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */; };
+		952112BD18548F8C00063EA8 /* BanksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9591075118535C600012B07E /* BanksCoreDataManager.m */; };
+		952112BE18548F9800063EA8 /* Bank.m in Sources */ = {isa = PBXBuildFile; fileRef = 959107A41853624A0012B07E /* Bank.m */; };
+		952112C1185491E500063EA8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C0185491E500063EA8 /* Event.m */; };
+		952112C2185491E500063EA8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C0185491E500063EA8 /* Event.m */; };
+		952112C51854929300063EA8 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C41854929300063EA8 /* EventCell.m */; };
+		952112C61854929300063EA8 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C41854929300063EA8 /* EventCell.m */; };
 		9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */; };
 		955EB19F18412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */; };
@@ -131,6 +141,13 @@
 		95065A01174C03DF008AB32D /* DTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCell.m; path = ../../DTTableViewManager/DTTableViewCell.m; sourceTree = "<group>"; };
 		952112B11853719700063EA8 /* DTTableViewCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCoreDataStorage.h; path = ../../DTTableViewManager/DTTableViewCoreDataStorage.h; sourceTree = "<group>"; };
 		952112B21853719700063EA8 /* DTTableViewCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCoreDataStorage.m; path = ../../DTTableViewManager/DTTableViewCoreDataStorage.m; sourceTree = "<group>"; };
+		952112B61854886400063EA8 /* AppleCoreDataExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppleCoreDataExampleController.h; path = ExampleControllers/AppleCoreDataExampleController.h; sourceTree = "<group>"; };
+		952112B71854886400063EA8 /* AppleCoreDataExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppleCoreDataExampleController.m; path = ExampleControllers/AppleCoreDataExampleController.m; sourceTree = "<group>"; };
+		952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppleCoreDataExampleController.xib; path = ExampleControllers/AppleCoreDataExampleController.xib; sourceTree = "<group>"; };
+		952112BF185491E500063EA8 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = CoreData/Event.h; sourceTree = "<group>"; };
+		952112C0185491E500063EA8 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = CoreData/Event.m; sourceTree = "<group>"; };
+		952112C31854929300063EA8 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventCell.h; path = TableViewFactory/Cells/EventCell.h; sourceTree = "<group>"; };
+		952112C41854929300063EA8 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventCell.m; path = TableViewFactory/Cells/EventCell.m; sourceTree = "<group>"; };
 		9545FB9C16FDC8EF0042A1A3 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Loading.h"; path = "../../DTTableViewManager/UIView+Loading.h"; sourceTree = "<group>"; };
 		9545FB9D16FDC8EF0042A1A3 /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Loading.m"; path = "../../DTTableViewManager/UIView+Loading.m"; sourceTree = "<group>"; };
 		955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewMemoryStorage.h; path = ../../DTTableViewManager/DTTableViewMemoryStorage.h; sourceTree = "<group>"; };
@@ -273,6 +290,16 @@
 			name = Mocks;
 			sourceTree = "<group>";
 		};
+		952112B51854881D00063EA8 /* Apple CoreData example */ = {
+			isa = PBXGroup;
+			children = (
+				952112B61854886400063EA8 /* AppleCoreDataExampleController.h */,
+				952112B71854886400063EA8 /* AppleCoreDataExampleController.m */,
+				952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */,
+			);
+			name = "Apple CoreData example";
+			sourceTree = "<group>";
+		};
 		9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +339,8 @@
 				9591075018535C600012B07E /* BanksCoreDataManager.h */,
 				9591075118535C600012B07E /* BanksCoreDataManager.m */,
 				959107A0185361CA0012B07E /* Banks.xcdatamodeld */,
+				952112BF185491E500063EA8 /* Event.h */,
+				952112C0185491E500063EA8 /* Event.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -447,6 +476,8 @@
 				95BCE7DB1776E93200980281 /* ControllerCell.m */,
 				95FC93FA18186BB1003225B7 /* PrototypedCell.h */,
 				95FC93FB18186BB1003225B7 /* PrototypedCell.m */,
+				952112C31854929300063EA8 /* EventCell.h */,
+				952112C41854929300063EA8 /* EventCell.m */,
 			);
 			name = Cells;
 			path = ..;
@@ -455,6 +486,7 @@
 		E6402F8E162D80EA00DDE2B3 /* Example controllers */ = {
 			isa = PBXGroup;
 			children = (
+				952112B51854881D00063EA8 /* Apple CoreData example */,
 				95B336641775BFF300AF0A57 /* Search */,
 				E6402FC1162D9A7800DDE2B3 /* MoveSection */,
 				E6402FB5162D8EF800DDE2B3 /* InsertReplace */,
@@ -718,6 +750,7 @@
 				95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */,
 				950659F9174C0219008AB32D /* CellWithNib.xib in Resources */,
 				958942011750B9E3007CEB5E /* MockTableHeaderView.xib in Resources */,
+				952112BC1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */,
 				958942091750BC27007CEB5E /* MockTableHeaderFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,6 +759,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				952112BB1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */,
 				E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */,
 				E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */,
 				E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */,
@@ -777,6 +811,7 @@
 				E6CB97F9161B2E9A00A7E936 /* Example.m in Sources */,
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
 				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
+				952112BE18548F9800063EA8 /* Bank.m in Sources */,
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				9591074C18424AAC0012B07E /* MemoryStorageSpecs.mm in Sources */,
 				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
@@ -787,11 +822,13 @@
 				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01D1684AFEF00F4147E /* DTTableViewController.m in Sources */,
+				952112BD18548F8C00063EA8 /* BanksCoreDataManager.m in Sources */,
 				E6915662168B382800C5F189 /* DTTableViewController+UnitTests.m in Sources */,
 				9545FB9F16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
 				95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
 				95834EE616FF820000409396 /* CustomHeaderView.m in Sources */,
+				952112C61854929300063EA8 /* EventCell.m in Sources */,
 				95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */,
 				950659EF1749030D008AB32D /* BaseExampleController.m in Sources */,
 				950659F4174C01EF008AB32D /* CellWithoutNib.m in Sources */,
@@ -800,6 +837,8 @@
 				955EB1A018412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */,
 				95065A03174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				955EB1A41841325D00EAE855 /* DTTableViewSectionModel.m in Sources */,
+				952112BA1854886400063EA8 /* AppleCoreDataExampleController.m in Sources */,
+				952112C2185491E500063EA8 /* Event.m in Sources */,
 				958941FF1750B9C8007CEB5E /* MockTableHeaderView.m in Sources */,
 				955EB1A918414B4F00EAE855 /* DTTableViewUpdate.m in Sources */,
 				958942041750BAAA007CEB5E /* NiblessTableHeaderView.m in Sources */,
@@ -832,6 +871,7 @@
 				955EB1A818414B4F00EAE855 /* DTTableViewUpdate.m in Sources */,
 				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
+				952112C51854929300063EA8 /* EventCell.m in Sources */,
 				E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */,
 				9545FB9E16FDC8EF0042A1A3 /* UIView+Loading.m in Sources */,
@@ -843,9 +883,11 @@
 				955EB19F18412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */,
 				95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */,
 				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,
+				952112C1185491E500063EA8 /* Event.m in Sources */,
 				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				95B336681775C01900AF0A57 /* SearchController.m in Sources */,
 				95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */,
+				952112B91854886400063EA8 /* AppleCoreDataExampleController.m in Sources */,
 				959107A51853624A0012B07E /* Bank.m in Sources */,
 				95BCE7DC1776E93200980281 /* ControllerCell.m in Sources */,
 				959107A2185361CA0012B07E /* Banks.xcdatamodeld in Sources */,

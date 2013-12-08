@@ -25,7 +25,7 @@
 
 #import "DTTableViewController.h"
 #import "DTTableViewMemoryStorage.h"
-
+#import "DTTableViewCoreDataStorage.h"
 #import "DTTableViewCell.h"
 
 #import "DTTableViewModelTransfer.h"

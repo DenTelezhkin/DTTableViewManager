@@ -8,7 +8,6 @@
 
 #import "Bank.h"
 
-
 @implementation Bank
 
 @dynamic name;

@@ -6,8 +6,11 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zip" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
-    <fetchRequest name="BanksFetchRequest" entity="Bank" predicateString="zip > 0"/>
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Bank" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Bank" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Event" positionX="160" positionY="192" width="128" height="58"/>
     </elements>
 </model>

@@ -191,7 +191,7 @@ static BOOL loggingEnabled = YES;
     }
 }
 
--(id)headerViewModelForIndex:(NSInteger)index
+-(id)headerModelForIndex:(NSInteger)index
 {
     if ([self isSearching])
     {
@@ -210,7 +210,7 @@ static BOOL loggingEnabled = YES;
     return nil;
 }
 
--(id)footerViewModelForIndex:(NSInteger)index
+-(id)footerModelForIndex:(NSInteger)index
 {
     if ([self isSearching])
     {
@@ -246,11 +246,11 @@ static BOOL loggingEnabled = YES;
 {
     if ([self isSearching])
     {
-        DTTableViewSectionModel * sectionModel = [self.searchingDataStorage sections][section];
+        id <DTTableViewSection> sectionModel = [self.searchingDataStorage sections][section];
         return [sectionModel numberOfObjects];
     }
     else {
-        DTTableViewSectionModel * sectionModel = [self.dataStorage sections][section];
+        id <DTTableViewSection> sectionModel = [self.dataStorage sections][section];
         return [sectionModel numberOfObjects];
     }
 }
@@ -262,21 +262,7 @@ static BOOL loggingEnabled = YES;
         return nil;
     }
     
-    if ([self isSearching])
-    {
-        if ([self.searchingDataStorage respondsToSelector:@selector(headerModelAtIndex:)])
-        {
-            return [self.searchingDataStorage headerModelAtIndex:sectionNumber];
-        }
-     }
-    else {
-        if ([self.dataStorage respondsToSelector:@selector(headerModelAtIndex:)])
-        {
-            return [self.dataStorage headerModelAtIndex:sectionNumber];
-        }
-     }
-    
-    return nil;
+    return [self headerModelForIndex:sectionNumber];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)sectionNumber
@@ -286,21 +272,7 @@ static BOOL loggingEnabled = YES;
         return nil;
     }
     
-    if ([self isSearching])
-    {
-        if ([self.searchingDataStorage respondsToSelector:@selector(footerModelAtIndex:)])
-        {
-            return [self.searchingDataStorage footerModelAtIndex:sectionNumber];
-        }
-    }
-    else {
-        if ([self.dataStorage respondsToSelector:@selector(footerModelAtIndex:)])
-        {
-            return [self.dataStorage footerModelAtIndex:sectionNumber];
-        }
-    }
-    
-    return nil;
+    return [self footerModelForIndex:sectionNumber];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)sectionNumber
@@ -309,7 +281,7 @@ static BOOL loggingEnabled = YES;
     {
         return nil;
     }
-    id model = [self headerViewModelForIndex:sectionNumber];
+    id model = [self headerModelForIndex:sectionNumber];
     
     if (!model) {
         return nil;
@@ -324,7 +296,7 @@ static BOOL loggingEnabled = YES;
     {
         return nil;
     }
-    id model = [self footerViewModelForIndex:sectionNumber];
+    id model = [self footerModelForIndex:sectionNumber];
     
     if (!model) {
         return nil;
@@ -335,13 +307,10 @@ static BOOL loggingEnabled = YES;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionNumber
 {
-    id <DTTableViewDataStorage> currentDataStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
-    DTTableViewSectionModel * section = [currentDataStorage sections][sectionNumber];
-    
     // Default table view section header titles, size defined by UILabel sizeToFit method
     if (self.sectionHeaderStyle == DTTableViewSectionStyleTitle)
     {
-        if (!section.headerModel)
+        if (![self headerModelForIndex:sectionNumber])
         {
             return 0;
         }
@@ -351,7 +320,7 @@ static BOOL loggingEnabled = YES;
     }
     
     // Custom table view headers
-    if (section.headerModel)
+    if ([self headerModelForIndex:sectionNumber])
     {
         return self.tableView.sectionHeaderHeight;
     }
@@ -362,13 +331,10 @@ static BOOL loggingEnabled = YES;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)sectionNumber
 {
-    id <DTTableViewDataStorage> currentDataStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
-    DTTableViewSectionModel * section = [currentDataStorage sections][sectionNumber];
-    
     // Default table view section header titles, size defined by UILabel sizeToFit method
     if (self.sectionFooterStyle == DTTableViewSectionStyleTitle)
     {
-        if (!section.footerModel)
+        if (![self footerModelForIndex:sectionNumber])
         {
             return 0;
         }
@@ -378,7 +344,7 @@ static BOOL loggingEnabled = YES;
     }
     
     // Custom table view headers
-    if (section.footerModel)
+    if ([self footerModelForIndex:sectionNumber])
     {
         return self.tableView.sectionFooterHeight;
     }
@@ -393,11 +359,11 @@ static BOOL loggingEnabled = YES;
     id model = nil;
     if ([self isSearching])
     {
-         DTTableViewSectionModel * sectionModel = [self.searchingDataStorage sections][indexPath.section];
+         id <DTTableViewSection> sectionModel = [self.searchingDataStorage sections][indexPath.section];
         model = [sectionModel.objects objectAtIndex:indexPath.row];
     }
     else {
-         DTTableViewSectionModel * sectionModel = [self.dataStorage sections][indexPath.section];
+         id <DTTableViewSection> sectionModel = [self.dataStorage sections][indexPath.section];
         model = [sectionModel.objects objectAtIndex:indexPath.row];
     }
     
@@ -406,19 +372,21 @@ static BOOL loggingEnabled = YES;
 
 #pragma mark - private
 
+#warning moving item requires explicit knowing about datastorage class, which is not desired
+/*
 - (void)tableView:(UITableView *)tableView
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
       toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     id <DTTableViewDataStorage> currentStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
 
-    DTTableViewSectionModel * fromSection = [currentStorage sections][sourceIndexPath.section];
-    DTTableViewSectionModel * toSection = [currentStorage sections][destinationIndexPath.section];
+    id <DTTableViewSection> fromSection = [currentStorage sections][sourceIndexPath.section];
+    id <DTTableViewSection> toSection = [currentStorage sections][destinationIndexPath.section];
     id tableItem = fromSection.objects[sourceIndexPath.row];
     
     [fromSection.objects removeObjectAtIndex:sourceIndexPath.row];
     [toSection.objects insertObject:tableItem atIndex:destinationIndexPath.row];
-}
+}*/
 
 #pragma  mark - UISearchBarDelegate
 
