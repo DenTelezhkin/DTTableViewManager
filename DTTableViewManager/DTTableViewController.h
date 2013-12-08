@@ -42,10 +42,11 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model (or `DTTableViewCell`, which is UITableViewCell subclass, that conforms to `DTTableViewModelTransfer` protocol)
  - Every cell class should be mapped to model class using mapping methods.
  - `UITableView` datasource and delegate is your `DTTableViewController` subclass.
+ - If you need CoreData storage, you should create DTTableViewCoreDataStorage and assign it to `dataStorage` property.
   
  ## Managing table items
  
- Every action that is done to table items - add, delete, insert etc. is applied immediately. There's no need to manually reload data on your table view. Group insertion, addition or deletion is processed inside `UITableView` `beginUpdates` and `endUpdates` block. All methods for tableItems manipulation will automatically update both original tableView and filtered tableView, when search is active.
+ Depending on data storage you choose to have, table items can be managed differently. But the pattern is the same - `DTTableViewController` reacts to changes in data storage object and updates table view appropriately. `DTTableViewManager` provides two data storage classes - `DTTableViewMemoryStorage` and `DTTableViewCoreDataStorage`. `DTTableViewMemoryStorage` is used by default.
  
  ## Mapping cells
  
@@ -55,23 +56,27 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 
  ## Search
  
+ Search implementation depends on what data storage you use. In both cases it's recommended to use this class as UISearchBarDelegate. Then searching data storage will be created automatically for every change in UISearchBar.
+ 
+ # DTTableViewMemoryStorage
+ 
  Your data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewController will know, when to show data models.
  
- # Automatic
+ # DTTableViewCoreDataStorage
  
-Set UISearchBar's delegate property to your `DTTableViewController` subclass. That's it, you've got search implemented!
- 
- # Manual
- 
- Any time you need your models sorted, call method filterTableItemsForSearchString:. Every data model in the table will be called with method shouldShowInSearchResultsForSearchString:inScopeIndex: and tableView will be automatically updated with results.
+ Subclass DTTableViewCoreDataStorage and implement single method: -searchingStorageForSearchString:inSearchScope:. You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate.
  
  ## Loading headers/footers from NIB
  
  To register custom NIB for header/footer use methods `registerHeaderClass:modelClass:` and `registerFooterClass:modelClass:` methods. If nib name is different from the class name, use `registerNibName:forHeaderClass:modelClass:` or `registerNibName:forFooterClass:modelClass:` method.
  
- For iOS 6 and higher, UITableView's `registerNib:forHeaderFooterViewReuseIdentifier:` will be used. 
+ You can use either UITableViewHeaderFooterView or a simple UIView,`DTTableViewManager` will automatically figure, how view should be loaded.
  
- To set header/footer models on the  tableView, use `sectionHeaderModels` and `sectionFooterModels` properties. Keep in mind, there's no public method to reload header/footer views, so after header/footer models are set, you will need to manually reload table with `reloadData` or `reloadSections:withRowAnimation` method.
+ ### Examples and questions
+ 
+ I recommend looking through provided examples https://github.com/DenHeadless/DTTableViewManager . I try to cover most interesting and often use cases for table view that you might encounter.
+ 
+ If you still are missing something, feel free to contact me or create issue on github!
 */
 
 @interface DTTableViewController : UIViewController
@@ -90,11 +95,16 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
  */
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 
+
 /**
- Data storage object. DTTableViewMemory storage used by default.
+ Data storage object. Create storage you need and set this property to populate table view with data. `DTTableViewManager` provides two data storage classes - `DTTableViewMemoryStorage` and `DTTableViewCoreDataStorage`. DTTableViewMemory storage used by default.
  */
 
 @property (nonatomic, strong) id <DTTableViewDataStorage> dataStorage;
+
+/**
+ Searching data storage object. It will be created automatically, responding to changes in UISearchBar, or after method filterTableItemsForSearchString:inScope: is called.
+ */
 
 @property (nonatomic, strong) id <DTTableViewDataStorage> searchingDataStorage;
 
@@ -103,15 +113,47 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
  */
 @property (nonatomic, strong) IBOutlet UISearchBar * searchBar;
 
+/**
+ Style of section headers for table view. Depending on style, datasource methods will return title for section or view for section. Default is DTTableViewSectionStyleTitle.
+ */
+
 @property (nonatomic, assign) DTTableViewSectionStyle sectionHeaderStyle;
+
+/**
+ Style of section footers for table view. Depending on style, datasource methods will return title for section or view for section. Default is DTTableViewSectionStyleTitle.
+ */
 @property (nonatomic, assign) DTTableViewSectionStyle sectionFooterStyle;
 
+/**
+ Animation, used for inserting sections. Default - UITableViewRowAnimationNone.
+ */
+
 @property (nonatomic, assign) UITableViewRowAnimation insertSectionAnimation;
+
+/**
+ Animation, used for deleting sections. Default - UITableViewRowAnimationAutomatic.
+ */
+
 @property (nonatomic, assign) UITableViewRowAnimation deleteSectionAnimation;
+
+/**
+ Animation, used for reloading sections. Default - UITableViewRowAnimationAutomatic.
+ */
 @property (nonatomic, assign) UITableViewRowAnimation reloadSectionAnimation;
 
+/**
+ Animation, used for inserting table view rows. Default - UITableViewRowAnimationAutomatic.
+ */
 @property (nonatomic, assign) UITableViewRowAnimation insertRowAnimation;
+
+/**
+ Animation, used for deleting table view rows. Default - UITableViewRowAnimationAutomatic.
+ */
 @property (nonatomic, assign) UITableViewRowAnimation deleteRowAnimation;
+
+/**
+ Animation, used for reloading table view rows. Default - UITableViewRowAnimationAutomatic.
+ */
 @property (nonatomic, assign) UITableViewRowAnimation reloadRowAnimation;
 
 ///---------------------------------------
@@ -189,23 +231,19 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
          forFooterClass:(Class)footerClass
              modelClass:(Class)modelClass;
 
-
 ///---------------------------------------
 /// @name Search
 ///---------------------------------------
 
-
 /**
- This method filters presented table items, using searchString as a criteria. All table items are queried with method `shouldShowInSearchResultsForSearchString:
- inScopeIndex:`. All models, which return YES to that method, will be displayed. This method is used, when you want to sort table items manually. If you want to do that automatically, simply set UISearchBarDelegate to your DTTableViewController subclass and this method will get called automatically, when search bar text changes. 
+ This method filters presented table items, using searchString as a criteria. Current dataStorage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString is not empty, UITableViewDataSource is assigned to searchingDataStorage and table view is reloaded automatically.
  
  @param searchString Search string used as a criteria for filtering.
  */
 -(void)filterTableItemsForSearchString:(NSString *)searchString;
 
 /**
- This method filters presented table items, using searchString and scopeNumber as a criteria. All table items are queried with method `shouldShowInSearchResultsForSearchString:
- inScopeIndex:`. All models, which return YES to that method, will be displayed. This method is used, when you want to sort table items manually. If you want to do that automatically, simply set UISearchBarDelegate to your DTTableViewController subclass and this method will get called automatically, when search bar text or scope changes.
+ This method filters presented table items, using searchString as a criteria. Current dataStorage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString or scopeNUmber is not empty, UITableViewDataSource is assigned to searchingDataStorage and table view is reloaded automatically.
  
  @param searchString Search string used as a criteria for filtering.
  
@@ -215,20 +253,23 @@ Set UISearchBar's delegate property to your `DTTableViewController` subclass. Th
                                inScope:(NSInteger)scopeNumber;
 
 /**
- Method to enable/disable logging. Logging is on by default, and will print out any critical messages, that DTTableViewController is encountering. Call this method, if you want to turn logging off. It is enough to call this method once, and this value will be used by all instances of DTTableViewController.
- 
-  @param isEnabled Flag, that indicates, whether logging is enabled.
- */
-
-/**
  Returns whether search is active, based on current searchString and searchScope, retrieved from UISearchBarDelegate methods.
  */
 
 -(BOOL)isSearching;
 
-
+/**
+ Method to enable/disable logging. Logging is on by default, and will print out any critical messages, that DTTableViewController is encountering. Call this method, if you want to turn logging off. It is enough to call this method once, and this value will be used by all instances of DTTableViewController.
+ 
+ @param isEnabled Flag, that indicates, whether logging is enabled.
+ */
 +(void)setLogging:(BOOL)isEnabled;
 
+/**
+ Method, that indicates whether logging has been enabled. Logging is turned on by default.
+ 
+ @return is logging enabled or not?
+ */
 +(BOOL)loggingEnabled;
 
 @end
