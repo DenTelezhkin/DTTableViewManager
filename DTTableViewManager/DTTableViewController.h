@@ -258,6 +258,10 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 
 -(BOOL)isSearching;
 
+///---------------------------------------
+/// @name Logging
+///---------------------------------------
+
 /**
  Method to enable/disable logging. Logging is on by default, and will print out any critical messages, that DTTableViewController is encountering. Call this method, if you want to turn logging off. It is enough to call this method once, and this value will be used by all instances of DTTableViewController.
  
