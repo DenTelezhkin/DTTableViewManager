@@ -36,7 +36,7 @@
 
 #pragma mark DTTableViewStorage protocol
 
--(id)headerModelAtIndex:(NSInteger)index
+-(id)headerModelForSectionIndex:(NSInteger)index
 {
     id <NSFetchedResultsSectionInfo> section = [self.fetchedResultsController sections][index];
     return section.name;

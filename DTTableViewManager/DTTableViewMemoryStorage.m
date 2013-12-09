@@ -264,13 +264,13 @@
 
 #pragma mark - Section management
 
--(id)headerModelAtIndex:(NSInteger)index
+-(id)headerModelForSectionIndex:(NSInteger)index
 {
     DTTableViewSectionModel * section = self.sections[index];
     return section.headerModel;
 }
 
--(id)footerModelAtIndex:(NSInteger)index
+-(id)footerModelForSectionIndex:(NSInteger)index
 {
     DTTableViewSectionModel * section = self.sections[index];
     return section.footerModel;

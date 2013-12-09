@@ -204,16 +204,16 @@ static BOOL loggingEnabled = YES;
 {
     if ([self isSearching])
     {
-        if ([self.searchingDataStorage respondsToSelector:@selector(headerModelAtIndex:)])
+        if ([self.searchingDataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
         {
-            return [self.searchingDataStorage headerModelAtIndex:index];
+            return [self.searchingDataStorage headerModelForSectionIndex:index];
         }
     }
     else
     {
-        if ([self.dataStorage respondsToSelector:@selector(headerModelAtIndex:)])
+        if ([self.dataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
         {
-            return [self.dataStorage headerModelAtIndex:index];
+            return [self.dataStorage headerModelForSectionIndex:index];
         }
     }
     return nil;
@@ -223,16 +223,16 @@ static BOOL loggingEnabled = YES;
 {
     if ([self isSearching])
     {
-        if ([self.searchingDataStorage respondsToSelector:@selector(footerModelAtIndex:)])
+        if ([self.searchingDataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
         {
-            return [self.searchingDataStorage footerModelAtIndex:index];
+            return [self.searchingDataStorage footerModelForSectionIndex:index];
         }
     }
     else
     {
-        if ([self.dataStorage respondsToSelector:@selector(footerModelAtIndex:)])
+        if ([self.dataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
         {
-            return [self.dataStorage footerModelAtIndex:index];
+            return [self.dataStorage footerModelForSectionIndex:index];
         }
     }
     return nil;

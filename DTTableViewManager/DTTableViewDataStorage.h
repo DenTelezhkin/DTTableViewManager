@@ -84,7 +84,7 @@
  */
 
 - (instancetype)searchingStorageForSearchString:(NSString *)searchString
-                                 inSearchScope:(NSInteger)searchScope;
+                                  inSearchScope:(NSInteger)searchScope;
 
 /**
  Getter method for header model for current section.
@@ -93,7 +93,7 @@
  
  @return Header model for section at index.
  */
-- (id)headerModelAtIndex:(NSInteger)index;
+- (id)headerModelForSectionIndex:(NSInteger)index;
 
 /**
  Getter method for footer model for current section.
@@ -102,6 +102,6 @@
  
  @return Footer model for section at index.
  */
-- (id)footerModelAtIndex:(NSInteger)index;
+- (id)footerModelForSectionIndex:(NSInteger)index;
 
 @end
