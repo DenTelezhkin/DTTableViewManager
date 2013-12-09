@@ -36,11 +36,6 @@
     [(DTTableViewMemoryStorage *)self.dataStorage setSectionHeaderModels:headerTitles];
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [self.searchBar resignFirstResponder];
-}
-
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [self.searchBar setShowsCancelButton:YES animated:YES];
