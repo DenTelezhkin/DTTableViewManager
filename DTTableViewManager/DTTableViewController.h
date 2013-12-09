@@ -75,7 +75,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  
  ### Examples and questions
  
- I recommend looking through provided examples https://github.com/DenHeadless/DTTableViewManager . I try to cover most interesting and often use cases for table view that you might encounter.
+ I recommend looking through provided examples https://github.com/DenHeadless/DTTableViewManager . I tried to cover most interesting and often use cases for table view that you might encounter.
  
  If you still are missing something, feel free to contact me or create issue on github!
 */
