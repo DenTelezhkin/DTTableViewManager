@@ -26,6 +26,7 @@
 #import <Foundation/Foundation.h>
 #import "DTTableViewDataStorage.h"
 #import "DTTableViewModelSearching.h"
+#import "DTTableViewSectionModel.h"
 
 /**
  This class is used as a default storage for table view models. To populate this storage with data, call one of many add or insert methods available below. Every change in data storage causes delegate call to `DTTableViewController` instance with `DTTableViewUpdate` instance. It is then expected to update UITableView with appropriate animations.
@@ -159,14 +160,14 @@
 ///---------------------------------------
 
 /**
- Set header models for UITableView sections. `DTTableViewSectionModel` objects are created automatically, if they don't exist already.
+ Set header models for UITableView sections. `DTTableViewSectionModel` objects are created automatically, if they don't exist already. Pass nil or empty array to this method to clear all section header models.
  
  @param headerModels Section header models to use.
  */
 -(void)setSectionHeaderModels:(NSArray *)headerModels;
 
 /**
- Set footer models for UITableView sections. `DTTableViewSectionModel` objects are created automatically, if they don't exist already.
+ Set footer models for UITableView sections. `DTTableViewSectionModel` objects are created automatically, if they don't exist already. Pass nil or empty array to this method to clear all section footer models.
  
  @param footerModels Section footer models to use.
  */
@@ -218,5 +219,16 @@
  @return array of table items in section. Empty array if section does not exist.
  */
 - (NSArray *)tableItemsInSection:(NSInteger)section;
+
+/**
+ Method to retrieve section model from memory storage. This method safely creates section, if it doesn't exist already.
+ 
+ You can use section model to change header and footer model. However, if you change objects of section manually, you are responsible for updating UITableView. Take a look at `DTTableViewDataStorageUpdating` protocol methods to do that.
+ 
+ @param sectionNumber Number of section to retrieve
+ 
+ @return DTTableViewSectionModel instance for current section
+ */
+- (DTTableViewSectionModel *)sectionAtIndex:(NSInteger)sectionNumber;
 
 @end

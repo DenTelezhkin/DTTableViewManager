@@ -24,7 +24,6 @@
 // THE SOFTWARE.
 
 #import "DTTableViewMemoryStorage.h"
-#import "DTTableViewSectionModel.h"
 #import "DTTableViewController.h"
 
 @interface DTTableViewMemoryStorage()
@@ -279,6 +278,14 @@
 
 -(void)setSectionHeaderModels:(NSArray *)headerModels
 {
+    if (!headerModels || [headerModels count] == 0)
+    {
+        for (DTTableViewSectionModel * section in self.sections)
+        {
+            section.headerModel = nil;
+        }
+        return;
+    }
     [self getValidSection:([headerModels count]-1)];
     
     for (int sectionNumber = 0; sectionNumber < [headerModels count]; sectionNumber++)
@@ -290,6 +297,15 @@
 
 -(void)setSectionFooterModels:(NSArray *)footerModels
 {
+    if (!footerModels || [footerModels count] == 0)
+    {
+        for (DTTableViewSectionModel * section in self.sections)
+        {
+            section.footerModel = nil;
+        }
+        return;
+    }
+    
     [self getValidSection:([footerModels count]-1)];
     
     for (int sectionNumber = 0; sectionNumber < [footerModels count]; sectionNumber++)
@@ -385,6 +401,15 @@
     {
         return nil;
     }
+}
+
+-(DTTableViewSectionModel *)sectionAtIndex:(NSInteger)sectionNumber
+{
+    [self startUpdate];
+    DTTableViewSectionModel * section = [self getValidSection:sectionNumber];
+    [self finishUpdate];
+    
+    return section;
 }
 
 #pragma mark - private

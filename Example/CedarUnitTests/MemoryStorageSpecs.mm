@@ -267,6 +267,43 @@ describe(@"Storage edit specs", ^{
         [[storage sections][1] footerModel] should equal(@"2");
         [[storage sections][2] footerModel] should equal(@"3");
     });
+    
+    it(@"should empty section headers if nil passed", ^{
+        [storage setSectionHeaderModels:@[@"1",@"2",@"3"]];
+        
+        [storage setSectionHeaderModels:nil];
+        
+        DTTableViewSectionModel * section2 = [storage sectionAtIndex:1];
+        
+        expect(section2.headerModel == nil).to(BeTruthy());
+    });
+    
+    it(@"should empty section headers if nil passed", ^{
+        [storage setSectionHeaderModels:@[@"1",@"2",@"3"]];
+        
+        [storage setSectionHeaderModels:@[]];
+        
+        DTTableViewSectionModel * section2 = [storage sectionAtIndex:1];
+        expect(section2.headerModel == nil).to(BeTruthy());
+    });
+    
+    it(@"should empty section headers if nil passed", ^{
+        [storage setSectionFooterModels:@[@"1",@"2",@"3"]];
+        
+        [storage setSectionFooterModels:nil];
+        
+        DTTableViewSectionModel * section2 = [storage sectionAtIndex:1];
+        expect(section2.footerModel == nil).to(BeTruthy());
+    });
+    
+    it(@"should empty section headers if nil passed", ^{
+        [storage setSectionFooterModels:@[@"1",@"2",@"3"]];
+        
+        [storage setSectionFooterModels:@[]];
+        
+        DTTableViewSectionModel * section2 = [storage sectionAtIndex:1];
+        expect(section2.footerModel == nil).to(BeTruthy());
+    });
 });
 
 
