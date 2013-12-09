@@ -259,7 +259,13 @@
 
 - (void)removeAllTableItems
 {
-    [self.sections removeAllObjects];
+    for (DTTableViewSectionModel * section in self.sections)
+    {
+        [section.objects removeAllObjects];
+    }
+    [self.delegate performAnimation:^(UITableView * tableView) {
+        [tableView reloadData];
+    }];
 }
 
 #pragma mark - Section management

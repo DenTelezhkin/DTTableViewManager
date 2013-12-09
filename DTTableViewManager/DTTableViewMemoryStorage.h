@@ -151,7 +151,7 @@
 - (void)removeTableItems:(NSArray *)tableItems;
 
 /**
- Removes all tableItems. This method DOES NOT reload data on tableView.
+ Removes all tableItems. This method will call UITableView -reloadData method on completion. This method does not remove sections and section header and footer models.
  */
 - (void)removeAllTableItems;
 
