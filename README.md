@@ -84,7 +84,7 @@ DTTableViewMemoryStorage encapsulates storage of table view data models in memor
 To work with memory storage, you will need to get it's instance from your DTTableViewController subclass.
 
 ```objective-c
-DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
+DTTableViewMemoryStorage * storage = [self memoryStorage];
 ```
 
 ##### Adding items 
