@@ -85,6 +85,15 @@ static BOOL loggingEnabled = YES;
 
 #pragma mark - getters, setters
 
+-(DTTableViewMemoryStorage *)memoryStorage
+{
+    if ([self.dataStorage isKindOfClass:[DTTableViewMemoryStorage class]])
+    {
+        return self.dataStorage;
+    }
+    return nil;
+}
+
 -(DTCellFactory *)cellFactory {
     if (!_cellFactory)
     {

@@ -26,6 +26,7 @@
 #import "DTTableViewModelTransfer.h"
 #import "DTTableViewModelSearching.h"
 #import "DTTableViewDataStorage.h"
+#import "DTTableViewMemoryStorage.h"
 
 typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 {
@@ -90,7 +91,6 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 ///---------------------------------------
 
 /**
- 
  Table view that will present your data models.
  */
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
@@ -101,6 +101,15 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  */
 
 @property (nonatomic, strong) id <DTTableViewDataStorage> dataStorage;
+
+
+/**
+ Convenience method, returning memory storage. If custom storage is used, this method will return nil.
+ 
+ @return DTTableViewMemoryStorage instance.
+ */
+- (DTTableViewMemoryStorage *)memoryStorage;
+
 
 /**
  Searching data storage object. It will be created automatically, responding to changes in UISearchBar, or after method filterTableItemsForSearchString:inScope: is called.
