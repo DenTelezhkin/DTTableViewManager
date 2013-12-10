@@ -47,6 +47,11 @@
     return [self.fetchedResultsController sections];
 }
 
+-(id)objectAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.fetchedResultsController objectAtIndexPath:indexPath];
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate methods
 
 -(void)startUpdate

@@ -368,12 +368,10 @@ static BOOL loggingEnabled = YES;
     id model = nil;
     if ([self isSearching])
     {
-         id <DTTableViewSection> sectionModel = [self.searchingDataStorage sections][indexPath.section];
-        model = [sectionModel.objects objectAtIndex:indexPath.row];
+        model = [self.searchingDataStorage objectAtIndexPath:indexPath];
     }
     else {
-         id <DTTableViewSection> sectionModel = [self.dataStorage sections][indexPath.section];
-        model = [sectionModel.objects objectAtIndex:indexPath.row];
+        model = [self.dataStorage objectAtIndexPath:indexPath];
     }
     
     return [self.cellFactory cellForModel:model];

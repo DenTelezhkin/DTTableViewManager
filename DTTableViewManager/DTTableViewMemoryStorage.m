@@ -43,6 +43,12 @@
     return storage;
 }
 
+-(id)objectAtIndexPath:(NSIndexPath *)indexPath
+{
+    id <DTTableViewSection> sectionModel = [self sections][indexPath.section];
+    return [sectionModel.objects objectAtIndex:indexPath.row];
+}
+
 #pragma mark - Searching
 
 -(instancetype)searchingStorageForSearchString:(NSString *)searchString
