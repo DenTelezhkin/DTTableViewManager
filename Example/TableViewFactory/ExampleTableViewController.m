@@ -36,7 +36,7 @@
     
     self.title = @"Examples";
     
-    DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
+    DTTableViewMemoryStorage * storage = [self memoryStorage];
     
     [storage addTableItem:[ControllerModel modelWithClass:[AddRemoveTableViewController class]
                                               andTitle:@"Add/Remove cells"]];
@@ -72,7 +72,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
+    DTTableViewMemoryStorage * storage = [self memoryStorage];
     id model = [[storage sections][indexPath.section] objects][indexPath.row];
     if ([model isKindOfClass:[ControllerModel class]])
     {

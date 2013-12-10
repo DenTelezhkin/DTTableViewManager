@@ -26,14 +26,14 @@
         NSDictionary * capitals = [[continents[section] allValues] lastObject];
         for (NSString * country in [capitals allKeys])
         {
-            [(DTTableViewMemoryStorage *)self.dataStorage addTableItem:[Example exampleWithText:capitals[country]
-                                             andDetails:country]
-                     toSection:section];
+            [[self memoryStorage] addTableItem:[Example exampleWithText:capitals[country]
+                                                             andDetails:country]
+                                     toSection:section];
         }
         
         [headerTitles addObject:[[continent allKeys] lastObject]];
     }
-    [(DTTableViewMemoryStorage *)self.dataStorage setSectionHeaderModels:headerTitles];
+    [[self memoryStorage] setSectionHeaderModels:headerTitles];
 }
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar

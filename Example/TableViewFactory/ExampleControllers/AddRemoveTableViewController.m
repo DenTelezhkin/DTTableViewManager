@@ -23,9 +23,7 @@
     self.rowCount ++;
     NSString * rowText = [NSString stringWithFormat:@"Row # %d",self.rowCount];
     
-    DTTableViewMemoryStorage * storage = (DTTableViewMemoryStorage *)self.dataStorage;
-    
-    [storage addTableItem:[Example exampleWithText:rowText andDetails:nil]];
+    [[self memoryStorage] addTableItem:[Example exampleWithText:rowText andDetails:nil]];
 }
 
 -(void)viewDidLoad

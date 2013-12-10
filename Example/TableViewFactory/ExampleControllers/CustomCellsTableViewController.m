@@ -23,10 +23,10 @@
     [self registerCellClass:[CustomCell class]
               forModelClass:[CustomModel class]];
     
-    [(DTTableViewMemoryStorage *)self.dataStorage addTableItem:[CustomModel modelWithText1:@"Very"
-                                                                                     text2:@"Custom"
-                                                                                     text3:@"Table"
-                                                                                     text4:@"Cell"]];
+    [[self memoryStorage] addTableItem:[CustomModel modelWithText1:@"Very"
+                                                             text2:@"Custom"
+                                                             text3:@"Table"
+                                                             text4:@"Cell"]];
 }
 
 @end
