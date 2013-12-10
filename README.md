@@ -13,6 +13,8 @@ Target of this project is to create powerful architecture for UITableView сontr
 
 DTTableViewManager 2.0 is a major update to the framework, introducing big changes to the architecture and bringing several powerful features. 
 
+Read the [DTTableViewManager 2.0 Transition Guide](https://github.com/DenHeadless/DTTableViewManager/wiki/DTTableViewManager-2.0-Transition-Guide) for an overview of the architectural and API changes.
+
 ### What's new
 
 * Refactored and more modular architecture
