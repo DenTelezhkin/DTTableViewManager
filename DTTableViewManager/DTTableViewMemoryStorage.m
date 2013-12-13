@@ -290,6 +290,7 @@
 
 -(void)setSectionHeaderModels:(NSArray *)headerModels
 {
+    [self startUpdate];
     if (!headerModels || [headerModels count] == 0)
     {
         for (DTTableViewSectionModel * section in self.sections)
@@ -305,10 +306,13 @@
         DTTableViewSectionModel * section = self.sections[sectionNumber];
         section.headerModel = headerModels[sectionNumber];
     }
+    [self finishUpdate];
 }
 
 -(void)setSectionFooterModels:(NSArray *)footerModels
 {
+    [self startUpdate];
+    
     if (!footerModels || [footerModels count] == 0)
     {
         for (DTTableViewSectionModel * section in self.sections)
@@ -325,6 +329,7 @@
         DTTableViewSectionModel * section = self.sections[sectionNumber];
         section.footerModel = footerModels[sectionNumber];
     }
+    [self finishUpdate];
 }
 
 -(void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo
