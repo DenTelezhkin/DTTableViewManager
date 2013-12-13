@@ -377,6 +377,7 @@ describe(@"Foundation class clusters", ^{
             [model registerCellClass:[CellWithNib class] forModelClass:[NSNumber class]];
             [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSNumber class]];
             [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSNumber class]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
         });
         
         it(@"should accept nsnumber for cells", ^{
@@ -426,6 +427,7 @@ describe(@"Foundation class clusters", ^{
             [model registerCellClass:[CellWithNib class] forModelClass:[NSDictionary class]];
             [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSDictionary class]];
             [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSDictionary class]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
         });
         
         it(@"should accept NSDictionary for cells", ^{
@@ -475,6 +477,7 @@ describe(@"Foundation class clusters", ^{
             [model registerCellClass:[CellWithNib class] forModelClass:[NSMutableDictionary class]];
             [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSMutableDictionary class]];
             [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSMutableDictionary class]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
         });
         
         it(@"should accept NSDictionary for cells", ^{
@@ -524,6 +527,7 @@ describe(@"Foundation class clusters", ^{
             [model registerCellClass:[CellWithNib class] forModelClass:[NSArray class]];
             [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSArray class]];
             [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSArray class]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
         });
         
         it(@"should accept NSArray for cells", ^{
@@ -574,6 +578,7 @@ describe(@"Foundation class clusters", ^{
             [model registerCellClass:[CellWithNib class] forModelClass:[NSMutableArray class]];
             [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSMutableArray class]];
             [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSMutableArray class]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
         });
         
         it(@"should accept NSArray for cells", ^{
@@ -624,6 +629,7 @@ describe(@"Foundation class clusters", ^{
             [model registerCellClass:[CellWithNib class] forModelClass:[NSDate class]];
             [model registerHeaderClass:[MockTableHeaderView class] forModelClass:[NSDate class]];
             [model registerFooterClass:[MockTableHeaderView class] forModelClass:[NSDate class]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
         });
         
         it(@"should accept NSDate for cells", ^{
