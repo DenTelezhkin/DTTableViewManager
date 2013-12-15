@@ -408,12 +408,6 @@
         DTTableViewSectionModel * section = self.sections[sectionNumber];
         return [section objects];
     }
-    else if ([self.sections count] == sectionNumber)
-    {
-        DTTableViewSectionModel * section =[DTTableViewSectionModel new];
-        [self.sections addObject:section];
-        return [section objects];
-    }
     else
     {
         return nil;

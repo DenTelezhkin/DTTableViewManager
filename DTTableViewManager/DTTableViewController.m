@@ -68,6 +68,12 @@ static BOOL loggingEnabled = YES;
 
 -(void)setup
 {
+    _cellFactory = [DTCellFactory new];
+    _cellFactory.delegate = self;
+    
+    _dataStorage = [DTTableViewMemoryStorage storage];
+    _dataStorage.delegate = self;
+    
     _currentSearchScope = -1;
     _sectionHeaderStyle = DTTableViewSectionStyleTitle;
     _sectionFooterStyle = DTTableViewSectionStyleTitle;
@@ -78,9 +84,6 @@ static BOOL loggingEnabled = YES;
     _insertRowAnimation = UITableViewRowAnimationAutomatic;
     _deleteRowAnimation = UITableViewRowAnimationAutomatic;
     _reloadRowAnimation = UITableViewRowAnimationAutomatic;
-    
-    _dataStorage = [DTTableViewMemoryStorage storage];
-    _dataStorage.delegate = self;
 }
 
 #pragma mark - getters, setters
@@ -92,15 +95,6 @@ static BOOL loggingEnabled = YES;
         return self.dataStorage;
     }
     return nil;
-}
-
--(DTCellFactory *)cellFactory {
-    if (!_cellFactory)
-    {
-        _cellFactory = [DTCellFactory new];
-        _cellFactory.delegate = self;
-    }
-    return _cellFactory;
 }
 
 -(void)setDataStorage:(id<DTTableViewDataStorage>)dataStorage
