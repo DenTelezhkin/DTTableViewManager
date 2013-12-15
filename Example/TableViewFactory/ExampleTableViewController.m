@@ -72,8 +72,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    DTTableViewMemoryStorage * storage = [self memoryStorage];
-    id model = [[storage sections][indexPath.section] objects][indexPath.row];
+    id model = [self.memoryStorage objectAtIndexPath:indexPath];
+    
     if ([model isKindOfClass:[ControllerModel class]])
     {
         ControllerModel * selectedController = model;
