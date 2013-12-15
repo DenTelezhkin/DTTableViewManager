@@ -1,8 +1,7 @@
 # cocoa pods
 
-Pods/*
 Example/Pods/*
-Podfile.lock
+Example/Podfile.lock
 
 # Xcode
 build/*
