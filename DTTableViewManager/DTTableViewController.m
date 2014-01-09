@@ -249,11 +249,11 @@ static BOOL loggingEnabled = YES;
 {
     if ([self isSearching])
     {
-        id <DTTableViewSection> sectionModel = [self.searchingDataStorage sections][section];
+        id <DTSection> sectionModel = [self.searchingDataStorage sections][section];
         return [sectionModel numberOfObjects];
     }
     else {
-        id <DTTableViewSection> sectionModel = [self.dataStorage sections][section];
+        id <DTSection> sectionModel = [self.dataStorage sections][section];
         return [sectionModel numberOfObjects];
     }
 }
@@ -397,7 +397,7 @@ static BOOL loggingEnabled = YES;
     return loggingEnabled;
 }
 
--(void)performUpdate:(DTTableViewUpdate *)update
+-(void)storageDidPerformUpdate:(DTStorageUpdate *)update
 {
     [self.tableView beginUpdates];
     

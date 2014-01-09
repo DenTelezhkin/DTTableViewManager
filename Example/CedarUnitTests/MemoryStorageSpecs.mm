@@ -62,12 +62,12 @@ describe(@"Storage Add specs", ^{
     
     it(@"should receive correct update call when adding table item",
     ^{
-        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        DTStorageUpdate * update = [DTStorageUpdate new];
         [update.insertedSectionIndexes addIndex:0];
         [update.insertedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
                                                                    inSection:0]];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id argument) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id argument) {
             return [update isEqual:argument];
         }]];
         
@@ -77,7 +77,7 @@ describe(@"Storage Add specs", ^{
     
     it(@"should receive correct update call when adding table items",
     ^{
-        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        DTStorageUpdate * update = [DTStorageUpdate new];
         [update.insertedSectionIndexes addIndexesInRange:{0,2}];
         [update.insertedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
                                                                    inSection:1]];
@@ -86,7 +86,7 @@ describe(@"Storage Add specs", ^{
         [update.insertedRowIndexPaths addObject:[NSIndexPath indexPathForRow:2
                                                                    inSection:1]];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id argument) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id argument) {
             return [update isEqual:argument];
         }]];
         
@@ -122,11 +122,11 @@ describe(@"Storage edit specs", ^{
         [storage addTableItems:@[acc2,acc4,acc6]];
         [storage addTableItem:acc5 toSection:1];
         
-        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        DTStorageUpdate * update = [DTStorageUpdate new];
         [update.insertedRowIndexPaths addObject:[NSIndexPath indexPathForRow:2
                                                                    inSection:0]];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
            return [update isEqual:obj];
         }]];
         
@@ -134,11 +134,11 @@ describe(@"Storage edit specs", ^{
         
         [delegate verify];
         
-        update = [DTTableViewUpdate new];
+        update = [DTStorageUpdate new];
         [update.insertedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
                                                                    inSection:1]];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
         
@@ -151,11 +151,11 @@ describe(@"Storage edit specs", ^{
         
         [storage addTableItems:@[acc2,acc4,acc6]];
         
-        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        DTStorageUpdate * update = [DTStorageUpdate new];
         [update.updatedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
                                                                   inSection:0]];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
         
@@ -168,11 +168,11 @@ describe(@"Storage edit specs", ^{
         
         [storage addTableItems:@[acc2,acc4,acc6]];
         
-        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        DTStorageUpdate * update = [DTStorageUpdate new];
         [update.updatedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
                                                                   inSection:0]];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
         
@@ -185,21 +185,21 @@ describe(@"Storage edit specs", ^{
         [storage addTableItems:@[acc2,acc4,acc6]];
         [storage addTableItem:acc5 toSection:1];
         
-        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        DTStorageUpdate * update = [DTStorageUpdate new];
         [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
                                                                   inSection:0]];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
         [storage removeTableItem:acc2];
         [delegate verify];
         
-        update = [DTTableViewUpdate new];
+        update = [DTStorageUpdate new];
         [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
                                                                   inSection:1]];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
         [storage removeTableItem:acc5];
@@ -211,7 +211,7 @@ describe(@"Storage edit specs", ^{
         [storage addTableItems:@[acc2,acc4] toSection:1];
         
         
-        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        DTStorageUpdate * update = [DTStorageUpdate new];
         [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
                                                                   inSection:0]];
         [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
@@ -220,7 +220,7 @@ describe(@"Storage edit specs", ^{
                                                                   inSection:0]];
         
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
         [storage removeTableItems:@[acc1,acc4,acc3,acc5]];
@@ -235,10 +235,10 @@ describe(@"Storage edit specs", ^{
         [storage addTableItem:acc2 toSection:1];
         [storage addTableItem:acc3 toSection:2];
         
-        DTTableViewUpdate * update = [DTTableViewUpdate new];
+        DTStorageUpdate * update = [DTStorageUpdate new];
         [update.deletedSectionIndexes addIndex:1];
         
-        [[delegate expect] performUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
+        [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
         [storage deleteSections:[NSIndexSet indexSetWithIndex:1]];

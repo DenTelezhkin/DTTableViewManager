@@ -2,6 +2,7 @@
 
 Example/Pods/*
 Example/Podfile.lock
+Podfile.lock
 
 # Xcode
 build/*

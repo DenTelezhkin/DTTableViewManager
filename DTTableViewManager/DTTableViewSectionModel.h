@@ -24,18 +24,14 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "DTTableViewSection.h"
+#import "DTSection.h"
+#import "DTSectionModel.h"
 
 /**
  This class represents data of the section used by `DTTableViewMemoryStorage`.
  */
 
-@interface DTTableViewSectionModel : NSObject <DTTableViewSection>
-
-/**
- Table items for current section
- */
-@property (nonatomic, strong) NSMutableArray * objects;
+@interface DTTableViewSectionModel : DTSectionModel
 
 /**
  Header model for current section. Header presentation depends on `DTTableViewController` sectionHeaderStyle property.

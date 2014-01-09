@@ -26,7 +26,7 @@
 #import "DTTableViewCoreDataStorage.h"
 
 @interface DTTableViewCoreDataStorage()
-@property (nonatomic, strong) DTTableViewUpdate * currentUpdate;
+@property (nonatomic, strong) DTStorageUpdate * currentUpdate;
 @property (nonatomic, strong, readwrite) NSFetchedResultsController * fetchedResultsController;
 @end
 
@@ -56,12 +56,12 @@
 
 -(void)startUpdate
 {
-    self.currentUpdate = [DTTableViewUpdate new];
+    self.currentUpdate = [DTStorageUpdate new];
 }
 
 -(void)finishUpdate
 {
-    [self.delegate performUpdate:self.currentUpdate];
+    [self.delegate storageDidPerformUpdate:self.currentUpdate];
     self.currentUpdate = nil;
 }
 

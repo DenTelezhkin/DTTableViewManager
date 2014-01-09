@@ -25,20 +25,29 @@
 
 #import "DTTableViewSectionModel.h"
 
+static NSString * const DTTableViewElementSectionHeader = @"DTTableViewElementSectionHeader";
+static NSString * const DTTableViewElementSectionFooter = @"DTTableViewElementSectionFooter";
+
 @implementation DTTableViewSectionModel
 
--(NSMutableArray *)objects
+-(void)setHeaderModel:(id)headerModel
 {
-    if (!_objects)
-    {
-        _objects = [NSMutableArray array];
-    }
-    return _objects;
+    [self setSupplementaryModel:headerModel forKind:DTTableViewElementSectionHeader];
 }
 
--(NSUInteger)numberOfObjects
+-(void)setFooterModel:(id)footerModel
 {
-    return [self.objects count];
+    [self setSupplementaryModel:footerModel forKind:DTTableViewElementSectionFooter];
+}
+
+-(id)headerModel
+{
+    return [self supplementaryModelOfKind:DTTableViewElementSectionHeader];
+}
+
+-(id)footerModel
+{
+    return [self supplementaryModelOfKind:DTTableViewElementSectionFooter];
 }
 
 @end

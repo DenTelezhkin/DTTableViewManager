@@ -41,8 +41,6 @@
 		955EB1A018412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */; };
 		955EB1A31841325D00EAE855 /* DTTableViewSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB1A21841325D00EAE855 /* DTTableViewSectionModel.m */; };
 		955EB1A41841325D00EAE855 /* DTTableViewSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB1A21841325D00EAE855 /* DTTableViewSectionModel.m */; };
-		955EB1A818414B4F00EAE855 /* DTTableViewUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB1A718414B4F00EAE855 /* DTTableViewUpdate.m */; };
-		955EB1A918414B4F00EAE855 /* DTTableViewUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB1A718414B4F00EAE855 /* DTTableViewUpdate.m */; };
 		956C39BB1854BA6400FC1A5B /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956C39BA1854BA6400FC1A5B /* BankCell.xib */; };
 		95834EE516FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
 		95834EE616FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
@@ -89,6 +87,7 @@
 		95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */; };
 		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
 		AA01B52F1848DA49009B3041 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BCE72F1792C7B300526954 /* Default-568h@2x.png */; };
+		D7742E7F970147C5BA8372FB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431B3D74923D4C9F93AE7D9D /* libPods.a */; };
 		DB055626E6234FD19677281D /* libPods-CedarUnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8F7029536743B48E68DC01 /* libPods-CedarUnitTests.a */; };
 		E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
 		E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
@@ -137,6 +136,7 @@
 
 /* Begin PBXFileReference section */
 		1D5F857F59CD43C689F106DB /* Pods-CedarUnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CedarUnitTests.xcconfig"; path = "Pods/Pods-CedarUnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		431B3D74923D4C9F93AE7D9D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		950659EC1749030C008AB32D /* BaseExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseExampleController.h; path = ExampleControllers/BaseExampleController.h; sourceTree = "<group>"; };
 		950659ED1749030C008AB32D /* BaseExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseExampleController.m; path = ExampleControllers/BaseExampleController.m; sourceTree = "<group>"; };
 		950659F2174C01EF008AB32D /* CellWithoutNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellWithoutNib.h; path = mocks/CellWithoutNib.h; sourceTree = "<group>"; };
@@ -170,8 +170,6 @@
 		955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewMemoryStorage.m; path = ../../DTTableViewManager/DTTableViewMemoryStorage.m; sourceTree = "<group>"; };
 		955EB1A11841325D00EAE855 /* DTTableViewSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewSectionModel.h; path = ../../DTTableViewManager/DTTableViewSectionModel.h; sourceTree = "<group>"; };
 		955EB1A21841325D00EAE855 /* DTTableViewSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewSectionModel.m; path = ../../DTTableViewManager/DTTableViewSectionModel.m; sourceTree = "<group>"; };
-		955EB1A618414B4F00EAE855 /* DTTableViewUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewUpdate.h; path = ../../DTTableViewManager/DTTableViewUpdate.h; sourceTree = "<group>"; };
-		955EB1A718414B4F00EAE855 /* DTTableViewUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewUpdate.m; path = ../../DTTableViewManager/DTTableViewUpdate.m; sourceTree = "<group>"; };
 		956C39BA1854BA6400FC1A5B /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = TableViewFactory/Cells/BankCell.xib; sourceTree = "<group>"; };
 		95834EE316FF820000409396 /* CustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderView.h; path = TableViewFactory/Cells/CustomHeaderView.h; sourceTree = "<group>"; };
 		95834EE416FF820000409396 /* CustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderView.m; path = TableViewFactory/Cells/CustomHeaderView.m; sourceTree = "<group>"; };
@@ -226,9 +224,9 @@
 		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
 		95FC93FA18186BB1003225B7 /* PrototypedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrototypedCell.h; path = TableViewFactory/Cells/PrototypedCell.h; sourceTree = "<group>"; };
 		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
-		AA01B5301848DF14009B3041 /* DTTableViewSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTTableViewSection.h; path = ../../DTTableViewManager/DTTableViewSection.h; sourceTree = "<group>"; };
 		AA1972EC18190CF200B81302 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
 		AAB09060184C845A008B7665 /* DTTableViewMemoryStorage+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTTableViewMemoryStorage+UnitTests.h"; sourceTree = "<group>"; };
+		C331A5120C02433C91C38655 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
 		E60CA0161684AFEF00F4147E /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/DTTableViewController.h; sourceTree = "<group>"; };
@@ -292,6 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7742E7F970147C5BA8372FB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +462,24 @@
 			name = Storyboard;
 			sourceTree = "<group>";
 		};
+		AA2EBD8C187EC5070063B98A /* Convienience */ = {
+			isa = PBXGroup;
+			children = (
+				95065A00174C03DF008AB32D /* DTTableViewCell.h */,
+				95065A01174C03DF008AB32D /* DTTableViewCell.m */,
+			);
+			name = Convienience;
+			sourceTree = "<group>";
+		};
+		AA2EBD8D187EC5170063B98A /* Cell factory */ = {
+			isa = PBXGroup;
+			children = (
+				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,
+				E60CA0141684AFEF00F4147E /* DTCellFactory.m */,
+			);
+			name = "Cell factory";
+			sourceTree = "<group>";
+		};
 		AAB09063184C9016008B7665 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,6 +636,7 @@
 				E6EA83651615EE6000F8B8C3 /* Frameworks */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
 				1D5F857F59CD43C689F106DB /* Pods-CedarUnitTests.xcconfig */,
+				C331A5120C02433C91C38655 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -635,6 +653,7 @@
 			isa = PBXGroup;
 			children = (
 				FA8F7029536743B48E68DC01 /* libPods-CedarUnitTests.a */,
+				431B3D74923D4C9F93AE7D9D /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -672,6 +691,8 @@
 		E6EA83931615F07F00F8B8C3 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
+				AA2EBD8D187EC5170063B98A /* Cell factory */,
+				AA2EBD8C187EC5070063B98A /* Convienience */,
 				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
 				E60CA0161684AFEF00F4147E /* DTTableViewController.h */,
 				E60CA0171684AFEF00F4147E /* DTTableViewController.m */,
@@ -680,17 +701,10 @@
 				952112B21853719700063EA8 /* DTTableViewCoreDataStorage.m */,
 				955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */,
 				955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */,
-				955EB1A618414B4F00EAE855 /* DTTableViewUpdate.h */,
-				955EB1A718414B4F00EAE855 /* DTTableViewUpdate.m */,
-				AA01B5301848DF14009B3041 /* DTTableViewSection.h */,
 				955EB1A11841325D00EAE855 /* DTTableViewSectionModel.h */,
 				955EB1A21841325D00EAE855 /* DTTableViewSectionModel.m */,
-				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,
-				E60CA0141684AFEF00F4147E /* DTCellFactory.m */,
 				E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */,
 				95DB1C331763577500050536 /* DTTableViewModelSearching.h */,
-				95065A00174C03DF008AB32D /* DTTableViewCell.h */,
-				95065A01174C03DF008AB32D /* DTTableViewCell.m */,
 				AA1972EC18190CF200B81302 /* DTTableViewManager.h */,
 			);
 			name = DTTableViewManager;
@@ -722,9 +736,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "DTTableViewManagerExample" */;
 			buildPhases = (
+				9FA6E8B05AAD4F99B8A07710 /* Check Pods Manifest.lock */,
 				E6EA835E1615EE6000F8B8C3 /* Sources */,
 				E6EA835F1615EE6000F8B8C3 /* Frameworks */,
 				E6EA83601615EE6000F8B8C3 /* Resources */,
+				649621700A8840EEBC6CFA45 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -821,6 +837,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		649621700A8840EEBC6CFA45 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FA6E8B05AAD4F99B8A07710 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		F7434A61D0D6410E97EC89D4 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -879,7 +925,6 @@
 				952112BA1854886400063EA8 /* AppleCoreDataExampleController.m in Sources */,
 				952112C2185491E500063EA8 /* Event.m in Sources */,
 				958941FF1750B9C8007CEB5E /* MockTableHeaderView.m in Sources */,
-				955EB1A918414B4F00EAE855 /* DTTableViewUpdate.m in Sources */,
 				958942041750BAAA007CEB5E /* NiblessTableHeaderView.m in Sources */,
 				958942071750BC08007CEB5E /* MockTableHeaderFooterView.m in Sources */,
 				9589420C1750BC63007CEB5E /* NiblessTableHeaderFooterView.m in Sources */,
@@ -909,7 +954,6 @@
 				952112D11854A82100063EA8 /* BankCell.m in Sources */,
 				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
-				955EB1A818414B4F00EAE855 /* DTTableViewUpdate.m in Sources */,
 				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				952112C51854929300063EA8 /* EventCell.m in Sources */,
@@ -1048,6 +1092,7 @@
 		};
 		E6EA83871615EE6000F8B8C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C331A5120C02433C91C38655 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -1068,6 +1113,7 @@
 		};
 		E6EA83881615EE6000F8B8C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C331A5120C02433C91C38655 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "compiler-default";

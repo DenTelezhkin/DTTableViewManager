@@ -28,7 +28,7 @@
 
 @interface DTTableViewMemoryStorage()
 
-@property (nonatomic, strong) DTTableViewUpdate * currentUpdate;
+@property (nonatomic, strong) DTStorageUpdate * currentUpdate;
 
 @end
 
@@ -45,7 +45,7 @@
 
 -(id)objectAtIndexPath:(NSIndexPath *)indexPath
 {
-    id <DTTableViewSection> sectionModel = [self sections][indexPath.section];
+    id <DTSection> sectionModel = [self sections][indexPath.section];
     return [sectionModel.objects objectAtIndex:indexPath.row];
 }
 
@@ -105,12 +105,12 @@
 
 -(void)startUpdate
 {
-    self.currentUpdate = [DTTableViewUpdate new];
+    self.currentUpdate = [DTStorageUpdate new];
 }
 
 -(void)finishUpdate
 {
-    [self.delegate performUpdate:self.currentUpdate];
+    [self.delegate storageDidPerformUpdate:self.currentUpdate];
     self.currentUpdate = nil;
 }
 

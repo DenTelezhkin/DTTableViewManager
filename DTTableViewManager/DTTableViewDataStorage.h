@@ -23,20 +23,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTTableViewUpdate.h"
+#import "DTStorageUpdate.h"
+#import "DTStorage.h"
 
 /**
  `DTTableViewDataStorageUpdating` protocol is used to transfer data storage updates to `DTTableViewController` object.
  */
 
-@protocol DTTableViewDataStorageUpdating
-
-/**
- This method transfers data storage updates to `DTTableViewController` object. Then `DTTableViewController` object is expected to perform all animations required to synchronize datasource and UI.
- 
- @param update `DTTableViewUpdate` instance, that incapsulates all changes, happened in data storage.
- */
-- (void)performUpdate:(DTTableViewUpdate *)update;
+@protocol DTTableViewDataStorageUpdating <DTStorageUpdating>
 
 @optional
 
@@ -55,30 +49,7 @@
  `DTTableViewDataStorage` protocol is used to define common interface for data storage objects used by `DTTableViewController` instance. `DTTableViewManager` provides 2 implementations - `DTTableViewMemoryStorage` and `DTTableViewCoreDataStorage`. `DTTableViewMemoryStorage` is used by default.
  */
 
-@protocol DTTableViewDataStorage <NSObject>
-
-/**
- Array of sections, conforming to DTTableViewSection protocol. Depending on data storage used, section objects may be different.
- 
- @return NSArray of id <DTTableViewSection> objects.
- */
-
-- (NSArray*)sections;
-
-/**
- Returns table item at concrete indexPath. This method is used for perfomance reasons. For example, when DTTableViewCoreDataStorage is used, calling objects method will fetch all the objects from fetchRequest, bu we want to fetch only one.
- 
- @param indexPath indexPath of desired tableItem
- 
- @return table item at desired indexPath
- */
-- (id)objectAtIndexPath:(NSIndexPath *)indexPath;
-
-/**
- Delegate property used to transfer current data storage changes to `DTTableViewController` object. It is expected to update UI with appropriate animations.
- */
-
-@property (nonatomic, weak) id <DTTableViewDataStorageUpdating> delegate;
+@protocol DTTableViewDataStorage <DTStorage>
 
 @optional
 
