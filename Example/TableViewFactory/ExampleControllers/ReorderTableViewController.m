@@ -14,7 +14,7 @@
 
 -(void)addExampleCells
 {
-    DTTableViewMemoryStorage * storage = self.dataStorage;
+    DTTableViewMemoryStorage * storage = [self memoryStorage];
     
     [storage addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
     [storage addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
@@ -67,7 +67,7 @@
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    DTTableViewMemoryStorage * storage = self.dataStorage;
+    DTTableViewMemoryStorage * storage = [self memoryStorage];
 
     DTTableViewSectionModel * fromSection = [storage sections][sourceIndexPath.section];
     DTTableViewSectionModel * toSection = [storage sections][destinationIndexPath.section];

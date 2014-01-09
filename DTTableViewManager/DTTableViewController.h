@@ -100,7 +100,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  Data storage object. Create storage you need and set this property to populate table view with data. `DTTableViewManager` provides two data storage classes - `DTTableViewMemoryStorage` and `DTTableViewCoreDataStorage`. DTTableViewMemory storage used by default.
  */
 
-@property (nonatomic, strong) id <DTTableViewDataStorage> dataStorage;
+@property (nonatomic, strong) id <DTStorage> dataStorage;
 
 
 /**
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  Searching data storage object. It will be created automatically, responding to changes in UISearchBar, or after method filterTableItemsForSearchString:inScope: is called.
  */
 
-@property (nonatomic, strong) id <DTTableViewDataStorage> searchingDataStorage;
+@property (nonatomic, strong) id <DTStorage> searchingDataStorage;
 
 /*
  Property to store UISearchBar, attached to your UITableView. Attaching it to this property is completely optional.

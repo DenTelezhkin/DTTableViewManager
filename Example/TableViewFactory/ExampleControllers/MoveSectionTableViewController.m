@@ -13,13 +13,13 @@
 
 -(void)moveSection
 {
-    DTTableViewMemoryStorage * storage = self.dataStorage;
+    DTTableViewMemoryStorage * storage = [self memoryStorage];
     [storage moveSection:0 toSection:([[storage sections] count]-1)];
 }
 
 -(void)addExampleRows
 {
-    DTTableViewMemoryStorage * storage = self.dataStorage;
+    DTTableViewMemoryStorage * storage = [self memoryStorage];
     [storage addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
     [storage addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
     

@@ -24,13 +24,12 @@
 
 -(void)addInsertSection
 {
-    DTTableViewMemoryStorage * storage = self.dataStorage;
-    [storage addTableItem:[Example exampleWithText:@"Tap me to insert wonderful cell" andDetails:nil]];
+    [[self memoryStorage] addTableItem:[Example exampleWithText:@"Tap me to insert wonderful cell" andDetails:nil]];
 }
 
 -(void)addReplaceSection
 {
-    DTTableViewMemoryStorage * storage = self.dataStorage;
+    DTTableViewMemoryStorage * storage = [self memoryStorage];
     [storage addTableItem:[Example exampleWithText:@"Tap me to replace with wonderful cell"
                                      andDetails:nil]
              toSection:1];
@@ -44,13 +43,13 @@
     
     [self addInsertSection];
     [self addReplaceSection];
-    DTTableViewMemoryStorage * storage = self.dataStorage;
+    DTTableViewMemoryStorage * storage =[self memoryStorage];
     [storage setSectionHeaderModels:@[@"Insert rows", @"Replace rows"]];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTTableViewMemoryStorage * storage = self.dataStorage;
+    DTTableViewMemoryStorage * storage = [self memoryStorage];
     if (indexPath.section)
     {
         //replace

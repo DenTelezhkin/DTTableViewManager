@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
 //
 
-#import "DTTableViewCoreDataStorage.h"
+#import "DTCoreDataStorage.h"
 
-@interface BanksCoreDataStorage : DTTableViewCoreDataStorage
+@interface BanksCoreDataStorage : DTCoreDataStorage
 
 +(NSFetchedResultsController *)banksFetchControllerWithPredicate:(NSPredicate *)predicate;
 

@@ -92,7 +92,7 @@ static BOOL loggingEnabled = YES;
 {
     if ([self.dataStorage isKindOfClass:[DTTableViewMemoryStorage class]])
     {
-        return self.dataStorage;
+        return (DTTableViewMemoryStorage *)self.dataStorage;
     }
     return nil;
 }
@@ -188,8 +188,8 @@ static BOOL loggingEnabled = YES;
     }
     if ([self.dataStorage respondsToSelector:@selector(searchingStorageForSearchString:inSearchScope:)])
     {
-        self.searchingDataStorage = [self.dataStorage searchingStorageForSearchString:searchString
-                                                                        inSearchScope:scopeNumber];
+        self.searchingDataStorage = [(DTTableViewMemoryStorage *)self.dataStorage searchingStorageForSearchString:searchString
+                                                                                                    inSearchScope:scopeNumber];
         [self.tableView reloadData];
     }
 }
@@ -200,14 +200,14 @@ static BOOL loggingEnabled = YES;
     {
         if ([self.searchingDataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
         {
-            return [self.searchingDataStorage headerModelForSectionIndex:index];
+            return [(DTTableViewMemoryStorage *)self.searchingDataStorage headerModelForSectionIndex:index];
         }
     }
     else
     {
         if ([self.dataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
         {
-            return [self.dataStorage headerModelForSectionIndex:index];
+            return [(DTTableViewMemoryStorage *)self.dataStorage headerModelForSectionIndex:index];
         }
     }
     return nil;
@@ -219,14 +219,14 @@ static BOOL loggingEnabled = YES;
     {
         if ([self.searchingDataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
         {
-            return [self.searchingDataStorage footerModelForSectionIndex:index];
+            return [(DTTableViewMemoryStorage *)self.searchingDataStorage footerModelForSectionIndex:index];
         }
     }
     else
     {
         if ([self.dataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
         {
-            return [self.dataStorage footerModelForSectionIndex:index];
+            return [(DTTableViewMemoryStorage *)self.dataStorage footerModelForSectionIndex:index];
         }
     }
     return nil;
@@ -418,7 +418,7 @@ static BOOL loggingEnabled = YES;
     [self.tableView endUpdates];
 }
 
--(void)performAnimation:(void (^)(UITableView *))animationBlock
+-(void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock
 {
     animationBlock(self.tableView);
 }

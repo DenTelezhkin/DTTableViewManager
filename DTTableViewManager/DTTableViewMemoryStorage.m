@@ -269,7 +269,7 @@
     {
         [section.objects removeAllObjects];
     }
-    [self.delegate performAnimation:^(UITableView * tableView) {
+    [self.delegate performAnimatedUpdate:^(UITableView * tableView) {
         [tableView reloadData];
     }];
 }
@@ -340,7 +340,7 @@
     [self.sections removeObject:validSectionFrom];
     [self.sections insertObject:validSectionFrom atIndex:indexTo];
     
-    [self.delegate performAnimation:^(UITableView * tableView) {
+    [self.delegate performAnimatedUpdate:^(UITableView * tableView) {
         [tableView moveSection:indexFrom toSection:indexTo];
     }];
 }
