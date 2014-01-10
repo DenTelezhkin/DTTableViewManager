@@ -212,7 +212,6 @@
 		95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterController.m; path = ExampleControllers/CustomHeaderFooterController.m; sourceTree = "<group>"; };
 		95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterController.xib; path = ExampleControllers/CustomHeaderFooterController.xib; sourceTree = "<group>"; };
 		95D51FC5175E78BA00FD2292 /* SearchSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SearchSpec.mm; sourceTree = "<group>"; };
-		95DB1C331763577500050536 /* DTTableViewModelSearching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelSearching.h; path = ../../DTTableViewManager/DTTableViewModelSearching.h; sourceTree = "<group>"; };
 		95FC93F518186A3F003225B7 /* StoryboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryboardController.h; path = ExampleControllers/StoryboardController.h; sourceTree = "<group>"; };
 		95FC93F618186A3F003225B7 /* StoryboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryboardController.m; path = ExampleControllers/StoryboardController.m; sourceTree = "<group>"; };
 		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
@@ -227,7 +226,6 @@
 		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
 		E60CA0161684AFEF00F4147E /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/DTTableViewController.h; sourceTree = "<group>"; };
 		E60CA0171684AFEF00F4147E /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../DTTableViewManager/DTTableViewController.m; sourceTree = "<group>"; };
-		E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewModelTransfer.h; path = ../../DTTableViewManager/DTTableViewModelTransfer.h; sourceTree = "<group>"; };
 		E638F1071619916B00694FBC /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = TableViewFactory/Models/Example.h; sourceTree = "<group>"; };
 		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
 		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
@@ -695,8 +693,6 @@
 				9591074A18423AC50012B07E /* DTTableViewDataStorage.h */,
 				955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */,
 				955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */,
-				E60CA0181684AFEF00F4147E /* DTTableViewModelTransfer.h */,
-				95DB1C331763577500050536 /* DTTableViewModelSearching.h */,
 				AA1972EC18190CF200B81302 /* DTTableViewManager.h */,
 				AAF8D10318802B6200B20BCF /* DTSectionModel+HeaderFooterModel.h */,
 				AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */,

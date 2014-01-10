@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DTTableViewModelTransfer.h"
+#import "DTModelTransfer.h"
 #import "CustomHeaderView.h"
 
 @interface CustomHeaderFooterView : UITableViewHeaderFooterView
-                                    <DTTableViewModelTransfer>
+                                    <DTModelTransfer>
 
 @property (strong, nonatomic) IBOutlet UILabel *headerTitleLabel;
 @property (strong, nonatomic) IBOutlet UIView *backgroundPatternView;

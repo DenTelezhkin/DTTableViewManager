@@ -23,14 +23,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
-#import "DTTableViewModelTransfer.h"
+#import "DTModelTransfer.h"
 
 /**
- `DTTableViewCell` is a convinience UITableViewCell subclass, conforming to `DTTableViewModelTransfer` protocol.
+ `DTTableViewCell` is a convinience UITableViewCell subclass, conforming to `DTModelTransfer` protocol.
  */
 
 
-@interface DTTableViewCell : UITableViewCell <DTTableViewModelTransfer>
+@interface DTTableViewCell : UITableViewCell <DTModelTransfer>
 
 @end

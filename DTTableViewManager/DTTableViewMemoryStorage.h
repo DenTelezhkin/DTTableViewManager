@@ -25,7 +25,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DTTableViewDataStorage.h"
-#import "DTTableViewModelSearching.h"
+#import "DTModelSearching.h"
 #import "DTSectionModel+HeaderFooterModel.h"
 #import "DTTableViewDataStorage.h"
 #import "DTMemoryStorage.h"
@@ -35,7 +35,7 @@
  
  ## Searching
  
- To implement search, your data models should implement `DTTableViewModelSearching` protocol. Specifically, on every change in UISearchBar, every model will get called with `shouldShowInSearchResultsForSearchString:inScopeIndex:` method. Based on the results, new searching storage will be created and used by `DTTableViewController` instance.
+ To implement search, your data models should implement `DTModelSearching` protocol. Specifically, on every change in UISearchBar, every model will get called with `shouldShowInSearchResultsForSearchString:inScopeIndex:` method. Based on the results, new searching storage will be created and used by `DTTableViewController` instance.
  */
 
 @interface DTTableViewMemoryStorage : DTMemoryStorage <DTTableViewDataStorage>

@@ -23,8 +23,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTTableViewModelTransfer.h"
-#import "DTTableViewModelSearching.h"
+#import "DTModelTransfer.h"
+#import "DTModelSearching.h"
 #import "DTTableViewDataStorage.h"
 #import "DTTableViewMemoryStorage.h"
 #import "DTSectionModel+HeaderFooterModel.h"
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  ## Setup
  
  # General steps
- - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model (or `DTTableViewCell`, which is UITableViewCell subclass, that conforms to `DTTableViewModelTransfer` protocol)
+ - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model (or `DTTableViewCell`, which is UITableViewCell subclass, that conforms to `DTModelTransfer` protocol)
  - Every cell class should be mapped to model class using mapping methods.
  - `UITableView` datasource and delegate is your `DTTableViewController` subclass.
  - If you need CoreData storage, you should create DTTableViewCoreDataStorage and assign it to `dataStorage` property.
@@ -62,7 +62,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  
  # DTTableViewMemoryStorage
  
- Your data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewController will know, when to show data models.
+ Your data models should conform to `DTModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewController will know, when to show data models.
  
  # DTTableViewCoreDataStorage
  
@@ -196,7 +196,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
              modelClass:(Class)modelClass;
 
 /**
- This method registers nib with `headerClass` name. `headerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ This method registers nib with `headerClass` name. `headerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
  
  @param headerClass headerClass to be mapped for `modelClass`
  
@@ -206,7 +206,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass;
 
 /**
- This method registers nib with `nibName` name. `headerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ This method registers nib with `nibName` name. `headerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
  
  @param nibName Name of custom XIB that is used to create a header.
  
@@ -219,7 +219,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
              modelClass:(Class)modelClass;
 
 /**
- This method registers nib with `footerClass` name. `footerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ This method registers nib with `footerClass` name. `footerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
  
  @param footerClass footerClass to be mapped for `modelClass`
  
@@ -229,7 +229,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 -(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass;
 
 /**
- This method registers nib with `nibName` name. `footerClass` should be a UIView subclass, conforming to `DTTableViewModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ This method registers nib with `nibName` name. `footerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
  
  @param nibName Name of custom XIB that is used to create a header.
  

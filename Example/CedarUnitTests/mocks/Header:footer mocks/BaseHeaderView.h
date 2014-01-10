@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DTTableViewModelTransfer.h"
+#import "DTModelTransfer.h"
 
-@interface BaseHeaderView : UIView <DTTableViewModelTransfer>
+@interface BaseHeaderView : UIView <DTModelTransfer>
 
 @end

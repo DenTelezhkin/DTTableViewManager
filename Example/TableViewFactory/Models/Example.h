@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DTTableViewController.h"
 
-@interface Example : NSObject <DTTableViewModelSearching>
+@interface Example : NSObject <DTModelSearching>
 
 @property (nonatomic,strong) NSString * text;
 @property (nonatomic,strong) NSString * details;

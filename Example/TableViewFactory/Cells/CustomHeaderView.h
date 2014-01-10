@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DTTableViewModelTransfer.h"
+#import "DTModelTransfer.h"
 
 typedef enum {
     kHeaderKind = 1,
     kFooterKind = 2
 } kHeaderFooterViewKind;
 
-@interface CustomHeaderView : UIView <DTTableViewModelTransfer>
+@interface CustomHeaderView : UIView <DTModelTransfer>
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 

@@ -19,7 +19,7 @@
 {
     id <DTStorage> currentStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
     id itemDatasource = [currentStorage objectAtIndexPath:path];
-    id itemTable = [(id <DTTableViewModelTransfer>)[self tableView:self.tableView cellForRowAtIndexPath:path] model];
+    id itemTable = [(id <DTModelTransfer>)[self tableView:self.tableView cellForRowAtIndexPath:path] model];
     
     if (![item isEqual:itemDatasource])
         return NO;

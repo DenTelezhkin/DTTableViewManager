@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 
 #import "DTCellFactory.h"
-#import "DTTableViewModelTransfer.h"
+#import "DTModelTransfer.h"
 #import "UIView+DTLoading.h"
 
 @interface DTCellFactory ()
@@ -62,10 +62,10 @@
 
 -(void)checkClassForModelTransferProtocolSupport:(Class)class
 {
-    if (![class conformsToProtocol:@protocol(DTTableViewModelTransfer)])
+    if (![class conformsToProtocol:@protocol(DTModelTransfer)])
     {
         NSString * reason = [NSString stringWithFormat:@"class %@ should conform\n"
-                             "to DTTableViewModelTransfer protocol",
+                             "to DTModelTransfer protocol",
                              NSStringFromClass(class)];
         NSException * exc =
         [NSException exceptionWithName:@"DTTableViewController API exception"
@@ -206,7 +206,7 @@
 - (UITableViewCell *)reuseCellforModel:(id)model
                         reuseIdentifier:(NSString *)reuseIdentifier
 {
-    UITableViewCell <DTTableViewModelTransfer> * cell =  [[self.delegate tableView] dequeueReusableCellWithIdentifier:
+    UITableViewCell <DTModelTransfer> * cell =  [[self.delegate tableView] dequeueReusableCellWithIdentifier:
                                                           reuseIdentifier];
     [cell updateWithModel:model];
     return cell;
@@ -217,7 +217,7 @@
 -(UIView *)reuseHeaderFooterViewForModel:(id)model
                            reuseIdentifier:(NSString *)reuseIdentifier
 {
-   UIView <DTTableViewModelTransfer> * view =
+   UIView <DTModelTransfer> * view =
    [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
    
    [view updateWithModel:model];
@@ -352,11 +352,11 @@
 {
     Class cellClass = [self cellClassForModel:model];
     
-    if ([cellClass conformsToProtocol:@protocol(DTTableViewModelTransfer)])
+    if ([cellClass conformsToProtocol:@protocol(DTModelTransfer)])
     {
-        UITableViewCell<DTTableViewModelTransfer> * cell;
+        UITableViewCell<DTModelTransfer> * cell;
 
-        cell = [(UITableViewCell <DTTableViewModelTransfer>  *)[cellClass alloc]
+        cell = [(UITableViewCell <DTModelTransfer>  *)[cellClass alloc]
                                                 initWithStyle:UITableViewCellStyleSubtitle
                                               reuseIdentifier:reuseIdentifier];
         [cell updateWithModel:model];
@@ -372,9 +372,9 @@
 {
     Class headerClass = [self headerClassForModel:model];
     
-    if([headerClass conformsToProtocol:@protocol(DTTableViewModelTransfer)])
+    if([headerClass conformsToProtocol:@protocol(DTModelTransfer)])
     {
-        UIView <DTTableViewModelTransfer> * headerView;
+        UIView <DTModelTransfer> * headerView;
         
         headerView = [headerClass dt_loadFromXib];
         [headerView updateWithModel:model];
@@ -390,9 +390,9 @@
 {
     Class footerClass = [self footerClassForModel:model];
     
-    if([footerClass conformsToProtocol:@protocol(DTTableViewModelTransfer)])
+    if([footerClass conformsToProtocol:@protocol(DTModelTransfer)])
     {
-        UIView <DTTableViewModelTransfer> * footerView;
+        UIView <DTModelTransfer> * footerView;
         
         footerView = [footerClass dt_loadFromXib];
         [footerView updateWithModel:model];

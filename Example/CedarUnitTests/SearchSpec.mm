@@ -302,20 +302,20 @@ describe(@"section headers/footers models", ^{
     it(@"should have correct header models", ^{
         if ([UITableViewHeaderFooterView class]) {
             UIView * view = [model tableView:model.tableView viewForHeaderInSection:0];
-            expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc3));
+            expect([(id <DTModelTransfer>)view model]).to(equal(acc3));
             
             view = [model tableView:model.tableView viewForHeaderInSection:1];
-            expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc5));
+            expect([(id <DTModelTransfer>)view model]).to(equal(acc5));
         }
     });
     
     it(@"should have correct footer models", ^{
         if ([UITableViewHeaderFooterView class]) {
             UIView * view = [model tableView:model.tableView viewForFooterInSection:0];
-            expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc4));
+            expect([(id <DTModelTransfer>)view model]).to(equal(acc4));
             
             view = [model tableView:model.tableView viewForFooterInSection:1];
-            expect([(id <DTTableViewModelTransfer>)view model]).to(equal(acc6));
+            expect([(id <DTModelTransfer>)view model]).to(equal(acc6));
         }
     });
     
