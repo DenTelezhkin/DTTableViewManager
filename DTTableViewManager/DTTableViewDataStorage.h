@@ -27,7 +27,7 @@
 #import "DTStorage.h"
 
 /**
- `DTTableViewDataStorageUpdating` protocol is used to transfer data storage updates to `DTTableViewController` object.
+ `DTTableViewDataStorageUpdating` protocol extends `DTStorageUpdating` protocol with animated updates method for UITableView.
  */
 
 @protocol DTTableViewDataStorageUpdating <DTStorageUpdating>
@@ -46,7 +46,7 @@
 @end
 
 /**
- `DTTableViewDataStorage` protocol is used to define common interface for data storage objects used by `DTTableViewController` instance. `DTTableViewManager` provides 2 implementations - `DTTableViewMemoryStorage` and `DTTableViewCoreDataStorage`. `DTTableViewMemoryStorage` is used by default.
+ `DTTableViewDataStorage` protocol extends `DTStorage` protocol with optional getters for header and footer model of current section.
  */
 
 @protocol DTTableViewDataStorage <DTStorage>
