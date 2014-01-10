@@ -1,25 +1,27 @@
 PODS:
   - Cedar (0.9.4)
-  - DTModelStorage (0.2.0):
+  - DTModelStorage (0.3.0):
     - DTModelStorage/All
-  - DTModelStorage/All (0.2.0):
+  - DTModelStorage/All (0.3.0):
     - DTModelStorage/CoreDataStorage
     - DTModelStorage/MemoryStorage
-  - DTModelStorage/Core (0.2.0)
-  - DTModelStorage/CoreDataStorage (0.2.0):
+    - DTModelStorage/ModelTransfer
+  - DTModelStorage/Core (0.3.0)
+  - DTModelStorage/CoreDataStorage (0.3.0):
     - DTModelStorage/Core
-  - DTModelStorage/MemoryStorage (0.2.0):
+  - DTModelStorage/MemoryStorage (0.3.0):
     - DTModelStorage/Core
-  - OCMock (2.2.1)
+  - DTModelStorage/ModelTransfer (0.3.0)
+  - OCMock (2.2.2)
 
 DEPENDENCIES:
   - Cedar
-  - DTModelStorage (= 0.2.0)
+  - DTModelStorage (= 0.3.0)
   - OCMock
 
 SPEC CHECKSUMS:
   Cedar: 56053d07b66394a84a576f6a4fa849ec13b5fc56
-  DTModelStorage: 73c75c7d2934949facef17beea59f851766cb243
-  OCMock: 80e4cfbc71a0e1bd28caf10a9fda27da7c4c8402
+  DTModelStorage: c2b70ac891c903029c5804294a07e272388a882d
+  OCMock: ffba68873fd32cfd35d885bddad23bfa816da4a3
 
 COCOAPODS: 0.29.0

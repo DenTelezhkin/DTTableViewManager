@@ -7,7 +7,6 @@
 //
 
 #import "ReorderTableViewController.h"
-#import "DTTableViewSectionModel.h"
 #import "Example.h"
 
 @implementation ReorderTableViewController
@@ -16,12 +15,12 @@
 {
     DTTableViewMemoryStorage * storage = [self memoryStorage];
     
-    [storage addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
-    [storage addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
-    [storage addTableItem:[Example exampleWithText:@"Section 2 cell" andDetails:@""] toSection:1];
-    [storage addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
-    [storage addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
-    [storage addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
+    [storage addItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
+    [storage addItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
+    [storage addItem:[Example exampleWithText:@"Section 2 cell" andDetails:@""] toSection:1];
+    [storage addItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
+    [storage addItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
+    [storage addItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
     
     [storage setSectionHeaderModels:@[@"Section 1", @"Section 2", @" Section 3"]];
 }
@@ -69,8 +68,8 @@ toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     DTTableViewMemoryStorage * storage = [self memoryStorage];
 
-    DTTableViewSectionModel * fromSection = [storage sections][sourceIndexPath.section];
-    DTTableViewSectionModel * toSection = [storage sections][destinationIndexPath.section];
+    DTSectionModel * fromSection = [storage sections][sourceIndexPath.section];
+    DTSectionModel * toSection = [storage sections][destinationIndexPath.section];
     id tableItem = fromSection.objects[sourceIndexPath.row];
 
     [fromSection.objects removeObjectAtIndex:sourceIndexPath.row];

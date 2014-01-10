@@ -27,6 +27,7 @@
 #import "DTTableViewModelSearching.h"
 #import "DTTableViewDataStorage.h"
 #import "DTTableViewMemoryStorage.h"
+#import "DTSectionModel+HeaderFooterModel.h"
 
 typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 {
@@ -267,22 +268,5 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 
 -(BOOL)isSearching;
 
-///---------------------------------------
-/// @name Logging
-///---------------------------------------
-
-/**
- Method to enable/disable logging. Logging is on by default, and will print out any critical messages, that DTTableViewController is encountering. Call this method, if you want to turn logging off. It is enough to call this method once, and this value will be used by all instances of DTTableViewController.
- 
- @param isEnabled Flag, that indicates, whether logging is enabled.
- */
-+(void)setLogging:(BOOL)isEnabled;
-
-/**
- Method, that indicates whether logging has been enabled. Logging is turned on by default.
- 
- @return is logging enabled or not?
- */
-+(BOOL)loggingEnabled;
 
 @end

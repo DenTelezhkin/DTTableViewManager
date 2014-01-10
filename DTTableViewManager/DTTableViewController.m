@@ -24,7 +24,6 @@
 
 #import "DTTableViewController.h"
 #import "DTCellFactory.h"
-#import "DTTableViewSectionModel.h"
 #import "DTTableViewMemoryStorage.h"
 
 @interface DTTableViewController ()
@@ -34,8 +33,6 @@
 @property (nonatomic, copy) NSString * currentSearchString;
 @property (nonatomic, retain) DTCellFactory * cellFactory;
 @end
-
-static BOOL loggingEnabled = YES;
 
 @implementation DTTableViewController
 
@@ -383,18 +380,6 @@ static BOOL loggingEnabled = YES;
 -(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     [self filterTableItemsForSearchString:searchBar.text inScope:selectedScope];
-}
-
-#pragma mark - logging
-
-+(void)setLogging:(BOOL)isEnabled
-{
-    loggingEnabled = isEnabled;
-}
-
-+(BOOL)loggingEnabled
-{
-    return loggingEnabled;
 }
 
 -(void)storageDidPerformUpdate:(DTStorageUpdate *)update

@@ -1,6 +1,5 @@
 #import "DTTableViewMemoryStorage.h"
 #import "OCMock.h"
-#import "DTTableViewSectionModel.h"
 
 using namespace Cedar::Matchers;
 
@@ -15,34 +14,34 @@ describe(@"Storage search specs", ^{
     });
     
     it(@"should correctly return item at indexPath", ^{
-        [storage addTableItems:@[@"1",@"2"] toSection:0];
-        [storage addTableItems:@[@"3",@"4"] toSection:1];
+        [storage addItems:@[@"1",@"2"] toSection:0];
+        [storage addItems:@[@"3",@"4"] toSection:1];
         
-        id model = [storage tableItemAtIndexPath:[NSIndexPath indexPathForRow:1
+        id model = [storage itemAtIndexPath:[NSIndexPath indexPathForRow:1
                                                                     inSection:1]];
         
         model should equal(@"4");
         
-        model = [storage tableItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        model = [storage itemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
         model should equal(@"1");
     });
     
     it(@"should return indexPath of tableItem", ^{
-        [storage addTableItems:@[@"1",@"2"] toSection:0];
-        [storage addTableItems:@[@"3",@"4"] toSection:1];
+        [storage addItems:@[@"1",@"2"] toSection:0];
+        [storage addItems:@[@"3",@"4"] toSection:1];
         
-        NSIndexPath * indexPath = [storage indexPathOfTableItem:@"3"];
+        NSIndexPath * indexPath = [storage indexPathForItem:@"3"];
         
         indexPath should equal([NSIndexPath indexPathForRow:0 inSection:1]);
     });
     
     it(@"should return items in section",^{
-        [storage addTableItems:@[@"1",@"2"] toSection:0];
-        [storage addTableItems:@[@"3",@"4"] toSection:1];
+        [storage addItems:@[@"1",@"2"] toSection:0];
+        [storage addItems:@[@"3",@"4"] toSection:1];
         
-        NSArray * section0 = [storage tableItemsInSection:0];
-        NSArray * section1 = [storage tableItemsInSection:1];
+        NSArray * section0 = [storage itemsInSection:0];
+        NSArray * section1 = [storage itemsInSection:1];
         
         section0 should equal(@[@"1",@"2"]);
         section1 should equal(@[@"3",@"4"]);
@@ -71,7 +70,7 @@ describe(@"Storage Add specs", ^{
             return [update isEqual:argument];
         }]];
         
-        [storage addTableItem:@""];
+        [storage addItem:@""];
         [delegate verify];
     });
     
@@ -90,7 +89,7 @@ describe(@"Storage Add specs", ^{
             return [update isEqual:argument];
         }]];
         
-        [storage addTableItems:@[@"1",@"2",@"3"] toSection:1];
+        [storage addItems:@[@"1",@"2",@"3"] toSection:1];
         [delegate verify];
     });
 });
@@ -119,8 +118,8 @@ describe(@"Storage edit specs", ^{
     });
     
     it(@"should insert table items", ^{
-        [storage addTableItems:@[acc2,acc4,acc6]];
-        [storage addTableItem:acc5 toSection:1];
+        [storage addItems:@[acc2,acc4,acc6]];
+        [storage addItem:acc5 toSection:1];
         
         DTStorageUpdate * update = [DTStorageUpdate new];
         [update.insertedRowIndexPaths addObject:[NSIndexPath indexPathForRow:2
@@ -130,7 +129,7 @@ describe(@"Storage edit specs", ^{
            return [update isEqual:obj];
         }]];
         
-        [storage insertTableItem:acc1 toIndexPath:[storage indexPathOfTableItem:acc6]];
+        [storage insertItem:acc1 toIndexPath:[storage indexPathForItem:acc6]];
         
         [delegate verify];
         
@@ -142,14 +141,14 @@ describe(@"Storage edit specs", ^{
             return [update isEqual:obj];
         }]];
         
-        [storage insertTableItem:acc3 toIndexPath:[storage indexPathOfTableItem:acc5]];
+        [storage insertItem:acc3 toIndexPath:[storage indexPathForItem:acc5]];
         
         [delegate verify];
     });
     
     it(@"should reload table view rows", ^{
         
-        [storage addTableItems:@[acc2,acc4,acc6]];
+        [storage addItems:@[acc2,acc4,acc6]];
         
         DTStorageUpdate * update = [DTStorageUpdate new];
         [update.updatedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
@@ -159,14 +158,14 @@ describe(@"Storage edit specs", ^{
             return [update isEqual:obj];
         }]];
         
-        [storage reloadTableItem:acc4];
+        [storage reloadItem:acc4];
         
         [delegate verify];
     });
     
     it(@"should reload table view rows", ^{
         
-        [storage addTableItems:@[acc2,acc4,acc6]];
+        [storage addItems:@[acc2,acc4,acc6]];
         
         DTStorageUpdate * update = [DTStorageUpdate new];
         [update.updatedRowIndexPaths addObject:[NSIndexPath indexPathForRow:1
@@ -176,14 +175,14 @@ describe(@"Storage edit specs", ^{
             return [update isEqual:obj];
         }]];
         
-        [storage replaceTableItem:acc4 withTableItem:acc5];
+        [storage replaceItem:acc4 withItem:acc5];
         
         [delegate verify];
     });
     
     it(@"should remove table item", ^{
-        [storage addTableItems:@[acc2,acc4,acc6]];
-        [storage addTableItem:acc5 toSection:1];
+        [storage addItems:@[acc2,acc4,acc6]];
+        [storage addItem:acc5 toSection:1];
         
         DTStorageUpdate * update = [DTStorageUpdate new];
         [update.deletedRowIndexPaths addObject:[NSIndexPath indexPathForRow:0
@@ -192,7 +191,7 @@ describe(@"Storage edit specs", ^{
         [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
-        [storage removeTableItem:acc2];
+        [storage removeItem:acc2];
         [delegate verify];
         
         update = [DTStorageUpdate new];
@@ -202,13 +201,13 @@ describe(@"Storage edit specs", ^{
         [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
-        [storage removeTableItem:acc5];
+        [storage removeItem:acc5];
         [delegate verify];
     });
     
     it(@"should remove table items", ^{
-        [storage addTableItems:@[acc1,acc3] toSection:0];
-        [storage addTableItems:@[acc2,acc4] toSection:1];
+        [storage addItems:@[acc1,acc3] toSection:0];
+        [storage addItems:@[acc2,acc4] toSection:1];
         
         
         DTStorageUpdate * update = [DTStorageUpdate new];
@@ -223,17 +222,17 @@ describe(@"Storage edit specs", ^{
         [[delegate expect] storageDidPerformUpdate:[OCMArg checkWithBlock:^BOOL(id obj) {
             return [update isEqual:obj];
         }]];
-        [storage removeTableItems:@[acc1,acc4,acc3,acc5]];
+        [storage removeItems:@[acc1,acc4,acc3,acc5]];
         [delegate verify];
         
-        [[storage tableItemsInSection:0] count] should equal(0);
-        [[storage tableItemsInSection:1] count] should equal(1);
+        [[storage itemsInSection:0] count] should equal(0);
+        [[storage itemsInSection:1] count] should equal(1);
     });
     
     it(@"should delete sections", ^{
-        [storage addTableItem:acc1];
-        [storage addTableItem:acc2 toSection:1];
-        [storage addTableItem:acc3 toSection:2];
+        [storage addItem:acc1];
+        [storage addItem:acc2 toSection:1];
+        [storage addItem:acc3 toSection:2];
         
         DTStorageUpdate * update = [DTStorageUpdate new];
         [update.deletedSectionIndexes addIndex:1];
@@ -273,7 +272,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionHeaderModels:nil];
         
-        DTTableViewSectionModel * section2 = [storage sectionAtIndex:1];
+        DTSectionModel * section2 = (DTSectionModel *)[storage sectionAtIndex:1];
         
         expect(section2.headerModel == nil).to(BeTruthy());
     });
@@ -283,7 +282,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionHeaderModels:@[]];
         
-        DTTableViewSectionModel * section2 = [storage sectionAtIndex:1];
+        DTSectionModel * section2 = (DTSectionModel *)[storage sectionAtIndex:1];
         expect(section2.headerModel == nil).to(BeTruthy());
     });
     
@@ -292,7 +291,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionFooterModels:nil];
         
-        DTTableViewSectionModel * section2 = [storage sectionAtIndex:1];
+        DTSectionModel * section2 = (DTSectionModel *)[storage sectionAtIndex:1];
         expect(section2.footerModel == nil).to(BeTruthy());
     });
     
@@ -301,7 +300,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionFooterModels:@[]];
         
-        DTTableViewSectionModel * section2 = [storage sectionAtIndex:1];
+        DTSectionModel * section2 = (DTSectionModel *)[storage sectionAtIndex:1];
         expect(section2.footerModel == nil).to(BeTruthy());
     });
 });

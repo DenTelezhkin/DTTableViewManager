@@ -18,7 +18,7 @@
     [self registerCellClass:[PrototypedCell class]
               forModelClass:[NSString class]];
     
-    [[self memoryStorage] addTableItems:@[@"Row 1", @"Row 2", @"Row 3"]];
+    [[self memoryStorage] addItems:@[@"Row 1", @"Row 2", @"Row 3"]];
 }
 
 @end

@@ -24,17 +24,17 @@
 
 -(void)addInsertSection
 {
-    [[self memoryStorage] addTableItem:[Example exampleWithText:@"Tap me to insert wonderful cell" andDetails:nil]];
+    [[self memoryStorage] addItem:[Example exampleWithText:@"Tap me to insert wonderful cell" andDetails:nil]];
 }
 
 -(void)addReplaceSection
 {
     DTTableViewMemoryStorage * storage = [self memoryStorage];
-    [storage addTableItem:[Example exampleWithText:@"Tap me to replace with wonderful cell"
+    [storage addItem:[Example exampleWithText:@"Tap me to replace with wonderful cell"
                                      andDetails:nil]
              toSection:1];
-    [storage addTableItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
-    [storage addTableItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
+    [storage addItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
+    [storage addItem:[Example exampleWithText:@"Or me" andDetails:nil] toSection:1];
 }
 
 - (void)viewDidLoad
@@ -53,13 +53,13 @@
     if (indexPath.section)
     {
         //replace
-        [storage replaceTableItem:[storage tableItemAtIndexPath:indexPath]
-                 withTableItem:self.wonderfulExample];
+        [storage replaceItem:[storage itemAtIndexPath:indexPath]
+                 withItem:self.wonderfulExample];
     }
     else
     {
         //insert
-        [storage insertTableItem:self.wonderfulExample
+        [storage insertItem:self.wonderfulExample
                   toIndexPath:indexPath];
     }
 }

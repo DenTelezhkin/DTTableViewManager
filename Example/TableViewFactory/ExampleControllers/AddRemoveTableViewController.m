@@ -23,7 +23,7 @@
     self.rowCount ++;
     NSString * rowText = [NSString stringWithFormat:@"Row # %d",self.rowCount];
     
-    [[self memoryStorage] addTableItem:[Example exampleWithText:rowText andDetails:nil]];
+    [[self memoryStorage] addItem:[Example exampleWithText:rowText andDetails:nil]];
 }
 
 -(void)viewDidLoad
@@ -40,7 +40,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DTTableViewMemoryStorage * storage = [self memoryStorage];
-    [storage removeTableItem:[storage tableItemAtIndexPath:indexPath]];
+    [storage removeItem:[storage itemAtIndexPath:indexPath]];
 }
 
 @end

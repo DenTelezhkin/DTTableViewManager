@@ -54,19 +54,6 @@
 @optional
 
 /**
- Method to create searching data storage, based on current data storage. This method will be called automatically by `DTTableViewController` instance.
- 
- @param searchString String, used to search in data storage
- 
- @param searchScope Search scope for current search.
- 
- @return searching data storage.
- */
-
-- (instancetype)searchingStorageForSearchString:(NSString *)searchString
-                                  inSearchScope:(NSInteger)searchScope;
-
-/**
  Getter method for header model for current section.
  
  @param index Number of section.

@@ -20,8 +20,6 @@ describe(@"mapping tests", ^{
     __block Example * testModel;
     __block Example * acc1;
     
-    [DTTableViewController setLogging:NO];
-    
     describe(@"cell mapping from code", ^{
         
         beforeEach(^{
@@ -30,6 +28,7 @@ describe(@"mapping tests", ^{
             
             model = [DTTableViewController new];
             storage = [DTTableViewMemoryStorage storage];
+            storage.loggingEnabled = NO;
             model.dataStorage = storage;
             model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
             model.tableView.dataSource = model;
@@ -52,7 +51,7 @@ describe(@"mapping tests", ^{
         
         it(@"should create cell from code", ^{
             
-            [storage addTableItem:acc1];
+            [storage addItem:acc1];
             
             [model verifyTableItem:acc1 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             
@@ -95,7 +94,7 @@ describe(@"mapping tests", ^{
 
         it(@"should create cell from nib", ^{
             
-            [storage addTableItem:acc1];
+            [storage addItem:acc1];
             
             [model verifyTableItem:acc1 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             
@@ -294,13 +293,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept constant strings", ^{
             ^{
-                [storage addTableItem:@""];
+                [storage addItem:@""];
             } should_not raise_exception;
         });
         
         it(@"should accept non-empty strings", ^{
             ^{
-                [storage addTableItem:@"not empty"];
+                [storage addItem:@"not empty"];
             } should_not raise_exception;
         });
         
@@ -308,7 +307,7 @@ describe(@"Foundation class clusters", ^{
             ^{
                 NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
                 [string appendString:@",second"];
-                [storage addTableItem:string];
+                [storage addItem:string];
             } should_not raise_exception;
         });
         
@@ -337,13 +336,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept constant strings", ^{
             ^{
-                [storage addTableItem:@""];
+                [storage addItem:@""];
             } should_not raise_exception;
         });
         
         it(@"should accept non-empty strings", ^{
             ^{
-                [storage addTableItem:@"not empty"];
+                [storage addItem:@"not empty"];
             } should_not raise_exception;
         });
         
@@ -351,7 +350,7 @@ describe(@"Foundation class clusters", ^{
             ^{
                 NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
                 [string appendString:@",second"];
-                [storage addTableItem:string];
+                [storage addItem:string];
             } should_not raise_exception;
         });
         
@@ -382,13 +381,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept nsnumber for cells", ^{
             ^{
-                [storage addTableItem:@5];
+                [storage addItem:@5];
             } should_not raise_exception;
         });
         
         it(@"should accept bool number for cells", ^{
             ^{
-                [storage addTableItem:@YES];
+                [storage addItem:@YES];
             } should_not raise_exception;
         });
         
@@ -432,13 +431,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSDictionary for cells", ^{
             ^{
-                [storage addTableItem:@{@1:@2}];
+                [storage addItem:@{@1:@2}];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableDictionary for cells", ^{
             ^{
-                [storage addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
+                [storage addItem:[[@{@1:@2} mutableCopy] autorelease]];
             } should_not raise_exception;
         });
         
@@ -482,13 +481,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSDictionary for cells", ^{
             ^{
-                [storage addTableItem:@{@1:@2}];
+                [storage addItem:@{@1:@2}];
             } should_not raise_exception;
         });
         
         it(@"should accept NSDictionary for cells", ^{
             ^{
-                [storage addTableItem:[[@{@1:@2} mutableCopy] autorelease]];
+                [storage addItem:[[@{@1:@2} mutableCopy] autorelease]];
             } should_not raise_exception;
         });
         
@@ -532,13 +531,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSArray for cells", ^{
             ^{
-                [storage addTableItem:@[]];
+                [storage addItem:@[]];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableArray for cells", ^{
             ^{
-                [storage addTableItem:[[@[] mutableCopy] autorelease]];
+                [storage addItem:[[@[] mutableCopy] autorelease]];
             } should_not raise_exception;
         });
         
@@ -583,13 +582,13 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSArray for cells", ^{
             ^{
-                [storage addTableItem:@[]];
+                [storage addItem:@[]];
             } should_not raise_exception;
         });
         
         it(@"should accept NSMutableArray for cells", ^{
             ^{
-                [storage addTableItem:[[@[] mutableCopy] autorelease]];
+                [storage addItem:[[@[] mutableCopy] autorelease]];
             } should_not raise_exception;
         });
         
@@ -634,7 +633,7 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should accept NSDate for cells", ^{
             ^{
-                [storage addTableItem:[NSDate date]];
+                [storage addItem:[NSDate date]];
             } should_not raise_exception;
         });
 

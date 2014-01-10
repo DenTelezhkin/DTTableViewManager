@@ -31,8 +31,8 @@
     self.sectionHeaderStyle = DTTableViewSectionStyleView;
     self.sectionFooterStyle = DTTableViewSectionStyleView;
     
-    [storage addTableItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
-    [storage addTableItem:[Example exampleWithText:@"Section 2" andDetails:nil]
+    [storage addItem:[Example exampleWithText:@"Section 1" andDetails:nil]];
+    [storage addItem:[Example exampleWithText:@"Section 2" andDetails:nil]
              toSection:1];
 }
 

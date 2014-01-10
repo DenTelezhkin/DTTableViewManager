@@ -19,7 +19,7 @@
 #import "ControllerCell.h"
 #import "StoryboardController.h"
 #import "DTTableViewMemoryStorage.h"
-#import "DTTableViewSectionModel.h"
+#import "DTSectionModel.h"
 #import "AppleCoreDataExampleController.h"
 #import "BanksCoreDataViewController.h"
 
@@ -38,31 +38,31 @@
     
     DTTableViewMemoryStorage * storage = [self memoryStorage];
     
-    [storage addTableItem:[ControllerModel modelWithClass:[AddRemoveTableViewController class]
+    [storage addItem:[ControllerModel modelWithClass:[AddRemoveTableViewController class]
                                               andTitle:@"Add/Remove cells"]];
     
-    [storage addTableItem:[ControllerModel modelWithClass:[ReorderTableViewController class]
+    [storage addItem:[ControllerModel modelWithClass:[ReorderTableViewController class]
                                               andTitle:@"Reorder cells"]];
-    [storage addTableItem:[ControllerModel modelWithClass:[CustomCellsTableViewController class]
+    [storage addItem:[ControllerModel modelWithClass:[CustomCellsTableViewController class]
                                               andTitle:@"Custom cells from NIB"]];
-    [storage addTableItem:[ControllerModel modelWithClass:[CustomHeaderController class]
+    [storage addItem:[ControllerModel modelWithClass:[CustomHeaderController class]
                                               andTitle:@"Custom header/footer"]];
     
-    [storage addTableItem:[ControllerModel modelWithClass:[CustomHeaderFooterController class]
+    [storage addItem:[ControllerModel modelWithClass:[CustomHeaderFooterController class]
                                               andTitle:@"UITableViewHeaderFooterView"]];
     
-    [storage addTableItem:[ControllerModel modelWithClass:[InsertReplaceTableViewController class]
+    [storage addItem:[ControllerModel modelWithClass:[InsertReplaceTableViewController class]
                                               andTitle:@"Insert/replace cells"]];
-    [storage addTableItem:[ControllerModel modelWithClass:[MoveSectionTableViewController class]
+    [storage addItem:[ControllerModel modelWithClass:[MoveSectionTableViewController class]
                                               andTitle:@"Move section"]];
     
-    [storage addTableItem:[ControllerModel modelWithClass:[SearchController class]
+    [storage addItem:[ControllerModel modelWithClass:[SearchController class]
                                               andTitle:@"Search"]];
-    [storage addTableItem:[ControllerModel modelWithClass:[StoryboardController class]
+    [storage addItem:[ControllerModel modelWithClass:[StoryboardController class]
                                               andTitle:@"Storyboard"]];
-    [storage addTableItem:[ControllerModel modelWithClass:[AppleCoreDataExampleController class]
+    [storage addItem:[ControllerModel modelWithClass:[AppleCoreDataExampleController class]
                                                  andTitle:@"Simple CoreData"]];
-    [storage addTableItem:[ControllerModel modelWithClass:[BanksCoreDataViewController class]
+    [storage addItem:[ControllerModel modelWithClass:[BanksCoreDataViewController class]
                                                  andTitle:@"CoreData search"]];
 }
 

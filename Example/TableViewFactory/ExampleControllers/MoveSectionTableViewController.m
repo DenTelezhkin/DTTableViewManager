@@ -20,14 +20,14 @@
 -(void)addExampleRows
 {
     DTTableViewMemoryStorage * storage = [self memoryStorage];
-    [storage addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
-    [storage addTableItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
+    [storage addItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
+    [storage addItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
     
-    [storage addTableItem:[Example exampleWithText:@"Section 2 cell" andDetails:@""] toSection:1];
+    [storage addItem:[Example exampleWithText:@"Section 2 cell" andDetails:@""] toSection:1];
     
-    [storage addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
-    [storage addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
-    [storage addTableItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
+    [storage addItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
+    [storage addItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
+    [storage addItem:[Example exampleWithText:@"Section 3 cell" andDetails:@""] toSection:2];
     
     [storage setSectionHeaderModels:@[@"Section 1", @"Section 2", @" Section 3"]];
 }

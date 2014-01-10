@@ -26,7 +26,7 @@
         NSDictionary * capitals = [[continents[section] allValues] lastObject];
         for (NSString * country in [capitals allKeys])
         {
-            [[self memoryStorage] addTableItem:[Example exampleWithText:capitals[country]
+            [[self memoryStorage] addItem:[Example exampleWithText:capitals[country]
                                                              andDetails:country]
                                      toSection:section];
         }

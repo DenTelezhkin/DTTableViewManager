@@ -10,6 +10,6 @@
 
 @interface DTTableViewMemoryStorage (UnitTests)
 
--(NSArray *)indexPathArrayForTableItems:(NSArray *)tableItems;
+-(NSArray *)indexPathArrayForItems:(NSArray *)items;
 
 @end

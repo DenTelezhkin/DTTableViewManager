@@ -17,9 +17,6 @@ __block Example * acc6;
 __block Example * testModel;
 __block DTTableViewMemoryStorage * storage;
 
-
-[DTTableViewController setLogging:NO];
-
 describe(@"search in first section", ^{
     
     beforeEach(^{
@@ -36,13 +33,14 @@ describe(@"search in first section", ^{
         model = [DTTableViewController new];
         
         storage = [DTTableViewMemoryStorage storage];
+        storage.loggingEnabled = NO;
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
         
-        [storage addTableItems:@[acc1,acc2,acc3,acc4,acc5,acc6]];
+        [storage addItems:@[acc1,acc2,acc3,acc4,acc5,acc6]];
     });
     
     afterEach(^{
@@ -133,9 +131,9 @@ describe(@"search in multiple sections", ^{
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
         
-        [storage addTableItems:@[acc1,acc2] toSection:0];
-        [storage addTableItems:@[acc3,acc4] toSection:1];
-        [storage addTableItems:@[acc5,acc6] toSection:2];
+        [storage addItems:@[acc1,acc2] toSection:0];
+        [storage addItems:@[acc3,acc4] toSection:1];
+        [storage addItems:@[acc5,acc6] toSection:2];
     });
     
     afterEach(^{
@@ -227,9 +225,9 @@ describe(@"section headers/footers titles", ^{
                                           @"footer2",
                                           @"footer3"]];
         
-        [storage addTableItems:@[acc1,acc2] toSection:0];
-        [storage addTableItems:@[acc3,acc4] toSection:1];
-        [storage addTableItems:@[acc5,acc6] toSection:2];
+        [storage addItems:@[acc1,acc2] toSection:0];
+        [storage addItems:@[acc3,acc4] toSection:1];
+        [storage addItems:@[acc5,acc6] toSection:2];
         
         [model filterTableItemsForSearchString:@"s"];
     });
@@ -287,9 +285,9 @@ describe(@"section headers/footers models", ^{
             
             [storage setSectionHeaderModels:@[acc1,acc3,acc5]];
             [storage setSectionFooterModels:@[acc2,acc4,acc6]];
-            [storage addTableItems:@[acc1,acc2] toSection:0];
-            [storage addTableItems:@[acc3,acc4] toSection:1];
-            [storage addTableItems:@[acc5,acc6] toSection:2];
+            [storage addItems:@[acc1,acc2] toSection:0];
+            [storage addItems:@[acc3,acc4] toSection:1];
+            [storage addItems:@[acc5,acc6] toSection:2];
             
             [model filterTableItemsForSearchString:@"s"];
         }
