@@ -11,4 +11,5 @@
 @interface DTTableViewController (UnitTests)
 
 -(BOOL)verifyTableItem:(id)item atIndexPath:(NSIndexPath *)path;
+-(void)verifySection:(NSArray *)section withSectionNumber:(NSInteger)sectionNumber;
 @end

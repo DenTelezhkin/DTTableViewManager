@@ -41,14 +41,25 @@
 @interface DTTableViewMemoryStorage : DTMemoryStorage <DTTableViewDataStorage>
 
 /**
- Removes all tableItems. This method will call UITableView -reloadData method on completion. This method does not remove sections and section header and footer models.
- */
-- (void)removeAllTableItems;
-
-/**
  Delegate object, that gets notified about data storage updates. If delegate does not respond to optional `DTTableViewDataStorageUpdating` methods, it will not get called.
  */
 @property (nonatomic, weak) id <DTTableViewDataStorageUpdating> delegate;
+
+/**
+ Move table item from `sourceIndexPath` to `destinationIndexPath`.
+ 
+ @param sourceIndexPath source indexPath of item to move.
+ 
+ @param destinationIndexPath Index, where item should be moved.
+ 
+ @warning Moving item at index, that is not valid, won't do anything, except logging into console about failure
+ */
+- (void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
+
+/**
+ Removes all tableItems. This method will call UITableView -reloadData method on completion. This method does not remove sections and section header and footer models.
+ */
+- (void)removeAllTableItems;
 
 ///---------------------------------------
 /// @name Managing sections
@@ -59,14 +70,14 @@
  
  @param headerModels Section header models to use.
  */
--(void)setSectionHeaderModels:(NSArray *)headerModels;
+- (void)setSectionHeaderModels:(NSArray *)headerModels;
 
 /**
  Set footer models for UITableView sections. `DTSectionModel` objects are created automatically, if they don't exist already. Pass nil or empty array to this method to clear all section footer models.
  
  @param footerModels Section footer models to use.
  */
--(void)setSectionFooterModels:(NSArray *)footerModels;
+- (void)setSectionFooterModels:(NSArray *)footerModels;
 
 /**
  Moves a section to a new location in the table view.

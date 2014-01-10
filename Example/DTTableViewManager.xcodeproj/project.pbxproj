@@ -685,6 +685,7 @@
 		E6EA83931615F07F00F8B8C3 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
+				AA1972EC18190CF200B81302 /* DTTableViewManager.h */,
 				AA2EBD8D187EC5170063B98A /* Cell factory */,
 				AA2EBD8C187EC5070063B98A /* Convienience */,
 				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
@@ -693,7 +694,6 @@
 				9591074A18423AC50012B07E /* DTTableViewDataStorage.h */,
 				955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */,
 				955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */,
-				AA1972EC18190CF200B81302 /* DTTableViewManager.h */,
 				AAF8D10318802B6200B20BCF /* DTSectionModel+HeaderFooterModel.h */,
 				AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */,
 			);

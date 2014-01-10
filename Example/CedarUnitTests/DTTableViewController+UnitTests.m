@@ -31,4 +31,30 @@
     return YES;
 }
 
+-(void)raiseInvalidSectionException
+{
+    NSException * exception = [NSException exceptionWithName:@""
+                                                      reason:@"wrong section items"
+                                                    userInfo:nil];
+    [exception raise];
+}
+
+-(void)verifySection:(NSArray *)section withSectionNumber:(NSInteger)sectionNumber
+{
+    for (int itemNumber = 0; itemNumber < [section count]; itemNumber++)
+    {
+        if (![self verifyTableItem:section[itemNumber]
+                            atIndexPath:[NSIndexPath indexPathForItem:itemNumber
+                                                            inSection:sectionNumber]])
+        {
+            [self raiseInvalidSectionException];
+        }
+    }
+    NSInteger itemsInSection = [self.tableView numberOfRowsInSection:sectionNumber];
+    if (itemsInSection!=[section count])
+    {
+        [self raiseInvalidSectionException];
+    }
+}
+
 @end

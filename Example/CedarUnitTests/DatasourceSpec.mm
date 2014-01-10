@@ -347,6 +347,38 @@ describe(@"Datasource spec", ^{
         [[storage itemsInSection:0] count] should equal(0);
     });
     
+    it(@"should move item to another row", ^{
+        [storage addItems:@[acc1,acc2,acc3]];
+
+        [storage moveItemAtIndexPath:[NSIndexPath indexPathForItem:0
+                                                                          inSection:0]
+                                          toIndexPath:[NSIndexPath indexPathForItem:2
+                                                                          inSection:0]];
+        [model verifySection:@[acc2,acc3,acc1] withSectionNumber:0];
+    });
+    
+    it(@"should not crash when moving to bad row", ^{
+        [storage addItems:@[acc1,acc2,acc3]];
+        
+        ^{
+            [storage moveItemAtIndexPath:[NSIndexPath indexPathForItem:0
+                                                             inSection:0]
+                             toIndexPath:[NSIndexPath indexPathForItem:2
+                                                             inSection:1]];
+        } should_not raise_exception();
+    });
+    
+    it(@"should not crash when moving from bad row", ^{
+        [storage addItems:@[acc1,acc2,acc3]];
+        
+        ^{
+            [storage moveItemAtIndexPath:[NSIndexPath indexPathForItem:0
+                                                             inSection:1]
+                             toIndexPath:[NSIndexPath indexPathForItem:0
+                                                             inSection:0]];
+        } should_not raise_exception();
+    });
+    
     it(@"should move sections", ^{
         [storage addItem:acc1];
         [storage addItem:acc2 toSection:1];

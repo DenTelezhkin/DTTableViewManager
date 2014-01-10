@@ -62,18 +62,4 @@
     return UITableViewCellEditingStyleNone;
 }
 
-- (void)tableView:(UITableView *)tableView
-moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    DTTableViewMemoryStorage * storage = [self memoryStorage];
-
-    DTSectionModel * fromSection = [storage sections][sourceIndexPath.section];
-    DTSectionModel * toSection = [storage sections][destinationIndexPath.section];
-    id tableItem = fromSection.objects[sourceIndexPath.row];
-
-    [fromSection.objects removeObjectAtIndex:sourceIndexPath.row];
-    [toSection.objects insertObject:tableItem atIndex:destinationIndexPath.row];
-}
-
 @end

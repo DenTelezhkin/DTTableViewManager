@@ -28,6 +28,9 @@
 
 @interface DTMemoryStorage()
 -(DTSectionModel *)getValidSection:(NSUInteger)sectionNumber;
+@property (nonatomic, retain) DTStorageUpdate * currentUpdate;
+-(void)startUpdate;
+-(void)finishUpdate;
 @end
 
 @implementation DTTableViewMemoryStorage
@@ -63,6 +66,46 @@
     [self.delegate performAnimatedUpdate:^(UITableView * tableView) {
         [tableView reloadData];
     }];
+}
+
+-(void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath
+               toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    [self startUpdate];
+    
+    id item = [self objectAtIndexPath:sourceIndexPath];
+    
+    if (!sourceIndexPath || !item)
+    {
+        if ([self loggingEnabled])
+        {
+            NSLog(@"DTCollectionViewManager: source indexPath should not be nil when moving collection item");
+        }
+        return;
+    }
+    DTSectionModel * sourceSection = [self getValidSection:sourceIndexPath.section];
+    DTSectionModel * destinationSection = [self getValidSection:destinationIndexPath.section];
+    
+    if ([destinationSection.objects count] < destinationIndexPath.row)
+    {
+        if ([self loggingEnabled])
+        {
+            NSLog(@"DTCollectionViewManager: failed moving item to indexPath: %@, only %d items in section",destinationIndexPath,[destinationSection.objects count]);
+        }
+        self.currentUpdate = nil;
+        return;
+    }
+    
+    [self.delegate performAnimatedUpdate:^(UITableView * tableView) {
+        [tableView insertSections:self.currentUpdate.insertedSectionIndexes
+                 withRowAnimation:UITableViewRowAnimationAutomatic];
+        [sourceSection.objects removeObjectAtIndex:sourceIndexPath.row];
+        [destinationSection.objects insertObject:item
+                                         atIndex:destinationIndexPath.row];
+        [tableView moveRowAtIndexPath:sourceIndexPath
+                                toIndexPath:destinationIndexPath];
+    }];
+    self.currentUpdate = nil;
 }
 
 #pragma mark - Section management
