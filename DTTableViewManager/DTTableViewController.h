@@ -64,9 +64,9 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  
  Your data models should conform to `DTModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewController will know, when to show data models.
  
- # DTTableViewCoreDataStorage
+ # DTCoreDataStorage
  
- Subclass DTTableViewCoreDataStorage and implement single method: -searchingStorageForSearchString:inSearchScope:. You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate.
+ Subclass DTCoreDataStorage and implement single method: -searchingStorageForSearchString:inSearchScope:. You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate.
  
  ## Loading headers/footers from NIB
  
