@@ -8,6 +8,8 @@
 #import "MockTableHeaderFooterView.h"
 #import "NiblessTableHeaderFooterView.h"
 #import "DTTableViewMemoryStorage.h"
+#import "DTAbstractCellModel.h"
+#import "CustomCell.h"
 
 using namespace Cedar::Matchers;
 
@@ -652,6 +654,48 @@ describe(@"Foundation class clusters", ^{
         });
        
     });
+    
+    describe(@"DTAbstractCellModel tests", ^{
+        
+        it(@"should accept DTAbstractCellModel with correct cellClass", ^{
+            DTAbstractCellModel * abstractCellModel = [DTAbstractCellModel modelWithCellClass:[ExampleCell class]];
+            [storage addItem:abstractCellModel];
+             
+            UITableViewCell * cell = [model tableView:model.tableView
+                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                                         inSection:0]];
+            
+            [cell class] should equal([ExampleCell class]);
+        });
+        
+        it(@"should raise if cell class is not derived from UITableViewCell", ^{
+            ^{
+                [DTAbstractCellModel modelWithCellClass:[NSString class]];
+            } should raise_exception();
+        });
+        
+        it(@"should invoke configuration block", ^{
+            DTAbstractCellModel * cellModel = [DTAbstractCellModel modelWithCellClass:[CustomCell class]
+                                               configurationBlock:^(UITableViewCell *cell) {
+                                                   CustomCell * customCell = (CustomCell *)cell;
+                                                   customCell.label1 = [[UILabel alloc] init];
+                                                   customCell.label1.text = @"foo";
+                                               }];
+            
+            [storage addItem:cellModel];
+            
+            UITableViewCell * cell = [model tableView:model.tableView
+                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                                         inSection:0]];
+            
+            [cell class] should equal([CustomCell class]);
+            
+            [(CustomCell *)cell label1].text should equal(@"foo");
+        });
+        
+    });
 });
+
+
 
 SPEC_END

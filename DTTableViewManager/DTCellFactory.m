@@ -26,6 +26,7 @@
 #import "DTCellFactory.h"
 #import "DTModelTransfer.h"
 #import "UIView+DTLoading.h"
+#import "DTAbstractCellModel.h"
 
 @interface DTCellFactory ()
 
@@ -203,8 +204,24 @@
 
 #pragma mark - actions
 
-- (UITableViewCell *)cellForModel:(NSObject *)model
+-(UITableViewCell *)cellForAbstractModel:(DTAbstractCellModel *)cellModel
 {
+    UITableViewCell * cell = [[cellModel.cellClass alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:nil];
+    if (cellModel.cellConfigurationBlock)
+    {
+        cellModel.cellConfigurationBlock(cell);
+    }
+    return cell;
+}
+
+- (UITableViewCell *)cellForModel:(id)model
+{
+    if ([model isKindOfClass:[DTAbstractCellModel class]])
+    {
+        return [self cellForAbstractModel:model];
+    }
+    
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
     
     UITableViewCell <DTModelTransfer> *cell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:
