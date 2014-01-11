@@ -201,59 +201,72 @@
                                       forKey:[self reuseIdentifierForClass:modelClass]];
 }
 
-#pragma mark - reuse
-
-- (UITableViewCell *)reuseCellforModel:(id)model
-                        reuseIdentifier:(NSString *)reuseIdentifier
-{
-    UITableViewCell <DTModelTransfer> * cell =  [[self.delegate tableView] dequeueReusableCellWithIdentifier:
-                                                          reuseIdentifier];
-    [cell updateWithModel:model];
-    return cell;
-}
-
-
-//This method should return nil if no class is registered
--(UIView *)reuseHeaderFooterViewForModel:(id)model
-                           reuseIdentifier:(NSString *)reuseIdentifier
-{
-   UIView <DTModelTransfer> * view =
-   [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
-   
-   [view updateWithModel:model];
-   
-   return view;
-}
-
 #pragma mark - actions
 
 - (UITableViewCell *)cellForModel:(NSObject *)model
 {
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
     
-    UITableViewCell *cell = [self reuseCellforModel:model
-                                     reuseIdentifier:reuseIdentifier];
-
-    return cell ? cell : [self cellWithModel:model reuseIdentifier:reuseIdentifier];
+    UITableViewCell <DTModelTransfer> *cell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:
+                                               reuseIdentifier];
+    if (!cell)
+    {
+        cell = [[[self cellClassForModel:model] alloc] initWithStyle:UITableViewCellStyleDefault
+                                                     reuseIdentifier:reuseIdentifier];
+    }
+    
+    if (![cell conformsToProtocol:@protocol(DTModelTransfer)])
+    {
+        [self throwModelProtocolExceptionForClass:[cell class]];
+    }
+    
+    [cell updateWithModel:model];
+    
+    return cell;
 }
 
 -(UIView *)headerViewForModel:(id)model
 {
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
     
-    UIView * view = [self reuseHeaderFooterViewForModel:model
-                                         reuseIdentifier:reuseIdentifier];
-    return view ? view : [self headerViewFromXibForModel:model];
+    UIView <DTModelTransfer> * view =
+    [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+    
+    if (!view)
+    {
+        view = [[self headerClassForModel:model] dt_loadFromXib];
+    }
+    
+    if (![view conformsToProtocol:@protocol(DTModelTransfer)])
+    {
+        [self throwModelProtocolExceptionForClass:[view class]];
+    }
+    
+    [view updateWithModel:model];
+
+    return view;
 }
 
 -(UIView *)footerViewForModel:(id)model
 {
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
     
-    UIView * view = [self reuseHeaderFooterViewForModel:model
-                                         reuseIdentifier:reuseIdentifier];
+    UIView <DTModelTransfer> * view =
+    [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
     
-    return view? view : [self footerViewFromXibForModel:model];
+    if (!view)
+    {
+        view = [[self footerClassForModel:model] dt_loadFromXib];
+    }
+    
+    if (![view conformsToProtocol:@protocol(DTModelTransfer)])
+    {
+        [self throwModelProtocolExceptionForClass:[view class]];
+    }
+    
+    [view updateWithModel:model];
+    
+    return view;
 }
 
 - (Class)cellClassForModel:(NSObject *)model
@@ -302,9 +315,7 @@
     }
 }
 
-#pragma mark -
-
-// http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CocoaFundamentals/CocoaObjects/CocoaObjects.html#//apple_ref/doc/uid/TP40002974-CH4-SW34
+#pragma mark - helpers
 
 -(NSString *)reuseIdentifierForClass:(Class)class
 {
@@ -346,61 +357,6 @@
                         class];
     @throw [NSException exceptionWithName:@"API misuse"
                                    reason:reason userInfo:nil];
-}
-
-- (UITableViewCell *)cellWithModel:(id)model reuseIdentifier:(NSString *)reuseIdentifier
-{
-    Class cellClass = [self cellClassForModel:model];
-    
-    if ([cellClass conformsToProtocol:@protocol(DTModelTransfer)])
-    {
-        UITableViewCell<DTModelTransfer> * cell;
-
-        cell = [(UITableViewCell <DTModelTransfer>  *)[cellClass alloc]
-                                                initWithStyle:UITableViewCellStyleSubtitle
-                                              reuseIdentifier:reuseIdentifier];
-        [cell updateWithModel:model];
-        
-        return cell;
-    }
-    
-    [self throwModelProtocolExceptionForClass:cellClass];
-    return nil;
-}
-
--(UIView *)headerViewFromXibForModel:(id)model
-{
-    Class headerClass = [self headerClassForModel:model];
-    
-    if([headerClass conformsToProtocol:@protocol(DTModelTransfer)])
-    {
-        UIView <DTModelTransfer> * headerView;
-        
-        headerView = [headerClass dt_loadFromXib];
-        [headerView updateWithModel:model];
-        
-        return headerView;
-    }
-    
-    [self throwModelProtocolExceptionForClass:headerClass];
-    return nil;
-}
-
--(UIView *)footerViewFromXibForModel:(id)model
-{
-    Class footerClass = [self footerClassForModel:model];
-    
-    if([footerClass conformsToProtocol:@protocol(DTModelTransfer)])
-    {
-        UIView <DTModelTransfer> * footerView;
-        
-        footerView = [footerClass dt_loadFromXib];
-        [footerView updateWithModel:model];
-        
-        return footerView;
-    }
-    [self throwModelProtocolExceptionForClass:footerClass];
-    return nil;
 }
 
 @end
