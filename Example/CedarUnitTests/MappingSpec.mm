@@ -10,6 +10,7 @@
 #import "DTTableViewMemoryStorage.h"
 #import "DTAbstractCellModel.h"
 #import "CustomCell.h"
+#import "DTDefaultCellModel.h"
 
 using namespace Cedar::Matchers;
 
@@ -693,6 +694,41 @@ describe(@"Foundation class clusters", ^{
             [(CustomCell *)cell label1].text should equal(@"foo");
         });
         
+    });
+    
+    describe(@"DTDefaultCellModel tests", ^{
+       
+        it(@"should accept DTDefaultCellModel with correct parameters", ^{
+           DTDefaultCellModel * cellModel = [DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
+                                                                   reuseIdentifier:nil
+                                                                configurationBlock:nil];
+            [storage addItem:cellModel];
+            
+            UITableViewCell * cell = [model tableView:model.tableView
+                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                                         inSection:0]];
+            
+            [cell class] should equal([UITableViewCell class]);
+        });
+        
+        it(@"should invoke configuration block", ^{
+            DTDefaultCellModel * cellModel = [DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
+                                                                    reuseIdentifier:nil
+                                                                 configurationBlock:^(UITableViewCell *cell) {
+                                                                     cell.textLabel.text = @"foo";
+                                                                     cell.detailTextLabel.text = @"bar";
+                                                                 }];
+            [storage addItem:cellModel];
+            
+            UITableViewCell * cell = [model tableView:model.tableView
+                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                                         inSection:0]];
+            
+            [cell class] should equal([UITableViewCell class]);
+            
+            cell.textLabel.text should equal(@"foo");
+            cell.detailTextLabel.text should equal(@"bar");
+        });
     });
 });
 

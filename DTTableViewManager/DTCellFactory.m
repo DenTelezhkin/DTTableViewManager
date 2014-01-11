@@ -27,6 +27,7 @@
 #import "DTModelTransfer.h"
 #import "UIView+DTLoading.h"
 #import "DTAbstractCellModel.h"
+#import "DTDefaultCellModel.h"
 
 @interface DTCellFactory ()
 
@@ -215,11 +216,27 @@
     return cell;
 }
 
+-(UITableViewCell *)cellForDefaultCellModel:(DTDefaultCellModel *)cellModel
+{
+    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:cellModel.cellStyle
+                                                    reuseIdentifier:cellModel.reuseIdentifier];
+    if (cellModel.cellConfigurationBlock)
+    {
+        cellModel.cellConfigurationBlock(cell);
+    }
+    return cell;
+}
+
 - (UITableViewCell *)cellForModel:(id)model
 {
     if ([model isKindOfClass:[DTAbstractCellModel class]])
     {
         return [self cellForAbstractModel:model];
+    }
+    
+    if ([model isKindOfClass:[DTDefaultCellModel class]])
+    {
+        return [self cellForDefaultCellModel:model];
     }
     
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];

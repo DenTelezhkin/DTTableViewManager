@@ -8,6 +8,7 @@
 
 #import "SearchController.h"
 #import "Example.h"
+#import "DTDefaultCellModel.h"
 
 @implementation SearchController
 
@@ -26,9 +27,13 @@
         NSDictionary * capitals = [[continents[section] allValues] lastObject];
         for (NSString * country in [capitals allKeys])
         {
-            [[self memoryStorage] addItem:[Example exampleWithText:capitals[country]
-                                                             andDetails:country]
-                                     toSection:section];
+            [[self memoryStorage] addItem:[DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
+                                                                 reuseIdentifier:NSStringFromClass([Example class])
+                                                              configurationBlock:^(UITableViewCell *cell) {
+                                                                  cell.textLabel.text = capitals[country];
+                                                                  cell.detailTextLabel.text = country;
+                                                              }]
+                                toSection:section];
         }
         
         [headerTitles addObject:[[continent allKeys] lastObject]];

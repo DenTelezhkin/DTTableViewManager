@@ -5,10 +5,8 @@
 //  Created by Denys Telezhkin on 22.06.13.
 //  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
 //
+#import "DTTableViewManager.h"
 
-#import "BaseExampleController.h"
-
-@interface SearchController : BaseExampleController
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@interface SearchController : DTTableViewController
 
 @end
