@@ -82,6 +82,10 @@
 		95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93F618186A3F003225B7 /* StoryboardController.m */; };
 		95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */; };
 		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
+		9A22771B1882F3C300C16345 /* DTDefaultHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A22771A1882F3C300C16345 /* DTDefaultHeaderFooterModel.m */; };
+		9A22771C1882F3C300C16345 /* DTDefaultHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A22771A1882F3C300C16345 /* DTDefaultHeaderFooterModel.m */; };
+		9A22771F18830A5300C16345 /* DTAbstractHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A22771E18830A5300C16345 /* DTAbstractHeaderFooterModel.m */; };
+		9A22772018830A5300C16345 /* DTAbstractHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A22771E18830A5300C16345 /* DTAbstractHeaderFooterModel.m */; };
 		AA01B52F1848DA49009B3041 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BCE72F1792C7B300526954 /* Default-568h@2x.png */; };
 		AA0F32E418813D170076106C /* DTAbstractCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F32E318813D170076106C /* DTAbstractCellModel.m */; };
 		AA0F32E518813D170076106C /* DTAbstractCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F32E318813D170076106C /* DTAbstractCellModel.m */; };
@@ -221,6 +225,10 @@
 		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
 		95FC93FA18186BB1003225B7 /* PrototypedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrototypedCell.h; path = TableViewFactory/Cells/PrototypedCell.h; sourceTree = "<group>"; };
 		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
+		9A2277191882F3C300C16345 /* DTDefaultHeaderFooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTDefaultHeaderFooterModel.h; path = ../../DTTableViewManager/DTDefaultHeaderFooterModel.h; sourceTree = "<group>"; };
+		9A22771A1882F3C300C16345 /* DTDefaultHeaderFooterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTDefaultHeaderFooterModel.m; path = ../../DTTableViewManager/DTDefaultHeaderFooterModel.m; sourceTree = "<group>"; };
+		9A22771D18830A5300C16345 /* DTAbstractHeaderFooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTAbstractHeaderFooterModel.h; path = ../../DTTableViewManager/DTAbstractHeaderFooterModel.h; sourceTree = "<group>"; };
+		9A22771E18830A5300C16345 /* DTAbstractHeaderFooterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTAbstractHeaderFooterModel.m; path = ../../DTTableViewManager/DTAbstractHeaderFooterModel.m; sourceTree = "<group>"; };
 		AA0F32E218813D170076106C /* DTAbstractCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTAbstractCellModel.h; path = ../../DTTableViewManager/DTAbstractCellModel.h; sourceTree = "<group>"; };
 		AA0F32E318813D170076106C /* DTAbstractCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTAbstractCellModel.m; path = ../../DTTableViewManager/DTAbstractCellModel.m; sourceTree = "<group>"; };
 		AA0F32E6188144FA0076106C /* DTViewConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTViewConfiguration.h; path = ../../DTTableViewManager/DTViewConfiguration.h; sourceTree = "<group>"; };
@@ -473,8 +481,12 @@
 				AA0F32E6188144FA0076106C /* DTViewConfiguration.h */,
 				AA0F32E218813D170076106C /* DTAbstractCellModel.h */,
 				AA0F32E318813D170076106C /* DTAbstractCellModel.m */,
+				9A22771D18830A5300C16345 /* DTAbstractHeaderFooterModel.h */,
+				9A22771E18830A5300C16345 /* DTAbstractHeaderFooterModel.m */,
 				AA0F32E7188193180076106C /* DTDefaultCellModel.h */,
 				AA0F32E8188193180076106C /* DTDefaultCellModel.m */,
+				9A2277191882F3C300C16345 /* DTDefaultHeaderFooterModel.h */,
+				9A22771A1882F3C300C16345 /* DTDefaultHeaderFooterModel.m */,
 			);
 			name = Convienience;
 			sourceTree = "<group>";
@@ -905,6 +917,7 @@
 				E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				AA0F32EA188193180076106C /* DTDefaultCellModel.m in Sources */,
 				AAF8D10618802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m in Sources */,
+				9A22771C1882F3C300C16345 /* DTDefaultHeaderFooterModel.m in Sources */,
 				E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */,
@@ -913,6 +926,7 @@
 				952112D21854A82100063EA8 /* BankCell.m in Sources */,
 				952112D61854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */,
 				E6915662168B382800C5F189 /* DTTableViewController+UnitTests.m in Sources */,
+				9A22772018830A5300C16345 /* DTAbstractHeaderFooterModel.m in Sources */,
 				9545FB9F16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
 				95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
@@ -962,6 +976,7 @@
 				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				952112C51854929300063EA8 /* EventCell.m in Sources */,
+				9A22771F18830A5300C16345 /* DTAbstractHeaderFooterModel.m in Sources */,
 				952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
 				E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */,
@@ -977,6 +992,7 @@
 				952112C1185491E500063EA8 /* Event.m in Sources */,
 				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				95B336681775C01900AF0A57 /* SearchController.m in Sources */,
+				9A22771B1882F3C300C16345 /* DTDefaultHeaderFooterModel.m in Sources */,
 				95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */,
 				952112B91854886400063EA8 /* AppleCoreDataExampleController.m in Sources */,
 				AA0F32E9188193180076106C /* DTDefaultCellModel.m in Sources */,

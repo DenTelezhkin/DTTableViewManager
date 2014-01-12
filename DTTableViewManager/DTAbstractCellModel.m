@@ -11,6 +11,8 @@
 @implementation DTAbstractCellModel
 
 +(instancetype)modelWithCellClass:(Class)cellClass
+                  reuseIdentifier:(NSString *)reuseIdentifier
+               configurationBlock:(DTCellConfigurationBlock)configurationBlock
 {
     if (![cellClass isSubclassOfClass:[UITableViewCell class]])
     {
@@ -20,17 +22,9 @@
                                        reason:reason userInfo:nil];
     }
     
-    DTAbstractCellModel * cellModel = [self new];
-    
-    cellModel.cellClass = cellClass;
-    
-    return cellModel;
-}
-
-+(instancetype)modelWithCellClass:(Class)cellClass configurationBlock:(DTCellConfigurationBlock)configurationBlock
-{
-    DTAbstractCellModel * model = [self modelWithCellClass:cellClass];
-    
+    DTAbstractCellModel * model = [self new];
+    model.cellClass = cellClass;
+    model.reuseIdentifier = reuseIdentifier;
     model.cellConfigurationBlock = configurationBlock;
     
     return model;

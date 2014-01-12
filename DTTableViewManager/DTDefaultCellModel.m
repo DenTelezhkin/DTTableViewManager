@@ -20,4 +20,5 @@
     model.cellConfigurationBlock = configurationBlock;
     return model;
 }
+
 @end

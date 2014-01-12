@@ -11,12 +11,11 @@
 @interface DTAbstractCellModel : NSObject
 
 @property (nonatomic, retain) Class cellClass;
-
+@property (nonatomic, retain) NSString * reuseIdentifier;
 @property (nonatomic, copy) DTCellConfigurationBlock cellConfigurationBlock;
 
-+(instancetype)modelWithCellClass:(Class)cellClass;
-
 +(instancetype)modelWithCellClass:(Class)cellClass
+                  reuseIdentifier:(NSString *)reuseIdentifier
                configurationBlock:(DTCellConfigurationBlock)configurationBlock;
 
 @end

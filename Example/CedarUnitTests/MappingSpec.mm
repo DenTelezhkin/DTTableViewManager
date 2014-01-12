@@ -659,7 +659,9 @@ describe(@"Foundation class clusters", ^{
     describe(@"DTAbstractCellModel tests", ^{
         
         it(@"should accept DTAbstractCellModel with correct cellClass", ^{
-            DTAbstractCellModel * abstractCellModel = [DTAbstractCellModel modelWithCellClass:[ExampleCell class]];
+            DTAbstractCellModel * abstractCellModel = [DTAbstractCellModel modelWithCellClass:[ExampleCell class]
+                                                                              reuseIdentifier:nil
+                                                                           configurationBlock:nil];
             [storage addItem:abstractCellModel];
              
             UITableViewCell * cell = [model tableView:model.tableView
@@ -671,13 +673,14 @@ describe(@"Foundation class clusters", ^{
         
         it(@"should raise if cell class is not derived from UITableViewCell", ^{
             ^{
-                [DTAbstractCellModel modelWithCellClass:[NSString class]];
+                [DTAbstractCellModel modelWithCellClass:[NSString class] reuseIdentifier:nil configurationBlock:nil];
             } should raise_exception();
         });
         
         it(@"should invoke configuration block", ^{
             DTAbstractCellModel * cellModel = [DTAbstractCellModel modelWithCellClass:[CustomCell class]
-                                               configurationBlock:^(UITableViewCell *cell) {
+                                                                      reuseIdentifier:nil
+                                                                   configurationBlock:^(UITableViewCell *cell) {
                                                    CustomCell * customCell = (CustomCell *)cell;
                                                    customCell.label1 = [[UILabel alloc] init];
                                                    customCell.label1.text = @"foo";
