@@ -7,4 +7,4 @@
 //
 
 typedef void (^DTCellConfigurationBlock)(UITableViewCell * cell);
-typedef void (^DTHeaderFooterViewConfigurationBlock)(UITableViewHeaderFooterView * view);
+typedef void (^DTViewConfigurationBlock)(UIView * view);

@@ -14,7 +14,7 @@
 {
     if (![headerFooterClass isSubclassOfClass:[UIView class]])
     {
-        NSString *reason = [NSString stringWithFormat:@"class '%@' is not a subclass of UITableViewCell",
+        NSString *reason = [NSString stringWithFormat:@"class '%@' is not a subclass of UIView",
                             headerFooterClass];
         @throw [NSException exceptionWithName:@"API misuse"
                                        reason:reason userInfo:nil];
@@ -29,7 +29,7 @@
 
 +(instancetype)modelWithHeaderFooterClass:(Class)headerFooterClass
                           reuseIdentifier:(NSString *)reuseIdentifier
-                       configurationBlock:(DTHeaderFooterViewConfigurationBlock)configurationBlock
+                       configurationBlock:(DTViewConfigurationBlock)configurationBlock
 {
     DTAbstractHeaderFooterModel * model = [self modelWithHeaderFooterClass:headerFooterClass];
     model.reuseIdentifier = reuseIdentifier;

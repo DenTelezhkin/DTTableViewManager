@@ -28,6 +28,8 @@
 #import "UIView+DTLoading.h"
 #import "DTAbstractCellModel.h"
 #import "DTDefaultCellModel.h"
+#import "DTAbstractHeaderFooterModel.h"
+#import "DTDefaultHeaderFooterModel.h"
 
 @interface DTCellFactory ()
 
@@ -205,24 +207,24 @@
 
 #pragma mark - actions
 
--(UITableViewCell *)cellForAbstractModel:(DTAbstractCellModel *)cellModel
+-(UITableViewCell *)cellForReuseIdentifier:(NSString *)reuseIdentifier
+                                     style:(UITableViewCellStyle)style
+                                 cellClass:(Class)cellClass
+                        configurationBlock:(DTCellConfigurationBlock)configurationBlock
 {
-    UITableViewCell * cell = [[cellModel.cellClass alloc] initWithStyle:UITableViewCellStyleDefault
-                                          reuseIdentifier:nil];
-    if (cellModel.cellConfigurationBlock)
+    UITableViewCell * cell = nil;
+    
+    if (reuseIdentifier)
     {
-        cellModel.cellConfigurationBlock(cell);
+        cell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:reuseIdentifier];
     }
-    return cell;
-}
-
--(UITableViewCell *)cellForDefaultCellModel:(DTDefaultCellModel *)cellModel
-{
-    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:cellModel.cellStyle
-                                                    reuseIdentifier:cellModel.reuseIdentifier];
-    if (cellModel.cellConfigurationBlock)
+    if (!cell)
     {
-        cellModel.cellConfigurationBlock(cell);
+        cell = [[cellClass alloc] initWithStyle:style reuseIdentifier:reuseIdentifier];
+    }
+    if (configurationBlock)
+    {
+        configurationBlock(cell);
     }
     return cell;
 }
@@ -231,23 +233,26 @@
 {
     if ([model isKindOfClass:[DTAbstractCellModel class]])
     {
-        return [self cellForAbstractModel:model];
+        DTAbstractCellModel * abstractModel = model;
+        return [self cellForReuseIdentifier:abstractModel.reuseIdentifier
+                                      style:UITableViewCellStyleDefault
+                                  cellClass:abstractModel.cellClass
+                         configurationBlock:abstractModel.cellConfigurationBlock];
     }
     
     if ([model isKindOfClass:[DTDefaultCellModel class]])
     {
-        return [self cellForDefaultCellModel:model];
+        DTDefaultCellModel * defaultModel = model;
+        return [self cellForReuseIdentifier:defaultModel.reuseIdentifier
+                                      style:defaultModel.cellStyle
+                                  cellClass:[UITableViewCell class]
+                         configurationBlock:defaultModel.cellConfigurationBlock];
     }
     
-    NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
-    
-    UITableViewCell <DTModelTransfer> *cell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:
-                                               reuseIdentifier];
-    if (!cell)
-    {
-        cell = [[[self cellClassForModel:model] alloc] initWithStyle:UITableViewCellStyleDefault
-                                                     reuseIdentifier:reuseIdentifier];
-    }
+    UITableViewCell <DTModelTransfer> *cell = (id)[self cellForReuseIdentifier:[self reuseIdentifierForClass:[model class]]
+                                                                         style:UITableViewCellStyleDefault
+                                                                     cellClass:[self cellClassForModel:model]
+                                                            configurationBlock:nil];
     
     if (![cell conformsToProtocol:@protocol(DTModelTransfer)])
     {
@@ -259,18 +264,54 @@
     return cell;
 }
 
--(UIView *)headerViewForModel:(id)model
+-(UIView *)headerFooterViewForReuseIdentifier:(NSString *)reuseIdentifier
+                                    viewClass:(Class)viewClass
+                           configurationBlock:(DTViewConfigurationBlock)configurationBlock
 {
-    NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
+    UIView * view = nil;
     
-    UIView <DTModelTransfer> * view =
-    [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
-    
+    if (reuseIdentifier)
+    {
+        view = [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+    }
+    if (!view && (viewClass == [UITableViewHeaderFooterView class]))
+    {
+        view = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:reuseIdentifier];
+    }
     if (!view)
     {
-        view = [[self headerClassForModel:model] dt_loadFromXib];
+        view = [viewClass dt_loadFromXib];
+    }
+    if (configurationBlock)
+    {
+        configurationBlock(view);
+    }
+    return view;
+}
+
+-(UIView *)headerViewForModel:(id)model
+{
+    if ([model isKindOfClass:[DTAbstractHeaderFooterModel class]])
+    {
+        DTAbstractHeaderFooterModel * headerFooter = model;
+        return [self headerFooterViewForReuseIdentifier:headerFooter.reuseIdentifier
+                                              viewClass:headerFooter.headerFooterClass
+                                     configurationBlock:headerFooter.viewConfigurationBlock];
+    }
+    if ([model isKindOfClass:[DTDefaultHeaderFooterModel class]])
+    {
+        DTDefaultHeaderFooterModel * headerFooter = model;
+        return [self headerFooterViewForReuseIdentifier:headerFooter.reuseIdentifier
+                                              viewClass:[UITableViewHeaderFooterView class]
+                                     configurationBlock:headerFooter.viewConfigurationBlock];
     }
     
+    NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
+    
+    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:reuseIdentifier
+                                                                         viewClass:[self headerClassForModel:model]
+                                                                configurationBlock:nil];
+
     if (![view conformsToProtocol:@protocol(DTModelTransfer)])
     {
         [self throwModelProtocolExceptionForClass:[view class]];
@@ -283,15 +324,26 @@
 
 -(UIView *)footerViewForModel:(id)model
 {
+    if ([model isKindOfClass:[DTAbstractHeaderFooterModel class]])
+    {
+        DTAbstractHeaderFooterModel * headerFooter = model;
+        return [self headerFooterViewForReuseIdentifier:headerFooter.reuseIdentifier
+                                              viewClass:headerFooter.headerFooterClass
+                                     configurationBlock:headerFooter.viewConfigurationBlock];
+    }
+    if ([model isKindOfClass:[DTDefaultHeaderFooterModel class]])
+    {
+        DTDefaultHeaderFooterModel * headerFooter = model;
+        return [self headerFooterViewForReuseIdentifier:headerFooter.reuseIdentifier
+                                              viewClass:[UITableViewHeaderFooterView class]
+                                     configurationBlock:headerFooter.viewConfigurationBlock];
+    }
+    
     NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
     
-    UIView <DTModelTransfer> * view =
-    [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
-    
-    if (!view)
-    {
-        view = [[self footerClassForModel:model] dt_loadFromXib];
-    }
+    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:reuseIdentifier
+                                                                         viewClass:[self footerClassForModel:model]
+                                                                configurationBlock:nil];
     
     if (![view conformsToProtocol:@protocol(DTModelTransfer)])
     {

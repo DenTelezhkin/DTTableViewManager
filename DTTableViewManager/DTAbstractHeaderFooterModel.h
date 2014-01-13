@@ -12,11 +12,11 @@
 
 @property (nonatomic, retain) Class headerFooterClass;
 @property (nonatomic, retain) NSString * reuseIdentifier;
-@property (nonatomic, copy) DTHeaderFooterViewConfigurationBlock viewConfigurationBlock;
+@property (nonatomic, copy) DTViewConfigurationBlock viewConfigurationBlock;
 
 +(instancetype)modelWithHeaderFooterClass:(Class)headerFooterClass
                           reuseIdentifier:(NSString *)reuseIdentifier
-                       configurationBlock:(DTHeaderFooterViewConfigurationBlock)configurationBlock;
+                       configurationBlock:(DTViewConfigurationBlock)configurationBlock;
 
 
 @end
