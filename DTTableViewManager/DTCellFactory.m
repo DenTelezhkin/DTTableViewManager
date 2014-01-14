@@ -26,9 +26,7 @@
 #import "DTCellFactory.h"
 #import "DTModelTransfer.h"
 #import "UIView+DTLoading.h"
-#import "DTAbstractCellModel.h"
 #import "DTDefaultCellModel.h"
-#import "DTAbstractHeaderFooterModel.h"
 #import "DTDefaultHeaderFooterModel.h"
 
 @interface DTCellFactory ()
@@ -231,15 +229,6 @@
 
 - (UITableViewCell *)cellForModel:(id)model
 {
-    if ([model isKindOfClass:[DTAbstractCellModel class]])
-    {
-        DTAbstractCellModel * abstractModel = model;
-        return [self cellForReuseIdentifier:abstractModel.reuseIdentifier
-                                      style:UITableViewCellStyleDefault
-                                  cellClass:abstractModel.cellClass
-                         configurationBlock:abstractModel.cellConfigurationBlock];
-    }
-    
     if ([model isKindOfClass:[DTDefaultCellModel class]])
     {
         DTDefaultCellModel * defaultModel = model;
@@ -291,13 +280,6 @@
 
 -(UIView *)headerViewForModel:(id)model
 {
-    if ([model isKindOfClass:[DTAbstractHeaderFooterModel class]])
-    {
-        DTAbstractHeaderFooterModel * headerFooter = model;
-        return [self headerFooterViewForReuseIdentifier:headerFooter.reuseIdentifier
-                                              viewClass:headerFooter.headerFooterClass
-                                     configurationBlock:headerFooter.viewConfigurationBlock];
-    }
     if ([model isKindOfClass:[DTDefaultHeaderFooterModel class]])
     {
         DTDefaultHeaderFooterModel * headerFooter = model;
@@ -324,13 +306,6 @@
 
 -(UIView *)footerViewForModel:(id)model
 {
-    if ([model isKindOfClass:[DTAbstractHeaderFooterModel class]])
-    {
-        DTAbstractHeaderFooterModel * headerFooter = model;
-        return [self headerFooterViewForReuseIdentifier:headerFooter.reuseIdentifier
-                                              viewClass:headerFooter.headerFooterClass
-                                     configurationBlock:headerFooter.viewConfigurationBlock];
-    }
     if ([model isKindOfClass:[DTDefaultHeaderFooterModel class]])
     {
         DTDefaultHeaderFooterModel * headerFooter = model;
