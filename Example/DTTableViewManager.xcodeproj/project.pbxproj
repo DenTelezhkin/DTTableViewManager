@@ -38,14 +38,6 @@
 		955EB19F18412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */; };
 		955EB1A018412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */; };
 		956C39BB1854BA6400FC1A5B /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956C39BA1854BA6400FC1A5B /* BankCell.xib */; };
-		95834EE516FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
-		95834EE616FF820000409396 /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EE416FF820000409396 /* CustomHeaderView.m */; };
-		95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EE716FF821900409396 /* CustomHeaderView.xib */; };
-		95834EE916FF821900409396 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EE716FF821900409396 /* CustomHeaderView.xib */; };
-		95834EED16FF830A00409396 /* CustomHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EEB16FF830A00409396 /* CustomHeaderController.m */; };
-		95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95834EEB16FF830A00409396 /* CustomHeaderController.m */; };
-		95834EEF16FF830A00409396 /* CustomHeaderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EEC16FF830A00409396 /* CustomHeaderController.xib */; };
-		95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95834EEC16FF830A00409396 /* CustomHeaderController.xib */; };
 		958941FF1750B9C8007CEB5E /* MockTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */; };
 		958942011750B9E3007CEB5E /* MockTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942001750B9E3007CEB5E /* MockTableHeaderView.xib */; };
 		958942041750BAAA007CEB5E /* NiblessTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */; };
@@ -109,10 +101,6 @@
 		E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */; };
 		E6402FB3162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */; };
 		E6402FB4162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */; };
-		E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FB7162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m */; };
-		E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FB7162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m */; };
-		E6402FBB162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB8162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib */; };
-		E6402FBC162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB8162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib */; };
 		E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */; };
 		E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */; };
 		E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
@@ -169,12 +157,6 @@
 		955EB19D18412BD500EAE855 /* DTTableViewMemoryStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewMemoryStorage.h; path = ../../DTTableViewManager/DTTableViewMemoryStorage.h; sourceTree = "<group>"; };
 		955EB19E18412BD500EAE855 /* DTTableViewMemoryStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewMemoryStorage.m; path = ../../DTTableViewManager/DTTableViewMemoryStorage.m; sourceTree = "<group>"; };
 		956C39BA1854BA6400FC1A5B /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = TableViewFactory/Cells/BankCell.xib; sourceTree = "<group>"; };
-		95834EE316FF820000409396 /* CustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderView.h; path = TableViewFactory/Cells/CustomHeaderView.h; sourceTree = "<group>"; };
-		95834EE416FF820000409396 /* CustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderView.m; path = TableViewFactory/Cells/CustomHeaderView.m; sourceTree = "<group>"; };
-		95834EE716FF821900409396 /* CustomHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderView.xib; path = TableViewFactory/Cells/CustomHeaderView.xib; sourceTree = "<group>"; };
-		95834EEA16FF830A00409396 /* CustomHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderController.h; path = ExampleControllers/CustomHeaderController.h; sourceTree = "<group>"; };
-		95834EEB16FF830A00409396 /* CustomHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderController.m; path = ExampleControllers/CustomHeaderController.m; sourceTree = "<group>"; };
-		95834EEC16FF830A00409396 /* CustomHeaderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderController.xib; path = ExampleControllers/CustomHeaderController.xib; sourceTree = "<group>"; };
 		958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockTableHeaderView.h; path = "mocks/Header:footer mocks/MockTableHeaderView.h"; sourceTree = "<group>"; };
 		958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockTableHeaderView.m; path = "mocks/Header:footer mocks/MockTableHeaderView.m"; sourceTree = "<group>"; };
 		958942001750B9E3007CEB5E /* MockTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MockTableHeaderView.xib; path = "mocks/Header:footer mocks/MockTableHeaderView.xib"; sourceTree = "<group>"; };
@@ -248,9 +230,6 @@
 		E6402FAE162D8B4F00DDE2B3 /* CustomCellsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCellsTableViewController.h; path = ExampleControllers/CustomCellsTableViewController.h; sourceTree = "<group>"; };
 		E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCellsTableViewController.m; path = ExampleControllers/CustomCellsTableViewController.m; sourceTree = "<group>"; };
 		E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCellsTableViewController.xib; path = ExampleControllers/CustomCellsTableViewController.xib; sourceTree = "<group>"; };
-		E6402FB6162D8F1D00DDE2B3 /* InsertReplaceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertReplaceTableViewController.h; path = ExampleControllers/InsertReplaceTableViewController.h; sourceTree = "<group>"; };
-		E6402FB7162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InsertReplaceTableViewController.m; path = ExampleControllers/InsertReplaceTableViewController.m; sourceTree = "<group>"; };
-		E6402FB8162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InsertReplaceTableViewController.xib; path = ExampleControllers/InsertReplaceTableViewController.xib; sourceTree = "<group>"; };
 		E6402FC2162D9A9500DDE2B3 /* MoveSectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveSectionTableViewController.h; path = ExampleControllers/MoveSectionTableViewController.h; sourceTree = "<group>"; };
 		E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoveSectionTableViewController.m; path = ExampleControllers/MoveSectionTableViewController.m; sourceTree = "<group>"; };
 		E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoveSectionTableViewController.xib; path = ExampleControllers/MoveSectionTableViewController.xib; sourceTree = "<group>"; };
@@ -346,9 +325,6 @@
 				95BF2B9C16FF72580050D0A7 /* CustomHeaderFooterController.h */,
 				95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */,
 				95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */,
-				95834EEA16FF830A00409396 /* CustomHeaderController.h */,
-				95834EEB16FF830A00409396 /* CustomHeaderController.m */,
-				95834EEC16FF830A00409396 /* CustomHeaderController.xib */,
 			);
 			name = "Custom headers/footers";
 			sourceTree = "<group>";
@@ -520,9 +496,6 @@
 				E666ACE9162C02C800A2DBF2 /* CustomCell.xib */,
 				E666ACED162C034000A2DBF2 /* CustomCell.h */,
 				E666ACEE162C034000A2DBF2 /* CustomCell.m */,
-				95834EE316FF820000409396 /* CustomHeaderView.h */,
-				95834EE416FF820000409396 /* CustomHeaderView.m */,
-				95834EE716FF821900409396 /* CustomHeaderView.xib */,
 				95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */,
 				95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */,
 				95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */,
@@ -547,7 +520,6 @@
 				952112B51854881D00063EA8 /* Apple CoreData example */,
 				95B336641775BFF300AF0A57 /* Search */,
 				E6402FC1162D9A7800DDE2B3 /* MoveSection */,
-				E6402FB5162D8EF800DDE2B3 /* InsertReplace */,
 				E6402FA6162D8B1200DDE2B3 /* CustomCells */,
 				9545FBA016FF61A00042A1A3 /* Custom headers/footers */,
 				E6402F90162D80FE00DDE2B3 /* Reorder */,
@@ -587,16 +559,6 @@
 				E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */,
 			);
 			name = CustomCells;
-			sourceTree = "<group>";
-		};
-		E6402FB5162D8EF800DDE2B3 /* InsertReplace */ = {
-			isa = PBXGroup;
-			children = (
-				E6402FB6162D8F1D00DDE2B3 /* InsertReplaceTableViewController.h */,
-				E6402FB7162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m */,
-				E6402FB8162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib */,
-			);
-			name = InsertReplace;
 			sourceTree = "<group>";
 		};
 		E6402FC1162D9A7800DDE2B3 /* MoveSection */ = {
@@ -792,16 +754,13 @@
 				E6402F8D162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
 				E6402F97162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
 				E6402FB4162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
-				E6402FBC162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */,
 				E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
 				95A3B4B216FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */,
 				AA01B52F1848DA49009B3041 /* Default-568h@2x.png in Resources */,
 				95A3B4B816FF649100F5897E /* textured_paper.png in Resources */,
 				95A3B4BB16FF64AE00F5897E /* mochaGrunge.png in Resources */,
 				95BF2BA216FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
-				95834EE916FF821900409396 /* CustomHeaderView.xib in Resources */,
 				952112CE1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */,
-				95834EF016FF830A00409396 /* CustomHeaderController.xib in Resources */,
 				950659F9174C0219008AB32D /* CellWithNib.xib in Resources */,
 				958942011750B9E3007CEB5E /* MockTableHeaderView.xib in Resources */,
 				952112BC1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */,
@@ -821,15 +780,12 @@
 				E6402F8C162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
 				E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
 				E6402FB3162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
-				E6402FBB162D8F1D00DDE2B3 /* InsertReplaceTableViewController.xib in Resources */,
 				E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
 				95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */,
 				95A3B4B716FF649100F5897E /* textured_paper.png in Resources */,
 				9591074E18535AE40012B07E /* Banks.json in Resources */,
 				95A3B4BA16FF64AE00F5897E /* mochaGrunge.png in Resources */,
 				95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
-				95834EE816FF821900409396 /* CustomHeaderView.xib in Resources */,
-				95834EEF16FF830A00409396 /* CustomHeaderController.xib in Resources */,
 				95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */,
 				95B336691775C01900AF0A57 /* SearchController.xib in Resources */,
 				95B3366B1776D8CB00AF0A57 /* Capitals.plist in Resources */,
@@ -906,7 +862,6 @@
 				AA0F32EA188193180076106C /* DTDefaultCellModel.m in Sources */,
 				AAF8D10618802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m in Sources */,
 				9A22771C1882F3C300C16345 /* DTDefaultHeaderFooterModel.m in Sources */,
-				E6402FBA162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				E60CA01D1684AFEF00F4147E /* DTTableViewController.m in Sources */,
@@ -917,9 +872,7 @@
 				9545FB9F16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
 				95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
-				95834EE616FF820000409396 /* CustomHeaderView.m in Sources */,
 				952112C61854929300063EA8 /* EventCell.m in Sources */,
-				95834EEE16FF830A00409396 /* CustomHeaderController.m in Sources */,
 				950659EF1749030D008AB32D /* BaseExampleController.m in Sources */,
 				952112CC1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
 				950659F4174C01EF008AB32D /* CellWithoutNib.m in Sources */,
@@ -959,7 +912,6 @@
 				952112D11854A82100063EA8 /* BankCell.m in Sources */,
 				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
-				E6402FB9162D8F1D00DDE2B3 /* InsertReplaceTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				952112C51854929300063EA8 /* EventCell.m in Sources */,
 				952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
@@ -968,8 +920,6 @@
 				9545FB9E16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
 				95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
-				95834EE516FF820000409396 /* CustomHeaderView.m in Sources */,
-				95834EED16FF830A00409396 /* CustomHeaderController.m in Sources */,
 				955EB19F18412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */,
 				95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */,
 				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,

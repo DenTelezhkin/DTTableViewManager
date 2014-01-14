@@ -10,10 +10,8 @@
 #import "AddRemoveTableViewController.h"
 #import "ReorderTableViewController.h"
 #import "CustomCellsTableViewController.h"
-#import "InsertReplaceTableViewController.h"
 #import "MoveSectionTableViewController.h"
 #import "CustomHeaderFooterController.h"
-#import "CustomHeaderController.h"
 #import "SearchController.h"
 #import "ControllerModel.h"
 #import "ControllerCell.h"
@@ -45,23 +43,19 @@
                                               andTitle:@"Reorder cells"]];
     [storage addItem:[ControllerModel modelWithClass:[CustomCellsTableViewController class]
                                               andTitle:@"Custom cells from NIB"]];
-    [storage addItem:[ControllerModel modelWithClass:[CustomHeaderController class]
-                                              andTitle:@"Custom header/footer"]];
     
     [storage addItem:[ControllerModel modelWithClass:[CustomHeaderFooterController class]
-                                              andTitle:@"UITableViewHeaderFooterView"]];
-    
-    [storage addItem:[ControllerModel modelWithClass:[InsertReplaceTableViewController class]
-                                              andTitle:@"Insert/replace cells"]];
+                                              andTitle:@"Custom headers/footers"]];
+
     [storage addItem:[ControllerModel modelWithClass:[MoveSectionTableViewController class]
                                               andTitle:@"Move section"]];
     
     [storage addItem:[ControllerModel modelWithClass:[SearchController class]
                                               andTitle:@"Search"]];
     [storage addItem:[ControllerModel modelWithClass:[StoryboardController class]
-                                              andTitle:@"Storyboard"]];
+                                              andTitle:@"Storyboard prototypes"]];
     [storage addItem:[ControllerModel modelWithClass:[AppleCoreDataExampleController class]
-                                                 andTitle:@"Simple CoreData"]];
+                                                 andTitle:@"CoreData add/remove"]];
     [storage addItem:[ControllerModel modelWithClass:[BanksCoreDataViewController class]
                                                  andTitle:@"CoreData search"]];
 }

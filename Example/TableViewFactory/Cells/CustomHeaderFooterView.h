@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "DTModelTransfer.h"
-#import "CustomHeaderView.h"
+
+typedef enum {
+    kHeaderKind = 1,
+    kFooterKind = 2
+} kHeaderFooterViewKind;
+
 
 @interface CustomHeaderFooterView : UITableViewHeaderFooterView
                                     <DTModelTransfer>
