@@ -28,7 +28,7 @@
 @implementation DTDefaultHeaderFooterModel
 
 +(instancetype)modelWithReuseIdentifier:(NSString *)reuseIdentifier
-                     configurationBlock:(DTViewConfigurationBlock)configurationBlock
+                     configurationBlock:(DTHeaderFooterViewConfigurationBlock)configurationBlock
 {
     DTDefaultHeaderFooterModel * model = [self new];
     model.reuseIdentifier = reuseIdentifier;

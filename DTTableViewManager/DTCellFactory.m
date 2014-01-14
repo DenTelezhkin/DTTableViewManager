@@ -255,7 +255,7 @@
 
 -(UIView *)headerFooterViewForReuseIdentifier:(NSString *)reuseIdentifier
                                     viewClass:(Class)viewClass
-                           configurationBlock:(DTViewConfigurationBlock)configurationBlock
+                           configurationBlock:(DTHeaderFooterViewConfigurationBlock)configurationBlock
 {
     UIView * view = nil;
     
@@ -273,7 +273,7 @@
     }
     if (configurationBlock)
     {
-        configurationBlock(view);
+        configurationBlock((UITableViewHeaderFooterView *)view);
     }
     return view;
 }

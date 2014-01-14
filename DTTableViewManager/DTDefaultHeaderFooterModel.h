@@ -38,7 +38,7 @@
 /**
  Configuration block, that will be executed on UITableViewHeaderFooterView after it will be created/reused.
  */
-@property (nonatomic, copy) DTViewConfigurationBlock viewConfigurationBlock;
+@property (nonatomic, copy) DTHeaderFooterViewConfigurationBlock viewConfigurationBlock;
 
 /**
  Convenience method, allowing to create `DTDefaultHeaderFooterModel` instance.
@@ -50,6 +50,6 @@
  @return `DTDefaultHeaderFooterModel` instance.
  */
 +(instancetype)modelWithReuseIdentifier:(NSString *)reuseIdentifier
-                     configurationBlock:(DTViewConfigurationBlock)configurationBlock;
+                     configurationBlock:(DTHeaderFooterViewConfigurationBlock)configurationBlock;
 
 @end

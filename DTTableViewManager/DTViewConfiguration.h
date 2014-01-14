@@ -24,4 +24,4 @@
 // THE SOFTWARE.
 
 typedef void (^DTCellConfigurationBlock)(UITableViewCell * cell);
-typedef void (^DTViewConfigurationBlock)(UIView * view);
+typedef void (^DTHeaderFooterViewConfigurationBlock)(UITableViewHeaderFooterView * view);
