@@ -35,17 +35,13 @@ The best way to understand, what we are trying to achieve here, is to take a loo
 
 Lets imagine view controller, that manages table view presentation on itself. 
 
-<p align="center" >
-  <img src="without.png" alt="without" title="without.png">
-</p>
+![](without.png)
 
 Clearly, there are way to many connections, that your view controller needs to handle. And we only show table view stuff, however most likely your view controller is also doing other things, which will make this graph much more complicated. 
 
 Solution for this - separate datasource from view controller. DTTableViewManager does just that. Here's how picture looks, when we use it:
 
-<p align="center" >
-  <img src="with.png" alt="with" title="with.png">
-</p>
+![](with.png)
 
 In the end, view controller is left with following stuff:
 
