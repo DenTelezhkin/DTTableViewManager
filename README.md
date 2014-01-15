@@ -39,7 +39,7 @@ Lets imagine view controller, that manages table view presentation on itself.
   <img src="without.png" alt="without" title="without.png">
 </p>
 
-Clearly, there are way to many connections, that your view controller needs to handle. And we only show table view stuff, however most likely your view controller is also doing other things, which will make this graph even more complicated. 
+Clearly, there are way to many connections, that your view controller needs to handle. And we only show table view stuff, however most likely your view controller is also doing other things, which will make this graph much more complicated. 
 
 Solution for this - separate datasource from view controller. DTTableViewManager does just that. Here's how picture looks, when we use it:
 
@@ -72,8 +72,6 @@ Okay, enough talking, let's dive into code. Simplest way for view controller is 
 This will also register nibs with `Cell`, `HeaderView` and `FooterView` name, if any of them exist. 
 
 If you use storyboards and prototype cells, you will need to set reuseIdentifier for corresponding cell in storyboard.
-
-[Note](https://github.com/DenHeadless/DTTableViewManager/wiki/Foundation-classes-as-data-models-for-DTTableViewManager) on using Foundation classes as data models.
 
 # Managing table items
 
@@ -140,11 +138,29 @@ Subclass DTCoreDataStorage and implement single method
 
 You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate. Take a look at example application, that does just that.
 	
-## Notes on implementation
+## Convenience classes and methods
 
-* This approach requires every table view cell to have it's data model object. 
-* Every cell, header or footer view after creation gets called with method updateWithModel: and receives data model to represent. 
-* Any datasource/delegate method can be overridden in your controller.  
+Most of the time you will have data model classes and UITableViewCell subclasses, that display models. However, sometimes you would want something more simple. For example, headers and footers might only need NSString as data model. You can use several Foundation types for that purpose. 
+
+[Note on using Foundation types as data models](https://github.com/DenHeadless/DTTableViewManager/wiki/Foundation-classes-as-data-models-for-DTTableViewManager)
+
+Sometimes you may also want to use predefined UITableViewCell styles for simple UITableViewCell. You can do that by creating `DTDefaultCellModel`:
+
+```objective-c
++(instancetype)modelWithCellStyle:(UITableViewCellStyle)style
+                  reuseIdentifier:(NSString *)reuseIdentifier
+               configurationBlock:(DTCellConfigurationBlock)configurationBlock
+                   searchingBlock:(DTModelSearchingBlock)searchBlock;
+```
+
+Similarly, there's also `DTDefaultHeaderFooterModel`:
+
+```objective-c
++(instancetype)modelWithReuseIdentifier:(NSString *)reuseIdentifier
+                     configurationBlock:(DTHeaderFooterViewConfigurationBlock)configurationBlock;
+```
+
+Just add default models to memory storage, no mapping required for those.
 
 ## Requirements
 
