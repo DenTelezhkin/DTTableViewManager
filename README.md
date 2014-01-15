@@ -52,7 +52,7 @@ In the end, view controller is left with following stuff:
 * Register mapping between data model class and cell class.
 * Populate data storage with data models
 
-Okay, enough talking, let's dive into code. Simplest way for view controller is to subclass DTTableViewController, set it's tableView property, delegate, datasource and off you go!
+Okay, enough talking, let's dive into code. Simplest way for view controller is to subclass `DTTableViewController`, set it's tableView property, delegate, datasource and off you go!
 
 ## Mapping
 
@@ -69,87 +69,73 @@ Okay, enough talking, let's dive into code. Simplest way for view controller is 
 [self registerFooterClass:[FooterView class] forModelClass:[Model class]];
 ```
 
-This will also register nibs with "Cell", "HeaderView" and "FooterView" name, if any of them exist. 
+This will also register nibs with `Cell`, `HeaderView` and `FooterView` name, if any of them exist. 
 
-If you use storyboards and prototype cells/headers/footers, you will need to set reuseIdentifier for corresponding cell in storyboard.
+If you use storyboards and prototype cells, you will need to set reuseIdentifier for corresponding cell in storyboard.
 
 [Note](https://github.com/DenHeadless/DTTableViewManager/wiki/Foundation-classes-as-data-models-for-DTTableViewManager) on using Foundation classes as data models.
 
 # Managing table items
 
-Starting with 2.0, DTTableViewManager supports custom data storage objects to provide data models. It also provides two default data storage classes, that can be used. Let's start with DTTableViewMemoryStorage, that is used by default.
+Starting with 2.1, storage classes for DTTableViewManager have been moved to [separate repo](https://github.com/DenHeadless/DTModelStorage). Two data storage classes are provided - memory and core data storage. Let's start with `DTTableViewMemoryStorage`, that is used by default.
 
 ### Memory storage
 
-DTTableViewMemoryStorage encapsulates storage of table view data models in memory. It's basically NSArray of DTTableViewSectionModel objects, which contain array of objects for current section, section header and footer model.
+`DTMemoryStorage` encapsulates storage of table view data models in memory. It's basically NSArray of `DTSectionModel` objects, which contain array of objects for current section, section header and footer model.
 
-To work with memory storage, you will need to get it's instance from your DTTableViewController subclass.
+To work with memory storage, you will need to get it's instance from your `DTTableViewController` subclass.
 
 ```objective-c
-DTTableViewMemoryStorage * storage = [self memoryStorage];
+- (DTTableViewMemoryStorage *)memoryStorage;
 ```
 
-##### Adding items 
+**You can take a look at all provided methods for manipulating items here: [DTMemoryStorage methods](https://github.com/DenHeadless/DTModelStorage/blob/master/README.md#adding-items)**
+
+In most cases, adding items to memory storage is as simple as calling:
 
 ```objective-c
-[storage addTableItem:model];
-[storage addTableItem:model toSection:0];
-
-[storage addTableItems:@[model1,model2]];
-[storage addTableItems:@[model1,model2] toSection:0];
-
-[storage insertTableItem:model toIndexPath:indexPath];
+- (void)addItem:(NSObject *)item;
+- (void)addItems:(NSArray *)items toSection:(NSInteger)sectionNumber;
 ```
 
-##### Remove / replace
+##### DTTableViewMemoryStorage
+
+`DTTableViewMemoryStorage` is a subclass of `DTMemoryStorage`, that adds adds several methods, that are specific to UITableView. Two most relevant of them are 
 
 ```objective-c
-[storage removeTableItem:model];
-[storage removeTableItems:@[model1,model2]];
-
-[storage replaceTableItem:model1 withTableItem:model2];
-```	
-
-##### Managing sections 
-
-```objective-c
-[storage setSectionHeaderModels:@[@"A",@"B",@"C"]];
-[storage setSectionFooterModels:@[@"A",@"B",@"C"]];
-
-[storage moveSection:1 toSection:2];
-[storage deleteSections:[NSIndexSet indexSetWithIndex:1]];
+- (void)setSectionHeaderModels:(NSArray *)headerModels;
+- (void)setSectionFooterModels:(NSArray *)footerModels;
 ```
-
-#### Retrieving items
-
-```objective-c
-id tableItem = [storage tableItemAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-
-NSIndexPath * indexPath = [storage indexPathOfTableItem:model];
-
-NSArray * tableItemsInSection = [storage tableItemsInSection:0];
-```
+These methods allow setting header and footer models for multiple sections in single method call.
 
 ##### Search
 	
 Set UISearchBar's delegate property to your `DTTableViewController` subclass. 	
-Data models should conform to `DTTableViewModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewManager will know, when to show data models.
+Data models should conform to `DTModelSearching` protocol. You need to implement method
+
+```objective-c
+- (BOOL)shouldShowInSearchResultsForSearchString:(NSString*)searchString
+                                    inScopeIndex:(int)scope;
+```
+
+on your data model, this way DTTableViewManager will know, when to show data models.
 
 Searching data storage will be created automatically for current search, and it will be used as a datasource for UITableView.
 	
 ### Core Data storage
 
-DTTableViewCoreDataStorage is meant to be used with NSFetchedResultsController. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it's changes. All you need to do to display CoreData models in your UITableView, is create DTTableVIewCoreDataStorage object and set it on your DTTableViewController subclass.
+`DTCoreDataStorage` is meant to be used with NSFetchedResultsController. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it's changes. All you need to do to display CoreData models in your UITableView, is create DTCoreDataStorage object and set it on your DTTableViewController subclass.
 
 ```objective-c
-self.dataStorage = [DTTableViewCoreDataStorage storageWithFetchResultsController:controller];
+self.dataStorage = [DTCoreDataStorage storageWithFetchResultsController:controller];
 ```	
 
 ##### Search
 
-Subclass DTTableViewCoreDataStorage and implement single method 
+Subclass DTCoreDataStorage and implement single method 
 ```objective-c
-searchingStorageForSearchString:inSearchScope:
+- (instancetype)searchingStorageForSearchString:(NSString *)searchString
+                                  inSearchScope:(NSInteger)searchScope;
 ```	
 
 You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate. Take a look at example application, that does just that.
@@ -169,7 +155,7 @@ You will need to provide a storage with NSFetchedResultsController and appropria
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 2.0.0'
+	pod 'DTTableViewManager', '~> 2.1.0'
 
 ## Documentation
 
