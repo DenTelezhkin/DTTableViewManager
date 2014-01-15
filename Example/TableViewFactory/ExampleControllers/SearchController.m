@@ -27,12 +27,22 @@
         NSDictionary * capitals = [[continents[section] allValues] lastObject];
         for (NSString * country in [capitals allKeys])
         {
-            [[self memoryStorage] addItem:[DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
-                                                                 reuseIdentifier:NSStringFromClass([Example class])
-                                                              configurationBlock:^(UITableViewCell *cell) {
-                                                                  cell.textLabel.text = capitals[country];
-                                                                  cell.detailTextLabel.text = country;
-                                                              }]
+            DTDefaultCellModel * model =[DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
+                                                               reuseIdentifier:@"CountryCell"
+                                                            configurationBlock:^(UITableViewCell *cell) {
+                                                                cell.textLabel.text = capitals[country];
+                                                                cell.detailTextLabel.text = country;
+                                                            }
+                                                                searchingBlock:^BOOL(NSString *searchString, NSInteger searchScope) {
+                                                                if ([capitals[country] rangeOfString:searchString].location == NSNotFound &&
+                                                                    [country rangeOfString:searchString].location == NSNotFound)
+                                                                {
+                                                                    return NO;
+                                                                }
+                                                                
+                                                                return YES;
+                                                            }];
+            [[self memoryStorage] addItem:model
                                 toSection:section];
         }
         

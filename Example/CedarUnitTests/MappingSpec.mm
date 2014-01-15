@@ -661,7 +661,8 @@ describe(@"Foundation class clusters", ^{
         it(@"should accept DTDefaultCellModel with correct parameters", ^{
            DTDefaultCellModel * cellModel = [DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
                                                                    reuseIdentifier:nil
-                                                                configurationBlock:nil];
+                                                                configurationBlock:nil
+                                                                    searchingBlock:nil];
             [storage addItem:cellModel];
             
             UITableViewCell * cell = [model tableView:model.tableView
@@ -677,7 +678,8 @@ describe(@"Foundation class clusters", ^{
                                                                  configurationBlock:^(UITableViewCell *cell) {
                                                                      cell.textLabel.text = @"foo";
                                                                      cell.detailTextLabel.text = @"bar";
-                                                                 }];
+                                                                 }
+                                                                     searchingBlock:nil];
             [storage addItem:cellModel];
             
             UITableViewCell * cell = [model tableView:model.tableView

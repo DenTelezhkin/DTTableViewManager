@@ -24,11 +24,14 @@
 // THE SOFTWARE.
 
 #import "DTViewConfiguration.h"
+#import "DTModelSearching.h"
+
+typedef BOOL (^DTModelSearchingBlock)(NSString * searchString, NSInteger searchScope);
 
 /**
  `DTDefaultCellModel` is a custom model class, that allows to use UITableViewCells without subclassing.
  */
-@interface DTDefaultCellModel : NSObject
+@interface DTDefaultCellModel : NSObject <DTModelSearching>
 
 /**
  Reuse identifier for cell, that will be used for current cell model.
@@ -46,18 +49,26 @@
 @property (nonatomic, copy) DTCellConfigurationBlock cellConfigurationBlock;
 
 /**
+ Block, that determines, whether model should appear in search results, given searchString and searchScope.
+ */
+@property (nonatomic, copy) DTModelSearchingBlock searchBlock;
+
+/**
  Convenience method, allowing to create `DTDefaultCellModel` instance.
  
- @param style UITableViewCellStyle to use for cell
+ @param style UITableViewCellStyle to use for cell.
  
- @param reuseIdentifier reuse identifier to use for cell
+ @param reuseIdentifier reuse identifier to use for cell.
  
- @param configurationBlock block to execute when cell is created
+ @param configurationBlock block to execute when cell is created.
+ 
+ @param searchBlock Block, that determines whether model should appear in search results.
  
  @return `DTDefaultCellModel` instance.
  */
 +(instancetype)modelWithCellStyle:(UITableViewCellStyle)style
                   reuseIdentifier:(NSString *)reuseIdentifier
-               configurationBlock:(DTCellConfigurationBlock)configurationBlock;
+               configurationBlock:(DTCellConfigurationBlock)configurationBlock
+                   searchingBlock:(DTModelSearchingBlock)searchBlock;
 
 @end
