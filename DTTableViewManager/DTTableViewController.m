@@ -83,6 +83,14 @@
     _reloadRowAnimation = UITableViewRowAnimationAutomatic;
 }
 
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+}
+
 #pragma mark - getters, setters
 
 -(DTTableViewMemoryStorage *)memoryStorage
@@ -382,8 +390,6 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     [toSection.objects insertObject:tableItem atIndex:destinationIndexPath.row];
 }
 
-#pragma mark - private
-
 #pragma  mark - UISearchBarDelegate
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -395,6 +401,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 {
     [self filterTableItemsForSearchString:searchBar.text inScope:selectedScope];
 }
+
+#pragma mark - DTStorageUpdate delegate methods
 
 -(void)storageDidPerformUpdate:(DTStorageUpdate *)update
 {
