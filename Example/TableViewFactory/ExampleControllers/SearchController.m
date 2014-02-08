@@ -18,6 +18,10 @@
     
     [[self navigationController] navigationBar].translucent = NO;
     
+//    [self.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope) {
+//        
+//    } forModelClass:[DTDefaultCellModel class]];
+    
     NSString * path = [[NSBundle mainBundle] pathForResource:@"Capitals" ofType:@"plist"];
     NSArray * continents = [NSArray arrayWithContentsOfFile:path];
     NSMutableArray * headerTitles = [NSMutableArray array];
@@ -38,6 +42,8 @@
     [[self memoryStorage] setSectionHeaderModels:headerTitles];
 }
 
+#warning searching?
+
 -(DTDefaultCellModel *)cellModelForCapital:(NSString *)capital inCountry:(NSString *)country
 {
     return [DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
@@ -45,7 +51,7 @@
                                configurationBlock:^(UITableViewCell *cell) {
                                                     cell.textLabel.text = capital;
                                                     cell.detailTextLabel.text = country;
-                                                }
+                                                }/*
                                    searchingBlock:^BOOL(NSString *searchString, NSInteger searchScope) {
                                                        if ([capital rangeOfString:searchString].location == NSNotFound &&
                                                            [country rangeOfString:searchString].location == NSNotFound)
@@ -53,7 +59,7 @@
                                                            return NO;
                                                        }
                                                        return YES;
-                                                   }];
+                                                   }*/];
 }
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar

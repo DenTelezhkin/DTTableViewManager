@@ -33,6 +33,7 @@ describe(@"search in first section", ^{
         model = [DTTableViewController new];
         
         storage = [DTTableViewMemoryStorage storage];
+        [storage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         storage.loggingEnabled = NO;
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
@@ -125,6 +126,7 @@ describe(@"search in multiple sections", ^{
         
         model = [DTTableViewController new];
         storage = [DTTableViewMemoryStorage storage];
+        [storage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
@@ -209,6 +211,7 @@ describe(@"section headers/footers titles", ^{
         
         model = [DTTableViewController new];
         storage = [DTTableViewMemoryStorage storage];
+        [storage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.sectionHeaderStyle = DTTableViewSectionStyleTitle;
@@ -269,6 +272,7 @@ describe(@"section headers/footers models", ^{
         
         model = [DTTableViewController new];
         storage = [DTTableViewMemoryStorage storage];
+        [storage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         model.sectionHeaderStyle = DTTableViewSectionStyleView;
         model.sectionFooterStyle = DTTableViewSectionStyleView;
         model.dataStorage = storage;

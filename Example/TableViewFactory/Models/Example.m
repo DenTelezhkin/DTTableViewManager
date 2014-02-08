@@ -18,16 +18,21 @@
     return example;
 }
 
--(BOOL)shouldShowInSearchResultsForSearchString:(NSString *)searchString
-                                   inScopeIndex:(int)scope
++(DTModelSearchingBlock)exampleSearchingBlock
 {
-    if ([self.text rangeOfString:searchString].location == NSNotFound &&
-        [self.details rangeOfString:searchString].location == NSNotFound)
+    DTModelSearchingBlock block = ^BOOL(id model,NSString * searchString, NSInteger searchScope)
     {
-        return NO;
-    }
+        Example * example  = model;
+        if ([example.text rangeOfString:searchString].location == NSNotFound &&
+            [example.details rangeOfString:searchString].location == NSNotFound)
+        {
+            return NO;
+        }
+        
+        return YES;
+    };
     
-    return YES;
+    return [block copy];
 }
 
 @end

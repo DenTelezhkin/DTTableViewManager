@@ -30,24 +30,12 @@
 +(instancetype)modelWithCellStyle:(UITableViewCellStyle)style
                   reuseIdentifier:(NSString *)reuseIdentifier
                configurationBlock:(DTCellConfigurationBlock)configurationBlock
-                   searchingBlock:(DTModelSearchingBlock)searchBlock
 {
     DTDefaultCellModel * model = [self new];
     model.cellStyle = style;
     model.reuseIdentifier = reuseIdentifier;
     model.cellConfigurationBlock = configurationBlock;
-    model.searchBlock = searchBlock;
     return model;
-}
-
--(BOOL)shouldShowInSearchResultsForSearchString:(NSString *)searchString
-                                   inScopeIndex:(int)scope
-{
-    if (self.searchBlock)
-    {
-        return self.searchBlock(searchString,scope);
-    }
-    else return NO;
 }
 
 @end
