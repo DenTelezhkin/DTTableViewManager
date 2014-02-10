@@ -20,7 +20,7 @@
 
 +(DTModelSearchingBlock)exampleSearchingBlock
 {
-    DTModelSearchingBlock block = ^BOOL(id model,NSString * searchString, NSInteger searchScope)
+    DTModelSearchingBlock block = ^BOOL(id model,NSString * searchString, NSInteger searchScope, DTSectionModel * section)
     {
         Example * example  = model;
         if ([example.text rangeOfString:searchString].location == NSNotFound &&
@@ -28,7 +28,6 @@
         {
             return NO;
         }
-        
         return YES;
     };
     

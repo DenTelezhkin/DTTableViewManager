@@ -8,7 +8,7 @@
 
 #import "SearchController.h"
 #import "Example.h"
-#import "DTDefaultCellModel.h"
+#import "ExampleCell.h"
 
 @implementation SearchController
 
@@ -18,9 +18,7 @@
     
     [[self navigationController] navigationBar].translucent = NO;
     
-//    [self.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope) {
-//        
-//    } forModelClass:[DTDefaultCellModel class]];
+    [self registerCellClass:[ExampleCell class] forModelClass:[Example class]];
     
     NSString * path = [[NSBundle mainBundle] pathForResource:@"Capitals" ofType:@"plist"];
     NSArray * continents = [NSArray arrayWithContentsOfFile:path];
@@ -31,35 +29,30 @@
         NSDictionary * capitals = [[continents[section] allValues] lastObject];
         for (NSString * country in [capitals allKeys])
         {
-            DTDefaultCellModel * model = [self cellModelForCapital:capitals[country]
-                                                         inCountry:country];
-            [[self memoryStorage] addItem:model
+            Example * example = [Example exampleWithText:capitals[country]
+                                              andDetails:country];
+            [[self memoryStorage] addItem:example
                                 toSection:section];
         }
         
         [headerTitles addObject:[[continent allKeys] lastObject]];
     }
     [[self memoryStorage] setSectionHeaderModels:headerTitles];
-}
-
-#warning searching?
-
--(DTDefaultCellModel *)cellModelForCapital:(NSString *)capital inCountry:(NSString *)country
-{
-    return [DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
-                                  reuseIdentifier:@"CountryCell"
-                               configurationBlock:^(UITableViewCell *cell) {
-                                                    cell.textLabel.text = capital;
-                                                    cell.detailTextLabel.text = country;
-                                                }/*
-                                   searchingBlock:^BOOL(NSString *searchString, NSInteger searchScope) {
-                                                       if ([capital rangeOfString:searchString].location == NSNotFound &&
-                                                           [country rangeOfString:searchString].location == NSNotFound)
-                                                       {
-                                                           return NO;
-                                                       }
-                                                       return YES;
-                                                   }*/];
+    
+    /*
+     We use country, capital and the continent name as the search criteria here.
+     */
+    
+    [self.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope, DTSectionModel *section) {
+        Example * example  = model;
+        if ([example.text rangeOfString:searchString].location == NSNotFound &&
+            [example.details rangeOfString:searchString].location == NSNotFound &&
+            [(NSString *)section.headerModel rangeOfString:searchString].location == NSNotFound)
+        {
+            return NO;
+        }
+        return YES;
+    } forModelClass:[Example class]];
 }
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
