@@ -50,7 +50,7 @@
             [self raiseInvalidSectionException];
         }
     }
-    NSInteger itemsInSection = [self.tableView numberOfRowsInSection:sectionNumber];
+    NSInteger itemsInSection = [self tableView:self.tableView numberOfRowsInSection:sectionNumber];
     if (itemsInSection!=[section count])
     {
         [self raiseInvalidSectionException];

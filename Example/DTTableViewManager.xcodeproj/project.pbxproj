@@ -79,6 +79,7 @@
 		AA01B52F1848DA49009B3041 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BCE72F1792C7B300526954 /* Default-568h@2x.png */; };
 		AA0F32E9188193180076106C /* DTDefaultCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F32E8188193180076106C /* DTDefaultCellModel.m */; };
 		AA0F32EA188193180076106C /* DTDefaultCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F32E8188193180076106C /* DTDefaultCellModel.m */; };
+		AA87853918AA716D00D138D5 /* StringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA87853818AA716D00D138D5 /* StringCell.m */; };
 		AAF8D10518802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */; };
 		AAF8D10618802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */; };
 		D7742E7F970147C5BA8372FB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431B3D74923D4C9F93AE7D9D /* libPods.a */; };
@@ -209,6 +210,8 @@
 		AA0F32E7188193180076106C /* DTDefaultCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTDefaultCellModel.h; path = ../../DTTableViewManager/DTDefaultCellModel.h; sourceTree = "<group>"; };
 		AA0F32E8188193180076106C /* DTDefaultCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTDefaultCellModel.m; path = ../../DTTableViewManager/DTDefaultCellModel.m; sourceTree = "<group>"; };
 		AA1972EC18190CF200B81302 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
+		AA87853718AA716D00D138D5 /* StringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringCell.h; path = mocks/StringCell.h; sourceTree = "<group>"; };
+		AA87853818AA716D00D138D5 /* StringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringCell.m; path = mocks/StringCell.m; sourceTree = "<group>"; };
 		AAB09060184C845A008B7665 /* DTTableViewMemoryStorage+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTTableViewMemoryStorage+UnitTests.h"; sourceTree = "<group>"; };
 		AAF8D10318802B6200B20BCF /* DTSectionModel+HeaderFooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DTSectionModel+HeaderFooterModel.h"; path = "../../DTTableViewManager/DTSectionModel+HeaderFooterModel.h"; sourceTree = "<group>"; };
 		AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DTSectionModel+HeaderFooterModel.m"; path = "../../DTTableViewManager/DTSectionModel+HeaderFooterModel.m"; sourceTree = "<group>"; };
@@ -399,6 +402,8 @@
 				950659F8174C0219008AB32D /* CellWithNib.xib */,
 				950659FA174C027F008AB32D /* BaseMockCell.h */,
 				950659FB174C027F008AB32D /* BaseMockCell.m */,
+				AA87853718AA716D00D138D5 /* StringCell.h */,
+				AA87853818AA716D00D138D5 /* StringCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -854,6 +859,7 @@
 				E6CB97FA161B2E9C00A7E936 /* ExampleCell.m in Sources */,
 				E666ACF0162C034000A2DBF2 /* CustomCell.m in Sources */,
 				952112BE18548F9800063EA8 /* Bank.m in Sources */,
+				AA87853918AA716D00D138D5 /* StringCell.m in Sources */,
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				9591074C18424AAC0012B07E /* MemoryStorageSpecs.mm in Sources */,
 				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,

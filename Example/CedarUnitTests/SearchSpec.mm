@@ -2,6 +2,7 @@
 #import "MockTableHeaderFooterView.h"
 #import "DTTableViewMemoryStorage.h"
 #import "DTTableViewController+UnitTests.h"
+#import "StringCell.h"
 
 using namespace Cedar::Matchers;
 
@@ -15,7 +16,6 @@ __block Example * acc4;
 __block Example * acc5;
 __block Example * acc6;
 __block Example * testModel;
-__block DTTableViewMemoryStorage * storage;
 
 describe(@"search in first section", ^{
     
@@ -32,16 +32,13 @@ describe(@"search in first section", ^{
         
         model = [DTTableViewController new];
         
-        storage = [DTTableViewMemoryStorage storage];
-        [storage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
-        storage.loggingEnabled = NO;
-        model.dataStorage = storage;
+        [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
+        model.memoryStorage.loggingEnabled = NO;
+
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
-        model.tableView.delegate = model;
-        model.tableView.dataSource = model;
         
-        [storage addItems:@[acc1,acc2,acc3,acc4,acc5,acc6]];
+        [model.memoryStorage addItems:@[acc1,acc2,acc3,acc4,acc5,acc6]];
     });
     
     afterEach(^{
@@ -54,9 +51,8 @@ describe(@"search in first section", ^{
         [model filterTableItemsForSearchString:@"ss"];
         
         [model tableView:model.tableView numberOfRowsInSection:0] should equal(2);
-        
-        [model verifyTableItem:acc6 atIndexPath:[NSIndexPath indexPathForRow:1
-                                                                   inSection:0]];
+
+        [model verifySection:@[acc4,acc6] withSectionNumber:0];
     });
     
     it(@"should find none items for iva", ^{
@@ -70,8 +66,7 @@ describe(@"search in first section", ^{
         
         expect([model tableView:model.tableView numberOfRowsInSection:0]).to(equal(1));
         
-        [model verifyTableItem:acc4 atIndexPath:[NSIndexPath indexPathForRow:0
-                                                                   inSection:0]];
+        [model verifySection:@[acc4] withSectionNumber:0];
     });
     
     it(@"should find 1 item for white space", ^{
@@ -125,17 +120,13 @@ describe(@"search in multiple sections", ^{
         acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
         
         model = [DTTableViewController new];
-        storage = [DTTableViewMemoryStorage storage];
-        [storage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
-        model.dataStorage = storage;
+        [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
-        model.tableView.delegate = model;
-        model.tableView.dataSource = model;
         
-        [storage addItems:@[acc1,acc2] toSection:0];
-        [storage addItems:@[acc3,acc4] toSection:1];
-        [storage addItems:@[acc5,acc6] toSection:2];
+        [model.memoryStorage addItems:@[acc1,acc2] toSection:0];
+        [model.memoryStorage addItems:@[acc3,acc4] toSection:1];
+        [model.memoryStorage addItems:@[acc5,acc6] toSection:2];
     });
     
     afterEach(^{
@@ -210,27 +201,24 @@ describe(@"section headers/footers titles", ^{
         testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
         model = [DTTableViewController new];
-        storage = [DTTableViewMemoryStorage storage];
-        [storage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
-        model.dataStorage = storage;
+        [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
+
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         model.sectionHeaderStyle = DTTableViewSectionStyleTitle;
         model.sectionFooterStyle = DTTableViewSectionStyleTitle;
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
-        model.tableView.delegate = model;
-        model.tableView.dataSource = model;
         
-        [storage setSectionHeaderModels:@[@"header1",
+        [model.memoryStorage setSectionHeaderModels:@[@"header1",
                                           @"header2",
                                           @"header3"]];
 
-        [storage setSectionFooterModels:@[@"footer1",
+        [model.memoryStorage setSectionFooterModels:@[@"footer1",
                                           @"footer2",
                                           @"footer3"]];
         
-        [storage addItems:@[acc1,acc2] toSection:0];
-        [storage addItems:@[acc3,acc4] toSection:1];
-        [storage addItems:@[acc5,acc6] toSection:2];
+        [model.memoryStorage addItems:@[acc1,acc2] toSection:0];
+        [model.memoryStorage addItems:@[acc3,acc4] toSection:1];
+        [model.memoryStorage addItems:@[acc5,acc6] toSection:2];
         
         [model filterTableItemsForSearchString:@"s"];
     });
@@ -271,15 +259,11 @@ describe(@"section headers/footers models", ^{
         testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
         model = [DTTableViewController new];
-        storage = [DTTableViewMemoryStorage storage];
-        [storage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
+        [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         model.sectionHeaderStyle = DTTableViewSectionStyleView;
         model.sectionFooterStyle = DTTableViewSectionStyleView;
-        model.dataStorage = storage;
         model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
-        model.tableView.delegate = model;
-        model.tableView.dataSource = model;
         
         if ([UITableViewHeaderFooterView class]) { // iOS 6 and higher test
             [model registerHeaderClass:[MockTableHeaderFooterView class]
@@ -287,11 +271,11 @@ describe(@"section headers/footers models", ^{
             [model registerFooterClass:[MockTableHeaderFooterView class]
                          forModelClass:[Example class]];
             
-            [storage setSectionHeaderModels:@[acc1,acc3,acc5]];
-            [storage setSectionFooterModels:@[acc2,acc4,acc6]];
-            [storage addItems:@[acc1,acc2] toSection:0];
-            [storage addItems:@[acc3,acc4] toSection:1];
-            [storage addItems:@[acc5,acc6] toSection:2];
+            [model.memoryStorage setSectionHeaderModels:@[acc1,acc3,acc5]];
+            [model.memoryStorage setSectionFooterModels:@[acc2,acc4,acc6]];
+            [model.memoryStorage addItems:@[acc1,acc2] toSection:0];
+            [model.memoryStorage addItems:@[acc3,acc4] toSection:1];
+            [model.memoryStorage addItems:@[acc5,acc6] toSection:2];
             
             [model filterTableItemsForSearchString:@"s"];
         }
@@ -321,6 +305,66 @@ describe(@"section headers/footers models", ^{
             view = [model tableView:model.tableView viewForFooterInSection:1];
             expect([(id <DTModelTransfer>)view model]).to(equal(acc6));
         }
+    });
+    
+});
+
+describe(@"Foundation models searching", ^{
+    
+    beforeEach(^{
+        
+        [UIView setAnimationsEnabled:NO];
+        
+        model = [DTTableViewController new];
+        
+        model.memoryStorage.loggingEnabled = NO;
+        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+
+    });
+    
+    afterEach(^{
+        [model release];
+        
+        [UIView setAnimationsEnabled:YES];
+    });
+    
+    describe(@"NSString spec", ^{
+       
+        beforeEach(^{
+           [model.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope, DTSectionModel *section) {
+               return [model rangeOfString:searchString].location !=NSNotFound;
+           } forModelClass:[NSString class]];
+
+            [model registerCellClass:[StringCell class] forModelClass:[NSString class]];
+        });
+        
+        it(@"should filter NSString models", ^{
+            [model.memoryStorage addItems:@[@"foo",@"bar",@"cat"]];
+            
+            [model filterTableItemsForSearchString:@"a"];
+
+            [model verifySection:@[@"bar",@"cat"] withSectionNumber:0];
+        });
+    });
+    
+    describe(@"NSMutableString spec", ^{
+        
+        beforeEach(^{
+            [model.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope, DTSectionModel *section) {
+                return [model rangeOfString:searchString].location !=NSNotFound;
+            } forModelClass:[NSMutableString class]];
+            
+            [model registerCellClass:[StringCell class] forModelClass:[NSMutableString class]];
+        });
+        
+        it(@"should filter NSString models", ^{
+
+            [model.memoryStorage addItems:@[@"foo",@"bar",@"cat"]];
+            
+            [model filterTableItemsForSearchString:@"a"];
+
+            [model verifySection:@[@"bar",@"cat"] withSectionNumber:0];
+        });
     });
     
 });
