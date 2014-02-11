@@ -105,14 +105,19 @@ These methods allow setting header and footer models for multiple sections in si
 ##### Search
 	
 Set UISearchBar's delegate property to your `DTTableViewController` subclass. 	
-Data models should conform to `DTModelSearching` protocol. You need to implement method
 
+Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
 ```objective-c
-- (BOOL)shouldShowInSearchResultsForSearchString:(NSString*)searchString
-                                    inScopeIndex:(int)scope;
+[self.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope, DTSectionModel *section) 
+	{
+        Example * example  = model;
+        if ([example.text rangeOfString:searchString].location == NSNotFound)
+        {
+            return NO;
+        }
+        return YES;
+    } forModelClass:[Example class]];
 ```
-
-on your data model, this way DTTableViewManager will know, when to show data models.
 
 Searching data storage will be created automatically for current search, and it will be used as a datasource for UITableView.
 	
@@ -145,8 +150,7 @@ Sometimes you may also want to use predefined UITableViewCell styles for simple 
 ```objective-c
 +(instancetype)modelWithCellStyle:(UITableViewCellStyle)style
                   reuseIdentifier:(NSString *)reuseIdentifier
-               configurationBlock:(DTCellConfigurationBlock)configurationBlock
-                   searchingBlock:(DTModelSearchingBlock)searchBlock;
+               configurationBlock:(DTCellConfigurationBlock)configurationBlock;
 ```
 
 Similarly, there's also `DTDefaultHeaderFooterModel`:
@@ -160,14 +164,13 @@ Just add default models to memory storage, no mapping required for those.
 
 ## Requirements
 
-* iOS 6.0
-* XCode 5
+* iOS 6.0 and later
         
 ## Installation
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 2.1.0'
+	pod 'DTTableViewManager', '~> 2.2.0'
 
 ## Documentation
 
