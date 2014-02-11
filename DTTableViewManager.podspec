@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '6.0'
   s.ios.frameworks = 'UIKit', 'Foundation'
   s.platform = :ios,'6.0'
-  s.dependency 'DTModelStorage' , '0.4.0'
+  s.dependency 'DTModelStorage' , '0.4.1'
 end
