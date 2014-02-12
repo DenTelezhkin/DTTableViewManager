@@ -118,7 +118,7 @@
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
-    NSParameterAssert(cellClass);
+    NSParameterAssert([cellClass isSubclassOfClass:[UITableViewCell class]]);
     NSParameterAssert(modelClass);
     
     [self.cellFactory registerCellClass:cellClass forModelClass:modelClass];
