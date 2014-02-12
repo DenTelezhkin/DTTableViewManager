@@ -64,17 +64,9 @@
 
 -(void)checkClassForModelTransferProtocolSupport:(Class)class
 {
-    if (![class conformsToProtocol:@protocol(DTModelTransfer)])
-    {
-        NSString * reason = [NSString stringWithFormat:@"class %@ should conform\n"
-                             "to DTModelTransfer protocol",
-                             NSStringFromClass(class)];
-        NSException * exc =
-        [NSException exceptionWithName:@"DTTableViewController API exception"
-                                reason:reason
-                              userInfo:nil];
-        [exc raise];
-    }
+    NSString * description = [NSString stringWithFormat:@"class %@ should conform to DTModelTransfer protocol",
+                              NSStringFromClass(class)];
+    NSAssert([class conformsToProtocol:@protocol(DTModelTransfer)], description);
 }
 
 -(BOOL)nibExistsWIthNibName:(NSString *)nibName
@@ -86,17 +78,6 @@
         return YES;
     }
     return NO;
-}
-
--(void)throwCannotFindNibExceptionForNibName:(NSString *)nibName
-{
-    NSString * reason = [NSString stringWithFormat:@"cannot find nib with name: %@",
-                         nibName];
-    NSException * exc =
-    [NSException exceptionWithName:@"DTTableViewController API exception"
-                            reason:reason
-                          userInfo:nil];
-    [exc raise];
 }
 
 #pragma mark - class mapping
@@ -131,10 +112,7 @@
 {
     [self checkClassForModelTransferProtocolSupport:cellClass];
     
-    if (![self nibExistsWIthNibName:nibName])
-    {
-        [self throwCannotFindNibExceptionForNibName:nibName];
-    }
+    NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
          forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
@@ -155,10 +133,7 @@
 {
     [self checkClassForModelTransferProtocolSupport:headerClass];
     
-    if (![self nibExistsWIthNibName:nibName])
-    {
-        [self throwCannotFindNibExceptionForNibName:nibName];
-    }
+    NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     if ([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
@@ -182,10 +157,7 @@
 {
     [self checkClassForModelTransferProtocolSupport:footerClass];
     
-    if (![self nibExistsWIthNibName:nibName])
-    {
-        [self throwCannotFindNibExceptionForNibName:nibName];
-    }
+    NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     if ([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
@@ -243,10 +215,7 @@
                                                                      cellClass:[self cellClassForModel:model]
                                                             configurationBlock:nil];
     
-    if (![cell conformsToProtocol:@protocol(DTModelTransfer)])
-    {
-        [self throwModelProtocolExceptionForClass:[cell class]];
-    }
+    NSAssert([cell conformsToProtocol:@protocol(DTModelTransfer)], @"cell %@ should conform to DTModelTransfer protocol",cell);
     
     [cell updateWithModel:model];
     
@@ -294,10 +263,7 @@
                                                                          viewClass:[self headerClassForModel:model]
                                                                 configurationBlock:nil];
 
-    if (![view conformsToProtocol:@protocol(DTModelTransfer)])
-    {
-        [self throwModelProtocolExceptionForClass:[view class]];
-    }
+    NSAssert([view conformsToProtocol:@protocol(DTModelTransfer)], @"view %@ should conform to DTModelTransfer protocol",view);
     
     [view updateWithModel:model];
 
@@ -320,10 +286,7 @@
                                                                          viewClass:[self footerClassForModel:model]
                                                                 configurationBlock:nil];
     
-    if (![view conformsToProtocol:@protocol(DTModelTransfer)])
-    {
-        [self throwModelProtocolExceptionForClass:[view class]];
-    }
+    NSAssert([view conformsToProtocol:@protocol(DTModelTransfer)], @"view %@ should conform to DTModelTransfer protocol",view);
     
     [view updateWithModel:model];
     
@@ -333,47 +296,34 @@
 - (Class)cellClassForModel:(NSObject *)model
 {
     NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
-    if ([self.cellMappingsDictionary objectForKey:modelClassName])
-    {
-        return NSClassFromString([self.cellMappingsDictionary objectForKey:modelClassName]);
-    }
-    else
-    {
-        NSString *reason = [NSString stringWithFormat:@"DTCellFactory does not have cell mapping for %@ class",
-                            [model class]];
-        @throw [NSException exceptionWithName:@"API misuse"
-                                       reason:reason userInfo:nil];
-    }
+    
+    NSString * cellClassString = [self.cellMappingsDictionary objectForKey:modelClassName];
+    
+    NSAssert(cellClassString, @"DTCellFactory does not have cell mapping for model class: %@",[model class]);
+    
+    return NSClassFromString(cellClassString);
 }
 
 -(Class)headerClassForModel:(id)model
 {
     NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
-    if ([self.headerMappingsDictionary objectForKey:modelClassName])
-    {
-        return NSClassFromString([self.headerMappingsDictionary objectForKey:modelClassName]);
-    }
-    else {
-        NSString *reason = [NSString stringWithFormat:@"DTCellFactory does not have header mapping for %@ class",
-                            [model class]];
-        @throw [NSException exceptionWithName:@"API misuse"
-                                       reason:reason userInfo:nil];
-    }
+    
+    NSString * headerClassString = [self.headerMappingsDictionary objectForKey:modelClassName];
+    
+    NSAssert(headerClassString, @"DTCellFactory does not have header mapping for model class: %@",[model class]);
+    
+    return NSClassFromString(headerClassString);
 }
 
 -(Class)footerClassForModel:(id)model
 {
     NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
-    if ([self.footerMappingsDictionary objectForKey:modelClassName])
-    {
-        return NSClassFromString([self.footerMappingsDictionary objectForKey:modelClassName]);
-    }
-    else {
-        NSString *reason = [NSString stringWithFormat:@"DTCellFactory does not have footer mapping for %@ class",
-                            [model class]];
-        @throw [NSException exceptionWithName:@"API misuse"
-                                       reason:reason userInfo:nil];
-    }
+    
+    NSString * footerClassString = [self.footerMappingsDictionary objectForKey:modelClassName];
+    
+    NSAssert(footerClassString, @"DTCellFactory does not have footer mapping for model class: %@",[model class]);
+    
+    return NSClassFromString(footerClassString);
 }
 
 #pragma mark - helpers
@@ -410,14 +360,6 @@
         return @"NSDate";
     }
     return classString;
-}
-
--(void)throwModelProtocolExceptionForClass:(Class)class
-{
-    NSString *reason = [NSString stringWithFormat:@"class '%@' does not conform to DTTableViewModelProtocol",
-                        class];
-    @throw [NSException exceptionWithName:@"API misuse"
-                                   reason:reason userInfo:nil];
 }
 
 @end

@@ -118,16 +118,25 @@
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
+    NSParameterAssert(cellClass);
+    NSParameterAssert(modelClass);
+    
     [self.cellFactory registerCellClass:cellClass forModelClass:modelClass];
 }
 
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
 {
+    NSParameterAssert(headerClass);
+    NSParameterAssert(modelClass);
+    
     [self.cellFactory registerHeaderClass:headerClass forModelClass:modelClass];
 }
 
 -(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
 {
+    NSParameterAssert(footerClass);
+    NSParameterAssert(modelClass);
+    
     [self.cellFactory registerFooterClass:footerClass forModelClass:modelClass];
 }
 
