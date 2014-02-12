@@ -62,13 +62,6 @@
 
 #pragma mark - check for features
 
--(void)checkClassForModelTransferProtocolSupport:(Class)class
-{
-    NSString * description = [NSString stringWithFormat:@"class %@ should conform to DTModelTransfer protocol",
-                              NSStringFromClass(class)];
-    NSAssert([class conformsToProtocol:@protocol(DTModelTransfer)], description);
-}
-
 -(BOOL)nibExistsWIthNibName:(NSString *)nibName
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:nibName
@@ -84,8 +77,6 @@
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
-    [self checkClassForModelTransferProtocolSupport:cellClass];
-    
     UITableViewCell * tableCell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:[self reuseIdentifierForClass:modelClass]];
     
     if (!tableCell)
@@ -110,8 +101,6 @@
            forCellClass:(Class)cellClass
              modelClass:(Class)modelClass
 {
-    [self checkClassForModelTransferProtocolSupport:cellClass];
-    
     NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
@@ -131,8 +120,6 @@
 -(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass
              modelClass:(Class)modelClass
 {
-    [self checkClassForModelTransferProtocolSupport:headerClass];
-    
     NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     if ([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
@@ -155,8 +142,6 @@
 -(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass
              modelClass:(Class)modelClass
 {
-    [self checkClassForModelTransferProtocolSupport:footerClass];
-    
     NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     if ([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
@@ -214,9 +199,6 @@
                                                                          style:UITableViewCellStyleDefault
                                                                      cellClass:[self cellClassForModel:model]
                                                             configurationBlock:nil];
-    
-    NSAssert([cell conformsToProtocol:@protocol(DTModelTransfer)], @"cell %@ should conform to DTModelTransfer protocol",cell);
-    
     [cell updateWithModel:model];
     
     return cell;
@@ -262,9 +244,6 @@
     UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:reuseIdentifier
                                                                          viewClass:[self headerClassForModel:model]
                                                                 configurationBlock:nil];
-
-    NSAssert([view conformsToProtocol:@protocol(DTModelTransfer)], @"view %@ should conform to DTModelTransfer protocol",view);
-    
     [view updateWithModel:model];
 
     return view;
@@ -285,9 +264,6 @@
     UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:reuseIdentifier
                                                                          viewClass:[self footerClassForModel:model]
                                                                 configurationBlock:nil];
-    
-    NSAssert([view conformsToProtocol:@protocol(DTModelTransfer)], @"view %@ should conform to DTModelTransfer protocol",view);
-    
     [view updateWithModel:model];
     
     return view;
@@ -299,7 +275,7 @@
     
     NSString * cellClassString = [self.cellMappingsDictionary objectForKey:modelClassName];
     
-    NSAssert(cellClassString, @"DTCellFactory does not have cell mapping for model class: %@",[model class]);
+    NSAssert(cellClassString, @"DTTableViewManager does not have cell mapping for model class: %@",[model class]);
     
     return NSClassFromString(cellClassString);
 }

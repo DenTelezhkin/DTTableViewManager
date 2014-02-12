@@ -34,7 +34,7 @@
 @end
 
 /**
- `DTCellFactory` is a singleton object that is used to create cells for your tableView.
+ `DTCellFactory` is a class that is used to create cells, headers and footers for your tableView.
  
  You shouldn't call any of it's methods. Use `DTTableViewController` API's.
  */

@@ -119,6 +119,7 @@
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
     NSParameterAssert([cellClass isSubclassOfClass:[UITableViewCell class]]);
+    NSParameterAssert([cellClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
     
     [self.cellFactory registerCellClass:cellClass forModelClass:modelClass];
@@ -126,7 +127,7 @@
 
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
 {
-    NSParameterAssert(headerClass);
+    NSParameterAssert([headerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
     
     [self.cellFactory registerHeaderClass:headerClass forModelClass:modelClass];
@@ -142,6 +143,10 @@
 
 -(void)registerNibNamed:(NSString *)nibName forCellClass:(Class)cellClass modelClass:(Class)modelClass
 {
+    NSParameterAssert(nibName);
+    NSParameterAssert([cellClass conformsToProtocol:@protocol(DTModelTransfer)]);
+    NSParameterAssert(modelClass);
+    
     [self.cellFactory registerNibNamed:nibName
                           forCellClass:cellClass
                             modelClass:modelClass];
@@ -149,6 +154,10 @@
 
 -(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass modelClass:(Class)modelClass
 {
+    NSParameterAssert(nibName);
+    NSParameterAssert([headerClass conformsToProtocol:@protocol(DTModelTransfer)]);
+    NSParameterAssert(modelClass);
+    
     [self.cellFactory registerNibNamed:nibName
                         forHeaderClass:headerClass
                             modelClass:modelClass];
@@ -156,6 +165,10 @@
 
 -(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass modelClass:(Class)modelClass
 {
+    NSParameterAssert(nibName);
+    NSParameterAssert([footerClass conformsToProtocol:@protocol(DTModelTransfer)]);
+    NSParameterAssert(modelClass);
+    
     [self.cellFactory registerNibNamed:nibName
                         forFooterClass:footerClass
                             modelClass:modelClass];
