@@ -4,6 +4,9 @@ Example/Pods/*
 Example/Podfile.lock
 Podfile.lock
 
+#Appcode
+.idea/
+
 # Xcode
 build/*
 *.pbxuser
