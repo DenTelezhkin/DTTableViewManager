@@ -165,6 +165,7 @@ Just add default models to memory storage, no mapping required for those.
 ## Requirements
 
 * iOS 6.0 and later
+* ARC
         
 ## Installation
 
