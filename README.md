@@ -177,6 +177,15 @@ Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
 You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
 
+## Example
+
+Take a look at Example folder in repo. Don't forget to run 
+
+```bash
+pod install 
+```
+in example directory.
+
 ## Thanks
 
 * [Alexey Belkevich](https://github.com/belkevich) for providing initial implementation of CellFactory.
