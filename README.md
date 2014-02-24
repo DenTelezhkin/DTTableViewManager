@@ -191,5 +191,3 @@ in example directory.
 * [Alexey Belkevich](https://github.com/belkevich) for providing initial implementation of CellFactory.
 * [Michael Fey](https://github.com/MrRooni) for providing insight into NSFetchedResultsController updates done right. 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/DenHeadless/dttableviewmanager/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
