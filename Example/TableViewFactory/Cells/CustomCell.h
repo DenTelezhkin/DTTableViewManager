@@ -16,6 +16,4 @@
 @property (nonatomic,strong) IBOutlet UILabel * label3;
 @property (nonatomic,strong) IBOutlet UILabel * label4;
 
-
-
 @end

@@ -171,7 +171,7 @@ Just add default models to memory storage, no mapping required for those.
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 2.2.0'
+	pod 'DTTableViewManager', '~> 2.2.1'
 
 ## Documentation
 
