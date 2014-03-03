@@ -24,10 +24,9 @@
 
 #import "DTTableViewController.h"
 #import "DTCellFactory.h"
-#import "DTTableViewMemoryStorage.h"
 
 @interface DTTableViewController ()
-<DTTableViewFactoryDelegate>
+        <DTTableViewFactoryDelegate>
 
 @property (nonatomic, assign) int currentSearchScope;
 @property (nonatomic, copy) NSString * currentSearchString;
@@ -38,7 +37,7 @@
 
 #pragma mark - initialize, clean
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
@@ -47,7 +46,7 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder])
     {
@@ -56,44 +55,44 @@
     return self;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
     self.searchBar.delegate = nil;
 }
 
--(void)setup
+- (void)setup
 {
     _cellFactory = [DTCellFactory new];
     _cellFactory.delegate = self;
-    
+
     _dataStorage = [DTTableViewMemoryStorage storage];
     _dataStorage.delegate = self;
-    
+
     _currentSearchScope = -1;
     _sectionHeaderStyle = DTTableViewSectionStyleTitle;
     _sectionFooterStyle = DTTableViewSectionStyleTitle;
     _insertSectionAnimation = UITableViewRowAnimationNone;
     _deleteSectionAnimation = UITableViewRowAnimationAutomatic;
     _reloadSectionAnimation = UITableViewRowAnimationAutomatic;
-    
+
     _insertRowAnimation = UITableViewRowAnimationAutomatic;
     _deleteRowAnimation = UITableViewRowAnimationAutomatic;
     _reloadRowAnimation = UITableViewRowAnimationAutomatic;
 }
 
--(void)viewDidLoad
+- (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 }
 
 #pragma mark - getters, setters
 
--(DTTableViewMemoryStorage *)memoryStorage
+- (DTTableViewMemoryStorage *)memoryStorage
 {
     if ([self.dataStorage isKindOfClass:[DTTableViewMemoryStorage class]])
     {
@@ -102,13 +101,13 @@
     return nil;
 }
 
--(void)setDataStorage:(id<DTTableViewDataStorage>)dataStorage
+- (void)setDataStorage:(id <DTTableViewDataStorage>)dataStorage
 {
     _dataStorage = dataStorage;
     _dataStorage.delegate = self;
 }
 
--(void)setSearchingDataStorage:(id<DTTableViewDataStorage>)searchingDataStorage
+- (void)setSearchingDataStorage:(id <DTTableViewDataStorage>)searchingDataStorage
 {
     _searchingDataStorage = searchingDataStorage;
     _searchingDataStorage.delegate = self;
@@ -116,59 +115,59 @@
 
 #pragma mark - mapping
 
--(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
+- (void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
     NSParameterAssert([cellClass isSubclassOfClass:[UITableViewCell class]]);
     NSParameterAssert([cellClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
-    
+
     [self.cellFactory registerCellClass:cellClass forModelClass:modelClass];
 }
 
--(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
+- (void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
 {
     NSParameterAssert([headerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
-    
+
     [self.cellFactory registerHeaderClass:headerClass forModelClass:modelClass];
 }
 
--(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
+- (void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
 {
     NSParameterAssert(footerClass);
     NSParameterAssert(modelClass);
-    
+
     [self.cellFactory registerFooterClass:footerClass forModelClass:modelClass];
 }
 
--(void)registerNibNamed:(NSString *)nibName forCellClass:(Class)cellClass modelClass:(Class)modelClass
+- (void)registerNibNamed:(NSString *)nibName forCellClass:(Class)cellClass modelClass:(Class)modelClass
 {
     NSParameterAssert(nibName);
     NSParameterAssert([cellClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
-    
+
     [self.cellFactory registerNibNamed:nibName
                           forCellClass:cellClass
                             modelClass:modelClass];
 }
 
--(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass modelClass:(Class)modelClass
+- (void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass modelClass:(Class)modelClass
 {
     NSParameterAssert(nibName);
     NSParameterAssert([headerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
-    
+
     [self.cellFactory registerNibNamed:nibName
                         forHeaderClass:headerClass
                             modelClass:modelClass];
 }
 
--(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass modelClass:(Class)modelClass
+- (void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass modelClass:(Class)modelClass
 {
     NSParameterAssert(nibName);
     NSParameterAssert([footerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
-    
+
     [self.cellFactory registerNibNamed:nibName
                         forFooterClass:footerClass
                             modelClass:modelClass];
@@ -176,38 +175,39 @@
 
 #pragma mark - search
 
--(BOOL)isSearching
+- (BOOL)isSearching
 {
     // If search scope is selected, we are already searching, even if dataset is all items
     if (((self.currentSearchString) && (![self.currentSearchString isEqualToString:@""]))
-        ||
-        self.currentSearchScope>-1)
+            ||
+            self.currentSearchScope > -1)
     {
         return YES;
     }
     return NO;
 }
 
--(void)filterTableItemsForSearchString:(NSString *)searchString
+- (void)filterTableItemsForSearchString:(NSString *)searchString
 {
     [self filterTableItemsForSearchString:searchString inScope:-1];
 }
 
--(void)filterTableItemsForSearchString:(NSString *)searchString
-                               inScope:(NSInteger)scopeNumber
+- (void)filterTableItemsForSearchString:(NSString *)searchString
+                                inScope:(NSInteger)scopeNumber
 {
     BOOL wereSearching = [self isSearching];
-    
+
     if (![searchString isEqualToString:self.currentSearchString] ||
-        scopeNumber!=self.currentSearchScope)
+            scopeNumber != self.currentSearchScope)
     {
         self.currentSearchScope = scopeNumber;
         self.currentSearchString = searchString;
     }
-    else {
+    else
+    {
         return;
     }
-    
+
     if (wereSearching && ![self isSearching])
     {
         [self.tableView reloadData];
@@ -221,7 +221,7 @@
     }
 }
 
--(id)headerModelForIndex:(NSInteger)index
+- (id)headerModelForIndex:(NSInteger)index
 {
     if ([self isSearching])
     {
@@ -240,7 +240,7 @@
     return nil;
 }
 
--(id)footerModelForIndex:(NSInteger)index
+- (id)footerModelForIndex:(NSInteger)index
 {
     if ([self isSearching])
     {
@@ -267,7 +267,8 @@
     {
         return [[self.searchingDataStorage sections] count];
     }
-    else {
+    else
+    {
         return [[self.dataStorage sections] count];
     }
 }
@@ -279,7 +280,8 @@
         id <DTSection> sectionModel = [self.searchingDataStorage sections][section];
         return [sectionModel numberOfObjects];
     }
-    else {
+    else
+    {
         id <DTSection> sectionModel = [self.dataStorage sections][section];
         return [sectionModel numberOfObjects];
     }
@@ -291,51 +293,53 @@
     {
         return nil;
     }
-    
+
     return [self headerModelForIndex:sectionNumber];
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)sectionNumber
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)sectionNumber
 {
     if (!(self.sectionFooterStyle == DTTableViewSectionStyleTitle))
     {
         return nil;
     }
-    
+
     return [self footerModelForIndex:sectionNumber];
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)sectionNumber
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)sectionNumber
 {
     if (self.sectionHeaderStyle == DTTableViewSectionStyleTitle)
     {
         return nil;
     }
     id model = [self headerModelForIndex:sectionNumber];
-    
-    if (!model) {
+
+    if (!model)
+    {
         return nil;
     }
-    
+
     return [self.cellFactory headerViewForModel:model];
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)sectionNumber
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)sectionNumber
 {
     if (self.sectionFooterStyle == DTTableViewSectionStyleTitle)
     {
         return nil;
     }
     id model = [self footerModelForIndex:sectionNumber];
-    
-    if (!model) {
+
+    if (!model)
+    {
         return nil;
     }
-    
+
     return [self.cellFactory footerViewForModel:model];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionNumber
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionNumber
 {
     // Default table view section header titles, size defined by UILabel sizeToFit method
     if (self.sectionHeaderStyle == DTTableViewSectionStyleTitle)
@@ -344,22 +348,24 @@
         {
             return 0;
         }
-        else {
+        else
+        {
             return UITableViewAutomaticDimension;
         }
     }
-    
+
     // Custom table view headers
     if ([self headerModelForIndex:sectionNumber])
     {
         return self.tableView.sectionHeaderHeight;
     }
-    else {
+    else
+    {
         return 0;
     }
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)sectionNumber
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)sectionNumber
 {
     // Default table view section header titles, size defined by UILabel sizeToFit method
     if (self.sectionFooterStyle == DTTableViewSectionStyleTitle)
@@ -368,17 +374,19 @@
         {
             return 0;
         }
-        else {
+        else
+        {
             return UITableViewAutomaticDimension;
         }
     }
-    
+
     // Custom table view headers
     if ([self footerModelForIndex:sectionNumber])
     {
         return self.tableView.sectionFooterHeight;
     }
-    else {
+    else
+    {
         return 0;
     }
 }
@@ -391,63 +399,69 @@
     {
         model = [self.searchingDataStorage objectAtIndexPath:indexPath];
     }
-    else {
+    else
+    {
         model = [self.dataStorage objectAtIndexPath:indexPath];
     }
-    
+
     return [self.cellFactory cellForModel:model];
 }
 
-- (void)tableView:(UITableView *)tableView
+- (void) tableView:(UITableView *)tableView
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-      toIndexPath:(NSIndexPath *)destinationIndexPath
+       toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     DTTableViewMemoryStorage * storage = [self memoryStorage];
-    
+    if (!storage)
+    {
+        // silencing static analyzer =). This probably will never happen.
+        return;
+    }
+
     DTSectionModel * fromSection = [storage sections][sourceIndexPath.section];
     DTSectionModel * toSection = [storage sections][destinationIndexPath.section];
     id tableItem = fromSection.objects[sourceIndexPath.row];
-    
+
     [fromSection.objects removeObjectAtIndex:sourceIndexPath.row];
     [toSection.objects insertObject:tableItem atIndex:destinationIndexPath.row];
 }
 
 #pragma  mark - UISearchBarDelegate
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     [self filterTableItemsForSearchString:searchText];
 }
 
--(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     [self filterTableItemsForSearchString:searchBar.text inScope:selectedScope];
 }
 
 #pragma mark - DTStorageUpdate delegate methods
 
--(void)storageDidPerformUpdate:(DTStorageUpdate *)update
+- (void)storageDidPerformUpdate:(DTStorageUpdate *)update
 {
     [self.tableView beginUpdates];
-    
+
     [self.tableView deleteSections:update.deletedSectionIndexes
                   withRowAnimation:self.deleteSectionAnimation];
     [self.tableView insertSections:update.insertedSectionIndexes
                   withRowAnimation:self.insertSectionAnimation];
     [self.tableView reloadSections:update.updatedSectionIndexes
                   withRowAnimation:self.reloadSectionAnimation];
-    
+
     [self.tableView deleteRowsAtIndexPaths:update.deletedRowIndexPaths
                           withRowAnimation:self.deleteRowAnimation];
     [self.tableView insertRowsAtIndexPaths:update.insertedRowIndexPaths
                           withRowAnimation:self.insertRowAnimation];
     [self.tableView reloadRowsAtIndexPaths:update.updatedRowIndexPaths
                           withRowAnimation:self.reloadRowAnimation];
-    
+
     [self.tableView endUpdates];
 }
 
--(void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock
+- (void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock
 {
     animationBlock(self.tableView);
 }

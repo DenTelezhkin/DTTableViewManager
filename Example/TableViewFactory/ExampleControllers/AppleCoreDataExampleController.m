@@ -7,7 +7,6 @@
 //
 
 #import "AppleCoreDataExampleController.h"
-#import <CoreData/CoreData.h>
 #import "BanksCoreDataManager.h"
 #import "Event.h"
 #import "EventCell.h"

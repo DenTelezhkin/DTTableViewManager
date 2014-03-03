@@ -9,7 +9,6 @@
 #import "CustomCellsTableViewController.h"
 #import "CustomCell.h"
 #import "CustomModel.h"
-#import "DTTableViewManager.h"
 
 @implementation CustomCellsTableViewController
 

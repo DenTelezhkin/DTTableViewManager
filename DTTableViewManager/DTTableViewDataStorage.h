@@ -41,7 +41,7 @@
  
  @warning You need to update data storage object before executing this method.
  */
-- (void)performAnimatedUpdate:(void(^)(UITableView *))animationBlock;
+- (void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock;
 
 @end
 

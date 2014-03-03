@@ -23,7 +23,7 @@
     NSString * path = [[NSBundle mainBundle] pathForResource:@"Capitals" ofType:@"plist"];
     NSArray * continents = [NSArray arrayWithContentsOfFile:path];
     NSMutableArray * headerTitles = [NSMutableArray array];
-    for (int section=0;section <[continents count]; section ++)
+    for (NSUInteger section=0;section <[continents count]; section ++)
     {
         NSDictionary * continent = continents[section];
         NSDictionary * capitals = [[continents[section] allValues] lastObject];

@@ -26,32 +26,35 @@
 #import "DTTableViewMemoryStorage.h"
 #import "DTTableViewController.h"
 
-@interface DTMemoryStorage()
--(DTSectionModel *)getValidSection:(NSUInteger)sectionNumber;
+@interface DTMemoryStorage ()
+- (DTSectionModel *)getValidSection:(NSUInteger)sectionNumber;
+
 @property (nonatomic, retain) DTStorageUpdate * currentUpdate;
--(void)startUpdate;
--(void)finishUpdate;
+
+- (void)startUpdate;
+
+- (void)finishUpdate;
 @end
 
 @implementation DTTableViewMemoryStorage
 
--(void)setSectionHeaderModels:(NSArray *)headerModels
+- (void)setSectionHeaderModels:(NSArray *)headerModels
 {
     [self setSupplementaries:headerModels forKind:DTTableViewElementSectionHeader];
 }
 
--(void)setSectionFooterModels:(NSArray *)footerModels
+- (void)setSectionFooterModels:(NSArray *)footerModels
 {
     [self setSupplementaries:footerModels forKind:DTTableViewElementSectionFooter];
 }
 
--(id)headerModelForSectionIndex:(NSInteger)index
+- (id)headerModelForSectionIndex:(NSInteger)index
 {
     DTSectionModel * section = self.sections[index];
     return section.headerModel;
 }
 
--(id)footerModelForSectionIndex:(NSInteger)index
+- (id)footerModelForSectionIndex:(NSInteger)index
 {
     DTSectionModel * section = self.sections[index];
     return section.footerModel;
@@ -63,18 +66,19 @@
     {
         [section.objects removeAllObjects];
     }
-    [self.delegate performAnimatedUpdate:^(UITableView * tableView) {
+    [self.delegate performAnimatedUpdate:^(UITableView * tableView)
+    {
         [tableView reloadData];
     }];
 }
 
--(void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath
-               toIndexPath:(NSIndexPath *)destinationIndexPath
+- (void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath
+                toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     [self startUpdate];
-    
+
     id item = [self objectAtIndexPath:sourceIndexPath];
-    
+
     if (!sourceIndexPath || !item)
     {
         if ([self loggingEnabled])
@@ -85,40 +89,42 @@
     }
     DTSectionModel * sourceSection = [self getValidSection:sourceIndexPath.section];
     DTSectionModel * destinationSection = [self getValidSection:destinationIndexPath.section];
-    
+
     if ([destinationSection.objects count] < destinationIndexPath.row)
     {
         if ([self loggingEnabled])
         {
-            NSLog(@"DTCollectionViewManager: failed moving item to indexPath: %@, only %d items in section",destinationIndexPath,[destinationSection.objects count]);
+            NSLog(@"DTCollectionViewManager: failed moving item to indexPath: %@, only %d items in section", destinationIndexPath, [destinationSection.objects count]);
         }
         self.currentUpdate = nil;
         return;
     }
-    
-    [self.delegate performAnimatedUpdate:^(UITableView * tableView) {
+
+    [self.delegate performAnimatedUpdate:^(UITableView * tableView)
+    {
         [tableView insertSections:self.currentUpdate.insertedSectionIndexes
                  withRowAnimation:UITableViewRowAnimationAutomatic];
         [sourceSection.objects removeObjectAtIndex:sourceIndexPath.row];
         [destinationSection.objects insertObject:item
                                          atIndex:destinationIndexPath.row];
         [tableView moveRowAtIndexPath:sourceIndexPath
-                                toIndexPath:destinationIndexPath];
+                          toIndexPath:destinationIndexPath];
     }];
     self.currentUpdate = nil;
 }
 
 #pragma mark - Section management
 
--(void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo
+- (void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo
 {
     DTSectionModel * validSectionFrom = [self getValidSection:indexFrom];
     [self getValidSection:indexTo];
-    
+
     [(NSMutableArray *)self.sections removeObject:validSectionFrom];
     [(NSMutableArray *)self.sections insertObject:validSectionFrom atIndex:indexTo];
-    
-    [self.delegate performAnimatedUpdate:^(UITableView * tableView) {
+
+    [self.delegate performAnimatedUpdate:^(UITableView * tableView)
+    {
         [tableView moveSection:indexFrom toSection:indexTo];
     }];
 }

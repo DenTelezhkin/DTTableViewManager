@@ -7,6 +7,7 @@
 //
 
 #import "MoveSectionTableViewController.h"
+#import "ExampleCell.h"
 #import "Example.h"
 
 @implementation MoveSectionTableViewController

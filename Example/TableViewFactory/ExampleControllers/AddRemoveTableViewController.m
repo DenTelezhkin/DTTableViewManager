@@ -7,37 +7,36 @@
 //
 
 #import "AddRemoveTableViewController.h"
-#import "DTTableViewMemoryStorage.h"
 #import "Example.h"
 
 @interface AddRemoveTableViewController ()
 
-@property (nonatomic,assign) int rowCount;
+@property (nonatomic, assign) int rowCount;
 
 @end
 
 @implementation AddRemoveTableViewController
 
--(void)addButtonTapped
+- (void)addButtonTapped
 {
-    self.rowCount ++;
-    NSString * rowText = [NSString stringWithFormat:@"Row # %d",self.rowCount];
-    
+    self.rowCount++;
+    NSString * rowText = [NSString stringWithFormat:@"Row # %d", self.rowCount];
+
     [[self memoryStorage] addItem:[Example exampleWithText:rowText andDetails:nil]];
 }
 
--(void)viewDidLoad
+- (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UIBarButtonItem * barItem = [[UIBarButtonItem alloc]
-                                            initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                 target:self
-                                                                 action:@selector(addButtonTapped)];
+            initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                 target:self
+                                 action:@selector(addButtonTapped)];
     self.navigationItem.rightBarButtonItem = barItem;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DTTableViewMemoryStorage * storage = [self memoryStorage];
     [storage removeItem:[storage itemAtIndexPath:indexPath]];
