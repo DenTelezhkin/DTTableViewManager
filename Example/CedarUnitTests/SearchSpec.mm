@@ -35,7 +35,7 @@ describe(@"search in first section", ^{
         [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         model.memoryStorage.loggingEnabled = NO;
 
-        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
         
         [model.memoryStorage addItems:@[acc1,acc2,acc3,acc4,acc5,acc6]];
@@ -121,7 +121,7 @@ describe(@"search in multiple sections", ^{
         
         model = [DTTableViewController new];
         [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
-        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
         
         [model.memoryStorage addItems:@[acc1,acc2] toSection:0];
@@ -203,7 +203,7 @@ describe(@"section headers/footers titles", ^{
         model = [DTTableViewController new];
         [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
 
-        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         model.sectionHeaderStyle = DTTableViewSectionStyleTitle;
         model.sectionFooterStyle = DTTableViewSectionStyleTitle;
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
@@ -262,7 +262,7 @@ describe(@"section headers/footers models", ^{
         [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         model.sectionHeaderStyle = DTTableViewSectionStyleView;
         model.sectionFooterStyle = DTTableViewSectionStyleView;
-        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
         
         if ([UITableViewHeaderFooterView class]) { // iOS 6 and higher test
@@ -318,7 +318,7 @@ describe(@"Foundation models searching", ^{
         model = [DTTableViewController new];
         
         model.memoryStorage.loggingEnabled = NO;
-        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
 
     });
     

@@ -26,7 +26,7 @@ describe(@"Datasource spec", ^{
         storage = [DTTableViewMemoryStorage storage];
         storage.loggingEnabled = NO;
         model.dataStorage = storage;
-        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
         model.tableView.delegate = model;
         model.tableView.dataSource = model;
@@ -135,14 +135,14 @@ describe(@"Datasource spec", ^{
     
     it(@"should set section titles", ^{
         model.sectionHeaderStyle = DTTableViewSectionStyleTitle;
-        [storage setSectionHeaderModels:[@[ TEST_1, TEST_2 ] mutableCopy]];
+        [storage setSectionHeaderModels:[[@[ TEST_1, TEST_2 ] mutableCopy] autorelease]];
         [model tableView:model.tableView titleForHeaderInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForHeaderInSection:1] should equal(TEST_2);
     });
     
     it(@"should set section footers", ^{
         model.sectionFooterStyle = DTTableViewSectionStyleTitle;
-        [storage setSectionFooterModels:[@[ TEST_1, TEST_2 ] mutableCopy]];
+        [storage setSectionFooterModels:[[@[ TEST_1, TEST_2 ] mutableCopy] autorelease]];
         
         [model tableView:model.tableView titleForFooterInSection:0] should equal(TEST_1);
         [model tableView:model.tableView titleForFooterInSection:1] should equal(TEST_2);

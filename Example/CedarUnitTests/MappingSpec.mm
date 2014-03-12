@@ -33,7 +33,7 @@ describe(@"mapping tests", ^{
             storage = [DTTableViewMemoryStorage storage];
             storage.loggingEnabled = NO;
             model.dataStorage = storage;
-            model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+            model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.dataSource = model;
             model.tableView.delegate = model;
             testModel = [Example new];
@@ -76,7 +76,7 @@ describe(@"mapping tests", ^{
             model = [DTTableViewController new];
             storage = [DTTableViewMemoryStorage storage];
             model.dataStorage = storage;
-            model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+            model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
             testModel = [Example new];
@@ -119,7 +119,7 @@ describe(@"mapping tests", ^{
             model = [DTTableViewController new];
             storage = [DTTableViewMemoryStorage storage];
             model.dataStorage = storage;
-            model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+            model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
             testModel = [Example new];
@@ -154,7 +154,7 @@ describe(@"mapping tests", ^{
             model.sectionFooterStyle = DTTableViewSectionStyleView;
             storage = [DTTableViewMemoryStorage storage];
             model.dataStorage = storage;
-            model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+            model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
             testModel = [Example new];
@@ -272,7 +272,7 @@ describe(@"Foundation class clusters", ^{
         model.sectionHeaderStyle = DTTableViewSectionStyleView;
         storage = [DTTableViewMemoryStorage storage];
         model.dataStorage = storage;
-        model.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+        model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         model.tableView.dataSource = model;
         model.tableView.delegate = model;
         [model.tableView reloadData];
@@ -311,6 +311,7 @@ describe(@"Foundation class clusters", ^{
                 NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
                 [string appendString:@",second"];
                 [storage addItem:string];
+                [string release];
             } should_not raise_exception;
         });
         
@@ -354,6 +355,7 @@ describe(@"Foundation class clusters", ^{
                 NSMutableString * string = [[NSMutableString alloc] initWithString:@"first"];
                 [string appendString:@",second"];
                 [storage addItem:string];
+                [string release];
             } should_not raise_exception;
         });
         

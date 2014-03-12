@@ -728,7 +728,7 @@
 		E6EA83591615EE6000F8B8C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Denys Telezhkin";
 			};
 			buildConfigurationList = E6EA835C1615EE6000F8B8C3 /* Build configuration list for PBXProject "DTTableViewManager" */;
@@ -1056,7 +1056,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C331A5120C02433C91C38655 /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1077,7 +1076,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C331A5120C02433C91C38655 /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
