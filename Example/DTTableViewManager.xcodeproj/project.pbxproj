@@ -685,9 +685,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E6CB97AA161B26C900A7E936 /* CedarUnitTests */ = {
+		E6CB97AA161B26C900A7E936 /* Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6CB97C2161B26C900A7E936 /* Build configuration list for PBXNativeTarget "CedarUnitTests" */;
+			buildConfigurationList = E6CB97C2161B26C900A7E936 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
 				E6CB97A7161B26C900A7E936 /* Sources */,
 				E6CB97A8161B26C900A7E936 /* Frameworks */,
@@ -698,14 +698,14 @@
 			);
 			dependencies = (
 			);
-			name = CedarUnitTests;
+			name = Tests;
 			productName = CedarUnitTests;
 			productReference = E6CB97AB161B26C900A7E936 /* CedarUnitTests.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E6EA83611615EE6000F8B8C3 /* DTTableViewManagerExample */ = {
+		E6EA83611615EE6000F8B8C3 /* Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "DTTableViewManagerExample" */;
+			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
 				9FA6E8B05AAD4F99B8A07710 /* Check Pods Manifest.lock */,
 				E6EA835E1615EE6000F8B8C3 /* Sources */,
@@ -717,7 +717,7 @@
 			);
 			dependencies = (
 			);
-			name = DTTableViewManagerExample;
+			name = Example;
 			productName = TableViewFactory;
 			productReference = E6EA83621615EE6000F8B8C3 /* DTTableViewManagerExample.app */;
 			productType = "com.apple.product-type.application";
@@ -743,8 +743,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E6EA83611615EE6000F8B8C3 /* DTTableViewManagerExample */,
-				E6CB97AA161B26C900A7E936 /* CedarUnitTests */,
+				E6EA83611615EE6000F8B8C3 /* Example */,
+				E6CB97AA161B26C900A7E936 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -1097,7 +1097,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E6CB97C2161B26C900A7E936 /* Build configuration list for PBXNativeTarget "CedarUnitTests" */ = {
+		E6CB97C2161B26C900A7E936 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6CB97C3161B26C900A7E936 /* Debug */,
@@ -1115,7 +1115,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "DTTableViewManagerExample" */ = {
+		E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6EA83871615EE6000F8B8C3 /* Debug */,
