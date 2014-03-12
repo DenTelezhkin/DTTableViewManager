@@ -94,7 +94,7 @@
     {
         if ([self loggingEnabled])
         {
-            NSLog(@"DTCollectionViewManager: failed moving item to indexPath: %@, only %d items in section", destinationIndexPath, [destinationSection.objects count]);
+            NSLog(@"DTCollectionViewManager: failed moving item to indexPath: %@, only %@ items in section", destinationIndexPath, @([destinationSection.objects count]));
         }
         self.currentUpdate = nil;
         return;

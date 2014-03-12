@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E6EA83611615EE6000F8B8C3"
-               BuildableName = "DTTableViewManagerExample.app"
+               BuildableName = "Example.app"
                BlueprintName = "Example"
                ReferencedContainer = "container:DTTableViewManager.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6EA83611615EE6000F8B8C3"
-            BuildableName = "DTTableViewManagerExample.app"
+            BuildableName = "Example.app"
             BlueprintName = "Example"
             ReferencedContainer = "container:DTTableViewManager.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6EA83611615EE6000F8B8C3"
-            BuildableName = "DTTableViewManagerExample.app"
+            BuildableName = "Example.app"
             BlueprintName = "Example"
             ReferencedContainer = "container:DTTableViewManager.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6EA83611615EE6000F8B8C3"
-            BuildableName = "DTTableViewManagerExample.app"
+            BuildableName = "Example.app"
             BlueprintName = "Example"
             ReferencedContainer = "container:DTTableViewManager.xcodeproj">
          </BuildableReference>

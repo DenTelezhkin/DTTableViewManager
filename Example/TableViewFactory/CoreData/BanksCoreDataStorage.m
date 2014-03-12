@@ -42,7 +42,7 @@
     return section.name;
 }
 
--(instancetype)searchingStorageForSearchString:(NSString *)searchString inSearchScope:(NSInteger)searchScope
+-(instancetype)searchingStorageForSearchString:(NSString *)searchString inSearchScope:(NSUInteger)searchScope
 {
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString];
 

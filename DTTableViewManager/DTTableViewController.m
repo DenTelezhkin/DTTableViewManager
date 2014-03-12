@@ -28,7 +28,7 @@
 @interface DTTableViewController ()
         <DTTableViewFactoryDelegate>
 
-@property (nonatomic, assign) int currentSearchScope;
+@property (nonatomic, assign) NSInteger currentSearchScope;
 @property (nonatomic, copy) NSString * currentSearchString;
 @property (nonatomic, retain) DTCellFactory * cellFactory;
 @end
