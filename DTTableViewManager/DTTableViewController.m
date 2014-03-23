@@ -80,6 +80,9 @@
     _insertRowAnimation = UITableViewRowAnimationAutomatic;
     _deleteRowAnimation = UITableViewRowAnimationAutomatic;
     _reloadRowAnimation = UITableViewRowAnimationAutomatic;
+    
+    _displayFooterOnEmptySection = YES;
+    _displayHeaderOnEmptySection = YES;
 }
 
 - (void)viewDidLoad
@@ -225,16 +228,22 @@
 {
     if ([self isSearching])
     {
-        if ([self.searchingDataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
+        if ([[self.searchingDataStorage sections][index] numberOfObjects] || self.displayHeaderOnEmptySection)
         {
-            return [(DTTableViewMemoryStorage *)self.searchingDataStorage headerModelForSectionIndex:index];
+            if ([self.searchingDataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
+            {
+                return [(DTTableViewMemoryStorage *)self.searchingDataStorage headerModelForSectionIndex:index];
+            }
         }
     }
     else
     {
-        if ([self.dataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
+        if ([[self.dataStorage sections][index] numberOfObjects] || self.displayHeaderOnEmptySection)
         {
-            return [(DTTableViewMemoryStorage *)self.dataStorage headerModelForSectionIndex:index];
+            if ([self.dataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
+            {
+                return [(DTTableViewMemoryStorage *)self.dataStorage headerModelForSectionIndex:index];
+            }
         }
     }
     return nil;
@@ -244,16 +253,22 @@
 {
     if ([self isSearching])
     {
-        if ([self.searchingDataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
+        if ([[self.searchingDataStorage sections][index] numberOfObjects] || self.displayFooterOnEmptySection)
         {
-            return [(DTTableViewMemoryStorage *)self.searchingDataStorage footerModelForSectionIndex:index];
+            if ([self.searchingDataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
+            {
+                return [(DTTableViewMemoryStorage *)self.searchingDataStorage footerModelForSectionIndex:index];
+            }
         }
     }
     else
     {
-        if ([self.dataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
+        if ([[self.dataStorage sections][index] numberOfObjects] || self.displayFooterOnEmptySection)
         {
-            return [(DTTableViewMemoryStorage *)self.dataStorage footerModelForSectionIndex:index];
+            if ([self.dataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
+            {
+                return [(DTTableViewMemoryStorage *)self.dataStorage footerModelForSectionIndex:index];
+            }
         }
     }
     return nil;
@@ -289,7 +304,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectionNumber
 {
-    if (!(self.sectionHeaderStyle == DTTableViewSectionStyleTitle))
+    if (self.sectionHeaderStyle != DTTableViewSectionStyleTitle)
     {
         return nil;
     }
@@ -299,7 +314,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)sectionNumber
 {
-    if (!(self.sectionFooterStyle == DTTableViewSectionStyleTitle))
+    if (self.sectionFooterStyle != DTTableViewSectionStyleTitle)
     {
         return nil;
     }

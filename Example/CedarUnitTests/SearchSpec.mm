@@ -1,6 +1,4 @@
-#import "DTTableViewController.h"
 #import "MockTableHeaderFooterView.h"
-#import "DTTableViewMemoryStorage.h"
 #import "DTTableViewController+UnitTests.h"
 #import "StringCell.h"
 
@@ -15,9 +13,8 @@ __block Example * acc3;
 __block Example * acc4;
 __block Example * acc5;
 __block Example * acc6;
-__block Example * testModel;
 
-describe(@"search in first section", ^{
+    describe(@"search in first section", ^{
     
     beforeEach(^{
         
@@ -198,7 +195,7 @@ describe(@"section headers/footers titles", ^{
         acc5 = [Example exampleWithText:@"Washington D.C." andDetails:@"USA"];
         acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
         
-        testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
+        [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
         model = [DTTableViewController new];
         [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
@@ -256,7 +253,7 @@ describe(@"section headers/footers models", ^{
         acc5 = [Example exampleWithText:@"Washington D.C." andDetails:@"USA"];
         acc6 = [Example exampleWithText:@"Lissabon" andDetails:@"Portugal"];
         
-        testModel = [Example exampleWithText:@"Dehli" andDetails:@"India"];
+        [Example exampleWithText:@"Dehli" andDetails:@"India"];
         
         model = [DTTableViewController new];
         [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];

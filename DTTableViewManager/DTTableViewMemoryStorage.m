@@ -83,7 +83,7 @@
     {
         if ([self loggingEnabled])
         {
-            NSLog(@"DTCollectionViewManager: source indexPath should not be nil when moving collection item");
+            NSLog(@"DTTableViewManager: source indexPath should not be nil when moving collection item");
         }
         return;
     }
@@ -94,7 +94,7 @@
     {
         if ([self loggingEnabled])
         {
-            NSLog(@"DTCollectionViewManager: failed moving item to indexPath: %@, only %@ items in section", destinationIndexPath, @([destinationSection.objects count]));
+            NSLog(@"DTTableViewManager: failed moving item to indexPath: %@, only %@ items in section", destinationIndexPath, @([destinationSection.objects count]));
         }
         self.currentUpdate = nil;
         return;

@@ -135,6 +135,16 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 @property (nonatomic, assign) DTTableViewSectionStyle sectionFooterStyle;
 
 /**
+ Determines, whether header should be displayed, if section does not contain any items. Default value is YES.
+ */
+@property (nonatomic, assign) BOOL displayHeaderOnEmptySection;
+
+/**
+ Determines, whether footer should be displayed, if section does not contain any items. Default value is YES.
+ */
+@property (nonatomic, assign) BOOL displayFooterOnEmptySection;
+
+/**
  Animation, used for inserting sections. Default - UITableViewRowAnimationNone.
  */
 

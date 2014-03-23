@@ -1,6 +1,3 @@
-#import "DTTableViewMemoryStorage.h"
-#import "OCMock.h"
-
 using namespace Cedar::Matchers;
 
 SPEC_BEGIN(MemoryStorageSpecs)

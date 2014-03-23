@@ -1,14 +1,9 @@
-#import "DTTableViewController.h"
 #import "DTTableViewController+UnitTests.h"
-#import <Foundation/Foundation.h>
 #import "CellWithNib.h"
 #import "CellWithoutNib.h"
 #import "MockTableHeaderView.h"
 #import "NiblessTableHeaderView.h"
 #import "MockTableHeaderFooterView.h"
-#import "NiblessTableHeaderFooterView.h"
-#import "DTTableViewMemoryStorage.h"
-#import "CustomCell.h"
 #import "DTDefaultCellModel.h"
 #import "DTDefaultHeaderFooterModel.h"
 
