@@ -33,7 +33,7 @@
  
  ## Searching
  
- To implement search, your data models should implement `DTModelSearching` protocol. Specifically, on every change in UISearchBar, every model will get called with `shouldShowInSearchResultsForSearchString:inScopeIndex:` method. Based on the results, new searching storage will be created and used by `DTTableViewController` instance.
+Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
  */
 
 @interface DTTableViewMemoryStorage : DTMemoryStorage <DTTableViewDataStorage>

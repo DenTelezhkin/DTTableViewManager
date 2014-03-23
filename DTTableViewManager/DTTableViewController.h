@@ -61,7 +61,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  
  # DTTableViewMemoryStorage
  
- Your data models should conform to `DTModelSearching` protocol. You need to implement method shouldShowInSearchResultsForSearchString:inScopeIndex: on your data model, this way DTTableViewController will know, when to show data models.
+Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
  
  # DTCoreDataStorage
  
