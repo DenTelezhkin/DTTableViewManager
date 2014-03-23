@@ -30,6 +30,5 @@
 #import "DTCoreDataStorage.h"
 
 #import "DTModelTransfer.h"
-#import "DTModelSearching.h"
 
 

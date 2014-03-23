@@ -24,7 +24,6 @@
 // THE SOFTWARE.
 
 #import "DTViewConfiguration.h"
-#import "DTModelSearching.h"
 
 /**
  `DTDefaultCellModel` is a custom model class, that allows to use UITableViewCells without subclassing.

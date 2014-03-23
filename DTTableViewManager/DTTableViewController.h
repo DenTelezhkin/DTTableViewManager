@@ -24,7 +24,6 @@
 // THE SOFTWARE.
 
 #import "DTModelTransfer.h"
-#import "DTModelSearching.h"
 #import "DTTableViewDataStorage.h"
 #import "DTTableViewMemoryStorage.h"
 #import "DTSectionModel+HeaderFooterModel.h"
