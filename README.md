@@ -9,6 +9,15 @@ DTTableViewManager
 
 Target of this project is to create powerful architecture for UITableView сontrollers. It combines several ideas to make UITableView management easy, clean, and delightful. 
 
+## Workflow
+
+Here are 4 simple steps you need to use DTTableViewManager:
+
+1. Your view controller should subclass `DTTableViewController`, and set tableView property.
+2. You should have subclass of `DTTableViewCell`.
+3. In your viewDidLoad method, call mapping methods to establish relationship between data models and UITableViewCells.
+4. Add data models to memoryStorage, or use CoreData storage class.
+
 ## 2.0
 
 DTTableViewManager 2.0 is a major update to the framework, introducing big changes to the architecture and bringing several powerful features. 
@@ -48,7 +57,9 @@ In the end, view controller is left with following stuff:
 * Register mapping between data model class and cell class.
 * Populate data storage with data models
 
-Okay, enough talking, let's dive into code. Simplest way for view controller is to subclass `DTTableViewController`, set it's tableView property, delegate, datasource and off you go!
+Okay, enough talking, let's dive into code. 
+
+Start with subclassing `DTTableViewController`, and setting it's `tableView` property with your UITableView.
 
 ## Mapping
 
