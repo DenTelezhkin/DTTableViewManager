@@ -9,26 +9,11 @@ DTTableViewManager
 
 Target of this project is to create powerful architecture for UITableView сontrollers. It combines several ideas to make UITableView management easy, clean, and delightful. 
 
-## Workflow
+Try it out! =)
 
-Here are 4 simple steps you need to use DTTableViewManager:
-
-1. Your view controller should subclass `DTTableViewController`, and set tableView property.
-2. You should have subclass of `DTTableViewCell`.
-3. In your viewDidLoad method, call mapping methods to establish relationship between data models and UITableViewCells.
-4. Add data models to memoryStorage, or use CoreData storage class.
-
-## 2.0
-
-DTTableViewManager 2.0 is a major update to the framework, introducing big changes to the architecture and bringing several powerful features. 
-
-**Read the [DTTableViewManager 2.0 Transition Guide](https://github.com/DenHeadless/DTTableViewManager/wiki/DTTableViewManager-2.0-Transition-Guide) for an overview of the architectural and API changes.**
-
-### What's new
-
-* Refactored and more modular architecture
-* Support for CoreData/NSFetchedResultsController
-* Support for custom data storage objects
+```bash
+pod try DTTableViewManager
+```
 
 ## Features
 
@@ -38,39 +23,65 @@ DTTableViewManager 2.0 is a major update to the framework, introducing big chang
 * Easy UITableView search 
 * Core data / NSFetchedResultsController support
 
-The best way to understand, what we are trying to achieve here, is to take a look at example, that shows most common use cases for framework. It is provided in Example folder. Don't miss CoreData examples, they are awesome!
+## Workflow
 
-## Picture time!
+Here are 4 simple steps you need to use DTTableViewManager:
 
-Lets imagine view controller, that manages table view presentation on itself. 
+1. Your view controller should subclass `DTTableViewController`, and set tableView property.
+2. You should have subclass of `DTTableViewCell`.
+3. In your viewDidLoad method, call mapping methods to establish relationship between data models and UITableViewCells.
+4. Add data models to memoryStorage, or use CoreData storage class.
 
-![](without.png)
+## API quickstart
 
-Clearly, there are way to many connections, that your view controller needs to handle. And we only show table view stuff, however most likely your view controller is also doing other things, which will make this graph much more complicated. 
+<table>
+<tr><th colspan=2 style="text-align:center;">Key classes</th></tr>
+	<tr>
+	<td> DTTableViewController </td>
+	<td>Your UIViewController, that presents tableView, needs to subclass* this class. This class implements all UITableViewDatasource methods.</td>
+	</tr>
+	<tr>
+	<td>DTTableViewMemoryStorage</td>
+	<td>Class responsible for holding tableView models. It is used as a default storage by DTTableViewManager.</td>
+	</tr>
+	<tr>
+	<td>DTCoreDataStorage</td>
+	<td>Class used to display data, using `NSFetchedResultsController`.</td>
+	</tr>
+	<tr>
+	<td>DTSectionModel</td>
+	<td> Object, representing section in UITableView. Basically has three properties - array of objects, headerModel and footerModel.</td>
+	</tr>
+<tr><th colspan=2 style="text-align:center;">Protocols</th></tr>
+	<tr>
+	<td>DTModelTransfer</td>
+	<td> Protocol, which methods are used to transfer model to UITableViewCell subclass, that will be representing it.</td>
+	</tr>
+<tr><th colspan=2 style="text-align:center;">Convenience classes (optional)</th></tr>
+	<tr>
+	<td>DTTableViewCell</td>
+	<td> UITableViewCell subclass, conforming to `DTModelTransfer` protocol. </td>
+	</tr>
+	<tr>
+	<td>DTDefaultCellModel</td>
+	<td>Custom model class, that allows to use UITableViewCell without subclassing.</td>
+	</tr>
+	<tr>
+	<td>DTDefaultHeaderFooterModel</td>
+	<td>Custom model class, that allows to use UITableViewHeaderFooterView without subclassing.</td>
+	</tr>
+</table>
 
-Solution for this - separate datasource from view controller. DTTableViewManager does just that. Here's how picture looks, when we use it:
-
-![](with.png)
-
-In the end, view controller is left with following stuff:
-
-* Register mapping between data model class and cell class.
-* Populate data storage with data models
-
-Okay, enough talking, let's dive into code. 
-
-Start with subclassing `DTTableViewController`, and setting it's `tableView` property with your UITableView.
+* If you need your view controller to be subclassed from something else than DTTableViewController, it's good practice to use [UIViewController containment API](http://www.objc.io/issue-1/containment-view-controller.html), and embed DTTableViewController subclass as a child inside inside parent controller.
 
 ## Mapping
 
 * Cells
-
 ```objective-c
 [self registerCellClass:[Cell class] forModelClass:[Model class]];
 ```
 
 * Headers/Footers
-
 ```objective-c
 [self registerHeaderClass:[HeaderView class] forModelClass:[Model class]];
 [self registerFooterClass:[FooterView class] forModelClass:[Model class]];
@@ -78,11 +89,13 @@ Start with subclassing `DTTableViewController`, and setting it's `tableView` pro
 
 This will also register nibs with `Cell`, `HeaderView` and `FooterView` name, if any of them exist. 
 
-If you use storyboards and prototype cells, you will need to set reuseIdentifier for corresponding cell in storyboard.
+#### Storyboards
 
-# Managing table items
+If you use storyboards and prototype cells, you will need to set reuseIdentifier for corresponding cell in storyboard. Reuse identifier needs to be identical to your cell class name. 
 
-Starting with 2.1, storage classes for DTTableViewManager have been moved to [separate repo](https://github.com/DenHeadless/DTModelStorage). Two data storage classes are provided - memory and core data storage. Let's start with `DTTableViewMemoryStorage`, that is used by default.
+## Managing table items
+
+Storage classes for DTTableViewManager have been moved to [separate repo](https://github.com/DenHeadless/DTModelStorage). Two data storage classes are provided - memory and core data storage. Let's start with `DTTableViewMemoryStorage`, that is used by default.
 
 ### Memory storage
 
@@ -149,29 +162,6 @@ Subclass DTCoreDataStorage and implement single method
 ```	
 
 You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate. Take a look at example application, that does just that.
-	
-## Convenience classes and methods
-
-Most of the time you will have data model classes and UITableViewCell subclasses, that display models. However, sometimes you would want something more simple. For example, headers and footers might only need NSString as data model. You can use several Foundation types for that purpose. 
-
-[Note on using Foundation types as data models](https://github.com/DenHeadless/DTTableViewManager/wiki/Foundation-classes-as-data-models-for-DTTableViewManager)
-
-Sometimes you may also want to use predefined UITableViewCell styles for simple UITableViewCell. You can do that by creating `DTDefaultCellModel`:
-
-```objective-c
-+(instancetype)modelWithCellStyle:(UITableViewCellStyle)style
-                  reuseIdentifier:(NSString *)reuseIdentifier
-               configurationBlock:(DTCellConfigurationBlock)configurationBlock;
-```
-
-Similarly, there's also `DTDefaultHeaderFooterModel`:
-
-```objective-c
-+(instancetype)modelWithReuseIdentifier:(NSString *)reuseIdentifier
-                     configurationBlock:(DTHeaderFooterViewConfigurationBlock)configurationBlock;
-```
-
-Just add default models to memory storage, no mapping required for those.
 
 ## Requirements
 
@@ -182,20 +172,11 @@ Just add default models to memory storage, no mapping required for those.
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 2.3.0'
+	pod 'DTTableViewManager', '~> 2.4.0'
 
 ## Documentation
 
 You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
-
-## Example
-
-Take a look at Example folder in repo. Don't forget to run 
-
-```bash
-pod install 
-```
-in example directory.
 
 ## Thanks
 
