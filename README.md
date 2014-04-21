@@ -116,8 +116,6 @@ In most cases, adding items to memory storage is as simple as calling:
 - (void)addItems:(NSArray *)items toSection:(NSInteger)sectionNumber;
 ```
 
-##### DTTableViewMemoryStorage
-
 `DTTableViewMemoryStorage` is a subclass of `DTMemoryStorage`, that adds adds several methods, that are specific to UITableView. Two most relevant of them are 
 
 ```objective-c
