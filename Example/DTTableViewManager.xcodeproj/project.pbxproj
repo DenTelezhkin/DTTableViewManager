@@ -126,7 +126,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D5F857F59CD43C689F106DB /* Pods-CedarUnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CedarUnitTests.xcconfig"; path = "Pods/Pods-CedarUnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		431B3D74923D4C9F93AE7D9D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		950659EC1749030C008AB32D /* BaseExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseExampleController.h; path = ExampleControllers/BaseExampleController.h; sourceTree = "<group>"; };
 		950659ED1749030C008AB32D /* BaseExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseExampleController.m; path = ExampleControllers/BaseExampleController.m; sourceTree = "<group>"; };
@@ -611,7 +610,6 @@
 				E6CB97B0161B26C900A7E936 /* CedarUnitTests */,
 				E6EA83651615EE6000F8B8C3 /* Frameworks */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
-				1D5F857F59CD43C689F106DB /* Pods-CedarUnitTests.xcconfig */,
 				C331A5120C02433C91C38655 /* Pods.xcconfig */,
 				A3A92A4CCD814CDC8B855D07 /* Pods-Tests.xcconfig */,
 			);

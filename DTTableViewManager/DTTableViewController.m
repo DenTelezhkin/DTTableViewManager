@@ -422,6 +422,8 @@
     return [self.cellFactory cellForModel:model];
 }
 
+#pragma mark - actions
+
 - (void) tableView:(UITableView *)tableView
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
        toIndexPath:(NSIndexPath *)destinationIndexPath

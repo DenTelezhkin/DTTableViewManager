@@ -77,24 +77,25 @@
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
-    UITableViewCell * tableCell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:[self reuseIdentifierForClass:modelClass]];
+    NSString * cellString = NSStringFromClass(cellClass);
+    UITableViewCell * tableCell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:cellString];
     
     if (!tableCell)
     {
         // Storyboard prototype cell
         [[self.delegate tableView] registerClass:cellClass
-                          forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+                          forCellReuseIdentifier:cellString];
         
-        if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
+        if ([self nibExistsWIthNibName:cellString])
         {
-            [self registerNibNamed:NSStringFromClass(cellClass)
+            [self registerNibNamed:cellString
                       forCellClass:cellClass
                         modelClass:modelClass];
         }
     }
 
     [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
-                                    forKey:[self reuseIdentifierForClass:modelClass]];
+                                    forKey:[self modelClassStringForClass:modelClass]];
 }
 
 -(void)registerNibNamed:(NSString *)nibName
@@ -104,10 +105,10 @@
     NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-         forCellReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+         forCellReuseIdentifier:NSStringFromClass(cellClass)];
     
     [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
-                                    forKey:[self reuseIdentifierForClass:modelClass]];
+                                    forKey:[self modelClassStringForClass:modelClass]];
 }
 
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
@@ -125,11 +126,11 @@
     if ([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-            forHeaderFooterViewReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+            forHeaderFooterViewReuseIdentifier:NSStringFromClass(headerClass)];
     }
     
     [self.headerMappingsDictionary setObject:NSStringFromClass(headerClass)
-                                      forKey:[self reuseIdentifierForClass:modelClass]];
+                                      forKey:[self modelClassStringForClass:modelClass]];
 }
 
 -(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
@@ -147,17 +148,17 @@
     if ([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-            forHeaderFooterViewReuseIdentifier:[self reuseIdentifierForClass:modelClass]];
+            forHeaderFooterViewReuseIdentifier:[self modelClassStringForClass:modelClass]];
     }
     
     [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
-                                      forKey:[self reuseIdentifierForClass:modelClass]];
+                                      forKey:[self modelClassStringForClass:modelClass]];
 }
 
 -(void)setFooterClassMapping:(Class)footerClass forModelClass:(Class)modelClass
 {
     [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
-                                      forKey:[self reuseIdentifierForClass:modelClass]];
+                                      forKey:[self modelClassStringForClass:modelClass]];
 }
 
 #pragma mark - actions
@@ -195,9 +196,11 @@
                          configurationBlock:defaultModel.cellConfigurationBlock];
     }
     
-    UITableViewCell <DTModelTransfer> *cell = (id)[self cellForReuseIdentifier:[self reuseIdentifierForClass:[model class]]
+    Class cellClass = [self cellClassForModel:model];
+    
+    UITableViewCell <DTModelTransfer> *cell = (id)[self cellForReuseIdentifier:NSStringFromClass(cellClass)
                                                                          style:UITableViewCellStyleDefault
-                                                                     cellClass:[self cellClassForModel:model]
+                                                                     cellClass:cellClass
                                                             configurationBlock:nil];
     [cell updateWithModel:model];
     
@@ -239,10 +242,10 @@
                                      configurationBlock:headerFooter.viewConfigurationBlock];
     }
     
-    NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
+    Class headerClass = [self headerClassForModel:model];
     
-    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:reuseIdentifier
-                                                                         viewClass:[self headerClassForModel:model]
+    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:NSStringFromClass(headerClass)
+                                                                         viewClass:headerClass
                                                                 configurationBlock:nil];
     [view updateWithModel:model];
 
@@ -259,10 +262,10 @@
                                      configurationBlock:headerFooter.viewConfigurationBlock];
     }
     
-    NSString * reuseIdentifier = [self reuseIdentifierForClass:[model class]];
+    Class footerClass = [self footerClassForModel:model];
     
-    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:reuseIdentifier
-                                                                         viewClass:[self footerClassForModel:model]
+    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:NSStringFromClass(footerClass)
+                                                                         viewClass:footerClass
                                                                 configurationBlock:nil];
     [view updateWithModel:model];
     
@@ -271,7 +274,7 @@
 
 - (Class)cellClassForModel:(NSObject *)model
 {
-    NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
+    NSString *modelClassName = [self modelClassStringForClass:[model class]];
     
     NSString * cellClassString = [self.cellMappingsDictionary objectForKey:modelClassName];
     
@@ -282,7 +285,7 @@
 
 -(Class)headerClassForModel:(id)model
 {
-    NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
+    NSString *modelClassName = [self modelClassStringForClass:[model class]];
     
     NSString * headerClassString = [self.headerMappingsDictionary objectForKey:modelClassName];
     
@@ -293,7 +296,7 @@
 
 -(Class)footerClassForModel:(id)model
 {
-    NSString *modelClassName = [self reuseIdentifierForClass:[model class]];
+    NSString *modelClassName = [self modelClassStringForClass:[model class]];
     
     NSString * footerClassString = [self.footerMappingsDictionary objectForKey:modelClassName];
     
@@ -304,7 +307,7 @@
 
 #pragma mark - helpers
 
--(NSString *)reuseIdentifierForClass:(Class)class
+-(NSString *)modelClassStringForClass:(Class)class
 {
     NSString * classString = NSStringFromClass(class);
     
