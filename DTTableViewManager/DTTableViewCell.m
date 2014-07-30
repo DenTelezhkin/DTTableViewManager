@@ -42,4 +42,10 @@
 {
     return nil;
 }
+
++(NSString *)reuseIdentifier
+{
+    return NSStringFromClass(self);
+}
+
 @end

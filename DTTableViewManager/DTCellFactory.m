@@ -198,7 +198,7 @@
     
     Class cellClass = [self cellClassForModel:model];
     
-    UITableViewCell <DTModelTransfer> *cell = (id)[self cellForReuseIdentifier:NSStringFromClass(cellClass)
+    UITableViewCell <DTModelTransfer> *cell = (id)[self cellForReuseIdentifier:[self reuseIdentifierFromClass:cellClass]
                                                                          style:UITableViewCellStyleDefault
                                                                      cellClass:cellClass
                                                             configurationBlock:nil];
@@ -244,7 +244,7 @@
     
     Class headerClass = [self headerClassForModel:model];
     
-    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:NSStringFromClass(headerClass)
+    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:[self reuseIdentifierFromClass:headerClass]
                                                                          viewClass:headerClass
                                                                 configurationBlock:nil];
     [view updateWithModel:model];
@@ -264,7 +264,7 @@
     
     Class footerClass = [self footerClassForModel:model];
     
-    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:NSStringFromClass(footerClass)
+    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:[self reuseIdentifierFromClass:footerClass]
                                                                          viewClass:footerClass
                                                                 configurationBlock:nil];
     [view updateWithModel:model];
@@ -303,6 +303,17 @@
     NSAssert(footerClassString, @"DTCellFactory does not have footer mapping for model class: %@",[model class]);
     
     return NSClassFromString(footerClassString);
+}
+
+-(NSString *)reuseIdentifierFromClass:(Class)klass
+{
+    NSString * reuseIdentifier = NSStringFromClass(klass);
+    
+    if ([klass respondsToSelector:@selector(reuseIdentifier)])
+    {
+        reuseIdentifier = [klass reuseIdentifier];
+    }
+    return reuseIdentifier;
 }
 
 #pragma mark - helpers

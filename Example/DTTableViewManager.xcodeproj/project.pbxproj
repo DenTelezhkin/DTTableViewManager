@@ -77,6 +77,12 @@
 		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
 		9A22771B1882F3C300C16345 /* DTDefaultHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A22771A1882F3C300C16345 /* DTDefaultHeaderFooterModel.m */; };
 		9A22771C1882F3C300C16345 /* DTDefaultHeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A22771A1882F3C300C16345 /* DTDefaultHeaderFooterModel.m */; };
+		9A951D3D198975CA004BE27E /* CellWIthNoIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A951D3B198975CA004BE27E /* CellWIthNoIdentifier.m */; };
+		9A951D3E198975CA004BE27E /* CellWIthNoIdentifier.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A951D3C198975CA004BE27E /* CellWIthNoIdentifier.xib */; };
+		9A951D3F198975D1004BE27E /* CellOverriddenIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A951D3619897552004BE27E /* CellOverriddenIdentifier.m */; };
+		9A951D40198975D1004BE27E /* CellOverriddenIdentifier.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A951D3719897552004BE27E /* CellOverriddenIdentifier.xib */; };
+		9A951D4319897795004BE27E /* HeaderWithOverriddenIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A951D4219897795004BE27E /* HeaderWithOverriddenIdentifier.m */; };
+		9A951D4519897897004BE27E /* HeaderWithOverriddenIdentifier.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A951D4419897897004BE27E /* HeaderWithOverriddenIdentifier.xib */; };
 		AA01B52F1848DA49009B3041 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BCE72F1792C7B300526954 /* Default-568h@2x.png */; };
 		AA0F32E9188193180076106C /* DTDefaultCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F32E8188193180076106C /* DTDefaultCellModel.m */; };
 		AA0F32EA188193180076106C /* DTDefaultCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F32E8188193180076106C /* DTDefaultCellModel.m */; };
@@ -205,6 +211,15 @@
 		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
 		9A2277191882F3C300C16345 /* DTDefaultHeaderFooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTDefaultHeaderFooterModel.h; path = ../../DTTableViewManager/DTDefaultHeaderFooterModel.h; sourceTree = "<group>"; };
 		9A22771A1882F3C300C16345 /* DTDefaultHeaderFooterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTDefaultHeaderFooterModel.m; path = ../../DTTableViewManager/DTDefaultHeaderFooterModel.m; sourceTree = "<group>"; };
+		9A951D3519897552004BE27E /* CellOverriddenIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellOverriddenIdentifier.h; path = mocks/CellOverriddenIdentifier.h; sourceTree = "<group>"; };
+		9A951D3619897552004BE27E /* CellOverriddenIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellOverriddenIdentifier.m; path = mocks/CellOverriddenIdentifier.m; sourceTree = "<group>"; };
+		9A951D3719897552004BE27E /* CellOverriddenIdentifier.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellOverriddenIdentifier.xib; path = mocks/CellOverriddenIdentifier.xib; sourceTree = "<group>"; };
+		9A951D3A198975CA004BE27E /* CellWIthNoIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellWIthNoIdentifier.h; path = mocks/CellWIthNoIdentifier.h; sourceTree = "<group>"; };
+		9A951D3B198975CA004BE27E /* CellWIthNoIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellWIthNoIdentifier.m; path = mocks/CellWIthNoIdentifier.m; sourceTree = "<group>"; };
+		9A951D3C198975CA004BE27E /* CellWIthNoIdentifier.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellWIthNoIdentifier.xib; path = mocks/CellWIthNoIdentifier.xib; sourceTree = "<group>"; };
+		9A951D4119897795004BE27E /* HeaderWithOverriddenIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderWithOverriddenIdentifier.h; path = "mocks/Header:footer mocks/HeaderWithOverriddenIdentifier.h"; sourceTree = "<group>"; };
+		9A951D4219897795004BE27E /* HeaderWithOverriddenIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeaderWithOverriddenIdentifier.m; path = "mocks/Header:footer mocks/HeaderWithOverriddenIdentifier.m"; sourceTree = "<group>"; };
+		9A951D4419897897004BE27E /* HeaderWithOverriddenIdentifier.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderWithOverriddenIdentifier.xib; path = "mocks/Header:footer mocks/HeaderWithOverriddenIdentifier.xib"; sourceTree = "<group>"; };
 		A3A92A4CCD814CDC8B855D07 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
 		AA0F32E6188144FA0076106C /* DTViewConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTViewConfiguration.h; path = ../../DTTableViewManager/DTViewConfiguration.h; sourceTree = "<group>"; };
 		AA0F32E7188193180076106C /* DTDefaultCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTDefaultCellModel.h; path = ../../DTTableViewManager/DTDefaultCellModel.h; sourceTree = "<group>"; };
@@ -404,6 +419,12 @@
 				950659FB174C027F008AB32D /* BaseMockCell.m */,
 				AA87853718AA716D00D138D5 /* StringCell.h */,
 				AA87853818AA716D00D138D5 /* StringCell.m */,
+				9A951D3519897552004BE27E /* CellOverriddenIdentifier.h */,
+				9A951D3619897552004BE27E /* CellOverriddenIdentifier.m */,
+				9A951D3719897552004BE27E /* CellOverriddenIdentifier.xib */,
+				9A951D3A198975CA004BE27E /* CellWIthNoIdentifier.h */,
+				9A951D3B198975CA004BE27E /* CellWIthNoIdentifier.m */,
+				9A951D3C198975CA004BE27E /* CellWIthNoIdentifier.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -432,6 +453,9 @@
 				9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */,
 				9589420F1750C900007CEB5E /* BaseHeaderFooterView.h */,
 				958942101750C901007CEB5E /* BaseHeaderFooterView.m */,
+				9A951D4119897795004BE27E /* HeaderWithOverriddenIdentifier.h */,
+				9A951D4219897795004BE27E /* HeaderWithOverriddenIdentifier.m */,
+				9A951D4419897897004BE27E /* HeaderWithOverriddenIdentifier.xib */,
 			);
 			name = "iOS 6";
 			sourceTree = "<group>";
@@ -757,7 +781,9 @@
 			files = (
 				E6CB97B5161B26C900A7E936 /* InfoPlist.strings in Resources */,
 				E666ACEB162C02C800A2DBF2 /* CustomCell.xib in Resources */,
+				9A951D40198975D1004BE27E /* CellOverriddenIdentifier.xib in Resources */,
 				E6402F8D162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
+				9A951D3E198975CA004BE27E /* CellWIthNoIdentifier.xib in Resources */,
 				E6402F97162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
 				E6402FB4162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
 				E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
@@ -769,6 +795,7 @@
 				952112CE1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */,
 				950659F9174C0219008AB32D /* CellWithNib.xib in Resources */,
 				958942011750B9E3007CEB5E /* MockTableHeaderView.xib in Resources */,
+				9A951D4519897897004BE27E /* HeaderWithOverriddenIdentifier.xib in Resources */,
 				952112BC1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */,
 				958942091750BC27007CEB5E /* MockTableHeaderFooterView.xib in Resources */,
 			);
@@ -879,6 +906,7 @@
 				AA87853918AA716D00D138D5 /* StringCell.m in Sources */,
 				E666ACF4162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				9591074C18424AAC0012B07E /* MemoryStorageSpecs.mm in Sources */,
+				9A951D3D198975CA004BE27E /* CellWIthNoIdentifier.m in Sources */,
 				E6402F8B162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
 				E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
@@ -892,6 +920,7 @@
 				952112D21854A82100063EA8 /* BankCell.m in Sources */,
 				952112D61854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */,
 				E6915662168B382800C5F189 /* DTTableViewController+UnitTests.m in Sources */,
+				9A951D3F198975D1004BE27E /* CellOverriddenIdentifier.m in Sources */,
 				9545FB9F16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
 				95A3B4AF16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
@@ -904,6 +933,7 @@
 				955EB1A018412BD500EAE855 /* DTTableViewMemoryStorage.m in Sources */,
 				95065A03174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				952112BA1854886400063EA8 /* AppleCoreDataExampleController.m in Sources */,
+				9A951D4319897795004BE27E /* HeaderWithOverriddenIdentifier.m in Sources */,
 				952112C2185491E500063EA8 /* Event.m in Sources */,
 				958941FF1750B9C8007CEB5E /* MockTableHeaderView.m in Sources */,
 				958942041750BAAA007CEB5E /* NiblessTableHeaderView.m in Sources */,

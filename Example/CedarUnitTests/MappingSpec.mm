@@ -6,6 +6,9 @@
 #import "MockTableHeaderFooterView.h"
 #import "DTDefaultCellModel.h"
 #import "DTDefaultHeaderFooterModel.h"
+#import "CellWIthNoIdentifier.h"
+#import "CellOverriddenIdentifier.h"
+#import "HeaderWithOverriddenIdentifier.h"
 
 using namespace Cedar::Matchers;
 
@@ -645,10 +648,8 @@ describe(@"Foundation class clusters", ^{
         });
         
         it(@"should accept NSDate for footer", ^{
-            ^{
-                [storage setSectionFooterModels:@[[NSDate date]]];
-                [model tableView:model.tableView viewForFooterInSection:0];
-            } should_not raise_exception;
+            [storage setSectionFooterModels:@[[NSDate date]]];
+            [model tableView:model.tableView viewForFooterInSection:0];
         });
        
     });
@@ -756,6 +757,61 @@ describe(@"Foundation class clusters", ^{
             [view detailTextLabel].text should equal(@"bar");
         });
     });
+    
+    describe(@"cell with different reuse identifiers", ^{
+        
+        it(@"should successfully add cell with no identifier", ^{
+            [model registerCellClass:[CellWIthNoIdentifier class]
+                       forModelClass:[NSString class]];
+            
+            [storage addItem:@"foo" toSection:0];
+            
+            UITableViewCell * cell = [model.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            
+            cell should BeInstanceOf([CellWIthNoIdentifier class]);
+        });
+        
+        it(@"should successfully add cell with overridden identifier", ^{
+            [model registerCellClass:[CellOverriddenIdentifier class]
+                       forModelClass:[NSString class]];
+            
+            [storage addItem:@"foo" toSection:0];
+            
+            UITableViewCell * cell = [model.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            
+            cell should BeInstanceOf([CellOverriddenIdentifier class]);
+        });
+    });
+    
+    describe(@"headers with different reuse identifiers", ^{
+        
+        it(@"should successfully add header overridden identifier", ^{
+            [model registerHeaderClass:[HeaderWithOverriddenIdentifier class]
+                         forModelClass:[NSString class]];
+            model.sectionHeaderStyle = DTTableViewSectionStyleView;
+            
+            [storage setSectionHeaderModels:@[@"bar"]];
+            
+            UITableViewHeaderFooterView * view = (UITableViewHeaderFooterView *)[model tableView:model.tableView
+                                                                          viewForHeaderInSection:0];
+            
+            [view class] should equal([HeaderWithOverriddenIdentifier class]);
+        });
+        
+        it(@"should successfully add footer with overridden identifier", ^{
+            [model registerFooterClass:[HeaderWithOverriddenIdentifier class]
+                         forModelClass:[NSString class]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
+            
+            [storage setSectionFooterModels:@[@"bar"]];
+            
+            UITableViewHeaderFooterView * view = (UITableViewHeaderFooterView *)[model tableView:model.tableView
+                                                                          viewForFooterInSection:0];
+            
+            [view class] should equal([HeaderWithOverriddenIdentifier class]);
+        });
+    });
+
 });
 
 SPEC_END
