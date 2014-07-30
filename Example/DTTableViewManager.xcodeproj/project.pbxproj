@@ -350,8 +350,8 @@
 		958941FC1750B992007CEB5E /* Header footer mocks */ = {
 			isa = PBXGroup;
 			children = (
-				95BCE7DF17770DA400980281 /* iOS 6 */,
-				95BCE7DE17770D9D00980281 /* iOS 5 */,
+				95BCE7DF17770DA400980281 /* UITableViewHeaderFooterView */,
+				95BCE7DE17770D9D00980281 /* UIView */,
 			);
 			name = "Header footer mocks";
 			sourceTree = "<group>";
@@ -429,7 +429,7 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		95BCE7DE17770D9D00980281 /* iOS 5 */ = {
+		95BCE7DE17770D9D00980281 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
 				958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */,
@@ -440,10 +440,10 @@
 				958942121750C937007CEB5E /* BaseHeaderView.h */,
 				958942131750C937007CEB5E /* BaseHeaderView.m */,
 			);
-			name = "iOS 5";
+			name = UIView;
 			sourceTree = "<group>";
 		};
-		95BCE7DF17770DA400980281 /* iOS 6 */ = {
+		95BCE7DF17770DA400980281 /* UITableViewHeaderFooterView */ = {
 			isa = PBXGroup;
 			children = (
 				958942051750BC08007CEB5E /* MockTableHeaderFooterView.h */,
@@ -457,7 +457,7 @@
 				9A951D4219897795004BE27E /* HeaderWithOverriddenIdentifier.m */,
 				9A951D4419897897004BE27E /* HeaderWithOverriddenIdentifier.xib */,
 			);
-			name = "iOS 6";
+			name = UITableViewHeaderFooterView;
 			sourceTree = "<group>";
 		};
 		95FC93F418186A21003225B7 /* Storyboard */ = {
