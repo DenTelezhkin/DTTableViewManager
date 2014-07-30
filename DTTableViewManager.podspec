@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'DTTableViewManager'
-  s.version  = '2.5.0'
+  s.version  = '2.5.1'
   s.license  = 'MIT'
   s.summary  = 'The most simple and robust way to manage UITableView.'
   s.homepage = 'https://github.com/DenHeadless/DTTableViewManager'

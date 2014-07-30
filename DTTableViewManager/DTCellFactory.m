@@ -77,18 +77,18 @@
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
-    NSString * cellString = NSStringFromClass(cellClass);
-    UITableViewCell * tableCell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:cellString];
+    NSString * reuseIdentifier = [self reuseIdentifierFromClass:cellClass];
+    UITableViewCell * tableCell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     if (!tableCell)
     {
         // Storyboard prototype cell
         [[self.delegate tableView] registerClass:cellClass
-                          forCellReuseIdentifier:cellString];
+                          forCellReuseIdentifier:reuseIdentifier];
         
-        if ([self nibExistsWIthNibName:cellString])
+        if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
         {
-            [self registerNibNamed:cellString
+            [self registerNibNamed:NSStringFromClass(cellClass)
                       forCellClass:cellClass
                         modelClass:modelClass];
         }
@@ -105,7 +105,7 @@
     NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-         forCellReuseIdentifier:NSStringFromClass(cellClass)];
+                    forCellReuseIdentifier:[self reuseIdentifierFromClass:cellClass]];
     
     [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
                                     forKey:[self modelClassStringForClass:modelClass]];
@@ -126,7 +126,7 @@
     if ([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-            forHeaderFooterViewReuseIdentifier:NSStringFromClass(headerClass)];
+            forHeaderFooterViewReuseIdentifier:[self reuseIdentifierFromClass:headerClass]];
     }
     
     [self.headerMappingsDictionary setObject:NSStringFromClass(headerClass)
@@ -148,7 +148,7 @@
     if ([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-            forHeaderFooterViewReuseIdentifier:[self modelClassStringForClass:modelClass]];
+            forHeaderFooterViewReuseIdentifier:[self reuseIdentifierFromClass:footerClass]];
     }
     
     [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
