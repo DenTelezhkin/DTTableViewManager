@@ -12,8 +12,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "OCMock.h"
-    #import <Cedar-iOS/Cedar-iOS.h>
-    #import <Cedar-iOS/SpecHelper.h>
+    #import <Cedar/Cedar-iOS.h>
     #import "Example.h"
     #import "ExampleCell.h"
 #endif

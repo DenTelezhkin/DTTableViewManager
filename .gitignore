@@ -1,8 +1,6 @@
 # cocoa pods
 
 Example/Pods/*
-Example/Podfile.lock
-Podfile.lock
 
 #Appcode
 .idea/
