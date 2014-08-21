@@ -26,10 +26,10 @@
 #import "DTTableViewController.h"
 #import "DTTableViewCell.h"
 
+#import "DTMemoryStorage.h"
+#import "DTCoreDataStorage.h"
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTCoreDataStorage+DTTableViewManagerAdditions.h"
-
-#import "DTCoreDataStorage.h"
 
 #import "DTModelTransfer.h"
 

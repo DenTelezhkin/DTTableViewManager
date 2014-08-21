@@ -1,7 +1,7 @@
 xcodeproj 'DTTableViewManager.xcodeproj'
 platform :ios, 6.0
 
-pod 'DTModelStorage', '0.8.0'
+pod 'DTModelStorage', '0.9.0'
 
 target :Tests do
   pod 'Cedar'
