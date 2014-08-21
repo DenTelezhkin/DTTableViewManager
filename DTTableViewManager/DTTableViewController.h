@@ -25,7 +25,7 @@
 
 #import "DTModelTransfer.h"
 #import "DTTableViewDataStorage.h"
-#import "DTTableViewMemoryStorage.h"
+#import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTSectionModel+HeaderFooterModel.h"
 
 typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
@@ -108,7 +108,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
  
  @return DTTableViewMemoryStorage instance.
  */
-- (DTTableViewMemoryStorage *)memoryStorage;
+- (DTMemoryStorage *)memoryStorage;
 
 
 /**

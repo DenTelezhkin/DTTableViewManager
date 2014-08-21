@@ -3,10 +3,10 @@ using namespace Cedar::Matchers;
 SPEC_BEGIN(MemoryStorageSpecs)
 
 describe(@"Storage search specs", ^{
-    __block DTTableViewMemoryStorage *storage;
+    __block DTMemoryStorage *storage;
     
     beforeEach(^{
-        storage = [DTTableViewMemoryStorage storage];
+        storage = [DTMemoryStorage storage];
         storage.delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
     });
     
@@ -47,12 +47,12 @@ describe(@"Storage search specs", ^{
 });
 
 describe(@"Storage Add specs", ^{
-    __block DTTableViewMemoryStorage *storage;
+    __block DTMemoryStorage *storage;
     __block OCMockObject * delegate;
 
     beforeEach(^{
         delegate = [OCMockObject mockForClass:[DTTableViewController class]];
-        storage = [DTTableViewMemoryStorage storage];
+        storage = [DTMemoryStorage storage];
         storage.delegate = (id <DTTableViewDataStorageUpdating>)delegate;
     });
     
@@ -92,7 +92,7 @@ describe(@"Storage Add specs", ^{
 });
 
 describe(@"Storage edit specs", ^{
-    __block DTTableViewMemoryStorage *storage;
+    __block DTMemoryStorage *storage;
     __block OCMockObject * delegate;
     __block Example * acc1;
     __block Example * acc2;
@@ -103,7 +103,7 @@ describe(@"Storage edit specs", ^{
     
     beforeEach(^{
         delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
-        storage = [DTTableViewMemoryStorage storage];
+        storage = [DTMemoryStorage storage];
         storage.delegate = (id <DTTableViewDataStorageUpdating>)delegate;
         
         acc1 = [Example new];

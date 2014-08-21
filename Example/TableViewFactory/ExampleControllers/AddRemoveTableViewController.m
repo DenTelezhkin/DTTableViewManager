@@ -38,7 +38,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTTableViewMemoryStorage * storage = [self memoryStorage];
+    DTMemoryStorage * storage = [self memoryStorage];
     [storage removeItem:[storage itemAtIndexPath:indexPath]];
 }
 

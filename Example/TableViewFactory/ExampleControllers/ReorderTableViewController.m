@@ -13,7 +13,7 @@
 
 -(void)addExampleCells
 {
-    DTTableViewMemoryStorage * storage = [self memoryStorage];
+    DTMemoryStorage * storage = [self memoryStorage];
     
     [storage addItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];
     [storage addItem:[Example exampleWithText:@"Section 1 cell" andDetails:@""] toSection:0];

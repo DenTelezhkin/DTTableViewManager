@@ -16,7 +16,7 @@
 #import "ControllerModel.h"
 #import "ControllerCell.h"
 #import "StoryboardController.h"
-#import "DTTableViewMemoryStorage.h"
+#import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTSectionModel.h"
 #import "AppleCoreDataExampleController.h"
 #import "BanksCoreDataViewController.h"
@@ -34,7 +34,7 @@
     
     self.title = @"Examples";
     
-    DTTableViewMemoryStorage * storage = [self memoryStorage];
+    DTMemoryStorage * storage = [self memoryStorage];
     
     [storage addItem:[ControllerModel modelWithClass:[AddRemoveTableViewController class]
                                               andTitle:@"Add/Remove cells"]];

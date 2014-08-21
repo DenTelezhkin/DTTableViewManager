@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
 //
 
-#import "DTTableViewMemoryStorage.h"
+#import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 
-@interface DTTableViewMemoryStorage (UnitTests)
+@interface DTMemoryStorage (UnitTests)
 
 -(NSArray *)indexPathArrayForItems:(NSArray *)items;
 

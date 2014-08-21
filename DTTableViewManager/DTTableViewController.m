@@ -24,6 +24,8 @@
 
 #import "DTTableViewController.h"
 #import "DTCellFactory.h"
+#import "DTMemoryStorage_DTTableViewManagerAdditions.h"
+#import "DTTableViewDataStorage.h"
 
 @interface DTTableViewController ()
         <DTTableViewFactoryDelegate>
@@ -67,7 +69,7 @@
     _cellFactory = [DTCellFactory new];
     _cellFactory.delegate = self;
 
-    _dataStorage = [DTTableViewMemoryStorage storage];
+    _dataStorage = [DTMemoryStorage storage];
     _dataStorage.delegate = self;
 
     _currentSearchScope = -1;
@@ -95,11 +97,11 @@
 
 #pragma mark - getters, setters
 
-- (DTTableViewMemoryStorage *)memoryStorage
+- (DTMemoryStorage *)memoryStorage
 {
-    if ([self.dataStorage isKindOfClass:[DTTableViewMemoryStorage class]])
+    if ([self.dataStorage isKindOfClass:[DTMemoryStorage class]])
     {
-        return (DTTableViewMemoryStorage *)self.dataStorage;
+        return (DTMemoryStorage *)self.dataStorage;
     }
     return nil;
 }
@@ -218,7 +220,7 @@
     }
     if ([self.dataStorage respondsToSelector:@selector(searchingStorageForSearchString:inSearchScope:)])
     {
-        self.searchingDataStorage = [(DTTableViewMemoryStorage *)self.dataStorage searchingStorageForSearchString:searchString
+        self.searchingDataStorage = [(DTMemoryStorage *)self.dataStorage searchingStorageForSearchString:searchString
                                                                                                     inSearchScope:scopeNumber];
         [self.tableView reloadData];
     }
@@ -232,7 +234,7 @@
         {
             if ([self.searchingDataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
             {
-                return [(DTTableViewMemoryStorage *)self.searchingDataStorage headerModelForSectionIndex:index];
+                return [(DTMemoryStorage *)self.searchingDataStorage headerModelForSectionIndex:index];
             }
         }
     }
@@ -242,7 +244,7 @@
         {
             if ([self.dataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
             {
-                return [(DTTableViewMemoryStorage *)self.dataStorage headerModelForSectionIndex:index];
+                return [(DTMemoryStorage *)self.dataStorage headerModelForSectionIndex:index];
             }
         }
     }
@@ -257,7 +259,7 @@
         {
             if ([self.searchingDataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
             {
-                return [(DTTableViewMemoryStorage *)self.searchingDataStorage footerModelForSectionIndex:index];
+                return [(DTMemoryStorage *)self.searchingDataStorage footerModelForSectionIndex:index];
             }
         }
     }
@@ -267,7 +269,7 @@
         {
             if ([self.dataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
             {
-                return [(DTTableViewMemoryStorage *)self.dataStorage footerModelForSectionIndex:index];
+                return [(DTMemoryStorage *)self.dataStorage footerModelForSectionIndex:index];
             }
         }
     }
@@ -428,7 +430,7 @@
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
        toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    DTTableViewMemoryStorage * storage = [self memoryStorage];
+    DTMemoryStorage * storage = [self memoryStorage];
     if (!storage)
     {
         // silencing static analyzer =). This probably will never happen.

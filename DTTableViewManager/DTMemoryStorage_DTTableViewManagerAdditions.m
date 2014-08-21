@@ -1,9 +1,9 @@
 //
-//  DTTableViewDatasource.m
+//  DTMemoryStorage_DTTableViewAdditions.h
 //  DTTableViewManager
 //
-//  Created by Denys Telezhkin on 23.11.13.
-//  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
+//  Created by Denys Telezhkin on 21.08.14.
+//  Copyright (c) 2014 Denys Telezhkin. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTTableViewMemoryStorage.h"
-#import "DTTableViewController.h"
+#import "DTMemoryStorage_DTTableViewManagerAdditions.h"
+#import "DTSectionModel+HeaderFooterModel.h"
+#import "DTTableViewDataStorage.h"
 
 @interface DTMemoryStorage ()
 - (DTSectionModel *)getValidSection:(NSUInteger)sectionNumber;
@@ -36,7 +37,7 @@
 - (void)finishUpdate;
 @end
 
-@implementation DTTableViewMemoryStorage
+@implementation DTMemoryStorage(DTTableViewManager_Additions)
 
 - (void)setSectionHeaderModels:(NSArray *)headerModels
 {
@@ -66,19 +67,19 @@
     {
         [section.objects removeAllObjects];
     }
-    [self.delegate performAnimatedUpdate:^(UITableView * tableView)
-    {
-        [tableView reloadData];
-    }];
+    [(id <DTTableViewDataStorageUpdating>)self.delegate performAnimatedUpdate:^(UITableView * tableView)
+     {
+         [tableView reloadData];
+     }];
 }
 
 - (void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath
                 toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     [self startUpdate];
-
+    
     id item = [self objectAtIndexPath:sourceIndexPath];
-
+    
     if (!sourceIndexPath || !item)
     {
         if ([self loggingEnabled])
@@ -89,7 +90,7 @@
     }
     DTSectionModel * sourceSection = [self getValidSection:sourceIndexPath.section];
     DTSectionModel * destinationSection = [self getValidSection:destinationIndexPath.section];
-
+    
     if ([destinationSection.objects count] < destinationIndexPath.row)
     {
         if ([self loggingEnabled])
@@ -99,17 +100,17 @@
         self.currentUpdate = nil;
         return;
     }
-
-    [self.delegate performAnimatedUpdate:^(UITableView * tableView)
-    {
-        [tableView insertSections:self.currentUpdate.insertedSectionIndexes
-                 withRowAnimation:UITableViewRowAnimationAutomatic];
-        [sourceSection.objects removeObjectAtIndex:sourceIndexPath.row];
-        [destinationSection.objects insertObject:item
-                                         atIndex:destinationIndexPath.row];
-        [tableView moveRowAtIndexPath:sourceIndexPath
-                          toIndexPath:destinationIndexPath];
-    }];
+    
+    [(id <DTTableViewDataStorageUpdating>)self.delegate performAnimatedUpdate:^(UITableView * tableView)
+     {
+         [tableView insertSections:self.currentUpdate.insertedSectionIndexes
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+         [sourceSection.objects removeObjectAtIndex:sourceIndexPath.row];
+         [destinationSection.objects insertObject:item
+                                          atIndex:destinationIndexPath.row];
+         [tableView moveRowAtIndexPath:sourceIndexPath
+                           toIndexPath:destinationIndexPath];
+     }];
     self.currentUpdate = nil;
 }
 
@@ -119,14 +120,14 @@
 {
     DTSectionModel * validSectionFrom = [self getValidSection:indexFrom];
     [self getValidSection:indexTo];
-
+    
     [(NSMutableArray *)self.sections removeObject:validSectionFrom];
     [(NSMutableArray *)self.sections insertObject:validSectionFrom atIndex:indexTo];
-
-    [self.delegate performAnimatedUpdate:^(UITableView * tableView)
-    {
-        [tableView moveSection:indexFrom toSection:indexTo];
-    }];
+    
+    [(id <DTTableViewDataStorageUpdating>)self.delegate performAnimatedUpdate:^(UITableView * tableView)
+     {
+         [tableView moveSection:indexFrom toSection:indexTo];
+     }];
 }
 
 @end

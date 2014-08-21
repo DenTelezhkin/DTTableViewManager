@@ -7,7 +7,7 @@
 //
 
 #import "DTTableViewController+UnitTests.h"
-#import "DTTableViewMemoryStorage.h"
+#import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 
 @interface DTTableViewController()
 -(BOOL)isSearching;

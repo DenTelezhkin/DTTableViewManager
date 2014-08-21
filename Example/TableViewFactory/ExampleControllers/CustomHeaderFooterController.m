@@ -24,7 +24,7 @@
     [self registerFooterClass:[CustomHeaderFooterView class]
                 forModelClass:[NSNumber class]];
     
-    DTTableViewMemoryStorage * storage = [self memoryStorage];
+    DTMemoryStorage * storage = [self memoryStorage];
     
     [storage setSectionHeaderModels:@[@(kHeaderKind),@(kHeaderKind)]];
     [storage setSectionFooterModels:@[@(kFooterKind),@(kFooterKind)]];

@@ -1,14 +1,13 @@
 #import "DTTableViewController+UnitTests.h"
 #import "DTTableViewMemoryStorage+UnitTests.h"
 #import "MockTableHeaderView.h"
-
 using namespace Cedar::Matchers;
 
 SPEC_BEGIN(DatasourceSpecs)
 
 describe(@"Datasource spec", ^{
     __block DTTableViewController *model;
-    __block DTTableViewMemoryStorage * storage;
+    __block DTMemoryStorage * storage;
     __block Example * testModel;
     __block Example * acc1;
     __block Example * acc2;
@@ -22,7 +21,7 @@ describe(@"Datasource spec", ^{
         [UIView setAnimationsEnabled:NO];
 
         model = [DTTableViewController new];
-        storage = [DTTableViewMemoryStorage storage];
+        storage = [DTMemoryStorage storage];
         storage.loggingEnabled = NO;
         model.dataStorage = storage;
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];

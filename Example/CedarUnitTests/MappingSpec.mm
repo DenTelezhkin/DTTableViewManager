@@ -17,7 +17,7 @@ SPEC_BEGIN(MappingSpecs)
 describe(@"mapping tests", ^{
     
     __block DTTableViewController *model;
-    __block DTTableViewMemoryStorage * storage;
+    __block DTMemoryStorage * storage;
     __block Example * testModel;
     __block Example * acc1;
     
@@ -28,7 +28,7 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTTableViewMemoryStorage storage];
+            storage = [DTMemoryStorage storage];
             storage.loggingEnabled = NO;
             model.dataStorage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
@@ -72,7 +72,7 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTTableViewMemoryStorage storage];
+            storage = [DTMemoryStorage storage];
             model.dataStorage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
@@ -115,7 +115,7 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTTableViewMemoryStorage storage];
+            storage = [DTMemoryStorage storage];
             model.dataStorage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
@@ -150,7 +150,7 @@ describe(@"mapping tests", ^{
             model = [DTTableViewController new];
             model.sectionHeaderStyle = DTTableViewSectionStyleView;
             model.sectionFooterStyle = DTTableViewSectionStyleView;
-            storage = [DTTableViewMemoryStorage storage];
+            storage = [DTMemoryStorage storage];
             model.dataStorage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
@@ -260,7 +260,7 @@ describe(@"mapping tests", ^{
 describe(@"Foundation class clusters", ^{
     
     __block DTTableViewController *model;
-    __block DTTableViewMemoryStorage * storage;
+    __block DTMemoryStorage * storage;
     
     beforeEach(^{
         
@@ -268,7 +268,7 @@ describe(@"Foundation class clusters", ^{
         
         model = [DTTableViewController new];
         model.sectionHeaderStyle = DTTableViewSectionStyleView;
-        storage = [DTTableViewMemoryStorage storage];
+        storage = [DTMemoryStorage storage];
         model.dataStorage = storage;
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         model.tableView.dataSource = model;

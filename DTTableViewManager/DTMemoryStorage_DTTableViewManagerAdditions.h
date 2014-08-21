@@ -1,9 +1,9 @@
 //
-//  DTTableViewDatasource.h
+//  DTMemoryStorage_DTTableViewAdditions.h
 //  DTTableViewManager
 //
-//  Created by Denys Telezhkin on 23.11.13.
-//  Copyright (c) 2013 Denys Telezhkin. All rights reserved.
+//  Created by Denys Telezhkin on 21.08.14.
+//  Copyright (c) 2014 Denys Telezhkin. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,41 +23,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import "DTTableViewDataStorage.h"
-#import "DTSectionModel+HeaderFooterModel.h"
 #import "DTMemoryStorage.h"
+#import "DTTableViewDataStorage.h"
 
 /**
- This class is used as a default storage for table view models. To populate this storage with data, call one of many add or insert methods available below. Every change in data storage causes delegate call to `DTTableViewController` instance with `DTStorageUpdate` instance. It is then expected to update UITableView with appropriate animations.
+ This category is used to adapt DTMemoryStorage for table view models. It adds section headers, and section footers to DTMemoryStorage, as well as adding UITableView specific methods like moving items between indexPaths and moving sections in UITableView.
  
  ## Searching
  
-Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
+ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
  */
-
-@interface DTTableViewMemoryStorage : DTMemoryStorage <DTTableViewDataStorage>
-
-/**
- Delegate object, that gets notified about data storage updates. If delegate does not respond to optional `DTTableViewDataStorageUpdating` methods, it will not get called.
- */
-@property (nonatomic, weak) id <DTTableViewDataStorageUpdating> delegate;
-
-/**
- Move table item from `sourceIndexPath` to `destinationIndexPath`.
- 
- @param sourceIndexPath source indexPath of item to move.
- 
- @param destinationIndexPath Index, where item should be moved.
- 
- @warning Moving item at index, that is not valid, won't do anything, except logging into console about failure
- */
-- (void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
-
-/**
- Removes all tableItems. This method will call UITableView -reloadData method on completion. This method does not remove sections and section header and footer models.
- */
-- (void)removeAllTableItems;
+@interface DTMemoryStorage (DTTableViewManager_Additions) <DTTableViewDataStorage>
 
 ///---------------------------------------
 /// @name Managing sections
@@ -77,6 +53,21 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
  */
 - (void)setSectionFooterModels:(NSArray *)footerModels;
 
+///---------------------------------------
+/// @name Moving items and sections
+///---------------------------------------
+
+/**
+ Move table item from `sourceIndexPath` to `destinationIndexPath`.
+ 
+ @param sourceIndexPath source indexPath of item to move.
+ 
+ @param destinationIndexPath Index, where item should be moved.
+ 
+ @warning Moving item at index, that is not valid, won't do anything, except logging into console about failure
+ */
+- (void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
+
 /**
  Moves a section to a new location in the table view.
  
@@ -85,5 +76,14 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
  @param indexTo The index in the table view that is the destination of the move for the section. The existing section at that location slides up or down to an adjoining index position to make room for it.
  */
 - (void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo;
+
+///---------------------------------------
+/// @name Remove all items
+///---------------------------------------
+
+/**
+ Removes all tableItems. This method will call UITableView -reloadData method on completion. This method does not remove sections and section header and footer models.
+ */
+- (void)removeAllTableItems;
 
 @end
