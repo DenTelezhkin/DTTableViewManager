@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
   
  ## Managing table items
  
- Depending on data storage you choose to have, table items can be managed differently. But the pattern is the same - `DTTableViewController` reacts to changes in data storage object and updates table view appropriately. `DTTableViewManager` provides two data storage classes - `DTTableViewMemoryStorage` and `DTTableViewCoreDataStorage`. `DTTableViewMemoryStorage` is used by default.
+ Depending on data storage you choose to have, table items can be managed differently. But the pattern is the same - `DTTableViewController` reacts to changes in data storage object and updates table view appropriately. `DTTableViewManager` provides two data storage classes - `DTMemoryStorage` and `DTTableViewCoreDataStorage`. `DTMemoryStorage` is used by default.
  
  ## Mapping cells
  
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  
  Search implementation depends on what data storage you use. In both cases it's recommended to use this class as UISearchBarDelegate. Then searching data storage will be created automatically for every change in UISearchBar.
  
- # DTTableViewMemoryStorage
+ # DTMemoryStorage
  
 Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
  
@@ -97,7 +97,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
 
 
 /**
- Data storage object. Create storage you need and set this property to populate table view with data. `DTTableViewManager` provides two data storage classes - `DTTableViewMemoryStorage` and `DTTableViewCoreDataStorage`. DTTableViewMemory storage used by default.
+ Data storage object. Create storage you need and set this property to populate table view with data. `DTTableViewManager` provides two data storage classes - `DTTableViewStorage` and `DTTableViewCoreDataStorage`. DTTableViewMemory storage used by default.
  */
 
 @property (nonatomic, strong) id <DTStorage> dataStorage;
@@ -106,7 +106,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
 /**
  Convenience method, returning memory storage. If custom storage is used, this method will return nil.
  
- @return DTTableViewMemoryStorage instance.
+ @return DTMemoryStorage instance.
  */
 - (DTMemoryStorage *)memoryStorage;
 

@@ -1,5 +1,5 @@
 //
-//  DTTableViewMemoryStorage+UnitTests.h
+//  DTMemoryStorage+UnitTests.h
 //  DTTableViewManager
 //
 //  Created by Denys Telezhkin on 02.12.13.

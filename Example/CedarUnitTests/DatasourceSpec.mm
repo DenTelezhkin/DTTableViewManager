@@ -1,5 +1,5 @@
 #import "DTTableViewController+UnitTests.h"
-#import "DTTableViewMemoryStorage+UnitTests.h"
+#import "DTMemoryStorage+UnitTests.h"
 #import "MockTableHeaderView.h"
 using namespace Cedar::Matchers;
 

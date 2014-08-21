@@ -41,7 +41,7 @@ Here are 4 simple steps you need to use DTTableViewManager:
 	<td>Your UIViewController, that presents tableView, needs to subclass* this class. This class implements all UITableViewDatasource methods.</td>
 	</tr>
 	<tr>
-	<td>DTTableViewMemoryStorage</td>
+	<td>DTMemoryStorage</td>
 	<td>Class responsible for holding tableView models. It is used as a default storage by DTTableViewManager.</td>
 	</tr>
 	<tr>
@@ -95,7 +95,7 @@ If you use storyboards and prototype cells, you will need to set reuseIdentifier
 
 ## Managing table items
 
-Storage classes for DTTableViewManager have been moved to [separate repo](https://github.com/DenHeadless/DTModelStorage). Two data storage classes are provided - memory and core data storage. Let's start with `DTTableViewMemoryStorage`, that is used by default.
+Storage classes for DTTableViewManager have been moved to [separate repo](https://github.com/DenHeadless/DTModelStorage). Two data storage classes are provided - memory and core data storage. Let's start with `DTMemoryStorage`, that is used by default.
 
 ### Memory storage
 
@@ -104,7 +104,7 @@ Storage classes for DTTableViewManager have been moved to [separate repo](https:
 To work with memory storage, you will need to get it's instance from your `DTTableViewController` subclass.
 
 ```objective-c
-- (DTTableViewMemoryStorage *)memoryStorage;
+- (DTMemoryStorage *)memoryStorage;
 ```
 
 **You can take a look at all provided methods for manipulating items here: [DTMemoryStorage methods](https://github.com/DenHeadless/DTModelStorage/blob/master/README.md#adding-items)**
@@ -116,7 +116,7 @@ In most cases, adding items to memory storage is as simple as calling:
 - (void)addItems:(NSArray *)items toSection:(NSInteger)sectionNumber;
 ```
 
-`DTTableViewMemoryStorage` is a subclass of `DTMemoryStorage`, that adds adds several methods, that are specific to UITableView. Two most relevant of them are 
+DTTableViewManager adds several methods to `DTMemoryStorage`, that are specific to UITableView. Two most relevant of them are 
 
 ```objective-c
 - (void)setSectionHeaderModels:(NSArray *)headerModels;

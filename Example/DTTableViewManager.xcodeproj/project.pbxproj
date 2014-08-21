@@ -227,7 +227,7 @@
 		AA1972EC18190CF200B81302 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
 		AA87853718AA716D00D138D5 /* StringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringCell.h; path = mocks/StringCell.h; sourceTree = "<group>"; };
 		AA87853818AA716D00D138D5 /* StringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringCell.m; path = mocks/StringCell.m; sourceTree = "<group>"; };
-		AAB09060184C845A008B7665 /* DTTableViewMemoryStorage+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTTableViewMemoryStorage+UnitTests.h"; sourceTree = "<group>"; };
+		AAB09060184C845A008B7665 /* DTMemoryStorage+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTMemoryStorage+UnitTests.h"; sourceTree = "<group>"; };
 		AAF8D10318802B6200B20BCF /* DTSectionModel+HeaderFooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DTSectionModel+HeaderFooterModel.h"; path = "../../DTTableViewManager/DTSectionModel+HeaderFooterModel.h"; sourceTree = "<group>"; };
 		AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DTSectionModel+HeaderFooterModel.m"; path = "../../DTTableViewManager/DTSectionModel+HeaderFooterModel.m"; sourceTree = "<group>"; };
 		C331A5120C02433C91C38655 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -498,7 +498,7 @@
 			children = (
 				E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */,
 				E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */,
-				AAB09060184C845A008B7665 /* DTTableViewMemoryStorage+UnitTests.h */,
+				AAB09060184C845A008B7665 /* DTMemoryStorage+UnitTests.h */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
