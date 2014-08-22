@@ -43,7 +43,7 @@
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
-        [self setup];
+        [self setupTableViewControllerDefaults];
     }
     return self;
 }
@@ -52,7 +52,7 @@
 {
     if (self = [super initWithCoder:aDecoder])
     {
-        [self setup];
+        [self setupTableViewControllerDefaults];
     }
     return self;
 }
@@ -64,7 +64,7 @@
     self.searchBar.delegate = nil;
 }
 
-- (void)setup
+- (void)setupTableViewControllerDefaults
 {
     _cellFactory = [DTCellFactory new];
     _cellFactory.delegate = self;
