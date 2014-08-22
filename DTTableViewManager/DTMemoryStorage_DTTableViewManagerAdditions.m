@@ -37,6 +37,13 @@
 - (void)finishUpdate;
 @end
 
+@protocol DTTableViewDataStorageUpdating <DTStorageUpdating>
+
+@optional
+- (void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock;
+
+@end
+
 @implementation DTMemoryStorage(DTTableViewManager_Additions)
 
 - (void)setSectionHeaderModels:(NSArray *)headerModels

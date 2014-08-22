@@ -53,7 +53,7 @@ describe(@"Storage Add specs", ^{
     beforeEach(^{
         delegate = [OCMockObject mockForClass:[DTTableViewController class]];
         storage = [DTMemoryStorage storage];
-        storage.delegate = (id <DTTableViewDataStorageUpdating>)delegate;
+        storage.delegate = (id <DTStorageUpdating>)delegate;
     });
     
     it(@"should receive correct update call when adding table item",
@@ -104,7 +104,7 @@ describe(@"Storage edit specs", ^{
     beforeEach(^{
         delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
         storage = [DTMemoryStorage storage];
-        storage.delegate = (id <DTTableViewDataStorageUpdating>)delegate;
+        storage.delegate = (id <DTStorageUpdating>)delegate;
         
         acc1 = [Example new];
         acc2 = [Example new];

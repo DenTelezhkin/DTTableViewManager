@@ -27,25 +27,6 @@
 #import "DTStorage.h"
 
 /**
- `DTTableViewDataStorageUpdating` protocol extends `DTStorageUpdating` protocol with animated updates method for UITableView.
- */
-
-@protocol DTTableViewDataStorageUpdating <DTStorageUpdating>
-
-@optional
-
-/**
- This method allows to perform animations you need for changes in UITableView. Performing manual animations requires to manually change datasource objects before animation method is called.
- 
- @param animationBlock AnimationBlock to be executed with UITableView.
- 
- @warning You need to update data storage object before executing this method.
- */
-- (void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock;
-
-@end
-
-/**
  `DTTableViewDataStorage` protocol extends `DTStorage` protocol with optional getters for header and footer model of current section.
  */
 

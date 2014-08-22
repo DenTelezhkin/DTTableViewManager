@@ -84,7 +84,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
                                        <UITableViewDataSource,
                                         UITableViewDelegate,
                                         UISearchBarDelegate,
-                                        DTTableViewDataStorageUpdating>
+                                        DTStorageUpdating>
 
 ///---------------------------------------
 /// @name Properties
@@ -275,7 +275,16 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
  Returns whether search is active, based on current searchString and searchScope, retrieved from UISearchBarDelegate methods.
  */
 
--(BOOL)isSearching;
+-(BOOL)isSearching NS_REQUIRES_SUPER;
+
+/**
+ This method allows to perform animations you need for changes in UITableView. It can be used for complex animations, that should be run simultaneously. For example, `DTTableViewManagerAdditions` category on `DTMemoryStorage` uses it to implement moving items between indexPaths.
+ 
+ @param animationBlock AnimationBlock to be executed with UITableView.
+ 
+ @warning You need to update data storage object before executing this method.
+ */
+- (void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock;
 
 
 @end
