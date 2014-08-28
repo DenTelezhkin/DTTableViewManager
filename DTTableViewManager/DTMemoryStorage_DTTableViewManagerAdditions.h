@@ -66,7 +66,7 @@
  
  @warning Moving item at index, that is not valid, won't do anything, except logging into console about failure
  */
-- (void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
+- (void)moveTableItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 
 /**
  Moves a section to a new location in the table view.
@@ -75,7 +75,7 @@
  
  @param indexTo The index in the table view that is the destination of the move for the section. The existing section at that location slides up or down to an adjoining index position to make room for it.
  */
-- (void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo;
+- (void)moveTableViewSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo;
 
 ///---------------------------------------
 /// @name Remove all items

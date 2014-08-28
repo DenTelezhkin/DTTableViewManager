@@ -15,7 +15,7 @@
 -(void)moveSection
 {
     DTMemoryStorage * storage = [self memoryStorage];
-    [storage moveSection:0 toSection:([[storage sections] count]-1)];
+    [storage moveTableViewSection:0 toSection:([[storage sections] count]-1)];
 }
 
 -(void)addExampleRows

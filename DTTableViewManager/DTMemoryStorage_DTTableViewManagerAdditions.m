@@ -80,7 +80,7 @@
      }];
 }
 
-- (void)moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath
+- (void)moveTableItemAtIndexPath:(NSIndexPath *)sourceIndexPath
                 toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     [self startUpdate];
@@ -123,7 +123,7 @@
 
 #pragma mark - Section management
 
-- (void)moveSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo
+- (void)moveTableViewSection:(NSInteger)indexFrom toSection:(NSInteger)indexTo
 {
     DTSectionModel * validSectionFrom = [self getValidSection:indexFrom];
     [self getValidSection:indexTo];

@@ -348,7 +348,7 @@ describe(@"Datasource spec", ^{
     it(@"should move item to another row", ^{
         [storage addItems:@[acc1,acc2,acc3]];
 
-        [storage moveItemAtIndexPath:[NSIndexPath indexPathForItem:0
+        [storage moveTableItemAtIndexPath:[NSIndexPath indexPathForItem:0
                                                                           inSection:0]
                                           toIndexPath:[NSIndexPath indexPathForItem:2
                                                                           inSection:0]];
@@ -359,7 +359,7 @@ describe(@"Datasource spec", ^{
         [storage addItems:@[acc1,acc2,acc3]];
 
         ^{
-            [storage moveItemAtIndexPath:[NSIndexPath indexPathForItem:0
+            [storage moveTableItemAtIndexPath:[NSIndexPath indexPathForItem:0
                                                              inSection:0]
                              toIndexPath:[NSIndexPath indexPathForItem:2
                                                              inSection:1]];
@@ -370,7 +370,7 @@ describe(@"Datasource spec", ^{
         [storage addItems:@[acc1,acc2,acc3]];
 
         ^{
-            [storage moveItemAtIndexPath:[NSIndexPath indexPathForItem:0
+            [storage moveTableItemAtIndexPath:[NSIndexPath indexPathForItem:0
                                                              inSection:1]
                              toIndexPath:[NSIndexPath indexPathForItem:0
                                                              inSection:0]];
@@ -382,7 +382,7 @@ describe(@"Datasource spec", ^{
         [storage addItem:acc2 toSection:1];
         [storage addItem:acc3 toSection:2];
 
-        [storage moveSection:0 toSection:1];
+        [storage moveTableViewSection:0 toSection:1];
 
         [model verifyTableItem:acc2
                    atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
@@ -390,7 +390,7 @@ describe(@"Datasource spec", ^{
         [model verifyTableItem:acc1
                    atIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] should be_truthy;
 
-        [storage moveSection:2 toSection:0];
+        [storage moveTableViewSection:2 toSection:0];
 
         [model verifyTableItem:acc3
                    atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] should be_truthy;
