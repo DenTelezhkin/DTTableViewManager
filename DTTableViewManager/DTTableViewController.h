@@ -85,7 +85,6 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
                                        <UITableViewDataSource,
                                         UITableViewDelegate,
                                         UISearchBarDelegate,
-                                        DTStorageUpdating,
                                         DTTableViewControllerEvents>
 
 ///---------------------------------------

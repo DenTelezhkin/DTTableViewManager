@@ -27,8 +27,7 @@
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTTableViewDataStorage.h"
 
-@interface DTTableViewController ()
-        <DTTableViewFactoryDelegate>
+@interface DTTableViewController () <DTStorageUpdating, DTTableViewFactoryDelegate>
 
 @property (nonatomic, assign) NSInteger currentSearchScope;
 @property (nonatomic, copy) NSString * currentSearchString;
