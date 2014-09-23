@@ -25,4 +25,20 @@
     self.dataStorage = [BanksCoreDataStorage storageWithFetchResultsController:controller];
 }
 
+-(void)controllerDidCancelSearch
+{
+    self.tableView.hidden = NO;
+}
+
+-(void)controllerDidEndSearch
+{
+    if ([self.tableView numberOfSections] == 0)
+    {
+        self.tableView.hidden = YES;
+    }
+    else {
+        self.tableView.hidden = NO;
+    }
+}
+
 @end

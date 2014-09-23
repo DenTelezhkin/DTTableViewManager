@@ -224,6 +224,7 @@
 		9A951D4119897795004BE27E /* HeaderWithOverriddenIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderWithOverriddenIdentifier.h; path = "mocks/Header:footer mocks/HeaderWithOverriddenIdentifier.h"; sourceTree = "<group>"; };
 		9A951D4219897795004BE27E /* HeaderWithOverriddenIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeaderWithOverriddenIdentifier.m; path = "mocks/Header:footer mocks/HeaderWithOverriddenIdentifier.m"; sourceTree = "<group>"; };
 		9A951D4419897897004BE27E /* HeaderWithOverriddenIdentifier.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderWithOverriddenIdentifier.xib; path = "mocks/Header:footer mocks/HeaderWithOverriddenIdentifier.xib"; sourceTree = "<group>"; };
+		9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewControllerEvents.h; path = ../../DTTableViewManager/DTTableViewControllerEvents.h; sourceTree = "<group>"; };
 		A3A92A4CCD814CDC8B855D07 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
 		AA0F32E6188144FA0076106C /* DTViewConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTViewConfiguration.h; path = ../../DTTableViewManager/DTViewConfiguration.h; sourceTree = "<group>"; };
 		AA0F32E7188193180076106C /* DTDefaultCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTDefaultCellModel.h; path = ../../DTTableViewManager/DTDefaultCellModel.h; sourceTree = "<group>"; };
@@ -700,6 +701,7 @@
 				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
 				E60CA0161684AFEF00F4147E /* DTTableViewController.h */,
 				E60CA0171684AFEF00F4147E /* DTTableViewController.m */,
+				9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */,
 				9591074A18423AC50012B07E /* DTTableViewDataStorage.h */,
 				9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */,
 				9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */,

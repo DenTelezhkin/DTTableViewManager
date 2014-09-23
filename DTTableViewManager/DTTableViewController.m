@@ -216,13 +216,16 @@
     if (wereSearching && ![self isSearching])
     {
         [self.tableView reloadData];
+        [self controllerDidCancelSearch];
         return;
     }
     if ([self.dataStorage respondsToSelector:@selector(searchingStorageForSearchString:inSearchScope:)])
     {
+        [self controllerWillBeginSearch];
         self.searchingDataStorage = [(DTMemoryStorage *)self.dataStorage searchingStorageForSearchString:searchString
                                                                                                     inSearchScope:scopeNumber];
         [self.tableView reloadData];
+        [self controllerDidEndSearch];
     }
 }
 
@@ -461,6 +464,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 - (void)storageDidPerformUpdate:(DTStorageUpdate *)update
 {
+    [self controllerWillUpdateContent];
+    
     [self.tableView beginUpdates];
 
     [self.tableView deleteSections:update.deletedSectionIndexes
@@ -478,11 +483,40 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                           withRowAnimation:self.reloadRowAnimation];
 
     [self.tableView endUpdates];
+    
+    [self controllerDidUpdateContent];
 }
 
 - (void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock
 {
     animationBlock(self.tableView);
+}
+
+#pragma mark - DTTableViewControllerEvents protocol
+
+-(void)controllerWillUpdateContent
+{
+    
+}
+
+-(void)controllerDidUpdateContent
+{
+    
+}
+
+-(void)controllerWillBeginSearch
+{
+    
+}
+
+-(void)controllerDidEndSearch
+{
+    
+}
+
+-(void)controllerDidCancelSearch
+{
+    
 }
 
 @end

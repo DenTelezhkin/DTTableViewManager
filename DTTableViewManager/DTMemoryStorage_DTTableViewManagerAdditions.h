@@ -37,6 +37,7 @@
 
 
 /***/
+#warning docs
 - (void)setItems:(NSArray *)items forSectionIndex:(NSUInteger)sectionNumber;
 
 ///---------------------------------------

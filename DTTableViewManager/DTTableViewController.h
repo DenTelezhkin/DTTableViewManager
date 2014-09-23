@@ -27,6 +27,7 @@
 #import "DTTableViewDataStorage.h"
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTSectionModel+HeaderFooterModel.h"
+#import "DTTableViewControllerEvents.h"
 
 typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 {
@@ -84,7 +85,8 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
                                        <UITableViewDataSource,
                                         UITableViewDelegate,
                                         UISearchBarDelegate,
-                                        DTStorageUpdating>
+                                        DTStorageUpdating,
+                                        DTTableViewControllerEvents>
 
 ///---------------------------------------
 /// @name Properties
