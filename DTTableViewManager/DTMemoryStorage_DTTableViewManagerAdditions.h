@@ -35,6 +35,10 @@
  */
 @interface DTMemoryStorage (DTTableViewManager_Additions) <DTTableViewDataStorage>
 
+
+/***/
+- (void)setItems:(NSArray *)items forSectionIndex:(NSUInteger)sectionNumber;
+
 ///---------------------------------------
 /// @name Managing sections
 ///---------------------------------------

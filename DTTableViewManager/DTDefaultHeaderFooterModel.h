@@ -28,6 +28,7 @@
 /**
  `DTDefaultHeaderFooterModel` is a custom model class, that allows to use UITableViewHeaderFooterView without subclassing.
  */
+__deprecated
 @interface DTDefaultHeaderFooterModel : NSObject
 
 /**

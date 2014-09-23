@@ -28,7 +28,8 @@
 /**
  `DTDefaultCellModel` is a custom model class, that allows to use UITableViewCells without subclassing.
  */
-@interface DTDefaultCellModel : NSObject 
+__deprecated
+@interface DTDefaultCellModel : NSObject
 
 /**
  Reuse identifier for cell, that will be used for current cell model.

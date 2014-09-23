@@ -46,6 +46,17 @@
 
 @implementation DTMemoryStorage(DTTableViewManager_Additions)
 
+-(void)setItems:(NSArray *)items forSectionIndex:(NSUInteger)sectionNumber
+{
+    DTSectionModel * section = [self sectionAtIndex:sectionNumber];
+    [section.objects removeAllObjects];
+    [section.objects addObjectsFromArray:items];
+    [(id <DTTableViewDataStorageUpdating>)self.delegate performAnimatedUpdate:^(UITableView * tableView)
+     {
+         [tableView reloadData];
+     }];
+}
+
 - (void)setSectionHeaderModels:(NSArray *)headerModels
 {
     [self setSupplementaries:headerModels forKind:DTTableViewElementSectionHeader];
