@@ -85,6 +85,7 @@
 		9A951D40198975D1004BE27E /* CellOverriddenIdentifier.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A951D3719897552004BE27E /* CellOverriddenIdentifier.xib */; };
 		9A951D4319897795004BE27E /* HeaderWithOverriddenIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A951D4219897795004BE27E /* HeaderWithOverriddenIdentifier.m */; };
 		9A951D4519897897004BE27E /* HeaderWithOverriddenIdentifier.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A951D4419897897004BE27E /* HeaderWithOverriddenIdentifier.xib */; };
+		9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
 		AA01B52F1848DA49009B3041 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BCE72F1792C7B300526954 /* Default-568h@2x.png */; };
 		AA0F32E9188193180076106C /* DTDefaultCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F32E8188193180076106C /* DTDefaultCellModel.m */; };
 		AA0F32EA188193180076106C /* DTDefaultCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F32E8188193180076106C /* DTDefaultCellModel.m */; };
@@ -225,6 +226,7 @@
 		9A951D4219897795004BE27E /* HeaderWithOverriddenIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeaderWithOverriddenIdentifier.m; path = "mocks/Header:footer mocks/HeaderWithOverriddenIdentifier.m"; sourceTree = "<group>"; };
 		9A951D4419897897004BE27E /* HeaderWithOverriddenIdentifier.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderWithOverriddenIdentifier.xib; path = "mocks/Header:footer mocks/HeaderWithOverriddenIdentifier.xib"; sourceTree = "<group>"; };
 		9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewControllerEvents.h; path = ../../DTTableViewManager/DTTableViewControllerEvents.h; sourceTree = "<group>"; };
+		9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExampleCell.xib; path = TableViewFactory/Cells/ExampleCell.xib; sourceTree = "<group>"; };
 		A3A92A4CCD814CDC8B855D07 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
 		AA0F32E6188144FA0076106C /* DTViewConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTViewConfiguration.h; path = ../../DTTableViewManager/DTViewConfiguration.h; sourceTree = "<group>"; };
 		AA0F32E7188193180076106C /* DTDefaultCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTDefaultCellModel.h; path = ../../DTTableViewManager/DTDefaultCellModel.h; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 			children = (
 				E638F10A1619919900694FBC /* ExampleCell.h */,
 				E638F10B1619919900694FBC /* ExampleCell.m */,
+				9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */,
 				E666ACE9162C02C800A2DBF2 /* CustomCell.xib */,
 				E666ACED162C034000A2DBF2 /* CustomCell.h */,
 				E666ACEE162C034000A2DBF2 /* CustomCell.m */,
@@ -821,6 +824,7 @@
 				E6402F8C162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
 				E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
 				E6402FB3162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
+				9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */,
 				E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
 				95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */,
 				95A3B4B716FF649100F5897E /* textured_paper.png in Resources */,

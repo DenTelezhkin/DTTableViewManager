@@ -16,14 +16,12 @@
 
 @implementation BaseExampleController
 
-- (id)init
+
+-(void)viewDidLoad
 {
-    if (self = [super init])
-    {
-        [self registerCellClass:[ExampleCell class]
-                  forModelClass:[Example class]];
-    }
-    return self;
+    [super viewDidLoad];
+    [self registerCellClass:[ExampleCell class]
+              forModelClass:[Example class]];
 }
 
 @end

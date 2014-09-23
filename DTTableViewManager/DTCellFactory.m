@@ -163,45 +163,15 @@
 
 #pragma mark - actions
 
--(UITableViewCell *)cellForReuseIdentifier:(NSString *)reuseIdentifier
-                                     style:(UITableViewCellStyle)style
-                                 cellClass:(Class)cellClass
-                        configurationBlock:(DTCellConfigurationBlock)configurationBlock
+- (UITableViewCell *)cellForModel:(id)model atIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = nil;
-    
-    if (reuseIdentifier)
-    {
-        cell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:reuseIdentifier];
-    }
-    if (!cell)
-    {
-        cell = [[cellClass alloc] initWithStyle:style reuseIdentifier:reuseIdentifier];
-    }
-    if (configurationBlock)
-    {
-        configurationBlock(cell);
-    }
-    return cell;
-}
-
-- (UITableViewCell *)cellForModel:(id)model
-{
-    if ([model isKindOfClass:[DTDefaultCellModel class]])
-    {
-        DTDefaultCellModel * defaultModel = model;
-        return [self cellForReuseIdentifier:defaultModel.reuseIdentifier
-                                      style:defaultModel.cellStyle
-                                  cellClass:[UITableViewCell class]
-                         configurationBlock:defaultModel.cellConfigurationBlock];
-    }
-    
     Class cellClass = [self cellClassForModel:model];
     
-    UITableViewCell <DTModelTransfer> *cell = (id)[self cellForReuseIdentifier:[self reuseIdentifierFromClass:cellClass]
-                                                                         style:UITableViewCellStyleDefault
-                                                                     cellClass:cellClass
-                                                            configurationBlock:nil];
+    NSString * reuseIdentifier = [self reuseIdentifierFromClass:cellClass];
+    UITableViewCell <DTModelTransfer> * cell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:reuseIdentifier
+                                                                                               forIndexPath:indexPath];
+
+    
     [cell updateWithModel:model];
     
     return cell;
@@ -345,7 +315,7 @@
     {
         return @"NSArray";
     }
-    if ([classString isEqualToString:@"__NSDate"] || class == [NSDate class])
+    if ([classString isEqualToString:@"__NSDate"] || [classString isEqualToString:@"__NSTaggedDate"] || class == [NSDate class])
     {
         return @"NSDate";
     }

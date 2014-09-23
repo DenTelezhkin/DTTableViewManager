@@ -423,7 +423,7 @@
         model = [self.dataStorage objectAtIndexPath:indexPath];
     }
 
-    return [self.cellFactory cellForModel:model];
+    return [self.cellFactory cellForModel:model atIndexPath:indexPath];
 }
 
 #pragma mark - actions

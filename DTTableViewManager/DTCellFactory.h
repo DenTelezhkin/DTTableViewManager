@@ -51,7 +51,7 @@
 
 -(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass modelClass:(Class)modelClass;
 
-- (UITableViewCell *)cellForModel:(NSObject *)model;
+- (UITableViewCell *)cellForModel:(NSObject *)model atIndexPath:(NSIndexPath *)indexPath;
 
 -(UIView *)headerViewForModel:(id)model;
 
