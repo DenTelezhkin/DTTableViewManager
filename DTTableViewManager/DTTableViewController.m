@@ -363,7 +363,7 @@
     {
         if (![self headerModelForIndex:sectionNumber])
         {
-            return 0;
+            return CGFLOAT_MIN;
         }
         else
         {
@@ -378,7 +378,7 @@
     }
     else
     {
-        return 0;
+        return CGFLOAT_MIN;
     }
 }
 
@@ -389,7 +389,7 @@
     {
         if (![self footerModelForIndex:sectionNumber])
         {
-            return 0;
+            return CGFLOAT_MIN;
         }
         else
         {
@@ -404,7 +404,7 @@
     }
     else
     {
-        return 0;
+        return CGFLOAT_MIN;
     }
 }
 
