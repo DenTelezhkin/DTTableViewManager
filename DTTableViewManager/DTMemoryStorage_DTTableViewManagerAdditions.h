@@ -35,9 +35,13 @@
  */
 @interface DTMemoryStorage (DTTableViewManager_Additions) <DTTableViewDataStorage>
 
-
-/***/
-#warning docs
+/**
+ Remove all items in section and replace them with array of items. After replacement is done, UITableView reloadData method is called.
+ 
+ @param items Array of models to replace current section contents
+ 
+ @param sectionNumber number of section
+ */
 - (void)setItems:(NSArray *)items forSectionIndex:(NSUInteger)sectionNumber;
 
 ///---------------------------------------
