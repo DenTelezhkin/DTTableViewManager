@@ -179,7 +179,6 @@
 
 -(UIView *)headerFooterViewForReuseIdentifier:(NSString *)reuseIdentifier
                                     viewClass:(Class)viewClass
-                           configurationBlock:(DTHeaderFooterViewConfigurationBlock)configurationBlock
 {
     UIView * view = nil;
     
@@ -195,28 +194,15 @@
     {
         view = [viewClass dt_loadFromXib];
     }
-    if (configurationBlock)
-    {
-        configurationBlock((UITableViewHeaderFooterView *)view);
-    }
     return view;
 }
 
 -(UIView *)headerViewForModel:(id)model
 {
-    if ([model isKindOfClass:[DTDefaultHeaderFooterModel class]])
-    {
-        DTDefaultHeaderFooterModel * headerFooter = model;
-        return [self headerFooterViewForReuseIdentifier:headerFooter.reuseIdentifier
-                                              viewClass:[UITableViewHeaderFooterView class]
-                                     configurationBlock:headerFooter.viewConfigurationBlock];
-    }
-    
     Class headerClass = [self headerClassForModel:model];
     
     UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:[self reuseIdentifierFromClass:headerClass]
-                                                                         viewClass:headerClass
-                                                                configurationBlock:nil];
+                                                                         viewClass:headerClass];
     [view updateWithModel:model];
 
     return view;
@@ -224,19 +210,10 @@
 
 -(UIView *)footerViewForModel:(id)model
 {
-    if ([model isKindOfClass:[DTDefaultHeaderFooterModel class]])
-    {
-        DTDefaultHeaderFooterModel * headerFooter = model;
-        return [self headerFooterViewForReuseIdentifier:headerFooter.reuseIdentifier
-                                              viewClass:[UITableViewHeaderFooterView class]
-                                     configurationBlock:headerFooter.viewConfigurationBlock];
-    }
-    
     Class footerClass = [self footerClassForModel:model];
     
     UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:[self reuseIdentifierFromClass:footerClass]
-                                                                         viewClass:footerClass
-                                                                configurationBlock:nil];
+                                                                         viewClass:footerClass];
     [view updateWithModel:model];
     
     return view;
