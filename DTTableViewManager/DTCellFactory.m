@@ -26,8 +26,6 @@
 #import "DTCellFactory.h"
 #import "DTModelTransfer.h"
 #import "UIView+DTLoading.h"
-#import "DTDefaultCellModel.h"
-#import "DTDefaultHeaderFooterModel.h"
 #import "DTRuntimeHelper.h"
 
 @interface DTCellFactory ()
@@ -211,7 +209,7 @@
     
     NSString * cellClassString = [self.cellMappingsDictionary objectForKey:modelClassName];
     
-    NSAssert(cellClassString, @"DTTableViewManager does not have cell mapping for model class: %@",[model class]);
+    NSAssert(cellClassString, @"DTCellFactory does not have cell mapping for model class: %@",[model class]);
     
     return cellClassString;
 }
