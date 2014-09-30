@@ -24,6 +24,7 @@
 // THE SOFTWARE.
 
 #import "DTTableViewCell.h"
+#import "DTRuntimeHelper.h"
 
 @implementation DTTableViewCell
 
@@ -41,11 +42,6 @@
 -(id)model
 {
     return nil;
-}
-
-+(NSString *)reuseIdentifier
-{
-    return NSStringFromClass(self);
 }
 
 @end

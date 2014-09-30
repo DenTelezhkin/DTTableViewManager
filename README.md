@@ -19,7 +19,8 @@ pod try DTTableViewManager
 
 * Powerful mapping system between data models and table view cells, headers and footers
 * Automatic datasource and interface synchronization.
-* Support for creating cells from code, XIBs or storyboards.
+* Support for creating cells from XIBs or storyboards.
+* Support for UITableViewHeaderFooterView or custom UIView for table headers and footers
 * Easy UITableView search 
 * Core data / NSFetchedResultsController support
 

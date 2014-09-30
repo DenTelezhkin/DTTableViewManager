@@ -28,6 +28,7 @@
 #import "UIView+DTLoading.h"
 #import "DTDefaultCellModel.h"
 #import "DTDefaultHeaderFooterModel.h"
+#import "DTRuntimeHelper.h"
 
 @interface DTCellFactory ()
 
@@ -77,7 +78,7 @@
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
-    NSString * reuseIdentifier = [self reuseIdentifierFromClass:cellClass];
+    NSString * reuseIdentifier = [DTRuntimeHelper classStringForClass:cellClass];
     UITableViewCell * tableCell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     if (!tableCell)
@@ -86,16 +87,16 @@
         [[self.delegate tableView] registerClass:cellClass
                           forCellReuseIdentifier:reuseIdentifier];
         
-        if ([self nibExistsWIthNibName:NSStringFromClass(cellClass)])
+        if ([self nibExistsWIthNibName:[DTRuntimeHelper classStringForClass:cellClass]])
         {
-            [self registerNibNamed:NSStringFromClass(cellClass)
+            [self registerNibNamed:[DTRuntimeHelper classStringForClass:cellClass]
                       forCellClass:cellClass
                         modelClass:modelClass];
         }
     }
 
-    [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
-                                    forKey:[self modelClassStringForClass:modelClass]];
+    [self.cellMappingsDictionary setObject:[DTRuntimeHelper classStringForClass:cellClass]
+                                    forKey:[DTRuntimeHelper modelStringForClass:modelClass]];
 }
 
 -(void)registerNibNamed:(NSString *)nibName
@@ -105,15 +106,15 @@
     NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
     [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-                    forCellReuseIdentifier:[self reuseIdentifierFromClass:cellClass]];
+                    forCellReuseIdentifier:[DTRuntimeHelper classStringForClass:cellClass]];
     
-    [self.cellMappingsDictionary setObject:NSStringFromClass(cellClass)
-                                    forKey:[self modelClassStringForClass:modelClass]];
+    [self.cellMappingsDictionary setObject:[DTRuntimeHelper classStringForClass:cellClass]
+                                    forKey:[DTRuntimeHelper modelStringForClass:modelClass]];
 }
 
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass
 {
-    [self registerNibNamed:NSStringFromClass(headerClass)
+    [self registerNibNamed:[DTRuntimeHelper classStringForClass:headerClass]
             forHeaderClass:headerClass
                 modelClass:modelClass];
 }
@@ -126,16 +127,16 @@
     if ([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-            forHeaderFooterViewReuseIdentifier:[self reuseIdentifierFromClass:headerClass]];
+            forHeaderFooterViewReuseIdentifier:[DTRuntimeHelper classStringForClass:headerClass]];
     }
     
     [self.headerMappingsDictionary setObject:NSStringFromClass(headerClass)
-                                      forKey:[self modelClassStringForClass:modelClass]];
+                                      forKey:[DTRuntimeHelper modelStringForClass:modelClass]];
 }
 
 -(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass
 {
-    [self registerNibNamed:NSStringFromClass(footerClass)
+    [self registerNibNamed:[DTRuntimeHelper classStringForClass:footerClass]
             forFooterClass:footerClass
                 modelClass:modelClass];
 }
@@ -148,48 +149,35 @@
     if ([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
         [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
-            forHeaderFooterViewReuseIdentifier:[self reuseIdentifierFromClass:footerClass]];
+            forHeaderFooterViewReuseIdentifier:[DTRuntimeHelper classStringForClass:footerClass]];
     }
     
     [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
-                                      forKey:[self modelClassStringForClass:modelClass]];
+                                      forKey:[DTRuntimeHelper modelStringForClass:modelClass]];
 }
 
 -(void)setFooterClassMapping:(Class)footerClass forModelClass:(Class)modelClass
 {
     [self.footerMappingsDictionary setObject:NSStringFromClass(footerClass)
-                                      forKey:[self modelClassStringForClass:modelClass]];
+                                      forKey:[DTRuntimeHelper modelStringForClass:modelClass]];
 }
 
-#pragma mark - actions
+#pragma mark - View creation
 
 - (UITableViewCell *)cellForModel:(id)model atIndexPath:(NSIndexPath *)indexPath
 {
-    Class cellClass = [self cellClassForModel:model];
-    
-    NSString * reuseIdentifier = [self reuseIdentifierFromClass:cellClass];
+    NSString * reuseIdentifier = [self cellReuseIdentifierForModel:model];
     UITableViewCell <DTModelTransfer> * cell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:reuseIdentifier
                                                                                                forIndexPath:indexPath];
-
-    
     [cell updateWithModel:model];
-    
     return cell;
 }
 
--(UIView *)headerFooterViewForReuseIdentifier:(NSString *)reuseIdentifier
-                                    viewClass:(Class)viewClass
+-(UIView *)headerFooterViewForViewClass:(Class)viewClass
 {
-    UIView * view = nil;
-    
-    if (reuseIdentifier)
-    {
-        view = [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
-    }
-    if (!view && (viewClass == [UITableViewHeaderFooterView class]))
-    {
-        view = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:reuseIdentifier];
-    }
+    NSString * reuseIdentifier = [DTRuntimeHelper classStringForClass:viewClass];
+    UIView * view = [[self.delegate tableView] dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+
     if (!view)
     {
         view = [viewClass dt_loadFromXib];
@@ -201,8 +189,7 @@
 {
     Class headerClass = [self headerClassForModel:model];
     
-    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:[self reuseIdentifierFromClass:headerClass]
-                                                                         viewClass:headerClass];
+    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForViewClass:headerClass];
     [view updateWithModel:model];
 
     return view;
@@ -212,27 +199,26 @@
 {
     Class footerClass = [self footerClassForModel:model];
     
-    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForReuseIdentifier:[self reuseIdentifierFromClass:footerClass]
-                                                                         viewClass:footerClass];
+    UIView <DTModelTransfer> * view = (id)[self headerFooterViewForViewClass:footerClass];
     [view updateWithModel:model];
     
     return view;
 }
 
-- (Class)cellClassForModel:(NSObject *)model
+- (NSString *)cellReuseIdentifierForModel:(id)model
 {
-    NSString *modelClassName = [self modelClassStringForClass:[model class]];
+    NSString *modelClassName = [DTRuntimeHelper modelStringForClass:[model class]];
     
     NSString * cellClassString = [self.cellMappingsDictionary objectForKey:modelClassName];
     
     NSAssert(cellClassString, @"DTTableViewManager does not have cell mapping for model class: %@",[model class]);
     
-    return NSClassFromString(cellClassString);
+    return cellClassString;
 }
 
 -(Class)headerClassForModel:(id)model
 {
-    NSString *modelClassName = [self modelClassStringForClass:[model class]];
+    NSString *modelClassName = [DTRuntimeHelper modelStringForClass:[model class]];
     
     NSString * headerClassString = [self.headerMappingsDictionary objectForKey:modelClassName];
     
@@ -243,60 +229,13 @@
 
 -(Class)footerClassForModel:(id)model
 {
-    NSString *modelClassName = [self modelClassStringForClass:[model class]];
+    NSString *modelClassName = [DTRuntimeHelper modelStringForClass:[model class]];
     
     NSString * footerClassString = [self.footerMappingsDictionary objectForKey:modelClassName];
     
     NSAssert(footerClassString, @"DTCellFactory does not have footer mapping for model class: %@",[model class]);
     
     return NSClassFromString(footerClassString);
-}
-
--(NSString *)reuseIdentifierFromClass:(Class)klass
-{
-    NSString * reuseIdentifier = NSStringFromClass(klass);
-    
-    if ([klass respondsToSelector:@selector(reuseIdentifier)])
-    {
-        reuseIdentifier = [klass reuseIdentifier];
-    }
-    return reuseIdentifier;
-}
-
-#pragma mark - helpers
-
--(NSString *)modelClassStringForClass:(Class)class
-{
-    NSString * classString = NSStringFromClass(class);
-    
-    if ([classString isEqualToString:@"__NSCFConstantString"] ||
-        [classString isEqualToString:@"__NSCFString"] ||
-        class == [NSMutableString class])
-    {
-        return @"NSString";
-    }
-    if ([classString isEqualToString:@"__NSCFNumber"] ||
-        [classString isEqualToString:@"__NSCFBoolean"])
-    {
-        return @"NSNumber";
-    }
-    if ([classString isEqualToString:@"__NSDictionaryI"] ||
-        [classString isEqualToString:@"__NSDictionaryM"] ||
-        class == [NSMutableDictionary class])
-    {
-        return @"NSDictionary";
-    }
-    if ([classString isEqualToString:@"__NSArrayI"] ||
-        [classString isEqualToString:@"__NSArrayM"] ||
-        class == [NSMutableArray class])
-    {
-        return @"NSArray";
-    }
-    if ([classString isEqualToString:@"__NSDate"] || [classString isEqualToString:@"__NSTaggedDate"] || class == [NSDate class])
-    {
-        return @"NSDate";
-    }
-    return classString;
 }
 
 @end

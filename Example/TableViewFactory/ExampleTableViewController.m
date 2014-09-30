@@ -20,6 +20,8 @@
 #import "DTSectionModel.h"
 #import "AppleCoreDataExampleController.h"
 #import "BanksCoreDataViewController.h"
+#import "Example-Swift.h"
+#import "Example.h"
 
 @implementation ExampleTableViewController
 
@@ -58,6 +60,8 @@
                                                  andTitle:@"CoreData add/remove"]];
     [storage addItem:[ControllerModel modelWithClass:[BanksCoreDataViewController class]
                                                  andTitle:@"CoreData search"]];
+    [storage addItem:[ControllerModel modelWithClass:[SwiftViewController class]
+                                            andTitle:@"Swift"]];
 }
 
 #pragma mark - Table View
@@ -78,7 +82,12 @@
             UIViewController * presentExampleClass = [exampleStoryBoard instantiateInitialViewController];
             [self.navigationController pushViewController:presentExampleClass animated:YES];
         }
-        else {
+        else /*if (selectedController.controllerClass == [SwiftViewController class]){
+            UIViewController * presentExampleClass = [[selectedController.controllerClass alloc] initWithNibName:@"SwiftViewController" bundle:nil];
+            
+            [self.navigationController pushViewController:presentExampleClass animated:YES];
+        }
+        else */{
             UIViewController * presentExampleClass = [[selectedController.controllerClass alloc] init];
             
             [self.navigationController pushViewController:presentExampleClass animated:YES];
