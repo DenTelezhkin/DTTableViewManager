@@ -53,9 +53,9 @@
     [section.objects addObjectsFromArray:items];
     [(id <DTTableViewDataStorageUpdating>)self.delegate performAnimatedUpdate:^(UITableView * tableView)
      {
-         [(id <DTTableViewControllerEvents>)self.delegate controllerWillUpdateContent];
+         [(id <DTTableViewControllerEvents>)self.delegate tableControllerWillUpdateContent];
          [tableView reloadData];
-         [(id <DTTableViewControllerEvents>)self.delegate controllerDidUpdateContent];
+         [(id <DTTableViewControllerEvents>)self.delegate tableControllerDidUpdateContent];
      }];
 }
 

@@ -82,12 +82,7 @@
             UIViewController * presentExampleClass = [exampleStoryBoard instantiateInitialViewController];
             [self.navigationController pushViewController:presentExampleClass animated:YES];
         }
-        else /*if (selectedController.controllerClass == [SwiftViewController class]){
-            UIViewController * presentExampleClass = [[selectedController.controllerClass alloc] initWithNibName:@"SwiftViewController" bundle:nil];
-            
-            [self.navigationController pushViewController:presentExampleClass animated:YES];
-        }
-        else */{
+        else{
             UIViewController * presentExampleClass = [[selectedController.controllerClass alloc] init];
             
             [self.navigationController pushViewController:presentExampleClass animated:YES];

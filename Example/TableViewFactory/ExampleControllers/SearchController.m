@@ -70,7 +70,7 @@
     [self.searchBar resignFirstResponder];
 }
 
--(void)controllerDidEndSearch
+-(void)tableControllerDidEndSearch
 {
     if ([self.tableView numberOfSections] == 0)
     {
@@ -81,7 +81,7 @@
     }
 }
 
--(void)controllerDidCancelSearch
+-(void)tableControllerDidCancelSearch
 {
     self.tableView.hidden = NO;
 }

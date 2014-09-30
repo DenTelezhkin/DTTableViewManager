@@ -49,7 +49,7 @@ class SwiftViewController: DTTableViewController {
 }
 
 extension SwiftViewController: DTTableViewControllerEvents {
-    override func controllerDidUpdateContent() {
+    override func tableControllerDidUpdateContent() {
         if self.tableView.numberOfRowsInSection(0) > 0
         {
             self.tableView.hidden = false

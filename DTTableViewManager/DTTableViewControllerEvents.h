@@ -14,13 +14,13 @@
 
 // updating content
 
-- (void)controllerWillUpdateContent;
-- (void)controllerDidUpdateContent;
+- (void)tableControllerWillUpdateContent;
+- (void)tableControllerDidUpdateContent;
 
 // searching
 
-- (void)controllerWillBeginSearch;
-- (void)controllerDidEndSearch;
-- (void)controllerDidCancelSearch;
+- (void)tableControllerWillBeginSearch;
+- (void)tableControllerDidEndSearch;
+- (void)tableControllerDidCancelSearch;
 
 @end
