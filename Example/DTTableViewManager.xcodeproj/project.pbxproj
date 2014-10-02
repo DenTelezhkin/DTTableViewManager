@@ -90,6 +90,9 @@
 		9A48860A19DABC1900A266BF /* SwiftHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A48860819DABC1900A266BF /* SwiftHeaderView.swift */; };
 		9A48860C19DABC9100A266BF /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
 		9A48860D19DABC9100A266BF /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
+		9AC702D619DBEE060065B21B /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
+		9AC702D819DBEE6B0065B21B /* SwiftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */; };
+		9AC702DA19DBEECB0065B21B /* SwiftStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */; };
 		9ADB0CAB19D700CA0048B08E /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */; };
 		9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAD19D701100048B08E /* NumberCell.swift */; };
 		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
@@ -232,6 +235,9 @@
 		9A48860419DAB3C700A266BF /* SwiftHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftHeaderFooterView.xib; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.xib"; sourceTree = "<group>"; };
 		9A48860819DABC1900A266BF /* SwiftHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderView.swift; path = "mocks/Header:footer mocks/SwiftHeaderView.swift"; sourceTree = "<group>"; };
 		9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftHeaderView.xib; path = "mocks/Header:footer mocks/SwiftHeaderView.xib"; sourceTree = "<group>"; };
+		9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SwiftStoryboard.storyboard; path = mocks/Controllers/SwiftStoryboard.storyboard; sourceTree = "<group>"; };
+		9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTableViewCell.swift; path = mocks/SwiftTableViewCell.swift; sourceTree = "<group>"; };
+		9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftStoryboardViewController.swift; path = mocks/Controllers/SwiftStoryboardViewController.swift; sourceTree = "<group>"; };
 		9ADB0CA919D700CA0048B08E /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftViewController.swift; path = ExampleControllers/SwiftViewController.swift; sourceTree = "<group>"; };
 		9ADB0CAD19D701100048B08E /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NumberCell.swift; path = Cells/NumberCell.swift; sourceTree = "<group>"; };
@@ -447,6 +453,9 @@
 				AA87853818AA716D00D138D5 /* StringCell.m */,
 				9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */,
 				9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */,
+				9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */,
+				9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */,
+				9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -834,6 +843,7 @@
 				E6402F97162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
 				E6402FB4162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
 				E6402FC8162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
+				9AC702D619DBEE060065B21B /* SwiftStoryboard.storyboard in Resources */,
 				95A3B4B216FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */,
 				9A48860D19DABC9100A266BF /* SwiftHeaderView.xib in Resources */,
 				9A48860719DAB4E200A266BF /* SwiftHeaderFooterView.xib in Resources */,
@@ -903,6 +913,7 @@
 				E6402F95162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB2162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				AAF8D10618802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m in Sources */,
+				9AC702D819DBEE6B0065B21B /* SwiftTableViewCell.swift in Sources */,
 				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
 				E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */,
 				9A3CC14919A60DC900D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
@@ -916,6 +927,7 @@
 				95BF2BA016FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
 				952112C61854929300063EA8 /* EventCell.m in Sources */,
 				950659EF1749030D008AB32D /* BaseExampleController.m in Sources */,
+				9AC702DA19DBEECB0065B21B /* SwiftStoryboardViewController.swift in Sources */,
 				952112CC1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
 				950659F4174C01EF008AB32D /* CellWithoutNib.m in Sources */,
 				950659F7174C0202008AB32D /* CellWithNib.m in Sources */,

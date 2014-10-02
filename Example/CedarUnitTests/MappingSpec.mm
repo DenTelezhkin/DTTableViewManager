@@ -690,6 +690,22 @@ describe(@"Foundation class clusters", ^{
             view.titleLabel.text should equal(@"FooBar");
         });
     });
+    
+    describe(@"should support storyboards with swift classes", ^{
+        
+        it(@"cells", ^{
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"SwiftStoryboard" bundle:nil];
+            
+            SwiftStoryboardViewController * controller = [storyboard instantiateInitialViewController];
+            [controller view];
+            [controller.memoryStorage addItem:@""];
+            [controller.tableView reloadData];
+            
+            SwiftTableViewCell * cell = (id) [controller.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0
+                                                                                                        inSection:0]];
+            cell.textLabel.text should equal(@"Foo");
+        });
+    });
 });
 
 SPEC_END
