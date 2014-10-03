@@ -103,8 +103,8 @@
 		AAF8D10518802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */; };
 		AAF8D10618802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */; };
 		D7742E7F970147C5BA8372FB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431B3D74923D4C9F93AE7D9D /* libPods.a */; };
-		E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
-		E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTCellFactory.m */; };
+		E60CA01A1684AFEF00F4147E /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
+		E60CA01B1684AFEF00F4147E /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
 		E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
 		E60CA01D1684AFEF00F4147E /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
@@ -253,8 +253,8 @@
 		AAF8D10418802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DTSectionModel+HeaderFooterModel.m"; path = "../../DTTableViewManager/DTSectionModel+HeaderFooterModel.m"; sourceTree = "<group>"; };
 		CCFADF5DE26E45C29A952C09 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9BF53CBE5EE9357BA7A7EB5 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		E60CA0131684AFEF00F4147E /* DTCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCellFactory.h; path = ../../DTTableViewManager/DTCellFactory.h; sourceTree = "<group>"; };
-		E60CA0141684AFEF00F4147E /* DTCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCellFactory.m; path = ../../DTTableViewManager/DTCellFactory.m; sourceTree = "<group>"; };
+		E60CA0131684AFEF00F4147E /* DTTableViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewFactory.h; path = ../../DTTableViewManager/DTTableViewFactory.h; sourceTree = "<group>"; };
+		E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewFactory.m; path = ../../DTTableViewManager/DTTableViewFactory.m; sourceTree = "<group>"; };
 		E60CA0161684AFEF00F4147E /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/DTTableViewController.h; sourceTree = "<group>"; };
 		E60CA0171684AFEF00F4147E /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../DTTableViewManager/DTTableViewController.m; sourceTree = "<group>"; };
 		E638F1071619916B00694FBC /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = TableViewFactory/Models/Example.h; sourceTree = "<group>"; };
@@ -542,8 +542,8 @@
 		AA2EBD8D187EC5170063B98A /* Cell factory */ = {
 			isa = PBXGroup;
 			children = (
-				E60CA0131684AFEF00F4147E /* DTCellFactory.h */,
-				E60CA0141684AFEF00F4147E /* DTCellFactory.m */,
+				E60CA0131684AFEF00F4147E /* DTTableViewFactory.h */,
+				E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */,
 			);
 			name = "Cell factory";
 			sourceTree = "<group>";
@@ -915,7 +915,7 @@
 				AAF8D10618802B6200B20BCF /* DTSectionModel+HeaderFooterModel.m in Sources */,
 				9AC702D819DBEE6B0065B21B /* SwiftTableViewCell.swift in Sources */,
 				E6402FC6162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
-				E60CA01B1684AFEF00F4147E /* DTCellFactory.m in Sources */,
+				E60CA01B1684AFEF00F4147E /* DTTableViewFactory.m in Sources */,
 				9A3CC14919A60DC900D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
 				E60CA01D1684AFEF00F4147E /* DTTableViewController.m in Sources */,
 				952112BD18548F8C00063EA8 /* BanksCoreDataManager.m in Sources */,
@@ -974,7 +974,7 @@
 				9ADB0CAB19D700CA0048B08E /* SwiftViewController.swift in Sources */,
 				9A48860319DAB39200A266BF /* SwiftHeaderFooterView.swift in Sources */,
 				952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
-				E60CA01A1684AFEF00F4147E /* DTCellFactory.m in Sources */,
+				E60CA01A1684AFEF00F4147E /* DTTableViewFactory.m in Sources */,
 				E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */,
 				9545FB9E16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
 				95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,

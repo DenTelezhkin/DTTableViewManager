@@ -23,7 +23,7 @@
 // THE SOFTWARE.
 
 #import "DTTableViewController.h"
-#import "DTCellFactory.h"
+#import "DTTableViewFactory.h"
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTTableViewDataStorage.h"
 
@@ -31,7 +31,7 @@
 
 @property (nonatomic, assign) NSInteger currentSearchScope;
 @property (nonatomic, copy) NSString * currentSearchString;
-@property (nonatomic, retain) DTCellFactory * cellFactory;
+@property (nonatomic, retain) DTTableViewFactory * cellFactory;
 @end
 
 @implementation DTTableViewController
@@ -65,7 +65,7 @@
 
 - (void)setupTableViewControllerDefaults
 {
-    _cellFactory = [DTCellFactory new];
+    _cellFactory = [DTTableViewFactory new];
     _cellFactory.delegate = self;
 
     _dataStorage = [DTMemoryStorage storage];

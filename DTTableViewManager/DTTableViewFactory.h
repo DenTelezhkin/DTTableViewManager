@@ -39,7 +39,7 @@
  You shouldn't call any of it's methods. Use `DTTableViewController` API's.
  */
 
-@interface DTCellFactory : NSObject
+@interface DTTableViewFactory : NSObject
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass;
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass;

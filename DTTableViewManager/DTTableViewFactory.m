@@ -23,12 +23,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTCellFactory.h"
+#import "DTTableViewFactory.h"
 #import "DTModelTransfer.h"
 #import "UIView+DTLoading.h"
 #import "DTRuntimeHelper.h"
 
-@interface DTCellFactory ()
+@interface DTTableViewFactory ()
 
 @property (nonatomic,strong) NSMutableDictionary * cellMappingsDictionary;
 @property (nonatomic,strong) NSMutableDictionary * headerMappingsDictionary;
@@ -36,7 +36,7 @@
 
 @end
 
-@implementation DTCellFactory
+@implementation DTTableViewFactory
 
 - (NSMutableDictionary *)cellMappingsDictionary
 {
