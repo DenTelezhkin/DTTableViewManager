@@ -16,20 +16,15 @@ PODS:
   - DTModelStorage/Utilities (HEAD based on 1.0.0rc2):
     - DTModelStorage/MemoryStorage
   - OCMock (2.2.4)
-  - PlaceKit (1.1.0):
-    - PlaceKit/Core
-  - PlaceKit/Core (1.1.0)
 
 DEPENDENCIES:
   - Cedar
   - DTModelStorage (HEAD)
   - OCMock (~> 2.2)
-  - PlaceKit
 
 SPEC CHECKSUMS:
   Cedar: 6ad54fd39ef5f32292af175bc0259462c724ffb3
   DTModelStorage: bd30edebe97c754a0ab873fd00e5be177b8d7eab
   OCMock: 6db79185520e24f9f299548f2b8b07e41d881bd5
-  PlaceKit: 84da16ea55065c2e62cff1fafb86f73bb9cbc193
 
 COCOAPODS: 0.34.1
