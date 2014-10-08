@@ -132,6 +132,8 @@
 {
     NSParameterAssert([headerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
+    
+    self.sectionHeaderStyle = DTTableViewSectionStyleView;
 
     [self.cellFactory registerHeaderClass:headerClass forModelClass:modelClass];
 }
@@ -140,6 +142,8 @@
 {
     NSParameterAssert(footerClass);
     NSParameterAssert(modelClass);
+    
+    self.sectionFooterStyle = DTTableViewSectionStyleView;
 
     [self.cellFactory registerFooterClass:footerClass forModelClass:modelClass];
 }
@@ -160,6 +164,8 @@
     NSParameterAssert(nibName);
     NSParameterAssert([headerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
+    
+    self.sectionHeaderStyle = DTTableViewSectionStyleView;
 
     [self.cellFactory registerNibNamed:nibName
                         forHeaderClass:headerClass
@@ -171,6 +177,8 @@
     NSParameterAssert(nibName);
     NSParameterAssert([footerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
+    
+    self.sectionFooterStyle = DTTableViewSectionStyleView;
 
     [self.cellFactory registerNibNamed:nibName
                         forFooterClass:footerClass
