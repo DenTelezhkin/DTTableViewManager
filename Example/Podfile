@@ -4,7 +4,6 @@ xcodeproj 'DTTableViewManager.xcodeproj'
 platform :ios, 7.0
 
 pod 'DTModelStorage', :head
-pod 'PlaceKit'
 
 target :Tests do
   pod 'Cedar'
