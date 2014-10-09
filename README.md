@@ -23,76 +23,58 @@ pod try DTTableViewManager
 * Support for UITableViewHeaderFooterView or custom UIView for table headers and footers
 * Easy UITableView search 
 * Core data / NSFetchedResultsController support
+* Swift support
 
-## Workflow
+## Quick start
 
-Here are 4 simple steps you need to use DTTableViewManager:
+Let's say you have an array of Posts you want to display in UITableView. To quickly show them using DTTableViewManager, here's what you need to do:
 
-1. Your view controller should subclass `DTTableViewController`, and set tableView property.
-2. You should have subclass of `DTTableViewCell`.
-3. In your viewDidLoad method, call mapping methods to establish relationship between data models and UITableViewCells.
-4. Add data models to memoryStorage, or use CoreData storage class.
+Subclass DTTableViewController, create xib, or storyboard with your view controller, wire up tableView outlet. Add following code to viewDidLoad:
 
-## API quickstart
+```objective-c
+[self registerCellClass:[Post class] forModelClass:[PostCell class]];
+[self.memoryStorage addItems:posts];
+```
+or in Swift:
+```swift
+self.registerCellClass(Post.self, forModelClass:PostCell.self)
+self.memoryStorage().addItems(posts)
+```
 
-<table>
-<tr><th colspan=2 style="text-align:center;">Key classes</th></tr>
-	<tr>
-	<td> DTTableViewController </td>
-	<td>Your UIViewController, that presents tableView, needs to subclass* this class. This class implements all UITableViewDatasource methods.</td>
-	</tr>
-	<tr>
-	<td>DTMemoryStorage</td>
-	<td>Class responsible for holding tableView models. It is used as a default storage by DTTableViewManager.</td>
-	</tr>
-	<tr>
-	<td>DTCoreDataStorage</td>
-	<td>Class used to display data, using `NSFetchedResultsController`.</td>
-	</tr>
-	<tr>
-	<td>DTSectionModel</td>
-	<td> Object, representing section in UITableView. Basically has three properties - array of objects, headerModel and footerModel.</td>
-	</tr>
-<tr><th colspan=2 style="text-align:center;">Protocols</th></tr>
-	<tr>
-	<td>DTModelTransfer</td>
-	<td> Protocol, which methods are used to transfer model to UITableViewCell subclass, that will be representing it.</td>
-	</tr>
-<tr><th colspan=2 style="text-align:center;">Convenience classes (optional)</th></tr>
-	<tr>
-	<td>DTTableViewCell</td>
-	<td> UITableViewCell subclass, conforming to `DTModelTransfer` protocol. </td>
-	</tr>
-	<tr>
-	<td>DTDefaultCellModel</td>
-	<td>Custom model class, that allows to use UITableViewCell without subclassing.</td>
-	</tr>
-	<tr>
-	<td>DTDefaultHeaderFooterModel</td>
-	<td>Custom model class, that allows to use UITableViewHeaderFooterView without subclassing.</td>
-	</tr>
-</table>
+Subclass DTTableViewCell, and implement updateWithModel method
+```objective-c
+-(void)updateWithModel:(id)model
+{
+    Post * post = model;
+    self.postTextView.text = post.content;
+}
+```
+or in Swift:
+```swift
+func updateWithModel(model: AnyObject!)
+{
+    let post = model as Post
+    self.postTextView.text = post.content
+}
+```
 
-* If you need your view controller to be subclassed from something else than DTTableViewController, it's good practice to use [UIViewController containment API](http://www.objc.io/issue-1/containment-view-controller.html), and embed DTTableViewController subclass as a child inside inside parent controller.
+That's it! For more detailed look at available API - [API quickstart](https://github.com/DenHeadless/DTTableViewManager/wiki/API-quickstart) page on wiki.
 
-## Mapping
+## Mapping and registration
 
-* Cells
+Registering cell class and xib is 1 line of code:
+
 ```objective-c
 [self registerCellClass:[Cell class] forModelClass:[Model class]];
 ```
+Similarly, for headers and footers:
 
-* Headers/Footers
 ```objective-c
 [self registerHeaderClass:[HeaderView class] forModelClass:[Model class]];
 [self registerFooterClass:[FooterView class] forModelClass:[Model class]];
 ```
 
-This will also register nibs with `Cell`, `HeaderView` and `FooterView` name, if any of them exist. 
-
-#### Storyboards
-
-If you use storyboards and prototype cells, you will need to set reuseIdentifier for corresponding cell in storyboard. Reuse identifier needs to be identical to your cell class name. 
+For more detailed look at mapping in DTTableViewManager, check out dedicated [Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping).
 
 ## Managing table items
 
@@ -164,7 +146,7 @@ You will need to provide a storage with NSFetchedResultsController and appropria
 
 ## Requirements
 
-* iOS 6.0 and later
+* iOS 7.x, 8.x
 * ARC
         
 ## Installation
