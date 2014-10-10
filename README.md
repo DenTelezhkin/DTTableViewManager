@@ -58,7 +58,7 @@ func updateWithModel(model: AnyObject!)
 }
 ```
 
-That's it! For more detailed look at available API - [API quickstart](https://github.com/DenHeadless/DTTableViewManager/wiki/API-quickstart) page on wiki.
+That's it! For more detailed look at available API - **[API quickstart](https://github.com/DenHeadless/DTTableViewManager/wiki/API-quickstart)** page on wiki.
 
 ## Mapping and registration
 
@@ -74,7 +74,7 @@ Similarly, for headers and footers:
 [self registerFooterClass:[FooterView class] forModelClass:[Model class]];
 ```
 
-For more detailed look at mapping in DTTableViewManager, check out dedicated [Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping).
+For more detailed look at mapping in DTTableViewManager, check out dedicated *[Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping)*.
 
 ## Managing table items
 
@@ -86,7 +86,7 @@ Storage classes for DTTableViewManager have been moved to [separate repo](https:
 
 **You can take a look at all provided methods for manipulating items here: [DTMemoryStorage methods](https://github.com/DenHeadless/DTModelStorage/blob/master/README.md#adding-items)**
 
-DTTableViewManager adds several methods to `DTMemoryStorage`, that are specific to UITableView. Take a look at them here: [DTMemoryStorage additions](https://github.com/DenHeadless/DTTableViewManager/wiki/DTMemoryStorage-additions)
+DTTableViewManager adds several methods to `DTMemoryStorage`, that are specific to UITableView. Take a look at them here: **[DTMemoryStorage additions](https://github.com/DenHeadless/DTTableViewManager/wiki/DTMemoryStorage-additions)**
 
 ### NSFetchedResultsController and DTCoreDataStorage
 
@@ -96,32 +96,12 @@ DTTableViewManager adds several methods to `DTMemoryStorage`, that are specific 
 self.dataStorage = [DTCoreDataStorage storageWithFetchResultsController:controller];
 ```
 
+**Important** Keep in mind, that DTMemoryStorage is not limited to objects in memory. For example, if you have CoreData database, and you now for sure, that number of items is not big, you can choose not to use DTCoreDataStorage and NSFetchedResultsController. You can fetch all required models, and store them in DTMemoryStorage, just like you would do with NSObject subclasses.
+
 ##### Search
-	
-Set UISearchBar's delegate property to your `DTTableViewController` subclass. 	
 
-Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
-```objective-c
-[self.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope, DTSectionModel *section) 
-	{
-        Example * example  = model;
-        if ([example.text rangeOfString:searchString].location == NSNotFound)
-        {
-            return NO;
-        }
-        return YES;
-    } forModelClass:[Example class]];
-```
+DTTableViewManager has a built-in search system, that is easy to use and flexible. Read all about it in a dedicated **[Implementing search](https://github.com/DenHeadless/DTTableViewManager/wiki/Implementing-search)** wiki page.	
 
-Searching data storage will be created automatically for current search, and it will be used as a datasource for UITableView.
-
-Subclass DTCoreDataStorage and implement single method 
-```objective-c
-- (instancetype)searchingStorageForSearchString:(NSString *)searchString
-                                  inSearchScope:(NSInteger)searchScope;
-```	
-
-You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate. Take a look at example application, that does just that.
 
 ## Requirements
 
@@ -132,14 +112,16 @@ You will need to provide a storage with NSFetchedResultsController and appropria
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 2.7.0'
+	pod 'DTTableViewManager', '~> 3.0.0'
 
 ## Documentation
 
 You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
 
+Also check out [wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki) for lot's of information on DTTableViewManager internals and best practices.
+
 ## Thanks
 
 * [Alexey Belkevich](https://github.com/belkevich) for providing initial implementation of CellFactory.
 * [Michael Fey](https://github.com/MrRooni) for providing insight into NSFetchedResultsController updates done right. 
-
+* [Nickolay Sheika](https://github.com/hawk-ukr) for great feedback, that helped shaping 3.0 release.
