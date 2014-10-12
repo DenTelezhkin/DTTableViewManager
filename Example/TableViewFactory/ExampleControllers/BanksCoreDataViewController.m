@@ -22,7 +22,7 @@
     [self registerCellClass:[BankCell class] forModelClass:[Bank class]];
 
     NSFetchedResultsController * controller = [BanksCoreDataStorage banksFetchControllerWithPredicate:nil];
-    self.dataStorage = [BanksCoreDataStorage storageWithFetchResultsController:controller];
+    self.storage = [BanksCoreDataStorage storageWithFetchResultsController:controller];
 }
 
 -(void)tableControllerDidCancelSearch

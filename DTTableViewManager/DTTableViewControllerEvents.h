@@ -48,7 +48,7 @@
 // searching
 
 /**
- This method is called when DTTableViewController will start searching in current storage. After calling this method DTTableViewController starts using searchingDataStorage instead of dataStorage to provide search results.
+ This method is called when DTTableViewController will start searching in current storage. After calling this method DTTableViewController starts using searchingStorage instead of storage to provide search results.
  */
 - (void)tableControllerWillBeginSearch;
 
@@ -58,7 +58,7 @@
 - (void)tableControllerDidEndSearch;
 
 /**
- This method is called, when search string becomes empty. DTTableViewController switches to default storage instead of searchingDataStorage and reloads data of the UITableView.
+ This method is called, when search string becomes empty. DTTableViewController switches to default storage instead of searchingStorage and reloads data of the UITableView.
  */
 - (void)tableControllerDidCancelSearch;
 

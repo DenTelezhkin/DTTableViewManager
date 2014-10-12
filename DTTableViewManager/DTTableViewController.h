@@ -56,9 +56,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 /**
  Data storage object. Create storage you need and set this property to populate table view with data. `DTTableViewManager` provides two data storage classes - `DTMemoryStorage` and `DTCoreDataStorage`. `DTMemoryStorage` storage used by default.
  */
-
-@property (nonatomic, strong) id <DTStorageProtocol> dataStorage;
-
+@property (nonatomic, strong) id <DTStorageProtocol> storage;
 
 /**
  Convenience method, returning memory storage. If custom storage is used, this method will return nil.
@@ -67,12 +65,10 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  */
 - (DTMemoryStorage *)memoryStorage;
 
-
 /**
  Searching data storage object. It will be created automatically, responding to changes in UISearchBar, or after method filterTableItemsForSearchString:inScope: is called.
  */
-
-@property (nonatomic, strong) id <DTStorageProtocol> searchingDataStorage;
+@property (nonatomic, strong) id <DTStorageProtocol> searchingStorage;
 
 /*
  Property to store UISearchBar, attached to your UITableView. Attaching it to this property is completely optional. Delegate for UISearchBar is set to instance of DTTableViewController automatically.
@@ -82,7 +78,6 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 /**
  Style of section headers for table view. Depending on style, datasource methods will return title for section or view for section. Default is DTTableViewSectionStyleTitle.
  */
-
 @property (nonatomic, assign) DTTableViewSectionStyle sectionHeaderStyle;
 
 /**
@@ -212,14 +207,14 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 ///---------------------------------------
 
 /**
- Filter presented table items, using searchString as a criteria. Current dataStorage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString is not empty, UITableViewDataSource is assigned to searchingDataStorage and table view is reloaded automatically.
+ Filter presented table items, using searchString as a criteria. Current storage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString is not empty, UITableViewDataSource is assigned to searchingStorage and table view is reloaded automatically.
  
  @param searchString Search string used as a criteria for filtering.
  */
 -(void)filterTableItemsForSearchString:(NSString *)searchString;
 
 /**
- Filter presented table items, using searchString as a criteria. Current dataStorage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString or scopeNUmber is not empty, UITableViewDataSource is assigned to searchingDataStorage and table view is reloaded automatically.
+ Filter presented table items, using searchString as a criteria. Current storage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString or scopeNUmber is not empty, UITableViewDataSource is assigned to searchingStorage and table view is reloaded automatically.
  
  @param searchString Search string used as a criteria for filtering.
  

@@ -25,7 +25,7 @@ describe(@"Datasource spec", ^{
         model = [DTTableViewController new];
         storage = [model memoryStorage];
         storage.loggingEnabled = NO;
-        model.dataStorage = storage;
+        model.storage = storage;
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
         model.tableView.delegate = model;
