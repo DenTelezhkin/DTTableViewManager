@@ -89,6 +89,7 @@
 		9A48860C19DABC9100A266BF /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
 		9A48860D19DABC9100A266BF /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
 		9A88F5A719EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */; };
+		9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A88F5A819EAC683008436C9 /* Images.xcassets */; };
 		9AC702D619DBEE060065B21B /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
 		9AC702D819DBEE6B0065B21B /* SwiftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */; };
 		9AC702DA19DBEECB0065B21B /* SwiftStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */; };
@@ -230,6 +231,7 @@
 		9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftHeaderView.xib; path = "mocks/Header:footer mocks/SwiftHeaderView.xib"; sourceTree = "<group>"; };
 		9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DTSectionModel+SectionHeadersFooters.h"; path = "../../DTTableViewManager/DTSectionModel+SectionHeadersFooters.h"; sourceTree = "<group>"; };
 		9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DTSectionModel+SectionHeadersFooters.m"; path = "../../DTTableViewManager/DTSectionModel+SectionHeadersFooters.m"; sourceTree = "<group>"; };
+		9A88F5A819EAC683008436C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Images.xcassets; sourceTree = "<group>"; };
 		9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SwiftStoryboard.storyboard; path = mocks/Controllers/SwiftStoryboard.storyboard; sourceTree = "<group>"; };
 		9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTableViewCell.swift; path = mocks/SwiftTableViewCell.swift; sourceTree = "<group>"; };
 		9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftStoryboardViewController.swift; path = mocks/Controllers/SwiftStoryboardViewController.swift; sourceTree = "<group>"; };
@@ -689,6 +691,7 @@
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
+				9A88F5A819EAC683008436C9 /* Images.xcassets */,
 				95BCE72F1792C7B300526954 /* Default-568h@2x.png */,
 				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
 				E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */,
@@ -861,6 +864,7 @@
 				952112BB1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */,
 				E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */,
 				9A48860C19DABC9100A266BF /* SwiftHeaderView.xib in Resources */,
+				9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */,
 				9A48860519DAB3C700A266BF /* SwiftHeaderFooterView.xib in Resources */,
 				E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */,
 				956C39BB1854BA6400FC1A5B /* BankCell.xib in Resources */,
@@ -1179,6 +1183,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB05CAF571608E373918A9BA /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1202,6 +1208,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECCD7CB920F030A4246B2E03 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
