@@ -42,12 +42,11 @@
     /*
      We use country, capital and the continent name as the search criteria here.
      */
-    
     [self.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope, DTSectionModel *section) {
         Example * example  = model;
         if ([example.text rangeOfString:searchString].location == NSNotFound &&
             [example.details rangeOfString:searchString].location == NSNotFound &&
-            [(NSString *)section.headerModel rangeOfString:searchString].location == NSNotFound)
+            [(NSString *)section.tableHeaderModel rangeOfString:searchString].location == NSNotFound)
         {
             return NO;
         }

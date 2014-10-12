@@ -24,7 +24,7 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTMemoryStorage storage];
+            storage = [model memoryStorage];
             storage.loggingEnabled = NO;
             model.dataStorage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
@@ -68,7 +68,7 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTMemoryStorage storage];
+            storage = [model memoryStorage];
             model.dataStorage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
@@ -111,7 +111,7 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTMemoryStorage storage];
+            storage = [model memoryStorage];
             model.dataStorage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
@@ -146,7 +146,7 @@ describe(@"mapping tests", ^{
             model = [DTTableViewController new];
             model.sectionHeaderStyle = DTTableViewSectionStyleView;
             model.sectionFooterStyle = DTTableViewSectionStyleView;
-            storage = [DTMemoryStorage storage];
+            storage = [model memoryStorage];
             model.dataStorage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
@@ -264,7 +264,7 @@ describe(@"Foundation class clusters", ^{
         
         model = [DTTableViewController new];
         model.sectionHeaderStyle = DTTableViewSectionStyleView;
-        storage = [DTMemoryStorage storage];
+        storage = [model memoryStorage];
         model.dataStorage = storage;
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         model.tableView.dataSource = model;

@@ -25,7 +25,6 @@
 #import "DTTableViewController.h"
 #import "DTTableViewFactory.h"
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
-#import "DTTableViewDataStorage.h"
 
 @interface DTTableViewController () <DTStorageUpdating, DTTableViewFactoryDelegate>
 
@@ -35,6 +34,8 @@
 @end
 
 @implementation DTTableViewController
+
+@synthesize dataStorage = _dataStorage;
 
 #pragma mark - initialize, clean
 
@@ -67,9 +68,6 @@
 {
     _cellFactory = [DTTableViewFactory new];
     _cellFactory.delegate = self;
-
-    _dataStorage = [DTMemoryStorage storage];
-    _dataStorage.delegate = self;
 
     _currentSearchScope = -1;
     _sectionHeaderStyle = DTTableViewSectionStyleTitle;
@@ -107,13 +105,26 @@
     return nil;
 }
 
-- (void)setDataStorage:(id <DTTableViewDataStorage>)dataStorage
+-(id<DTStorageProtocol>)dataStorage
+{
+    if (!_dataStorage)
+    {
+        DTMemoryStorage * storage = [DTMemoryStorage storage];
+        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
+        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
+        _dataStorage = storage;
+        _dataStorage.delegate = self;
+    }
+    return _dataStorage;
+}
+
+- (void)setDataStorage:(id <DTStorageProtocol>)dataStorage
 {
     _dataStorage = dataStorage;
     _dataStorage.delegate = self;
 }
 
-- (void)setSearchingDataStorage:(id <DTTableViewDataStorage>)searchingDataStorage
+- (void)setSearchingDataStorage:(id <DTStorageProtocol>)searchingDataStorage
 {
     _searchingDataStorage = searchingDataStorage;
     _searchingDataStorage.delegate = self;
@@ -231,8 +242,11 @@
     if ([self.dataStorage respondsToSelector:@selector(searchingStorageForSearchString:inSearchScope:)])
     {
         [self tableControllerWillBeginSearch];
-        self.searchingDataStorage = [(DTMemoryStorage *)self.dataStorage searchingStorageForSearchString:searchString
-                                                                                                    inSearchScope:scopeNumber];
+        DTMemoryStorage * searchStorage =[self.dataStorage searchingStorageForSearchString:searchString
+                                                                             inSearchScope:scopeNumber];
+        searchStorage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
+        searchStorage.supplementaryFooterKind = DTTableViewElementSectionFooter;
+        self.searchingDataStorage = (DTMemoryStorage *)searchStorage;
         [self.tableView reloadData];
         [self tableControllerDidEndSearch];
     }
@@ -492,6 +506,15 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                           withRowAnimation:self.reloadRowAnimation];
 
     [self.tableView endUpdates];
+    
+    [self tableControllerDidUpdateContent];
+}
+
+- (void)storageNeedsReload
+{
+    [self tableControllerWillUpdateContent];
+    
+    [self.tableView reloadData];
     
     [self tableControllerDidUpdateContent];
 }

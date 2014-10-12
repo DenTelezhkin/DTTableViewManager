@@ -1,6 +1,8 @@
 #import "DTTableViewController+UnitTests.h"
 #import "DTMemoryStorage+UnitTests.h"
 #import "MockTableHeaderView.h"
+#import "BeNil.h"
+
 using namespace Cedar::Matchers;
 
 SPEC_BEGIN(DatasourceSpecs)
@@ -21,7 +23,7 @@ describe(@"Datasource spec", ^{
         [UIView setAnimationsEnabled:NO];
 
         model = [DTTableViewController new];
-        storage = [DTMemoryStorage storage];
+        storage = [model memoryStorage];
         storage.loggingEnabled = NO;
         model.dataStorage = storage;
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
@@ -445,8 +447,8 @@ describe(@"Datasource spec", ^{
     describe(@"display titles on empty section", ^{
 
         beforeEach(^{
-            [[model.memoryStorage sectionAtIndex:0] setHeaderModel:@"Foo"];
-            [[model.memoryStorage sectionAtIndex:0] setFooterModel:@"Bar"];
+            [model.memoryStorage setSectionHeaderModel:@"Foo" forSectionIndex:0];
+            [model.memoryStorage setSectionFooterModel:@"Bar" forSectionIndex:0];
         });
 
         afterEach(^{
@@ -476,8 +478,8 @@ describe(@"Datasource spec", ^{
                          forModelClass:[Example class]];
             [model registerFooterClass:[MockTableHeaderView class]
                          forModelClass:[Example class]];
-            [[model.memoryStorage sectionAtIndex:0] setHeaderModel:acc1];
-            [[model.memoryStorage sectionAtIndex:0] setFooterModel:acc2];
+            [model.memoryStorage setSectionHeaderModel:acc1 forSectionIndex:0];
+            [model.memoryStorage setSectionFooterModel:acc2 forSectionIndex:0];
             
         });
 

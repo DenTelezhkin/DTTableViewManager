@@ -24,9 +24,7 @@
 // THE SOFTWARE.
 
 #import "DTModelTransfer.h"
-#import "DTTableViewDataStorage.h"
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
-#import "DTSectionModel+HeaderFooterModel.h"
 #import "DTTableViewControllerEvents.h"
 
 typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
@@ -37,48 +35,6 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 
 /**
  `DTTableViewController` manages all `UITableView` datasource methods and provides API for managing your data models in the table. 
- 
- ## Setup
- 
- # General steps
- - You should have custom `UITableViewCell` subclasses that manage cell layout, using given data model (or `DTTableViewCell`, which is UITableViewCell subclass, that conforms to `DTModelTransfer` protocol)
- - Every cell class should be mapped to model class using mapping methods.
- - `UITableView` datasource and delegate is your `DTTableViewController` subclass.
- - If you need CoreData storage, you should create DTTableViewCoreDataStorage and assign it to `dataStorage` property.
-  
- ## Managing table items
- 
- Depending on data storage you choose to have, table items can be managed differently. But the pattern is the same - `DTTableViewController` reacts to changes in data storage object and updates table view appropriately. `DTTableViewManager` provides two data storage classes - `DTMemoryStorage` and `DTTableViewCoreDataStorage`. `DTMemoryStorage` is used by default.
- 
- ## Mapping cells
- 
- Use `registerCellClass:forModelClass` for mapping cell class to model. 'DTTableViewController' will automatically check, if there's a nib with the same name as cellClass. If it is - this nib is registered for modelClass. If there's no nib - then cell will be created using initWithStyle: method on cellClass. If you need nib name for the cell to differ from cellClass name, use `registerNibName:forCellClass:modelClass:`.
- 
- Before executing mapping methods, make sure that tableView property is set and tableView is created. Good spot to call `registerCellClass:forModelClass` is in viewDidLoad method.
-
- ## Search
- 
- Search implementation depends on what data storage you use. In both cases it's recommended to use this class as UISearchBarDelegate. Then searching data storage will be created automatically for every change in UISearchBar.
- 
- # DTMemoryStorage
- 
-Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
- 
- # DTCoreDataStorage
- 
- Subclass DTCoreDataStorage and implement single method: -searchingStorageForSearchString:inSearchScope:. You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate.
- 
- ## Loading headers/footers from NIB
- 
- To register custom NIB for header/footer use methods `registerHeaderClass:modelClass:` and `registerFooterClass:modelClass:` methods. If nib name is different from the class name, use `registerNibName:forHeaderClass:modelClass:` or `registerNibName:forFooterClass:modelClass:` method.
- 
- You can use either UITableViewHeaderFooterView or a simple UIView,`DTTableViewManager` will automatically figure, how view should be loaded.
- 
- ### Examples and questions
- 
- I recommend looking through provided examples https://github.com/DenHeadless/DTTableViewManager . I tried to cover most interesting and often use cases for table view that you might encounter.
- 
- If you still are missing something, feel free to contact me or create issue on github!
 */
 
 @interface DTTableViewController : UIViewController
@@ -92,16 +48,16 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
 ///---------------------------------------
 
 /**
- Table view that will present your data models.
+ Table view that will present your data models. Delegate and dataSource properties are set automatically.
  */
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 
 
 /**
- Data storage object. Create storage you need and set this property to populate table view with data. `DTTableViewManager` provides two data storage classes - `DTTableViewStorage` and `DTTableViewCoreDataStorage`. DTTableViewMemory storage used by default.
+ Data storage object. Create storage you need and set this property to populate table view with data. `DTTableViewManager` provides two data storage classes - `DTMemoryStorage` and `DTCoreDataStorage`. `DTMemoryStorage` storage used by default.
  */
 
-@property (nonatomic, strong) id <DTStorage> dataStorage;
+@property (nonatomic, strong) id <DTStorageProtocol> dataStorage;
 
 
 /**
@@ -116,10 +72,10 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
  Searching data storage object. It will be created automatically, responding to changes in UISearchBar, or after method filterTableItemsForSearchString:inScope: is called.
  */
 
-@property (nonatomic, strong) id <DTStorage> searchingDataStorage;
+@property (nonatomic, strong) id <DTStorageProtocol> searchingDataStorage;
 
 /*
- Property to store UISearchBar, attached to your UITableView. Attaching it to this property is completely optional.
+ Property to store UISearchBar, attached to your UITableView. Attaching it to this property is completely optional. Delegate for UISearchBar is set to instance of DTTableViewController automatically.
  */
 @property (nonatomic, strong) IBOutlet UISearchBar * searchBar;
 
@@ -181,7 +137,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
 ///---------------------------------------
 
 /**
- This method is used to register mapping from model class to custom cell class. It will automatically check for nib with the same name as `cellClass`. If it exists - nib will be registered instead of class.
+ Register mapping from model class to custom cell class. Method will automatically check for nib with the same name as `cellClass`. If it exists - nib will be registered instead of class.
  
  @param cellClass Class of the cell you want to be created for model with modelClass.
  
@@ -206,7 +162,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
              modelClass:(Class)modelClass;
 
 /**
- This method registers nib with `headerClass` name. `headerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ Register nib with `headerClass` name. `headerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. It can also be a subclass of `UITableViewHeaderFooterView`. Calling this method automatically sets headerStyle property to DTTableViewSectionStyleView.
  
  @param headerClass headerClass to be mapped for `modelClass`
  
@@ -216,7 +172,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
 -(void)registerHeaderClass:(Class)headerClass forModelClass:(Class)modelClass;
 
 /**
- This method registers nib with `nibName` name. `headerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ Register nib with `nibName` name. `headerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. It can also be a subclass of `UITableViewHeaderFooterView`. Calling this method automatically sets headerStyle property to DTTableViewSectionStyleView.
  
  @param nibName Name of custom XIB that is used to create a header.
  
@@ -229,7 +185,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
              modelClass:(Class)modelClass;
 
 /**
- This method registers nib with `footerClass` name. `footerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ Register nib with `footerClass` name. `footerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. It can also be a subclass of `UITableViewHeaderFooterView`. Calling this method automatically sets footerStyle property to DTTableViewSectionStyleView.
  
  @param footerClass footerClass to be mapped for `modelClass`
  
@@ -239,7 +195,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
 -(void)registerFooterClass:(Class)footerClass forModelClass:(Class)modelClass;
 
 /**
- This method registers nib with `nibName` name. `footerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. On iOS 6 it can be a subclass of `UITableViewHeaderFooterView` for reusability.
+ Registers nib with `nibName` name. `footerClass` should be a UIView subclass, conforming to `DTModelTransfer` protocol. It can also be a subclass of `UITableViewHeaderFooterView`. Calling this method automatically sets footerStyle property to DTTableViewSectionStyleView.
  
  @param nibName Name of custom XIB that is used to create a header.
  
@@ -256,14 +212,14 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
 ///---------------------------------------
 
 /**
- This method filters presented table items, using searchString as a criteria. Current dataStorage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString is not empty, UITableViewDataSource is assigned to searchingDataStorage and table view is reloaded automatically.
+ Filter presented table items, using searchString as a criteria. Current dataStorage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString is not empty, UITableViewDataSource is assigned to searchingDataStorage and table view is reloaded automatically.
  
  @param searchString Search string used as a criteria for filtering.
  */
 -(void)filterTableItemsForSearchString:(NSString *)searchString;
 
 /**
- This method filters presented table items, using searchString as a criteria. Current dataStorage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString or scopeNUmber is not empty, UITableViewDataSource is assigned to searchingDataStorage and table view is reloaded automatically.
+ Filter presented table items, using searchString as a criteria. Current dataStorage is queried with `searchingStorageForSearchString:inSearchScope:` method. If searchString or scopeNUmber is not empty, UITableViewDataSource is assigned to searchingDataStorage and table view is reloaded automatically.
  
  @param searchString Search string used as a criteria for filtering.
  
@@ -279,7 +235,7 @@ Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model 
 -(BOOL)isSearching NS_REQUIRES_SUPER;
 
 /**
- This method allows to perform animations you need for changes in UITableView. It can be used for complex animations, that should be run simultaneously. For example, `DTTableViewManagerAdditions` category on `DTMemoryStorage` uses it to implement moving items between indexPaths.
+ Perform animations you need for changes in UITableView. Method can be used for complex animations, that should be run simultaneously. For example, `DTTableViewManagerAdditions` category on `DTMemoryStorage` uses it to implement moving items between indexPaths.
  
  @param animationBlock AnimationBlock to be executed with UITableView.
  

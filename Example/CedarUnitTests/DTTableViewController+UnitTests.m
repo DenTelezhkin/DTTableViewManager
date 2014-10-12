@@ -17,7 +17,7 @@
 
 -(BOOL)verifyTableItem:(id)item atIndexPath:(NSIndexPath *)path
 {
-    id <DTStorage> currentStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
+    id <DTStorageProtocol> currentStorage = [self isSearching] ? self.searchingDataStorage : self.dataStorage;
     id itemDatasource = [currentStorage objectAtIndexPath:path];
     id itemTable = [(id <DTModelTransfer>)[self tableView:self.tableView cellForRowAtIndexPath:path] model];
     

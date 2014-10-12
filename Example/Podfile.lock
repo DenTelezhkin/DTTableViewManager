@@ -18,7 +18,7 @@ PODS:
   - OCMock (2.2.4)
 
 DEPENDENCIES:
-  - Cedar
+  - Cedar (= 0.9.8)
   - DTModelStorage (HEAD)
   - OCMock (~> 2.2)
 
@@ -27,4 +27,4 @@ SPEC CHECKSUMS:
   DTModelStorage: bd30edebe97c754a0ab873fd00e5be177b8d7eab
   OCMock: 6db79185520e24f9f299548f2b8b07e41d881bd5
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.34.2

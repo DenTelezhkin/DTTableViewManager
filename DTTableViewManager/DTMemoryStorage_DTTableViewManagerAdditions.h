@@ -24,43 +24,14 @@
 // THE SOFTWARE.
 
 #import "DTMemoryStorage.h"
-#import "DTTableViewDataStorage.h"
+
+static NSString * const DTTableViewElementSectionHeader = @"DTTableViewElementSectionHeader";
+static NSString * const DTTableViewElementSectionFooter = @"DTTableViewElementSectionFooter";
 
 /**
- This category is used to adapt DTMemoryStorage for table view models. It adds section headers, and section footers to DTMemoryStorage, as well as adding UITableView specific methods like moving items between indexPaths and moving sections in UITableView.
- 
- ## Searching
- 
- Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
+ This category is used to adapt DTMemoryStorage for table view models. It adds UITableView specific methods like moving items between indexPaths and moving sections in UITableView.
  */
-@interface DTMemoryStorage (DTTableViewManager_Additions) <DTTableViewDataStorage>
-
-/**
- Remove all items in section and replace them with array of items. After replacement is done, UITableView reloadData method is called.
- 
- @param items Array of models to replace current section contents
- 
- @param sectionNumber number of section
- */
-- (void)setItems:(NSArray *)items forSectionIndex:(NSUInteger)sectionNumber;
-
-///---------------------------------------
-/// @name Managing sections
-///---------------------------------------
-
-/**
- Set header models for UITableView sections. `DTSectionModel` objects are created automatically, if they don't exist already. Pass nil or empty array to this method to clear all section header models.
- 
- @param headerModels Section header models to use.
- */
-- (void)setSectionHeaderModels:(NSArray *)headerModels;
-
-/**
- Set footer models for UITableView sections. `DTSectionModel` objects are created automatically, if they don't exist already. Pass nil or empty array to this method to clear all section footer models.
- 
- @param footerModels Section footer models to use.
- */
-- (void)setSectionFooterModels:(NSArray *)footerModels;
+@interface DTMemoryStorage (DTTableViewManager_Additions)
 
 ///---------------------------------------
 /// @name Moving items and sections

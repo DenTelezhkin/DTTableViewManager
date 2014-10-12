@@ -24,8 +24,6 @@
 // THE SOFTWARE.
 
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
-#import "DTSectionModel+HeaderFooterModel.h"
-#import "DTTableViewDataStorage.h"
 
 @interface DTMemoryStorage ()
 - (DTSectionModel *)getValidSection:(NSUInteger)sectionNumber;
@@ -45,41 +43,6 @@
 @end
 
 @implementation DTMemoryStorage(DTTableViewManager_Additions)
-
--(void)setItems:(NSArray *)items forSectionIndex:(NSUInteger)sectionNumber
-{
-    DTSectionModel * section = [self sectionAtIndex:sectionNumber];
-    [section.objects removeAllObjects];
-    [section.objects addObjectsFromArray:items];
-    [(id <DTTableViewDataStorageUpdating>)self.delegate performAnimatedUpdate:^(UITableView * tableView)
-     {
-         [(id <DTTableViewControllerEvents>)self.delegate tableControllerWillUpdateContent];
-         [tableView reloadData];
-         [(id <DTTableViewControllerEvents>)self.delegate tableControllerDidUpdateContent];
-     }];
-}
-
-- (void)setSectionHeaderModels:(NSArray *)headerModels
-{
-    [self setSupplementaries:headerModels forKind:DTTableViewElementSectionHeader];
-}
-
-- (void)setSectionFooterModels:(NSArray *)footerModels
-{
-    [self setSupplementaries:footerModels forKind:DTTableViewElementSectionFooter];
-}
-
-- (id)headerModelForSectionIndex:(NSInteger)index
-{
-    DTSectionModel * section = self.sections[index];
-    return section.headerModel;
-}
-
-- (id)footerModelForSectionIndex:(NSInteger)index
-{
-    DTSectionModel * section = self.sections[index];
-    return section.footerModel;
-}
 
 - (void)removeAllTableItems
 {
