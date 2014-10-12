@@ -538,6 +538,8 @@
 		AA2EBD8C187EC5070063B98A /* Convienience */ = {
 			isa = PBXGroup;
 			children = (
+				9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */,
+				9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */,
 				95065A00174C03DF008AB32D /* DTTableViewCell.h */,
 				95065A01174C03DF008AB32D /* DTTableViewCell.m */,
 			);
@@ -754,8 +756,6 @@
 				9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */,
 				9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */,
 				9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */,
-				9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */,
-				9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */,
 			);
 			name = DTTableViewManager;
 			path = TableViewFactory;

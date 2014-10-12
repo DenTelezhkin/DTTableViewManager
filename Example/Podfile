@@ -7,7 +7,6 @@ target :Example do
 	pod 'DTModelStorage', :head
 end
 
-
 target :Tests do
 	pod 'DTModelStorage', :head
 	pod 'Cedar', '0.9.8'

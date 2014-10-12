@@ -244,8 +244,6 @@
         [self tableControllerWillBeginSearch];
         DTMemoryStorage * searchStorage =[self.dataStorage searchingStorageForSearchString:searchString
                                                                              inSearchScope:scopeNumber];
-        searchStorage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
-        searchStorage.supplementaryFooterKind = DTTableViewElementSectionFooter;
         self.searchingDataStorage = (DTMemoryStorage *)searchStorage;
         [self.tableView reloadData];
         [self tableControllerDidEndSearch];
