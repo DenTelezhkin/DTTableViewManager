@@ -8,8 +8,6 @@ describe(@"Storage search specs", ^{
     
     beforeEach(^{
         storage = [DTMemoryStorage storage];
-        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
-        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
         storage.delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
     });
     
@@ -56,8 +54,8 @@ describe(@"Storage Add specs", ^{
     beforeEach(^{
         delegate = [OCMockObject mockForClass:[DTTableViewController class]];
         storage = [DTMemoryStorage storage];
-        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
-        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
+        [storage setSupplementaryHeaderKind:DTTableViewElementSectionHeader];
+        [storage setSupplementaryFooterKind:DTTableViewElementSectionFooter];
         storage.delegate = (id <DTStorageUpdating>)delegate;
     });
     
@@ -109,8 +107,8 @@ describe(@"Storage edit specs", ^{
     beforeEach(^{
         delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
         storage = [DTMemoryStorage storage];
-        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
-        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
+        [storage setSupplementaryHeaderKind:DTTableViewElementSectionHeader];
+        [storage setSupplementaryFooterKind:DTTableViewElementSectionFooter];
         storage.delegate = (id <DTStorageUpdating>)delegate;
         
         acc1 = [Example new];

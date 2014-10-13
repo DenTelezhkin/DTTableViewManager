@@ -2,6 +2,7 @@
 #import "DTMemoryStorage+UnitTests.h"
 #import "MockTableHeaderView.h"
 #import "BeNil.h"
+#import "DTMemoryStorage.h"
 
 using namespace Cedar::Matchers;
 
@@ -501,6 +502,27 @@ describe(@"Datasource spec", ^{
         });
     });
     
+});
+
+describe(@"Supplementary kinds should be set",^{
+
+    it(@"should set kinds for storage",^{
+        DTTableViewController * controller = [DTTableViewController new];
+        DTMemoryStorage * storage = [DTMemoryStorage new];
+        controller.storage = storage;
+        
+        storage.supplementaryHeaderKind should equal(DTTableViewElementSectionHeader);
+        storage.supplementaryFooterKind should equal(DTTableViewElementSectionFooter);
+    });
+    
+    it(@"should set kinds for searching storage",^{
+        DTTableViewController * controller = [DTTableViewController new];
+        DTMemoryStorage * storage = [DTMemoryStorage new];
+        controller.searchingStorage = storage;
+        
+        storage.supplementaryHeaderKind should equal(DTTableViewElementSectionHeader);
+        storage.supplementaryFooterKind should equal(DTTableViewElementSectionFooter);
+    });
 });
 
 SPEC_END

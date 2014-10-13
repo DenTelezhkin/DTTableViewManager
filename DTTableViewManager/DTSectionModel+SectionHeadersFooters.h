@@ -8,6 +8,7 @@
 
 #import "DTSectionModel.h"
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
+#import "DTMemoryStorage.h"
 
 /**
  Category, providing getters and setters for section headers and footers

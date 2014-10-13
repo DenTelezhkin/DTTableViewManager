@@ -110,9 +110,9 @@
     if (!_storage)
     {
         DTMemoryStorage * storage = [DTMemoryStorage storage];
-        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
-        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
         _storage = storage;
+        [_storage setSupplementaryHeaderKind:DTTableViewElementSectionHeader];
+        [_storage setSupplementaryFooterKind:DTTableViewElementSectionFooter];
         _storage.delegate = self;
     }
     return _storage;
@@ -122,12 +122,16 @@
 {
     _storage = storage;
     _storage.delegate = self;
+    [_storage setSupplementaryHeaderKind:DTTableViewElementSectionHeader];
+    [_storage setSupplementaryFooterKind:DTTableViewElementSectionFooter];
 }
 
 - (void)setSearchingStorage:(id <DTStorageProtocol>)searchingStorage
 {
     _searchingStorage = searchingStorage;
     _searchingStorage.delegate = self;
+    [_searchingStorage setSupplementaryHeaderKind:DTTableViewElementSectionHeader];
+    [_searchingStorage setSupplementaryFooterKind:DTTableViewElementSectionFooter];
 }
 
 #pragma mark - mapping

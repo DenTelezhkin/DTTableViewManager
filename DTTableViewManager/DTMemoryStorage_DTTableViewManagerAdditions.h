@@ -25,9 +25,6 @@
 
 #import "DTMemoryStorage.h"
 
-static NSString * const DTTableViewElementSectionHeader = @"DTTableViewElementSectionHeader";
-static NSString * const DTTableViewElementSectionFooter = @"DTTableViewElementSectionFooter";
-
 /**
  This category is used to adapt DTMemoryStorage for table view models. It adds UITableView specific methods like moving items between indexPaths and moving sections in UITableView.
  */
