@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 #import "UIView+DTLoading.h"
+#import "DTRuntimeHelper.h"
 
 @implementation UIView (DTLoading)
 
@@ -39,7 +40,7 @@
 }
 
 + (id) dt_loadFromXib {
-    return [self dt_loadFromXibNamed:NSStringFromClass(self)];
+    return [self dt_loadFromXibNamed:[DTRuntimeHelper classStringForClass:self]];
 }
 
 @end

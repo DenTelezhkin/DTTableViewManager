@@ -22,7 +22,23 @@
     [self registerCellClass:[BankCell class] forModelClass:[Bank class]];
 
     NSFetchedResultsController * controller = [BanksCoreDataStorage banksFetchControllerWithPredicate:nil];
-    self.dataStorage = [BanksCoreDataStorage storageWithFetchResultsController:controller];
+    self.storage = [BanksCoreDataStorage storageWithFetchResultsController:controller];
+}
+
+-(void)tableControllerDidCancelSearch
+{
+    self.tableView.hidden = NO;
+}
+
+-(void)tableControllerDidEndSearch
+{
+    if ([self.tableView numberOfSections] == 0)
+    {
+        self.tableView.hidden = YES;
+    }
+    else {
+        self.tableView.hidden = NO;
+    }
 }
 
 @end

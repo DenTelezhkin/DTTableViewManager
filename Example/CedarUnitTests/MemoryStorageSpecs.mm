@@ -1,3 +1,4 @@
+
 using namespace Cedar::Matchers;
 
 SPEC_BEGIN(MemoryStorageSpecs)
@@ -7,6 +8,8 @@ describe(@"Storage search specs", ^{
     
     beforeEach(^{
         storage = [DTMemoryStorage storage];
+        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
+        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
         storage.delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
     });
     
@@ -53,6 +56,8 @@ describe(@"Storage Add specs", ^{
     beforeEach(^{
         delegate = [OCMockObject mockForClass:[DTTableViewController class]];
         storage = [DTMemoryStorage storage];
+        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
+        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
         storage.delegate = (id <DTStorageUpdating>)delegate;
     });
     
@@ -104,6 +109,8 @@ describe(@"Storage edit specs", ^{
     beforeEach(^{
         delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
         storage = [DTMemoryStorage storage];
+        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
+        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
         storage.delegate = (id <DTStorageUpdating>)delegate;
         
         acc1 = [Example new];
@@ -249,9 +256,9 @@ describe(@"Storage edit specs", ^{
         
         [[storage sections] count] should equal(3);
         
-        [[storage sections][0] headerModel] should equal(@"1");
-        [[storage sections][1] headerModel] should equal(@"2");
-        [[storage sections][2] headerModel] should equal(@"3");
+        [storage headerModelForSectionIndex:0] should equal(@"1");
+        [storage headerModelForSectionIndex:1] should equal(@"2");
+        [storage headerModelForSectionIndex:2] should equal(@"3");
     });
     
     it(@"should set section footer models", ^{
@@ -259,9 +266,9 @@ describe(@"Storage edit specs", ^{
         
         [[storage sections] count] should equal(3);
         
-        [[storage sections][0] footerModel] should equal(@"1");
-        [[storage sections][1] footerModel] should equal(@"2");
-        [[storage sections][2] footerModel] should equal(@"3");
+        [storage footerModelForSectionIndex:0] should equal(@"1");
+        [storage footerModelForSectionIndex:1] should equal(@"2");
+        [storage footerModelForSectionIndex:2] should equal(@"3");
     });
     
     it(@"should empty section headers if nil passed", ^{
@@ -269,9 +276,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionHeaderModels:nil];
         
-        DTSectionModel * section2 = (DTSectionModel *)[storage sectionAtIndex:1];
-        
-        expect(section2.headerModel == nil).to(BeTruthy());
+        expect([storage headerModelForSectionIndex:1] == nil).to(BeTruthy());
     });
     
     it(@"should empty section headers if nil passed", ^{
@@ -279,8 +284,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionHeaderModels:@[]];
         
-        DTSectionModel * section2 = (DTSectionModel *)[storage sectionAtIndex:1];
-        expect(section2.headerModel == nil).to(BeTruthy());
+        expect([storage headerModelForSectionIndex:1] == nil).to(BeTruthy());
     });
     
     it(@"should empty section headers if nil passed", ^{
@@ -288,8 +292,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionFooterModels:nil];
         
-        DTSectionModel * section2 = (DTSectionModel *)[storage sectionAtIndex:1];
-        expect(section2.footerModel == nil).to(BeTruthy());
+        expect([storage footerModelForSectionIndex:1] == nil).to(BeTruthy());
     });
     
     it(@"should empty section headers if nil passed", ^{
@@ -297,8 +300,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionFooterModels:@[]];
         
-        DTSectionModel * section2 = (DTSectionModel *)[storage sectionAtIndex:1];
-        expect(section2.footerModel == nil).to(BeTruthy());
+        expect([storage footerModelForSectionIndex:1] == nil).to(BeTruthy());
     });
 });
 

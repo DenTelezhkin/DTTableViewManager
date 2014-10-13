@@ -4,11 +4,7 @@
 #import "MockTableHeaderView.h"
 #import "NiblessTableHeaderView.h"
 #import "MockTableHeaderFooterView.h"
-#import "DTDefaultCellModel.h"
-#import "DTDefaultHeaderFooterModel.h"
-#import "CellWIthNoIdentifier.h"
-#import "CellOverriddenIdentifier.h"
-#import "HeaderWithOverriddenIdentifier.h"
+#import "Tests-Swift.h"
 
 using namespace Cedar::Matchers;
 
@@ -28,9 +24,9 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTMemoryStorage storage];
+            storage = [model memoryStorage];
             storage.loggingEnabled = NO;
-            model.dataStorage = storage;
+            model.storage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.dataSource = model;
             model.tableView.delegate = model;
@@ -72,8 +68,8 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTMemoryStorage storage];
-            model.dataStorage = storage;
+            storage = [model memoryStorage];
+            model.storage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -115,8 +111,8 @@ describe(@"mapping tests", ^{
             [UIView setAnimationsEnabled:NO];
             
             model = [DTTableViewController new];
-            storage = [DTMemoryStorage storage];
-            model.dataStorage = storage;
+            storage = [model memoryStorage];
+            model.storage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -150,8 +146,8 @@ describe(@"mapping tests", ^{
             model = [DTTableViewController new];
             model.sectionHeaderStyle = DTTableViewSectionStyleView;
             model.sectionFooterStyle = DTTableViewSectionStyleView;
-            storage = [DTMemoryStorage storage];
-            model.dataStorage = storage;
+            storage = [model memoryStorage];
+            model.storage = storage;
             model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
             model.tableView.delegate = model;
             model.tableView.dataSource = model;
@@ -268,8 +264,8 @@ describe(@"Foundation class clusters", ^{
         
         model = [DTTableViewController new];
         model.sectionHeaderStyle = DTTableViewSectionStyleView;
-        storage = [DTMemoryStorage storage];
-        model.dataStorage = storage;
+        storage = [model memoryStorage];
+        model.storage = storage;
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         model.tableView.dataSource = model;
         model.tableView.delegate = model;
@@ -641,10 +637,8 @@ describe(@"Foundation class clusters", ^{
         });
 
         it(@"should accept NSDate for header", ^{
-            ^{
-                [storage setSectionHeaderModels:@[[NSDate date]]];
-                [model tableView:model.tableView viewForHeaderInSection:0];
-            } should_not raise_exception;
+            [storage setSectionHeaderModels:@[[NSDate date]]];
+            [model tableView:model.tableView viewForHeaderInSection:0];
         });
         
         it(@"should accept NSDate for footer", ^{
@@ -654,164 +648,64 @@ describe(@"Foundation class clusters", ^{
        
     });
     
-    describe(@"DTDefaultCellModel tests", ^{
-       
-        it(@"should accept DTDefaultCellModel with correct parameters", ^{
-           DTDefaultCellModel * cellModel = [DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
-                                                                   reuseIdentifier:nil
-                                                                configurationBlock:nil];
-            [storage addItem:cellModel];
+    describe(@"Should support Swift classes", ^{
+        
+        it(@"cell class",^{
+            [model registerCellClass:[SwiftCell class] forModelClass:[NSString class]];
+            [model.memoryStorage addItem:@""];
             
-            UITableViewCell * cell = [model tableView:model.tableView
-                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0
-                                                                         inSection:0]];
-            
-            [cell class] should equal([UITableViewCell class]);
+            UITableViewCell * cell = [model tableView:model.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            cell.textLabel.text should equal(@"Foo");
         });
         
-        it(@"should invoke configuration block", ^{
-            DTDefaultCellModel * cellModel = [DTDefaultCellModel modelWithCellStyle:UITableViewCellStyleSubtitle
-                                                                    reuseIdentifier:nil
-                                                                 configurationBlock:^(UITableViewCell *cell) {
-                                                                     cell.textLabel.text = @"foo";
-                                                                     cell.detailTextLabel.text = @"bar";
-                                                                 }];
-            [storage addItem:cellModel];
-            
-            UITableViewCell * cell = [model tableView:model.tableView
-                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0
-                                                                         inSection:0]];
-            
-            [cell class] should equal([UITableViewCell class]);
-            
-            cell.textLabel.text should equal(@"foo");
-            cell.detailTextLabel.text should equal(@"bar");
-        });
-    });
-    
-    describe(@"DTDefaultHeaderFooterModel tests", ^{
-        
-        it(@"should accept DTDefaultHeaderFooterModel with correct parameters", ^{
-            
-            DTDefaultHeaderFooterModel * headerModel = [DTDefaultHeaderFooterModel modelWithReuseIdentifier:nil
-                                                                                         configurationBlock:nil];
-            [storage setSectionHeaderModels:@[headerModel]];
+        it(@"UITableViewHeaderFooterView header class", ^{
+            [model registerHeaderClass:[SwiftHeaderFooterView class] forModelClass:[NSString class]];
+            [model.memoryStorage setSectionHeaderModels:@[@"bar"]];
             model.sectionHeaderStyle = DTTableViewSectionStyleView;
-            UITableViewHeaderFooterView * view = (UITableViewHeaderFooterView *)[model tableView:model.tableView
-                                                                          viewForHeaderInSection:0];
-            
-            [view class] should equal([UITableViewHeaderFooterView class]);
+            SwiftHeaderFooterView * view = (id)[model tableView:model.tableView viewForHeaderInSection:0];
+            view.titleLabel.text should equal(@"Bar");
         });
         
-        it(@"should invoke configuration block", ^{
-            DTDefaultHeaderFooterModel * headerModel = [DTDefaultHeaderFooterModel modelWithReuseIdentifier:nil
-                                                                                         configurationBlock:^(UIView *view) {
-                                                                                             UITableViewHeaderFooterView * header = (id)view;
-                                                                                             header.textLabel.text = @"foo";
-                                                                                             header.detailTextLabel.text = @"bar";
-                                                                                         }];
-            [storage setSectionHeaderModels:@[headerModel]];
+        it(@"UITableViewHeaderFooterView footer class", ^{
+            [model registerFooterClass:[SwiftHeaderFooterView class] forModelClass:[NSString class]];
+            [model.memoryStorage setSectionFooterModels:@[@"bar"]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
+            SwiftHeaderFooterView * view = (id)[model tableView:model.tableView viewForFooterInSection:0];
+            view.titleLabel.text should equal(@"Bar");
+        });
+        
+        it(@"UIView header class", ^{
+            [model registerHeaderClass:[SwiftHeaderView class] forModelClass:[NSString class]];
+            [model.memoryStorage setSectionHeaderModels:@[@"bar"]];
             model.sectionHeaderStyle = DTTableViewSectionStyleView;
-            UITableViewHeaderFooterView * view = (UITableViewHeaderFooterView *)[model tableView:model.tableView
-                                                                          viewForHeaderInSection:0];
-            
-            [view class] should equal([UITableViewHeaderFooterView class]);
-            
-            
-            [view textLabel].text should equal(@"foo");
-            [view detailTextLabel].text should equal(@"bar");
+            SwiftHeaderFooterView * view = (id)[model tableView:model.tableView viewForHeaderInSection:0];
+            view.titleLabel.text should equal(@"FooBar");
+        });
+        
+        it(@"UIView footer class", ^{
+            [model registerFooterClass:[SwiftHeaderView class] forModelClass:[NSString class]];
+            [model.memoryStorage setSectionFooterModels:@[@"bar"]];
+            model.sectionFooterStyle = DTTableViewSectionStyleView;
+            SwiftHeaderFooterView * view = (id)[model tableView:model.tableView viewForFooterInSection:0];
+            view.titleLabel.text should equal(@"FooBar");
         });
     });
     
-    describe(@"DTDefaultHeaderFooterModel tests", ^{
+    describe(@"should support storyboards with swift classes", ^{
         
-        it(@"should accept DTDefaultHeaderFooterModel with correct parameters", ^{
+        it(@"cells", ^{
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"SwiftStoryboard" bundle:nil];
             
-            DTDefaultHeaderFooterModel * footerModel = [DTDefaultHeaderFooterModel modelWithReuseIdentifier:nil
-                                                                                         configurationBlock:nil];
-            model.sectionFooterStyle = DTTableViewSectionStyleView;
-            [storage setSectionFooterModels:@[footerModel]];
-            UITableViewHeaderFooterView * view = (UITableViewHeaderFooterView *)[model tableView:model.tableView
-                                                                          viewForFooterInSection:0];
+            SwiftStoryboardViewController * controller = [storyboard instantiateInitialViewController];
+            [controller view];
+            [controller.memoryStorage addItem:@""];
+            [controller.tableView reloadData];
             
-            [view class] should equal([UITableViewHeaderFooterView class]);
-        });
-        
-        it(@"should invoke configuration block", ^{
-            DTDefaultHeaderFooterModel * footerModel = [DTDefaultHeaderFooterModel modelWithReuseIdentifier:nil
-                                                                                         configurationBlock:^(UIView *view) {
-                                                                                             UITableViewHeaderFooterView * header = (id) view;
-                                                                                             header.textLabel.text = @"foo";
-                                                                                             header.detailTextLabel.text = @"bar";
-                                                                                         }];
-            model.sectionFooterStyle = DTTableViewSectionStyleView;
-            [storage setSectionFooterModels:@[footerModel]];
-
-            UITableViewHeaderFooterView * view = (UITableViewHeaderFooterView *)[model tableView:model.tableView
-                                                                          viewForFooterInSection:0];
-            
-            [view class] should equal([UITableViewHeaderFooterView class]);
-            
-            
-            [view textLabel].text should equal(@"foo");
-            [view detailTextLabel].text should equal(@"bar");
+            SwiftTableViewCell * cell = (id) [controller.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0
+                                                                                                        inSection:0]];
+            cell.textLabel.text should equal(@"Foo");
         });
     });
-    
-    describe(@"cell with different reuse identifiers", ^{
-        
-        it(@"should successfully add cell with no identifier", ^{
-            [model registerCellClass:[CellWIthNoIdentifier class]
-                       forModelClass:[NSString class]];
-            
-            [storage addItem:@"foo" toSection:0];
-            
-            UITableViewCell * cell = [model.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            
-            cell should BeInstanceOf([CellWIthNoIdentifier class]);
-        });
-        
-        it(@"should successfully add cell with overridden identifier", ^{
-            [model registerCellClass:[CellOverriddenIdentifier class]
-                       forModelClass:[NSString class]];
-            
-            [storage addItem:@"foo" toSection:0];
-            
-            UITableViewCell * cell = [model.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            
-            cell should BeInstanceOf([CellOverriddenIdentifier class]);
-        });
-    });
-    
-    describe(@"headers with different reuse identifiers", ^{
-        
-        it(@"should successfully add header overridden identifier", ^{
-            [model registerHeaderClass:[HeaderWithOverriddenIdentifier class]
-                         forModelClass:[NSString class]];
-            model.sectionHeaderStyle = DTTableViewSectionStyleView;
-            
-            [storage setSectionHeaderModels:@[@"bar"]];
-            
-            UITableViewHeaderFooterView * view = (UITableViewHeaderFooterView *)[model tableView:model.tableView
-                                                                          viewForHeaderInSection:0];
-            
-            [view class] should equal([HeaderWithOverriddenIdentifier class]);
-        });
-        
-        it(@"should successfully add footer with overridden identifier", ^{
-            [model registerFooterClass:[HeaderWithOverriddenIdentifier class]
-                         forModelClass:[NSString class]];
-            model.sectionFooterStyle = DTTableViewSectionStyleView;
-            
-            [storage setSectionFooterModels:@[@"bar"]];
-            
-            UITableViewHeaderFooterView * view = (UITableViewHeaderFooterView *)[model tableView:model.tableView
-                                                                          viewForFooterInSection:0];
-            
-            [view class] should equal([HeaderWithOverriddenIdentifier class]);
-        });
-    });
-
 });
 
 SPEC_END

@@ -23,19 +23,19 @@
 // THE SOFTWARE.
 
 #import "DTTableViewController.h"
-#import "DTCellFactory.h"
+#import "DTTableViewFactory.h"
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
-#import "DTTableViewDataStorage.h"
 
-@interface DTTableViewController ()
-        <DTTableViewFactoryDelegate>
+@interface DTTableViewController () <DTStorageUpdating, DTTableViewFactoryDelegate>
 
 @property (nonatomic, assign) NSInteger currentSearchScope;
 @property (nonatomic, copy) NSString * currentSearchString;
-@property (nonatomic, retain) DTCellFactory * cellFactory;
+@property (nonatomic, retain) DTTableViewFactory * cellFactory;
 @end
 
 @implementation DTTableViewController
+
+@synthesize storage = _storage;
 
 #pragma mark - initialize, clean
 
@@ -66,11 +66,8 @@
 
 - (void)setupTableViewControllerDefaults
 {
-    _cellFactory = [DTCellFactory new];
+    _cellFactory = [DTTableViewFactory new];
     _cellFactory.delegate = self;
-
-    _dataStorage = [DTMemoryStorage storage];
-    _dataStorage.delegate = self;
 
     _currentSearchScope = -1;
     _sectionHeaderStyle = DTTableViewSectionStyleTitle;
@@ -93,29 +90,44 @@
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.searchBar.delegate = self;
 }
 
 #pragma mark - getters, setters
 
 - (DTMemoryStorage *)memoryStorage
 {
-    if ([self.dataStorage isKindOfClass:[DTMemoryStorage class]])
+    if ([self.storage isKindOfClass:[DTMemoryStorage class]])
     {
-        return (DTMemoryStorage *)self.dataStorage;
+        return (DTMemoryStorage *)self.storage;
     }
     return nil;
 }
 
-- (void)setDataStorage:(id <DTTableViewDataStorage>)dataStorage
+-(id<DTStorageProtocol>)storage
 {
-    _dataStorage = dataStorage;
-    _dataStorage.delegate = self;
+    if (!_storage)
+    {
+        DTMemoryStorage * storage = [DTMemoryStorage storage];
+        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader;
+        storage.supplementaryFooterKind = DTTableViewElementSectionFooter;
+        _storage = storage;
+        _storage.delegate = self;
+    }
+    return _storage;
 }
 
-- (void)setSearchingDataStorage:(id <DTTableViewDataStorage>)searchingDataStorage
+- (void)setStorage:(id <DTStorageProtocol>)storage
 {
-    _searchingDataStorage = searchingDataStorage;
-    _searchingDataStorage.delegate = self;
+    _storage = storage;
+    _storage.delegate = self;
+}
+
+- (void)setSearchingStorage:(id <DTStorageProtocol>)searchingStorage
+{
+    _searchingStorage = searchingStorage;
+    _searchingStorage.delegate = self;
 }
 
 #pragma mark - mapping
@@ -133,6 +145,8 @@
 {
     NSParameterAssert([headerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
+    
+    self.sectionHeaderStyle = DTTableViewSectionStyleView;
 
     [self.cellFactory registerHeaderClass:headerClass forModelClass:modelClass];
 }
@@ -141,6 +155,8 @@
 {
     NSParameterAssert(footerClass);
     NSParameterAssert(modelClass);
+    
+    self.sectionFooterStyle = DTTableViewSectionStyleView;
 
     [self.cellFactory registerFooterClass:footerClass forModelClass:modelClass];
 }
@@ -161,6 +177,8 @@
     NSParameterAssert(nibName);
     NSParameterAssert([headerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
+    
+    self.sectionHeaderStyle = DTTableViewSectionStyleView;
 
     [self.cellFactory registerNibNamed:nibName
                         forHeaderClass:headerClass
@@ -172,6 +190,8 @@
     NSParameterAssert(nibName);
     NSParameterAssert([footerClass conformsToProtocol:@protocol(DTModelTransfer)]);
     NSParameterAssert(modelClass);
+    
+    self.sectionFooterStyle = DTTableViewSectionStyleView;
 
     [self.cellFactory registerNibNamed:nibName
                         forFooterClass:footerClass
@@ -216,13 +236,17 @@
     if (wereSearching && ![self isSearching])
     {
         [self.tableView reloadData];
+        [self tableControllerDidCancelSearch];
         return;
     }
-    if ([self.dataStorage respondsToSelector:@selector(searchingStorageForSearchString:inSearchScope:)])
+    if ([self.storage respondsToSelector:@selector(searchingStorageForSearchString:inSearchScope:)])
     {
-        self.searchingDataStorage = [(DTMemoryStorage *)self.dataStorage searchingStorageForSearchString:searchString
-                                                                                                    inSearchScope:scopeNumber];
+        [self tableControllerWillBeginSearch];
+        DTMemoryStorage * searchStorage =[self.storage searchingStorageForSearchString:searchString
+                                                                         inSearchScope:scopeNumber];
+        self.searchingStorage = (DTMemoryStorage *)searchStorage;
         [self.tableView reloadData];
+        [self tableControllerDidEndSearch];
     }
 }
 
@@ -230,21 +254,21 @@
 {
     if ([self isSearching])
     {
-        if ([[self.searchingDataStorage sections][index] numberOfObjects] || self.displayHeaderOnEmptySection)
+        if ([[self.searchingStorage sections][index] numberOfObjects] || self.displayHeaderOnEmptySection)
         {
-            if ([self.searchingDataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
+            if ([self.searchingStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
             {
-                return [(DTMemoryStorage *)self.searchingDataStorage headerModelForSectionIndex:index];
+                return [(DTMemoryStorage *)self.searchingStorage headerModelForSectionIndex:index];
             }
         }
     }
     else
     {
-        if ([[self.dataStorage sections][index] numberOfObjects] || self.displayHeaderOnEmptySection)
+        if ([[self.storage sections][index] numberOfObjects] || self.displayHeaderOnEmptySection)
         {
-            if ([self.dataStorage respondsToSelector:@selector(headerModelForSectionIndex:)])
+            if ([self.storage respondsToSelector:@selector(headerModelForSectionIndex:)])
             {
-                return [(DTMemoryStorage *)self.dataStorage headerModelForSectionIndex:index];
+                return [(DTMemoryStorage *)self.storage headerModelForSectionIndex:index];
             }
         }
     }
@@ -255,21 +279,21 @@
 {
     if ([self isSearching])
     {
-        if ([[self.searchingDataStorage sections][index] numberOfObjects] || self.displayFooterOnEmptySection)
+        if ([[self.searchingStorage sections][index] numberOfObjects] || self.displayFooterOnEmptySection)
         {
-            if ([self.searchingDataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
+            if ([self.searchingStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
             {
-                return [(DTMemoryStorage *)self.searchingDataStorage footerModelForSectionIndex:index];
+                return [(DTMemoryStorage *)self.searchingStorage footerModelForSectionIndex:index];
             }
         }
     }
     else
     {
-        if ([[self.dataStorage sections][index] numberOfObjects] || self.displayFooterOnEmptySection)
+        if ([[self.storage sections][index] numberOfObjects] || self.displayFooterOnEmptySection)
         {
-            if ([self.dataStorage respondsToSelector:@selector(footerModelForSectionIndex:)])
+            if ([self.storage respondsToSelector:@selector(footerModelForSectionIndex:)])
             {
-                return [(DTMemoryStorage *)self.dataStorage footerModelForSectionIndex:index];
+                return [(DTMemoryStorage *)self.storage footerModelForSectionIndex:index];
             }
         }
     }
@@ -282,11 +306,11 @@
 {
     if ([self isSearching])
     {
-        return [[self.searchingDataStorage sections] count];
+        return [[self.searchingStorage sections] count];
     }
     else
     {
-        return [[self.dataStorage sections] count];
+        return [[self.storage sections] count];
     }
 }
 
@@ -294,12 +318,12 @@
 {
     if ([self isSearching])
     {
-        id <DTSection> sectionModel = [self.searchingDataStorage sections][section];
+        id <DTSection> sectionModel = [self.searchingStorage sections][section];
         return [sectionModel numberOfObjects];
     }
     else
     {
-        id <DTSection> sectionModel = [self.dataStorage sections][section];
+        id <DTSection> sectionModel = [self.storage sections][section];
         return [sectionModel numberOfObjects];
     }
 }
@@ -414,14 +438,14 @@
     id model = nil;
     if ([self isSearching])
     {
-        model = [self.searchingDataStorage objectAtIndexPath:indexPath];
+        model = [self.searchingStorage objectAtIndexPath:indexPath];
     }
     else
     {
-        model = [self.dataStorage objectAtIndexPath:indexPath];
+        model = [self.storage objectAtIndexPath:indexPath];
     }
 
-    return [self.cellFactory cellForModel:model];
+    return [self.cellFactory cellForModel:model atIndexPath:indexPath];
 }
 
 #pragma mark - actions
@@ -461,6 +485,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 - (void)storageDidPerformUpdate:(DTStorageUpdate *)update
 {
+    [self tableControllerWillUpdateContent];
+    
     [self.tableView beginUpdates];
 
     [self.tableView deleteSections:update.deletedSectionIndexes
@@ -478,11 +504,49 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                           withRowAnimation:self.reloadRowAnimation];
 
     [self.tableView endUpdates];
+    
+    [self tableControllerDidUpdateContent];
+}
+
+- (void)storageNeedsReload
+{
+    [self tableControllerWillUpdateContent];
+    
+    [self.tableView reloadData];
+    
+    [self tableControllerDidUpdateContent];
 }
 
 - (void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock
 {
     animationBlock(self.tableView);
+}
+
+#pragma mark - DTTableViewControllerEvents protocol
+
+-(void)tableControllerWillUpdateContent
+{
+    
+}
+
+-(void)tableControllerDidUpdateContent
+{
+    
+}
+
+-(void)tableControllerWillBeginSearch
+{
+    
+}
+
+-(void)tableControllerDidEndSearch
+{
+    
+}
+
+-(void)tableControllerDidCancelSearch
+{
+    
 }
 
 @end

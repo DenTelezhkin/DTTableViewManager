@@ -26,14 +26,14 @@
     self.navigationItem.rightBarButtonItem = barItem;
     
     [self registerCellClass:[EventCell class] forModelClass:[Event class]];
-    self.dataStorage = [DTCoreDataStorage storageWithFetchResultsController:[self timeStampFetchedResultsController]];
+    self.storage = [DTCoreDataStorage storageWithFetchResultsController:[self timeStampFetchedResultsController]];
 }
 
 #pragma mark - actions
 
 -(void)addButtonTapped
 {
-    DTCoreDataStorage * storage = (DTCoreDataStorage *)self.dataStorage;
+    DTCoreDataStorage * storage = (DTCoreDataStorage *)self.storage;
     
     NSManagedObjectContext *context = [storage.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[storage.fetchedResultsController fetchRequest] entity];
@@ -74,7 +74,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        DTCoreDataStorage * storage = (DTCoreDataStorage *)self.dataStorage;
+        DTCoreDataStorage * storage = (DTCoreDataStorage *)self.storage;
         NSManagedObjectContext *context = [storage.fetchedResultsController managedObjectContext];
         [context deleteObject:[storage.fetchedResultsController objectAtIndexPath:indexPath]];
         

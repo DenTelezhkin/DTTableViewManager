@@ -19,165 +19,109 @@ pod try DTTableViewManager
 
 * Powerful mapping system between data models and table view cells, headers and footers
 * Automatic datasource and interface synchronization.
-* Support for creating cells from code, XIBs or storyboards.
+* Support for creating cells from XIBs or storyboards.
+* Support for UITableViewHeaderFooterView or custom UIView for table headers and footers
 * Easy UITableView search 
 * Core data / NSFetchedResultsController support
+* Swift support
 
-## Workflow
+## Quick start
 
-Here are 4 simple steps you need to use DTTableViewManager:
+Let's say you have an array of Posts you want to display in UITableView. To quickly show them using DTTableViewManager, here's what you need to do:
 
-1. Your view controller should subclass `DTTableViewController`, and set tableView property.
-2. You should have subclass of `DTTableViewCell`.
-3. In your viewDidLoad method, call mapping methods to establish relationship between data models and UITableViewCells.
-4. Add data models to memoryStorage, or use CoreData storage class.
+Subclass DTTableViewController, create xib, or storyboard with your view controller, wire up tableView outlet. Add following code to viewDidLoad:
 
-## API quickstart
+```objective-c
+[self registerCellClass:[Post class] forModelClass:[PostCell class]];
+[self.memoryStorage addItems:posts];
+```
+or in Swift:
+```swift
+self.registerCellClass(Post.self, forModelClass:PostCell.self)
+self.memoryStorage().addItems(posts)
+```
 
-<table>
-<tr><th colspan=2 style="text-align:center;">Key classes</th></tr>
-	<tr>
-	<td> DTTableViewController </td>
-	<td>Your UIViewController, that presents tableView, needs to subclass* this class. This class implements all UITableViewDatasource methods.</td>
-	</tr>
-	<tr>
-	<td>DTMemoryStorage</td>
-	<td>Class responsible for holding tableView models. It is used as a default storage by DTTableViewManager.</td>
-	</tr>
-	<tr>
-	<td>DTCoreDataStorage</td>
-	<td>Class used to display data, using `NSFetchedResultsController`.</td>
-	</tr>
-	<tr>
-	<td>DTSectionModel</td>
-	<td> Object, representing section in UITableView. Basically has three properties - array of objects, headerModel and footerModel.</td>
-	</tr>
-<tr><th colspan=2 style="text-align:center;">Protocols</th></tr>
-	<tr>
-	<td>DTModelTransfer</td>
-	<td> Protocol, which methods are used to transfer model to UITableViewCell subclass, that will be representing it.</td>
-	</tr>
-<tr><th colspan=2 style="text-align:center;">Convenience classes (optional)</th></tr>
-	<tr>
-	<td>DTTableViewCell</td>
-	<td> UITableViewCell subclass, conforming to `DTModelTransfer` protocol. </td>
-	</tr>
-	<tr>
-	<td>DTDefaultCellModel</td>
-	<td>Custom model class, that allows to use UITableViewCell without subclassing.</td>
-	</tr>
-	<tr>
-	<td>DTDefaultHeaderFooterModel</td>
-	<td>Custom model class, that allows to use UITableViewHeaderFooterView without subclassing.</td>
-	</tr>
-</table>
+Subclass DTTableViewCell, and implement updateWithModel method
+```objective-c
+-(void)updateWithModel:(id)model
+{
+    Post * post = model;
+    self.postTextView.text = post.content;
+}
+```
+or in Swift:
+```swift
+func updateWithModel(model: AnyObject!)
+{
+    let post = model as Post
+    self.postTextView.text = post.content
+}
+```
 
-* If you need your view controller to be subclassed from something else than DTTableViewController, it's good practice to use [UIViewController containment API](http://www.objc.io/issue-1/containment-view-controller.html), and embed DTTableViewController subclass as a child inside inside parent controller.
+That's it! For more detailed look at available API - **[API quickstart](https://github.com/DenHeadless/DTTableViewManager/wiki/API-quickstart)** page on wiki.
 
-## Mapping
+## Mapping and registration
 
-* Cells
+Registering cell class and xib is 1 line of code:
+
 ```objective-c
 [self registerCellClass:[Cell class] forModelClass:[Model class]];
 ```
+Similarly, for headers and footers:
 
-* Headers/Footers
 ```objective-c
 [self registerHeaderClass:[HeaderView class] forModelClass:[Model class]];
 [self registerFooterClass:[FooterView class] forModelClass:[Model class]];
 ```
 
-This will also register nibs with `Cell`, `HeaderView` and `FooterView` name, if any of them exist. 
-
-#### Storyboards
-
-If you use storyboards and prototype cells, you will need to set reuseIdentifier for corresponding cell in storyboard. Reuse identifier needs to be identical to your cell class name. 
+For more detailed look at mapping in DTTableViewManager, check out dedicated *[Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping)*.
 
 ## Managing table items
 
-Storage classes for DTTableViewManager have been moved to [separate repo](https://github.com/DenHeadless/DTModelStorage). Two data storage classes are provided - memory and core data storage. Let's start with `DTMemoryStorage`, that is used by default.
+Storage classes for DTTableViewManager have been moved to [separate repo](https://github.com/DenHeadless/DTModelStorage). Two data storage classes are provided - memory and core data storage. 
 
 ### Memory storage
 
 `DTMemoryStorage` encapsulates storage of table view data models in memory. It's basically NSArray of `DTSectionModel` objects, which contain array of objects for current section, section header and footer model.
 
-To work with memory storage, you will need to get it's instance from your `DTTableViewController` subclass.
-
-```objective-c
-- (DTMemoryStorage *)memoryStorage;
-```
-
 **You can take a look at all provided methods for manipulating items here: [DTMemoryStorage methods](https://github.com/DenHeadless/DTModelStorage/blob/master/README.md#adding-items)**
 
-In most cases, adding items to memory storage is as simple as calling:
+DTTableViewManager adds several methods to `DTMemoryStorage`, that are specific to UITableView. Take a look at them here: **[DTMemoryStorage additions](https://github.com/DenHeadless/DTTableViewManager/wiki/DTMemoryStorage-additions)**
 
-```objective-c
-- (void)addItem:(NSObject *)item;
-- (void)addItems:(NSArray *)items toSection:(NSInteger)sectionNumber;
-```
-
-DTTableViewManager adds several methods to `DTMemoryStorage`, that are specific to UITableView. Two most relevant of them are 
-
-```objective-c
-- (void)setSectionHeaderModels:(NSArray *)headerModels;
-- (void)setSectionFooterModels:(NSArray *)footerModels;
-```
-These methods allow setting header and footer models for multiple sections in single method call.
-
-##### Search
-	
-Set UISearchBar's delegate property to your `DTTableViewController` subclass. 	
-
-Call memoryStorage setSearchingBlock:forModelClass: to determine, whether model of passed class should show for current search criteria. This method can be called as many times as you need.
-```objective-c
-[self.memoryStorage setSearchingBlock:^BOOL(id model, NSString *searchString, NSInteger searchScope, DTSectionModel *section) 
-	{
-        Example * example  = model;
-        if ([example.text rangeOfString:searchString].location == NSNotFound)
-        {
-            return NO;
-        }
-        return YES;
-    } forModelClass:[Example class]];
-```
-
-Searching data storage will be created automatically for current search, and it will be used as a datasource for UITableView.
-	
-### Core Data storage
+### NSFetchedResultsController and DTCoreDataStorage
 
 `DTCoreDataStorage` is meant to be used with NSFetchedResultsController. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it's changes. All you need to do to display CoreData models in your UITableView, is create DTCoreDataStorage object and set it on your DTTableViewController subclass.
 
 ```objective-c
 self.dataStorage = [DTCoreDataStorage storageWithFetchResultsController:controller];
-```	
+```
+
+**Important** Keep in mind, that DTMemoryStorage is not limited to objects in memory. For example, if you have CoreData database, and you now for sure, that number of items is not big, you can choose not to use DTCoreDataStorage and NSFetchedResultsController. You can fetch all required models, and store them in DTMemoryStorage, just like you would do with NSObject subclasses.
 
 ##### Search
 
-Subclass DTCoreDataStorage and implement single method 
-```objective-c
-- (instancetype)searchingStorageForSearchString:(NSString *)searchString
-                                  inSearchScope:(NSInteger)searchScope;
-```	
+DTTableViewManager has a built-in search system, that is easy to use and flexible. Read all about it in a dedicated **[Implementing search](https://github.com/DenHeadless/DTTableViewManager/wiki/Implementing-search)** wiki page.	
 
-You will need to provide a storage with NSFetchedResultsController and appropriate NSPredicate. Take a look at example application, that does just that.
 
 ## Requirements
 
-* iOS 6.0 and later
+* iOS 7.x, 8.x
 * ARC
         
 ## Installation
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 2.7.0'
+	pod 'DTTableViewManager', '~> 3.0.0'
 
 ## Documentation
 
 You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
 
+Also check out [wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki) for lot's of information on DTTableViewManager internals and best practices.
+
 ## Thanks
 
 * [Alexey Belkevich](https://github.com/belkevich) for providing initial implementation of CellFactory.
 * [Michael Fey](https://github.com/MrRooni) for providing insight into NSFetchedResultsController updates done right. 
-
+* [Nickolay Sheika](https://github.com/hawk-ukr) for great feedback, that helped shaping 3.0 release.

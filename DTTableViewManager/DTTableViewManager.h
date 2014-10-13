@@ -29,7 +29,7 @@
 #import "DTMemoryStorage.h"
 #import "DTCoreDataStorage.h"
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
-#import "DTCoreDataStorage+DTTableViewManagerAdditions.h"
+#import "DTSectionModel+SectionHeadersFooters.h"
 
 #import "DTModelTransfer.h"
 

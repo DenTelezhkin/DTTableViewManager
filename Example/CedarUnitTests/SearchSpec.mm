@@ -1,6 +1,7 @@
 #import "MockTableHeaderFooterView.h"
 #import "DTTableViewController+UnitTests.h"
 #import "StringCell.h"
+#import "CellWithoutNib.h"
 
 using namespace Cedar::Matchers;
 
@@ -34,8 +35,11 @@ __block Example * acc6;
 
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
-        
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
+        [model.tableView reloadData];
         [model.memoryStorage addItems:@[acc1,acc2,acc3,acc4,acc5,acc6]];
+
     });
     
     afterEach(^{
@@ -120,7 +124,9 @@ describe(@"search in multiple sections", ^{
         [model.memoryStorage setSearchingBlock:[Example exampleSearchingBlock] forModelClass:[Example class]];
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
-        
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
+        [model.tableView reloadData];
         [model.memoryStorage addItems:@[acc1,acc2] toSection:0];
         [model.memoryStorage addItems:@[acc3,acc4] toSection:1];
         [model.memoryStorage addItems:@[acc5,acc6] toSection:2];
@@ -204,7 +210,9 @@ describe(@"section headers/footers titles", ^{
         model.sectionHeaderStyle = DTTableViewSectionStyleTitle;
         model.sectionFooterStyle = DTTableViewSectionStyleTitle;
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
-        
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
+        [model.tableView reloadData];
         [model.memoryStorage setSectionHeaderModels:@[@"header1",
                                           @"header2",
                                           @"header3"]];
@@ -262,20 +270,20 @@ describe(@"section headers/footers models", ^{
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
         [model registerCellClass:[ExampleCell class] forModelClass:[Example class]];
         
-        if ([UITableViewHeaderFooterView class]) { // iOS 6 and higher test
-            [model registerHeaderClass:[MockTableHeaderFooterView class]
-                         forModelClass:[Example class]];
-            [model registerFooterClass:[MockTableHeaderFooterView class]
-                         forModelClass:[Example class]];
-            
-            [model.memoryStorage setSectionHeaderModels:@[acc1,acc3,acc5]];
-            [model.memoryStorage setSectionFooterModels:@[acc2,acc4,acc6]];
-            [model.memoryStorage addItems:@[acc1,acc2] toSection:0];
-            [model.memoryStorage addItems:@[acc3,acc4] toSection:1];
-            [model.memoryStorage addItems:@[acc5,acc6] toSection:2];
-            
-            [model filterTableItemsForSearchString:@"s"];
-        }
+        [model registerHeaderClass:[MockTableHeaderFooterView class]
+                     forModelClass:[Example class]];
+        [model registerFooterClass:[MockTableHeaderFooterView class]
+                     forModelClass:[Example class]];
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
+        [model.tableView reloadData];
+        [model.memoryStorage setSectionHeaderModels:@[acc1,acc3,acc5]];
+        [model.memoryStorage setSectionFooterModels:@[acc2,acc4,acc6]];
+        [model.memoryStorage addItems:@[acc1,acc2] toSection:0];
+        [model.memoryStorage addItems:@[acc3,acc4] toSection:1];
+        [model.memoryStorage addItems:@[acc5,acc6] toSection:2];
+        
+        [model filterTableItemsForSearchString:@"s"];
     });
     
     afterEach(^{
@@ -316,7 +324,9 @@ describe(@"Foundation models searching", ^{
         
         model.memoryStorage.loggingEnabled = NO;
         model.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain] autorelease];
-
+        model.tableView.delegate = model;
+        model.tableView.dataSource = model;
+        [model.tableView reloadData];
     });
     
     afterEach(^{
