@@ -1,3 +1,5 @@
+sudo: false
+
 language: objective-c
 
 before_install:
