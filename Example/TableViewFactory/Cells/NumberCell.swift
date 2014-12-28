@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DTModelStorage
 
 class NumberCell: UITableViewCell, DTModelTransfer {
 

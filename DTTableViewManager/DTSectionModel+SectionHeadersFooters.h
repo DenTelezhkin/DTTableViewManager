@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Denys Telezhkin. All rights reserved.
 //
 
-#import "DTSectionModel.h"
+#import <DTModelStorage/DTMemoryStorage.h>
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
-#import "DTMemoryStorage.h"
 
 /**
  Category, providing getters and setters for section headers and footers

@@ -23,7 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTModelTransfer.h"
+#import <DTModelStorage/DTModelTransfer.h>
 
 /**
  `DTTableViewCell` is a convinience UITableViewCell subclass, conforming to `DTModelTransfer` protocol.

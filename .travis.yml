@@ -1,7 +1,7 @@
 language: objective-c
 
 before_install:
-    - gem install cocoapods --no-document --quiet
+    - gem install cocoapods --pre --no-document --quiet
     - gem install ios_ci --no-document --quiet
     - export LANG=en_US.UTF-8
     - brew install ios-sim

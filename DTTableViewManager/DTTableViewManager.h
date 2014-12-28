@@ -26,11 +26,9 @@
 #import "DTTableViewController.h"
 #import "DTTableViewCell.h"
 
-#import "DTMemoryStorage.h"
-#import "DTCoreDataStorage.h"
+#import <DTModelStorage/DTModelStorage.h>
+#import <DTModelStorage/DTModelTransfer.h>
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTSectionModel+SectionHeadersFooters.h"
-
-#import "DTModelTransfer.h"
 
 
