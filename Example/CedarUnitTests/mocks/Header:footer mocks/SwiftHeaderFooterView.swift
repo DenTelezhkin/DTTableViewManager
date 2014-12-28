@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DTModelStorage
 
 class SwiftHeaderFooterView: UITableViewHeaderFooterView, DTModelTransfer {
 
