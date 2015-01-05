@@ -7,8 +7,8 @@ target :Example do
 	pod 'DTModelStorage', '1.1.1'
 end
 
-target :Tests do
+target :XCTests do
 	pod 'DTModelStorage', '1.1.1'
-	pod 'Cedar', '0.9.8'
+	pod 'Cedar'
     pod 'OCMock', '~> 2.2'
 end

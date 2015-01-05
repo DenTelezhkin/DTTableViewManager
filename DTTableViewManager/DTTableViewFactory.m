@@ -63,8 +63,8 @@
 
 -(BOOL)nibExistsWIthNibName:(NSString *)nibName
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:nibName
-                                                     ofType:@"nib"];
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:nibName
+                                                                      ofType:@"nib"];
     if (path)
     {
         return YES;
@@ -103,7 +103,7 @@
 {
     NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
     
-    [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
+    [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:[NSBundle bundleForClass:[self class]]]
                     forCellReuseIdentifier:[DTRuntimeHelper classStringForClass:cellClass]];
     
     [self.cellMappingsDictionary setObject:[DTRuntimeHelper classStringForClass:cellClass]
@@ -124,7 +124,7 @@
     
     if ([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
-        [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
+        [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:[NSBundle bundleForClass:[self class]]]
             forHeaderFooterViewReuseIdentifier:[DTRuntimeHelper classStringForClass:headerClass]];
     }
     
@@ -146,7 +146,7 @@
     
     if ([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
-        [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:nil]
+        [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:[NSBundle bundleForClass:[self class]]]
             forHeaderFooterViewReuseIdentifier:[DTRuntimeHelper classStringForClass:footerClass]];
     }
     

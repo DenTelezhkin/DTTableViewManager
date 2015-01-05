@@ -459,12 +459,12 @@ describe(@"Datasource spec", ^{
 
         it(@"shouldn't return anything with property set", ^{
             model.displayHeaderOnEmptySection = NO;
-            [model tableView:model.tableView titleForHeaderInSection:0] should BeNil();
+            [model tableView:model.tableView titleForHeaderInSection:0] should be_nil;
         });
 
         it(@"should not return footer", ^{
             model.displayFooterOnEmptySection = NO;
-            [model tableView:model.tableView titleForFooterInSection:0] should BeNil();
+            [model tableView:model.tableView titleForFooterInSection:0] should be_nil;
         });
 
     });
@@ -492,13 +492,13 @@ describe(@"Datasource spec", ^{
         it(@"should not return header", ^
         {
             model.displayHeaderOnEmptySection = NO;
-            [model tableView:model.tableView viewForHeaderInSection:0] should BeNil();
+            [model tableView:model.tableView viewForHeaderInSection:0] should be_nil;
         });
 
         it(@"should not return footer", ^
         {
            model.displayFooterOnEmptySection = NO;
-            [model tableView:model.tableView viewForFooterInSection:0] should BeNil();
+            [model tableView:model.tableView viewForFooterInSection:0] should be_nil;
         });
     });
     

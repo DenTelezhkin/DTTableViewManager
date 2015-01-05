@@ -4,7 +4,7 @@
 #import "MockTableHeaderView.h"
 #import "NiblessTableHeaderView.h"
 #import "MockTableHeaderFooterView.h"
-#import "Tests-Swift.h"
+#import "XCTests-Swift.h"
 
 using namespace Cedar::Matchers;
 
@@ -171,7 +171,7 @@ describe(@"mapping tests", ^{
             
             UIView * headerView = [model tableView:model.tableView viewForHeaderInSection:0];
             
-            [headerView isKindOfClass:[MockTableHeaderView class]] should BeTruthy();
+            headerView should be_instance_of([MockTableHeaderView class]);
         });
         
         it(@"should create footer view from UIView", ^{
@@ -182,7 +182,7 @@ describe(@"mapping tests", ^{
             
             UIView * footerView = [model tableView:model.tableView viewForFooterInSection:0];
             
-            [footerView isKindOfClass:[MockTableHeaderView class]] should BeTruthy();
+            [footerView isKindOfClass:[MockTableHeaderView class]] should be_truthy;
         });
         
         it(@"should create header view from UITableViewHeaderFooterView", ^{
@@ -195,7 +195,7 @@ describe(@"mapping tests", ^{
                 
                 UIView * headerView = [model tableView:model.tableView viewForHeaderInSection:0];
                 
-                [headerView isKindOfClass:[MockTableHeaderFooterView class]] should BeTruthy();
+                [headerView isKindOfClass:[MockTableHeaderFooterView class]] should be_truthy;
             }
         });
         
@@ -210,7 +210,7 @@ describe(@"mapping tests", ^{
                 
                 UIView * footerView = [model tableView:model.tableView viewForFooterInSection:0];
                 
-                [footerView isKindOfClass:[MockTableHeaderFooterView class]] should BeTruthy();
+                [footerView isKindOfClass:[MockTableHeaderFooterView class]] should be_truthy;
             }
         });
         
@@ -694,7 +694,7 @@ describe(@"Foundation class clusters", ^{
     describe(@"should support storyboards with swift classes", ^{
         
         it(@"cells", ^{
-            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"SwiftStoryboard" bundle:nil];
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"SwiftStoryboard" bundle:[NSBundle bundleForClass:[self class]]];
             
             SwiftStoryboardViewController * controller = [storyboard instantiateInitialViewController];
             [controller view];

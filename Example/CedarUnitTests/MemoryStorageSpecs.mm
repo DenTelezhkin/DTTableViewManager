@@ -274,7 +274,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionHeaderModels:nil];
         
-        expect([storage headerModelForSectionIndex:1] == nil).to(BeTruthy());
+        expect([storage headerModelForSectionIndex:1] == nil).to(be_truthy);
     });
     
     it(@"should empty section headers if nil passed", ^{
@@ -282,7 +282,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionHeaderModels:@[]];
         
-        expect([storage headerModelForSectionIndex:1] == nil).to(BeTruthy());
+        expect([storage headerModelForSectionIndex:1] == nil).to(be_truthy);
     });
     
     it(@"should empty section headers if nil passed", ^{
@@ -290,7 +290,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionFooterModels:nil];
         
-        expect([storage footerModelForSectionIndex:1] == nil).to(BeTruthy());
+        expect([storage footerModelForSectionIndex:1] == nil).to(be_truthy);
     });
     
     it(@"should empty section headers if nil passed", ^{
@@ -298,7 +298,7 @@ describe(@"Storage edit specs", ^{
         
         [storage setSectionFooterModels:@[]];
         
-        expect([storage footerModelForSectionIndex:1] == nil).to(BeTruthy());
+        expect([storage footerModelForSectionIndex:1] == nil).to(be_truthy);
     });
 });
 

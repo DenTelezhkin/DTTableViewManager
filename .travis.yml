@@ -4,9 +4,7 @@ language: objective-c
 
 before_install:
     - gem install cocoapods --no-document --quiet
-    - gem install ios_ci --no-document --quiet
     - export LANG=en_US.UTF-8
-    - brew install ios-sim
     - cd Example
 
-script: ios_ci cedar --source-root $TRAVIS_BUILD_DIR/Example --workspace DTTableViewManager.xcworkspace --scheme Tests --build-path Build/Products --configuration Debug
+script: rake

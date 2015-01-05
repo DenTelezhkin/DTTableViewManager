@@ -20,6 +20,20 @@
                ReferencedContainer = "container:DTTableViewManager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9AF003191A5ABE7000ABFC90"
+               BuildableName = "XCTests.xctest"
+               BlueprintName = "XCTests"
+               ReferencedContainer = "container:DTTableViewManager.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,6 +42,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9AF003191A5ABE7000ABFC90"
+               BuildableName = "XCTests.xctest"
+               BlueprintName = "XCTests"
+               ReferencedContainer = "container:DTTableViewManager.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
