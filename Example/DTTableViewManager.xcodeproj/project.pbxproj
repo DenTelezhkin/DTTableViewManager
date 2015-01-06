@@ -42,16 +42,15 @@
 		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
 		9A24F6A419DAA430009DE5D4 /* SwiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */; };
 		9A24F6A519DAA430009DE5D4 /* SwiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */; };
+		9A24FF521A5C0777001D4BF4 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
+		9A24FF531A5C0777001D4BF4 /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */; };
+		9A24FF541A5C0777001D4BF4 /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
+		9A24FF551A5C0777001D4BF4 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
+		9A24FF561A5C0777001D4BF4 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
+		9A24FF571A5C0777001D4BF4 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
 		9A359E8019D859A60075ED16 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A359E7F19D859A60075ED16 /* NumberCell.xib */; };
 		9A3CC14819A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
-		9A48860919DABC1900A266BF /* SwiftHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A48860819DABC1900A266BF /* SwiftHeaderView.swift */; };
-		9A6FB6191A5AD343004ED709 /* CellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950659F8174C0219008AB32D /* CellWithNib.xib */; };
-		9A6FB61A1A5AD343004ED709 /* MockTableHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */; };
-		9A6FB61B1A5AD343004ED709 /* SwiftHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860419DAB3C700A266BF /* SwiftHeaderFooterView.xib */; };
-		9A6FB61C1A5AD343004ED709 /* MockTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942001750B9E3007CEB5E /* MockTableHeaderView.xib */; };
-		9A6FB61D1A5AD343004ED709 /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
-		9A7A03E71A5AC98C003A4FA4 /* SwiftStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */; };
-		9A7A03E81A5AC99B003A4FA4 /* SwiftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */; };
+		9A6FB6501A5B0262004ED709 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
 		9A7A03EA1A5ACA94003A4FA4 /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
 		9A7A03EB1A5ACA9B003A4FA4 /* SwiftStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */; };
 		9A7A03EC1A5ACAA4003A4FA4 /* SwiftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */; };
@@ -59,7 +58,6 @@
 		9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A88F5A819EAC683008436C9 /* Images.xcassets */; };
 		9AD462851A5ACD8800936CA9 /* MockTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */; };
 		9AD462861A5ACD9D00936CA9 /* XCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF0031E1A5ABE7000ABFC90 /* XCTests.m */; };
-		9AD462871A5ACE0900936CA9 /* SwiftHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */; };
 		9AD462881A5AD23C00936CA9 /* CellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950659F8174C0219008AB32D /* CellWithNib.xib */; };
 		9AD462891A5AD23C00936CA9 /* SwiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */; };
 		9AD4628A1A5AD23C00936CA9 /* MockTableHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */; };
@@ -89,7 +87,6 @@
 		9AF003381A5ABEAB00ABFC90 /* DTTableViewController+UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */; };
 		9AF003471A5AC20700ABFC90 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		9AF003481A5AC20B00ABFC90 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
-		9AF0034B1A5AC4AF00ABFC90 /* BaseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942131750C937007CEB5E /* BaseHeaderView.m */; };
 		9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
 		E60CA01A1684AFEF00F4147E /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
 		E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
@@ -167,12 +164,12 @@
 		958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MockTableHeaderFooterView.xib; path = "mocks/Header:footer mocks/MockTableHeaderFooterView.xib"; sourceTree = "<group>"; };
 		9589420A1750BC63007CEB5E /* NiblessTableHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NiblessTableHeaderFooterView.h; path = "mocks/Header:footer mocks/NiblessTableHeaderFooterView.h"; sourceTree = "<group>"; };
 		9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NiblessTableHeaderFooterView.m; path = "mocks/Header:footer mocks/NiblessTableHeaderFooterView.m"; sourceTree = "<group>"; };
-		9589420D1750C7AD007CEB5E /* MappingSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MappingSpec.mm; sourceTree = "<group>"; };
+		9589420D1750C7AD007CEB5E /* MappingSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MappingSpec.mm; path = ../CedarUnitTests/MappingSpec.mm; sourceTree = "<group>"; };
 		9589420F1750C900007CEB5E /* BaseHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseHeaderFooterView.h; path = "mocks/Header:footer mocks/BaseHeaderFooterView.h"; sourceTree = "<group>"; };
 		958942101750C901007CEB5E /* BaseHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderFooterView.m; path = "mocks/Header:footer mocks/BaseHeaderFooterView.m"; sourceTree = "<group>"; };
 		958942121750C937007CEB5E /* BaseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseHeaderView.h; path = "mocks/Header:footer mocks/BaseHeaderView.h"; sourceTree = "<group>"; };
 		958942131750C937007CEB5E /* BaseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderView.m; path = "mocks/Header:footer mocks/BaseHeaderView.m"; sourceTree = "<group>"; };
-		9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MemoryStorageSpecs.mm; sourceTree = "<group>"; };
+		9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MemoryStorageSpecs.mm; path = ../CedarUnitTests/MemoryStorageSpecs.mm; sourceTree = "<group>"; };
 		9591074D18535AE30012B07E /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = Resources/Banks.json; sourceTree = "<group>"; };
 		9591075018535C600012B07E /* BanksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataManager.h; path = CoreData/BanksCoreDataManager.h; sourceTree = "<group>"; };
 		9591075118535C600012B07E /* BanksCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataManager.m; path = CoreData/BanksCoreDataManager.m; sourceTree = "<group>"; };
@@ -196,7 +193,7 @@
 		95BF2B9C16FF72580050D0A7 /* CustomHeaderFooterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterController.h; path = ExampleControllers/CustomHeaderFooterController.h; sourceTree = "<group>"; };
 		95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterController.m; path = ExampleControllers/CustomHeaderFooterController.m; sourceTree = "<group>"; };
 		95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterController.xib; path = ExampleControllers/CustomHeaderFooterController.xib; sourceTree = "<group>"; };
-		95D51FC5175E78BA00FD2292 /* SearchSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SearchSpec.mm; sourceTree = "<group>"; };
+		95D51FC5175E78BA00FD2292 /* SearchSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SearchSpec.mm; path = ../CedarUnitTests/SearchSpec.mm; sourceTree = "<group>"; };
 		95FC93F518186A3F003225B7 /* StoryboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryboardController.h; path = ExampleControllers/StoryboardController.h; sourceTree = "<group>"; };
 		95FC93F618186A3F003225B7 /* StoryboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryboardController.m; path = ExampleControllers/StoryboardController.m; sourceTree = "<group>"; };
 		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
@@ -204,7 +201,6 @@
 		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
 		9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftCell.swift; path = mocks/SwiftCell.swift; sourceTree = "<group>"; };
 		9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftCell.xib; path = mocks/SwiftCell.xib; sourceTree = "<group>"; };
-		9A24F6A819DAA4FB009DE5D4 /* CedarUnitTests-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CedarUnitTests-BridgingHeader.h"; sourceTree = "<group>"; };
 		9A359E7F19D859A60075ED16 /* NumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NumberCell.xib; path = Cells/NumberCell.xib; sourceTree = "<group>"; };
 		9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTMemoryStorage_DTTableViewManagerAdditions.h; path = ../../DTTableViewManager/DTMemoryStorage_DTTableViewManagerAdditions.h; sourceTree = "<group>"; };
 		9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTMemoryStorage_DTTableViewManagerAdditions.m; path = ../../DTTableViewManager/DTMemoryStorage_DTTableViewManagerAdditions.m; sourceTree = "<group>"; };
@@ -265,11 +261,7 @@
 		E666ACF2162C037B00A2DBF2 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomModel.m; path = TableViewFactory/Models/CustomModel.m; sourceTree = "<group>"; };
 		E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTTableViewController+UnitTests.h"; sourceTree = "<group>"; };
 		E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTTableViewController+UnitTests.m"; sourceTree = "<group>"; };
-		E6CB97B2161B26C900A7E936 /* CedarUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CedarUnitTests-Info.plist"; sourceTree = "<group>"; };
-		E6CB97B4161B26C900A7E936 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E6CB97B6161B26C900A7E936 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CedarUnitTests-Prefix.pch"; sourceTree = "<group>"; };
-		E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DatasourceSpec.mm; sourceTree = "<group>"; };
+		E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DatasourceSpec.mm; path = ../CedarUnitTests/DatasourceSpec.mm; sourceTree = "<group>"; };
 		E6EA83621615EE6000F8B8C3 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EA836E1615EE6000F8B8C3 /* DTTableViewManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DTTableViewManager-Info.plist"; sourceTree = "<group>"; };
 		E6EA83701615EE6000F8B8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -332,6 +324,7 @@
 				958941FC1750B992007CEB5E /* Header footer mocks */,
 			);
 			name = Mocks;
+			path = ../CedarUnitTests;
 			sourceTree = "<group>";
 		};
 		952112B51854881D00063EA8 /* Apple CoreData example */ = {
@@ -529,6 +522,12 @@
 		9AF0031B1A5ABE7000ABFC90 /* XCTests */ = {
 			isa = PBXGroup;
 			children = (
+				AAB09063184C9016008B7665 /* Extensions */,
+				950659F1174C01CD008AB32D /* Mocks */,
+				9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */,
+				E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */,
+				95D51FC5175E78BA00FD2292 /* SearchSpec.mm */,
+				9589420D1750C7AD007CEB5E /* MappingSpec.mm */,
 				9AF0033C1A5ABFFB00ABFC90 /* XCTests-Prefix.pch */,
 				9AF0033B1A5ABF8E00ABFC90 /* XCTests-Bridging-Header.h */,
 				9AF0031E1A5ABE7000ABFC90 /* XCTests.m */,
@@ -573,6 +572,7 @@
 				AAB09060184C845A008B7665 /* DTMemoryStorage+UnitTests.h */,
 			);
 			name = Extensions;
+			path = ../CedarUnitTests;
 			sourceTree = "<group>";
 		};
 		E638F1051619913B00694FBC /* Models */ = {
@@ -674,32 +674,6 @@
 			name = MoveSection;
 			sourceTree = "<group>";
 		};
-		E6CB97B0161B26C900A7E936 /* CedarUnitTests */ = {
-			isa = PBXGroup;
-			children = (
-				AAB09063184C9016008B7665 /* Extensions */,
-				950659F1174C01CD008AB32D /* Mocks */,
-				9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */,
-				E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */,
-				95D51FC5175E78BA00FD2292 /* SearchSpec.mm */,
-				9589420D1750C7AD007CEB5E /* MappingSpec.mm */,
-				E6CB97B1161B26C900A7E936 /* Supporting Files */,
-			);
-			path = CedarUnitTests;
-			sourceTree = "<group>";
-		};
-		E6CB97B1161B26C900A7E936 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E6CB97B2161B26C900A7E936 /* CedarUnitTests-Info.plist */,
-				E6CB97B3161B26C900A7E936 /* InfoPlist.strings */,
-				E6CB97B6161B26C900A7E936 /* main.m */,
-				E6CB97B8161B26C900A7E936 /* CedarUnitTests-Prefix.pch */,
-				9A24F6A819DAA4FB009DE5D4 /* CedarUnitTests-BridgingHeader.h */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
@@ -707,7 +681,6 @@
 				95BCE72F1792C7B300526954 /* Default-568h@2x.png */,
 				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
 				E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */,
-				E6CB97B0161B26C900A7E936 /* CedarUnitTests */,
 				9AF0031B1A5ABE7000ABFC90 /* XCTests */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
 				42C02947419B802DAF1EB71C /* Pods */,
@@ -825,7 +798,6 @@
 				TargetAttributes = {
 					9AF003191A5ABE7000ABFC90 = {
 						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = E6EA83611615EE6000F8B8C3;
 					};
 				};
 			};
@@ -852,6 +824,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A6FB6501A5B0262004ED709 /* ExampleCell.xib in Resources */,
 				9AD462881A5AD23C00936CA9 /* CellWithNib.xib in Resources */,
 				9AD462891A5AD23C00936CA9 /* SwiftCell.xib in Resources */,
 				9AD4628A1A5AD23C00936CA9 /* MockTableHeaderFooterView.xib in Resources */,
@@ -866,11 +839,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A6FB6191A5AD343004ED709 /* CellWithNib.xib in Resources */,
-				9A6FB61A1A5AD343004ED709 /* MockTableHeaderFooterView.xib in Resources */,
-				9A6FB61B1A5AD343004ED709 /* SwiftHeaderFooterView.xib in Resources */,
-				9A6FB61C1A5AD343004ED709 /* MockTableHeaderView.xib in Resources */,
-				9A6FB61D1A5AD343004ED709 /* SwiftHeaderView.xib in Resources */,
 				952112BB1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */,
 				E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */,
 				9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */,
@@ -968,8 +936,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A24FF571A5C0777001D4BF4 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
 				9AD462861A5ACD9D00936CA9 /* XCTests.m in Sources */,
 				9A7A03EC1A5ACAA4003A4FA4 /* SwiftTableViewCell.swift in Sources */,
+				9A24FF521A5C0777001D4BF4 /* DTTableViewFactory.m in Sources */,
 				9A7A03EB1A5ACA9B003A4FA4 /* SwiftStoryboardViewController.swift in Sources */,
 				9AF003481A5AC20B00ABFC90 /* ExampleCell.m in Sources */,
 				9AF003471A5AC20700ABFC90 /* Example.m in Sources */,
@@ -978,10 +948,14 @@
 				9AF0032A1A5ABEA700ABFC90 /* CellWithNib.m in Sources */,
 				9AF0032B1A5ABEA700ABFC90 /* BaseMockCell.m in Sources */,
 				9AF003381A5ABEAB00ABFC90 /* DTTableViewController+UnitTests.m in Sources */,
+				9A24FF541A5C0777001D4BF4 /* DTTableViewCell.m in Sources */,
 				9AF0032C1A5ABEA700ABFC90 /* StringCell.m in Sources */,
+				9A24FF561A5C0777001D4BF4 /* DTTableViewController.m in Sources */,
 				9AF0032D1A5ABEA700ABFC90 /* SwiftCell.swift in Sources */,
 				9AF003301A5ABEA700ABFC90 /* MockTableHeaderFooterView.m in Sources */,
 				9AF003311A5ABEA700ABFC90 /* NiblessTableHeaderFooterView.m in Sources */,
+				9A24FF551A5C0777001D4BF4 /* UIView+DTLoading.m in Sources */,
+				9A24FF531A5C0777001D4BF4 /* DTSectionModel+SectionHeadersFooters.m in Sources */,
 				9AF003321A5ABEA700ABFC90 /* BaseHeaderFooterView.m in Sources */,
 				9AF003331A5ABEA700ABFC90 /* SwiftHeaderFooterView.swift in Sources */,
 				9AF003351A5ABEA700ABFC90 /* NiblessTableHeaderView.m in Sources */,
@@ -998,9 +972,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AD462871A5ACE0900936CA9 /* SwiftHeaderFooterView.swift in Sources */,
-				9A7A03E81A5AC99B003A4FA4 /* SwiftTableViewCell.swift in Sources */,
-				9A7A03E71A5AC98C003A4FA4 /* SwiftStoryboardViewController.swift in Sources */,
 				952112D51854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */,
 				9591075218535C600012B07E /* BanksCoreDataManager.m in Sources */,
 				E6EA83731615EE6000F8B8C3 /* main.m in Sources */,
@@ -1035,9 +1006,7 @@
 				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				95B336681775C01900AF0A57 /* SearchController.m in Sources */,
 				95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */,
-				9A48860919DABC1900A266BF /* SwiftHeaderView.swift in Sources */,
 				952112B91854886400063EA8 /* AppleCoreDataExampleController.m in Sources */,
-				9AF0034B1A5AC4AF00ABFC90 /* BaseHeaderView.m in Sources */,
 				959107A51853624A0012B07E /* Bank.m in Sources */,
 				95BCE7DC1776E93200980281 /* ControllerCell.m in Sources */,
 				959107A2185361CA0012B07E /* Banks.xcdatamodeld in Sources */,
@@ -1055,14 +1024,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E6CB97B3161B26C900A7E936 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E6CB97B4161B26C900A7E936 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		E6EA836F1615EE6000F8B8C3 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1086,7 +1047,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 739310F5C1100EA0C112064E /* Pods-XCTests.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1118,7 +1078,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TableViewFactory/XCTests-Bridging-Header.h";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
 			};
 			name = Debug;
 		};
@@ -1126,7 +1085,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1057F7821C2326EFE8CE5E9C /* Pods-XCTests.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1155,7 +1113,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TableViewFactory/XCTests-Bridging-Header.h";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
 			};
 			name = Release;
 		};
