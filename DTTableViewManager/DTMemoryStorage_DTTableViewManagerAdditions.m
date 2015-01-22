@@ -56,6 +56,16 @@
      }];
 }
 
+-(void)removeAllTableItemsAnimated
+{
+    NSMutableArray * items = [NSMutableArray array];
+    for (DTSectionModel * section in self.sections)
+    {
+        [items addObjectsFromArray:section.objects];
+    }
+    [self removeItems:items];
+}
+
 - (void)moveTableItemAtIndexPath:(NSIndexPath *)sourceIndexPath
                 toIndexPath:(NSIndexPath *)destinationIndexPath
 {

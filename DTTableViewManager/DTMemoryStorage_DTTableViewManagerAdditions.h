@@ -63,4 +63,9 @@
  */
 - (void)removeAllTableItems;
 
+/**
+ Removes all tableItems with animation. This method does not remove sections and section header and footer models.
+ */
+- (void)removeAllTableItemsAnimated;
+
 @end
