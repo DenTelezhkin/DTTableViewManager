@@ -32,12 +32,12 @@ Let's say you have an array of Posts you want to display in UITableView. To quic
 Subclass DTTableViewController, create xib, or storyboard with your view controller, wire up tableView outlet. Add following code to viewDidLoad:
 
 ```objective-c
-[self registerCellClass:[Post class] forModelClass:[PostCell class]];
+[self registerCellClass:[PostCell class] forModelClass:[Post class]];
 [self.memoryStorage addItems:posts];
 ```
 or in Swift:
 ```swift
-self.registerCellClass(Post.self, forModelClass:PostCell.self)
+self.registerCellClass(PostCell.self, forModelClass:Post.self)
 self.memoryStorage().addItems(posts)
 ```
 
