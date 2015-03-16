@@ -32,6 +32,8 @@
 #else
 #define nullable
 #define __nullable
+#define __null_unspecified
+#define null_resettable
 #endif
 
 typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
