@@ -27,6 +27,13 @@
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTTableViewControllerEvents.h"
 
+#if __has_feature(nullability) // Xcode 6.3+
+#pragma clang assume_nonnull begin
+#else
+#define nullable
+#define __nullable
+#endif
+
 typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 {
     DTTableViewSectionStyleTitle = 1,
@@ -56,24 +63,24 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 /**
  Data storage object. Create storage you need and set this property to populate table view with data. `DTTableViewManager` provides two data storage classes - `DTMemoryStorage` and `DTCoreDataStorage`. `DTMemoryStorage` storage used by default.
  */
-@property (nonatomic, strong) id <DTStorageProtocol> storage;
+@property (nonatomic, strong, null_resettable) id <DTStorageProtocol> storage;
 
 /**
  Convenience method, returning memory storage. If custom storage is used, this method will return nil.
  
  @return DTMemoryStorage instance.
  */
-- (DTMemoryStorage *)memoryStorage;
+- (__null_unspecified DTMemoryStorage *)memoryStorage;
 
 /**
  Searching data storage object. It will be created automatically, responding to changes in UISearchBar, or after method filterTableItemsForSearchString:inScope: is called.
  */
-@property (nonatomic, strong) id <DTStorageProtocol> searchingStorage;
+@property (nonatomic, strong, nullable) id <DTStorageProtocol> searchingStorage;
 
 /*
  Property to store UISearchBar, attached to your UITableView. Attaching it to this property is completely optional. Delegate for UISearchBar is set to instance of DTTableViewController automatically.
  */
-@property (nonatomic, strong) IBOutlet UISearchBar * searchBar;
+@property (nonatomic, strong, nullable) IBOutlet UISearchBar * searchBar;
 
 /**
  Style of section headers for table view. Depending on style, datasource methods will return title for section or view for section. Default is DTTableViewSectionStyleTitle.
@@ -238,5 +245,8 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  */
 - (void)performAnimatedUpdate:(void (^)(UITableView *))animationBlock;
 
-
 @end
+
+#if __has_feature(nullability)
+#pragma clang assume_nonnull end
+#endif

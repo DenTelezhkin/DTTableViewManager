@@ -10,7 +10,7 @@ import UIKit
 
 class SwiftCell: DTTableViewCell {
 
-    override func updateWithModel(model: AnyObject!) {
+    override func updateWithModel(model: AnyObject) {
         
     }
     

@@ -11,9 +11,9 @@ import UIKit
 class NumberCell: UITableViewCell, DTModelTransfer {
 
     @IBOutlet weak var label: UILabel!
-    func updateWithModel(model: AnyObject!)
+    func updateWithModel(model: AnyObject)
     {
-        let number = model as Int
+        let number = model as! Int
         label.text = number.description
     }
 }

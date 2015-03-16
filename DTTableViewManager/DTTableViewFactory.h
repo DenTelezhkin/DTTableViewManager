@@ -25,6 +25,13 @@
 
 #import <Foundation/Foundation.h>
 
+#if __has_feature(nullability) // Xcode 6.3+
+#pragma clang assume_nonnull begin
+#else
+#define nullable
+#define __nullable
+#endif
+
 /**
  Protocol, used by DTCellFactory to access tableView property on DTTableViewController instance.
  */
@@ -60,3 +67,7 @@
 @property (nonatomic, weak) id <DTTableViewFactoryDelegate> delegate;
 
 @end
+
+#if __has_feature(nullability)
+#pragma clang assume_nonnull end
+#endif

@@ -9,6 +9,13 @@
 #import <DTModelStorage/DTMemoryStorage.h>
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 
+#if __has_feature(nullability) // Xcode 6.3+
+#pragma clang assume_nonnull begin
+#else
+#define nullable
+#define __nullable
+#endif
+
 /**
  Category, providing getters and setters for section headers and footers
  */
@@ -19,27 +26,31 @@
  
  @return header model
  */
--(id)tableHeaderModel;
+-(nullable id)tableHeaderModel;
 
 /**
  Retrieve table header model for current section.
  
  @return footer model
  */
--(id)tableFooterModel;
+-(nullable id)tableFooterModel;
 
 /**
  Header model for current section.
  
  @param headerModel footer model for current section
  */
--(void)setTableSectionHeader:(id)headerModel;
+-(void)setTableSectionHeader:(nullable id)headerModel;
 
 /**
  Footer model for current section.
  
  @param footerModel footer model for current section
  */
--(void)setTableSectionFooter:(id)footerModel;
+-(void)setTableSectionFooter:(nullable id)footerModel;
 
 @end
+
+#if __has_feature(nullability)
+#pragma clang assume_nonnull end
+#endif

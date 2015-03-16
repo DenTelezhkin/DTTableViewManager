@@ -39,7 +39,7 @@
  @return view object
  */
 
-+ (id) dt_loadFromXibNamed:(NSString *) xibName;
++ (instancetype) dt_loadFromXibNamed:(NSString *) xibName;
 
 /**
  Loads view from xib with name identical to name of the current view class
@@ -47,6 +47,6 @@
  @return view object
  */
 
-+ (id) dt_loadFromXib;
++ (instancetype) dt_loadFromXib;
 
 @end

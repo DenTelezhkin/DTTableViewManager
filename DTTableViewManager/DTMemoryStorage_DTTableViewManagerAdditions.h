@@ -25,6 +25,13 @@
 
 #import <DTModelStorage/DTMemoryStorage.h>
 
+#if __has_feature(nullability) // Xcode 6.3+
+#pragma clang assume_nonnull begin
+#else
+#define nullable
+#define __nullable
+#endif
+
 /**
  This category is used to adapt DTMemoryStorage for table view models. It adds UITableView specific methods like moving items between indexPaths and moving sections in UITableView.
  */
@@ -69,3 +76,7 @@
 - (void)removeAllTableItemsAnimated;
 
 @end
+
+#if __has_feature(nullability)
+#pragma clang assume_nonnull end
+#endif

@@ -274,8 +274,11 @@ describe(@"Datasource spec", ^{
     it(@"should do nothing if trying to replace nil items", ^{
         [storage addItems:@[acc1,acc3,acc5]];
         ^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
             [storage replaceItem:nil withItem:acc2];
             [storage replaceItem:acc5 withItem:nil];
+#pragma clang diagnostic pop
         } should_not raise_exception;
 
         [model verifyTableItem:acc1
@@ -307,8 +310,11 @@ describe(@"Datasource spec", ^{
     it(@"should do nothing if trying to replace nil items with row animation", ^{
         [storage addItems:@[acc1,acc3,acc5]];
         ^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
             [storage replaceItem:nil withItem:acc2];
             [storage replaceItem:acc5 withItem:nil];
+#pragma clang diagnostic pop
         } should_not raise_exception;
 
         [model verifyTableItem:acc1
