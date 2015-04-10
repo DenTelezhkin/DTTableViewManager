@@ -105,6 +105,7 @@ DTTableViewManager has a built-in search system, that is easy to use and flexibl
 
 ## Requirements
 
+* XCode 6.3 and higher
 * iOS 7.x, 8.x
 * ARC
         
@@ -112,7 +113,7 @@ DTTableViewManager has a built-in search system, that is easy to use and flexibl
 
 Simplest option is to use [CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 3.0.0'
+	pod 'DTTableViewManager', '~> 3.1.0'
 
 ## Documentation
 

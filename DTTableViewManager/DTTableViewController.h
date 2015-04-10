@@ -27,14 +27,7 @@
 #import "DTMemoryStorage_DTTableViewManagerAdditions.h"
 #import "DTTableViewControllerEvents.h"
 
-#if __has_feature(nullability) // Xcode 6.3+
 #pragma clang assume_nonnull begin
-#else
-#define nullable
-#define __nullable
-#define __null_unspecified
-#define null_resettable
-#endif
 
 typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 {
@@ -72,7 +65,7 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
  
  @return DTMemoryStorage instance.
  */
-- (__null_unspecified DTMemoryStorage *)memoryStorage;
+- (null_unspecified DTMemoryStorage *)memoryStorage;
 
 /**
  Searching data storage object. It will be created automatically, responding to changes in UISearchBar, or after method filterTableItemsForSearchString:inScope: is called.
@@ -249,6 +242,4 @@ typedef NS_ENUM(NSUInteger,DTTableViewSectionStyle)
 
 @end
 
-#if __has_feature(nullability)
 #pragma clang assume_nonnull end
-#endif
