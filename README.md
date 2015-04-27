@@ -1,6 +1,7 @@
 ![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.png?branch=master) &nbsp;
 ![CocoaPod platform](https://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.png) &nbsp; 
 ![CocoaPod version](https://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png) &nbsp; 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)
 
 DTTableViewManager
@@ -111,9 +112,15 @@ DTTableViewManager has a built-in search system, that is easy to use and flexibl
         
 ## Installation
 
-Simplest option is to use [CocoaPods](http://www.cocoapods.org):
+[CocoaPods](http://www.cocoapods.org):
 
-	pod 'DTTableViewManager', '~> 3.1.0'
+    pod 'DTTableViewManager', '~> 3.1.0'
+	
+[Carthage](https://github.com/Carthage/Carthage):
+
+    github "DenHeadless/DTTableViewManager"
+    
+Carthage uses dynamic frameworks, which require iOS 8 and higher. After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to XCode project embedded binaries.
 
 ## Documentation
 
