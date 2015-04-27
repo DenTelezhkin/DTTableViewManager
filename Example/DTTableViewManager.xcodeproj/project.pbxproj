@@ -40,7 +40,6 @@
 		95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93F618186A3F003225B7 /* StoryboardController.m */; };
 		95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */; };
 		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
-		9A19F6A61AEE2ED200ECA05A /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A19F6A51AEE2ED200ECA05A /* DTModelStorage.framework */; };
 		9A24F6A419DAA430009DE5D4 /* SwiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */; };
 		9A24F6A519DAA430009DE5D4 /* SwiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */; };
 		9A24FF521A5C0777001D4BF4 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
@@ -83,6 +82,7 @@
 		9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAD19D701100048B08E /* NumberCell.swift */; };
 		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
 		9ADB0CB219D737B10048B08E /* ExecuteAfter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */; };
+		9AE6713A1AEE5EFF00B25A5F /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */; };
 		9AF003251A5ABE8F00ABFC90 /* MemoryStorageSpecs.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AF003261A5ABE8F00ABFC90 /* DatasourceSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AF003271A5ABE8F00ABFC90 /* SearchSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95D51FC5175E78BA00FD2292 /* SearchSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -214,7 +214,6 @@
 		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
 		95FC93FA18186BB1003225B7 /* PrototypedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrototypedCell.h; path = TableViewFactory/Cells/PrototypedCell.h; sourceTree = "<group>"; };
 		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
-		9A19F6A51AEE2ED200ECA05A /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = Carthage/Build/iOS/DTModelStorage.framework; sourceTree = "<group>"; };
 		9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftCell.swift; path = mocks/SwiftCell.swift; sourceTree = "<group>"; };
 		9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftCell.xib; path = mocks/SwiftCell.xib; sourceTree = "<group>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +236,7 @@
 		9ADB0CAD19D701100048B08E /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NumberCell.swift; path = Cells/NumberCell.swift; sourceTree = "<group>"; };
 		9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftViewController.xib; path = ExampleControllers/SwiftViewController.xib; sourceTree = "<group>"; };
 		9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExecuteAfter.swift; path = Helpers/ExecuteAfter.swift; sourceTree = "<group>"; };
+		9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = ../Carthage/Build/iOS/DTModelStorage.framework; sourceTree = "<group>"; };
 		9AF0031A1A5ABE7000ABFC90 /* XCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF0031D1A5ABE7000ABFC90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AF0031E1A5ABE7000ABFC90 /* XCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCTests.m; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A19F6A61AEE2ED200ECA05A /* DTModelStorage.framework in Frameworks */,
+				9AE6713A1AEE5EFF00B25A5F /* DTModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +336,7 @@
 		7C8E608B51C8902777399AD2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9A19F6A51AEE2ED200ECA05A /* DTModelStorage.framework */,
+				9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */,
 				B3838F9C7BCC31E26AE67A38 /* libPods-Example.a */,
 				D15CF9111653D5CB07B9DC77 /* libPods-Tests.a */,
 				D44D2328C4E105FF69C29CAB /* libPods-XCTests.a */,
@@ -1169,7 +1169,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1217,7 +1217,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

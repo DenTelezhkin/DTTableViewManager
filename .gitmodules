@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/DTModelStorage"]
+	path = Carthage/Checkouts/DTModelStorage
+	url = git@github.com:DenHeadless/DTModelStorage.git
