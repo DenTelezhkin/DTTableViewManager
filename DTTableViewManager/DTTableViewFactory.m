@@ -24,9 +24,9 @@
 // THE SOFTWARE.
 
 #import "DTTableViewFactory.h"
-#import "DTModelTransfer.h"
+#import <DTModelStorage/DTModelStorage.h>
 #import "UIView+DTLoading.h"
-#import "DTRuntimeHelper.h"
+#import <DTModelStorage/DTRuntimeHelper.h>
 
 @interface DTTableViewFactory ()
 

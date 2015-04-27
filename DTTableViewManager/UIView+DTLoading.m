@@ -23,7 +23,7 @@
 // THE SOFTWARE.
 
 #import "UIView+DTLoading.h"
-#import "DTRuntimeHelper.h"
+#import <DTModelStorage/DTRuntimeHelper.h>
 
 @implementation UIView (DTLoading)
 

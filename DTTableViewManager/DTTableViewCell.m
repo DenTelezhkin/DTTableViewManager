@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 
 #import "DTTableViewCell.h"
-#import "DTRuntimeHelper.h"
+#import <DTModelStorage/DTRuntimeHelper.h>
 
 @implementation DTTableViewCell
 
