@@ -7,7 +7,7 @@ describe(@"Storage search specs", ^{
     __block DTMemoryStorage *storage;
     
     beforeEach(^{
-        storage = [DTMemoryStorage storage];
+        storage = [DTMemoryStorage new];
         storage.delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
     });
     
@@ -53,7 +53,7 @@ describe(@"Storage Add specs", ^{
 
     beforeEach(^{
         delegate = [OCMockObject mockForClass:[DTTableViewController class]];
-        storage = [DTMemoryStorage storage];
+        storage = [DTMemoryStorage new];
         [storage setSupplementaryHeaderKind:DTTableViewElementSectionHeader];
         [storage setSupplementaryFooterKind:DTTableViewElementSectionFooter];
         storage.delegate = (id <DTStorageUpdating>)delegate;
@@ -106,7 +106,7 @@ describe(@"Storage edit specs", ^{
     
     beforeEach(^{
         delegate = [OCMockObject niceMockForClass:[DTTableViewController class]];
-        storage = [DTMemoryStorage storage];
+        storage = [DTMemoryStorage new];
         [storage setSupplementaryHeaderKind:DTTableViewElementSectionHeader];
         [storage setSupplementaryFooterKind:DTTableViewElementSectionFooter];
         storage.delegate = (id <DTStorageUpdating>)delegate;

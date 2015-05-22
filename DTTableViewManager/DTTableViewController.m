@@ -109,7 +109,7 @@
 {
     if (!_storage)
     {
-        DTMemoryStorage * storage = [DTMemoryStorage storage];
+        DTMemoryStorage * storage = [DTMemoryStorage new];
         _storage = storage;
         [_storage setSupplementaryHeaderKind:DTTableViewElementSectionHeader];
         [_storage setSupplementaryFooterKind:DTTableViewElementSectionFooter];

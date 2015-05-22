@@ -40,7 +40,7 @@
 {
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString];
 
-    return [[self class] storageWithFetchResultsController:[[self class] banksFetchControllerWithPredicate:predicate]];
+    return [[[self class] alloc] initWithFetchResultsController:[[self class] banksFetchControllerWithPredicate:predicate]];
 }
 
 @end

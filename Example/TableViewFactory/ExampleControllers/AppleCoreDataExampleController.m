@@ -26,7 +26,7 @@
     self.navigationItem.rightBarButtonItem = barItem;
     
     [self registerCellClass:[EventCell class] forModelClass:[Event class]];
-    DTCoreDataStorage * storage = [DTCoreDataStorage storageWithFetchResultsController:[self timeStampFetchedResultsController]];
+    DTCoreDataStorage * storage = [[DTCoreDataStorage alloc ] initWithFetchResultsController:[self timeStampFetchedResultsController]];
     self.storage = storage;
 }
 
