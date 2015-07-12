@@ -10,7 +10,6 @@
 		48E2881AD00A5FD6607C839A /* Pods_XCTestsObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D17553896EB3F5BC5045DB /* Pods_XCTestsObjectiveC.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		79F540E16D8E820759648533 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA99ECA00D79CCC5B204B46 /* Pods_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		950659EE1749030D008AB32D /* BaseExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659ED1749030C008AB32D /* BaseExampleController.m */; };
-		95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
 		952112B91854886400063EA8 /* AppleCoreDataExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112B71854886400063EA8 /* AppleCoreDataExampleController.m */; };
 		952112BB1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */; };
 		952112C1185491E500063EA8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C0185491E500063EA8 /* Event.m */; };
@@ -19,7 +18,6 @@
 		952112CD1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952112CA1854A4DD00063EA8 /* BanksCoreDataViewController.xib */; };
 		952112D11854A82100063EA8 /* BankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D01854A82100063EA8 /* BankCell.m */; };
 		952112D51854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */; };
-		9545FB9E16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
 		956C39BB1854BA6400FC1A5B /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956C39BA1854BA6400FC1A5B /* BankCell.xib */; };
 		9591074E18535AE40012B07E /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9591074D18535AE30012B07E /* Banks.json */; };
 		9591075218535C600012B07E /* BanksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9591075118535C600012B07E /* BanksCoreDataManager.m */; };
@@ -42,10 +40,8 @@
 		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
 		9A24F6A419DAA430009DE5D4 /* SwiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */; };
 		9A24F6A519DAA430009DE5D4 /* SwiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */; };
-		9A27AB0D1B5276F4002EFB47 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
 		9A27AB0E1B5276F4002EFB47 /* XCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF0031E1A5ABE7000ABFC90 /* XCTests.m */; };
 		9A27AB0F1B5276F4002EFB47 /* SwiftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */; };
-		9A27AB101B5276F4002EFB47 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
 		9A27AB111B5276F4002EFB47 /* SwiftStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */; };
 		9A27AB121B5276F4002EFB47 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
 		9A27AB131B5276F4002EFB47 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
@@ -54,14 +50,10 @@
 		9A27AB161B5276F4002EFB47 /* CellWithNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659F6174C0201008AB32D /* CellWithNib.m */; };
 		9A27AB171B5276F4002EFB47 /* BaseMockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659FB174C027F008AB32D /* BaseMockCell.m */; };
 		9A27AB181B5276F4002EFB47 /* DTTableViewController+UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */; };
-		9A27AB191B5276F4002EFB47 /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
 		9A27AB1A1B5276F4002EFB47 /* StringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA87853818AA716D00D138D5 /* StringCell.m */; };
-		9A27AB1B1B5276F4002EFB47 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
 		9A27AB1C1B5276F4002EFB47 /* SwiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */; };
 		9A27AB1D1B5276F4002EFB47 /* MockTableHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */; };
 		9A27AB1E1B5276F4002EFB47 /* NiblessTableHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */; };
-		9A27AB1F1B5276F4002EFB47 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
-		9A27AB201B5276F4002EFB47 /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */; };
 		9A27AB211B5276F4002EFB47 /* BaseHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942101750C901007CEB5E /* BaseHeaderFooterView.m */; };
 		9A27AB221B5276F4002EFB47 /* SwiftHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */; };
 		9A27AB231B5276F4002EFB47 /* NiblessTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */; };
@@ -79,25 +71,9 @@
 		9A27AB331B5276F4002EFB47 /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
 		9A27AB341B5276F4002EFB47 /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
 		9A27AB3E1B5279B0002EFB47 /* DummyTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27AB3D1B5279B0002EFB47 /* DummyTestCase.swift */; };
-		9A2A38D51AEE288A0021E97D /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
-		9A2A38D61AEE288A0021E97D /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */; };
-		9A2A38D71AEE288A0021E97D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
-		9A2A38D81AEE288A0021E97D /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
-		9A2A38D91AEE288A0021E97D /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
-		9A2A38DA1AEE288A0021E97D /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
-		9A2A38DB1AEE28990021E97D /* DTTableViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA1972EC18190CF200B81302 /* DTTableViewManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38DC1AEE28990021E97D /* DTTableViewFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = E60CA0131684AFEF00F4147E /* DTTableViewFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38DD1AEE28990021E97D /* DTSectionModel+SectionHeadersFooters.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38DE1AEE28990021E97D /* DTTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 95065A00174C03DF008AB32D /* DTTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38DF1AEE28990021E97D /* UIView+DTLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = 9545FB9C16FDC8EF0042A1A3 /* UIView+DTLoading.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38E01AEE28990021E97D /* DTTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E60CA0161684AFEF00F4147E /* DTTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38E11AEE28990021E97D /* DTTableViewControllerEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38E21AEE28990021E97D /* DTMemoryStorage_DTTableViewManagerAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9A359E8019D859A60075ED16 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A359E7F19D859A60075ED16 /* NumberCell.xib */; };
-		9A3CC14819A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
 		9A6FB6501A5B0262004ED709 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
 		9A7A03EA1A5ACA94003A4FA4 /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
-		9A88F5A719EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */; };
 		9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A88F5A819EAC683008436C9 /* Images.xcassets */; };
 		9AD462881A5AD23C00936CA9 /* CellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950659F8174C0219008AB32D /* CellWithNib.xib */; };
 		9AD462891A5AD23C00936CA9 /* SwiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */; };
@@ -110,10 +86,22 @@
 		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
 		9ADB0CB219D737B10048B08E /* ExecuteAfter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */; };
 		9AE6713A1AEE5EFF00B25A5F /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */; };
+		9AF8E4C41B528336005A2406 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C31B528336005A2406 /* DTTableViewFactory.m */; };
+		9AF8E4C51B528336005A2406 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C31B528336005A2406 /* DTTableViewFactory.m */; };
+		9AF8E4CA1B528342005A2406 /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C71B528342005A2406 /* DTSectionModel+SectionHeadersFooters.m */; };
+		9AF8E4CB1B528342005A2406 /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C71B528342005A2406 /* DTSectionModel+SectionHeadersFooters.m */; };
+		9AF8E4CC1B528342005A2406 /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C91B528342005A2406 /* DTTableViewCell.m */; };
+		9AF8E4CD1B528342005A2406 /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C91B528342005A2406 /* DTTableViewCell.m */; };
+		9AF8E4D01B52834B005A2406 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4CF1B52834B005A2406 /* UIView+DTLoading.m */; };
+		9AF8E4D11B52834B005A2406 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4CF1B52834B005A2406 /* UIView+DTLoading.m */; };
+		9AF8E4D71B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D31B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
+		9AF8E4D81B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D31B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
+		9AF8E4D91B528356005A2406 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D51B528356005A2406 /* DTTableViewController.m */; };
+		9AF8E4DA1B528356005A2406 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D51B528356005A2406 /* DTTableViewController.m */; };
+		9AF8E4DC1B52848D005A2406 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4DB1B52848D005A2406 /* TableViewController.swift */; };
+		9AF8E4DD1B52848D005A2406 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4DB1B52848D005A2406 /* TableViewController.swift */; };
 		9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
 		CA47BC0CD2E5C2D8AD69EA7E /* Pods_XCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F290902C21A60B71391681 /* Pods_XCTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		E60CA01A1684AFEF00F4147E /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
-		E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
 		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
 		E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */; };
@@ -149,8 +137,6 @@
 		950659F8174C0219008AB32D /* CellWithNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellWithNib.xib; path = mocks/CellWithNib.xib; sourceTree = "<group>"; };
 		950659FA174C027F008AB32D /* BaseMockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMockCell.h; path = mocks/BaseMockCell.h; sourceTree = "<group>"; };
 		950659FB174C027F008AB32D /* BaseMockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseMockCell.m; path = mocks/BaseMockCell.m; sourceTree = "<group>"; };
-		95065A00174C03DF008AB32D /* DTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCell.h; path = ../../DTTableViewManager/DTTableViewCell.h; sourceTree = "<group>"; };
-		95065A01174C03DF008AB32D /* DTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCell.m; path = ../../DTTableViewManager/DTTableViewCell.m; sourceTree = "<group>"; };
 		952112B61854886400063EA8 /* AppleCoreDataExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppleCoreDataExampleController.h; path = ExampleControllers/AppleCoreDataExampleController.h; sourceTree = "<group>"; };
 		952112B71854886400063EA8 /* AppleCoreDataExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppleCoreDataExampleController.m; path = ExampleControllers/AppleCoreDataExampleController.m; sourceTree = "<group>"; };
 		952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppleCoreDataExampleController.xib; path = ExampleControllers/AppleCoreDataExampleController.xib; sourceTree = "<group>"; };
@@ -165,8 +151,6 @@
 		952112D01854A82100063EA8 /* BankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BankCell.m; path = TableViewFactory/Cells/BankCell.m; sourceTree = "<group>"; };
 		952112D31854B59E00063EA8 /* BanksCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataStorage.h; path = CoreData/BanksCoreDataStorage.h; sourceTree = "<group>"; };
 		952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataStorage.m; path = CoreData/BanksCoreDataStorage.m; sourceTree = "<group>"; };
-		9545FB9C16FDC8EF0042A1A3 /* UIView+DTLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DTLoading.h"; path = "../../DTTableViewManager/UIView+DTLoading.h"; sourceTree = "<group>"; };
-		9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DTLoading.m"; path = "../../DTTableViewManager/UIView+DTLoading.m"; sourceTree = "<group>"; };
 		956C39BA1854BA6400FC1A5B /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = TableViewFactory/Cells/BankCell.xib; sourceTree = "<group>"; };
 		958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockTableHeaderView.h; path = "mocks/Header:footer mocks/MockTableHeaderView.h"; sourceTree = "<group>"; };
 		958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockTableHeaderView.m; path = "mocks/Header:footer mocks/MockTableHeaderView.m"; sourceTree = "<group>"; };
@@ -220,15 +204,11 @@
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A38BF1AEE285E0021E97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A359E7F19D859A60075ED16 /* NumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NumberCell.xib; path = Cells/NumberCell.xib; sourceTree = "<group>"; };
-		9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTMemoryStorage_DTTableViewManagerAdditions.h; path = ../../DTTableViewManager/DTMemoryStorage_DTTableViewManagerAdditions.h; sourceTree = "<group>"; };
-		9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTMemoryStorage_DTTableViewManagerAdditions.m; path = ../../DTTableViewManager/DTMemoryStorage_DTTableViewManagerAdditions.m; sourceTree = "<group>"; };
 		9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderFooterView.swift; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.swift"; sourceTree = "<group>"; };
 		9A48860419DAB3C700A266BF /* SwiftHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftHeaderFooterView.xib; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.xib"; sourceTree = "<group>"; };
 		9A48860819DABC1900A266BF /* SwiftHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderView.swift; path = "mocks/Header:footer mocks/SwiftHeaderView.swift"; sourceTree = "<group>"; };
 		9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftHeaderView.xib; path = "mocks/Header:footer mocks/SwiftHeaderView.xib"; sourceTree = "<group>"; };
 		9A6AB7AA4E4DAB775D686ED7 /* Pods-XCTestsObjectiveC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCTestsObjectiveC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XCTestsObjectiveC/Pods-XCTestsObjectiveC.debug.xcconfig"; sourceTree = "<group>"; };
-		9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DTSectionModel+SectionHeadersFooters.h"; path = "../../DTTableViewManager/DTSectionModel+SectionHeadersFooters.h"; sourceTree = "<group>"; };
-		9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DTSectionModel+SectionHeadersFooters.m"; path = "../../DTTableViewManager/DTSectionModel+SectionHeadersFooters.m"; sourceTree = "<group>"; };
 		9A88F5A819EAC683008436C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Images.xcassets; sourceTree = "<group>"; };
 		9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SwiftStoryboard.storyboard; path = mocks/Controllers/SwiftStoryboard.storyboard; sourceTree = "<group>"; };
 		9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTableViewCell.swift; path = mocks/SwiftTableViewCell.swift; sourceTree = "<group>"; };
@@ -244,18 +224,27 @@
 		9AF0031E1A5ABE7000ABFC90 /* XCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCTests.m; sourceTree = "<group>"; };
 		9AF0033B1A5ABF8E00ABFC90 /* XCTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "XCTests-Bridging-Header.h"; path = "TableViewFactory/XCTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		9AF0033C1A5ABFFB00ABFC90 /* XCTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "XCTests-Prefix.pch"; path = "TableViewFactory/XCTests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewControllerEvents.h; path = ../../DTTableViewManager/DTTableViewControllerEvents.h; sourceTree = "<group>"; };
+		9AF8E4C11B528329005A2406 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/ObjectiveC/DTTableViewManager.h; sourceTree = "<group>"; };
+		9AF8E4C21B528336005A2406 /* DTTableViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewFactory.h; path = ../../DTTableViewManager/ObjectiveC/DTTableViewFactory.h; sourceTree = "<group>"; };
+		9AF8E4C31B528336005A2406 /* DTTableViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewFactory.m; path = ../../DTTableViewManager/ObjectiveC/DTTableViewFactory.m; sourceTree = "<group>"; };
+		9AF8E4C61B528342005A2406 /* DTSectionModel+SectionHeadersFooters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DTSectionModel+SectionHeadersFooters.h"; path = "../../DTTableViewManager/ObjectiveC/DTSectionModel+SectionHeadersFooters.h"; sourceTree = "<group>"; };
+		9AF8E4C71B528342005A2406 /* DTSectionModel+SectionHeadersFooters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DTSectionModel+SectionHeadersFooters.m"; path = "../../DTTableViewManager/ObjectiveC/DTSectionModel+SectionHeadersFooters.m"; sourceTree = "<group>"; };
+		9AF8E4C81B528342005A2406 /* DTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCell.h; path = ../../DTTableViewManager/ObjectiveC/DTTableViewCell.h; sourceTree = "<group>"; };
+		9AF8E4C91B528342005A2406 /* DTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCell.m; path = ../../DTTableViewManager/ObjectiveC/DTTableViewCell.m; sourceTree = "<group>"; };
+		9AF8E4CE1B52834B005A2406 /* UIView+DTLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DTLoading.h"; path = "../../DTTableViewManager/ObjectiveC/UIView+DTLoading.h"; sourceTree = "<group>"; };
+		9AF8E4CF1B52834B005A2406 /* UIView+DTLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DTLoading.m"; path = "../../DTTableViewManager/ObjectiveC/UIView+DTLoading.m"; sourceTree = "<group>"; };
+		9AF8E4D21B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTMemoryStorage_DTTableViewManagerAdditions.h; path = ../../DTTableViewManager/ObjectiveC/DTMemoryStorage_DTTableViewManagerAdditions.h; sourceTree = "<group>"; };
+		9AF8E4D31B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTMemoryStorage_DTTableViewManagerAdditions.m; path = ../../DTTableViewManager/ObjectiveC/DTMemoryStorage_DTTableViewManagerAdditions.m; sourceTree = "<group>"; };
+		9AF8E4D41B528356005A2406 /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/ObjectiveC/DTTableViewController.h; sourceTree = "<group>"; };
+		9AF8E4D51B528356005A2406 /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../DTTableViewManager/ObjectiveC/DTTableViewController.m; sourceTree = "<group>"; };
+		9AF8E4D61B528356005A2406 /* DTTableViewControllerEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewControllerEvents.h; path = ../../DTTableViewManager/ObjectiveC/DTTableViewControllerEvents.h; sourceTree = "<group>"; };
+		9AF8E4DB1B52848D005A2406 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = ../../DTTableViewManager/Swift/TableViewController.swift; sourceTree = "<group>"; };
 		9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExampleCell.xib; path = TableViewFactory/Cells/ExampleCell.xib; sourceTree = "<group>"; };
-		AA1972EC18190CF200B81302 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
 		AA87853718AA716D00D138D5 /* StringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringCell.h; path = mocks/StringCell.h; sourceTree = "<group>"; };
 		AA87853818AA716D00D138D5 /* StringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringCell.m; path = mocks/StringCell.m; sourceTree = "<group>"; };
 		AAB09060184C845A008B7665 /* DTMemoryStorage+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTMemoryStorage+UnitTests.h"; sourceTree = "<group>"; };
 		AACAEDA7FA2B9C9448A7CB6C /* Pods-XCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XCTests/Pods-XCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D9F290902C21A60B71391681 /* Pods_XCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E60CA0131684AFEF00F4147E /* DTTableViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewFactory.h; path = ../../DTTableViewManager/DTTableViewFactory.h; sourceTree = "<group>"; };
-		E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewFactory.m; path = ../../DTTableViewManager/DTTableViewFactory.m; sourceTree = "<group>"; };
-		E60CA0161684AFEF00F4147E /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/DTTableViewController.h; sourceTree = "<group>"; };
-		E60CA0171684AFEF00F4147E /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../DTTableViewManager/DTTableViewController.m; sourceTree = "<group>"; };
 		E638F1071619916B00694FBC /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = TableViewFactory/Models/Example.h; sourceTree = "<group>"; };
 		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
 		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
@@ -388,8 +377,8 @@
 		9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */ = {
 			isa = PBXGroup;
 			children = (
-				9545FB9C16FDC8EF0042A1A3 /* UIView+DTLoading.h */,
-				9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */,
+				9AF8E4CE1B52834B005A2406 /* UIView+DTLoading.h */,
+				9AF8E4CF1B52834B005A2406 /* UIView+DTLoading.m */,
 			);
 			name = "UIView+loadFromXib";
 			sourceTree = "<group>";
@@ -613,13 +602,37 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9AF8E4BF1B5282EE005A2406 /* ObjectiveC */ = {
+			isa = PBXGroup;
+			children = (
+				9AF8E4C11B528329005A2406 /* DTTableViewManager.h */,
+				AA2EBD8D187EC5170063B98A /* Cell factory */,
+				AA2EBD8C187EC5070063B98A /* Convienience */,
+				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
+				9AF8E4D21B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.h */,
+				9AF8E4D31B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m */,
+				9AF8E4D41B528356005A2406 /* DTTableViewController.h */,
+				9AF8E4D51B528356005A2406 /* DTTableViewController.m */,
+				9AF8E4D61B528356005A2406 /* DTTableViewControllerEvents.h */,
+			);
+			name = ObjectiveC;
+			sourceTree = "<group>";
+		};
+		9AF8E4C01B52830F005A2406 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				9AF8E4DB1B52848D005A2406 /* TableViewController.swift */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
 		AA2EBD8C187EC5070063B98A /* Convienience */ = {
 			isa = PBXGroup;
 			children = (
-				9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */,
-				9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */,
-				95065A00174C03DF008AB32D /* DTTableViewCell.h */,
-				95065A01174C03DF008AB32D /* DTTableViewCell.m */,
+				9AF8E4C61B528342005A2406 /* DTSectionModel+SectionHeadersFooters.h */,
+				9AF8E4C71B528342005A2406 /* DTSectionModel+SectionHeadersFooters.m */,
+				9AF8E4C81B528342005A2406 /* DTTableViewCell.h */,
+				9AF8E4C91B528342005A2406 /* DTTableViewCell.m */,
 			);
 			name = Convienience;
 			sourceTree = "<group>";
@@ -627,8 +640,8 @@
 		AA2EBD8D187EC5170063B98A /* Cell factory */ = {
 			isa = PBXGroup;
 			children = (
-				E60CA0131684AFEF00F4147E /* DTTableViewFactory.h */,
-				E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */,
+				9AF8E4C21B528336005A2406 /* DTTableViewFactory.h */,
+				9AF8E4C31B528336005A2406 /* DTTableViewFactory.m */,
 			);
 			name = "Cell factory";
 			sourceTree = "<group>";
@@ -803,15 +816,8 @@
 		E6EA83931615F07F00F8B8C3 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
-				AA1972EC18190CF200B81302 /* DTTableViewManager.h */,
-				AA2EBD8D187EC5170063B98A /* Cell factory */,
-				AA2EBD8C187EC5070063B98A /* Convienience */,
-				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
-				E60CA0161684AFEF00F4147E /* DTTableViewController.h */,
-				E60CA0171684AFEF00F4147E /* DTTableViewController.m */,
-				9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */,
-				9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */,
-				9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */,
+				9AF8E4C01B52830F005A2406 /* Swift */,
+				9AF8E4BF1B5282EE005A2406 /* ObjectiveC */,
 			);
 			name = DTTableViewManager;
 			path = TableViewFactory;
@@ -824,14 +830,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A2A38DB1AEE28990021E97D /* DTTableViewManager.h in Headers */,
-				9A2A38DC1AEE28990021E97D /* DTTableViewFactory.h in Headers */,
-				9A2A38DD1AEE28990021E97D /* DTSectionModel+SectionHeadersFooters.h in Headers */,
-				9A2A38DE1AEE28990021E97D /* DTTableViewCell.h in Headers */,
-				9A2A38DF1AEE28990021E97D /* UIView+DTLoading.h in Headers */,
-				9A2A38E01AEE28990021E97D /* DTTableViewController.h in Headers */,
-				9A2A38E11AEE28990021E97D /* DTTableViewControllerEvents.h in Headers */,
-				9A2A38E21AEE28990021E97D /* DTMemoryStorage_DTTableViewManagerAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,33 +1165,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A27AB0D1B5276F4002EFB47 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
+				9AF8E4D81B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
 				9A27AB0E1B5276F4002EFB47 /* XCTests.m in Sources */,
 				9A27AB0F1B5276F4002EFB47 /* SwiftTableViewCell.swift in Sources */,
-				9A27AB101B5276F4002EFB47 /* DTTableViewFactory.m in Sources */,
 				9A27AB111B5276F4002EFB47 /* SwiftStoryboardViewController.swift in Sources */,
+				9AF8E4C51B528336005A2406 /* DTTableViewFactory.m in Sources */,
 				9A27AB121B5276F4002EFB47 /* ExampleCell.m in Sources */,
+				9AF8E4DA1B528356005A2406 /* DTTableViewController.m in Sources */,
 				9A27AB131B5276F4002EFB47 /* Example.m in Sources */,
 				9A27AB141B5276F4002EFB47 /* MockTableHeaderView.m in Sources */,
 				9A27AB151B5276F4002EFB47 /* CellWithoutNib.m in Sources */,
 				9A27AB161B5276F4002EFB47 /* CellWithNib.m in Sources */,
 				9A27AB171B5276F4002EFB47 /* BaseMockCell.m in Sources */,
 				9A27AB181B5276F4002EFB47 /* DTTableViewController+UnitTests.m in Sources */,
-				9A27AB191B5276F4002EFB47 /* DTTableViewCell.m in Sources */,
 				9A27AB1A1B5276F4002EFB47 /* StringCell.m in Sources */,
-				9A27AB1B1B5276F4002EFB47 /* DTTableViewController.m in Sources */,
+				9AF8E4D11B52834B005A2406 /* UIView+DTLoading.m in Sources */,
 				9A27AB1C1B5276F4002EFB47 /* SwiftCell.swift in Sources */,
 				9A27AB1D1B5276F4002EFB47 /* MockTableHeaderFooterView.m in Sources */,
 				9A27AB1E1B5276F4002EFB47 /* NiblessTableHeaderFooterView.m in Sources */,
-				9A27AB1F1B5276F4002EFB47 /* UIView+DTLoading.m in Sources */,
-				9A27AB201B5276F4002EFB47 /* DTSectionModel+SectionHeadersFooters.m in Sources */,
 				9A27AB211B5276F4002EFB47 /* BaseHeaderFooterView.m in Sources */,
+				9AF8E4CD1B528342005A2406 /* DTTableViewCell.m in Sources */,
 				9A27AB221B5276F4002EFB47 /* SwiftHeaderFooterView.swift in Sources */,
 				9A27AB231B5276F4002EFB47 /* NiblessTableHeaderView.m in Sources */,
 				9A27AB241B5276F4002EFB47 /* BaseHeaderView.m in Sources */,
 				9A27AB251B5276F4002EFB47 /* SwiftHeaderView.swift in Sources */,
 				9A27AB271B5276F4002EFB47 /* DatasourceSpec.mm in Sources */,
 				9A27AB281B5276F4002EFB47 /* SearchSpec.mm in Sources */,
+				9AF8E4CB1B528342005A2406 /* DTSectionModel+SectionHeadersFooters.m in Sources */,
 				9A27AB291B5276F4002EFB47 /* MappingSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1202,12 +1200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A2A38D51AEE288A0021E97D /* DTTableViewFactory.m in Sources */,
-				9A2A38D61AEE288A0021E97D /* DTSectionModel+SectionHeadersFooters.m in Sources */,
-				9A2A38D71AEE288A0021E97D /* DTTableViewCell.m in Sources */,
-				9A2A38D81AEE288A0021E97D /* UIView+DTLoading.m in Sources */,
-				9A2A38D91AEE288A0021E97D /* DTTableViewController.m in Sources */,
-				9A2A38DA1AEE288A0021E97D /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
+				9AF8E4DD1B52848D005A2406 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1216,6 +1209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A27AB3E1B5279B0002EFB47 /* DummyTestCase.swift in Sources */,
+				9AF8E4DC1B52848D005A2406 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1224,11 +1218,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				952112D51854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */,
+				9AF8E4CA1B528342005A2406 /* DTSectionModel+SectionHeadersFooters.m in Sources */,
 				9591075218535C600012B07E /* BanksCoreDataManager.m in Sources */,
 				E6EA83731615EE6000F8B8C3 /* main.m in Sources */,
+				9AF8E4D01B52834B005A2406 /* UIView+DTLoading.m in Sources */,
 				95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */,
 				E6EA83771615EE6000F8B8C3 /* AppDelegate.m in Sources */,
-				9A88F5A719EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m in Sources */,
+				9AF8E4D71B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
 				9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */,
 				E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */,
 				E638F1091619916B00694FBC /* Example.m in Sources */,
@@ -1237,24 +1233,22 @@
 				E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */,
 				E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
 				952112D11854A82100063EA8 /* BankCell.m in Sources */,
+				9AF8E4C41B528336005A2406 /* DTTableViewFactory.m in Sources */,
+				9AF8E4D91B528356005A2406 /* DTTableViewController.m in Sources */,
 				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
 				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
 				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
-				9A3CC14819A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
 				952112C51854929300063EA8 /* EventCell.m in Sources */,
 				9ADB0CAB19D700CA0048B08E /* SwiftViewController.swift in Sources */,
 				952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
-				E60CA01A1684AFEF00F4147E /* DTTableViewFactory.m in Sources */,
-				E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */,
-				9545FB9E16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
 				95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
 				95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
 				9ADB0CB219D737B10048B08E /* ExecuteAfter.swift in Sources */,
 				9A24F6A419DAA430009DE5D4 /* SwiftCell.swift in Sources */,
 				95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */,
 				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,
+				9AF8E4CC1B528342005A2406 /* DTTableViewCell.m in Sources */,
 				952112C1185491E500063EA8 /* Event.m in Sources */,
-				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
 				95B336681775C01900AF0A57 /* SearchController.m in Sources */,
 				95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */,
 				952112B91854886400063EA8 /* AppleCoreDataExampleController.m in Sources */,
@@ -1405,6 +1399,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
