@@ -1,0 +1,41 @@
+//
+//  MappingTestCase.swift
+//  DTTableViewManager
+//
+//  Created by Denys Telezhkin on 14.07.15.
+//  Copyright (c) 2015 Denys Telezhkin. All rights reserved.
+//
+
+import UIKit
+import XCTest
+import DTModelStorage
+import Nimble
+
+class MappingTestCase: XCTestCase {
+
+    var controller : DTTableViewController!
+    
+    override func setUp() {
+        super.setUp()
+        controller = DTTableViewController()
+        controller.tableView = UITableView()
+        let _ = controller.view
+        controller.storage = MemoryStorage()
+    }
+
+    func testShouldCreateCellFromCode()
+    {
+        controller.registerCellClass(NiblessCell)
+        
+        controller.memoryStorage.addItem(1, toSection: 0)
+        
+        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
+        expect(self.controller.verifyItem(2, atIndexPath: indexPath(0, 0))) == false // Sanity check
+        
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0)) as! NiblessCell
+        
+        expect(cell.awakedFromNib) == false
+        expect(cell.inittedWithStyle) == true
+    }
+
+}
