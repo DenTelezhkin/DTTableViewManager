@@ -21,7 +21,7 @@ class BaseTestCell : UITableViewCell, ModelTransfer, ModelRetrievable
     }
 
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     override func awakeFromNib() {
@@ -34,7 +34,6 @@ class BaseTestCell : UITableViewCell, ModelTransfer, ModelRetrievable
     }
 }
 
-class NiblessCell: BaseTestCell {
+class NiblessCell: BaseTestCell {}
 
-
-}
+class NibCell: BaseTestCell {}

@@ -81,6 +81,11 @@ extension DTTableViewController
     {
         self.cellFactory.registerCellClass(cellType)
     }
+    
+    func registerNibName<T:ModelTransfer>(nibName: String, cellType: T.Type)
+    {
+        self.cellFactory.registerNibName(nibName, cellType: cellType)
+    }
 }
 
 extension DTTableViewController: UITableViewDataSource

@@ -57,4 +57,34 @@ class MappingTestCase: XCTestCase {
         
         expect(self.controller.verifyItem(3, atIndexPath: indexPath(0, 0))) == true
     }
+    
+    func testCellMappingFromNib()
+    {
+        controller.registerCellClass(NibCell)
+        
+        controller.memoryStorage.addItem(1, toSection: 0)
+        
+        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
+        expect(self.controller.verifyItem(2, atIndexPath: indexPath(0, 0))) == false // Sanity check
+        
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0)) as! NibCell
+        
+        expect(cell.awakedFromNib) == true
+        expect(cell.inittedWithStyle) == false
+    }
+    
+    func testCellMappingFromNibWithDifferentName()
+    {
+        controller.registerNibName("RandomNibNameCell", cellType: BaseTestCell.self)
+        
+        controller.memoryStorage.addItem(1, toSection: 0)
+        
+        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
+        expect(self.controller.verifyItem(2, atIndexPath: indexPath(0, 0))) == false // Sanity check
+        
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0)) as! BaseTestCell
+        
+        expect(cell.awakedFromNib) == true
+        expect(cell.inittedWithStyle) == false
+    }
 }

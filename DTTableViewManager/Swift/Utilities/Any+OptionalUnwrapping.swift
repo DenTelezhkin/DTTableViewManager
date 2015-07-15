@@ -8,7 +8,7 @@
 
 import Foundation
 
-func recursiveUnwrapValue(any: Any) -> Any?
+public func recursiveUnwrapAnyValue(any: Any) -> Any?
 {
     let mirror = reflect(any)
     if mirror.disposition != .Optional
@@ -20,5 +20,5 @@ func recursiveUnwrapValue(any: Any) -> Any?
         return nil
     }
     let (_,some) = mirror[0]
-    return recursiveUnwrapValue(some.value)
+    return recursiveUnwrapAnyValue(some.value)
 }
