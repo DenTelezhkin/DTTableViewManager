@@ -37,5 +37,24 @@ class MappingTestCase: XCTestCase {
         expect(cell.awakedFromNib) == false
         expect(cell.inittedWithStyle) == true
     }
-
+    
+    func testOptionalUnwrapping()
+    {
+        controller.registerCellClass(NiblessCell)
+        
+        let intOptional : Int? = 3
+        controller.memoryStorage.addItem(intOptional, toSection: 0)
+        
+        expect(self.controller.verifyItem(3, atIndexPath: indexPath(0, 0))) == true
+    }
+    
+    func testSeveralLevelsOfOptionalUnwrapping()
+    {
+        controller.registerCellClass(NiblessCell)
+        
+        let intOptional : Int?? = 3
+        controller.memoryStorage.addItem(intOptional, toSection: 0)
+        
+        expect(self.controller.verifyItem(3, atIndexPath: indexPath(0, 0))) == true
+    }
 }

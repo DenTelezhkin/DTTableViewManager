@@ -64,13 +64,19 @@ class TableViewFactory
     
     func cellForModel(model: Any, atIndexPath indexPath:NSIndexPath) -> UITableViewCell
     {
-        let typeMirror = reflect(model.dynamicType)
+        // MARK: TODO replace with guard in Swift 2
+        let unwrappedModel = recursiveUnwrapValue(model)
+        if unwrappedModel == nil {
+            assertionFailure("Received nil model at indexPath: \(indexPath)")
+        }
+        
+        let typeMirror = reflect(unwrappedModel!.dynamicType)
         if let cellSummary = self.cellMappings[typeMirror.summary]
         {
             let cellClassName = RuntimeHelper.classNameFromReflectionSummary(cellSummary)
             let cell = tableView.dequeueReusableCellWithIdentifier(cellClassName, forIndexPath: indexPath) as! UITableViewCell
             let updateBlock = self.updateModelBlocks[typeMirror.summary]
-            updateBlock?(cell, model)
+            updateBlock?(cell, unwrappedModel!)
             return cell
         }
         

@@ -9,9 +9,9 @@
 import UIKit
 import DTModelStorage
 
-class BaseTestCell : UITableViewCell, ModelTransfer, IntModelRetrievable
+class BaseTestCell : UITableViewCell, ModelTransfer, ModelRetrievable
 {
-    var model : Int!
+    var model : Any!
     var awakedFromNib = false
     var inittedWithStyle = false
     

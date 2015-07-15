@@ -8,18 +8,29 @@
 
 import Foundation
 
-protocol IntModelRetrievable
+protocol ModelRetrievable
 {
-    var model : Int! { get }
+    var model : Any! { get }
+}
+
+func recursiveForceUnwrap<T>(any: T) -> T
+{
+    let mirror = reflect(any)
+    if mirror.disposition != .Optional
+    {
+        return any
+    }
+    let (_,some) = mirror[0]
+    return recursiveForceUnwrap(some.value as! T)
 }
 
 extension DTTableViewController
 {
-    func verifyItem(item: Int, atIndexPath indexPath: NSIndexPath) -> Bool
+    func verifyItem<T:Equatable>(item: T, atIndexPath indexPath: NSIndexPath) -> Bool
     {
-        let itemDatasource = self.storage.objectAtIndexPath(indexPath) as! Int
-        let itemTable = (self.tableView(self.tableView, cellForRowAtIndexPath: indexPath) as! IntModelRetrievable).model
-
+        let itemTable = (self.tableView(self.tableView, cellForRowAtIndexPath: indexPath) as! ModelRetrievable).model as! T
+        let itemDatasource = recursiveForceUnwrap(self.storage.objectAtIndexPath(indexPath)!) as! T
+        
         if !(item == itemDatasource)
         {
             return false
