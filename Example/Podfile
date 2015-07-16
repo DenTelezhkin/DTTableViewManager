@@ -1,14 +1,14 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 xcodeproj 'DTTableViewManager.xcodeproj'
-platform :ios, 7.0
+platform :ios, 6.0
 
 target :Example do
-	pod 'DTModelStorage', :head
+	pod 'DTModelStorage', '1.2.4'
 end
 
 target :XCTests do
-	pod 'DTModelStorage', :head
+	pod 'DTModelStorage', '1.2.4'
 	pod 'Cedar'
     pod 'OCMock', '~> 2.2'
 end

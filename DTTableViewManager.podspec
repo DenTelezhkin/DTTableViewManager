@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'DTTableViewManager'
-  s.version  = '3.1.2'
+  s.version  = '3.1.3'
   s.license  = 'MIT'
   s.summary  = 'The most simple and robust way to manage UITableView.'
   s.homepage = 'https://github.com/DenHeadless/DTTableViewManager'
@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/DenHeadless/DTTableViewManager.git', :tag => s.version.to_s }
   s.source_files = 'DTTableViewManager'
   s.requires_arc = true
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '6.0'
   s.ios.frameworks = 'UIKit', 'Foundation'
-  s.platform = :ios,'7.0'
-  s.dependency 'DTModelStorage' , '~> 1.2.0'
+  s.platform = :ios,'6.0'
+  s.dependency 'DTModelStorage' , '~> 1.2.4'
 end
