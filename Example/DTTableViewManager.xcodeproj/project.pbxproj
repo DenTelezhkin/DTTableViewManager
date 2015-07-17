@@ -98,6 +98,8 @@
 		9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAD19D701100048B08E /* NumberCell.swift */; };
 		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
 		9ADB0CB219D737B10048B08E /* ExecuteAfter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */; };
+		9AE339371B56950E0075A3D6 /* ViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE339361B56950E0075A3D6 /* ViewModelMapping.swift */; };
+		9AE339381B56950E0075A3D6 /* ViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE339361B56950E0075A3D6 /* ViewModelMapping.swift */; };
 		9AE6713A1AEE5EFF00B25A5F /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */; };
 		9AF8E4C41B528336005A2406 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C31B528336005A2406 /* DTTableViewFactory.m */; };
 		9AF8E4C51B528336005A2406 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C31B528336005A2406 /* DTTableViewFactory.m */; };
@@ -113,6 +115,7 @@
 		9AF8E4DA1B528356005A2406 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D51B528356005A2406 /* DTTableViewController.m */; };
 		9AF8E4DC1B52848D005A2406 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4DB1B52848D005A2406 /* TableViewController.swift */; };
 		9AF8E4DD1B52848D005A2406 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4DB1B52848D005A2406 /* TableViewController.swift */; };
+		9AF931551B5936A800456503 /* OptionalCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF931541B5936A800456503 /* OptionalCells.swift */; };
 		9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
 		D648BFBBDB6FE72BBF4AD5A5 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE8176BF30C15E8721FFFD0 /* Pods_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
@@ -254,6 +257,7 @@
 		9ADB0CAD19D701100048B08E /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NumberCell.swift; path = Cells/NumberCell.swift; sourceTree = "<group>"; };
 		9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftViewController.xib; path = ExampleControllers/SwiftViewController.xib; sourceTree = "<group>"; };
 		9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExecuteAfter.swift; path = Helpers/ExecuteAfter.swift; sourceTree = "<group>"; };
+		9AE339361B56950E0075A3D6 /* ViewModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelMapping.swift; path = ../../DTTableViewManager/Swift/Utilities/ViewModelMapping.swift; sourceTree = "<group>"; };
 		9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = ../Carthage/Build/iOS/DTModelStorage.framework; sourceTree = "<group>"; };
 		9AF0031A1A5ABE7000ABFC90 /* XCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF0031D1A5ABE7000ABFC90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 		9AF8E4D51B528356005A2406 /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../DTTableViewManager/ObjectiveC/DTTableViewController.m; sourceTree = "<group>"; };
 		9AF8E4D61B528356005A2406 /* DTTableViewControllerEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewControllerEvents.h; path = ../../DTTableViewManager/ObjectiveC/DTTableViewControllerEvents.h; sourceTree = "<group>"; };
 		9AF8E4DB1B52848D005A2406 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = ../../DTTableViewManager/Swift/TableViewController.swift; sourceTree = "<group>"; };
+		9AF931541B5936A800456503 /* OptionalCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionalCells.swift; path = Fixtures/OptionalCells.swift; sourceTree = "<group>"; };
 		9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExampleCell.xib; path = TableViewFactory/Cells/ExampleCell.xib; sourceTree = "<group>"; };
 		A16EC5F4BC41DF45FE3F4F5E /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AA87853718AA716D00D138D5 /* StringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringCell.h; path = mocks/StringCell.h; sourceTree = "<group>"; };
@@ -607,6 +612,7 @@
 			isa = PBXGroup;
 			children = (
 				9A75CEC61B55B2E2007FB06C /* FixtureCells.swift */,
+				9AF931541B5936A800456503 /* OptionalCells.swift */,
 				9A952DFC1B567BE900B9255E /* NibCell.xib */,
 				9A952E021B56832100B9255E /* RandomNibNameCell.xib */,
 			);
@@ -617,6 +623,7 @@
 			isa = PBXGroup;
 			children = (
 				9A952DF81B565C8900B9255E /* Any+OptionalUnwrapping.swift */,
+				9AE339361B56950E0075A3D6 /* ViewModelMapping.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1323,6 +1330,7 @@
 			files = (
 				9A1A499B1B53E9DC0006610B /* TableViewCellFactory.swift in Sources */,
 				9A952DFA1B565C8900B9255E /* Any+OptionalUnwrapping.swift in Sources */,
+				9AE339381B56950E0075A3D6 /* ViewModelMapping.swift in Sources */,
 				9AF8E4DD1B52848D005A2406 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1336,9 +1344,11 @@
 				9A75CEC41B55AF68007FB06C /* TableViewController+UnitTests.swift in Sources */,
 				9A75CEC11B55AE6F007FB06C /* MappingTestCase.swift in Sources */,
 				9A952DF91B565C8900B9255E /* Any+OptionalUnwrapping.swift in Sources */,
+				9AF931551B5936A800456503 /* OptionalCells.swift in Sources */,
 				9A75CEC71B55B2E2007FB06C /* FixtureCells.swift in Sources */,
 				9A1A499D1B54527E0006610B /* CreationTestCase.swift in Sources */,
 				9AF8E4DC1B52848D005A2406 /* TableViewController.swift in Sources */,
+				9AE339371B56950E0075A3D6 /* ViewModelMapping.swift in Sources */,
 				9A75CEC91B55B43B007FB06C /* NSIndexPath+Constructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

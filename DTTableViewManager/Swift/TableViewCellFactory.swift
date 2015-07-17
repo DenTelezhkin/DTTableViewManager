@@ -9,29 +9,42 @@
 import UIKit
 import Foundation
 import DTModelStorage
+import Swift
 
 class TableViewFactory
 {
-    typealias AnyBlock = (Any, Any) -> ()
-    
     private let tableView: UITableView
-    private var cellMappings = [String: String]()
-    private var headerMappings = [String:String]()
-    private var footerMappings = [String:String]()
-    private var updateModelBlocks = [String: AnyBlock]()
+    
+    private var mappings = [ViewModelMapping]()
     
     init(tableView: UITableView)
     {
         self.tableView = tableView
     }
     
+    private func mappingForViewType(type: ViewType,modelTypeMirror: MirrorType) -> ViewModelMapping?
+    {
+        return self.mappings.filter({ (mapping) -> Bool in
+            return mapping.viewType == type && mapping.modelTypeMirror.summary == modelTypeMirror.summary
+        }).first
+    }
+    
+    private func addMappingForViewType<T:ModelTransfer>(type: ViewType, viewClass : T.Type)
+    {
+        if self.mappingForViewType(type, modelTypeMirror: reflect(T.CellModel.self)) == nil
+        {
+            self.mappings.append(ViewModelMapping(viewType : type,
+                viewTypeMirror : reflect(T),
+                modelTypeMirror: reflect(T.CellModel.self),
+                updateBlock: { (view, model) in
+                    (view as! T).updateWithModel(model as! T.CellModel)
+            }))
+        }
+    }
+    
     func registerCellClass<T:ModelTransfer>(cellType : T.Type)
     {
-        let typeMirror = reflect(T.CellModel.self)
-        let cellTypeMirror = reflect(cellType)
-        self.registerUpdateBlockForType(T)
-        
-        let reuseIdentifier = RuntimeHelper.classNameFromReflection(cellTypeMirror)
+        let reuseIdentifier = RuntimeHelper.classNameFromReflection(reflect(cellType))
         if self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) == nil
         {
             // Storyboard prototype cell
@@ -41,17 +54,7 @@ class TableViewFactory
                 self.registerNibName(reuseIdentifier, cellType: T.self)
             }
         }
-        self.registerUpdateBlockForType(T)
-        self.cellMappings[typeMirror.summary] = cellTypeMirror.summary
-    }
-    
-    private func registerUpdateBlockForType<T:ModelTransfer>(type: T.Type)
-    {
-        let typeMirror = reflect(T.CellModel.self)
-        let updateBlock : (Any,Any) -> Void = { view, model in
-            (view as! T).updateWithModel(model as! T.CellModel)
-        }
-        self.updateModelBlocks[typeMirror.summary] = updateBlock
+        self.addMappingForViewType(.Cell, viewClass: T.self)
     }
     
     func registerNibName<T:ModelTransfer>(nibName : String, cellType: T.Type)
@@ -59,13 +62,9 @@ class TableViewFactory
         assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle(forClass: self.dynamicType)), "Register nib method should be called only if nix exists")
         
         let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
-        let typeMirror = reflect(T.CellModel.self)
-        let cellTypeMirror = reflect(cellType)
-        let reuseIdentifier = RuntimeHelper.classNameFromReflection(cellTypeMirror)
+        let reuseIdentifier = RuntimeHelper.classNameFromReflection(reflect(cellType))
         self.tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
-        
-        self.registerUpdateBlockForType(T)
-        self.cellMappings[typeMirror.summary] = cellTypeMirror.summary
+        self.addMappingForViewType(.Cell, viewClass: T.self)
     }
     
     func cellForModel(model: Any, atIndexPath indexPath:NSIndexPath) -> UITableViewCell
@@ -77,12 +76,11 @@ class TableViewFactory
         }
         
         let typeMirror = reflect(unwrappedModel!.dynamicType)
-        if let cellSummary = self.cellMappings[typeMirror.summary]
+        if let mapping = self.mappingForViewType(.Cell, modelTypeMirror: typeMirror)
         {
-            let cellClassName = RuntimeHelper.classNameFromReflectionSummary(cellSummary)
+            let cellClassName = RuntimeHelper.classNameFromReflection(mapping.viewTypeMirror)
             let cell = tableView.dequeueReusableCellWithIdentifier(cellClassName, forIndexPath: indexPath) as! UITableViewCell
-            let updateBlock = self.updateModelBlocks[typeMirror.summary]
-            updateBlock?(cell, unwrappedModel!)
+            mapping.updateBlock(cell, unwrappedModel!)
             return cell
         }
         

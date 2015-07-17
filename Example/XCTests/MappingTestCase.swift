@@ -87,4 +87,17 @@ class MappingTestCase: XCTestCase {
         expect(cell.awakedFromNib) == true
         expect(cell.inittedWithStyle) == false
     }
+
+    // MARK: TODO - Reealuate this functionality in the future
+    // Is there a reason to have optional cell mapping or not?
+//    func testOptionalModelCellMapping()
+//    {
+//        controller.registerCellClass(OptionalIntCell)
+//        
+//        controller.memoryStorage.addItem(Optional(1), toSection: 0)
+//        
+//        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
+//    }
+    
+    // MARK: TODO in Swift 2, with testables, check that mapping cannot be added twice
 }
