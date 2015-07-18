@@ -42,26 +42,26 @@ class TableViewFactory
         }
     }
     
-    func registerCellClass<T:ModelTransfer>(cellType : T.Type)
+    func registerCellClass<T:ModelTransfer where T: UITableViewCell>(cellType : T.Type)
     {
         let reuseIdentifier = RuntimeHelper.classNameFromReflection(reflect(cellType))
         if self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) == nil
         {
             // Storyboard prototype cell
-            self.tableView.registerClass(T.self as! UITableViewCell.Type, forCellReuseIdentifier: reuseIdentifier)
+            self.tableView.registerClass(T.self, forCellReuseIdentifier: reuseIdentifier)
             
-            if UINib.nibExistsWithNibName(reuseIdentifier, inBundle: NSBundle(forClass: self.dynamicType)) {
+            if UINib.nibExistsWithNibName(reuseIdentifier, inBundle: NSBundle(forClass: T.self)) {
                 self.registerNibName(reuseIdentifier, cellType: T.self)
             }
         }
         self.addMappingForViewType(.Cell, viewClass: T.self)
     }
     
-    func registerNibName<T:ModelTransfer>(nibName : String, cellType: T.Type)
+    func registerNibName<T:ModelTransfer where T: UITableViewCell>(nibName : String, cellType: T.Type)
     {
-        assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle(forClass: self.dynamicType)), "Register nib method should be called only if nix exists")
+        assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle(forClass: T.self)), "Register nib method should be called only if nix exists")
         
-        let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
+        let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: T.self))
         let reuseIdentifier = RuntimeHelper.classNameFromReflection(reflect(cellType))
         self.tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
         self.addMappingForViewType(.Cell, viewClass: T.self)

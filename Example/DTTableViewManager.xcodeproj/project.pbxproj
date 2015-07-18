@@ -39,7 +39,6 @@
 		95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93F618186A3F003225B7 /* StoryboardController.m */; };
 		95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */; };
 		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
-		9A1A499A1B53E9DC0006610B /* TableViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A49991B53E9DC0006610B /* TableViewCellFactory.swift */; };
 		9A1A499B1B53E9DC0006610B /* TableViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A49991B53E9DC0006610B /* TableViewCellFactory.swift */; };
 		9A1A499D1B54527E0006610B /* CreationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A499C1B54527E0006610B /* CreationTestCase.swift */; };
 		9A1A49A31B5455820006610B /* XibTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A49A11B5455820006610B /* XibTableViewController.swift */; };
@@ -84,7 +83,6 @@
 		9A75CEC91B55B43B007FB06C /* NSIndexPath+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC81B55B43B007FB06C /* NSIndexPath+Constructor.swift */; };
 		9A7A03EA1A5ACA94003A4FA4 /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
 		9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A88F5A819EAC683008436C9 /* Images.xcassets */; };
-		9A952DF91B565C8900B9255E /* Any+OptionalUnwrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A952DF81B565C8900B9255E /* Any+OptionalUnwrapping.swift */; };
 		9A952DFA1B565C8900B9255E /* Any+OptionalUnwrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A952DF81B565C8900B9255E /* Any+OptionalUnwrapping.swift */; };
 		9A952DFF1B567BE900B9255E /* NibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952DFC1B567BE900B9255E /* NibCell.xib */; };
 		9A952E041B56832100B9255E /* RandomNibNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952E021B56832100B9255E /* RandomNibNameCell.xib */; };
@@ -98,7 +96,6 @@
 		9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAD19D701100048B08E /* NumberCell.swift */; };
 		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
 		9ADB0CB219D737B10048B08E /* ExecuteAfter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */; };
-		9AE339371B56950E0075A3D6 /* ViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE339361B56950E0075A3D6 /* ViewModelMapping.swift */; };
 		9AE339381B56950E0075A3D6 /* ViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE339361B56950E0075A3D6 /* ViewModelMapping.swift */; };
 		9AE6713A1AEE5EFF00B25A5F /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */; };
 		9AF8E4C41B528336005A2406 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4C31B528336005A2406 /* DTTableViewFactory.m */; };
@@ -113,7 +110,6 @@
 		9AF8E4D81B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D31B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
 		9AF8E4D91B528356005A2406 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D51B528356005A2406 /* DTTableViewController.m */; };
 		9AF8E4DA1B528356005A2406 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D51B528356005A2406 /* DTTableViewController.m */; };
-		9AF8E4DC1B52848D005A2406 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4DB1B52848D005A2406 /* TableViewController.swift */; };
 		9AF8E4DD1B52848D005A2406 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4DB1B52848D005A2406 /* TableViewController.swift */; };
 		9AF931551B5936A800456503 /* OptionalCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF931541B5936A800456503 /* OptionalCells.swift */; };
 		9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
@@ -1339,16 +1335,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A1A499A1B53E9DC0006610B /* TableViewCellFactory.swift in Sources */,
 				9A1A49A31B5455820006610B /* XibTableViewController.swift in Sources */,
 				9A75CEC41B55AF68007FB06C /* TableViewController+UnitTests.swift in Sources */,
 				9A75CEC11B55AE6F007FB06C /* MappingTestCase.swift in Sources */,
-				9A952DF91B565C8900B9255E /* Any+OptionalUnwrapping.swift in Sources */,
 				9AF931551B5936A800456503 /* OptionalCells.swift in Sources */,
 				9A75CEC71B55B2E2007FB06C /* FixtureCells.swift in Sources */,
 				9A1A499D1B54527E0006610B /* CreationTestCase.swift in Sources */,
-				9AF8E4DC1B52848D005A2406 /* TableViewController.swift in Sources */,
-				9AE339371B56950E0075A3D6 /* ViewModelMapping.swift in Sources */,
 				9A75CEC91B55B43B007FB06C /* NSIndexPath+Constructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1527,10 +1519,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/../Carthage/Build/iOS",
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1577,10 +1565,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/../Carthage/Build/iOS",
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

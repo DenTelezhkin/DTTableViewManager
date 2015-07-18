@@ -16,7 +16,7 @@ enum SupplementarySectionStyle
 }
 
 public class DTTableViewController: UIViewController {
-    @IBOutlet var tableView : UITableView!
+    @IBOutlet public var tableView : UITableView!
 
     private lazy var cellFactory: TableViewFactory = {
         precondition(self.tableView != nil, "Please call registration methods only when view is loaded")
@@ -39,14 +39,14 @@ public class DTTableViewController: UIViewController {
     var deleteRowAnimation = UITableViewRowAnimation.Automatic
     var reloadRowAnimation = UITableViewRowAnimation.Automatic
     
-    var memoryStorage : MemoryStorage!
+    public var memoryStorage : MemoryStorage!
     {
         precondition(storage is MemoryStorage, "DTTableViewController memoryStorage method should be called only if you are using MemoryStorage")
         
         return storage as! MemoryStorage
     }
     
-    var storage : StorageProtocol = {
+    public var storage : StorageProtocol = {
         let storage = MemoryStorage()
         storage.supplementaryHeaderKind = DTTableViewElementSectionHeader
         storage.supplementaryFooterKind = DTTableViewElementSectionFooter
@@ -77,12 +77,12 @@ public class DTTableViewController: UIViewController {
 // MARK: Cell registration
 extension DTTableViewController
 {
-    func registerCellClass<T:ModelTransfer>(cellType:T.Type)
+    public func registerCellClass<T:ModelTransfer where T: UITableViewCell>(cellType:T.Type)
     {
         self.cellFactory.registerCellClass(cellType)
     }
     
-    func registerNibName<T:ModelTransfer>(nibName: String, cellType: T.Type)
+    public func registerNibName<T:ModelTransfer where T: UITableViewCell>(nibName: String, cellType: T.Type)
     {
         self.cellFactory.registerNibName(nibName, cellType: cellType)
     }
