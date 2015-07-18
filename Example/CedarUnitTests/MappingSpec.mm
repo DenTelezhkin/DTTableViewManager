@@ -186,17 +186,14 @@ describe(@"mapping tests", ^{
         });
         
         it(@"should create header view from UITableViewHeaderFooterView", ^{
-            if ([UITableViewHeaderFooterView class])
-            {
-                [model registerHeaderClass:[MockTableHeaderFooterView class]
-                             forModelClass:[Example class]];
-                
-                [storage setSectionHeaderModels:@[[[Example new] autorelease]]];
-                
-                UIView * headerView = [model tableView:model.tableView viewForHeaderInSection:0];
-                
-                [headerView isKindOfClass:[MockTableHeaderFooterView class]] should be_truthy;
-            }
+            [model registerHeaderClass:[MockTableHeaderFooterView class]
+                         forModelClass:[Example class]];
+            
+            [storage setSectionHeaderModels:@[[[Example new] autorelease]]];
+            
+            UIView * headerView = [model tableView:model.tableView viewForHeaderInSection:0];
+            
+            [headerView isKindOfClass:[MockTableHeaderFooterView class]] should be_truthy;
         });
         
         it(@"should create footer view from UITableViewHeaderFooterView", ^{

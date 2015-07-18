@@ -39,6 +39,10 @@
 		95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93F618186A3F003225B7 /* StoryboardController.m */; };
 		95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */; };
 		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
+		9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */; };
+		9A1663ED1B5A68B200B2C3C8 /* NibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1663EC1B5A68B200B2C3C8 /* NibView.xib */; };
+		9A1663EF1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */; };
+		9A1663F21B5A871D00B2C3C8 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1663F01B5A77C800B2C3C8 /* UIView+XibLoading.swift */; };
 		9A1A499B1B53E9DC0006610B /* TableViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A49991B53E9DC0006610B /* TableViewCellFactory.swift */; };
 		9A1A499D1B54527E0006610B /* CreationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A499C1B54527E0006610B /* CreationTestCase.swift */; };
 		9A1A49A31B5455820006610B /* XibTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A49A11B5455820006610B /* XibTableViewController.swift */; };
@@ -221,6 +225,10 @@
 		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
 		95FC93FA18186BB1003225B7 /* PrototypedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrototypedCell.h; path = TableViewFactory/Cells/PrototypedCell.h; sourceTree = "<group>"; };
 		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
+		9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FixtureViews.swift; path = Fixtures/FixtureViews.swift; sourceTree = "<group>"; };
+		9A1663EC1B5A68B200B2C3C8 /* NibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibView.xib; path = Fixtures/NibView.xib; sourceTree = "<group>"; };
+		9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibHeaderFooterView.xib; path = Fixtures/NibHeaderFooterView.xib; sourceTree = "<group>"; };
+		9A1663F01B5A77C800B2C3C8 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+XibLoading.swift"; path = "../../DTTableViewManager/Swift/Utilities/UIView+XibLoading.swift"; sourceTree = "<group>"; };
 		9A1A49991B53E9DC0006610B /* TableViewCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCellFactory.swift; path = ../../DTTableViewManager/Swift/TableViewCellFactory.swift; sourceTree = "<group>"; };
 		9A1A499C1B54527E0006610B /* CreationTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationTestCase.swift; sourceTree = "<group>"; };
 		9A1A49A11B5455820006610B /* XibTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XibTableViewController.swift; path = Fixtures/XibTableViewController.swift; sourceTree = "<group>"; };
@@ -543,9 +551,20 @@
 			name = Storyboard;
 			sourceTree = "<group>";
 		};
+		9A1663E91B5A63BB00B2C3C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */,
+				9A1663EC1B5A68B200B2C3C8 /* NibView.xib */,
+				9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		9A1A49A01B54555D0006610B /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				9A1663E91B5A63BB00B2C3C8 /* Views */,
 				9A75CEC51B55B2CA007FB06C /* Cells */,
 				9A1A49A11B5455820006610B /* XibTableViewController.swift */,
 				9A1A49A21B5455820006610B /* XibTableViewController.xib */,
@@ -620,6 +639,7 @@
 			children = (
 				9A952DF81B565C8900B9255E /* Any+OptionalUnwrapping.swift */,
 				9AE339361B56950E0075A3D6 /* ViewModelMapping.swift */,
+				9A1663F01B5A77C800B2C3C8 /* UIView+XibLoading.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1077,8 +1097,10 @@
 				9AD462891A5AD23C00936CA9 /* SwiftCell.xib in Resources */,
 				9AD4628A1A5AD23C00936CA9 /* MockTableHeaderFooterView.xib in Resources */,
 				9AD4628B1A5AD23C00936CA9 /* SwiftHeaderFooterView.xib in Resources */,
+				9A1663ED1B5A68B200B2C3C8 /* NibView.xib in Resources */,
 				9AD4628C1A5AD23C00936CA9 /* MockTableHeaderView.xib in Resources */,
 				9AD4628D1A5AD23C00936CA9 /* SwiftHeaderView.xib in Resources */,
+				9A1663EF1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib in Resources */,
 				9A7A03EA1A5ACA94003A4FA4 /* SwiftStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1325,6 +1347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1A499B1B53E9DC0006610B /* TableViewCellFactory.swift in Sources */,
+				9A1663F21B5A871D00B2C3C8 /* UIView+XibLoading.swift in Sources */,
 				9A952DFA1B565C8900B9255E /* Any+OptionalUnwrapping.swift in Sources */,
 				9AE339381B56950E0075A3D6 /* ViewModelMapping.swift in Sources */,
 				9AF8E4DD1B52848D005A2406 /* TableViewController.swift in Sources */,
@@ -1337,6 +1360,7 @@
 			files = (
 				9A1A49A31B5455820006610B /* XibTableViewController.swift in Sources */,
 				9A75CEC41B55AF68007FB06C /* TableViewController+UnitTests.swift in Sources */,
+				9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */,
 				9A75CEC11B55AE6F007FB06C /* MappingTestCase.swift in Sources */,
 				9AF931551B5936A800456503 /* OptionalCells.swift in Sources */,
 				9A75CEC71B55B2E2007FB06C /* FixtureCells.swift in Sources */,

@@ -76,7 +76,7 @@ class MappingTestCase: XCTestCase {
     
     func testCellMappingFromNibWithDifferentName()
     {
-        controller.registerNibName("RandomNibNameCell", cellType: BaseTestCell.self)
+        controller.registerNibNamed("RandomNibNameCell", forCellType: BaseTestCell.self)
         
         controller.memoryStorage.addItem(1, toSection: 0)
         
@@ -101,4 +101,169 @@ class MappingTestCase: XCTestCase {
 //    }
     
     // MARK: TODO in Swift 2, with testables, check that mapping cannot be added twice
+    
+    
+    func testHeaderViewMappingFromUIView()
+    {
+        controller.registerHeaderClass(NibView)
+        
+        controller.memoryStorage.setSectionHeaderModels([1])
+        let view = controller.tableView(controller.tableView, viewForHeaderInSection: 0)
+        expect(view).to(beAKindOf(NibView.self))
+    }
+    
+    func testHeaderMappingFromHeaderFooterView()
+    {
+        controller.registerHeaderClass(NibHeaderFooterView)
+        controller.memoryStorage.setSectionHeaderModels([1])
+        let view = controller.tableView(controller.tableView, viewForHeaderInSection: 0)
+        expect(view).to(beAKindOf(NibHeaderFooterView.self))
+    }
+    
+    func testFooterViewMappingFromUIView()
+    {
+        controller.registerFooterClass(NibView)
+        
+        controller.memoryStorage.setSectionFooterModels([1])
+        let view = controller.tableView(controller.tableView, viewForFooterInSection: 0)
+        expect(view).to(beAKindOf(NibView.self))
+    }
+    
+    func testFooterMappingFromHeaderFooterView()
+    {
+        controller.registerFooterClass(NibHeaderFooterView)
+        controller.memoryStorage.setSectionFooterModels([1])
+        let view = controller.tableView(controller.tableView, viewForFooterInSection: 0)
+        expect(view).to(beAKindOf(NibHeaderFooterView.self))
+    }
+    
+    class NSNumberCell : UITableViewCell, ModelTransfer {
+        func updateWithModel(model: NSNumber) {}
+    }
+    
+    func testShouldSupportFoundationNSNumber()
+    {
+        controller.registerCellClass(NSNumberCell)
+        
+        controller.memoryStorage.addItem(NSNumber(double: 1), toSection: 0)
+        
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSNumberCell.self))
+    }
+    
+    func testShouldSupportFoundationNSNumberBool()
+    {
+        controller.registerCellClass(NSNumberCell)
+        controller.memoryStorage.addItem(NSNumber(bool: true), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSNumberCell.self))
+    }
+    
+    class NSStringCell: UITableViewCell, ModelTransfer{
+        func updateWithModel(model: NSString) {}
+    }
+    
+    func testShouldSupportFoundationNSStringEmpty()
+    {
+        controller.registerCellClass(NSStringCell)
+        controller.memoryStorage.addItem(NSString(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSStringCell.self))
+    }
+    
+    func testShouldSupportFoundationNSString()
+    {
+        controller.registerCellClass(NSStringCell)
+        controller.memoryStorage.addItem(NSString(string: "dsf"), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSStringCell.self))
+    }
+    
+    func testShouldSupportFoundationNSStringWithSwiftString()
+    {
+        controller.registerCellClass(NSStringCell)
+        controller.memoryStorage.addItem("sdf", toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSStringCell.self))
+    }
+    
+    func testShouldSupportFoundationNSStringWithNSMutableString()
+    {
+        controller.registerCellClass(NSStringCell)
+        controller.memoryStorage.addItem(NSMutableString(string: "dsfdssf"), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSStringCell.self))
+    }
+    
+    class NSAttributedStringCell: UITableViewCell, ModelTransfer{
+        func updateWithModel(model: NSAttributedString) {}
+    }
+    
+    func testShouldSupportFoundationNSStringWithNSAttributedString()
+    {
+        controller.registerCellClass(NSAttributedStringCell)
+        controller.memoryStorage.addItem(NSAttributedString(string: "dsfdssf"), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSAttributedStringCell.self))
+    }
+    
+    func testShouldSupportFoundationNSStringWithNSMutableAttributedString()
+    {
+        controller.registerCellClass(NSAttributedStringCell)
+        controller.memoryStorage.addItem(NSMutableAttributedString(string: "dsfdssf"), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSAttributedStringCell.self))
+    }
+    
+    class NSDictionaryCell: UITableViewCell, ModelTransfer{
+        func updateWithModel(model: NSDictionary) {}
+    }
+    
+    func testShouldSupportFoundationNSDictionary()
+    {
+        controller.registerCellClass(NSDictionaryCell)
+        controller.memoryStorage.addItem(NSDictionary(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSDictionaryCell.self))
+    }
+    
+    func testShouldSupportFoundationNSDictionaryWithMutableDicationary()
+    {
+        controller.registerCellClass(NSDictionaryCell)
+        controller.memoryStorage.addItem(NSMutableDictionary(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSDictionaryCell.self))
+    }
+    
+    class NSArrayCell: UITableViewCell, ModelTransfer{
+        func updateWithModel(model: NSArray) {}
+    }
+    
+    func testShouldSupportFoundationNSArray()
+    {
+        controller.registerCellClass(NSArrayCell)
+        controller.memoryStorage.addItem(NSArray(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSArrayCell.self))
+    }
+    
+    func testShouldSupportFoundationNSArrayWithMutableNSArray()
+    {
+        controller.registerCellClass(NSArrayCell)
+        controller.memoryStorage.addItem(NSMutableArray(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSArrayCell.self))
+    }
+    
+    class NSDateCell: UITableViewCell, ModelTransfer{
+        func updateWithModel(model: NSDate) {}
+    }
+    
+    func testShouldSupportFoundationNSDate()
+    {
+        controller.registerCellClass(NSDateCell)
+        controller.memoryStorage.addItem(NSDate(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSDateCell.self))
+    }
 }
