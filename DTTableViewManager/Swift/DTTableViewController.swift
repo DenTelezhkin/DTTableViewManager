@@ -110,6 +110,32 @@ extension DTTableViewController
         self.sectionFooterStyle = .View
         self.cellFactory.registerNibNamed(nibName, forFooterType: footerType)
     }
+    
+    func headerModelForSectionIndex(index: Int) -> Any?
+    {
+        if self.storage.sections[index].numberOfObjects == 0 && !self.displayHeaderOnEmptySection
+        {
+            return nil
+        }
+        
+        if self.storage is HeaderFooterStorageProtocol {
+            return (self.storage as! HeaderFooterStorageProtocol).headerModelForSectionIndex(index)
+        }
+        return nil
+    }
+    
+    func footerModelForSectionIndex(index: Int) -> Any?
+    {
+        if self.storage.sections[index].numberOfObjects == 0 && !self.displayFooterOnEmptySection
+        {
+            return nil
+        }
+        
+        if self.storage is HeaderFooterStorageProtocol {
+            return (self.storage as! HeaderFooterStorageProtocol).footerModelForSectionIndex(index)
+        }
+        return nil
+    }
 }
 
 extension DTTableViewController: UITableViewDataSource
@@ -125,6 +151,18 @@ extension DTTableViewController: UITableViewDataSource
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return self.cellFactory.cellForModel(self.storage.objectAtIndexPath(indexPath)!, atIndexPath: indexPath)
     }
+    
+    public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if self.sectionHeaderStyle == .View { return nil }
+        
+        return self.headerModelForSectionIndex(section) as? String
+    }
+    
+    public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if self.sectionFooterStyle == .View { return nil }
+        
+        return self.footerModelForSectionIndex(section) as? String
+    }
 }
 
 extension DTTableViewController: UITableViewDelegate
@@ -132,27 +170,47 @@ extension DTTableViewController: UITableViewDelegate
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if self.sectionHeaderStyle == .Title { return nil }
         
-        var model : Any?
-        if self.storage is HeaderFooterStorageProtocol {
-            model = (self.storage as! HeaderFooterStorageProtocol).headerModelForSectionIndex(section)
+        if let model = self.headerModelForSectionIndex(section) {
+            return self.cellFactory.headerViewForModel(model)
         }
-        if self.storage.sections[section].numberOfObjects == 0 && !self.displayHeaderOnEmptySection {
-            model = nil
-        }
-        return self.cellFactory.headerViewForModel(model)
+        return nil
     }
     
     public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if self.sectionFooterStyle == .Title { return nil }
         
-        var model : Any?
-        if self.storage is HeaderFooterStorageProtocol {
-            model = (self.storage as! HeaderFooterStorageProtocol).footerModelForSectionIndex(section)
+        if let model = self.footerModelForSectionIndex(section) {
+            return self.cellFactory.footerViewForModel(model)
         }
-        if self.storage.sections[section].numberOfObjects == 0 && !self.displayFooterOnEmptySection {
-            model = nil
+        return nil
+    }
+    
+    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.sectionHeaderStyle == .Title {
+            if let _ = self.headerModelForSectionIndex(section) {
+                return UITableViewAutomaticDimension
+            }
+            return CGFloat.min
         }
-        return self.cellFactory.footerViewForModel(model)
+        
+        if let _ = self.headerModelForSectionIndex(section) {
+            return self.tableView.sectionHeaderHeight
+        }
+        return CGFloat.min
+    }
+    
+    public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if self.sectionFooterStyle == .Title {
+            if let _ = self.footerModelForSectionIndex(section) {
+                return UITableViewAutomaticDimension
+            }
+            return CGFloat.min
+        }
+        
+        if let _ = self.footerModelForSectionIndex(section) {
+            return self.tableView.sectionFooterHeight
+        }
+        return CGFloat.min
     }
 }
 
@@ -176,5 +234,12 @@ extension DTTableViewController : StorageUpdating
     public func storageNeedsReloading()
     {
         tableView.reloadData()
+    }
+}
+
+extension DTTableViewController : TableViewStorageUpdating
+{
+    public func performAnimatedUpdate(block: UITableView -> Void) {
+        block(self.tableView)
     }
 }

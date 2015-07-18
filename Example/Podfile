@@ -2,19 +2,19 @@ use_frameworks!
 platform :ios, 8.0
 
 target :Example do
-	pod 'DTModelStorage/ObjectiveC', '1.3.0-beta2'
+	pod 'DTModelStorage/ObjectiveC', '1.3.0-beta3'
 end
 
 target :XCTests do
-	pod 'DTModelStorage/Swift', '1.3.0-beta2'
+	pod 'DTModelStorage/Swift', '1.3.0-beta3'
 	pod 'Nimble'
 end
 
 target :DTTableViewManager do
-	pod 'DTModelStorage/Swift', '1.3.0-beta2'
+	pod 'DTModelStorage/Swift', '1.3.0-beta3'
 end
 
 target :XCTestsObjectiveC do
     pod 'OCMock', '~> 2.2'
-    pod 'DTModelStorage/ObjectiveC', '1.3.0-beta2'
+    pod 'DTModelStorage/ObjectiveC', '1.3.0-beta3'
 end

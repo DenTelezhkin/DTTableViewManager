@@ -22,49 +22,9 @@ class TableViewFactory
         self.tableView = tableView
     }
     
-    private func classClusterReflectionFromMirrorType(mirror: MirrorType) -> MirrorType
-    {
-        let typeReflection = reflect(mirror.value).summary
-        switch typeReflection
-        {
-        case "__NSCFBoolean": fallthrough
-        case "__NSCFNumber":
-            return reflect(NSNumber)
-        
-        case "__NSCFConstantString": fallthrough
-        case "Swift.String": fallthrough
-        case "__NSCFString":
-            return reflect(NSString)
-            
-        case "NSConcreteAttributedString": fallthrough
-        case "NSConcreteMutableAttributedString":
-            return reflect(NSAttributedString)
-            
-        case "__NSDictionaryM": fallthrough
-        case "__NSDictionaryI":
-            return reflect(NSDictionary)
-            
-        case "__NSArrayM": fallthrough
-        case "__NSArrayI":
-            return reflect(NSArray)
-            
-        case "__NSTaggedDate": fallthrough
-        case "__NSDate":
-            return reflect(NSDate)
-            
-        default:
-//            println("Not found reflection for summary \(reflect(mirror.value).summary)")
-            return mirror
-        }
-    }
-    
     private func mappingForViewType(type: ViewType,modelTypeMirror: MirrorType) -> ViewModelMapping?
     {
-        var adjustedModelTypeMirror = modelTypeMirror
-        if modelTypeMirror.disposition == .Aggregate {
-            // Possibly, Objective-C class clusters 
-            adjustedModelTypeMirror = self.classClusterReflectionFromMirrorType(modelTypeMirror)
-        }
+        var adjustedModelTypeMirror = RuntimeHelper.classClusterReflectionFromMirrorType(modelTypeMirror)
         return self.mappings.filter({ (mapping) -> Bool in
             return mapping.viewType == type && mapping.modelTypeMirror.summary == adjustedModelTypeMirror.summary
         }).first
@@ -143,7 +103,7 @@ class TableViewFactory
     func cellForModel(model: Any, atIndexPath indexPath:NSIndexPath) -> UITableViewCell
     {
         // MARK: TODO replace with guard in Swift 2
-        let unwrappedModel = recursiveUnwrapAnyValue(model)
+        let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model)
         if unwrappedModel == nil {
             assertionFailure("Received nil model at indexPath: \(indexPath)")
         }
@@ -179,7 +139,7 @@ class TableViewFactory
     
     func headerViewForModel(model: Any) -> UIView?
     {
-        let unwrappedModel = recursiveUnwrapAnyValue(model)
+        let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model)
         if unwrappedModel == nil {
             assertionFailure("Received nil model for headerViewModel")
         }
@@ -195,7 +155,7 @@ class TableViewFactory
     
     func footerViewForModel(model: Any) -> UIView?
     {
-        let unwrappedModel = recursiveUnwrapAnyValue(model)
+        let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model)
         if unwrappedModel == nil {
             assertionFailure("Received nil model for footerViewModel")
         }

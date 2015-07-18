@@ -266,4 +266,44 @@ class MappingTestCase: XCTestCase {
         let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
         expect(cell).to(beAKindOf(NSDateCell.self))
     }
+    
+    class NSSetCell : UITableViewCell, ModelTransfer {
+        func updateWithModel(model: NSSet) {}
+    }
+    
+    func testShouldSupportFoundationNSSet()
+    {
+        controller.registerCellClass(NSSetCell)
+        controller.memoryStorage.addItem(NSSet(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSSetCell.self))
+    }
+    
+    func testShouldSupportFoundationNSSetWithMutableSet()
+    {
+        controller.registerCellClass(NSSetCell)
+        controller.memoryStorage.addItem(NSMutableSet(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSSetCell.self))
+    }
+    
+    class NSOrderedSetCell : UITableViewCell, ModelTransfer {
+        func updateWithModel(model: NSOrderedSet) {}
+    }
+    
+    func testShouldSupportFoundationNSOrderedSet()
+    {
+        controller.registerCellClass(NSOrderedSetCell)
+        controller.memoryStorage.addItem(NSOrderedSet(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSOrderedSetCell.self))
+    }
+    
+    func testShouldSupportFoundationNSOrderedSetWithMutableSet()
+    {
+        controller.registerCellClass(NSOrderedSetCell)
+        controller.memoryStorage.addItem(NSMutableOrderedSet(), toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        expect(cell).to(beAKindOf(NSOrderedSetCell.self))
+    }
 }

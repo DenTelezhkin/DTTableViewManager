@@ -9,11 +9,6 @@ def run(command, min_exit_status = 0)
   return $?.exitstatus
 end
  
-desc "Cleaning environment"
-task :clean do
-  run("rm -rf Build && rm -rf DerivedData && rm -rf Pods && rm -rf #{workspace_file}")
-end
- 
 desc "install dependencies"
 task :dependencies do
   run("pod install")
@@ -25,7 +20,7 @@ task :run_tests do
 end
  
 desc "Test and compile #{scheme_name}"
-task :ci =>  ['clean','dependencies','run_tests'] do 
+task :ci =>  ['dependencies','run_tests'] do 
   puts "\033[0;31m! #{scheme_name} unit tests failed" unless $tests_success == 0
   if ($tests_success == 0)
     puts "\033[0;32m** All is good!"

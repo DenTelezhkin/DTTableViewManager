@@ -1,3 +1,4 @@
+osx_image: xcode6.4
 sudo: false
 cache: cocoapods
 language: objective-c

@@ -1,17 +1,17 @@
 PODS:
-  - DTModelStorage/ObjectiveC (1.3.0-beta2)
-  - DTModelStorage/Swift (1.3.0-beta2)
+  - DTModelStorage/ObjectiveC (1.3.0-beta3)
+  - DTModelStorage/Swift (1.3.0-beta3)
   - Nimble (1.0.0)
   - OCMock (2.2.4)
 
 DEPENDENCIES:
-  - DTModelStorage/ObjectiveC (= 1.3.0-beta2)
-  - DTModelStorage/Swift (= 1.3.0-beta2)
+  - DTModelStorage/ObjectiveC (= 1.3.0-beta3)
+  - DTModelStorage/Swift (= 1.3.0-beta3)
   - Nimble
   - OCMock (~> 2.2)
 
 SPEC CHECKSUMS:
-  DTModelStorage: 8505dfee2bb36c55bece626cb7d96110a7b44247
+  DTModelStorage: 1fdfb34708929eb688a88e988501a650e8e8b2d9
   Nimble: 8bee528e5fcc403653076545db562d2b5db7bb87
   OCMock: a6a7dc0e3997fb9f35d99f72528698ebf60d64f2
 
