@@ -90,6 +90,9 @@
 		9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A88F5A819EAC683008436C9 /* Images.xcassets */; };
 		9A952DFF1B567BE900B9255E /* NibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952DFC1B567BE900B9255E /* NibCell.xib */; };
 		9A952E041B56832100B9255E /* RandomNibNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952E021B56832100B9255E /* RandomNibNameCell.xib */; };
+		9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */; };
+		9A9793B51B5BDB4400908C72 /* ReactingToEventsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */; };
+		9A9793B71B5BE5DD00908C72 /* DTTableViewReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B61B5BE5DD00908C72 /* DTTableViewReaction.swift */; };
 		9AD462881A5AD23C00936CA9 /* CellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950659F8174C0219008AB32D /* CellWithNib.xib */; };
 		9AD462891A5AD23C00936CA9 /* SwiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */; };
 		9AD4628A1A5AD23C00936CA9 /* MockTableHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */; };
@@ -252,6 +255,9 @@
 		9A88F5A819EAC683008436C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Images.xcassets; sourceTree = "<group>"; };
 		9A952DFC1B567BE900B9255E /* NibCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibCell.xib; path = Fixtures/NibCell.xib; sourceTree = "<group>"; };
 		9A952E021B56832100B9255E /* RandomNibNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RandomNibNameCell.xib; path = Fixtures/RandomNibNameCell.xib; sourceTree = "<group>"; };
+		9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingTableCell.swift; path = Fixtures/ReactingTableCell.swift; sourceTree = "<group>"; };
+		9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactingToEventsTestCase.swift; sourceTree = "<group>"; };
+		9A9793B61B5BE5DD00908C72 /* DTTableViewReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewReaction.swift; path = ../../DTTableViewManager/Swift/DTTableViewReaction.swift; sourceTree = "<group>"; };
 		9AB0619B1B5463BA00D4803E /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SwiftStoryboard.storyboard; path = mocks/Controllers/SwiftStoryboard.storyboard; sourceTree = "<group>"; };
 		9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTableViewCell.swift; path = mocks/SwiftTableViewCell.swift; sourceTree = "<group>"; };
@@ -595,6 +601,7 @@
 				9A1A499C1B54527E0006610B /* CreationTestCase.swift */,
 				9A75CEC01B55AE6F007FB06C /* MappingTestCase.swift */,
 				9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */,
+				9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -638,6 +645,7 @@
 				9AF931541B5936A800456503 /* OptionalCells.swift */,
 				9A952DFC1B567BE900B9255E /* NibCell.xib */,
 				9A952E021B56832100B9255E /* RandomNibNameCell.xib */,
+				9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -721,6 +729,7 @@
 				9A952DF71B565C6900B9255E /* Utilities */,
 				9AF8E4DB1B52848D005A2406 /* DTTableViewController.swift */,
 				9A1A49991B53E9DC0006610B /* TableViewCellFactory.swift */,
+				9A9793B61B5BE5DD00908C72 /* DTTableViewReaction.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -1355,6 +1364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1A499B1B53E9DC0006610B /* TableViewCellFactory.swift in Sources */,
+				9A9793B71B5BE5DD00908C72 /* DTTableViewReaction.swift in Sources */,
 				9A1663F21B5A871D00B2C3C8 /* UIView+XibLoading.swift in Sources */,
 				9AE339381B56950E0075A3D6 /* ViewModelMapping.swift in Sources */,
 				9AF8E4DD1B52848D005A2406 /* DTTableViewController.swift in Sources */,
@@ -1370,6 +1380,8 @@
 				9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */,
 				9A52DD6B1B5A99F30048F535 /* DatasourceTestCase.swift in Sources */,
 				9A75CEC11B55AE6F007FB06C /* MappingTestCase.swift in Sources */,
+				9A9793B51B5BDB4400908C72 /* ReactingToEventsTestCase.swift in Sources */,
+				9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */,
 				9AF931551B5936A800456503 /* OptionalCells.swift in Sources */,
 				9A75CEC71B55B2E2007FB06C /* FixtureCells.swift in Sources */,
 				9A1A499D1B54527E0006610B /* CreationTestCase.swift in Sources */,

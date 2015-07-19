@@ -39,6 +39,15 @@ public class DTTableViewController: UIViewController, UITableViewDataSource, UIT
     public var deleteRowAnimation = UITableViewRowAnimation.Automatic
     public var reloadRowAnimation = UITableViewRowAnimation.Automatic
     
+    var tableViewReactions = [TableViewReaction]()
+    
+    func reactionOfReactionType(type: TableViewReactionType, forCellType cellType: MirrorType) -> TableViewReaction?
+    {
+        return self.tableViewReactions.filter({ (reaction) -> Bool in
+            return reaction.reactionType == type && reaction.cellType.summary == cellType.summary
+        }).first
+    }
+    
     public var memoryStorage : MemoryStorage!
     {
         precondition(storage is MemoryStorage, "DTTableViewController memoryStorage method should be called only if you are using MemoryStorage")
@@ -69,8 +78,34 @@ public class DTTableViewController: UIViewController, UITableViewDataSource, UIT
         
         tableView.delegate = self
         tableView.dataSource = self
-        // MARK: TODO use latest DTModelStorage for updates
+        
         storage.delegate = self
+    }
+    
+    func headerModelForSectionIndex(index: Int) -> Any?
+    {
+        if self.storage.sections[index].numberOfObjects == 0 && !self.displayHeaderOnEmptySection
+        {
+            return nil
+        }
+        
+        if self.storage is HeaderFooterStorageProtocol {
+            return (self.storage as! HeaderFooterStorageProtocol).headerModelForSectionIndex(index)
+        }
+        return nil
+    }
+    
+    func footerModelForSectionIndex(index: Int) -> Any?
+    {
+        if self.storage.sections[index].numberOfObjects == 0 && !self.displayFooterOnEmptySection
+        {
+            return nil
+        }
+        
+        if self.storage is HeaderFooterStorageProtocol {
+            return (self.storage as! HeaderFooterStorageProtocol).footerModelForSectionIndex(index)
+        }
+        return nil
     }
 }
 
@@ -111,30 +146,17 @@ extension DTTableViewController
         self.cellFactory.registerNibNamed(nibName, forFooterType: footerType)
     }
     
-    func headerModelForSectionIndex(index: Int) -> Any?
+    public func whenSelected<T:ModelTransfer where T:UITableViewCell>(cellClass:  T.Type, _ closure: (T,T.CellModel, NSIndexPath) -> Void)
     {
-        if self.storage.sections[index].numberOfObjects == 0 && !self.displayHeaderOnEmptySection
-        {
-            return nil
-        }
+        let reaction = TableViewReaction(reactionType : .Selection, cellType: reflect(T), reactionBlock: { [weak self] (indexPath) in
+            if let cell = self?.tableView.cellForRowAtIndexPath(indexPath),
+               let model = self?.memoryStorage.objectAtIndexPath(indexPath)
+            {
+                closure(cell as! T, model as! T.CellModel, indexPath)
+            }
         
-        if self.storage is HeaderFooterStorageProtocol {
-            return (self.storage as! HeaderFooterStorageProtocol).headerModelForSectionIndex(index)
-        }
-        return nil
-    }
-    
-    func footerModelForSectionIndex(index: Int) -> Any?
-    {
-        if self.storage.sections[index].numberOfObjects == 0 && !self.displayFooterOnEmptySection
-        {
-            return nil
-        }
-        
-        if self.storage is HeaderFooterStorageProtocol {
-            return (self.storage as! HeaderFooterStorageProtocol).footerModelForSectionIndex(index)
-        }
-        return nil
+        })
+        self.tableViewReactions.append(reaction)
     }
 }
 
@@ -211,6 +233,13 @@ extension DTTableViewController: UITableViewDelegate
             return self.tableView.sectionFooterHeight
         }
         return CGFloat.min
+    }
+    
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        if let reaction = self.reactionOfReactionType(.Selection, forCellType: reflect(cell.dynamicType)) {
+            reaction.reactionBlock(indexPath)
+        }
     }
 }
 
