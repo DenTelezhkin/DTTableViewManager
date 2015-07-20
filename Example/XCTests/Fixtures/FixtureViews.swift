@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import DTModelStorage
+import ModelStorage
 
 class NibView : UIView, ModelTransfer
 {

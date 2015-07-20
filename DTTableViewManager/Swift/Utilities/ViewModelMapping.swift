@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Denys Telezhkin. All rights reserved.
 //
 
-import Foundation
-import DTModelStorage
+import ModelStorage
 
 enum ViewType
 {

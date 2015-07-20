@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import DTModelStorage
+import ModelStorage
 import DTTableViewManager
 import Nimble
 

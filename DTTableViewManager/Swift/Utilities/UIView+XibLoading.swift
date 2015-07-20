@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import DTModelStorage
+import ModelStorage
 
 extension UIView
 {

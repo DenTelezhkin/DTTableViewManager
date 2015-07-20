@@ -4,7 +4,8 @@
 #import "MockTableHeaderView.h"
 #import "NiblessTableHeaderView.h"
 #import "MockTableHeaderFooterView.h"
-#import "XCTests-Swift.h"
+#import "XCTests_copy-Swift.h"
+#import <Cedar/Cedar-iOS.h>
 
 using namespace Cedar::Matchers;
 

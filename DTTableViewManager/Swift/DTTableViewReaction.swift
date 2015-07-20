@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import DTModelStorage
+import ModelStorage
 
 enum TableViewReactionType
 {

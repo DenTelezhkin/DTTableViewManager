@@ -2,6 +2,7 @@
 #import "DTTableViewController+UnitTests.h"
 #import "StringCell.h"
 #import "CellWithoutNib.h"
+#import <Cedar/Cedar-iOS.h>
 
 using namespace Cedar::Matchers;
 

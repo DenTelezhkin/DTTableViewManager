@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Denys Telezhkin. All rights reserved.
 //
 
+import Foundation
 import UIKit
-import DTModelStorage
+import ModelStorage
 
 public enum SupplementarySectionStyle
 {

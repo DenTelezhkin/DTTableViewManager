@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import DTModelStorage
+import UIKit
+import ModelStorage
 
 class OptionalIntCell : UITableViewCell, ModelTransfer
 {

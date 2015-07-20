@@ -6,6 +6,7 @@ language: objective-c
 before_install:
     - gem install cocoapods --no-document --quiet
     - export LANG=en_US.UTF-8
+    - carthage bootstrap
     - cd Example
 
 script: rake

@@ -3,5 +3,5 @@
 //
 #import <UIKit/UIKit.h>
 #import "DTTableViewManager.h"
-#import <DTModelStorage/DTModelTransfer.h>
+#import "DTModelTransfer.h"
 #import "DTTableViewCell.h"

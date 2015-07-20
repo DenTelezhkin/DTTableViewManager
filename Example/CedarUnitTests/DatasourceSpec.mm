@@ -1,6 +1,7 @@
 #import "DTTableViewController+UnitTests.h"
 #import "DTMemoryStorage+UnitTests.h"
 #import "MockTableHeaderView.h"
+#import <Cedar/Cedar-iOS.h>
 #import "BeNil.h"
 #import "DTMemoryStorage.h"
 
