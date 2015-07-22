@@ -147,16 +147,23 @@ extension DTTableViewController
         self.cellFactory.registerNibNamed(nibName, forFooterType: footerType)
     }
     
+    
+}
+
+// MARK: Table view reactions
+extension DTTableViewController
+{
     public func whenSelected<T:ModelTransfer where T:UITableViewCell>(cellClass:  T.Type, _ closure: (T,T.CellModel, NSIndexPath) -> Void)
     {
-        let reaction = TableViewReaction(reactionType : .Selection, cellType: reflect(T), reactionBlock: { [weak self] (indexPath) in
-            if let cell = self?.tableView.cellForRowAtIndexPath(indexPath),
-               let model = self?.memoryStorage.objectAtIndexPath(indexPath)
+        var reaction = TableViewReaction(reactionType: .Selection, cellType: reflect(T))
+        reaction.reactionBlock = { [weak self, reaction] in
+            if let indexPath = reaction.reactionData as? NSIndexPath,
+                let cell = self?.tableView.cellForRowAtIndexPath(indexPath),
+                let model = self?.memoryStorage.objectAtIndexPath(indexPath)
             {
                 closure(cell as! T, model as! T.CellModel, indexPath)
             }
-        
-        })
+        }
         self.tableViewReactions.append(reaction)
     }
 }
@@ -172,7 +179,8 @@ extension DTTableViewController: UITableViewDataSource
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return self.cellFactory.cellForModel(self.storage.objectAtIndexPath(indexPath)!, atIndexPath: indexPath)
+        let model = self.storage.objectAtIndexPath(indexPath)!
+        return self.cellFactory.cellForModel(model, atIndexPath: indexPath)
     }
     
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -239,7 +247,8 @@ extension DTTableViewController: UITableViewDelegate
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)!
         if let reaction = self.reactionOfReactionType(.Selection, forCellType: reflect(cell.dynamicType)) {
-            reaction.reactionBlock(indexPath)
+            reaction.reactionData = indexPath
+            reaction.perform()
         }
     }
 }
