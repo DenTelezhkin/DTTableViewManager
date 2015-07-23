@@ -37,3 +37,10 @@ class BaseTestCell : UITableViewCell, ModelTransfer, ModelRetrievable
 class NiblessCell: BaseTestCell {}
 
 class NibCell: BaseTestCell {}
+
+class StringCell : UITableViewCell, ModelTransfer
+{
+    func updateWithModel(model: String) {
+        
+    }
+}

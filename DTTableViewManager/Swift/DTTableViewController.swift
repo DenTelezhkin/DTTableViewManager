@@ -312,6 +312,11 @@ extension DTTableViewController: UITableViewDelegate
             reaction.perform()
         }
     }
+    
+    public func objectForCell<T:ModelTransfer where T: UITableViewCell>(cell: T?, atIndexPath indexPath: NSIndexPath)-> T.CellModel?
+    {
+        return self.storage.objectAtIndexPath(indexPath) as? T.CellModel
+    }
 }
 
 extension DTTableViewController : StorageUpdating

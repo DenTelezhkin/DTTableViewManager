@@ -1464,7 +1464,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Denys/Developer/Projects/DTTableViewManager/Carthage/Build/iOS,
+					../Carthage/Build/iOS,
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1514,7 +1514,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Denys/Developer/Projects/DTTableViewManager/Carthage/Build/iOS,
+					../Carthage/Build/iOS,
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1551,8 +1551,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
+					../Carthage/Build/iOS,
 					"$(inherited)",
-					/Users/Denys/Developer/Projects/DTTableViewManager/Carthage/Build/iOS,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/XCTests-Prefix.pch";
@@ -1591,8 +1591,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
+					../Carthage/Build/iOS,
 					"$(inherited)",
-					/Users/Denys/Developer/Projects/DTTableViewManager/Carthage/Build/iOS,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/XCTests-Prefix.pch";

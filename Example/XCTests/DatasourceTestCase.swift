@@ -236,4 +236,32 @@ class DatasourceTestCase: XCTestCase {
         controller.memoryStorage.setSectionFooterModels([1])
         expect(self.controller.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
+    
+    func testObjectForCellAtIndexPathGenericConversion()
+    {
+        controller.registerCellClass(NibCell)
+        controller.memoryStorage.addItem(1, toSection: 0)
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        
+        if let object = controller.objectForCell(cell as? NibCell, atIndexPath: indexPath(0, 0))
+        {
+            expect(object) == 1
+        }
+        else {
+            XCTFail("")
+        }
+    }
+    
+    func testObjectAtIndexPathGenericConversionFailsForNil()
+    {
+        controller.registerCellClass(NibCell)
+        controller.memoryStorage.addItem(1, toSection: 0)
+        
+        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        
+        if let object = controller.objectForCell(cell as? StringCell, atIndexPath: indexPath(0, 0))
+        {
+            XCTFail()
+        }
+    }
 }
