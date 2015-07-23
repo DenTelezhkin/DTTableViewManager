@@ -80,6 +80,7 @@
 		9A27AB331B5276F4002EFB47 /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
 		9A27AB341B5276F4002EFB47 /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
 		9A359E8019D859A60075ED16 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A359E7F19D859A60075ED16 /* NumberCell.xib */; };
+		9A36C7E81B61807F0077FAFD /* ModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* ModelStorage.framework */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A5292051B5D3DBF00DC8528 /* ModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8A14F01B5D35C300732293 /* ModelStorage.framework */; };
 		9A5292061B5D3DBF00DC8528 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8A14F11B5D35C300732293 /* Nimble.framework */; };
@@ -92,10 +93,6 @@
 		9A75CEC71B55B2E2007FB06C /* FixtureCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC61B55B2E2007FB06C /* FixtureCells.swift */; };
 		9A75CEC91B55B43B007FB06C /* NSIndexPath+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC81B55B43B007FB06C /* NSIndexPath+Constructor.swift */; };
 		9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A88F5A819EAC683008436C9 /* Images.xcassets */; };
-		9A8A14F21B5D35C300732293 /* ModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8A14F01B5D35C300732293 /* ModelStorage.framework */; };
-		9A8A14F31B5D35C300732293 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8A14F11B5D35C300732293 /* Nimble.framework */; };
-		9A8A14F51B5D35EC00732293 /* ModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A8A14F01B5D35C300732293 /* ModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9A8A14F61B5D35EC00732293 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A8A14F11B5D35C300732293 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A952DFF1B567BE900B9255E /* NibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952DFC1B567BE900B9255E /* NibCell.xib */; };
 		9A952E041B56832100B9255E /* RandomNibNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952E021B56832100B9255E /* RandomNibNameCell.xib */; };
 		9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */; };
@@ -149,6 +146,34 @@
 			remoteGlobalIDString = 9A2A38BB1AEE285E0021E97D;
 			remoteInfo = DTTableViewManager;
 		};
+		9A36C7E01B6180660077FAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A7D5BAB19D860700083673D;
+			remoteInfo = XCTests;
+		};
+		9A36C7E21B6180660077FAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A2A385B1AEE24340021E97D;
+			remoteInfo = ModelStorage;
+		};
+		9A36C7E41B6180660077FAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9AF931731B59502F00456503;
+			remoteInfo = XCTestsLegacy;
+		};
+		9A36C7E61B6180750077FAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
+			remoteInfo = ModelStorage;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -160,17 +185,6 @@
 			files = (
 				9A5292091B5D3E6800DC8528 /* Nimble.framework in CopyFiles */,
 				9A5292081B5D3E6000DC8528 /* ModelStorage.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9A8A14F41B5D35E300732293 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9A8A14F51B5D35EC00732293 /* ModelStorage.framework in CopyFiles */,
-				9A8A14F61B5D35EC00732293 /* Nimble.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +279,7 @@
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A38BF1AEE285E0021E97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A359E7F19D859A60075ED16 /* NumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NumberCell.xib; path = Cells/NumberCell.xib; sourceTree = "<group>"; };
+		9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTModelStorageTests.xcodeproj; path = ../Carthage/Checkouts/DTModelStorage/DTModelStorageTests/DTModelStorageTests.xcodeproj; sourceTree = "<group>"; };
 		9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderFooterView.swift; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.swift"; sourceTree = "<group>"; };
 		9A48860419DAB3C700A266BF /* SwiftHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftHeaderFooterView.xib; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.xib"; sourceTree = "<group>"; };
 		9A48860819DABC1900A266BF /* SwiftHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderView.swift; path = "mocks/Header:footer mocks/SwiftHeaderView.swift"; sourceTree = "<group>"; };
@@ -283,7 +298,6 @@
 		9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingTableCell.swift; path = Fixtures/ReactingTableCell.swift; sourceTree = "<group>"; };
 		9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactingToEventsTestCase.swift; sourceTree = "<group>"; };
 		9A9793B61B5BE5DD00908C72 /* DTTableViewReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewReaction.swift; path = ../../DTTableViewManager/Swift/DTTableViewReaction.swift; sourceTree = "<group>"; };
-		9AB0619B1B5463BA00D4803E /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SwiftStoryboard.storyboard; path = mocks/Controllers/SwiftStoryboard.storyboard; sourceTree = "<group>"; };
 		9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTableViewCell.swift; path = mocks/SwiftTableViewCell.swift; sourceTree = "<group>"; };
 		9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftStoryboardViewController.swift; path = mocks/Controllers/SwiftStoryboardViewController.swift; sourceTree = "<group>"; };
@@ -369,8 +383,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A8A14F21B5D35C300732293 /* ModelStorage.framework in Frameworks */,
-				9A8A14F31B5D35C300732293 /* Nimble.framework in Frameworks */,
+				9A36C7E81B61807F0077FAFD /* ModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,9 +658,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9A36C7DB1B6180660077FAFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A36C7E11B6180660077FAFD /* XCTests.xctest */,
+				9A36C7E31B6180660077FAFD /* ModelStorage.framework */,
+				9A36C7E51B6180660077FAFD /* XCTests copy.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9A5292031B5D39F200DC8528 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */,
 				9A8A14F01B5D35C300732293 /* ModelStorage.framework */,
 				9A8A14F11B5D35C300732293 /* Nimble.framework */,
 				74C8A5D3CD60DCD6DD21BD1E /* libPods-Example.a */,
@@ -904,7 +928,6 @@
 			isa = PBXGroup;
 			children = (
 				9A5292031B5D39F200DC8528 /* Frameworks */,
-				9AB0619B1B5463BA00D4803E /* MyPlayground.playground */,
 				9A88F5A819EAC683008436C9 /* Images.xcassets */,
 				95BCE72F1792C7B300526954 /* Default-568h@2x.png */,
 				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
@@ -1007,11 +1030,11 @@
 				9A2A38B71AEE285E0021E97D /* Sources */,
 				9A2A38B81AEE285E0021E97D /* Frameworks */,
 				9A2A38B91AEE285E0021E97D /* Headers */,
-				9A8A14F41B5D35E300732293 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9A36C7E71B6180750077FAFD /* PBXTargetDependency */,
 			);
 			name = DTTableViewManager;
 			productName = DTTableViewManager;
@@ -1085,6 +1108,12 @@
 			mainGroup = E6EA83571615EE6000F8B8C3;
 			productRefGroup = E6EA83631615EE6000F8B8C3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9A36C7DB1B6180660077FAFD /* Products */;
+					ProjectRef = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E6EA83611615EE6000F8B8C3 /* Example */,
@@ -1094,6 +1123,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9A36C7E11B6180660077FAFD /* XCTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XCTests.xctest;
+			remoteRef = 9A36C7E01B6180660077FAFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9A36C7E31B6180660077FAFD /* ModelStorage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ModelStorage.framework;
+			remoteRef = 9A36C7E21B6180660077FAFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9A36C7E51B6180660077FAFD /* XCTests copy.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "XCTests copy.xctest";
+			remoteRef = 9A36C7E41B6180660077FAFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9A27AB2C1B5276F4002EFB47 /* Resources */ = {
@@ -1340,6 +1393,11 @@
 			target = 9A2A38BB1AEE285E0021E97D /* DTTableViewManager */;
 			targetProxy = 9A1A499E1B5452FA0006610B /* PBXContainerItemProxy */;
 		};
+		9A36C7E71B6180750077FAFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ModelStorage;
+			targetProxy = 9A36C7E61B6180750077FAFD /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1462,10 +1520,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					../Carthage/Build/iOS,
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1512,10 +1566,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					../Carthage/Build/iOS,
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1551,8 +1601,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					../Carthage/Build/iOS,
 					"$(inherited)",
+					../Carthage/Build/iOS,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/XCTests-Prefix.pch";
@@ -1591,8 +1641,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					../Carthage/Build/iOS,
 					"$(inherited)",
+					../Carthage/Build/iOS,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/XCTests-Prefix.pch";
