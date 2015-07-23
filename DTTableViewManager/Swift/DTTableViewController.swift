@@ -166,6 +166,47 @@ extension DTTableViewController
         }
         self.tableViewReactions.append(reaction)
     }
+    
+    public func configureCell<T:ModelTransfer where T: UITableViewCell>(cellClass:T.Type, _ closure: (T, T.CellModel, NSIndexPath) -> Void)
+    {
+        let reaction = TableViewReaction(reactionType: .CellConfiguration, cellType: reflect(T))
+        reaction.reactionBlock = { [weak self, reaction] in
+            if let configuration = reaction.reactionData as? CellConfiguration,
+                let model = self?.storage.objectAtIndexPath(configuration.indexPath)
+            {
+                closure(configuration.cell as! T, model as! T.CellModel, configuration.indexPath)
+            }
+        }
+        self.tableViewReactions.append(reaction)
+    }
+    
+    public func configureHeader<T:ModelTransfer where T: UIView>(headerClass: T.Type, _ closure: (T, T.CellModel, NSInteger) -> Void)
+    {
+        let reaction = TableViewReaction(reactionType: .HeaderConfiguration, cellType: reflect(T))
+        reaction.reactionBlock = { [weak self, reaction] in
+            if let configuration = reaction.reactionData as? ViewConfiguration,
+                let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
+                let model = headerStorage.headerModelForSectionIndex(configuration.sectionIndex)
+            {
+                closure(configuration.view as! T, model as! T.CellModel, configuration.sectionIndex)
+            }
+        }
+        self.tableViewReactions.append(reaction)
+    }
+    
+    public func configureFooter<T:ModelTransfer where T: UIView>(footerClass: T.Type, _ closure: (T, T.CellModel, NSInteger) -> Void)
+    {
+        let reaction = TableViewReaction(reactionType: .FooterConfiguration, cellType: reflect(T))
+        reaction.reactionBlock = { [weak self, reaction] in
+            if let configuration = reaction.reactionData as? ViewConfiguration,
+                let footerStorage = self?.storage as? HeaderFooterStorageProtocol,
+                let model = footerStorage.footerModelForSectionIndex(configuration.sectionIndex)
+            {
+                closure(configuration.view as! T, model as! T.CellModel, configuration.sectionIndex)
+            }
+        }
+        self.tableViewReactions.append(reaction)
+    }
 }
 
 extension DTTableViewController: UITableViewDataSource
@@ -180,7 +221,13 @@ extension DTTableViewController: UITableViewDataSource
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let model = self.storage.objectAtIndexPath(indexPath)!
-        return self.cellFactory.cellForModel(model, atIndexPath: indexPath)
+        let cell = self.cellFactory.cellForModel(model, atIndexPath: indexPath)
+        
+        if let reaction = self.reactionOfReactionType(.CellConfiguration, forCellType: reflect(cell.dynamicType)) {
+            reaction.reactionData = CellConfiguration(cell:cell, indexPath:indexPath)
+            reaction.perform()
+        }
+        return cell
     }
     
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -202,7 +249,14 @@ extension DTTableViewController: UITableViewDelegate
         if self.sectionHeaderStyle == .Title { return nil }
         
         if let model = self.headerModelForSectionIndex(section) {
-            return self.cellFactory.headerViewForModel(model)
+            let view = self.cellFactory.headerViewForModel(model)
+            if let reaction = self.reactionOfReactionType(.HeaderConfiguration, forCellType: reflect(view!.dynamicType)),
+                let createdView = view
+            {
+                reaction.reactionData = ViewConfiguration(view: createdView, sectionIndex: section)
+                reaction.perform()
+            }
+            return view
         }
         return nil
     }
@@ -211,7 +265,14 @@ extension DTTableViewController: UITableViewDelegate
         if self.sectionFooterStyle == .Title { return nil }
         
         if let model = self.footerModelForSectionIndex(section) {
-            return self.cellFactory.footerViewForModel(model)
+            let view = self.cellFactory.footerViewForModel(model)
+            if let reaction = self.reactionOfReactionType(.FooterConfiguration, forCellType: reflect(view!.dynamicType)),
+                let createdView = view
+            {
+                reaction.reactionData = ViewConfiguration(view: createdView, sectionIndex: section)
+                reaction.perform()
+            }
+            return view
         }
         return nil
     }

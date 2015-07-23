@@ -24,7 +24,12 @@ class TableViewFactory
     private func mappingForViewType(type: ViewType,modelTypeMirror: MirrorType) -> ViewModelMapping?
     {
         var adjustedModelTypeMirror = RuntimeHelper.classClusterReflectionFromMirrorType(modelTypeMirror)
+//        println(modelTypeMirror.value)
+//        println(adjustedModelTypeMirror.value)
         return self.mappings.filter({ (mapping) -> Bool in
+//            println(mapping)
+//            println(type)
+//            println(adjustedModelTypeMirror.summary)
             return mapping.viewType == type && mapping.modelTypeMirror.summary == adjustedModelTypeMirror.summary
         }).first
     }

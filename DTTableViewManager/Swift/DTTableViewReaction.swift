@@ -8,14 +8,18 @@
 
 import Foundation
 import ModelStorage
+import UIKit
 
 enum TableViewReactionType
 {
     case Selection
+    case CellConfiguration
+    case HeaderConfiguration
+    case FooterConfiguration
 }
 
 protocol TableViewReactionData {}
-extension NSIndexPath :TableViewReactionData{}
+extension NSIndexPath : TableViewReactionData{}
     
 class TableViewReaction
 {
@@ -34,4 +38,16 @@ class TableViewReaction
         self.reactionType = reactionType
         self.cellType = cellType
     }
+}
+
+struct CellConfiguration : TableViewReactionData
+{
+    let cell : UITableViewCell
+    let indexPath: NSIndexPath
+}
+
+struct ViewConfiguration : TableViewReactionData
+{
+    let view : UIView
+    let sectionIndex : Int
 }

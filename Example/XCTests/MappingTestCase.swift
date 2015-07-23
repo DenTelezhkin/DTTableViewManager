@@ -131,10 +131,17 @@ class MappingTestCase: XCTestCase {
     
     func testFooterMappingFromHeaderFooterView()
     {
-        controller.registerFooterClass(NibHeaderFooterView)
-        controller.memoryStorage.setSectionFooterModels([1])
-        let view = controller.tableView(controller.tableView, viewForFooterInSection: 0)
-        expect(view).to(beAKindOf(NibHeaderFooterView.self))
+        controller.registerHeaderClass(ReactingHeaderFooterView)
+        controller.memoryStorage.setSectionHeaderModels(["Foo"])
+        let view = controller.tableView(controller.tableView, viewForHeaderInSection: 0)
+        expect(view).to(beAKindOf(ReactingHeaderFooterView.self))
+    }
+    
+    func testHeaderViewShouldSupportNSStringModel()
+    {
+        controller.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
+        controller.memoryStorage.setSectionHeaderModels([1])
+        expect(self.controller.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
     
     class NSNumberCell : UITableViewCell, ModelTransfer {
@@ -182,7 +189,7 @@ class MappingTestCase: XCTestCase {
     func testShouldSupportFoundationNSStringWithSwiftString()
     {
         controller.registerCellClass(NSStringCell)
-        controller.memoryStorage.addItem("sdf", toSection: 0)
+        controller.memoryStorage.addItem("sdf" as NSString, toSection: 0)
         let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
         expect(cell).to(beAKindOf(NSStringCell.self))
     }

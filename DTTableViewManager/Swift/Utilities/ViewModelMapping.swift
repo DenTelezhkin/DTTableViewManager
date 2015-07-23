@@ -8,11 +8,11 @@
 
 import ModelStorage
 
-enum ViewType
+enum ViewType : String
 {
-    case Cell
-    case Header
-    case Footer
+    case Cell = "Cell"
+    case Header = "Header"
+    case Footer = "Footer"
 }
 
 struct ViewModelMapping
@@ -21,4 +21,14 @@ struct ViewModelMapping
     let viewTypeMirror: MirrorType
     let modelTypeMirror: MirrorType
     let updateBlock : (Any, Any) -> ()
+}
+
+extension ViewModelMapping : Printable
+{
+    var description : String
+    {
+        return "Mapping type : \(viewType.rawValue) \n" +
+            "View Type : \(viewTypeMirror.value) \n" +
+            "Model Type : \(modelTypeMirror.value) \n"
+    }
 }

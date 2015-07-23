@@ -208,4 +208,32 @@ class DatasourceTestCase: XCTestCase {
         expect(self.controller.memoryStorage.supplementaryHeaderKind) == DTTableViewElementSectionHeader
         expect(self.controller.memoryStorage.supplementaryFooterKind) == DTTableViewElementSectionFooter
     }
+    
+    func testHeaderViewShouldBeCreated()
+    {
+        controller.registerHeaderClass(NibHeaderFooterView)
+        controller.memoryStorage.setSectionHeaderModels([1])
+        expect(self.controller.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
+    }
+    
+    func testFooterViewShouldBeCreated()
+    {
+        controller.registerFooterClass(NibHeaderFooterView)
+        controller.memoryStorage.setSectionFooterModels([1])
+        expect(self.controller.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView))
+    }
+    
+    func testHeaderViewShouldBeCreatedFromXib()
+    {
+        controller.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
+        controller.memoryStorage.setSectionHeaderModels([1])
+        expect(self.controller.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
+    }
+    
+    func testFooterViewShouldBeCreatedFromXib()
+    {
+        controller.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
+        controller.memoryStorage.setSectionFooterModels([1])
+        expect(self.controller.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView))
+    }
 }
