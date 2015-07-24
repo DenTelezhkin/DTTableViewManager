@@ -135,4 +135,21 @@ class ReactingToEventsTestCase: XCTestCase {
         
         expect(updated) == 42
     }
+    
+    func testCellRegisterSelectionClosure()
+    {
+        var reactingCell : SelectionReactingTableCell?
+        
+        controller.registerCellClass(SelectionReactingTableCell.self, selectionClosure: { (cell, model, indexPath) in
+            cell.indexPath = indexPath
+            cell.model = model
+            reactingCell = cell
+        })
+
+        controller.memoryStorage.addItems([1,2], toSection: 0)
+        controller.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
+        
+        expect(reactingCell?.indexPath) == indexPath(1, 0)
+        expect(reactingCell?.model) == 2
+    }
 }

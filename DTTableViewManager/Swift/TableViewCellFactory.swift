@@ -24,12 +24,7 @@ class TableViewFactory
     private func mappingForViewType(type: ViewType,modelTypeMirror: MirrorType) -> ViewModelMapping?
     {
         var adjustedModelTypeMirror = RuntimeHelper.classClusterReflectionFromMirrorType(modelTypeMirror)
-//        println(modelTypeMirror.value)
-//        println(adjustedModelTypeMirror.value)
         return self.mappings.filter({ (mapping) -> Bool in
-//            println(mapping)
-//            println(type)
-//            println(adjustedModelTypeMirror.summary)
             return mapping.viewType == type && mapping.modelTypeMirror.summary == adjustedModelTypeMirror.summary
         }).first
     }
@@ -141,35 +136,29 @@ class TableViewFactory
         return view
     }
     
-    func headerViewForModel(model: Any) -> UIView?
+    private func headerFooterViewOfType(type: ViewType, model : Any) -> UIView?
     {
         let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model)
         if unwrappedModel == nil {
-            assertionFailure("Received nil model for headerViewModel")
+            assertionFailure("Received nil model for headerFooterViewModel")
         }
         
         let typeMirror = reflect(unwrappedModel!.dynamicType)
         
-        if let mapping = self.mappingForViewType(.Header, modelTypeMirror: typeMirror) {
+        if let mapping = self.mappingForViewType(type, modelTypeMirror: typeMirror) {
             return self.headerFooterViewWithMapping(mapping, unwrappedModel: unwrappedModel!)
         }
         
         return nil
     }
     
+    func headerViewForModel(model: Any) -> UIView?
+    {
+        return self.headerFooterViewOfType(.Header, model: model)
+    }
+    
     func footerViewForModel(model: Any) -> UIView?
     {
-        let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model)
-        if unwrappedModel == nil {
-            assertionFailure("Received nil model for footerViewModel")
-        }
-        
-        let typeMirror = reflect(unwrappedModel!.dynamicType)
-        
-        if let mapping = self.mappingForViewType(.Footer, modelTypeMirror: typeMirror) {
-            return self.headerFooterViewWithMapping(mapping, unwrappedModel: unwrappedModel!)
-        }
-        
-        return nil
+        return self.headerFooterViewOfType(.Footer, model: model)
     }
 }

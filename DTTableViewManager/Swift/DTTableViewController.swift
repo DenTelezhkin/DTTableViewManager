@@ -89,11 +89,7 @@ public class DTTableViewController: UIViewController, UITableViewDataSource, UIT
         {
             return nil
         }
-        
-        if self.storage is HeaderFooterStorageProtocol {
-            return (self.storage as! HeaderFooterStorageProtocol).headerModelForSectionIndex(index)
-        }
-        return nil
+        return (self.storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(index)
     }
     
     func footerModelForSectionIndex(index: Int) -> Any?
@@ -102,11 +98,7 @@ public class DTTableViewController: UIViewController, UITableViewDataSource, UIT
         {
             return nil
         }
-        
-        if self.storage is HeaderFooterStorageProtocol {
-            return (self.storage as! HeaderFooterStorageProtocol).footerModelForSectionIndex(index)
-        }
-        return nil
+        return (self.storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(index)
     }
 }
 
@@ -118,6 +110,13 @@ extension DTTableViewController
         self.cellFactory.registerCellClass(cellType)
     }
     
+    public func registerCellClass<T:ModelTransfer where T:UITableViewCell>(cellType: T.Type,
+        selectionClosure: (T,T.CellModel, NSIndexPath) -> Void)
+    {
+        self.cellFactory.registerCellClass(cellType)
+        self.whenSelected(cellType, selectionClosure)
+    }
+
     public func registerNibNamed<T:ModelTransfer where T: UITableViewCell>(nibName: String, forCellType cellType: T.Type)
     {
         self.cellFactory.registerNibNamed(nibName, forCellType: cellType)
@@ -146,7 +145,6 @@ extension DTTableViewController
         self.sectionFooterStyle = .View
         self.cellFactory.registerNibNamed(nibName, forFooterType: footerType)
     }
-    
     
 }
 
