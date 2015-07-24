@@ -42,10 +42,10 @@ public class DTTableViewController: UIViewController, UITableViewDataSource, UIT
     
     var tableViewReactions = [TableViewReaction]()
     
-    func reactionOfReactionType(type: TableViewReactionType, forCellType cellType: MirrorType) -> TableViewReaction?
+    func reactionOfReactionType(type: TableViewReactionType, forCellType cellType: MirrorType?) -> TableViewReaction?
     {
         return self.tableViewReactions.filter({ (reaction) -> Bool in
-            return reaction.reactionType == type && reaction.cellType.summary == cellType.summary
+            return reaction.reactionType == type && reaction.cellType?.summary == cellType?.summary
         }).first
     }
     
@@ -155,11 +155,12 @@ extension DTTableViewController
 {
     public func whenSelected<T:ModelTransfer where T:UITableViewCell>(cellClass:  T.Type, _ closure: (T,T.CellModel, NSIndexPath) -> Void)
     {
-        var reaction = TableViewReaction(reactionType: .Selection, cellType: reflect(T))
+        var reaction = TableViewReaction(reactionType: .Selection)
+        reaction.cellType = reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let indexPath = reaction.reactionData as? NSIndexPath,
                 let cell = self?.tableView.cellForRowAtIndexPath(indexPath),
-                let model = self?.memoryStorage.objectAtIndexPath(indexPath)
+                let model = self?.storage.objectAtIndexPath(indexPath)
             {
                 closure(cell as! T, model as! T.CellModel, indexPath)
             }
@@ -169,7 +170,8 @@ extension DTTableViewController
     
     public func configureCell<T:ModelTransfer where T: UITableViewCell>(cellClass:T.Type, _ closure: (T, T.CellModel, NSIndexPath) -> Void)
     {
-        let reaction = TableViewReaction(reactionType: .CellConfiguration, cellType: reflect(T))
+        let reaction = TableViewReaction(reactionType: .CellConfiguration)
+        reaction.cellType = reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? CellConfiguration,
                 let model = self?.storage.objectAtIndexPath(configuration.indexPath)
@@ -182,7 +184,8 @@ extension DTTableViewController
     
     public func configureHeader<T:ModelTransfer where T: UIView>(headerClass: T.Type, _ closure: (T, T.CellModel, NSInteger) -> Void)
     {
-        let reaction = TableViewReaction(reactionType: .HeaderConfiguration, cellType: reflect(T))
+        let reaction = TableViewReaction(reactionType: .HeaderConfiguration)
+        reaction.cellType = reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
@@ -196,7 +199,8 @@ extension DTTableViewController
     
     public func configureFooter<T:ModelTransfer where T: UIView>(footerClass: T.Type, _ closure: (T, T.CellModel, NSInteger) -> Void)
     {
-        let reaction = TableViewReaction(reactionType: .FooterConfiguration, cellType: reflect(T))
+        let reaction = TableViewReaction(reactionType: .FooterConfiguration)
+        reaction.cellType = reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let footerStorage = self?.storage as? HeaderFooterStorageProtocol,
@@ -205,6 +209,20 @@ extension DTTableViewController
                 closure(configuration.view as! T, model as! T.CellModel, configuration.sectionIndex)
             }
         }
+        self.tableViewReactions.append(reaction)
+    }
+    
+    public func beforeContentUpdate(block: () -> Void )
+    {
+        let reaction = TableViewReaction(reactionType: .ControllerWillUpdateContent)
+        reaction.reactionBlock = block
+        self.tableViewReactions.append(reaction)
+    }
+    
+    public func afterContentUpdate(block : () -> Void )
+    {
+        let reaction = TableViewReaction(reactionType: .ControllerDidUpdateContent)
+        reaction.reactionBlock = block
         self.tableViewReactions.append(reaction)
     }
 }
@@ -317,12 +335,24 @@ extension DTTableViewController: UITableViewDelegate
     {
         return self.storage.objectAtIndexPath(indexPath) as? T.CellModel
     }
+    
+    public func objectForHeader<T:ModelTransfer where T:UIView>(headerView: T?, atSectionIndex sectionIndex: Int) -> T.CellModel?
+    {
+        return (self.storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(sectionIndex) as? T.CellModel
+    }
+    
+    public func objectForFooter<T:ModelTransfer where T:UIView>(footerView: T?, atSectionIndex sectionIndex: Int) -> T.CellModel?
+    {
+        return (self.storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(sectionIndex) as? T.CellModel
+    }
 }
 
 extension DTTableViewController : StorageUpdating
 {
     public func storageDidPerformUpdate(update : StorageUpdate)
     {
+        self.controllerWillUpdateContent()
+
         tableView.beginUpdates()
         
         tableView.deleteSections(update.deletedSectionIndexes, withRowAnimation: deleteSectionAnimation)
@@ -334,11 +364,31 @@ extension DTTableViewController : StorageUpdating
         tableView.reloadRowsAtIndexPaths(update.updatedRowIndexPaths, withRowAnimation: reloadRowAnimation)
         
         tableView.endUpdates()
+        
+        self.controllerDidUpdateContent()
     }
     
     public func storageNeedsReloading()
     {
+        self.controllerWillUpdateContent()
         tableView.reloadData()
+        self.controllerDidUpdateContent()
+    }
+    
+    func controllerWillUpdateContent()
+    {
+        if let reaction = self.reactionOfReactionType(.ControllerWillUpdateContent, forCellType: nil)
+        {
+            reaction.perform()
+        }
+    }
+    
+    func controllerDidUpdateContent()
+    {
+        if let reaction = self.reactionOfReactionType(.ControllerDidUpdateContent, forCellType: nil)
+        {
+            reaction.perform()
+        }
     }
 }
 

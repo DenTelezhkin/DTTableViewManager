@@ -16,6 +16,8 @@ enum TableViewReactionType
     case CellConfiguration
     case HeaderConfiguration
     case FooterConfiguration
+    case ControllerWillUpdateContent
+    case ControllerDidUpdateContent
 }
 
 protocol TableViewReactionData {}
@@ -24,7 +26,7 @@ extension NSIndexPath : TableViewReactionData{}
 class TableViewReaction
 {
     let reactionType : TableViewReactionType
-    let cellType : MirrorType
+    var cellType : MirrorType?
     var reactionBlock: (() -> Void)?
     var reactionData : TableViewReactionData?
     
@@ -33,10 +35,9 @@ class TableViewReaction
         reactionBlock?()
     }
     
-    init(reactionType : TableViewReactionType, cellType: MirrorType)
+    init(reactionType : TableViewReactionType)
     {
         self.reactionType = reactionType
-        self.cellType = cellType
     }
 }
 

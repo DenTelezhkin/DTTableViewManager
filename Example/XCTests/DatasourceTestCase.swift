@@ -264,4 +264,32 @@ class DatasourceTestCase: XCTestCase {
             XCTFail()
         }
     }
+    
+    func testHeaderObjectForViewGenericConversion()
+    {
+        controller.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
+        controller.memoryStorage.setSectionHeaderModels([1])
+        let header = controller.tableView(controller.tableView, viewForHeaderInSection: 0)
+        if let object = controller.objectForHeader(header as? NibHeaderFooterView, atSectionIndex: 0)
+        {
+            
+        }
+        else {
+            XCTFail()
+        }
+    }
+    
+    func testFooterObjectForViewGenericConversion()
+    {
+        controller.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
+        controller.memoryStorage.setSectionFooterModels([1])
+        let header = controller.tableView(controller.tableView, viewForFooterInSection: 0)
+        if let object = controller.objectForFooter(header as? NibHeaderFooterView, atSectionIndex: 0)
+        {
+            
+        }
+        else {
+            XCTFail()
+        }
+    }
 }

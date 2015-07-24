@@ -107,4 +107,32 @@ class ReactingToEventsTestCase: XCTestCase {
         expect(reactingFooter?.sectionIndex) == 0
         expect(reactingFooter?.model) == "Bar"
     }
+    
+    func testShouldReactAfterContentUpdate()
+    {
+        controller.registerCellClass(NibCell)
+        
+        var updated : Int?
+        controller.afterContentUpdate { () -> Void in
+            updated = 42
+        }
+        
+        controller.memoryStorage.addItem(1, toSection: 0)
+        
+        expect(updated) == 42
+    }
+    
+    func testShouldReactBeforeContentUpdate()
+    {
+        controller.registerCellClass(NibCell)
+        
+        var updated : Int?
+        controller.beforeContentUpdate { () -> Void in
+            updated = 42
+        }
+        
+        controller.memoryStorage.addItem(1, toSection: 0)
+        
+        expect(updated) == 42
+    }
 }
