@@ -16,7 +16,7 @@ public enum SupplementarySectionStyle
     case View
 }
 
-public class DTTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+public class DTTableViewController: UIViewController {
     @IBOutlet public var tableView : UITableView!
 
     private lazy var cellFactory: TableViewFactory = {
@@ -256,6 +256,20 @@ extension DTTableViewController: UITableViewDataSource
         if self.sectionFooterStyle == .View { return nil }
         
         return self.footerModelForSectionIndex(section) as? String
+    }
+    
+    public func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        if let storage = self.storage as? MemoryStorage
+        {
+            if let from = storage.sections[sourceIndexPath.section] as? SectionModel,
+               let to = storage.sections[destinationIndexPath.section] as? SectionModel
+            {
+                    let item = from.objects[sourceIndexPath.row]
+                    
+                    from.objects.removeAtIndex(sourceIndexPath.row)
+                    to.objects.insert(item, atIndex: destinationIndexPath.row)
+            }
+        }
     }
 }
 
