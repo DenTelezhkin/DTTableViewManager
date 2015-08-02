@@ -20,7 +20,7 @@
 #import "DTSectionModel.h"
 #import "AppleCoreDataExampleController.h"
 #import "BanksCoreDataViewController.h"
-#import "Example-Swift.h"
+#import "LegacyExample-Swift.h"
 #import "Example.h"
 
 @implementation ExampleTableViewController

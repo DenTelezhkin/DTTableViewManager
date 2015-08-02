@@ -1,6 +1,6 @@
 platform :ios, 7.0
 
-target :Example do
+target :LegacyExample do
 	pod 'DTModelStorage', '1.2.4'
 end
 
