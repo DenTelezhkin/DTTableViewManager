@@ -14,7 +14,7 @@ extension UIView
 {
     class func dt_loadFromXibNamed(xibName : String) -> UIView?
     {
-        let topLevelObjects = NSBundle(forClass: self).loadNibNamed(xibName, owner: nil, options: nil)
+        let topLevelObjects = NSBundle.mainBundle().loadNibNamed(xibName, owner: nil, options: nil)
         
         for object in topLevelObjects {
             if object.isKindOfClass(self) {

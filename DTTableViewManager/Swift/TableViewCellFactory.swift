@@ -50,7 +50,7 @@ class TableViewFactory
             // Storyboard prototype cell
             self.tableView.registerClass(T.self, forCellReuseIdentifier: reuseIdentifier)
             
-            if UINib.nibExistsWithNibName(reuseIdentifier, inBundle: NSBundle(forClass: T.self)) {
+            if UINib.nibExistsWithNibName(reuseIdentifier, inBundle: NSBundle.mainBundle()) {
                 self.registerNibNamed(reuseIdentifier, forCellType: T.self)
             }
         }
@@ -59,9 +59,9 @@ class TableViewFactory
     
     func registerNibNamed<T:ModelTransfer where T: UITableViewCell>(nibName : String, forCellType cellType: T.Type)
     {
-        assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle(forClass: T.self)), "Register cell nib method should be called only if nib exists")
+        assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle.mainBundle()), "Register cell nib method should be called only if nib exists")
         
-        let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: T.self))
+        let nib = UINib(nibName: nibName, bundle: NSBundle.mainBundle())
         let reuseIdentifier = RuntimeHelper.classNameFromReflection(reflect(cellType))
         self.tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
         self.addMappingForViewType(.Cell, viewClass: T.self)
@@ -79,22 +79,22 @@ class TableViewFactory
     
     func registerNibNamed<T:ModelTransfer where T:UIView>(nibName: String, forHeaderType headerType: T.Type)
     {
-        assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle(forClass: T.self)), "Register header nib method should be called only if nib exists")
+        assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle.mainBundle()), "Register header nib method should be called only if nib exists")
         let reuseIdentifier = RuntimeHelper.classNameFromReflection(reflect(headerType))
         
         if T.isSubclassOfClass(UITableViewHeaderFooterView.self) {
-            self.tableView.registerNib(UINib(nibName: nibName, bundle: NSBundle(forClass: T.self)), forHeaderFooterViewReuseIdentifier: reuseIdentifier)
+            self.tableView.registerNib(UINib(nibName: nibName, bundle: NSBundle.mainBundle()), forHeaderFooterViewReuseIdentifier: reuseIdentifier)
         }
         self.addMappingForViewType(.Header, viewClass: T.self)
     }
     
     func registerNibNamed<T:ModelTransfer where T:UIView>(nibName: String, forFooterType footerType: T.Type)
     {
-        assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle(forClass: T.self)), "Register footer nib method should be called only if nib exists")
+        assert(UINib.nibExistsWithNibName(nibName, inBundle: NSBundle.mainBundle()), "Register footer nib method should be called only if nib exists")
         let reuseIdentifier = RuntimeHelper.classNameFromReflection(reflect(footerType))
         
         if T.isSubclassOfClass(UITableViewHeaderFooterView.self) {
-            self.tableView.registerNib(UINib(nibName: nibName, bundle: NSBundle(forClass: T.self)), forHeaderFooterViewReuseIdentifier: reuseIdentifier)
+            self.tableView.registerNib(UINib(nibName: nibName, bundle: NSBundle.mainBundle()), forHeaderFooterViewReuseIdentifier: reuseIdentifier)
         }
         self.addMappingForViewType(.Footer, viewClass: T.self)
     }
