@@ -78,6 +78,8 @@
 		9A27AB321B5276F4002EFB47 /* MockTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942001750B9E3007CEB5E /* MockTableHeaderView.xib */; };
 		9A27AB331B5276F4002EFB47 /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
 		9A27AB341B5276F4002EFB47 /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
+		9A3033511B77B23E000B3355 /* CapitalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3033501B77B23E000B3355 /* CapitalCell.swift */; };
+		9A3033531B77B24F000B3355 /* LocalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3033521B77B24F000B3355 /* LocalSearchViewController.swift */; };
 		9A359E8019D859A60075ED16 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A359E7F19D859A60075ED16 /* NumberCell.xib */; };
 		9A36C7E81B61807F0077FAFD /* ModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* ModelStorage.framework */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
@@ -113,7 +115,6 @@
 		9AD9D9F31B6EC24500AD49AC /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B616FF649100F5897E /* textured_paper.png */; };
 		9AD9D9F41B6EC24500AD49AC /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B916FF64AE00F5897E /* mochaGrunge.png */; };
 		9AD9D9F51B6EC8FF00AD49AC /* Capitals.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95B3366A1776D8CB00AF0A57 /* Capitals.plist */; };
-		9AD9D9F71B6EC9C700AD49AC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9F61B6EC9C700AD49AC /* SearchViewController.swift */; };
 		9ADB0CAB19D700CA0048B08E /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */; };
 		9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAD19D701100048B08E /* NumberCell.swift */; };
 		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
@@ -293,6 +294,8 @@
 		9A27AB3A1B5276F4002EFB47 /* XCTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "XCTests copy-Info.plist"; path = "/Users/Denys/Projects/DTTableViewManager/Example/XCTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A38BF1AEE285E0021E97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A3033501B77B23E000B3355 /* CapitalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapitalCell.swift; path = "Example controllers/Search/CapitalCell.swift"; sourceTree = "<group>"; };
+		9A3033521B77B24F000B3355 /* LocalSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalSearchViewController.swift; path = "Example controllers/Search/LocalSearchViewController.swift"; sourceTree = "<group>"; };
 		9A359E7F19D859A60075ED16 /* NumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NumberCell.xib; path = Cells/NumberCell.xib; sourceTree = "<group>"; };
 		9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTModelStorageTests.xcodeproj; path = ../Carthage/Checkouts/DTModelStorage/DTModelStorageTests/DTModelStorageTests.xcodeproj; sourceTree = "<group>"; };
 		9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderFooterView.swift; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.swift"; sourceTree = "<group>"; };
@@ -331,7 +334,6 @@
 		9AD9D9EC1B6EBEAD00AD49AC /* CustomStringCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomStringCell.xib; path = Cells/CustomStringCell.xib; sourceTree = "<group>"; };
 		9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomHeaderFooterView.swift; path = "Headers:Footers/CustomHeaderFooterView.swift"; sourceTree = "<group>"; };
 		9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = "Headers:Footers/CustomHeaderFooterView.xib"; sourceTree = "<group>"; };
-		9AD9D9F61B6EC9C700AD49AC /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = "Example controllers/SearchViewController.swift"; sourceTree = "<group>"; };
 		9ADB0CA919D700CA0048B08E /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftViewController.swift; path = ExampleControllers/SwiftViewController.swift; sourceTree = "<group>"; };
 		9ADB0CAD19D701100048B08E /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NumberCell.swift; path = Cells/NumberCell.swift; sourceTree = "<group>"; };
@@ -700,6 +702,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9A30334D1B77A303000B3355 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				9A3033521B77B24F000B3355 /* LocalSearchViewController.swift */,
+				9A3033501B77B23E000B3355 /* CapitalCell.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		9A36C7DB1B6180660077FAFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,10 +799,10 @@
 		9AD9D9DD1B6EB2D500AD49AC /* ExampleControllers */ = {
 			isa = PBXGroup;
 			children = (
+				9A30334D1B77A303000B3355 /* Search */,
 				9AD9D9EA1B6EBD9F00AD49AC /* Custom views example */,
 				9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */,
 				9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */,
-				9AD9D9F61B6EC9C700AD49AC /* SearchViewController.swift */,
 			);
 			name = ExampleControllers;
 			sourceTree = "<group>";
@@ -1471,7 +1482,8 @@
 				9AD9D9E41B6EB8AB00AD49AC /* ReorderViewController.swift in Sources */,
 				9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */,
 				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,
-				9AD9D9F71B6EC9C700AD49AC /* SearchViewController.swift in Sources */,
+				9A3033511B77B23E000B3355 /* CapitalCell.swift in Sources */,
+				9A3033531B77B24F000B3355 /* LocalSearchViewController.swift in Sources */,
 				9A9B17091B65771600D8ABD3 /* MasterViewController.swift in Sources */,
 				9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */,
 				9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */,
