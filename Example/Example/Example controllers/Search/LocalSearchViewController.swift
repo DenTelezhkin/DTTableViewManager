@@ -29,8 +29,10 @@ class LocalSearchViewController: DTTableViewController {
         super.viewDidLoad()
         
         self.registerCellClass(CapitalCell)
-//        fullStorage.setSectionHeaderModels([Any](capitals.keys) )
-//        filteredStorage.setSectionHeaderModels(capitals.keys.array)
+        fullStorage.setSectionHeaderModels(capitals.keys.array)
+        filteredStorage.supplementaryHeaderKind = DTTableViewElementSectionHeader
+        filteredStorage.supplementaryFooterKind = DTTableViewElementSectionFooter
+        filteredStorage.setSectionHeaderModels(capitals.keys.array)
         
         searchController.delegate = self
         searchController.searchResultsUpdater = self
