@@ -103,8 +103,8 @@ class DatasourceTestCase: XCTestCase {
     {
         controller.memoryStorage.addItems([1,3], toSection: 0)
         controller.memoryStorage.addItems([4,6], toSection: 1)
-        controller.memoryStorage.replaceItem(3, replacingItem: 2)
-        controller.memoryStorage.replaceItem(4, replacingItem: 5)
+        try! controller.memoryStorage.replaceItem(3, replacingItem: 2)
+        try! controller.memoryStorage.replaceItem(4, replacingItem: 5)
         
         expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 2
         expect(self.controller.memoryStorage.itemsInSection(1)?.count) == 2
@@ -245,7 +245,7 @@ class DatasourceTestCase: XCTestCase {
         controller.memoryStorage.addItem(1, toSection: 0)
         let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
         
-        if let object = controller.objectForCell(cell as? NibCell, atIndexPath: indexPath(0, 0))
+        if let object = controller.storage.objectForCell(cell as? NibCell, atIndexPath: indexPath(0, 0))
         {
             expect(object) == 1
         }
@@ -261,7 +261,7 @@ class DatasourceTestCase: XCTestCase {
         
         let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
         
-        if let object = controller.objectForCell(cell as? StringCell, atIndexPath: indexPath(0, 0))
+        if let _ = controller.storage.objectForCell(cell as? StringCell, atIndexPath: indexPath(0, 0))
         {
             XCTFail()
         }
@@ -272,7 +272,7 @@ class DatasourceTestCase: XCTestCase {
         controller.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
         controller.memoryStorage.setSectionHeaderModels([1])
         let header = controller.tableView(controller.tableView, viewForHeaderInSection: 0)
-        if let object = controller.objectForHeader(header as? NibHeaderFooterView, atSectionIndex: 0)
+        if let _ = controller.storage.objectForTableHeader(header as? NibHeaderFooterView, atSectionIndex: 0)
         {
             
         }
@@ -286,7 +286,7 @@ class DatasourceTestCase: XCTestCase {
         controller.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
         controller.memoryStorage.setSectionFooterModels([1])
         let header = controller.tableView(controller.tableView, viewForFooterInSection: 0)
-        if let object = controller.objectForFooter(header as? NibHeaderFooterView, atSectionIndex: 0)
+        if let _ = controller.storage.objectForTableFooter(header as? NibHeaderFooterView, atSectionIndex: 0)
         {
             
         }

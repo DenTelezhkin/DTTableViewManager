@@ -15,10 +15,7 @@ class CoreDataManager
     private init(){
         let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Banks.sqlite")
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        if persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil, error: nil) == nil
-        {
-            abort()
-        }
+        try! persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
         managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
     }
@@ -32,7 +29,7 @@ class CoreDataManager
         }
     }
     
-    private let applicationDocumentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as! NSURL
+    private let applicationDocumentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
     
     private let managedObjectModel : NSManagedObjectModel = {
             let url = NSBundle.mainBundle().URLForResource("Banks", withExtension: "momd")
@@ -49,13 +46,13 @@ class CoreDataManager
         
         if let filePath = NSBundle.mainBundle().pathForResource("Banks", ofType: "json"),
             let banksData = NSData(contentsOfFile: filePath),
-        let banks = NSJSONSerialization.JSONObjectWithData(banksData, options: NSJSONReadingOptions.allZeros, error: nil) as? [[String:AnyObject]]
+        let banks = try! NSJSONSerialization.JSONObjectWithData(banksData, options: []) as? [[String:AnyObject]]
         {
             for bankInfo in banks {
                 let _ = Bank(info: bankInfo, inContext: managedObjectContext)
             }
             
-            managedObjectContext.save(nil)
+            try! managedObjectContext.save()
             banksPreloaded = true
         }
     }

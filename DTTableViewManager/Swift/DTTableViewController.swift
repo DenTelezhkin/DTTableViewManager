@@ -49,7 +49,7 @@ public class DTTableViewController: UIViewController {
     
     var tableViewReactions = [TableViewReaction]()
     
-    func reactionOfReactionType(type: TableViewReactionType, forCellType cellType: MirrorType?) -> TableViewReaction?
+    func reactionOfReactionType(type: TableViewReactionType, forCellType cellType: _MirrorType?) -> TableViewReaction?
     {
         return self.tableViewReactions.filter({ (reaction) -> Bool in
             return reaction.reactionType == type && reaction.cellType?.summary == cellType?.summary
@@ -160,8 +160,8 @@ extension DTTableViewController
 {
     public func whenSelected<T:ModelTransfer where T:UITableViewCell>(cellClass:  T.Type, _ closure: (T,T.CellModel, NSIndexPath) -> Void)
     {
-        var reaction = TableViewReaction(reactionType: .Selection)
-        reaction.cellType = reflect(T)
+        let reaction = TableViewReaction(reactionType: .Selection)
+        reaction.cellType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let indexPath = reaction.reactionData as? NSIndexPath,
                 let cell = self?.tableView.cellForRowAtIndexPath(indexPath),
@@ -176,7 +176,7 @@ extension DTTableViewController
     public func configureCell<T:ModelTransfer where T: UITableViewCell>(cellClass:T.Type, _ closure: (T, T.CellModel, NSIndexPath) -> Void)
     {
         let reaction = TableViewReaction(reactionType: .CellConfiguration)
-        reaction.cellType = reflect(T)
+        reaction.cellType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? CellConfiguration,
                 let model = self?.storage.objectAtIndexPath(configuration.indexPath)
@@ -190,7 +190,7 @@ extension DTTableViewController
     public func configureHeader<T:ModelTransfer where T: UIView>(headerClass: T.Type, _ closure: (T, T.CellModel, NSInteger) -> Void)
     {
         let reaction = TableViewReaction(reactionType: .HeaderConfiguration)
-        reaction.cellType = reflect(T)
+        reaction.cellType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
@@ -205,7 +205,7 @@ extension DTTableViewController
     public func configureFooter<T:ModelTransfer where T: UIView>(footerClass: T.Type, _ closure: (T, T.CellModel, NSInteger) -> Void)
     {
         let reaction = TableViewReaction(reactionType: .FooterConfiguration)
-        reaction.cellType = reflect(T)
+        reaction.cellType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let footerStorage = self?.storage as? HeaderFooterStorageProtocol,
@@ -246,7 +246,7 @@ extension DTTableViewController: UITableViewDataSource
         let model = self.storage.objectAtIndexPath(indexPath)!
         let cell = self.cellFactory.cellForModel(model, atIndexPath: indexPath)
         
-        if let reaction = self.reactionOfReactionType(.CellConfiguration, forCellType: reflect(cell.dynamicType)) {
+        if let reaction = self.reactionOfReactionType(.CellConfiguration, forCellType: _reflect(cell.dynamicType)) {
             reaction.reactionData = CellConfiguration(cell:cell, indexPath:indexPath)
             reaction.perform()
         }
@@ -287,7 +287,7 @@ extension DTTableViewController: UITableViewDelegate
         
         if let model = self.headerModelForSectionIndex(section) {
             let view = self.cellFactory.headerViewForModel(model)
-            if let reaction = self.reactionOfReactionType(.HeaderConfiguration, forCellType: reflect(view!.dynamicType)),
+            if let reaction = self.reactionOfReactionType(.HeaderConfiguration, forCellType: _reflect(view!.dynamicType)),
                 let createdView = view
             {
                 reaction.reactionData = ViewConfiguration(view: createdView, sectionIndex: section)
@@ -303,7 +303,7 @@ extension DTTableViewController: UITableViewDelegate
         
         if let model = self.footerModelForSectionIndex(section) {
             let view = self.cellFactory.footerViewForModel(model)
-            if let reaction = self.reactionOfReactionType(.FooterConfiguration, forCellType: reflect(view!.dynamicType)),
+            if let reaction = self.reactionOfReactionType(.FooterConfiguration, forCellType: _reflect(view!.dynamicType)),
                 let createdView = view
             {
                 reaction.reactionData = ViewConfiguration(view: createdView, sectionIndex: section)
@@ -344,25 +344,10 @@ extension DTTableViewController: UITableViewDelegate
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)!
-        if let reaction = self.reactionOfReactionType(.Selection, forCellType: reflect(cell.dynamicType)) {
+        if let reaction = self.reactionOfReactionType(.Selection, forCellType: _reflect(cell.dynamicType)) {
             reaction.reactionData = indexPath
             reaction.perform()
         }
-    }
-    
-    public func objectForCell<T:ModelTransfer where T: UITableViewCell>(cell: T?, atIndexPath indexPath: NSIndexPath)-> T.CellModel?
-    {
-        return self.storage.objectAtIndexPath(indexPath) as? T.CellModel
-    }
-    
-    public func objectForHeader<T:ModelTransfer where T:UIView>(headerView: T?, atSectionIndex sectionIndex: Int) -> T.CellModel?
-    {
-        return (self.storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(sectionIndex) as? T.CellModel
-    }
-    
-    public func objectForFooter<T:ModelTransfer where T:UIView>(footerView: T?, atSectionIndex sectionIndex: Int) -> T.CellModel?
-    {
-        return (self.storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(sectionIndex) as? T.CellModel
     }
 }
 

@@ -16,7 +16,7 @@ protocol ModelRetrievable
 
 func recursiveForceUnwrap<T>(any: T) -> T
 {
-    let mirror = reflect(any)
+    let mirror = _reflect(any)
     if mirror.disposition != .Optional
     {
         return any

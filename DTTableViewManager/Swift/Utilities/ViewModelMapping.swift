@@ -18,12 +18,12 @@ enum ViewType : String
 struct ViewModelMapping
 {
     let viewType : ViewType
-    let viewTypeMirror: MirrorType
-    let modelTypeMirror: MirrorType
+    let viewTypeMirror: _MirrorType
+    let modelTypeMirror: _MirrorType
     let updateBlock : (Any, Any) -> ()
 }
 
-extension ViewModelMapping : Printable
+extension ViewModelMapping : CustomStringConvertible
 {
     var description : String
     {

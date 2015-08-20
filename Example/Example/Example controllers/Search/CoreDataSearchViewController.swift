@@ -22,7 +22,7 @@ class CoreDataSearchViewController: DTTableViewController {
         request.sortDescriptors = [NSSortDescriptor(key: "zip", ascending: true)]
         
         let fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "state", cacheName: nil)
-        fetchResultsController.performFetch(nil)
+        try! fetchResultsController.performFetch()
         return fetchResultsController
     }()
     
@@ -41,15 +41,15 @@ class CoreDataSearchViewController: DTTableViewController {
 extension CoreDataSearchViewController : UISearchResultsUpdating
 {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        let searchString = searchController.searchBar.text
+        let searchString = searchController.searchBar.text ?? ""
         if searchString == "" {
             self.fetchResultsController.fetchRequest.predicate = nil
         } else {
             let predicate = NSPredicate(format: "name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString)
             self.fetchResultsController.fetchRequest.predicate = predicate
         }
-        self.fetchResultsController.performFetch(nil)
+        try! fetchResultsController.performFetch()
         tableView.reloadData()
-        self.tableView.hidden = self.tableView.numberOfSections() == 0
+        self.tableView.hidden = self.tableView.numberOfSections == 0
     }
 }

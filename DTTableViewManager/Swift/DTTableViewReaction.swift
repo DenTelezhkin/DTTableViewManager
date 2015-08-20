@@ -26,7 +26,7 @@ extension NSIndexPath : TableViewReactionData{}
 class TableViewReaction
 {
     let reactionType : TableViewReactionType
-    var cellType : MirrorType?
+    var cellType : _MirrorType?
     var reactionBlock: (() -> Void)?
     var reactionData : TableViewReactionData?
     
