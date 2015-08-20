@@ -90,7 +90,7 @@ class MappingTestCase: XCTestCase {
         expect(cell.inittedWithStyle) == false
     }
 
-    // MARK: TODO - Reealuate this functionality in the future
+    // MARK: TODO - Reevaluate this functionality in the future
     // Is there a reason to have optional cell mapping or not?
 //    func testOptionalModelCellMapping()
 //    {
@@ -100,9 +100,6 @@ class MappingTestCase: XCTestCase {
 //        
 //        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
 //    }
-    
-    // MARK: TODO in Swift 2, with testables, check that mapping cannot be added twice
-    
     
     func testHeaderViewMappingFromUIView()
     {

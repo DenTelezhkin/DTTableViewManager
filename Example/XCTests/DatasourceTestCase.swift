@@ -87,17 +87,15 @@ class DatasourceTestCase: XCTestCase {
         expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 2
     }
     
-    //MARK: TODO Check this test on Swift 2.0
-    
-//    func testShouldInsertTableItem()
-//    {
-//        controller.memoryStorage.addItems([2,4,6], toSection: 0)
-//        controller.memoryStorage.insertItem(1, toIndexPath: indexPath(2, 0))
-//        
-//        expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 4
-//        expect(self.controller.verifyItem(1, atIndexPath: indexPath(2, 0))) == true
-//        expect(self.controller.verifyItem(6, atIndexPath: indexPath(3, 0))) == true
-//    }
+    func testShouldInsertTableItem()
+    {
+        controller.memoryStorage.addItems([2,4,6], toSection: 0)
+        try! controller.memoryStorage.insertItem(1, toIndexPath: indexPath(2, 0))
+        
+        expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 4
+        expect(self.controller.verifyItem(1, atIndexPath: indexPath(2, 0))) == true
+        expect(self.controller.verifyItem(6, atIndexPath: indexPath(3, 0))) == true
+    }
     
     func testReplaceItem()
     {
