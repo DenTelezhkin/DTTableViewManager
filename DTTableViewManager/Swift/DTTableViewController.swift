@@ -10,10 +10,32 @@ import Foundation
 import UIKit
 import ModelStorage
 
-public enum SupplementarySectionStyle
+public protocol DTTableViewManageable : Associatable
 {
-    case Title
-    case View
+    var tableView : UITableView { get }
+}
+
+private struct AssociatedKeys {
+    static var CellFactoryKey = "DTCellFactory associated key"
+    static var ConfigurationKey = "TableViewConffiguration key"
+}
+
+extension DTTableViewManageable
+{
+    public var configuration : TableViewConfiguration
+    {
+        get {
+            return self.retrieveObject(&AssociatedKeys.ConfigurationKey)
+        }
+        set {
+            self.associateObject(newValue, key: &AssociatedKeys.ConfigurationKey)
+        }
+    }
+    
+    public func configureTableViewDefaults()
+    {
+        self.configuration = TableViewConfiguration()
+    }
 }
 
 public class DTTableViewController: UIViewController {
@@ -33,19 +55,7 @@ public class DTTableViewController: UIViewController {
         }
     }
     
-    public var sectionHeaderStyle = SupplementarySectionStyle.Title
-    public var sectionFooterStyle = SupplementarySectionStyle.Title
-    
-    public var displayHeaderOnEmptySection = true
-    public var displayFooterOnEmptySection = true
-    
-    public var insertSectionAnimation = UITableViewRowAnimation.None
-    public var deleteSectionAnimation = UITableViewRowAnimation.Automatic
-    public var reloadSectionAnimation = UITableViewRowAnimation.Automatic
-
-    public var insertRowAnimation = UITableViewRowAnimation.Automatic
-    public var deleteRowAnimation = UITableViewRowAnimation.Automatic
-    public var reloadRowAnimation = UITableViewRowAnimation.Automatic
+    public var configuration = TableViewConfiguration()
     
     var tableViewReactions = [TableViewReaction]()
     
@@ -65,15 +75,13 @@ public class DTTableViewController: UIViewController {
     
     public var storage : StorageProtocol = {
         let storage = MemoryStorage()
-        storage.supplementaryHeaderKind = DTTableViewElementSectionHeader
-        storage.supplementaryFooterKind = DTTableViewElementSectionFooter
+        storage.configureForTableViewUsage()
         return storage
     }()
     {
         didSet {
             if let headerFooterCompatibleStorage = storage as? BaseStorage {
-                headerFooterCompatibleStorage.supplementaryHeaderKind = DTTableViewElementSectionHeader
-                headerFooterCompatibleStorage.supplementaryFooterKind = DTTableViewElementSectionFooter
+                headerFooterCompatibleStorage.configureForTableViewUsage()
             }
             storage.delegate = self
         }
@@ -92,7 +100,7 @@ public class DTTableViewController: UIViewController {
     
     func headerModelForSectionIndex(index: Int) -> Any?
     {
-        if self.storage.sections[index].numberOfObjects == 0 && !self.displayHeaderOnEmptySection
+        if self.storage.sections[index].numberOfObjects == 0 && !configuration.displayHeaderOnEmptySection
         {
             return nil
         }
@@ -101,7 +109,7 @@ public class DTTableViewController: UIViewController {
     
     func footerModelForSectionIndex(index: Int) -> Any?
     {
-        if self.storage.sections[index].numberOfObjects == 0 && !self.displayFooterOnEmptySection
+        if self.storage.sections[index].numberOfObjects == 0 && !configuration.displayFooterOnEmptySection
         {
             return nil
         }
@@ -131,26 +139,26 @@ extension DTTableViewController
     
     public func registerHeaderClass<T:ModelTransfer where T: UIView>(headerType : T.Type)
     {
-        self.sectionHeaderStyle = .View
+        configuration.sectionHeaderStyle = .View
         self.cellFactory.registerHeaderClass(headerType)
     }
     
     public func registerFooterClass<T:ModelTransfer where T:UIView>(footerType: T.Type)
     {
-        self.sectionFooterStyle = .View
-        self.cellFactory.registerFooterClass(footerType)
+        configuration.sectionFooterStyle = .View
+        cellFactory.registerFooterClass(footerType)
     }
     
     public func registerNibNamed<T:ModelTransfer where T:UIView>(nibName: String, forHeaderType headerType: T.Type)
     {
-        self.sectionHeaderStyle = .View
-        self.cellFactory.registerNibNamed(nibName, forHeaderType: headerType)
+        configuration.sectionHeaderStyle = .View
+        cellFactory.registerNibNamed(nibName, forHeaderType: headerType)
     }
     
     public func registerNibNamed<T:ModelTransfer where T:UIView>(nibName: String, forFooterType footerType: T.Type)
     {
-        self.sectionFooterStyle = .View
-        self.cellFactory.registerNibNamed(nibName, forFooterType: footerType)
+        configuration.sectionFooterStyle = .View
+        cellFactory.registerNibNamed(nibName, forFooterType: footerType)
     }
     
 }
@@ -254,13 +262,13 @@ extension DTTableViewController: UITableViewDataSource
     }
     
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if self.sectionHeaderStyle == .View { return nil }
+        if configuration.sectionHeaderStyle == .View { return nil }
         
         return self.headerModelForSectionIndex(section) as? String
     }
     
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if self.sectionFooterStyle == .View { return nil }
+        if configuration.sectionFooterStyle == .View { return nil }
         
         return self.footerModelForSectionIndex(section) as? String
     }
@@ -283,7 +291,7 @@ extension DTTableViewController: UITableViewDataSource
 extension DTTableViewController: UITableViewDelegate
 {
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if self.sectionHeaderStyle == .Title { return nil }
+        if configuration.sectionHeaderStyle == .Title { return nil }
         
         if let model = self.headerModelForSectionIndex(section) {
             let view = self.cellFactory.headerViewForModel(model)
@@ -299,7 +307,7 @@ extension DTTableViewController: UITableViewDelegate
     }
     
     public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if self.sectionFooterStyle == .Title { return nil }
+        if configuration.sectionFooterStyle == .Title { return nil }
         
         if let model = self.footerModelForSectionIndex(section) {
             let view = self.cellFactory.footerViewForModel(model)
@@ -315,7 +323,7 @@ extension DTTableViewController: UITableViewDelegate
     }
     
     public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if self.sectionHeaderStyle == .Title {
+        if configuration.sectionHeaderStyle == .Title {
             if let _ = self.headerModelForSectionIndex(section) {
                 return UITableViewAutomaticDimension
             }
@@ -329,7 +337,7 @@ extension DTTableViewController: UITableViewDelegate
     }
     
     public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if self.sectionFooterStyle == .Title {
+        if configuration.sectionFooterStyle == .Title {
             if let _ = self.footerModelForSectionIndex(section) {
                 return UITableViewAutomaticDimension
             }
@@ -359,13 +367,13 @@ extension DTTableViewController : StorageUpdating
 
         tableView.beginUpdates()
         
-        tableView.deleteSections(update.deletedSectionIndexes, withRowAnimation: deleteSectionAnimation)
-        tableView.insertSections(update.insertedSectionIndexes, withRowAnimation: insertSectionAnimation)
-        tableView.reloadSections(update.updatedSectionIndexes, withRowAnimation: reloadSectionAnimation)
+        tableView.deleteSections(update.deletedSectionIndexes, withRowAnimation: configuration.deleteSectionAnimation)
+        tableView.insertSections(update.insertedSectionIndexes, withRowAnimation: configuration.insertSectionAnimation)
+        tableView.reloadSections(update.updatedSectionIndexes, withRowAnimation: configuration.reloadSectionAnimation)
         
-        tableView.deleteRowsAtIndexPaths(update.deletedRowIndexPaths, withRowAnimation: deleteRowAnimation)
-        tableView.insertRowsAtIndexPaths(update.insertedRowIndexPaths, withRowAnimation: insertRowAnimation)
-        tableView.reloadRowsAtIndexPaths(update.updatedRowIndexPaths, withRowAnimation: reloadRowAnimation)
+        tableView.deleteRowsAtIndexPaths(update.deletedRowIndexPaths, withRowAnimation: configuration.deleteRowAnimation)
+        tableView.insertRowsAtIndexPaths(update.insertedRowIndexPaths, withRowAnimation: configuration.insertRowAnimation)
+        tableView.reloadRowsAtIndexPaths(update.updatedRowIndexPaths, withRowAnimation: configuration.reloadRowAnimation)
         
         tableView.endUpdates()
         

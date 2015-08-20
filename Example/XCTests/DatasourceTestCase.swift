@@ -176,21 +176,21 @@ class DatasourceTestCase: XCTestCase {
     func testShouldShowTitlesOnEmptySection()
     {
         controller.memoryStorage.setSectionHeaderModels(["Foo"])
-        controller.displayHeaderOnEmptySection = false
+        controller.configuration.displayHeaderOnEmptySection = false
         expect(self.controller.tableView(self.controller.tableView, titleForHeaderInSection: 0)).to(beNil())
     }
     
     func testShouldShowTitleOnEmptySectionFooter()
     {
         controller.memoryStorage.setSectionFooterModels(["Foo"])
-        controller.displayFooterOnEmptySection = false
+        controller.configuration.displayFooterOnEmptySection = false
         expect(self.controller.tableView(self.controller.tableView, titleForFooterInSection: 0)).to(beNil())
     }
     
     func testShouldShowViewHeaderOnEmptySEction()
     {
         controller.registerHeaderClass(NibView)
-        controller.displayHeaderOnEmptySection = false
+        controller.configuration.displayHeaderOnEmptySection = false
         controller.memoryStorage.setSectionHeaderModels([1])
         expect(self.controller.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
     }
@@ -198,7 +198,7 @@ class DatasourceTestCase: XCTestCase {
     func testShouldShowViewFooterOnEmptySection()
     {
         controller.registerFooterClass(NibView)
-        controller.displayFooterOnEmptySection = false
+        controller.configuration.displayFooterOnEmptySection = false
         controller.memoryStorage.setSectionFooterModels([1])
         expect(self.controller.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
     }
