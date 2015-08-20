@@ -30,14 +30,12 @@ class CoreDataSearchViewController: DTTableViewController {
         super.viewDidLoad()
 
         self.registerCellClass(BankCell)
-        
         self.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
     }
-
 }
 
 extension CoreDataSearchViewController : UISearchResultsUpdating
@@ -46,13 +44,12 @@ extension CoreDataSearchViewController : UISearchResultsUpdating
         let searchString = searchController.searchBar.text
         if searchString == "" {
             self.fetchResultsController.fetchRequest.predicate = nil
-            self.fetchResultsController.performFetch(nil)
-            tableView.reloadData()
-            return
+        } else {
+            let predicate = NSPredicate(format: "name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString)
+            self.fetchResultsController.fetchRequest.predicate = predicate
         }
-        let predicate = NSPredicate(format: "name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString)
-        self.fetchResultsController.fetchRequest.predicate = predicate
         self.fetchResultsController.performFetch(nil)
         tableView.reloadData()
+        self.tableView.hidden = self.tableView.numberOfSections() == 0
     }
 }
