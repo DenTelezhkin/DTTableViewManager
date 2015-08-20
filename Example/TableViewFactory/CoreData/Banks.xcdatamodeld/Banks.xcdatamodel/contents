@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Bank" representedClassName="Bank" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -10,7 +10,7 @@
         <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bank" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Bank" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Event" positionX="0" positionY="0" width="128" height="60"/>
     </elements>
 </model>

@@ -78,8 +78,6 @@
 		9A27AB321B5276F4002EFB47 /* MockTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942001750B9E3007CEB5E /* MockTableHeaderView.xib */; };
 		9A27AB331B5276F4002EFB47 /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
 		9A27AB341B5276F4002EFB47 /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
-		9A3033511B77B23E000B3355 /* CapitalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3033501B77B23E000B3355 /* CapitalCell.swift */; };
-		9A3033531B77B24F000B3355 /* LocalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3033521B77B24F000B3355 /* LocalSearchViewController.swift */; };
 		9A359E8019D859A60075ED16 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A359E7F19D859A60075ED16 /* NumberCell.xib */; };
 		9A36C7E81B61807F0077FAFD /* ModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* ModelStorage.framework */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
@@ -104,6 +102,13 @@
 		9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */; };
 		9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A9B17271B65772E00D8ABD3 /* ModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* ModelStorage.framework */; };
+		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
+		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
+		9ABE07431B85FCF600636D78 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9591074D18535AE30012B07E /* Banks.json */; };
+		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
+		9ABE07491B86053500636D78 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 959107A0185361CA0012B07E /* Banks.xcdatamodeld */; };
+		9ABE074A1B86071B00636D78 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956C39BA1854BA6400FC1A5B /* BankCell.xib */; };
+		9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE074B1B86074900636D78 /* BankCell.swift */; };
 		9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */; };
 		9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */; };
 		9AD9D9E41B6EB8AB00AD49AC /* ReorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */; };
@@ -234,7 +239,7 @@
 		952112D01854A82100063EA8 /* BankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BankCell.m; path = TableViewFactory/Cells/BankCell.m; sourceTree = "<group>"; };
 		952112D31854B59E00063EA8 /* BanksCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataStorage.h; path = CoreData/BanksCoreDataStorage.h; sourceTree = "<group>"; };
 		952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataStorage.m; path = CoreData/BanksCoreDataStorage.m; sourceTree = "<group>"; };
-		956C39BA1854BA6400FC1A5B /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = TableViewFactory/Cells/BankCell.xib; sourceTree = "<group>"; };
+		956C39BA1854BA6400FC1A5B /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = ../TableViewFactory/Cells/BankCell.xib; sourceTree = "<group>"; };
 		958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockTableHeaderView.h; path = "mocks/Header:footer mocks/MockTableHeaderView.h"; sourceTree = "<group>"; };
 		958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockTableHeaderView.m; path = "mocks/Header:footer mocks/MockTableHeaderView.m"; sourceTree = "<group>"; };
 		958942001750B9E3007CEB5E /* MockTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MockTableHeaderView.xib; path = "mocks/Header:footer mocks/MockTableHeaderView.xib"; sourceTree = "<group>"; };
@@ -250,7 +255,7 @@
 		958942101750C901007CEB5E /* BaseHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderFooterView.m; path = "mocks/Header:footer mocks/BaseHeaderFooterView.m"; sourceTree = "<group>"; };
 		958942121750C937007CEB5E /* BaseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseHeaderView.h; path = "mocks/Header:footer mocks/BaseHeaderView.h"; sourceTree = "<group>"; };
 		958942131750C937007CEB5E /* BaseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderView.m; path = "mocks/Header:footer mocks/BaseHeaderView.m"; sourceTree = "<group>"; };
-		9591074D18535AE30012B07E /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = Resources/Banks.json; sourceTree = "<group>"; };
+		9591074D18535AE30012B07E /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = ../TableViewFactory/Resources/Banks.json; sourceTree = "<group>"; };
 		9591075018535C600012B07E /* BanksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataManager.h; path = CoreData/BanksCoreDataManager.h; sourceTree = "<group>"; };
 		9591075118535C600012B07E /* BanksCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataManager.m; path = CoreData/BanksCoreDataManager.m; sourceTree = "<group>"; };
 		959107A1185361CA0012B07E /* Banks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banks.xcdatamodel; sourceTree = "<group>"; };
@@ -294,8 +299,6 @@
 		9A27AB3A1B5276F4002EFB47 /* XCTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "XCTests copy-Info.plist"; path = "/Users/Denys/Projects/DTTableViewManager/Example/XCTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A38BF1AEE285E0021E97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A3033501B77B23E000B3355 /* CapitalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapitalCell.swift; path = "Example controllers/Search/CapitalCell.swift"; sourceTree = "<group>"; };
-		9A3033521B77B24F000B3355 /* LocalSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalSearchViewController.swift; path = "Example controllers/Search/LocalSearchViewController.swift"; sourceTree = "<group>"; };
 		9A359E7F19D859A60075ED16 /* NumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NumberCell.xib; path = Cells/NumberCell.xib; sourceTree = "<group>"; };
 		9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTModelStorageTests.xcodeproj; path = ../Carthage/Checkouts/DTModelStorage/DTModelStorageTests/DTModelStorageTests.xcodeproj; sourceTree = "<group>"; };
 		9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderFooterView.swift; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.swift"; sourceTree = "<group>"; };
@@ -323,6 +326,10 @@
 		9A9B170D1B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A9B170F1B65771600D8ABD3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9A9B17121B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataSearchViewController.swift; path = "Example controllers/Search/CoreDataSearchViewController.swift"; sourceTree = "<group>"; };
+		9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		9ABE07441B85FE4E00636D78 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = CoreData/Bank.swift; sourceTree = "<group>"; };
+		9ABE074B1B86074900636D78 /* BankCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankCell.swift; path = "Example controllers/Search/BankCell.swift"; sourceTree = "<group>"; };
 		9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SwiftStoryboard.storyboard; path = mocks/Controllers/SwiftStoryboard.storyboard; sourceTree = "<group>"; };
 		9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTableViewCell.swift; path = mocks/SwiftTableViewCell.swift; sourceTree = "<group>"; };
 		9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftStoryboardViewController.swift; path = mocks/Controllers/SwiftStoryboardViewController.swift; sourceTree = "<group>"; };
@@ -530,7 +537,6 @@
 				959107A41853624A0012B07E /* Bank.m */,
 				9591075018535C600012B07E /* BanksCoreDataManager.h */,
 				9591075118535C600012B07E /* BanksCoreDataManager.m */,
-				959107A0185361CA0012B07E /* Banks.xcdatamodeld */,
 				952112BF185491E500063EA8 /* Event.h */,
 				952112C0185491E500063EA8 /* Event.m */,
 			);
@@ -541,7 +547,6 @@
 			isa = PBXGroup;
 			children = (
 				95A3B4B416FF646200F5897E /* Images */,
-				9591074D18535AE30012B07E /* Banks.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -705,8 +710,7 @@
 		9A30334D1B77A303000B3355 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				9A3033521B77B24F000B3355 /* LocalSearchViewController.swift */,
-				9A3033501B77B23E000B3355 /* CapitalCell.swift */,
+				9ABE073E1B85FC6C00636D78 /* CoreData */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -794,6 +798,20 @@
 				9A9B17051B65771600D8ABD3 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9ABE073E1B85FC6C00636D78 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				956C39BA1854BA6400FC1A5B /* BankCell.xib */,
+				9591074D18535AE30012B07E /* Banks.json */,
+				959107A0185361CA0012B07E /* Banks.xcdatamodeld */,
+				9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */,
+				9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */,
+				9ABE07441B85FE4E00636D78 /* Bank.swift */,
+				9ABE074B1B86074900636D78 /* BankCell.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		9AD9D9DD1B6EB2D500AD49AC /* ExampleControllers */ = {
@@ -974,7 +992,6 @@
 				952112C41854929300063EA8 /* EventCell.m */,
 				952112CF1854A82100063EA8 /* BankCell.h */,
 				952112D01854A82100063EA8 /* BankCell.m */,
-				956C39BA1854BA6400FC1A5B /* BankCell.xib */,
 			);
 			name = Cells;
 			path = ..;
@@ -1313,6 +1330,8 @@
 				9A9B170E1B65771600D8ABD3 /* Main.storyboard in Resources */,
 				9AD9D9F41B6EC24500AD49AC /* mochaGrunge.png in Resources */,
 				9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */,
+				9ABE07431B85FCF600636D78 /* Banks.json in Resources */,
+				9ABE074A1B86071B00636D78 /* BankCell.xib in Resources */,
 				9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */,
 				9AD9D9EE1B6EBEAD00AD49AC /* CustomStringCell.xib in Resources */,
 			);
@@ -1481,13 +1500,16 @@
 			files = (
 				9AD9D9E41B6EB8AB00AD49AC /* ReorderViewController.swift in Sources */,
 				9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */,
+				9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */,
+				9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */,
 				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,
-				9A3033511B77B23E000B3355 /* CapitalCell.swift in Sources */,
-				9A3033531B77B24F000B3355 /* LocalSearchViewController.swift in Sources */,
+				9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */,
+				9ABE07491B86053500636D78 /* Banks.xcdatamodeld in Sources */,
 				9A9B17091B65771600D8ABD3 /* MasterViewController.swift in Sources */,
 				9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */,
 				9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */,
 				9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */,
+				9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */,
 				9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2089,7 +2111,7 @@
 			);
 			currentVersion = 959107A1185361CA0012B07E /* Banks.xcdatamodel */;
 			name = Banks.xcdatamodeld;
-			path = CoreData/Banks.xcdatamodeld;
+			path = ../TableViewFactory/CoreData/Banks.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

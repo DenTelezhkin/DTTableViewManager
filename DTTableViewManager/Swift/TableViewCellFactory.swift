@@ -107,7 +107,7 @@ class TableViewFactory
             assertionFailure("Received nil model at indexPath: \(indexPath)")
         }
         
-        let typeMirror = reflect(unwrappedModel!.dynamicType)
+        let typeMirror = RuntimeHelper.mirrorFromModel(unwrappedModel!)
         if let mapping = self.mappingForViewType(.Cell, modelTypeMirror: typeMirror)
         {
             let cellClassName = RuntimeHelper.classNameFromReflection(mapping.viewTypeMirror)
@@ -116,7 +116,7 @@ class TableViewFactory
             return cell
         }
         
-        assertionFailure("Unable to find cell mappings for type: \(reflect(typeMirror.value).summary)")
+        assertionFailure("Unable to find cell mappings for type: \(reflect(typeMirror.valueType).summary)")
         
         return UITableViewCell()
     }
@@ -143,7 +143,7 @@ class TableViewFactory
             assertionFailure("Received nil model for headerFooterViewModel")
         }
         
-        let typeMirror = reflect(unwrappedModel!.dynamicType)
+        let typeMirror = RuntimeHelper.mirrorFromModel(unwrappedModel!)
         
         if let mapping = self.mappingForViewType(type, modelTypeMirror: typeMirror) {
             return self.headerFooterViewWithMapping(mapping, unwrappedModel: unwrappedModel!)
