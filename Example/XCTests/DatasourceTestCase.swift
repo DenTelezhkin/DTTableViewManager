@@ -19,8 +19,10 @@ class DatasourceTestCase: XCTestCase {
     override func setUp() {
         super.setUp()
         controller = DTTableViewController()
+        
         controller.tableView = UITableView()
         let _ = controller.view
+        controller.viewBundle = NSBundle(forClass: self.dynamicType)
         controller.storage = MemoryStorage()
         
         controller.registerCellClass(NibCell)

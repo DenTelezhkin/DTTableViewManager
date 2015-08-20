@@ -96,7 +96,6 @@
 		9A9793B51B5BDB4400908C72 /* ReactingToEventsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */; };
 		9A9793B71B5BE5DD00908C72 /* DTTableViewReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B61B5BE5DD00908C72 /* DTTableViewReaction.swift */; };
 		9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9B17061B65771600D8ABD3 /* AppDelegate.swift */; };
-		9A9B17091B65771600D8ABD3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9B17081B65771600D8ABD3 /* MasterViewController.swift */; };
 		9A9B170E1B65771600D8ABD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170C1B65771600D8ABD3 /* Main.storyboard */; };
 		9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170F1B65771600D8ABD3 /* Images.xcassets */; };
 		9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */; };
@@ -322,7 +321,6 @@
 		9A9B17021B65771600D8ABD3 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A9B17051B65771600D8ABD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A9B17061B65771600D8ABD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9A9B17081B65771600D8ABD3 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		9A9B170D1B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A9B170F1B65771600D8ABD3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9A9B17121B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -783,7 +781,6 @@
 				9AD9D9E01B6EB3AC00AD49AC /* Cells */,
 				9AD9D9DD1B6EB2D500AD49AC /* ExampleControllers */,
 				9A9B17061B65771600D8ABD3 /* AppDelegate.swift */,
-				9A9B17081B65771600D8ABD3 /* MasterViewController.swift */,
 				9A9B170C1B65771600D8ABD3 /* Main.storyboard */,
 				9A9B170F1B65771600D8ABD3 /* Images.xcassets */,
 				9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */,
@@ -1505,7 +1502,6 @@
 				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,
 				9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */,
 				9ABE07491B86053500636D78 /* Banks.xcdatamodeld in Sources */,
-				9A9B17091B65771600D8ABD3 /* MasterViewController.swift in Sources */,
 				9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */,
 				9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */,
 				9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */,

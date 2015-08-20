@@ -12,9 +12,9 @@ import ModelStorage
 
 extension UIView
 {
-    class func dt_loadFromXibNamed(xibName : String) -> UIView?
+    class func dt_loadFromXibNamed(xibName : String, bundle : NSBundle) -> UIView?
     {
-        let topLevelObjects = NSBundle.mainBundle().loadNibNamed(xibName, owner: nil, options: nil)
+        let topLevelObjects = bundle.loadNibNamed(xibName, owner: nil, options: nil)
         
         for object in topLevelObjects {
             if object.isKindOfClass(self) {
@@ -24,8 +24,8 @@ extension UIView
         return nil
     }
     
-    class func dt_loadFromXib() -> UIView?
+    class func dt_loadFromXibInBundle(bundle: NSBundle) -> UIView?
     {
-        return self.dt_loadFromXibNamed(RuntimeHelper.classNameFromReflection(reflect(self)))
+        return self.dt_loadFromXibNamed(RuntimeHelper.classNameFromReflection(reflect(self)), bundle : bundle)
     }
 }

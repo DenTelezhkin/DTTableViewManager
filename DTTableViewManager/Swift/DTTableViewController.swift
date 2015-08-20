@@ -26,6 +26,13 @@ public class DTTableViewController: UIViewController {
         return factory
         }()
     
+    public var viewBundle = NSBundle.mainBundle()
+    {
+        didSet {
+            cellFactory.bundle = viewBundle
+        }
+    }
+    
     public var sectionHeaderStyle = SupplementarySectionStyle.Title
     public var sectionFooterStyle = SupplementarySectionStyle.Title
     

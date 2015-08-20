@@ -33,6 +33,7 @@ class ReactingToEventsTestCase: XCTestCase {
         controller = DTTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
+        controller.viewBundle = NSBundle(forClass: self.dynamicType)
         controller.storage = MemoryStorage()
     }
     
