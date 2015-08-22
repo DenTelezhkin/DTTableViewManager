@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import ModelStorage
+import DTModelStorage
 
 public protocol DTTableViewManageable : NSObjectProtocol
 {
@@ -98,6 +98,16 @@ public class DTTableViewManager : NSObject {
         self.delegate = delegate
         delegate.tableView.delegate = self
         delegate.tableView.dataSource = self
+    }
+    
+    public func objectForCell<T:ModelTransfer where T:UITableViewCell>(cell:T?) -> T.CellModel?
+    {
+        guard cell != nil else {  return nil }
+        
+        if let indexPath = self.tableView.indexPathForCell(cell!) {
+            return storage.objectAtIndexPath(indexPath) as? T.CellModel
+        }
+        return nil
     }
     
     func headerModelForSectionIndex(index: Int) -> Any?

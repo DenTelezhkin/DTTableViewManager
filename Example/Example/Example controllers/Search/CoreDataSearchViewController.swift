@@ -9,7 +9,7 @@
 import UIKit
 import DTTableViewManager
 import CoreData
-import ModelStorage
+import DTModelStorage
 
 class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 

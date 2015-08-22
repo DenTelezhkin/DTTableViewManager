@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-import ModelStorage
+import DTModelStorage
 
 class TableViewFactory
 {

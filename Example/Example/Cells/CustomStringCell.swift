@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ModelStorage
+import DTModelStorage
 
 class CustomStringCell: UITableViewCell, ModelTransfer {
 

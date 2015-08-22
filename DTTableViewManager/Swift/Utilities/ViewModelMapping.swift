@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Denys Telezhkin. All rights reserved.
 //
 
-import ModelStorage
+import DTModelStorage
 
 enum ViewType : String
 {

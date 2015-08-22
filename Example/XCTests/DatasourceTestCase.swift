@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import ModelStorage
+import DTModelStorage
 import DTTableViewManager
 import Nimble
 
@@ -20,7 +20,7 @@ class DatasourceTestCase: XCTestCase {
         super.setUp()
         controller = DTTestTableViewController()
         
-        controller.tableView = UITableView()
+        controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
         controller.manager.viewBundle = NSBundle(forClass: self.dynamicType)

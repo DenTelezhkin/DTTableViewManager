@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ModelStorage
+import DTModelStorage
 
 class ReactingTableCell: UITableViewCell, ModelTransfer {
 

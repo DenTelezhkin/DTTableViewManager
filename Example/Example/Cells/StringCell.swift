@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ModelStorage
+import DTModelStorage
 import DTTableViewManager
 
 class StringCell: UITableViewCell, ModelTransfer {

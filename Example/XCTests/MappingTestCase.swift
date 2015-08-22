@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 import Nimble
-import ModelStorage
+import DTModelStorage
 import DTTableViewManager
 
 class MappingTestCase: XCTestCase {
