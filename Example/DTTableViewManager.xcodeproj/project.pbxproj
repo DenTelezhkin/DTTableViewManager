@@ -98,7 +98,7 @@
 		9A952E041B56832100B9255E /* RandomNibNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952E021B56832100B9255E /* RandomNibNameCell.xib */; };
 		9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */; };
 		9A9793B51B5BDB4400908C72 /* ReactingToEventsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */; };
-		9A9793B71B5BE5DD00908C72 /* DTTableViewReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B61B5BE5DD00908C72 /* DTTableViewReaction.swift */; };
+		9A9793B71B5BE5DD00908C72 /* TableViewReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B61B5BE5DD00908C72 /* TableViewReaction.swift */; };
 		9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9B17061B65771600D8ABD3 /* AppDelegate.swift */; };
 		9A9B170E1B65771600D8ABD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170C1B65771600D8ABD3 /* Main.storyboard */; };
 		9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170F1B65771600D8ABD3 /* Images.xcassets */; };
@@ -124,6 +124,7 @@
 		9AD9D9F41B6EC24500AD49AC /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B916FF64AE00F5897E /* mochaGrunge.png */; };
 		9AD9D9F51B6EC8FF00AD49AC /* Capitals.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95B3366A1776D8CB00AF0A57 /* Capitals.plist */; };
 		9ADA632F1B888DC60060B2C0 /* DTTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */; };
+		9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA63321B88A56F0060B2C0 /* TableViewController.swift */; };
 		9ADB0CAB19D700CA0048B08E /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */; };
 		9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAD19D701100048B08E /* NumberCell.swift */; };
 		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
@@ -141,7 +142,7 @@
 		9AF8E4D81B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D31B528356005A2406 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
 		9AF8E4D91B528356005A2406 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D51B528356005A2406 /* DTTableViewController.m */; };
 		9AF8E4DA1B528356005A2406 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4D51B528356005A2406 /* DTTableViewController.m */; };
-		9AF8E4DD1B52848D005A2406 /* DTTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4DB1B52848D005A2406 /* DTTableViewController.swift */; };
+		9AF8E4DD1B52848D005A2406 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF8E4DB1B52848D005A2406 /* DTTableViewManager.swift */; };
 		9AF931551B5936A800456503 /* OptionalCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF931541B5936A800456503 /* OptionalCells.swift */; };
 		9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
 		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
@@ -338,7 +339,7 @@
 		9A952E021B56832100B9255E /* RandomNibNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RandomNibNameCell.xib; path = Fixtures/RandomNibNameCell.xib; sourceTree = "<group>"; };
 		9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingTableCell.swift; path = Fixtures/ReactingTableCell.swift; sourceTree = "<group>"; };
 		9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactingToEventsTestCase.swift; sourceTree = "<group>"; };
-		9A9793B61B5BE5DD00908C72 /* DTTableViewReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewReaction.swift; path = ../../DTTableViewManager/Swift/DTTableViewReaction.swift; sourceTree = "<group>"; };
+		9A9793B61B5BE5DD00908C72 /* TableViewReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewReaction.swift; path = ../../DTTableViewManager/Swift/TableViewReaction.swift; sourceTree = "<group>"; };
 		9A9B17021B65771600D8ABD3 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A9B17051B65771600D8ABD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A9B17061B65771600D8ABD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -361,6 +362,7 @@
 		9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomHeaderFooterView.swift; path = "Headers:Footers/CustomHeaderFooterView.swift"; sourceTree = "<group>"; };
 		9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = "Headers:Footers/CustomHeaderFooterView.xib"; sourceTree = "<group>"; };
 		9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTestTableViewController.swift; sourceTree = "<group>"; };
+		9ADA63321B88A56F0060B2C0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = "Example controllers/TableViewController.swift"; sourceTree = "<group>"; };
 		9ADB0CA919D700CA0048B08E /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftViewController.swift; path = ExampleControllers/SwiftViewController.swift; sourceTree = "<group>"; };
 		9ADB0CAD19D701100048B08E /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NumberCell.swift; path = Cells/NumberCell.swift; sourceTree = "<group>"; };
@@ -386,7 +388,7 @@
 		9AF8E4D41B528356005A2406 /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/ObjectiveC/DTTableViewController.h; sourceTree = "<group>"; };
 		9AF8E4D51B528356005A2406 /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../DTTableViewManager/ObjectiveC/DTTableViewController.m; sourceTree = "<group>"; };
 		9AF8E4D61B528356005A2406 /* DTTableViewControllerEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewControllerEvents.h; path = ../../DTTableViewManager/ObjectiveC/DTTableViewControllerEvents.h; sourceTree = "<group>"; };
-		9AF8E4DB1B52848D005A2406 /* DTTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewController.swift; path = ../../DTTableViewManager/Swift/DTTableViewController.swift; sourceTree = "<group>"; };
+		9AF8E4DB1B52848D005A2406 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewManager.swift; path = ../../DTTableViewManager/Swift/DTTableViewManager.swift; sourceTree = "<group>"; };
 		9AF931541B5936A800456503 /* OptionalCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionalCells.swift; path = Fixtures/OptionalCells.swift; sourceTree = "<group>"; };
 		9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExampleCell.xib; path = TableViewFactory/Cells/ExampleCell.xib; sourceTree = "<group>"; };
 		A3633CF47008CD666B4DDC4F /* Pods-LegacyExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyExample/Pods-LegacyExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -843,6 +845,7 @@
 				9AD9D9EA1B6EBD9F00AD49AC /* Custom views example */,
 				9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */,
 				9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */,
+				9ADA63321B88A56F0060B2C0 /* TableViewController.swift */,
 			);
 			name = ExampleControllers;
 			sourceTree = "<group>";
@@ -942,10 +945,10 @@
 			children = (
 				9A52DD6C1B5AA5510048F535 /* Extensions */,
 				9A952DF71B565C6900B9255E /* Utilities */,
-				9AF8E4DB1B52848D005A2406 /* DTTableViewController.swift */,
+				9AF8E4DB1B52848D005A2406 /* DTTableViewManager.swift */,
 				9A1C667B1B8666D400B3DEE0 /* TableViewConfiguration.swift */,
 				9A1A49991B53E9DC0006610B /* TableViewCellFactory.swift */,
-				9A9793B61B5BE5DD00908C72 /* DTTableViewReaction.swift */,
+				9A9793B61B5BE5DD00908C72 /* TableViewReaction.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -1511,11 +1514,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1A499B1B53E9DC0006610B /* TableViewCellFactory.swift in Sources */,
-				9A9793B71B5BE5DD00908C72 /* DTTableViewReaction.swift in Sources */,
+				9A9793B71B5BE5DD00908C72 /* TableViewReaction.swift in Sources */,
 				9A1663F21B5A871D00B2C3C8 /* UIView+XibLoading.swift in Sources */,
 				9AE339381B56950E0075A3D6 /* ViewModelMapping.swift in Sources */,
 				9A1C667C1B8666D400B3DEE0 /* TableViewConfiguration.swift in Sources */,
-				9AF8E4DD1B52848D005A2406 /* DTTableViewController.swift in Sources */,
+				9AF8E4DD1B52848D005A2406 /* DTTableViewManager.swift in Sources */,
 				9A1C667E1B866EEB00B3DEE0 /* Associator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1526,6 +1529,7 @@
 			files = (
 				9AD9D9E41B6EB8AB00AD49AC /* ReorderViewController.swift in Sources */,
 				9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */,
+				9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */,
 				9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */,
 				9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */,
 				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,

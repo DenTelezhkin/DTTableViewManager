@@ -41,10 +41,10 @@ public class DTTableViewManager : NSObject {
         return self.delegate?.tableView
     }
     
-    weak var delegate : protocol<NSObjectProtocol,DTTableViewManageable>?
+    weak var delegate : DTTableViewManageable?
 
     private lazy var cellFactory: TableViewFactory = {
-        precondition(self.tableView != nil, "Please call manager.startManagingWithDelegate(self) before calling any of DTTableViewManager methods only")
+        precondition(self.tableView != nil, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
         return TableViewFactory(tableView: self.tableView)
     }()
     
@@ -79,17 +79,19 @@ public class DTTableViewManager : NSObject {
         return storage
     }()
     {
+        willSet {
+            // explicit self is required due to known bug in Swift compiler - https://devforums.apple.com/message/1065306#1065306
+            self.storage.delegate = nil
+        }
         didSet {
             if let headerFooterCompatibleStorage = storage as? BaseStorage {
                 headerFooterCompatibleStorage.configureForTableViewUsage()
             }
-            // MARK: - TODO figure out a way to nil out old delegate
-//            oldValue.delegate = nil
             storage.delegate = self
         }
     }
     
-    public func startManagingWithDelegate(delegate : protocol<NSObjectProtocol,DTTableViewManageable>)
+    public func startManagingWithDelegate(delegate : DTTableViewManageable)
     {
         precondition(delegate.tableView != nil,"Call startManagingWithDelegate: method only when UITableView has been created")
         
