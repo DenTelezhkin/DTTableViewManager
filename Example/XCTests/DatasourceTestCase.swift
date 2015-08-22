@@ -14,147 +14,148 @@ import Nimble
 
 class DatasourceTestCase: XCTestCase {
 
-    var controller : DTTableViewController!
+    var controller : DTTestTableViewController!
     
     override func setUp() {
         super.setUp()
-        controller = DTTableViewController()
+        controller = DTTestTableViewController()
         
         controller.tableView = UITableView()
         let _ = controller.view
-        controller.viewBundle = NSBundle(forClass: self.dynamicType)
-        controller.storage = MemoryStorage()
+        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.viewBundle = NSBundle(forClass: self.dynamicType)
+        controller.manager.storage = MemoryStorage()
         
-        controller.registerCellClass(NibCell)
+        controller.manager.registerCellClass(NibCell)
     }
     
     func testTableItemAtIndexPath()
     {
-        controller.memoryStorage.addItems([3,2,1,6,4], toSection: 0)
+        controller.manager.memoryStorage.addItems([3,2,1,6,4], toSection: 0)
         
         expect(self.controller.verifyItem(6, atIndexPath: indexPath(3, 0))) == true
         expect(self.controller.verifyItem(3, atIndexPath: indexPath(0, 0))) == true
-        expect(self.controller.memoryStorage.itemAtIndexPath(indexPath(56, 0))).to(beNil())
+        expect(self.controller.manager.memoryStorage.itemAtIndexPath(indexPath(56, 0))).to(beNil())
     }
     
     func testShouldReturnCorrectNumberOfTableItems()
     {
-        controller.memoryStorage.addItems([1,1,1,1], toSection: 0)
-        controller.memoryStorage.addItems([2,2,2], toSection: 1)
+        controller.manager.memoryStorage.addItems([1,1,1,1], toSection: 0)
+        controller.manager.memoryStorage.addItems([2,2,2], toSection: 1)
         let tableView = controller.tableView
-        expect(self.controller.tableView(tableView, numberOfRowsInSection: 0)) == 4
-        expect(self.controller.tableView(tableView, numberOfRowsInSection: 1)) == 3
+        expect(self.controller.manager.tableView(tableView, numberOfRowsInSection: 0)) == 4
+        expect(self.controller.manager.tableView(tableView, numberOfRowsInSection: 1)) == 3
     }
     
     func testShouldReturnCorrectNumberOfSections()
     {
-        controller.memoryStorage.addItem(1, toSection: 0)
-        controller.memoryStorage.addItem(4, toSection: 3)
-        controller.memoryStorage.addItem(2, toSection: 2)
+        controller.manager.memoryStorage.addItem(1, toSection: 0)
+        controller.manager.memoryStorage.addItem(4, toSection: 3)
+        controller.manager.memoryStorage.addItem(2, toSection: 2)
         
-        expect(self.controller.numberOfSectionsInTableView(self.controller.tableView)) == 4
+        expect(self.controller.manager.numberOfSectionsInTableView(self.controller.tableView)) == 4
     }
     
     func testShouldSetSectionTitles()
     {
-        controller.memoryStorage.setSectionHeaderModels(["one","two"])
+        controller.manager.memoryStorage.setSectionHeaderModels(["one","two"])
         let tableView = self.controller.tableView
-        expect(self.controller.tableView(tableView, titleForHeaderInSection: 0)) == "one"
-        expect(self.controller.tableView(tableView, titleForHeaderInSection: 1)) == "two"
+        expect(self.controller.manager.tableView(tableView, titleForHeaderInSection: 0)) == "one"
+        expect(self.controller.manager.tableView(tableView, titleForHeaderInSection: 1)) == "two"
     }
     
     func testSHouldSetSectionFooterTitles()
     {
-        controller.memoryStorage.setSectionFooterModels(["one","two"])
+        controller.manager.memoryStorage.setSectionFooterModels(["one","two"])
         let tableView = self.controller.tableView
-        expect(self.controller.tableView(tableView, titleForFooterInSection: 0)) == "one"
-        expect(self.controller.tableView(tableView, titleForFooterInSection: 1)) == "two"
+        expect(self.controller.manager.tableView(tableView, titleForFooterInSection: 0)) == "one"
+        expect(self.controller.manager.tableView(tableView, titleForFooterInSection: 1)) == "two"
     }
     
     func testShouldHandleAbsenceOfHeadersFooters()
     {
-        controller.memoryStorage.addItem(1, toSection: 0)
-        controller.memoryStorage.addItem(2, toSection: 1)
+        controller.manager.memoryStorage.addItem(1, toSection: 0)
+        controller.manager.memoryStorage.addItem(2, toSection: 1)
         
-        controller.tableView(controller.tableView, titleForHeaderInSection: 0)
-        controller.tableView(controller.tableView, titleForFooterInSection: 1)
+        controller.manager.tableView(controller.tableView, titleForHeaderInSection: 0)
+        controller.manager.tableView(controller.tableView, titleForFooterInSection: 1)
     }
 
     func testShouldAddTableItems()
     {
-        controller.memoryStorage.addItems([3,2], toSection: 0)
+        controller.manager.memoryStorage.addItems([3,2], toSection: 0)
         
-        expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 2
+        expect(self.controller.manager.memoryStorage.itemsInSection(0)?.count) == 2
     }
     
     func testShouldInsertTableItem()
     {
-        controller.memoryStorage.addItems([2,4,6], toSection: 0)
-        try! controller.memoryStorage.insertItem(1, toIndexPath: indexPath(2, 0))
+        controller.manager.memoryStorage.addItems([2,4,6], toSection: 0)
+        try! controller.manager.memoryStorage.insertItem(1, toIndexPath: indexPath(2, 0))
         
-        expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 4
+        expect(self.controller.manager.memoryStorage.itemsInSection(0)?.count) == 4
         expect(self.controller.verifyItem(1, atIndexPath: indexPath(2, 0))) == true
         expect(self.controller.verifyItem(6, atIndexPath: indexPath(3, 0))) == true
     }
     
     func testReplaceItem()
     {
-        controller.memoryStorage.addItems([1,3], toSection: 0)
-        controller.memoryStorage.addItems([4,6], toSection: 1)
-        try! controller.memoryStorage.replaceItem(3, replacingItem: 2)
-        try! controller.memoryStorage.replaceItem(4, replacingItem: 5)
+        controller.manager.memoryStorage.addItems([1,3], toSection: 0)
+        controller.manager.memoryStorage.addItems([4,6], toSection: 1)
+        try! controller.manager.memoryStorage.replaceItem(3, replacingItem: 2)
+        try! controller.manager.memoryStorage.replaceItem(4, replacingItem: 5)
         
-        expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 2
-        expect(self.controller.memoryStorage.itemsInSection(1)?.count) == 2
+        expect(self.controller.manager.memoryStorage.itemsInSection(0)?.count) == 2
+        expect(self.controller.manager.memoryStorage.itemsInSection(1)?.count) == 2
         expect(self.controller.verifyItem(2, atIndexPath: indexPath(1, 0))) == true
         expect(self.controller.verifyItem(5, atIndexPath: indexPath(0, 1))) == true
     }
     
     func testRemoveItem()
     {
-        controller.memoryStorage.addItems([1,3,2,4], toSection: 0)
-        controller.memoryStorage.removeItems([1,4,3,5])
+        controller.manager.memoryStorage.addItems([1,3,2,4], toSection: 0)
+        controller.manager.memoryStorage.removeItems([1,4,3,5])
         
-        expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 1
+        expect(self.controller.manager.memoryStorage.itemsInSection(0)?.count) == 1
         expect(self.controller.verifyItem(2, atIndexPath: indexPath(0, 0))) == true
     }
     
     func testRemoveItems()
     {
-        controller.memoryStorage.addItems([1,2,3], toSection: 0)
-        controller.memoryStorage.removeAllTableItems()
+        controller.manager.memoryStorage.addItems([1,2,3], toSection: 0)
+        controller.manager.memoryStorage.removeAllTableItems()
         
-        expect(self.controller.memoryStorage.itemsInSection(0)?.count) == 0
+        expect(self.controller.manager.memoryStorage.itemsInSection(0)?.count) == 0
     }
     
     func testMovingItems()
     {
-        controller.memoryStorage.addItems([1,2,3], toSection: 0)
-        controller.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 0), toIndexPath: indexPath(2, 0))
+        controller.manager.memoryStorage.addItems([1,2,3], toSection: 0)
+        controller.manager.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 0), toIndexPath: indexPath(2, 0))
         
         expect(self.controller.verifySection([2,3,1], withSectionNumber: 0)) == true
     }
     
     func testShouldNotCrashWhenMovingToBadRow()
     {
-        controller.memoryStorage.addItem([1,2,3], toSection: 0)
+        controller.manager.memoryStorage.addItem([1,2,3], toSection: 0)
         
-        controller.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 0), toIndexPath: indexPath(2, 1))
+        controller.manager.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 0), toIndexPath: indexPath(2, 1))
     }
     
     func testShouldNotCrashWhenMovingFromBadRow()
     {
-        controller.memoryStorage.addItem([1,2,3], toSection: 0)
-        controller.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 1), toIndexPath: indexPath(0, 0))
+        controller.manager.memoryStorage.addItem([1,2,3], toSection: 0)
+        controller.manager.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 1), toIndexPath: indexPath(0, 0))
     }
     
     func testShouldMoveSections()
     {
-        controller.memoryStorage.addItem(1, toSection: 0)
-        controller.memoryStorage.addItem(2, toSection: 1)
-        controller.memoryStorage.addItem(3, toSection: 2)
+        controller.manager.memoryStorage.addItem(1, toSection: 0)
+        controller.manager.memoryStorage.addItem(2, toSection: 1)
+        controller.manager.memoryStorage.addItem(3, toSection: 2)
         
-        controller.memoryStorage.moveTableViewSection(0, toSection: 1)
+        controller.manager.memoryStorage.moveTableViewSection(0, toSection: 1)
         
         expect(self.controller.verifySection([2], withSectionNumber: 0)) == true
         expect(self.controller.verifySection([1], withSectionNumber: 1)) == true
@@ -163,87 +164,87 @@ class DatasourceTestCase: XCTestCase {
     
     func testShouldDeleteSections()
     {
-        controller.memoryStorage.addItem(0, toSection: 0)
-        controller.memoryStorage.addItem(1, toSection: 1)
-        controller.memoryStorage.addItem(2, toSection: 2)
+        controller.manager.memoryStorage.addItem(0, toSection: 0)
+        controller.manager.memoryStorage.addItem(1, toSection: 1)
+        controller.manager.memoryStorage.addItem(2, toSection: 2)
         
-        controller.memoryStorage.deleteSections(NSIndexSet(index: 1))
+        controller.manager.memoryStorage.deleteSections(NSIndexSet(index: 1))
         
-        expect(self.controller.memoryStorage.sections.count) == 2
+        expect(self.controller.manager.memoryStorage.sections.count) == 2
         expect(self.controller.verifySection([2], withSectionNumber: 1))
     }
     
     func testShouldShowTitlesOnEmptySection()
     {
-        controller.memoryStorage.setSectionHeaderModels(["Foo"])
-        controller.configuration.displayHeaderOnEmptySection = false
-        expect(self.controller.tableView(self.controller.tableView, titleForHeaderInSection: 0)).to(beNil())
+        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        controller.manager.configuration.displayHeaderOnEmptySection = false
+        expect(self.controller.manager.tableView(self.controller.tableView, titleForHeaderInSection: 0)).to(beNil())
     }
     
     func testShouldShowTitleOnEmptySectionFooter()
     {
-        controller.memoryStorage.setSectionFooterModels(["Foo"])
-        controller.configuration.displayFooterOnEmptySection = false
-        expect(self.controller.tableView(self.controller.tableView, titleForFooterInSection: 0)).to(beNil())
+        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        controller.manager.configuration.displayFooterOnEmptySection = false
+        expect(self.controller.manager.tableView(self.controller.tableView, titleForFooterInSection: 0)).to(beNil())
     }
     
     func testShouldShowViewHeaderOnEmptySEction()
     {
-        controller.registerHeaderClass(NibView)
-        controller.configuration.displayHeaderOnEmptySection = false
-        controller.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
+        controller.manager.registerHeaderClass(NibView)
+        controller.manager.configuration.displayHeaderOnEmptySection = false
+        controller.manager.memoryStorage.setSectionHeaderModels([1])
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
     }
     
     func testShouldShowViewFooterOnEmptySection()
     {
-        controller.registerFooterClass(NibView)
-        controller.configuration.displayFooterOnEmptySection = false
-        controller.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
+        controller.manager.registerFooterClass(NibView)
+        controller.manager.configuration.displayFooterOnEmptySection = false
+        controller.manager.memoryStorage.setSectionFooterModels([1])
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
     }
     
     func testSupplementaryKindsShouldBeSet()
     {
-        expect(self.controller.memoryStorage.supplementaryHeaderKind) == DTTableViewElementSectionHeader
-        expect(self.controller.memoryStorage.supplementaryFooterKind) == DTTableViewElementSectionFooter
+        expect(self.controller.manager.memoryStorage.supplementaryHeaderKind) == DTTableViewElementSectionHeader
+        expect(self.controller.manager.memoryStorage.supplementaryFooterKind) == DTTableViewElementSectionFooter
     }
     
     func testHeaderViewShouldBeCreated()
     {
-        controller.registerHeaderClass(NibHeaderFooterView)
-        controller.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
+        controller.manager.registerHeaderClass(NibHeaderFooterView)
+        controller.manager.memoryStorage.setSectionHeaderModels([1])
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
     
     func testFooterViewShouldBeCreated()
     {
-        controller.registerFooterClass(NibHeaderFooterView)
-        controller.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView))
+        controller.manager.registerFooterClass(NibHeaderFooterView)
+        controller.manager.memoryStorage.setSectionFooterModels([1])
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
     
     func testHeaderViewShouldBeCreatedFromXib()
     {
-        controller.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
-        controller.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
+        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionHeaderModels([1])
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
     
     func testFooterViewShouldBeCreatedFromXib()
     {
-        controller.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
-        controller.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView))
+        controller.manager.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionFooterModels([1])
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
     
     func testObjectForCellAtIndexPathGenericConversion()
     {
-        controller.registerCellClass(NibCell)
-        controller.memoryStorage.addItem(1, toSection: 0)
-        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        controller.manager.registerCellClass(NibCell)
+        controller.manager.memoryStorage.addItem(1, toSection: 0)
+        let cell = controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
         
-        if let object = controller.storage.objectForCell(cell as? NibCell, atIndexPath: indexPath(0, 0))
+        if let object = controller.manager.storage.objectForCell(cell as? NibCell, atIndexPath: indexPath(0, 0))
         {
             expect(object) == 1
         }
@@ -254,12 +255,12 @@ class DatasourceTestCase: XCTestCase {
     
     func testObjectAtIndexPathGenericConversionFailsForNil()
     {
-        controller.registerCellClass(NibCell)
-        controller.memoryStorage.addItem(1, toSection: 0)
+        controller.manager.registerCellClass(NibCell)
+        controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        let cell = controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        let cell = controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
         
-        if let _ = controller.storage.objectForCell(cell as? StringCell, atIndexPath: indexPath(0, 0))
+        if let _ = controller.manager.storage.objectForCell(cell as? StringCell, atIndexPath: indexPath(0, 0))
         {
             XCTFail()
         }
@@ -267,10 +268,10 @@ class DatasourceTestCase: XCTestCase {
     
     func testHeaderObjectForViewGenericConversion()
     {
-        controller.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
-        controller.memoryStorage.setSectionHeaderModels([1])
-        let header = controller.tableView(controller.tableView, viewForHeaderInSection: 0)
-        if let _ = controller.storage.objectForTableHeader(header as? NibHeaderFooterView, atSectionIndex: 0)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionHeaderModels([1])
+        let header = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0)
+        if let _ = controller.manager.storage.objectForTableHeader(header as? NibHeaderFooterView, atSectionIndex: 0)
         {
             
         }
@@ -281,10 +282,10 @@ class DatasourceTestCase: XCTestCase {
     
     func testFooterObjectForViewGenericConversion()
     {
-        controller.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
-        controller.memoryStorage.setSectionFooterModels([1])
-        let header = controller.tableView(controller.tableView, viewForFooterInSection: 0)
-        if let _ = controller.storage.objectForTableFooter(header as? NibHeaderFooterView, atSectionIndex: 0)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionFooterModels([1])
+        let header = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
+        if let _ = controller.manager.storage.objectForTableFooter(header as? NibHeaderFooterView, atSectionIndex: 0)
         {
             
         }

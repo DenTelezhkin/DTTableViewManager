@@ -123,6 +123,7 @@
 		9AD9D9F31B6EC24500AD49AC /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B616FF649100F5897E /* textured_paper.png */; };
 		9AD9D9F41B6EC24500AD49AC /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B916FF64AE00F5897E /* mochaGrunge.png */; };
 		9AD9D9F51B6EC8FF00AD49AC /* Capitals.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95B3366A1776D8CB00AF0A57 /* Capitals.plist */; };
+		9ADA632F1B888DC60060B2C0 /* DTTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */; };
 		9ADB0CAB19D700CA0048B08E /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */; };
 		9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAD19D701100048B08E /* NumberCell.swift */; };
 		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
@@ -359,6 +360,7 @@
 		9AD9D9EC1B6EBEAD00AD49AC /* CustomStringCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomStringCell.xib; path = Cells/CustomStringCell.xib; sourceTree = "<group>"; };
 		9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomHeaderFooterView.swift; path = "Headers:Footers/CustomHeaderFooterView.swift"; sourceTree = "<group>"; };
 		9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = "Headers:Footers/CustomHeaderFooterView.xib"; sourceTree = "<group>"; };
+		9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTestTableViewController.swift; sourceTree = "<group>"; };
 		9ADB0CA919D700CA0048B08E /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftViewController.swift; path = ExampleControllers/SwiftViewController.swift; sourceTree = "<group>"; };
 		9ADB0CAD19D701100048B08E /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NumberCell.swift; path = Cells/NumberCell.swift; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 			children = (
 				9A75CEC31B55AF68007FB06C /* TableViewController+UnitTests.swift */,
 				9A75CEC81B55B43B007FB06C /* NSIndexPath+Constructor.swift */,
+				9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1549,6 +1552,7 @@
 				9A244A1E1B6134B0007E4FAA /* ReactingHeaderFooters.swift in Sources */,
 				9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */,
 				9AF931551B5936A800456503 /* OptionalCells.swift in Sources */,
+				9ADA632F1B888DC60060B2C0 /* DTTestTableViewController.swift in Sources */,
 				9A75CEC71B55B2E2007FB06C /* FixtureCells.swift in Sources */,
 				9A1A499D1B54527E0006610B /* CreationTestCase.swift in Sources */,
 				9A1C66801B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift in Sources */,

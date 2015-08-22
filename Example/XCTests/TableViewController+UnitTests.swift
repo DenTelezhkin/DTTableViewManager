@@ -8,6 +8,7 @@
 
 import Foundation
 import DTTableViewManager
+import UIKit
 
 protocol ModelRetrievable
 {
@@ -25,12 +26,12 @@ func recursiveForceUnwrap<T>(any: T) -> T
     return recursiveForceUnwrap(some.value as! T)
 }
 
-extension DTTableViewController
+extension DTTestTableViewController
 {
     func verifyItem<T:Equatable>(item: T, atIndexPath indexPath: NSIndexPath) -> Bool
     {
-        let itemTable = (self.tableView(self.tableView, cellForRowAtIndexPath: indexPath) as! ModelRetrievable).model as! T
-        let itemDatasource = recursiveForceUnwrap(self.storage.objectAtIndexPath(indexPath)!) as! T
+        let itemTable = (self.manager.tableView(self.tableView, cellForRowAtIndexPath: indexPath) as! ModelRetrievable).model as! T
+        let itemDatasource = recursiveForceUnwrap(self.manager.storage.objectAtIndexPath(indexPath)!) as! T
         
         if !(item == itemDatasource)
         {
@@ -54,7 +55,7 @@ extension DTTableViewController
                 return false
             }
         }
-        if self.tableView(self.tableView, numberOfRowsInSection: sectionNumber) == section.count
+        if self.manager.tableView(self.tableView, numberOfRowsInSection: sectionNumber) == section.count
         {
             return true
         }

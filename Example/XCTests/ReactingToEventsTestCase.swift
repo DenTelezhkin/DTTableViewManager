@@ -26,29 +26,30 @@ class AlwaysVisibleTableView: UITableView
 
 class ReactingToEventsTestCase: XCTestCase {
 
-    var controller : DTTableViewController!
+    var controller : DTTestTableViewController!
     
     override func setUp() {
         super.setUp()
-        controller = DTTableViewController()
+        controller = DTTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.viewBundle = NSBundle(forClass: self.dynamicType)
-        controller.storage = MemoryStorage()
+        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.viewBundle = NSBundle(forClass: self.dynamicType)
+        controller.manager.storage = MemoryStorage()
     }
     
     func testCellSelectionClosure()
     {
-        controller.registerCellClass(SelectionReactingTableCell)
+        controller.manager.registerCellClass(SelectionReactingTableCell)
         var reactingCell : SelectionReactingTableCell?
-        controller.whenSelected(SelectionReactingTableCell.self) { (cell, model, indexPath) in
+        controller.manager.whenSelected(SelectionReactingTableCell.self) { (cell, model, indexPath) in
             cell.indexPath = indexPath
             cell.model = model
             reactingCell = cell
         }
         
-        controller.memoryStorage.addItems([1,2], toSection: 0)
-        controller.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
+        controller.manager.memoryStorage.addItems([1,2], toSection: 0)
+        controller.manager.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
         
         expect(reactingCell?.indexPath) == indexPath(1, 0)
         expect(reactingCell?.model) == 2
@@ -56,19 +57,19 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testCellConfigurationClosure()
     {
-        controller.registerCellClass(SelectionReactingTableCell)
+        controller.manager.registerCellClass(SelectionReactingTableCell)
         
         var reactingCell : SelectionReactingTableCell?
         
-        controller.configureCell(SelectionReactingTableCell.self, { (cell, model, indexPath) in
+        controller.manager.configureCell(SelectionReactingTableCell.self, { (cell, model, indexPath) in
             cell.indexPath = indexPath
             cell.model = model
             cell.textLabel?.text = "Foo"
             reactingCell = cell
         })
         
-        controller.memoryStorage.addItem(2, toSection: 0)
-        controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        controller.manager.memoryStorage.addItem(2, toSection: 0)
+        controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
         
         expect(reactingCell?.indexPath) == indexPath(0, 0)
         expect(reactingCell?.model) == 2
@@ -77,16 +78,16 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testHeaderConfigurationClosure()
     {
-        controller.registerHeaderClass(ReactingHeaderFooterView)
+        controller.manager.registerHeaderClass(ReactingHeaderFooterView)
         
         var reactingHeader : ReactingHeaderFooterView?
         
-        controller.configureHeader(ReactingHeaderFooterView.self) { (header, model, sectionIndex) in
+        controller.manager.configureHeader(ReactingHeaderFooterView.self) { (header, model, sectionIndex) in
             header.model = "Bar"
             header.sectionIndex = sectionIndex
         }
-        controller.memoryStorage.setSectionHeaderModels(["Foo"])
-        reactingHeader = controller.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
+        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        reactingHeader = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
         
         expect(reactingHeader?.sectionIndex) == 0
         expect(reactingHeader?.model) == "Bar"
@@ -94,16 +95,16 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testFooterConfigurationClosure()
     {
-        controller.registerFooterClass(ReactingHeaderFooterView)
+        controller.manager.registerFooterClass(ReactingHeaderFooterView)
         
         var reactingFooter : ReactingHeaderFooterView?
         
-        controller.configureFooter(ReactingHeaderFooterView.self) { (footer, model, sectionIndex) in
+        controller.manager.configureFooter(ReactingHeaderFooterView.self) { (footer, model, sectionIndex) in
             footer.model = "Bar"
             footer.sectionIndex = sectionIndex
         }
-        controller.memoryStorage.setSectionFooterModels(["Foo"])
-        reactingFooter = controller.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
+        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        reactingFooter = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
         
         expect(reactingFooter?.sectionIndex) == 0
         expect(reactingFooter?.model) == "Bar"
@@ -111,28 +112,28 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testShouldReactAfterContentUpdate()
     {
-        controller.registerCellClass(NibCell)
+        controller.manager.registerCellClass(NibCell)
         
         var updated : Int?
-        controller.afterContentUpdate { () -> Void in
+        controller.manager.afterContentUpdate { () -> Void in
             updated = 42
         }
         
-        controller.memoryStorage.addItem(1, toSection: 0)
+        controller.manager.memoryStorage.addItem(1, toSection: 0)
         
         expect(updated) == 42
     }
     
     func testShouldReactBeforeContentUpdate()
     {
-        controller.registerCellClass(NibCell)
+        controller.manager.registerCellClass(NibCell)
         
         var updated : Int?
-        controller.beforeContentUpdate { () -> Void in
+        controller.manager.beforeContentUpdate { () -> Void in
             updated = 42
         }
         
-        controller.memoryStorage.addItem(1, toSection: 0)
+        controller.manager.memoryStorage.addItem(1, toSection: 0)
         
         expect(updated) == 42
     }
@@ -141,14 +142,14 @@ class ReactingToEventsTestCase: XCTestCase {
     {
         var reactingCell : SelectionReactingTableCell?
         
-        controller.registerCellClass(SelectionReactingTableCell.self, selectionClosure: { (cell, model, indexPath) in
+        controller.manager.registerCellClass(SelectionReactingTableCell.self, selectionClosure: { (cell, model, indexPath) in
             cell.indexPath = indexPath
             cell.model = model
             reactingCell = cell
         })
 
-        controller.memoryStorage.addItems([1,2], toSection: 0)
-        controller.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
+        controller.manager.memoryStorage.addItems([1,2], toSection: 0)
+        controller.manager.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
         
         expect(reactingCell?.indexPath) == indexPath(1, 0)
         expect(reactingCell?.model) == 2

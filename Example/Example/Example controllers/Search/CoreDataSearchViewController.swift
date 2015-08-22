@@ -11,8 +11,9 @@ import DTTableViewManager
 import CoreData
 import ModelStorage
 
-class CoreDataSearchViewController: DTTableViewController {
+class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 
+    @IBOutlet weak var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
     let fetchResultsController: NSFetchedResultsController = {
     
@@ -28,9 +29,10 @@ class CoreDataSearchViewController: DTTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        manager.startManagingWithDelegate(self)
 
-        self.registerCellClass(BankCell)
-        self.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
+        manager.registerCellClass(BankCell)
+        manager.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.sizeToFit()

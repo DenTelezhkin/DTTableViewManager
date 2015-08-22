@@ -9,6 +9,6 @@
 import UIKit
 import DTTableViewManager
 
-class XibTableViewController: DTTableViewController {
+class XibTableViewController: DTTestTableViewController {
 
 }

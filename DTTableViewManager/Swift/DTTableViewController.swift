@@ -10,43 +10,43 @@ import Foundation
 import UIKit
 import ModelStorage
 
-public protocol DTTableViewManageable : Associatable
+public protocol DTTableViewManageable : NSObjectProtocol
 {
-    var tableView : UITableView { get }
+    var tableView : UITableView! { get }
 }
 
-private struct AssociatedKeys {
-    static var CellFactoryKey = "DTCellFactory associated key"
-    static var ConfigurationKey = "TableViewConffiguration key"
-}
-
+private var DTTableViewManagerAssociatedKey = "Manager Associated Key"
 extension DTTableViewManageable
 {
-    public var configuration : TableViewConfiguration
+    public var manager : DTTableViewManager
     {
         get {
-            return self.retrieveObject(&AssociatedKeys.ConfigurationKey)
+            var object = objc_getAssociatedObject(self, &DTTableViewManagerAssociatedKey)
+            if object == nil {
+                object = DTTableViewManager()
+                objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, object, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
+            return object as! DTTableViewManager
         }
         set {
-            self.associateObject(newValue, key: &AssociatedKeys.ConfigurationKey)
+            objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
-    }
-    
-    public func configureTableViewDefaults()
-    {
-        self.configuration = TableViewConfiguration()
     }
 }
 
-public class DTTableViewController: UIViewController {
-    @IBOutlet public var tableView : UITableView!
+public class DTTableViewManager : NSObject {
+    
+    var tableView : UITableView!
+    {
+        return self.delegate?.tableView
+    }
+    
+    weak var delegate : protocol<NSObjectProtocol,DTTableViewManageable>?
 
     private lazy var cellFactory: TableViewFactory = {
-        precondition(self.tableView != nil, "Please call registration methods only when view is loaded")
-        
-        let factory = TableViewFactory(tableView: self.tableView)
-        return factory
-        }()
+        precondition(self.tableView != nil, "Please call manager.startManagingWithDelegate(self) before calling any of DTTableViewManager methods only")
+        return TableViewFactory(tableView: self.tableView)
+    }()
     
     public var viewBundle = NSBundle.mainBundle()
     {
@@ -83,19 +83,19 @@ public class DTTableViewController: UIViewController {
             if let headerFooterCompatibleStorage = storage as? BaseStorage {
                 headerFooterCompatibleStorage.configureForTableViewUsage()
             }
+            // MARK: - TODO figure out a way to nil out old delegate
+//            oldValue.delegate = nil
             storage.delegate = self
         }
     }
     
-    public override func viewDidLoad() {
-        super.viewDidLoad()
+    public func startManagingWithDelegate(delegate : protocol<NSObjectProtocol,DTTableViewManageable>)
+    {
+        precondition(delegate.tableView != nil,"Call startManagingWithDelegate: method only when UITableView has been created")
         
-        assert(tableView != nil, "Wire up UITableView outlet before creating \(self.dynamicType) controller")
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        storage.delegate = self
+        self.delegate = delegate
+        delegate.tableView.delegate = self
+        delegate.tableView.dataSource = self
     }
     
     func headerModelForSectionIndex(index: Int) -> Any?
@@ -117,8 +117,23 @@ public class DTTableViewController: UIViewController {
     }
 }
 
+// MARK: Runtime forwarding
+extension DTTableViewManager
+{
+    public override func forwardingTargetForSelector(aSelector: Selector) -> AnyObject? {
+        return delegate
+    }
+    
+    public override func respondsToSelector(aSelector: Selector) -> Bool {
+        if self.delegate?.respondsToSelector(aSelector) ?? false {
+            return true
+        }
+        return super.respondsToSelector(aSelector)
+    }
+}
+
 // MARK: Cell registration
-extension DTTableViewController
+extension DTTableViewManager
 {
     public func registerCellClass<T:ModelTransfer where T: UITableViewCell>(cellType:T.Type)
     {
@@ -164,7 +179,7 @@ extension DTTableViewController
 }
 
 // MARK: Table view reactions
-extension DTTableViewController
+extension DTTableViewManager
 {
     public func whenSelected<T:ModelTransfer where T:UITableViewCell>(cellClass:  T.Type, _ closure: (T,T.CellModel, NSIndexPath) -> Void)
     {
@@ -240,7 +255,7 @@ extension DTTableViewController
     }
 }
 
-extension DTTableViewController: UITableViewDataSource
+extension DTTableViewManager: UITableViewDataSource
 {
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.storage.sections[section].numberOfObjects
@@ -288,7 +303,7 @@ extension DTTableViewController: UITableViewDataSource
     }
 }
 
-extension DTTableViewController: UITableViewDelegate
+extension DTTableViewManager: UITableViewDelegate
 {
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if configuration.sectionHeaderStyle == .Title { return nil }
@@ -359,7 +374,7 @@ extension DTTableViewController: UITableViewDelegate
     }
 }
 
-extension DTTableViewController : StorageUpdating
+extension DTTableViewManager : StorageUpdating
 {
     public func storageDidPerformUpdate(update : StorageUpdate)
     {
@@ -404,7 +419,7 @@ extension DTTableViewController : StorageUpdating
     }
 }
 
-extension DTTableViewController : TableViewStorageUpdating
+extension DTTableViewManager : TableViewStorageUpdating
 {
     public func performAnimatedUpdate(block: UITableView -> Void) {
         block(self.tableView)

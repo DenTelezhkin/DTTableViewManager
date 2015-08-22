@@ -22,15 +22,16 @@ class CreationTestCase: XCTestCase {
 
     func testCreatingTableControllerFromCode()
     {
-        let controller = DTTableViewController()
-        controller.tableView = UITableView()
-        controller.registerCellClass(FooCell)
+        let controller = DTTestTableViewController()
+        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.registerCellClass(FooCell)
     }
     
     func testCreatingTableControllerFromXIB()
     {
         let controller = XibTableViewController(nibName: "XibTableViewController", bundle: NSBundle(forClass: self.dynamicType))
         let _ = controller.view
-        controller.registerCellClass(FooCell)
+        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.registerCellClass(FooCell)
     }
 }

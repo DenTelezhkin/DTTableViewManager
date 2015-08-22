@@ -12,17 +12,13 @@ import Nimble
 
 class TableViewManageableProtocolExtensionTestCase: XCTestCase {
     
-    class Foo : UIViewController, DTTableViewManageable
-    {
-        var tableView = UITableView()
-    }
-    
     func testConfigurationAssociation()
     {
-        let foo = Foo(nibName: nil, bundle: nil)
-        foo.configureTableViewDefaults()
+        let foo = DTTestTableViewController(nibName: nil, bundle: nil)
+        foo.manager.startManagingWithDelegate(foo)
         
-        expect(foo.configuration.deleteRowAnimation) == UITableViewRowAnimation.Automatic
+        expect(foo.manager) != nil
+        expect(foo.manager) == foo.manager // Test if lazily instantiating using associations works correctly
     }
     
 }

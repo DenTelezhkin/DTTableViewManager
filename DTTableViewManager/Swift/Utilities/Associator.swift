@@ -31,8 +31,8 @@ public extension Associatable
         objc_setAssociatedObject(self, &key, holder, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
-    func retrieveObject<T>(inout key: String) -> T
+    func retrieveObject<T>(inout key: String) -> T?
     {
-        return (objc_getAssociatedObject(self, &key) as! AssociatedObjectHolder).object as! T
+        return (objc_getAssociatedObject(self, &key) as! AssociatedObjectHolder).object as? T
     }
 }

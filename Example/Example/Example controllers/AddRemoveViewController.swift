@@ -9,12 +9,14 @@
 import UIKit
 import DTTableViewManager
 
-class AddRemoveViewController: DTTableViewController {
+class AddRemoveViewController: UIViewController, DTTableViewManageable {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.registerCellClass(StringCell.self, selectionClosure: { [weak self] (_, model, indexPath)  in
+        manager.startManagingWithDelegate(self)
+        manager.registerCellClass(StringCell.self, selectionClosure: { [weak self] (_, model, indexPath)  in
             let alert = UIAlertController(title: "Selected cell",
                 message: "with model: \(model) at indexPath: \(indexPath)",
                 preferredStyle: .Alert)
@@ -25,11 +27,11 @@ class AddRemoveViewController: DTTableViewController {
     }
     
     @IBAction func addItem(sender: AnyObject) {
-        self.memoryStorage.addItem("Row # \(self.memoryStorage.sectionAtIndex(0).numberOfObjects)")
+        manager.memoryStorage.addItem("Row # \(manager.memoryStorage.sectionAtIndex(0).numberOfObjects)")
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
-        self.memoryStorage.removeItemsAtIndexPaths([indexPath])
+        manager.memoryStorage.removeItemsAtIndexPaths([indexPath])
     }
 }

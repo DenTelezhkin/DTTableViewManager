@@ -9,20 +9,23 @@
 import UIKit
 import DTTableViewManager
 
-class CustomViewsController: DTTableViewController {
+class CustomViewsController: UIViewController, DTTableViewManageable {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.registerCellClass(CustomStringCell)
-        self.registerHeaderClass(CustomHeaderFooterView)
-        self.registerFooterClass(CustomHeaderFooterView)
+        manager.startManagingWithDelegate(self)
+        manager.registerCellClass(CustomStringCell)
+        manager.registerHeaderClass(CustomHeaderFooterView)
+        manager.registerFooterClass(CustomHeaderFooterView)
         
-        self.memoryStorage.setSectionHeaderModel(("Awesome custom header", UIImage(named: "textured_paper.png")!), forSectionIndex: 0)
-        self.memoryStorage.setSectionFooterModel(("Not so awesome custom footer", UIImage(named: "mochaGrunge.png")!), forSectionIndex: 0)
+        manager.memoryStorage.setSectionHeaderModel(("Awesome custom header", UIImage(named: "textured_paper.png")!), forSectionIndex: 0)
+        manager.memoryStorage.setSectionFooterModel(("Not so awesome custom footer", UIImage(named: "mochaGrunge.png")!), forSectionIndex: 0)
         
         let foo = ["Custom cell", "Custom cell 2"]
-        self.memoryStorage.addItems(foo)
+        manager.memoryStorage.addItems(foo)
     }
 
 }
