@@ -48,7 +48,6 @@
 		9A1C66781B8660D600B3DEE0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1C66771B8660D600B3DEE0 /* Nimble.framework */; };
 		9A1C667A1B86619900B3DEE0 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A1C66771B8660D600B3DEE0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A1C667C1B8666D400B3DEE0 /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C667B1B8666D400B3DEE0 /* TableViewConfiguration.swift */; };
-		9A1C667E1B866EEB00B3DEE0 /* Associator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C667D1B866EEB00B3DEE0 /* Associator.swift */; };
 		9A1C66801B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C667F1B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift */; };
 		9A244A1E1B6134B0007E4FAA /* ReactingHeaderFooters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */; };
 		9A24F6A419DAA430009DE5D4 /* SwiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */; };
@@ -307,7 +306,6 @@
 		9A1A49A21B5455820006610B /* XibTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XibTableViewController.xib; path = Fixtures/XibTableViewController.xib; sourceTree = "<group>"; };
 		9A1C66771B8660D600B3DEE0 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		9A1C667B1B8666D400B3DEE0 /* TableViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewConfiguration.swift; path = ../../DTTableViewManager/Swift/TableViewConfiguration.swift; sourceTree = "<group>"; };
-		9A1C667D1B866EEB00B3DEE0 /* Associator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Associator.swift; path = ../../DTTableViewManager/Swift/Utilities/Associator.swift; sourceTree = "<group>"; };
 		9A1C667F1B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewManageableProtocolExtensionTestCase.swift; sourceTree = "<group>"; };
 		9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingHeaderFooters.swift; path = Fixtures/ReactingHeaderFooters.swift; sourceTree = "<group>"; };
 		9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftCell.swift; path = mocks/SwiftCell.swift; sourceTree = "<group>"; };
@@ -783,7 +781,6 @@
 			children = (
 				9AE339361B56950E0075A3D6 /* ViewModelMapping.swift */,
 				9A1663F01B5A77C800B2C3C8 /* UIView+XibLoading.swift */,
-				9A1C667D1B866EEB00B3DEE0 /* Associator.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1498,7 +1495,6 @@
 				9AE339381B56950E0075A3D6 /* ViewModelMapping.swift in Sources */,
 				9A1C667C1B8666D400B3DEE0 /* TableViewConfiguration.swift in Sources */,
 				9AF8E4DD1B52848D005A2406 /* DTTableViewManager.swift in Sources */,
-				9A1C667E1B866EEB00B3DEE0 /* Associator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

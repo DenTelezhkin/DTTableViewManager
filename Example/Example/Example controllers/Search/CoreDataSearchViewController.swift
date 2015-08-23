@@ -33,6 +33,9 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 
         manager.registerCellClass(BankCell)
         manager.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
+        manager.afterContentUpdate { [weak self] in
+            self?.tableView.hidden = self?.tableView.numberOfSections == 0
+        }
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.sizeToFit()
@@ -51,7 +54,6 @@ extension CoreDataSearchViewController : UISearchResultsUpdating
             self.fetchResultsController.fetchRequest.predicate = predicate
         }
         try! fetchResultsController.performFetch()
-        tableView.reloadData()
-        self.tableView.hidden = self.tableView.numberOfSections == 0
+        manager.storageNeedsReloading()
     }
 }
