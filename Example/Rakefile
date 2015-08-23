@@ -1,8 +1,4 @@
-require 'cocoapods'
- 
-workspace_file = "DTTableViewManager.xcworkspace"
 scheme_name = "XCTests"
-legacy_scheme_name = "XCTests-ObjectiveC"
 
 def run(command, min_exit_status = 0)
   puts "Executing: `#{command}`"
@@ -10,24 +6,14 @@ def run(command, min_exit_status = 0)
   return $?.exitstatus
 end
  
-desc "install dependencies"
-task :dependencies do
-  run("pod install")
-end
- 
 desc "Run #{scheme_name} tests"
 task :run_tests do
-  $tests_success = run("set -o pipefail && xcodebuild -scheme \"#{scheme_name}\" -workspace \"#{workspace_file}\" -destination 'name=iPhone 6' clean test")
-end
-
-desc "Run #{scheme_name} tests"
-task :run_legacy_tests do
-  $legacy_tests_success = run("set -o pipefail && xcodebuild -scheme \"#{legacy_scheme_name}\" -workspace \"#{workspace_file}\" -destination 'name=iPhone 6' clean test")
+  $tests_success = run("set -o pipefail && xcodebuild -scheme \"#{scheme_name}\" -destination 'name=iPhone 6' clean test | xcpretty -tc")
 end
  
 desc "Run Test suit"
-task :ci =>  ['dependencies','run_tests','run_legacy_tests'] do 
-  puts "\033[0;31m! #{scheme_name} unit tests failed" unless ($tests_success == 0 && $legacy_tests_success == 0) 
+task :ci =>  ['run_tests'] do 
+  puts "\033[0;31m! #{scheme_name} unit tests failed" unless $tests_success == 0 
   if ($tests_success == 0)
     puts "\033[0;32m** All is good!"
   else
