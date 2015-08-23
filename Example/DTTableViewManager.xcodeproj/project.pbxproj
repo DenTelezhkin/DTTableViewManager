@@ -22,8 +22,11 @@
 		9A244A1E1B6134B0007E4FAA /* ReactingHeaderFooters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */; };
 		9A2A32231B88E3E600C535A0 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A36C7E81B61807F0077FAFD /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* DTModelStorage.framework */; };
-		9A41FBD71B8A147600508207 /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBD51B8A147600508207 /* mochaGrunge.png */; };
-		9A41FBD81B8A147600508207 /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBD61B8A147600508207 /* textured_paper.png */; };
+		9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDA1B8A176300508207 /* BankCell.xib */; };
+		9A41FBE01B8A17C400508207 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDF1B8A17C400508207 /* Banks.json */; };
+		9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE11B8A17E700508207 /* mochaGrunge.png */; };
+		9A41FBE41B8A17E700508207 /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE21B8A17E700508207 /* textured_paper.png */; };
+		9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */; };
 		9A4EB0151B88E48F006C2B8D /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A52DD6B1B5A99F30048F535 /* DatasourceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */; };
@@ -45,10 +48,7 @@
 		9A9B17271B65772E00D8ABD3 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* DTModelStorage.framework */; };
 		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
-		9ABE07431B85FCF600636D78 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9591074D18535AE30012B07E /* Banks.json */; };
 		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
-		9ABE07491B86053500636D78 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 959107A0185361CA0012B07E /* Banks.xcdatamodeld */; };
-		9ABE074A1B86071B00636D78 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956C39BA1854BA6400FC1A5B /* BankCell.xib */; };
 		9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE074B1B86074900636D78 /* BankCell.swift */; };
 		9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */; };
 		9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */; };
@@ -125,9 +125,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		956C39BA1854BA6400FC1A5B /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = ../TableViewFactory/Cells/BankCell.xib; sourceTree = "<group>"; };
-		9591074D18535AE30012B07E /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = ../TableViewFactory/Resources/Banks.json; sourceTree = "<group>"; };
-		959107A1185361CA0012B07E /* Banks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banks.xcdatamodel; sourceTree = "<group>"; };
 		95BCE72F1792C7B300526954 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FixtureViews.swift; path = Fixtures/FixtureViews.swift; sourceTree = "<group>"; };
 		9A1663EC1B5A68B200B2C3C8 /* NibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibView.xib; path = Fixtures/NibView.xib; sourceTree = "<group>"; };
@@ -144,8 +141,11 @@
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A38BF1AEE285E0021E97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTModelStorageTests.xcodeproj; path = ../Carthage/Checkouts/DTModelStorage/DTModelStorageTests/DTModelStorageTests.xcodeproj; sourceTree = "<group>"; };
-		9A41FBD51B8A147600508207 /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mochaGrunge.png; path = TableViewFactory/mochaGrunge.png; sourceTree = SOURCE_ROOT; };
-		9A41FBD61B8A147600508207 /* textured_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textured_paper.png; path = TableViewFactory/textured_paper.png; sourceTree = SOURCE_ROOT; };
+		9A41FBDA1B8A176300508207 /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = Cells/BankCell.xib; sourceTree = "<group>"; };
+		9A41FBDF1B8A17C400508207 /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = "Example controllers/Search/Banks.json"; sourceTree = "<group>"; };
+		9A41FBE11B8A17E700508207 /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mochaGrunge.png; path = Resources/mochaGrunge.png; sourceTree = "<group>"; };
+		9A41FBE21B8A17E700508207 /* textured_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textured_paper.png; path = Resources/textured_paper.png; sourceTree = "<group>"; };
+		9A41FBE61B8A181300508207 /* Banks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banks.xcdatamodel; sourceTree = "<group>"; };
 		9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = /Users/Denys/Projects/DTTableViewManager/Carthage/Checkouts/DTModelStorage/DTModelStorageTests/../../../Build/iOS/DTModelStorage.framework; sourceTree = "<absolute>"; };
 		9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatasourceTestCase.swift; sourceTree = "<group>"; };
 		9A71EDBF1B61481300047DE0 /* ReactingHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReactingHeaderFooterView.xib; path = Fixtures/ReactingHeaderFooterView.xib; sourceTree = "<group>"; };
@@ -328,8 +328,8 @@
 		9A9B17041B65771600D8ABD3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9A41FBD51B8A147600508207 /* mochaGrunge.png */,
-				9A41FBD61B8A147600508207 /* textured_paper.png */,
+				9A41FBE11B8A17E700508207 /* mochaGrunge.png */,
+				9A41FBE21B8A17E700508207 /* textured_paper.png */,
 				9A9B17051B65771600D8ABD3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -338,9 +338,8 @@
 		9ABE073E1B85FC6C00636D78 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				956C39BA1854BA6400FC1A5B /* BankCell.xib */,
-				9591074D18535AE30012B07E /* Banks.json */,
-				959107A0185361CA0012B07E /* Banks.xcdatamodeld */,
+				9A41FBDF1B8A17C400508207 /* Banks.json */,
+				9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */,
 				9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */,
 				9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */,
 				9ABE07441B85FE4E00636D78 /* Bank.swift */,
@@ -364,6 +363,7 @@
 		9AD9D9E01B6EB3AC00AD49AC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9A41FBDA1B8A176300508207 /* BankCell.xib */,
 				9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */,
 				9AD9D9EB1B6EBEAD00AD49AC /* CustomStringCell.swift */,
 				9AD9D9EC1B6EBEAD00AD49AC /* CustomStringCell.xib */,
@@ -592,14 +592,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A41FBE41B8A17E700508207 /* textured_paper.png in Resources */,
 				9AD9D9F21B6EBF8800AD49AC /* CustomHeaderFooterView.xib in Resources */,
 				9A9B170E1B65771600D8ABD3 /* Main.storyboard in Resources */,
-				9A41FBD71B8A147600508207 /* mochaGrunge.png in Resources */,
 				9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */,
-				9ABE07431B85FCF600636D78 /* Banks.json in Resources */,
-				9ABE074A1B86071B00636D78 /* BankCell.xib in Resources */,
 				9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */,
-				9A41FBD81B8A147600508207 /* textured_paper.png in Resources */,
+				9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */,
+				9A41FBE01B8A17C400508207 /* Banks.json in Resources */,
+				9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */,
 				9AD9D9EE1B6EBEAD00AD49AC /* CustomStringCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,10 +644,10 @@
 				9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */,
 				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,
 				9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */,
-				9ABE07491B86053500636D78 /* Banks.xcdatamodeld in Sources */,
 				9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */,
 				9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */,
 				9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */,
+				9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */,
 				9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */,
 				9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */,
 			);
@@ -1046,14 +1046,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		959107A0185361CA0012B07E /* Banks.xcdatamodeld */ = {
+		9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				959107A1185361CA0012B07E /* Banks.xcdatamodel */,
+				9A41FBE61B8A181300508207 /* Banks.xcdatamodel */,
 			);
-			currentVersion = 959107A1185361CA0012B07E /* Banks.xcdatamodel */;
+			currentVersion = 9A41FBE61B8A181300508207 /* Banks.xcdatamodel */;
 			name = Banks.xcdatamodeld;
-			path = ../TableViewFactory/CoreData/Banks.xcdatamodeld;
+			path = "Example controllers/Search/Banks.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
