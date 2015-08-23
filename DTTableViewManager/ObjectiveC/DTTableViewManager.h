@@ -2,8 +2,8 @@
 //  DTTableViewManager.h
 //  DTTableViewManager
 //
-//  Created by Denys Telezhkin on 10/24/13.
-//  Copyright (c) 2013 MLSDev. All rights reserved.
+//  Created by Denys Telezhkin on 9/23/15.
+//  Copyright (c) 2015 MLSDev. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DTTableViewController.h"
-#import "DTTableViewCell.h"
+#import <Foundation/Foundation.h>
 
-#import <DTModelStorage/DTModelStorage.h>
-#import "DTMemoryStorage_DTTableViewManagerAdditions.h"
-#import "DTSectionModel+SectionHeadersFooters.h"
+FOUNDATION_EXPORT double DTTableViewManagerVersionNumber;
+FOUNDATION_EXPORT const unsigned char DTTableViewManagerVersionString[];
 
 
