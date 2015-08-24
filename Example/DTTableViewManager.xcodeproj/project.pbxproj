@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		9A08A9B41B8A23A100877C62 /* DTTableViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A08A9AC1B8A23A100877C62 /* DTTableViewManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
-		9A08A9B61B8A23A100877C62 /* TableViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewCellFactory.swift */; };
+		9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
 		9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
 		9A08A9B81B8A23A100877C62 /* TableViewReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */; };
 		9A08A9B91B8A23A100877C62 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */; };
@@ -129,7 +129,7 @@
 		95BCE72F1792C7B300526954 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A08A9AC1B8A23A100877C62 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTableViewManager.h; sourceTree = "<group>"; };
 		9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTableViewManager.swift; sourceTree = "<group>"; };
-		9A08A9AE1B8A23A100877C62 /* TableViewCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellFactory.swift; sourceTree = "<group>"; };
+		9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFactory.swift; sourceTree = "<group>"; };
 		9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewConfiguration.swift; sourceTree = "<group>"; };
 		9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewReaction.swift; sourceTree = "<group>"; };
 		9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibLoading.swift"; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 			children = (
 				9A08A9AC1B8A23A100877C62 /* DTTableViewManager.h */,
 				9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */,
-				9A08A9AE1B8A23A100877C62 /* TableViewCellFactory.swift */,
+				9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */,
 				9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */,
 				9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */,
 				9A08A9B11B8A23A100877C62 /* Utilities */,
@@ -626,7 +626,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A08A9B61B8A23A100877C62 /* TableViewCellFactory.swift in Sources */,
+				9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */,
 				9A08A9B91B8A23A100877C62 /* UIView+XibLoading.swift in Sources */,
 				9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */,
 				9A08A9BA1B8A23A100877C62 /* ViewModelMapping.swift in Sources */,

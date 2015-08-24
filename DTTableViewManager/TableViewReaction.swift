@@ -45,7 +45,7 @@ extension NSIndexPath : TableViewReactionData{}
 class TableViewReaction
 {
     let reactionType : TableViewReactionType
-    var cellType : _MirrorType?
+    var viewType : _MirrorType?
     var reactionBlock: (() -> Void)?
     var reactionData : TableViewReactionData?
     
@@ -60,14 +60,8 @@ class TableViewReaction
     }
 }
 
-struct CellConfiguration : TableViewReactionData
-{
-    let cell : UITableViewCell
-    let indexPath: NSIndexPath
-}
-
 struct ViewConfiguration : TableViewReactionData
 {
     let view : UIView
-    let sectionIndex : Int
+    let indexPath : NSIndexPath
 }
