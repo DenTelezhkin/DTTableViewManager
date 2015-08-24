@@ -190,7 +190,7 @@ extension DTTableViewManager
     }
 }
 
-// MARK: - Cell registration
+// MARK: - View registration
 extension DTTableViewManager
 {
     /// Register mapping from model class to custom cell class. Method will automatically check for nib with the same name as `cellType`. If it exists - nib will be registered instead of class.
@@ -225,7 +225,7 @@ extension DTTableViewManager
     
     /// Register mapping from model class to custom header view class. Method will automatically check for nib with the same name as `headerType`. If it exists - nib will be registered instead of class.
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
-    /// - Parameter headerType: Type of UITableViewCell subclass, that is being registered for using by `DTTableViewManager`
+    /// - Parameter headerType: Type of UIView or UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
     public func registerHeaderClass<T:ModelTransfer where T: UIView>(headerType : T.Type)
     {
         configuration.sectionHeaderStyle = .View
@@ -234,7 +234,7 @@ extension DTTableViewManager
     
     /// Register mapping from model class to custom footer view class. Method will automatically check for nib with the same name as `footerType`. If it exists - nib will be registered instead of class.
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
-    /// - Parameter footerType: Type of UITableViewCell subclass, that is being registered for using by `DTTableViewManager`
+    /// - Parameter footerType: Type of UIView or UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
     public func registerFooterClass<T:ModelTransfer where T:UIView>(footerType: T.Type)
     {
         configuration.sectionFooterStyle = .View

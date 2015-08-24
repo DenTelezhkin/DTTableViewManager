@@ -14,11 +14,10 @@ import Nimble
 
 class DatasourceTestCase: XCTestCase {
 
-    var controller : DTTestTableViewController!
+    var controller = DTTestTableViewController()
     
     override func setUp() {
         super.setUp()
-        controller = DTTestTableViewController()
         
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
