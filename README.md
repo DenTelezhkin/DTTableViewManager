@@ -1,4 +1,3 @@
-![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.png?branch=master) &nbsp;
 ![CocoaPod platform](https://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.png) &nbsp; 
 ![CocoaPod version](https://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png) &nbsp; 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
@@ -8,82 +7,96 @@ DTTableViewManager
 ================
 > This is a sister-project for [DTCollectionViewManager](https://github.com/DenHeadless/DTCollectionViewManager) - great tool for UICollectionView management, built on the same principles.
 
-Target of this project is to create powerful architecture for UITableView сontrollers. It combines several ideas to make UITableView management easy, clean, and delightful. 
-
-Try it out! =)
-
-```bash
-pod try DTTableViewManager
-```
+Powerful protocol-oriented UITableView management framework, written in Swift. 
 
 ## Features
 
-* Powerful mapping system between data models and table view cells, headers and footers
-* Automatic datasource and interface synchronization.
-* Support for creating cells from XIBs or storyboards.
-* Support for UITableViewHeaderFooterView or custom UIView for table headers and footers
-* Easy UITableView search 
-* Core data / NSFetchedResultsController support
-* Swift support
+- [x] Safe, compile-time powered mapping system between data models and table view cells, headers and footers
+- [x] Support for UITableViewController, UIViewController with UITableView, or any other object, that has a UITableView
+- [x] Flexible datasource model with support for models in memory, CoreData, or even custom storages
+- [x] Automatic datasource and interface synchronization.
+- [x] Automatic XIB registration and dequeue
+- [x] No type casts required
+- [x] No need to subclass
+- [x] Support for all Swift types - classes, structs, enums, tuples
+
+## Requirements 
+
+- iOS 8.0+
+- XCode 7
+- Swift 2
+
+## Installation
+
+[CocoaPods](http://www.cocoapods.org):
+
+    pod 'DTTableViewManager', '~> 4.0.0'
+	
+[Carthage](https://github.com/Carthage/Carthage):
+
+    github "DenHeadless/DTTableViewManager"
 
 ## Quick start
 
+The core object of a framework is `DTTableViewManager`. Declare your class as 'DTTableViewManageable', and it will be automatically injected with `manager` property, that will hold an instance of `DTTableViewManager`.
+
+First, call `startManagingWithDelegate:` to initiate UITableView management. Make sure your UITableView outlet is wired to your class.
+
+```swift
+	manager.startManagingWithDelegate(self)
+```
+
 Let's say you have an array of Posts you want to display in UITableView. To quickly show them using DTTableViewManager, here's what you need to do:
 
-Subclass DTTableViewController, create xib, or storyboard with your view controller, wire up tableView outlet. Add following code to viewDidLoad:
+* Create UITableViewCell subclass, let's say PostCell. Adopt ModelTransfer protocol
 
-```objective-c
-[self registerCellClass:[PostCell class] forModelClass:[Post class]];
-[self.memoryStorage addItems:posts];
-```
-or in Swift:
 ```swift
-self.registerCellClass(PostCell.self, forModelClass:Post.self)
-self.memoryStorage().addItems(posts)
-```
-
-Subclass DTTableViewCell, and implement updateWithModel method
-```objective-c
--(void)updateWithModel:(id)model
+class PostCell : UITableViewCell, ModelTransfer 
 {
-    Post * post = model;
-    self.postTextView.text = post.content;
-}
-```
-or in Swift:
-```swift
-func updateWithModel(model: AnyObject!)
-{
-    let post = model as Post
-    self.postTextView.text = post.content
+	func updateWithModel(model: Post)
+	{
+		// Fill your cell with actual data
+	}
 }
 ```
 
-That's it! For more detailed look at available API - **[API quickstart](https://github.com/DenHeadless/DTTableViewManager/wiki/API-quickstart)** page on wiki.
+* Call registration methods on your DTTableViewManageable instance
+
+```swift
+	manager.registerCellClass(PostCell)
+```
+
+ModelType will be automatically gathered from your `PostCell`. If you have a PostCell.xib file, it will be automatically registered for PostCell.
+
+* Add your posts!
+
+```swift
+	manager.memoryStorage.addItems(posts)
+```
+
+That's it! It's that easy!
 
 ## Mapping and registration
 
-Registering cell class and xib is 1 line of code:
+* `registerCellClass:`
+* `registerNibNamed:forCellClass:`
+* `registerHeaderClass:`
+* `registerNibNamed:forHeaderClass:`
+* `registerFooterClass:`
+* `registerNibNamed:forFooterClass:`
 
-```objective-c
-[self registerCellClass:[Cell class] forModelClass:[Model class]];
-```
-Similarly, for headers and footers:
+By default, `DTTableViewManager` uses section titles and `tableView(_:titleForHeaderInSection:)` UITableViewDatasource methods. However, if you call any mapping methods for headers or footers, it will automatically switch to using 'tableView(_:viewForHeaderInSection:)' methods and dequeue UITableViewHeaderFooterView instances. Make your `UITableViewHeaderFooterView` subclasses conform to `ModelTransfer` protocol to allow them to participate in mapping.
 
-```objective-c
-[self registerHeaderClass:[HeaderView class] forModelClass:[Model class]];
-[self registerFooterClass:[FooterView class] forModelClass:[Model class]];
-```
+You can also use UIView subclasses for headers and footers.
 
 For more detailed look at mapping in DTTableViewManager, check out dedicated *[Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping)*.
 
-## Managing table items
+### DTModelStorage
 
-Storage classes for DTTableViewManager have been moved to [separate repo](https://github.com/DenHeadless/DTModelStorage). Two data storage classes are provided - memory and core data storage. 
+[DTModelStorage](https://github.com/DenHeadless/DTModelStorage/) is a framework, that provides storage classes for `DTTableViewManager`. By default, storage class is a `MemoryStorage` instance.
 
-### Memory storage
+`MemoryStorage` is a class, that manages UITableView models in memory. It has methods for adding, removing, replacing, reordering table view models etc. You can read all about them in [DTModelStorage repo](https://github.com/DenHeadless/DTModelStorage). Basically, every section in `MemoryStorage` is an array of `SectionModel` objects, which itself is an object, that contains optional header and footer models, and array of table items.
 
-`DTMemoryStorage` encapsulates storage of table view data models in memory. It's basically NSArray of `DTSectionModel` objects, which contain array of objects for current section, section header and footer model.
 
 **You can take a look at all provided methods for manipulating items here: [DTMemoryStorage methods](https://github.com/DenHeadless/DTModelStorage/blob/master/README.md#adding-items)**
 

@@ -78,7 +78,7 @@ class MappingTestCase: XCTestCase {
     
     func testCellMappingFromNibWithDifferentName()
     {
-        controller.manager.registerNibNamed("RandomNibNameCell", forCellType: BaseTestCell.self)
+        controller.manager.registerNibNamed("RandomNibNameCell", forCellClass: BaseTestCell.self)
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
