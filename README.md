@@ -194,7 +194,11 @@ There are various customization options available with `DTTableViewManager`. Tho
 
 You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
 
-Also check out [wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki) for lot's of information on DTTableViewManager internals and best practices.
+Also check out [wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki) for some information on DTTableViewManager internals.
+
+## Examples
+
+There is an example project, that shows some usage examples of `DTTableViewManager`. 
 
 ## Thanks
 
