@@ -47,7 +47,7 @@ import DTTableViewManager
 import DTModelStorage
 ```
 
-The core object of a framework is `DTTableViewManager`. Declare your class as 'DTTableViewManageable', and it will be automatically injected with `manager` property, that will hold an instance of `DTTableViewManager`.
+The core object of a framework is `DTTableViewManager`. Declare your class as `DTTableViewManageable`, and it will be automatically injected with `manager` property, that will hold an instance of `DTTableViewManager`.
 
 First, call `startManagingWithDelegate:` to initiate UITableView management. Make sure your UITableView outlet is wired to your class.
 
@@ -122,15 +122,14 @@ You can register closures, that will be executed on various events. First and mo
 
 ```swift
   manager.whenSelected(PostCell.self) { postCell, post, indexPath in
-    print("Selected \(post) in \(postCell) at \(indexPath)")
+      print("Selected \(post) in \(postCell) at \(indexPath)")
   }
 ```
 
 Thanks to generics, `postCell` and `post` are already a concrete type, there's no need to check types and cast. There' also a shortcut to registration and selection method:
 
 ```swift
-  manager.registerCellClass(PostCell.self, whenSelected: { postCell, post, indexPath in
-  })
+  manager.registerCellClass(PostCell.self, whenSelected: { postCell, post, indexPath in })
 ```
 
 ### Configuration
@@ -139,7 +138,6 @@ Although in most cases your cell can update it's UI with model inside `updateWit
 
 ```swift
   manager.configureCell(PostCell.self) { postCell, post, indexPath in }
-
   manager.configureHeader(PostHeader.self) { postHeader, postHeaderModel, sectionIndex in }
   manager.configureFooter(PostFooter.self) { postFooter, postFooterModel, sectionIndex in }
 ```
