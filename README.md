@@ -22,9 +22,9 @@ Powerful protocol-oriented UITableView management framework, written in Swift 2.
 
 ## Requirements
 
-- iOS 8.0+
-- XCode 7
-- Swift 2
+* XCode 7 and higher
+* iOS 8,9
+* Swift 2
 
 ## Installation
 
@@ -35,6 +35,8 @@ Powerful protocol-oriented UITableView management framework, written in Swift 2.
 [Carthage](https://github.com/Carthage/Carthage):
 
     github "DenHeadless/DTTableViewManager"
+
+After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to XCode project embedded binaries.
 
 ## Quick start
 
@@ -180,27 +182,9 @@ There are various customization options available with `DTTableViewManager`. Tho
 * Section header and footer styles - title or view
 * Should section header and footer be displayed on empty section
 
-## Requirements
-
-* XCode 7 and higher
-* iOS 8.x
-* Swift 2
-
 ## ObjectiveC
 
 `DTTableViewManager` is heavily relying on Swift 2 protocol extensions, generics and associated types. Enabling this stuff to work on objective-c right now is not possible. Because of this DTTableViewManager 4 does not support usage in objective-c. If you need to use objective-c, you can use [latest compatible version of `DTTableViewManager`](https://github.com/DenHeadless/DTTableViewManager/releases/tag/3.2.0).
-
-## Installation
-
-[CocoaPods](http://www.cocoapods.org):
-
-    pod 'DTTableViewManager', '~> 4.0.0'
-
-[Carthage](https://github.com/Carthage/Carthage):
-
-    github "DenHeadless/DTTableViewManager"
-
-After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to XCode project embedded binaries.
 
 ## Documentation
 
