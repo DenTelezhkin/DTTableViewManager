@@ -38,33 +38,33 @@ public enum SupplementarySectionStyle
 /// Defines most commonly used configuration properties for UITableView
 public struct TableViewConfiguration
 {
-    /// Section header style
+    /// Section header style. Default - .Title.
     public var sectionHeaderStyle = SupplementarySectionStyle.Title
     
-    /// Section footer style
+    /// Section footer style. Default - .Title
     public var sectionFooterStyle = SupplementarySectionStyle.Title
     
-    /// Defines, whether to show header on a section, that does not contain any items.
+    /// Defines, whether to show header on a section, that does not contain any items. Default is true.
     public var displayHeaderOnEmptySection = true
     
-    /// Defines, whether to show footer on a section, that does not contain any items
+    /// Defines, whether to show footer on a section, that does not contain any items. Default is true.
     public var displayFooterOnEmptySection = true
     
-    /// Insert section animation
+    /// Insert section animation. Default - .None.
     public var insertSectionAnimation = UITableViewRowAnimation.None
     
-    /// Delete section animation
+    /// Delete section animation. Default - .Automatic
     public var deleteSectionAnimation = UITableViewRowAnimation.Automatic
     
-    /// Reload section animation
+    /// Reload section animation. Default - .Automatic.
     public var reloadSectionAnimation = UITableViewRowAnimation.Automatic
     
-    /// Insert row animation
+    /// Insert row animation. Default - .Automatic.
     public var insertRowAnimation = UITableViewRowAnimation.Automatic
     
-    /// Delete row animation
+    /// Delete row animation. Default - .Automatic.
     public var deleteRowAnimation = UITableViewRowAnimation.Automatic
     
-    /// Reload row animation
+    /// Reload row animation. Default - .Automatic.
     public var reloadRowAnimation = UITableViewRowAnimation.Automatic
 }

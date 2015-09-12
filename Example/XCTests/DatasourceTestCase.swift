@@ -225,14 +225,14 @@ class DatasourceTestCase: XCTestCase {
     
     func testHeaderViewShouldBeCreatedFromXib()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderClass: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
     
     func testFooterViewShouldBeCreatedFromXib()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forFooterClass: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
@@ -267,7 +267,7 @@ class DatasourceTestCase: XCTestCase {
     
     func testHeaderObjectForViewGenericConversion()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderClass: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         let header = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0)
         if let _ = controller.manager.storage.objectForTableHeader(header as? NibHeaderFooterView, atSectionIndex: 0)
@@ -281,7 +281,7 @@ class DatasourceTestCase: XCTestCase {
     
     func testFooterObjectForViewGenericConversion()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forFooterType: NibHeaderFooterView.self)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forFooterClass: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
         let header = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
         if let _ = controller.manager.storage.objectForTableFooter(header as? NibHeaderFooterView, atSectionIndex: 0)

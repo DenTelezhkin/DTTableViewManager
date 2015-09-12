@@ -138,7 +138,7 @@ class MappingTestCase: XCTestCase {
     
     func testHeaderViewShouldSupportNSStringModel()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderType: NibHeaderFooterView.self)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderClass: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
