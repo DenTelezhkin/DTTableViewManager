@@ -142,7 +142,7 @@ class ReactingToEventsTestCase: XCTestCase {
     {
         var reactingCell : SelectionReactingTableCell?
         
-        controller.manager.registerCellClass(SelectionReactingTableCell.self, selectionClosure: { (cell, model, indexPath) in
+        controller.manager.registerCellClass(SelectionReactingTableCell.self, whenSelected: { (cell, model, indexPath) in
             cell.indexPath = indexPath
             cell.model = model
             reactingCell = cell
