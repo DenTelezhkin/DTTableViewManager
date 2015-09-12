@@ -69,13 +69,13 @@ class PostCell : UITableViewCell, ModelTransfer
 }
 ```
 
-* Call registration methods on your DTTableViewManageable instance
+* Call registration methods on your `DTTableViewManageable` instance
 
 ```swift
 	manager.registerCellClass(PostCell)
 ```
 
-ModelType will be automatically gathered from your `PostCell`. If you have a PostCell.xib file, it will be automatically registered for PostCell.
+ModelType will be automatically gathered from your `PostCell`. If you have a PostCell.xib file, it will be automatically registered for PostCell. If you have a storyboard with PostCell, set it's reuseIdentifier to be identical to class - "PostCell".
 
 * Add your posts!
 
@@ -98,11 +98,13 @@ By default, `DTTableViewManager` uses section titles and `tableView(_:titleForHe
 
 You can also use UIView subclasses for headers and footers.
 
-For more detailed look at mapping in DTTableViewManager, check out dedicated *[Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping)*.
+For more detailed look at mapping in DTTableViewManager, check out dedicated *[Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping-and-registration)*.
 
-### DTModelStorage
+## DTModelStorage
 
 [DTModelStorage](https://github.com/DenHeadless/DTModelStorage/) is a framework, that provides storage classes for `DTTableViewManager`. By default, storage property on `DTTableViewManager` holds a `MemoryStorage` instance.
+
+### MemoryStorage
 
 `MemoryStorage` is a class, that manages UITableView models in memory. It has methods for adding, removing, replacing, reordering table view models etc. You can read all about them in [DTModelStorage repo](https://github.com/DenHeadless/DTModelStorage#memorystorage). Basically, every section in `MemoryStorage` is an array of `SectionModel` objects, which itself is an object, that contains optional header and footer models, and array of table items.
 
@@ -111,6 +113,10 @@ For more detailed look at mapping in DTTableViewManager, check out dedicated *[M
 `CoreDataStorage` is meant to be used with NSFetchedResultsController. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it's changes. All you need to do to display CoreData models in your UITableView, is create CoreDataStorage object and set it on your `storage` property of `DTTableViewManager`.
 
 Keep in mind, that MemoryStorage is not limited to objects in memory. For example, if you have CoreData database, and you now for sure, that number of items is not big, you can choose not to use CoreDataStorage and NSFetchedResultsController. You can fetch all required models, and store them in MemoryStorage.
+
+## Subclassing storage classes
+
+For in-depth look at how subclassing storage classes can improve your code base, read [this article](https://github.com/DenHeadless/DTTableViewManager/wiki/Extracting-logic-into-storage-subclasses) on wiki.
 
 ## Reacting to events
 
