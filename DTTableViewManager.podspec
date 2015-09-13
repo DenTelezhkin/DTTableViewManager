@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.authors  = { 'Denys Telezhkin' => 'denys.telezhkin@yandex.ru' }
   s.social_media_url = 'https://twitter.com/DTCoder'
   s.source   = { :git => 'https://github.com/DenHeadless/DTTableViewManager.git', :tag => s.version.to_s }
-  s.source_files = 'DTTableViewManager'
+  s.source_files = 'DTTableViewManager/**/*.{h,swift}'
   s.requires_arc = true
   s.ios.deployment_target = '8.0'
   s.ios.frameworks = 'UIKit', 'Foundation'

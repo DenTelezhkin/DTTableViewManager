@@ -143,16 +143,24 @@ class TableViewFactory
     func headerFooterViewWithMapping(mapping: ViewModelMapping, unwrappedModel: Any) -> UIView?
     {
         let viewClassName = RuntimeHelper.classNameFromReflection(mapping.viewTypeMirror)
-        var view = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier(viewClassName) as? UIView
-        if view == nil {
+        if let view = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier(viewClassName) {
+            mapping.updateBlock(view,unwrappedModel)
+            return view
+        }
+        else {
+            let view : UIView?
             if let type = mapping.viewTypeMirror.value as? UIView.Type {
                 view = type.dt_loadFromXibInBundle(bundle)
             }
+            else {
+                view = nil
+            }
+            
+            precondition(view != nil,"failed creating view of type: \(viewClassName) for model: \(unwrappedModel)")
+            
+            mapping.updateBlock(view!,unwrappedModel)
+            return view
         }
-        precondition(view != nil,"failed creating view of type: \(viewClassName) for model: \(unwrappedModel)")
-        
-        mapping.updateBlock(view!,unwrappedModel)
-        return view
     }
     
     private func headerFooterViewOfType(type: ViewType, model : Any) -> UIView?
