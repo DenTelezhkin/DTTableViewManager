@@ -122,6 +122,10 @@ For in-depth look at how subclassing storage classes can improve your code base,
 
 You can register closures, that will be executed on various events. First and most important is cell selection event.
 
+** Important **
+
+All events are stored on `DTTableViewManager` instance, so be sure to declare self weak in capture lists to prevent retain cycles.
+
 ### Selection
 
  Instead of reacting to cell selection at UITableView NSIndexPath, `DTTableViewManager` allows you to react when user selects concrete model:
@@ -198,7 +202,7 @@ Also check out [wiki page](https://github.com/DenHeadless/DTTableViewManager/wik
 
 ## Examples
 
-There is an example project, that shows some usage examples of `DTTableViewManager`. 
+There is an example project, that shows some usage examples of `DTTableViewManager`.
 
 ## Thanks
 
