@@ -122,7 +122,7 @@ For in-depth look at how subclassing storage classes can improve your code base,
 
 You can register closures, that will be executed on various events. First and most important is cell selection event.
 
-** Important **
+**Important**
 
 All events are stored on `DTTableViewManager` instance, so be sure to declare self weak in capture lists to prevent retain cycles.
 
