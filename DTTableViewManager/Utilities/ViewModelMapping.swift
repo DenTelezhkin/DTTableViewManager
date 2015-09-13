@@ -1,9 +1,8 @@
 //
-//  DTTableViewManager.h
+//  CellModelMapping.swift
 //  DTTableViewManager
 //
-//  Created by Denys Telezhkin on 9/23/15.
-//  Copyright (c) 2015 MLSDev. All rights reserved.
+//  Created by Denys Telezhkin on 15.07.15.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +22,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+import DTModelStorage
 
-FOUNDATION_EXPORT double DTTableViewManagerVersionNumber;
-FOUNDATION_EXPORT const unsigned char DTTableViewManagerVersionString[];
+enum ViewType : String
+{
+    case Cell = "Cell"
+    case Header = "Header"
+    case Footer = "Footer"
+}
 
+struct ViewModelMapping
+{
+    let viewType : ViewType
+    let viewTypeMirror: _MirrorType
+    let modelTypeMirror: _MirrorType
+    let updateBlock : (Any, Any) -> ()
+}
 
+extension ViewModelMapping : CustomStringConvertible
+{
+    var description : String
+    {
+        return "Mapping type : \(viewType.rawValue) \n" +
+            "View Type : \(viewTypeMirror.value) \n" +
+            "Model Type : \(modelTypeMirror.value) \n"
+    }
+}

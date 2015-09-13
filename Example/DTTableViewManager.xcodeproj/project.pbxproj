@@ -7,276 +7,187 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		201F73D3A5D188AE5D0A6DC7 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 351660C977F833AE2009CA0A /* libPods-Example.a */; };
-		950659EE1749030D008AB32D /* BaseExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659ED1749030C008AB32D /* BaseExampleController.m */; };
-		95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
-		952112B91854886400063EA8 /* AppleCoreDataExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112B71854886400063EA8 /* AppleCoreDataExampleController.m */; };
-		952112BB1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */; };
-		952112C1185491E500063EA8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C0185491E500063EA8 /* Event.m */; };
-		952112C51854929300063EA8 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C41854929300063EA8 /* EventCell.m */; };
-		952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112C91854A4DD00063EA8 /* BanksCoreDataViewController.m */; };
-		952112CD1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952112CA1854A4DD00063EA8 /* BanksCoreDataViewController.xib */; };
-		952112D11854A82100063EA8 /* BankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D01854A82100063EA8 /* BankCell.m */; };
-		952112D51854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */; };
-		9545FB9E16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
-		956C39BB1854BA6400FC1A5B /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956C39BA1854BA6400FC1A5B /* BankCell.xib */; };
-		9591074E18535AE40012B07E /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9591074D18535AE30012B07E /* Banks.json */; };
-		9591075218535C600012B07E /* BanksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9591075118535C600012B07E /* BanksCoreDataManager.m */; };
-		959107A2185361CA0012B07E /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 959107A0185361CA0012B07E /* Banks.xcdatamodeld */; };
-		959107A51853624A0012B07E /* Bank.m in Sources */ = {isa = PBXBuildFile; fileRef = 959107A41853624A0012B07E /* Bank.m */; };
-		95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */; };
-		95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */; };
-		95A3B4B716FF649100F5897E /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B616FF649100F5897E /* textured_paper.png */; };
-		95A3B4BA16FF64AE00F5897E /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A3B4B916FF64AE00F5897E /* mochaGrunge.png */; };
-		95B336681775C01900AF0A57 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B336661775C01900AF0A57 /* SearchController.m */; };
-		95B336691775C01900AF0A57 /* SearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B336671775C01900AF0A57 /* SearchController.xib */; };
-		95B3366B1776D8CB00AF0A57 /* Capitals.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95B3366A1776D8CB00AF0A57 /* Capitals.plist */; };
-		95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B3366D1776E28800AF0A57 /* ControllerModel.m */; };
-		95BCE7301792C7B300526954 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BCE72F1792C7B300526954 /* Default-568h@2x.png */; };
-		95BCE7DC1776E93200980281 /* ControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BCE7DB1776E93200980281 /* ControllerCell.m */; };
-		95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */; };
-		95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */; };
-		95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93F618186A3F003225B7 /* StoryboardController.m */; };
-		95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */; };
-		95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FC93FB18186BB1003225B7 /* PrototypedCell.m */; };
-		9A24F6A419DAA430009DE5D4 /* SwiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */; };
-		9A24F6A519DAA430009DE5D4 /* SwiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */; };
-		9A24FF521A5C0777001D4BF4 /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
-		9A24FF531A5C0777001D4BF4 /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */; };
-		9A24FF541A5C0777001D4BF4 /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
-		9A24FF551A5C0777001D4BF4 /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
-		9A24FF561A5C0777001D4BF4 /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
-		9A24FF571A5C0777001D4BF4 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
-		9A2A38D51AEE288A0021E97D /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
-		9A2A38D61AEE288A0021E97D /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */; };
-		9A2A38D71AEE288A0021E97D /* DTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95065A01174C03DF008AB32D /* DTTableViewCell.m */; };
-		9A2A38D81AEE288A0021E97D /* UIView+DTLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */; };
-		9A2A38D91AEE288A0021E97D /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
-		9A2A38DA1AEE288A0021E97D /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
-		9A2A38DB1AEE28990021E97D /* DTTableViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA1972EC18190CF200B81302 /* DTTableViewManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38DC1AEE28990021E97D /* DTTableViewFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = E60CA0131684AFEF00F4147E /* DTTableViewFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38DD1AEE28990021E97D /* DTSectionModel+SectionHeadersFooters.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38DE1AEE28990021E97D /* DTTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 95065A00174C03DF008AB32D /* DTTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38DF1AEE28990021E97D /* UIView+DTLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = 9545FB9C16FDC8EF0042A1A3 /* UIView+DTLoading.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38E01AEE28990021E97D /* DTTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E60CA0161684AFEF00F4147E /* DTTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38E11AEE28990021E97D /* DTTableViewControllerEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A2A38E21AEE28990021E97D /* DTMemoryStorage_DTTableViewManagerAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A359E8019D859A60075ED16 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A359E7F19D859A60075ED16 /* NumberCell.xib */; };
-		9A3CC14819A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */; };
-		9A6FB6501A5B0262004ED709 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
-		9A7A03EA1A5ACA94003A4FA4 /* SwiftStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */; };
-		9A7A03EB1A5ACA9B003A4FA4 /* SwiftStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */; };
-		9A7A03EC1A5ACAA4003A4FA4 /* SwiftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */; };
-		9A88F5A719EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */; };
-		9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A88F5A819EAC683008436C9 /* Images.xcassets */; };
-		9AD462851A5ACD8800936CA9 /* MockTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */; };
-		9AD462861A5ACD9D00936CA9 /* XCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF0031E1A5ABE7000ABFC90 /* XCTests.m */; };
-		9AD462881A5AD23C00936CA9 /* CellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950659F8174C0219008AB32D /* CellWithNib.xib */; };
-		9AD462891A5AD23C00936CA9 /* SwiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */; };
-		9AD4628A1A5AD23C00936CA9 /* MockTableHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */; };
-		9AD4628B1A5AD23C00936CA9 /* SwiftHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860419DAB3C700A266BF /* SwiftHeaderFooterView.xib */; };
-		9AD4628C1A5AD23C00936CA9 /* MockTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 958942001750B9E3007CEB5E /* MockTableHeaderView.xib */; };
-		9AD4628D1A5AD23C00936CA9 /* SwiftHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */; };
-		9ADB0CAB19D700CA0048B08E /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */; };
-		9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAD19D701100048B08E /* NumberCell.swift */; };
-		9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */; };
-		9ADB0CB219D737B10048B08E /* ExecuteAfter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */; };
-		9AE6713A1AEE5EFF00B25A5F /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */; };
-		9AF003251A5ABE8F00ABFC90 /* MemoryStorageSpecs.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9AF003261A5ABE8F00ABFC90 /* DatasourceSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9AF003271A5ABE8F00ABFC90 /* SearchSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95D51FC5175E78BA00FD2292 /* SearchSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9AF003281A5ABE8F00ABFC90 /* MappingSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9589420D1750C7AD007CEB5E /* MappingSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9AF003291A5ABEA700ABFC90 /* CellWithoutNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659F3174C01EF008AB32D /* CellWithoutNib.m */; };
-		9AF0032A1A5ABEA700ABFC90 /* CellWithNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659F6174C0201008AB32D /* CellWithNib.m */; };
-		9AF0032B1A5ABEA700ABFC90 /* BaseMockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 950659FB174C027F008AB32D /* BaseMockCell.m */; };
-		9AF0032C1A5ABEA700ABFC90 /* StringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA87853818AA716D00D138D5 /* StringCell.m */; };
-		9AF0032D1A5ABEA700ABFC90 /* SwiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */; };
-		9AF003301A5ABEA700ABFC90 /* MockTableHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */; };
-		9AF003311A5ABEA700ABFC90 /* NiblessTableHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */; };
-		9AF003321A5ABEA700ABFC90 /* BaseHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942101750C901007CEB5E /* BaseHeaderFooterView.m */; };
-		9AF003331A5ABEA700ABFC90 /* SwiftHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */; };
-		9AF003351A5ABEA700ABFC90 /* NiblessTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */; };
-		9AF003361A5ABEA700ABFC90 /* BaseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958942131750C937007CEB5E /* BaseHeaderView.m */; };
-		9AF003371A5ABEA700ABFC90 /* SwiftHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A48860819DABC1900A266BF /* SwiftHeaderView.swift */; };
-		9AF003381A5ABEAB00ABFC90 /* DTTableViewController+UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */; };
-		9AF003471A5AC20700ABFC90 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
-		9AF003481A5AC20B00ABFC90 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
-		9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */; };
-		E60CA01A1684AFEF00F4147E /* DTTableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */; };
-		E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60CA0171684AFEF00F4147E /* DTTableViewController.m */; };
-		E638F1091619916B00694FBC /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F1081619916B00694FBC /* Example.m */; };
-		E638F10C1619919900694FBC /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E638F10B1619919900694FBC /* ExampleCell.m */; };
-		E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */; };
-		E6402F8C162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402F89162D788300DDE2B3 /* AddRemoveTableViewController.xib */; };
-		E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */; };
-		E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */; };
-		E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */; };
-		E6402FB3162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */; };
-		E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */; };
-		E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */; };
-		E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E666ACE9162C02C800A2DBF2 /* CustomCell.xib */; };
-		E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACEE162C034000A2DBF2 /* CustomCell.m */; };
-		E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E666ACF2162C037B00A2DBF2 /* CustomModel.m */; };
-		E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6EA836F1615EE6000F8B8C3 /* InfoPlist.strings */; };
-		E6EA83731615EE6000F8B8C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EA83721615EE6000F8B8C3 /* main.m */; };
-		E6EA83771615EE6000F8B8C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EA83761615EE6000F8B8C3 /* AppDelegate.m */; };
-		E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */; };
-		E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */; };
-		FAED22C4CC2E97D1A5768F07 /* libPods-XCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6256A6CF878807DB3C840EB2 /* libPods-XCTests.a */; };
+		9A04ED491B9C67B10021B658 /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */; settings = {ASSET_TAGS = (); }; };
+		9A08A9B41B8A23A100877C62 /* DTTableViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A08A9AC1B8A23A100877C62 /* DTTableViewManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
+		9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
+		9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
+		9A08A9B81B8A23A100877C62 /* TableViewReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */; };
+		9A08A9B91B8A23A100877C62 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */; };
+		9A08A9BA1B8A23A100877C62 /* ViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B31B8A23A100877C62 /* ViewModelMapping.swift */; };
+		9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */; };
+		9A1663ED1B5A68B200B2C3C8 /* NibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1663EC1B5A68B200B2C3C8 /* NibView.xib */; };
+		9A1663EF1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */; };
+		9A1A499D1B54527E0006610B /* CreationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A499C1B54527E0006610B /* CreationTestCase.swift */; };
+		9A1A49A31B5455820006610B /* XibTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A49A11B5455820006610B /* XibTableViewController.swift */; };
+		9A1A49A41B5455820006610B /* XibTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1A49A21B5455820006610B /* XibTableViewController.xib */; };
+		9A1C66781B8660D600B3DEE0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1C66771B8660D600B3DEE0 /* Nimble.framework */; };
+		9A1C667A1B86619900B3DEE0 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A1C66771B8660D600B3DEE0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9A1C66801B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C667F1B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift */; };
+		9A244A1E1B6134B0007E4FAA /* ReactingHeaderFooters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */; };
+		9A2A32231B88E3E600C535A0 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9A36C7E81B61807F0077FAFD /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* DTModelStorage.framework */; };
+		9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDA1B8A176300508207 /* BankCell.xib */; };
+		9A41FBE01B8A17C400508207 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDF1B8A17C400508207 /* Banks.json */; };
+		9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE11B8A17E700508207 /* mochaGrunge.png */; };
+		9A41FBE41B8A17E700508207 /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE21B8A17E700508207 /* textured_paper.png */; };
+		9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */; };
+		9A4EB0151B88E48F006C2B8D /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */; };
+		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
+		9A52DD6B1B5A99F30048F535 /* DatasourceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */; };
+		9A71EDC01B61481300047DE0 /* ReactingHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A71EDBF1B61481300047DE0 /* ReactingHeaderFooterView.xib */; };
+		9A75CEC11B55AE6F007FB06C /* MappingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC01B55AE6F007FB06C /* MappingTestCase.swift */; };
+		9A75CEC41B55AF68007FB06C /* TableViewController+UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC31B55AF68007FB06C /* TableViewController+UnitTests.swift */; };
+		9A75CEC71B55B2E2007FB06C /* FixtureCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC61B55B2E2007FB06C /* FixtureCells.swift */; };
+		9A75CEC91B55B43B007FB06C /* NSIndexPath+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC81B55B43B007FB06C /* NSIndexPath+Constructor.swift */; };
+		9A952DFF1B567BE900B9255E /* NibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952DFC1B567BE900B9255E /* NibCell.xib */; };
+		9A952E041B56832100B9255E /* RandomNibNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952E021B56832100B9255E /* RandomNibNameCell.xib */; };
+		9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */; };
+		9A9793B51B5BDB4400908C72 /* ReactingToEventsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */; };
+		9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9B17061B65771600D8ABD3 /* AppDelegate.swift */; };
+		9A9B170E1B65771600D8ABD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170C1B65771600D8ABD3 /* Main.storyboard */; };
+		9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170F1B65771600D8ABD3 /* Images.xcassets */; };
+		9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */; };
+		9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
+		9A9B17271B65772E00D8ABD3 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A36C7E31B6180660077FAFD /* DTModelStorage.framework */; };
+		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
+		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
+		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
+		9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE074B1B86074900636D78 /* BankCell.swift */; };
+		9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */; };
+		9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */; };
+		9AD9D9E41B6EB8AB00AD49AC /* ReorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */; };
+		9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E81B6EBD7D00AD49AC /* CustomViewsController.swift */; };
+		9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9EB1B6EBEAD00AD49AC /* CustomStringCell.swift */; };
+		9AD9D9EE1B6EBEAD00AD49AC /* CustomStringCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD9D9EC1B6EBEAD00AD49AC /* CustomStringCell.xib */; };
+		9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */; };
+		9AD9D9F21B6EBF8800AD49AC /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */; };
+		9ADA632F1B888DC60060B2C0 /* DTTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */; };
+		9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA63321B88A56F0060B2C0 /* TableViewController.swift */; };
+		9AF931551B5936A800456503 /* OptionalCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF931541B5936A800456503 /* OptionalCells.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9A1A499E1B5452FA0006610B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6EA83591615EE6000F8B8C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A2A38BB1AEE285E0021E97D;
+			remoteInfo = DTTableViewManager;
+		};
+		9A36C7E01B6180660077FAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A7D5BAB19D860700083673D;
+			remoteInfo = XCTests;
+		};
+		9A36C7E21B6180660077FAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A2A385B1AEE24340021E97D;
+			remoteInfo = ModelStorage;
+		};
+		9A36C7E61B6180750077FAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
+			remoteInfo = ModelStorage;
+		};
+		9A9B17281B65773500D8ABD3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
+			remoteInfo = ModelStorage;
+		};
+		9A9B172A1B65773800D8ABD3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6EA83591615EE6000F8B8C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A2A38BB1AEE285E0021E97D;
+			remoteInfo = DTTableViewManager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9A1C66791B86618F00B3DEE0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9A2A32231B88E3E600C535A0 /* DTModelStorage.framework in CopyFiles */,
+				9A1C667A1B86619900B3DEE0 /* Nimble.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		351660C977F833AE2009CA0A /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		495FF2F7E0E6CDFC842E2501 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
-		6256A6CF878807DB3C840EB2 /* libPods-XCTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XCTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		855464A7C4615BF02B6DD781 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
-		8D58125737AF56BDBFFD9CD1 /* Pods-XCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XCTests/Pods-XCTests.debug.xcconfig"; sourceTree = "<group>"; };
-		93A5C29EB3BA5E345F59D009 /* Pods-XCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XCTests/Pods-XCTests.release.xcconfig"; sourceTree = "<group>"; };
-		950659EC1749030C008AB32D /* BaseExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseExampleController.h; path = ExampleControllers/BaseExampleController.h; sourceTree = "<group>"; };
-		950659ED1749030C008AB32D /* BaseExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseExampleController.m; path = ExampleControllers/BaseExampleController.m; sourceTree = "<group>"; };
-		950659F2174C01EF008AB32D /* CellWithoutNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellWithoutNib.h; path = mocks/CellWithoutNib.h; sourceTree = "<group>"; };
-		950659F3174C01EF008AB32D /* CellWithoutNib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellWithoutNib.m; path = mocks/CellWithoutNib.m; sourceTree = "<group>"; };
-		950659F5174C0201008AB32D /* CellWithNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellWithNib.h; path = mocks/CellWithNib.h; sourceTree = "<group>"; };
-		950659F6174C0201008AB32D /* CellWithNib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellWithNib.m; path = mocks/CellWithNib.m; sourceTree = "<group>"; };
-		950659F8174C0219008AB32D /* CellWithNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellWithNib.xib; path = mocks/CellWithNib.xib; sourceTree = "<group>"; };
-		950659FA174C027F008AB32D /* BaseMockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMockCell.h; path = mocks/BaseMockCell.h; sourceTree = "<group>"; };
-		950659FB174C027F008AB32D /* BaseMockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseMockCell.m; path = mocks/BaseMockCell.m; sourceTree = "<group>"; };
-		95065A00174C03DF008AB32D /* DTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewCell.h; path = ../../DTTableViewManager/DTTableViewCell.h; sourceTree = "<group>"; };
-		95065A01174C03DF008AB32D /* DTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewCell.m; path = ../../DTTableViewManager/DTTableViewCell.m; sourceTree = "<group>"; };
-		952112B61854886400063EA8 /* AppleCoreDataExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppleCoreDataExampleController.h; path = ExampleControllers/AppleCoreDataExampleController.h; sourceTree = "<group>"; };
-		952112B71854886400063EA8 /* AppleCoreDataExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppleCoreDataExampleController.m; path = ExampleControllers/AppleCoreDataExampleController.m; sourceTree = "<group>"; };
-		952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppleCoreDataExampleController.xib; path = ExampleControllers/AppleCoreDataExampleController.xib; sourceTree = "<group>"; };
-		952112BF185491E500063EA8 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = CoreData/Event.h; sourceTree = "<group>"; };
-		952112C0185491E500063EA8 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = CoreData/Event.m; sourceTree = "<group>"; };
-		952112C31854929300063EA8 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventCell.h; path = TableViewFactory/Cells/EventCell.h; sourceTree = "<group>"; };
-		952112C41854929300063EA8 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventCell.m; path = TableViewFactory/Cells/EventCell.m; sourceTree = "<group>"; };
-		952112C81854A4DD00063EA8 /* BanksCoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataViewController.h; path = ExampleControllers/BanksCoreDataViewController.h; sourceTree = "<group>"; };
-		952112C91854A4DD00063EA8 /* BanksCoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataViewController.m; path = ExampleControllers/BanksCoreDataViewController.m; sourceTree = "<group>"; };
-		952112CA1854A4DD00063EA8 /* BanksCoreDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BanksCoreDataViewController.xib; path = ExampleControllers/BanksCoreDataViewController.xib; sourceTree = "<group>"; };
-		952112CF1854A82100063EA8 /* BankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BankCell.h; path = TableViewFactory/Cells/BankCell.h; sourceTree = "<group>"; };
-		952112D01854A82100063EA8 /* BankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BankCell.m; path = TableViewFactory/Cells/BankCell.m; sourceTree = "<group>"; };
-		952112D31854B59E00063EA8 /* BanksCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataStorage.h; path = CoreData/BanksCoreDataStorage.h; sourceTree = "<group>"; };
-		952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataStorage.m; path = CoreData/BanksCoreDataStorage.m; sourceTree = "<group>"; };
-		9545FB9C16FDC8EF0042A1A3 /* UIView+DTLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DTLoading.h"; path = "../../DTTableViewManager/UIView+DTLoading.h"; sourceTree = "<group>"; };
-		9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DTLoading.m"; path = "../../DTTableViewManager/UIView+DTLoading.m"; sourceTree = "<group>"; };
-		956C39BA1854BA6400FC1A5B /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = TableViewFactory/Cells/BankCell.xib; sourceTree = "<group>"; };
-		958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockTableHeaderView.h; path = "mocks/Header:footer mocks/MockTableHeaderView.h"; sourceTree = "<group>"; };
-		958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockTableHeaderView.m; path = "mocks/Header:footer mocks/MockTableHeaderView.m"; sourceTree = "<group>"; };
-		958942001750B9E3007CEB5E /* MockTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MockTableHeaderView.xib; path = "mocks/Header:footer mocks/MockTableHeaderView.xib"; sourceTree = "<group>"; };
-		958942021750BAAA007CEB5E /* NiblessTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NiblessTableHeaderView.h; path = "mocks/Header:footer mocks/NiblessTableHeaderView.h"; sourceTree = "<group>"; };
-		958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NiblessTableHeaderView.m; path = "mocks/Header:footer mocks/NiblessTableHeaderView.m"; sourceTree = "<group>"; };
-		958942051750BC08007CEB5E /* MockTableHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockTableHeaderFooterView.h; path = "mocks/Header:footer mocks/MockTableHeaderFooterView.h"; sourceTree = "<group>"; };
-		958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockTableHeaderFooterView.m; path = "mocks/Header:footer mocks/MockTableHeaderFooterView.m"; sourceTree = "<group>"; };
-		958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MockTableHeaderFooterView.xib; path = "mocks/Header:footer mocks/MockTableHeaderFooterView.xib"; sourceTree = "<group>"; };
-		9589420A1750BC63007CEB5E /* NiblessTableHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NiblessTableHeaderFooterView.h; path = "mocks/Header:footer mocks/NiblessTableHeaderFooterView.h"; sourceTree = "<group>"; };
-		9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NiblessTableHeaderFooterView.m; path = "mocks/Header:footer mocks/NiblessTableHeaderFooterView.m"; sourceTree = "<group>"; };
-		9589420D1750C7AD007CEB5E /* MappingSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MappingSpec.mm; path = ../CedarUnitTests/MappingSpec.mm; sourceTree = "<group>"; };
-		9589420F1750C900007CEB5E /* BaseHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseHeaderFooterView.h; path = "mocks/Header:footer mocks/BaseHeaderFooterView.h"; sourceTree = "<group>"; };
-		958942101750C901007CEB5E /* BaseHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderFooterView.m; path = "mocks/Header:footer mocks/BaseHeaderFooterView.m"; sourceTree = "<group>"; };
-		958942121750C937007CEB5E /* BaseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseHeaderView.h; path = "mocks/Header:footer mocks/BaseHeaderView.h"; sourceTree = "<group>"; };
-		958942131750C937007CEB5E /* BaseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseHeaderView.m; path = "mocks/Header:footer mocks/BaseHeaderView.m"; sourceTree = "<group>"; };
-		9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MemoryStorageSpecs.mm; path = ../CedarUnitTests/MemoryStorageSpecs.mm; sourceTree = "<group>"; };
-		9591074D18535AE30012B07E /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = Resources/Banks.json; sourceTree = "<group>"; };
-		9591075018535C600012B07E /* BanksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BanksCoreDataManager.h; path = CoreData/BanksCoreDataManager.h; sourceTree = "<group>"; };
-		9591075118535C600012B07E /* BanksCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BanksCoreDataManager.m; path = CoreData/BanksCoreDataManager.m; sourceTree = "<group>"; };
-		959107A1185361CA0012B07E /* Banks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banks.xcdatamodel; sourceTree = "<group>"; };
-		959107A31853624A0012B07E /* Bank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bank.h; path = CoreData/Bank.h; sourceTree = "<group>"; };
-		959107A41853624A0012B07E /* Bank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bank.m; path = CoreData/Bank.m; sourceTree = "<group>"; };
-		95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterView.h; path = TableViewFactory/Cells/CustomHeaderFooterView.h; sourceTree = "<group>"; };
-		95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterView.m; path = TableViewFactory/Cells/CustomHeaderFooterView.m; sourceTree = "<group>"; };
-		95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = TableViewFactory/Cells/CustomHeaderFooterView.xib; sourceTree = "<group>"; };
-		95A3B4B616FF649100F5897E /* textured_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textured_paper.png; sourceTree = "<group>"; };
-		95A3B4B916FF64AE00F5897E /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mochaGrunge.png; sourceTree = "<group>"; };
-		95B336651775C01900AF0A57 /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchController.h; path = ExampleControllers/SearchController.h; sourceTree = "<group>"; };
-		95B336661775C01900AF0A57 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchController.m; path = ExampleControllers/SearchController.m; sourceTree = "<group>"; };
-		95B336671775C01900AF0A57 /* SearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchController.xib; path = ExampleControllers/SearchController.xib; sourceTree = "<group>"; };
-		95B3366A1776D8CB00AF0A57 /* Capitals.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Capitals.plist; path = ExampleControllers/Capitals.plist; sourceTree = "<group>"; };
-		95B3366C1776E28800AF0A57 /* ControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerModel.h; path = TableViewFactory/ExampleControllers/ControllerModel.h; sourceTree = "<group>"; };
-		95B3366D1776E28800AF0A57 /* ControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControllerModel.m; path = TableViewFactory/ExampleControllers/ControllerModel.m; sourceTree = "<group>"; };
 		95BCE72F1792C7B300526954 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		95BCE7DA1776E93200980281 /* ControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerCell.h; path = TableViewFactory/Cells/ControllerCell.h; sourceTree = "<group>"; };
-		95BCE7DB1776E93200980281 /* ControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControllerCell.m; path = TableViewFactory/Cells/ControllerCell.m; sourceTree = "<group>"; };
-		95BF2B9C16FF72580050D0A7 /* CustomHeaderFooterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomHeaderFooterController.h; path = ExampleControllers/CustomHeaderFooterController.h; sourceTree = "<group>"; };
-		95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomHeaderFooterController.m; path = ExampleControllers/CustomHeaderFooterController.m; sourceTree = "<group>"; };
-		95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterController.xib; path = ExampleControllers/CustomHeaderFooterController.xib; sourceTree = "<group>"; };
-		95D51FC5175E78BA00FD2292 /* SearchSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SearchSpec.mm; path = ../CedarUnitTests/SearchSpec.mm; sourceTree = "<group>"; };
-		95FC93F518186A3F003225B7 /* StoryboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryboardController.h; path = ExampleControllers/StoryboardController.h; sourceTree = "<group>"; };
-		95FC93F618186A3F003225B7 /* StoryboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryboardController.m; path = ExampleControllers/StoryboardController.m; sourceTree = "<group>"; };
-		95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ExampleStoryboard.storyboard; path = ExampleControllers/ExampleStoryboard.storyboard; sourceTree = "<group>"; };
-		95FC93FA18186BB1003225B7 /* PrototypedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrototypedCell.h; path = TableViewFactory/Cells/PrototypedCell.h; sourceTree = "<group>"; };
-		95FC93FB18186BB1003225B7 /* PrototypedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrototypedCell.m; path = TableViewFactory/Cells/PrototypedCell.m; sourceTree = "<group>"; };
-		9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftCell.swift; path = mocks/SwiftCell.swift; sourceTree = "<group>"; };
-		9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftCell.xib; path = mocks/SwiftCell.xib; sourceTree = "<group>"; };
+		9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SectionModel+HeaderFooter.swift"; sourceTree = "<group>"; };
+		9A08A9AC1B8A23A100877C62 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTableViewManager.h; sourceTree = "<group>"; };
+		9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTableViewManager.swift; sourceTree = "<group>"; };
+		9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFactory.swift; sourceTree = "<group>"; };
+		9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewConfiguration.swift; sourceTree = "<group>"; };
+		9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewReaction.swift; sourceTree = "<group>"; };
+		9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibLoading.swift"; sourceTree = "<group>"; };
+		9A08A9B31B8A23A100877C62 /* ViewModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelMapping.swift; sourceTree = "<group>"; };
+		9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FixtureViews.swift; path = Fixtures/FixtureViews.swift; sourceTree = "<group>"; };
+		9A1663EC1B5A68B200B2C3C8 /* NibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibView.xib; path = Fixtures/NibView.xib; sourceTree = "<group>"; };
+		9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibHeaderFooterView.xib; path = Fixtures/NibHeaderFooterView.xib; sourceTree = "<group>"; };
+		9A1A499C1B54527E0006610B /* CreationTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationTestCase.swift; sourceTree = "<group>"; };
+		9A1A49A11B5455820006610B /* XibTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XibTableViewController.swift; path = Fixtures/XibTableViewController.swift; sourceTree = "<group>"; };
+		9A1A49A21B5455820006610B /* XibTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XibTableViewController.xib; path = Fixtures/XibTableViewController.xib; sourceTree = "<group>"; };
+		9A1C66771B8660D600B3DEE0 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		9A1C667F1B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewManageableProtocolExtensionTestCase.swift; sourceTree = "<group>"; };
+		9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingHeaderFooters.swift; path = Fixtures/ReactingHeaderFooters.swift; sourceTree = "<group>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A38BF1AEE285E0021E97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A359E7F19D859A60075ED16 /* NumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NumberCell.xib; path = Cells/NumberCell.xib; sourceTree = "<group>"; };
-		9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTMemoryStorage_DTTableViewManagerAdditions.h; path = ../../DTTableViewManager/DTMemoryStorage_DTTableViewManagerAdditions.h; sourceTree = "<group>"; };
-		9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTMemoryStorage_DTTableViewManagerAdditions.m; path = ../../DTTableViewManager/DTMemoryStorage_DTTableViewManagerAdditions.m; sourceTree = "<group>"; };
-		9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderFooterView.swift; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.swift"; sourceTree = "<group>"; };
-		9A48860419DAB3C700A266BF /* SwiftHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftHeaderFooterView.xib; path = "mocks/Header:footer mocks/SwiftHeaderFooterView.xib"; sourceTree = "<group>"; };
-		9A48860819DABC1900A266BF /* SwiftHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHeaderView.swift; path = "mocks/Header:footer mocks/SwiftHeaderView.swift"; sourceTree = "<group>"; };
-		9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftHeaderView.xib; path = "mocks/Header:footer mocks/SwiftHeaderView.xib"; sourceTree = "<group>"; };
-		9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DTSectionModel+SectionHeadersFooters.h"; path = "../../DTTableViewManager/DTSectionModel+SectionHeadersFooters.h"; sourceTree = "<group>"; };
-		9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DTSectionModel+SectionHeadersFooters.m"; path = "../../DTTableViewManager/DTSectionModel+SectionHeadersFooters.m"; sourceTree = "<group>"; };
+		9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTModelStorageTests.xcodeproj; path = ../Carthage/Checkouts/DTModelStorage/DTModelStorageTests/DTModelStorageTests.xcodeproj; sourceTree = "<group>"; };
+		9A41FBDA1B8A176300508207 /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = Cells/BankCell.xib; sourceTree = "<group>"; };
+		9A41FBDF1B8A17C400508207 /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = "Example controllers/Search/Banks.json"; sourceTree = "<group>"; };
+		9A41FBE11B8A17E700508207 /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mochaGrunge.png; path = Resources/mochaGrunge.png; sourceTree = "<group>"; };
+		9A41FBE21B8A17E700508207 /* textured_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textured_paper.png; path = Resources/textured_paper.png; sourceTree = "<group>"; };
+		9A41FBE61B8A181300508207 /* Banks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banks.xcdatamodel; sourceTree = "<group>"; };
+		9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = /Users/Denys/Projects/DTTableViewManager/Carthage/Checkouts/DTModelStorage/DTModelStorageTests/../../../Build/iOS/DTModelStorage.framework; sourceTree = "<absolute>"; };
+		9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatasourceTestCase.swift; sourceTree = "<group>"; };
+		9A71EDBF1B61481300047DE0 /* ReactingHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReactingHeaderFooterView.xib; path = Fixtures/ReactingHeaderFooterView.xib; sourceTree = "<group>"; };
+		9A75CEC01B55AE6F007FB06C /* MappingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingTestCase.swift; sourceTree = "<group>"; };
+		9A75CEC31B55AF68007FB06C /* TableViewController+UnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableViewController+UnitTests.swift"; sourceTree = "<group>"; };
+		9A75CEC61B55B2E2007FB06C /* FixtureCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FixtureCells.swift; path = Fixtures/FixtureCells.swift; sourceTree = "<group>"; };
+		9A75CEC81B55B43B007FB06C /* NSIndexPath+Constructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSIndexPath+Constructor.swift"; sourceTree = "<group>"; };
 		9A88F5A819EAC683008436C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Images.xcassets; sourceTree = "<group>"; };
-		9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SwiftStoryboard.storyboard; path = mocks/Controllers/SwiftStoryboard.storyboard; sourceTree = "<group>"; };
-		9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTableViewCell.swift; path = mocks/SwiftTableViewCell.swift; sourceTree = "<group>"; };
-		9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftStoryboardViewController.swift; path = mocks/Controllers/SwiftStoryboardViewController.swift; sourceTree = "<group>"; };
-		9ADB0CA919D700CA0048B08E /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
-		9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftViewController.swift; path = ExampleControllers/SwiftViewController.swift; sourceTree = "<group>"; };
-		9ADB0CAD19D701100048B08E /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NumberCell.swift; path = Cells/NumberCell.swift; sourceTree = "<group>"; };
-		9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwiftViewController.xib; path = ExampleControllers/SwiftViewController.xib; sourceTree = "<group>"; };
-		9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExecuteAfter.swift; path = Helpers/ExecuteAfter.swift; sourceTree = "<group>"; };
-		9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = ../Carthage/Build/iOS/DTModelStorage.framework; sourceTree = "<group>"; };
+		9A952DFC1B567BE900B9255E /* NibCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibCell.xib; path = Fixtures/NibCell.xib; sourceTree = "<group>"; };
+		9A952E021B56832100B9255E /* RandomNibNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RandomNibNameCell.xib; path = Fixtures/RandomNibNameCell.xib; sourceTree = "<group>"; };
+		9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingTableCell.swift; path = Fixtures/ReactingTableCell.swift; sourceTree = "<group>"; };
+		9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactingToEventsTestCase.swift; sourceTree = "<group>"; };
+		9A9B17021B65771600D8ABD3 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A9B17051B65771600D8ABD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A9B17061B65771600D8ABD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9A9B170D1B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9A9B170F1B65771600D8ABD3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9A9B17121B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataSearchViewController.swift; path = "Example controllers/Search/CoreDataSearchViewController.swift"; sourceTree = "<group>"; };
+		9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		9ABE07441B85FE4E00636D78 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = CoreData/Bank.swift; sourceTree = "<group>"; };
+		9ABE074B1B86074900636D78 /* BankCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankCell.swift; path = "Example controllers/Search/BankCell.swift"; sourceTree = "<group>"; };
+		9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRemoveViewController.swift; path = "Example controllers/AddRemoveViewController.swift"; sourceTree = "<group>"; };
+		9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringCell.swift; path = Cells/StringCell.swift; sourceTree = "<group>"; };
+		9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReorderViewController.swift; path = "Example controllers/ReorderViewController.swift"; sourceTree = "<group>"; };
+		9AD9D9E81B6EBD7D00AD49AC /* CustomViewsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomViewsController.swift; path = "Example controllers/CustomViewsController.swift"; sourceTree = "<group>"; };
+		9AD9D9EB1B6EBEAD00AD49AC /* CustomStringCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomStringCell.swift; path = Cells/CustomStringCell.swift; sourceTree = "<group>"; };
+		9AD9D9EC1B6EBEAD00AD49AC /* CustomStringCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomStringCell.xib; path = Cells/CustomStringCell.xib; sourceTree = "<group>"; };
+		9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomHeaderFooterView.swift; path = "Headers:Footers/CustomHeaderFooterView.swift"; sourceTree = "<group>"; };
+		9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = "Headers:Footers/CustomHeaderFooterView.xib"; sourceTree = "<group>"; };
+		9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTestTableViewController.swift; sourceTree = "<group>"; };
+		9ADA63321B88A56F0060B2C0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = "Example controllers/TableViewController.swift"; sourceTree = "<group>"; };
 		9AF0031A1A5ABE7000ABFC90 /* XCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF0031D1A5ABE7000ABFC90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9AF0031E1A5ABE7000ABFC90 /* XCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCTests.m; sourceTree = "<group>"; };
-		9AF0033B1A5ABF8E00ABFC90 /* XCTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "XCTests-Bridging-Header.h"; path = "TableViewFactory/XCTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		9AF0033C1A5ABFFB00ABFC90 /* XCTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "XCTests-Prefix.pch"; path = "TableViewFactory/XCTests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewControllerEvents.h; path = ../../DTTableViewManager/DTTableViewControllerEvents.h; sourceTree = "<group>"; };
-		9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExampleCell.xib; path = TableViewFactory/Cells/ExampleCell.xib; sourceTree = "<group>"; };
-		AA1972EC18190CF200B81302 /* DTTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewManager.h; path = ../../DTTableViewManager/DTTableViewManager.h; sourceTree = "<group>"; };
-		AA87853718AA716D00D138D5 /* StringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringCell.h; path = mocks/StringCell.h; sourceTree = "<group>"; };
-		AA87853818AA716D00D138D5 /* StringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringCell.m; path = mocks/StringCell.m; sourceTree = "<group>"; };
-		AAB09060184C845A008B7665 /* DTMemoryStorage+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTMemoryStorage+UnitTests.h"; sourceTree = "<group>"; };
-		E60CA0131684AFEF00F4147E /* DTTableViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewFactory.h; path = ../../DTTableViewManager/DTTableViewFactory.h; sourceTree = "<group>"; };
-		E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewFactory.m; path = ../../DTTableViewManager/DTTableViewFactory.m; sourceTree = "<group>"; };
-		E60CA0161684AFEF00F4147E /* DTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTTableViewController.h; path = ../../DTTableViewManager/DTTableViewController.h; sourceTree = "<group>"; };
-		E60CA0171684AFEF00F4147E /* DTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTableViewController.m; path = ../../DTTableViewManager/DTTableViewController.m; sourceTree = "<group>"; };
-		E638F1071619916B00694FBC /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = TableViewFactory/Models/Example.h; sourceTree = "<group>"; };
-		E638F1081619916B00694FBC /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = TableViewFactory/Models/Example.m; sourceTree = "<group>"; };
-		E638F10A1619919900694FBC /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleCell.h; path = TableViewFactory/Cells/ExampleCell.h; sourceTree = "<group>"; };
-		E638F10B1619919900694FBC /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleCell.m; path = TableViewFactory/Cells/ExampleCell.m; sourceTree = "<group>"; };
-		E6402F87162D788200DDE2B3 /* AddRemoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddRemoveTableViewController.h; path = ExampleControllers/AddRemoveTableViewController.h; sourceTree = "<group>"; };
-		E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddRemoveTableViewController.m; path = ExampleControllers/AddRemoveTableViewController.m; sourceTree = "<group>"; };
-		E6402F89162D788300DDE2B3 /* AddRemoveTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddRemoveTableViewController.xib; path = ExampleControllers/AddRemoveTableViewController.xib; sourceTree = "<group>"; };
-		E6402F91162D811F00DDE2B3 /* ReorderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReorderTableViewController.h; path = ExampleControllers/ReorderTableViewController.h; sourceTree = "<group>"; };
-		E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReorderTableViewController.m; path = ExampleControllers/ReorderTableViewController.m; sourceTree = "<group>"; };
-		E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReorderTableViewController.xib; path = ExampleControllers/ReorderTableViewController.xib; sourceTree = "<group>"; };
-		E6402FAE162D8B4F00DDE2B3 /* CustomCellsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCellsTableViewController.h; path = ExampleControllers/CustomCellsTableViewController.h; sourceTree = "<group>"; };
-		E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCellsTableViewController.m; path = ExampleControllers/CustomCellsTableViewController.m; sourceTree = "<group>"; };
-		E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCellsTableViewController.xib; path = ExampleControllers/CustomCellsTableViewController.xib; sourceTree = "<group>"; };
-		E6402FC2162D9A9500DDE2B3 /* MoveSectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveSectionTableViewController.h; path = ExampleControllers/MoveSectionTableViewController.h; sourceTree = "<group>"; };
-		E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoveSectionTableViewController.m; path = ExampleControllers/MoveSectionTableViewController.m; sourceTree = "<group>"; };
-		E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoveSectionTableViewController.xib; path = ExampleControllers/MoveSectionTableViewController.xib; sourceTree = "<group>"; };
-		E666ACE9162C02C800A2DBF2 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCell.xib; path = TableViewFactory/Cells/CustomCell.xib; sourceTree = "<group>"; };
-		E666ACED162C034000A2DBF2 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCell.h; path = TableViewFactory/Cells/CustomCell.h; sourceTree = "<group>"; };
-		E666ACEE162C034000A2DBF2 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = TableViewFactory/Cells/CustomCell.m; sourceTree = "<group>"; };
-		E666ACF1162C037B00A2DBF2 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomModel.h; path = TableViewFactory/Models/CustomModel.h; sourceTree = "<group>"; };
-		E666ACF2162C037B00A2DBF2 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomModel.m; path = TableViewFactory/Models/CustomModel.m; sourceTree = "<group>"; };
-		E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTTableViewController+UnitTests.h"; sourceTree = "<group>"; };
-		E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTTableViewController+UnitTests.m"; sourceTree = "<group>"; };
-		E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DatasourceSpec.mm; path = ../CedarUnitTests/DatasourceSpec.mm; sourceTree = "<group>"; };
-		E6EA83621615EE6000F8B8C3 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6EA836E1615EE6000F8B8C3 /* DTTableViewManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DTTableViewManager-Info.plist"; sourceTree = "<group>"; };
-		E6EA83701615EE6000F8B8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E6EA83721615EE6000F8B8C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E6EA83741615EE6000F8B8C3 /* DTTableViewManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTTableViewManager-Prefix.pch"; sourceTree = "<group>"; };
-		E6EA83751615EE6000F8B8C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E6EA83761615EE6000F8B8C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleTableViewController.h; sourceTree = "<group>"; };
-		E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTableViewController.m; sourceTree = "<group>"; };
-		E6EA83821615EE6000F8B8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ExampleTableViewController.xib; sourceTree = "<group>"; };
+		9AF931541B5936A800456503 /* OptionalCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionalCells.swift; path = Fixtures/OptionalCells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,7 +195,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AE6713A1AEE5EFF00B25A5F /* DTModelStorage.framework in Frameworks */,
+				9A36C7E81B61807F0077FAFD /* DTModelStorage.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A9B16FF1B65771600D8ABD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
+				9A9B17271B65772E00D8ABD3 /* DTModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,203 +212,58 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAED22C4CC2E97D1A5768F07 /* libPods-XCTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6EA835F1615EE6000F8B8C3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				201F73D3A5D188AE5D0A6DC7 /* libPods-Example.a in Frameworks */,
+				9A1C66781B8660D600B3DEE0 /* Nimble.framework in Frameworks */,
+				9A4EB0151B88E48F006C2B8D /* DTModelStorage.framework in Frameworks */,
+				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C8E608B51C8902777399AD2 /* Frameworks */ = {
+		9A08A9AB1B8A23A100877C62 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
-				9AE671391AEE5EFF00B25A5F /* DTModelStorage.framework */,
-				351660C977F833AE2009CA0A /* libPods-Example.a */,
-				6256A6CF878807DB3C840EB2 /* libPods-XCTests.a */,
+				9A08A9AC1B8A23A100877C62 /* DTTableViewManager.h */,
+				9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */,
+				9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */,
+				9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */,
+				9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */,
+				9A08A9B11B8A23A100877C62 /* Utilities */,
 			);
-			name = Frameworks;
+			name = DTTableViewManager;
+			path = ../DTTableViewManager;
 			sourceTree = "<group>";
 		};
-		950659F1174C01CD008AB32D /* Mocks */ = {
+		9A08A9B11B8A23A100877C62 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				95BCE7DD17770D8D00980281 /* Cells */,
-				958941FC1750B992007CEB5E /* Header footer mocks */,
+				9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */,
+				9A08A9B31B8A23A100877C62 /* ViewModelMapping.swift */,
+				9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */,
 			);
-			name = Mocks;
-			path = ../CedarUnitTests;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
-		952112B51854881D00063EA8 /* Apple CoreData example */ = {
+		9A1663E91B5A63BB00B2C3C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				952112B61854886400063EA8 /* AppleCoreDataExampleController.h */,
-				952112B71854886400063EA8 /* AppleCoreDataExampleController.m */,
-				952112B81854886400063EA8 /* AppleCoreDataExampleController.xib */,
+				9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */,
+				9A1663EC1B5A68B200B2C3C8 /* NibView.xib */,
+				9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */,
 			);
-			name = "Apple CoreData example";
+			name = Views;
 			sourceTree = "<group>";
 		};
-		952112C71854A4B900063EA8 /* Banks CoreData example */ = {
+		9A1A49A01B54555D0006610B /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				952112C81854A4DD00063EA8 /* BanksCoreDataViewController.h */,
-				952112C91854A4DD00063EA8 /* BanksCoreDataViewController.m */,
-				952112CA1854A4DD00063EA8 /* BanksCoreDataViewController.xib */,
-				952112D31854B59E00063EA8 /* BanksCoreDataStorage.h */,
-				952112D41854B59E00063EA8 /* BanksCoreDataStorage.m */,
+				9A1663E91B5A63BB00B2C3C8 /* Views */,
+				9A75CEC51B55B2CA007FB06C /* Cells */,
+				9A1A49A11B5455820006610B /* XibTableViewController.swift */,
+				9A1A49A21B5455820006610B /* XibTableViewController.xib */,
 			);
-			name = "Banks CoreData example";
-			sourceTree = "<group>";
-		};
-		9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */ = {
-			isa = PBXGroup;
-			children = (
-				9545FB9C16FDC8EF0042A1A3 /* UIView+DTLoading.h */,
-				9545FB9D16FDC8EF0042A1A3 /* UIView+DTLoading.m */,
-			);
-			name = "UIView+loadFromXib";
-			sourceTree = "<group>";
-		};
-		9545FBA016FF61A00042A1A3 /* Custom headers/footers */ = {
-			isa = PBXGroup;
-			children = (
-				95BF2B9C16FF72580050D0A7 /* CustomHeaderFooterController.h */,
-				95BF2B9D16FF72580050D0A7 /* CustomHeaderFooterController.m */,
-				95BF2B9E16FF72580050D0A7 /* CustomHeaderFooterController.xib */,
-			);
-			name = "Custom headers/footers";
-			sourceTree = "<group>";
-		};
-		958941FC1750B992007CEB5E /* Header footer mocks */ = {
-			isa = PBXGroup;
-			children = (
-				95BCE7DF17770DA400980281 /* UITableViewHeaderFooterView */,
-				95BCE7DE17770D9D00980281 /* UIView */,
-			);
-			name = "Header footer mocks";
-			sourceTree = "<group>";
-		};
-		9591074F18535C290012B07E /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				959107A31853624A0012B07E /* Bank.h */,
-				959107A41853624A0012B07E /* Bank.m */,
-				9591075018535C600012B07E /* BanksCoreDataManager.h */,
-				9591075118535C600012B07E /* BanksCoreDataManager.m */,
-				959107A0185361CA0012B07E /* Banks.xcdatamodeld */,
-				952112BF185491E500063EA8 /* Event.h */,
-				952112C0185491E500063EA8 /* Event.m */,
-			);
-			name = CoreData;
-			sourceTree = "<group>";
-		};
-		95A3B4B316FF645600F5897E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				95A3B4B416FF646200F5897E /* Images */,
-				9591074D18535AE30012B07E /* Banks.json */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		95A3B4B416FF646200F5897E /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				95A3B4B516FF646900F5897E /* patterns */,
-			);
-			name = Images;
-			sourceTree = "<group>";
-		};
-		95A3B4B516FF646900F5897E /* patterns */ = {
-			isa = PBXGroup;
-			children = (
-				95A3B4B616FF649100F5897E /* textured_paper.png */,
-				95A3B4B916FF64AE00F5897E /* mochaGrunge.png */,
-			);
-			name = patterns;
-			sourceTree = "<group>";
-		};
-		95B336641775BFF300AF0A57 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				95B336651775C01900AF0A57 /* SearchController.h */,
-				95B336661775C01900AF0A57 /* SearchController.m */,
-				95B336671775C01900AF0A57 /* SearchController.xib */,
-				95B3366A1776D8CB00AF0A57 /* Capitals.plist */,
-			);
-			name = Search;
-			sourceTree = "<group>";
-		};
-		95BCE7DD17770D8D00980281 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				950659F2174C01EF008AB32D /* CellWithoutNib.h */,
-				950659F3174C01EF008AB32D /* CellWithoutNib.m */,
-				950659F5174C0201008AB32D /* CellWithNib.h */,
-				950659F6174C0201008AB32D /* CellWithNib.m */,
-				950659F8174C0219008AB32D /* CellWithNib.xib */,
-				950659FA174C027F008AB32D /* BaseMockCell.h */,
-				950659FB174C027F008AB32D /* BaseMockCell.m */,
-				AA87853718AA716D00D138D5 /* StringCell.h */,
-				AA87853818AA716D00D138D5 /* StringCell.m */,
-				9A24F6A219DAA430009DE5D4 /* SwiftCell.swift */,
-				9A24F6A319DAA430009DE5D4 /* SwiftCell.xib */,
-				9AC702D519DBEE060065B21B /* SwiftStoryboard.storyboard */,
-				9AC702D919DBEECB0065B21B /* SwiftStoryboardViewController.swift */,
-				9AC702D719DBEE6B0065B21B /* SwiftTableViewCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		95BCE7DE17770D9D00980281 /* UIView */ = {
-			isa = PBXGroup;
-			children = (
-				958941FD1750B9C8007CEB5E /* MockTableHeaderView.h */,
-				958941FE1750B9C8007CEB5E /* MockTableHeaderView.m */,
-				958942001750B9E3007CEB5E /* MockTableHeaderView.xib */,
-				958942021750BAAA007CEB5E /* NiblessTableHeaderView.h */,
-				958942031750BAAA007CEB5E /* NiblessTableHeaderView.m */,
-				958942121750C937007CEB5E /* BaseHeaderView.h */,
-				958942131750C937007CEB5E /* BaseHeaderView.m */,
-				9A48860819DABC1900A266BF /* SwiftHeaderView.swift */,
-				9A48860B19DABC9100A266BF /* SwiftHeaderView.xib */,
-			);
-			name = UIView;
-			sourceTree = "<group>";
-		};
-		95BCE7DF17770DA400980281 /* UITableViewHeaderFooterView */ = {
-			isa = PBXGroup;
-			children = (
-				958942051750BC08007CEB5E /* MockTableHeaderFooterView.h */,
-				958942061750BC08007CEB5E /* MockTableHeaderFooterView.m */,
-				958942081750BC27007CEB5E /* MockTableHeaderFooterView.xib */,
-				9589420A1750BC63007CEB5E /* NiblessTableHeaderFooterView.h */,
-				9589420B1750BC63007CEB5E /* NiblessTableHeaderFooterView.m */,
-				9589420F1750C900007CEB5E /* BaseHeaderFooterView.h */,
-				958942101750C901007CEB5E /* BaseHeaderFooterView.m */,
-				9A48860219DAB39200A266BF /* SwiftHeaderFooterView.swift */,
-				9A48860419DAB3C700A266BF /* SwiftHeaderFooterView.xib */,
-			);
-			name = UITableViewHeaderFooterView;
-			sourceTree = "<group>";
-		};
-		95FC93F418186A21003225B7 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				95FC93F518186A3F003225B7 /* StoryboardController.h */,
-				95FC93F618186A3F003225B7 /* StoryboardController.m */,
-				95FC93F818186A5B003225B7 /* ExampleStoryboard.storyboard */,
-			);
-			name = Storyboard;
+			name = Fixtures;
 			sourceTree = "<group>";
 		};
 		9A2A38BD1AEE285E0021E97D /* DTTableViewManager */ = {
@@ -507,46 +282,145 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9ADB0CA419D5AF880048B08E /* Swift */ = {
+		9A30334D1B77A303000B3355 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				9ADB0CB319D738E30048B08E /* Helpers */,
-				9ADB0CAC19D700E60048B08E /* Cells */,
-				9ADB0CAA19D700CA0048B08E /* SwiftViewController.swift */,
-				9ADB0CAF19D7051C0048B08E /* SwiftViewController.xib */,
+				9ABE073E1B85FC6C00636D78 /* CoreData */,
 			);
-			name = Swift;
+			name = Search;
 			sourceTree = "<group>";
 		};
-		9ADB0CAC19D700E60048B08E /* Cells */ = {
+		9A36C7DB1B6180660077FAFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9ADB0CAD19D701100048B08E /* NumberCell.swift */,
-				9A359E7F19D859A60075ED16 /* NumberCell.xib */,
+				9A36C7E11B6180660077FAFD /* XCTests.xctest */,
+				9A36C7E31B6180660077FAFD /* DTModelStorage.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9A5292031B5D39F200DC8528 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */,
+				9A1C66771B8660D600B3DEE0 /* Nimble.framework */,
+				9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9A75CEC21B55AF52007FB06C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		9A75CEC51B55B2CA007FB06C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9A75CEC61B55B2E2007FB06C /* FixtureCells.swift */,
+				9AF931541B5936A800456503 /* OptionalCells.swift */,
+				9A952DFC1B567BE900B9255E /* NibCell.xib */,
+				9A952E021B56832100B9255E /* RandomNibNameCell.xib */,
+				9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */,
+				9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */,
+				9A71EDBF1B61481300047DE0 /* ReactingHeaderFooterView.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		9ADB0CB319D738E30048B08E /* Helpers */ = {
+		9A9B17031B65771600D8ABD3 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				9ADB0CB119D737B10048B08E /* ExecuteAfter.swift */,
+				9AD9D9E51B6EB96B00AD49AC /* Headers/Footers */,
+				9AD9D9E01B6EB3AC00AD49AC /* Cells */,
+				9AD9D9DD1B6EB2D500AD49AC /* ExampleControllers */,
+				9A9B17061B65771600D8ABD3 /* AppDelegate.swift */,
+				9A9B170C1B65771600D8ABD3 /* Main.storyboard */,
+				9A9B170F1B65771600D8ABD3 /* Images.xcassets */,
+				9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */,
+				9A9B17041B65771600D8ABD3 /* Supporting Files */,
 			);
-			name = Helpers;
+			path = Example;
+			sourceTree = "<group>";
+		};
+		9A9B17041B65771600D8ABD3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A41FBE11B8A17E700508207 /* mochaGrunge.png */,
+				9A41FBE21B8A17E700508207 /* textured_paper.png */,
+				9A9B17051B65771600D8ABD3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9ABE073E1B85FC6C00636D78 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9A41FBDF1B8A17C400508207 /* Banks.json */,
+				9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */,
+				9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */,
+				9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */,
+				9ABE07441B85FE4E00636D78 /* Bank.swift */,
+				9ABE074B1B86074900636D78 /* BankCell.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		9AD9D9DD1B6EB2D500AD49AC /* ExampleControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9A30334D1B77A303000B3355 /* Search */,
+				9AD9D9EA1B6EBD9F00AD49AC /* Custom views example */,
+				9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */,
+				9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */,
+				9ADA63321B88A56F0060B2C0 /* TableViewController.swift */,
+			);
+			name = ExampleControllers;
+			sourceTree = "<group>";
+		};
+		9AD9D9E01B6EB3AC00AD49AC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9A41FBDA1B8A176300508207 /* BankCell.xib */,
+				9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */,
+				9AD9D9EB1B6EBEAD00AD49AC /* CustomStringCell.swift */,
+				9AD9D9EC1B6EBEAD00AD49AC /* CustomStringCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		9AD9D9E51B6EB96B00AD49AC /* Headers/Footers */ = {
+			isa = PBXGroup;
+			children = (
+				9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */,
+				9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */,
+			);
+			name = Headers/Footers;
+			sourceTree = "<group>";
+		};
+		9AD9D9EA1B6EBD9F00AD49AC /* Custom views example */ = {
+			isa = PBXGroup;
+			children = (
+				9AD9D9E81B6EBD7D00AD49AC /* CustomViewsController.swift */,
+			);
+			name = "Custom views example";
 			sourceTree = "<group>";
 		};
 		9AF0031B1A5ABE7000ABFC90 /* XCTests */ = {
 			isa = PBXGroup;
 			children = (
-				AAB09063184C9016008B7665 /* Extensions */,
-				950659F1174C01CD008AB32D /* Mocks */,
-				9591074B18424AAC0012B07E /* MemoryStorageSpecs.mm */,
-				E6CB97D8161B27B800A7E936 /* DatasourceSpec.mm */,
-				95D51FC5175E78BA00FD2292 /* SearchSpec.mm */,
-				9589420D1750C7AD007CEB5E /* MappingSpec.mm */,
-				9AF0033C1A5ABFFB00ABFC90 /* XCTests-Prefix.pch */,
-				9AF0033B1A5ABF8E00ABFC90 /* XCTests-Bridging-Header.h */,
-				9AF0031E1A5ABE7000ABFC90 /* XCTests.m */,
+				9A75CEC21B55AF52007FB06C /* Helpers */,
+				9A75CEC31B55AF68007FB06C /* TableViewController+UnitTests.swift */,
+				9A75CEC81B55B43B007FB06C /* NSIndexPath+Constructor.swift */,
+				9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */,
+				9A1A49A01B54555D0006610B /* Fixtures */,
+				9A1A499C1B54527E0006610B /* CreationTestCase.swift */,
+				9A75CEC01B55AE6F007FB06C /* MappingTestCase.swift */,
+				9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */,
+				9A1C667F1B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift */,
+				9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */,
 				9AF0031C1A5ABE7000ABFC90 /* Supporting Files */,
 			);
 			path = XCTests;
@@ -560,218 +434,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AA2EBD8C187EC5070063B98A /* Convienience */ = {
-			isa = PBXGroup;
-			children = (
-				9A88F5A519EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.h */,
-				9A88F5A619EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m */,
-				95065A00174C03DF008AB32D /* DTTableViewCell.h */,
-				95065A01174C03DF008AB32D /* DTTableViewCell.m */,
-			);
-			name = Convienience;
-			sourceTree = "<group>";
-		};
-		AA2EBD8D187EC5170063B98A /* Cell factory */ = {
-			isa = PBXGroup;
-			children = (
-				E60CA0131684AFEF00F4147E /* DTTableViewFactory.h */,
-				E60CA0141684AFEF00F4147E /* DTTableViewFactory.m */,
-			);
-			name = "Cell factory";
-			sourceTree = "<group>";
-		};
-		AAB09063184C9016008B7665 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E6915660168B382800C5F189 /* DTTableViewController+UnitTests.h */,
-				E6915661168B382800C5F189 /* DTTableViewController+UnitTests.m */,
-				AAB09060184C845A008B7665 /* DTMemoryStorage+UnitTests.h */,
-			);
-			name = Extensions;
-			path = ../CedarUnitTests;
-			sourceTree = "<group>";
-		};
-		E5D76D8280B5DD3C525CD0A7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				855464A7C4615BF02B6DD781 /* Pods-Example.debug.xcconfig */,
-				495FF2F7E0E6CDFC842E2501 /* Pods-Example.release.xcconfig */,
-				8D58125737AF56BDBFFD9CD1 /* Pods-XCTests.debug.xcconfig */,
-				93A5C29EB3BA5E345F59D009 /* Pods-XCTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		E638F1051619913B00694FBC /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E638F1071619916B00694FBC /* Example.h */,
-				E638F1081619916B00694FBC /* Example.m */,
-				E666ACF1162C037B00A2DBF2 /* CustomModel.h */,
-				E666ACF2162C037B00A2DBF2 /* CustomModel.m */,
-				95B3366C1776E28800AF0A57 /* ControllerModel.h */,
-				95B3366D1776E28800AF0A57 /* ControllerModel.m */,
-			);
-			name = Models;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		E638F1061619914300694FBC /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				E638F10A1619919900694FBC /* ExampleCell.h */,
-				E638F10B1619919900694FBC /* ExampleCell.m */,
-				9AFDD02519D1BEF300AA6252 /* ExampleCell.xib */,
-				E666ACE9162C02C800A2DBF2 /* CustomCell.xib */,
-				E666ACED162C034000A2DBF2 /* CustomCell.h */,
-				E666ACEE162C034000A2DBF2 /* CustomCell.m */,
-				95A3B4AC16FF62CA00F5897E /* CustomHeaderFooterView.h */,
-				95A3B4AD16FF62CA00F5897E /* CustomHeaderFooterView.m */,
-				95A3B4B016FF62ED00F5897E /* CustomHeaderFooterView.xib */,
-				95BCE7DA1776E93200980281 /* ControllerCell.h */,
-				95BCE7DB1776E93200980281 /* ControllerCell.m */,
-				95FC93FA18186BB1003225B7 /* PrototypedCell.h */,
-				95FC93FB18186BB1003225B7 /* PrototypedCell.m */,
-				952112C31854929300063EA8 /* EventCell.h */,
-				952112C41854929300063EA8 /* EventCell.m */,
-				952112CF1854A82100063EA8 /* BankCell.h */,
-				952112D01854A82100063EA8 /* BankCell.m */,
-				956C39BA1854BA6400FC1A5B /* BankCell.xib */,
-			);
-			name = Cells;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		E6402F8E162D80EA00DDE2B3 /* Example controllers */ = {
-			isa = PBXGroup;
-			children = (
-				9ADB0CA419D5AF880048B08E /* Swift */,
-				952112C71854A4B900063EA8 /* Banks CoreData example */,
-				952112B51854881D00063EA8 /* Apple CoreData example */,
-				95B336641775BFF300AF0A57 /* Search */,
-				E6402FC1162D9A7800DDE2B3 /* MoveSection */,
-				E6402FA6162D8B1200DDE2B3 /* CustomCells */,
-				9545FBA016FF61A00042A1A3 /* Custom headers/footers */,
-				E6402F90162D80FE00DDE2B3 /* Reorder */,
-				E6402F8F162D80F300DDE2B3 /* AddRemove */,
-				95FC93F418186A21003225B7 /* Storyboard */,
-				950659EC1749030C008AB32D /* BaseExampleController.h */,
-				950659ED1749030C008AB32D /* BaseExampleController.m */,
-			);
-			name = "Example controllers";
-			sourceTree = "<group>";
-		};
-		E6402F8F162D80F300DDE2B3 /* AddRemove */ = {
-			isa = PBXGroup;
-			children = (
-				E6402F87162D788200DDE2B3 /* AddRemoveTableViewController.h */,
-				E6402F88162D788200DDE2B3 /* AddRemoveTableViewController.m */,
-				E6402F89162D788300DDE2B3 /* AddRemoveTableViewController.xib */,
-			);
-			name = AddRemove;
-			sourceTree = "<group>";
-		};
-		E6402F90162D80FE00DDE2B3 /* Reorder */ = {
-			isa = PBXGroup;
-			children = (
-				E6402F91162D811F00DDE2B3 /* ReorderTableViewController.h */,
-				E6402F92162D811F00DDE2B3 /* ReorderTableViewController.m */,
-				E6402F93162D811F00DDE2B3 /* ReorderTableViewController.xib */,
-			);
-			name = Reorder;
-			sourceTree = "<group>";
-		};
-		E6402FA6162D8B1200DDE2B3 /* CustomCells */ = {
-			isa = PBXGroup;
-			children = (
-				E6402FAE162D8B4F00DDE2B3 /* CustomCellsTableViewController.h */,
-				E6402FAF162D8B4F00DDE2B3 /* CustomCellsTableViewController.m */,
-				E6402FB0162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib */,
-			);
-			name = CustomCells;
-			sourceTree = "<group>";
-		};
-		E6402FC1162D9A7800DDE2B3 /* MoveSection */ = {
-			isa = PBXGroup;
-			children = (
-				E6402FC2162D9A9500DDE2B3 /* MoveSectionTableViewController.h */,
-				E6402FC3162D9A9500DDE2B3 /* MoveSectionTableViewController.m */,
-				E6402FC4162D9A9500DDE2B3 /* MoveSectionTableViewController.xib */,
-			);
-			name = MoveSection;
-			sourceTree = "<group>";
-		};
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
+				9A08A9AB1B8A23A100877C62 /* DTTableViewManager */,
+				9A9B17031B65771600D8ABD3 /* Example */,
+				9A5292031B5D39F200DC8528 /* Frameworks */,
 				9A88F5A819EAC683008436C9 /* Images.xcassets */,
 				95BCE72F1792C7B300526954 /* Default-568h@2x.png */,
-				E6EA83931615F07F00F8B8C3 /* DTTableViewManager */,
-				E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */,
 				9AF0031B1A5ABE7000ABFC90 /* XCTests */,
 				9A2A38BD1AEE285E0021E97D /* DTTableViewManager */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
-				7C8E608B51C8902777399AD2 /* Frameworks */,
-				E5D76D8280B5DD3C525CD0A7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		E6EA83631615EE6000F8B8C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E6EA83621615EE6000F8B8C3 /* Example.app */,
 				9AF0031A1A5ABE7000ABFC90 /* XCTests.xctest */,
 				9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */,
+				9A9B17021B65771600D8ABD3 /* Example.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E6EA836C1615EE6000F8B8C3 /* DTTableViewManagerExample */ = {
-			isa = PBXGroup;
-			children = (
-				9ADB0CA919D700CA0048B08E /* Example-Bridging-Header.h */,
-				E6EA83751615EE6000F8B8C3 /* AppDelegate.h */,
-				E6EA83761615EE6000F8B8C3 /* AppDelegate.m */,
-				E638F1051619913B00694FBC /* Models */,
-				E638F1061619914300694FBC /* Cells */,
-				E6402F8E162D80EA00DDE2B3 /* Example controllers */,
-				9591074F18535C290012B07E /* CoreData */,
-				E6EA837E1615EE6000F8B8C3 /* ExampleTableViewController.h */,
-				E6EA837F1615EE6000F8B8C3 /* ExampleTableViewController.m */,
-				E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */,
-				95A3B4B316FF645600F5897E /* Resources */,
-				E6EA836D1615EE6000F8B8C3 /* Supporting Files */,
-			);
-			name = DTTableViewManagerExample;
-			path = TableViewFactory;
-			sourceTree = "<group>";
-		};
-		E6EA836D1615EE6000F8B8C3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E6EA836E1615EE6000F8B8C3 /* DTTableViewManager-Info.plist */,
-				E6EA836F1615EE6000F8B8C3 /* InfoPlist.strings */,
-				E6EA83721615EE6000F8B8C3 /* main.m */,
-				E6EA83741615EE6000F8B8C3 /* DTTableViewManager-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E6EA83931615F07F00F8B8C3 /* DTTableViewManager */ = {
-			isa = PBXGroup;
-			children = (
-				AA1972EC18190CF200B81302 /* DTTableViewManager.h */,
-				AA2EBD8D187EC5170063B98A /* Cell factory */,
-				AA2EBD8C187EC5070063B98A /* Convienience */,
-				9545FB9716FDC8A80042A1A3 /* UIView+loadFromXib */,
-				E60CA0161684AFEF00F4147E /* DTTableViewController.h */,
-				E60CA0171684AFEF00F4147E /* DTTableViewController.m */,
-				9AFDD02219D1947700AA6252 /* DTTableViewControllerEvents.h */,
-				9A3CC14619A607EF00D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.h */,
-				9A3CC14719A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m */,
-			);
-			name = DTTableViewManager;
-			path = TableViewFactory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -781,14 +465,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A2A38DB1AEE28990021E97D /* DTTableViewManager.h in Headers */,
-				9A2A38DC1AEE28990021E97D /* DTTableViewFactory.h in Headers */,
-				9A2A38DD1AEE28990021E97D /* DTSectionModel+SectionHeadersFooters.h in Headers */,
-				9A2A38DE1AEE28990021E97D /* DTTableViewCell.h in Headers */,
-				9A2A38DF1AEE28990021E97D /* UIView+DTLoading.h in Headers */,
-				9A2A38E01AEE28990021E97D /* DTTableViewController.h in Headers */,
-				9A2A38E11AEE28990021E97D /* DTTableViewControllerEvents.h in Headers */,
-				9A2A38E21AEE28990021E97D /* DTMemoryStorage_DTTableViewManagerAdditions.h in Headers */,
+				9A08A9B41B8A23A100877C62 /* DTTableViewManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,54 +479,54 @@
 				9A2A38B71AEE285E0021E97D /* Sources */,
 				9A2A38B81AEE285E0021E97D /* Frameworks */,
 				9A2A38B91AEE285E0021E97D /* Headers */,
-				9A2A38BA1AEE285E0021E97D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9A36C7E71B6180750077FAFD /* PBXTargetDependency */,
 			);
 			name = DTTableViewManager;
 			productName = DTTableViewManager;
 			productReference = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9AF003191A5ABE7000ABFC90 /* XCTests */ = {
+		9A9B17011B65771600D8ABD3 /* Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9AF003241A5ABE7000ABFC90 /* Build configuration list for PBXNativeTarget "XCTests" */;
+			buildConfigurationList = 9A9B17201B65771600D8ABD3 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
-				47166CAB0FEBB3C33A1CDB91 /* Check Pods Manifest.lock */,
-				9AF003161A5ABE7000ABFC90 /* Sources */,
-				9AF003171A5ABE7000ABFC90 /* Frameworks */,
-				9AF003181A5ABE7000ABFC90 /* Resources */,
-				7839AC0C4F255A96C15B64FD /* Copy Pods Resources */,
+				9A9B16FE1B65771600D8ABD3 /* Sources */,
+				9A9B16FF1B65771600D8ABD3 /* Frameworks */,
+				9A9B17001B65771600D8ABD3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9A9B172B1B65773800D8ABD3 /* PBXTargetDependency */,
+				9A9B17291B65773500D8ABD3 /* PBXTargetDependency */,
+			);
+			name = Example;
+			productName = Example;
+			productReference = 9A9B17021B65771600D8ABD3 /* Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9AF003191A5ABE7000ABFC90 /* XCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AF003241A5ABE7000ABFC90 /* Build configuration list for PBXNativeTarget "XCTests" */;
+			buildPhases = (
+				9AF003161A5ABE7000ABFC90 /* Sources */,
+				9AF003171A5ABE7000ABFC90 /* Frameworks */,
+				9AF003181A5ABE7000ABFC90 /* Resources */,
+				9A1C66791B86618F00B3DEE0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A1A499F1B5452FA0006610B /* PBXTargetDependency */,
 			);
 			name = XCTests;
 			productName = XCTests;
 			productReference = 9AF0031A1A5ABE7000ABFC90 /* XCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		E6EA83611615EE6000F8B8C3 /* Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "Example" */;
-			buildPhases = (
-				5C900E1BBED0EA0E3DBAC554 /* Check Pods Manifest.lock */,
-				E6EA835E1615EE6000F8B8C3 /* Sources */,
-				E6EA835F1615EE6000F8B8C3 /* Frameworks */,
-				E6EA83601615EE6000F8B8C3 /* Resources */,
-				61239D64CF8F43179FA68467 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Example;
-			productName = TableViewFactory;
-			productReference = E6EA83621615EE6000F8B8C3 /* Example.app */;
-			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -857,11 +534,15 @@
 		E6EA83591615EE6000F8B8C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Denys Telezhkin";
 				TargetAttributes = {
 					9A2A38BB1AEE285E0021E97D = {
 						CreatedOnToolsVersion = 6.3.1;
+					};
+					9A9B17011B65771600D8ABD3 = {
+						CreatedOnToolsVersion = 6.4;
 					};
 					9AF003191A5ABE7000ABFC90 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -874,24 +555,57 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = E6EA83571615EE6000F8B8C3;
 			productRefGroup = E6EA83631615EE6000F8B8C3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9A36C7DB1B6180660077FAFD /* Products */;
+					ProjectRef = 9A36C7DA1B6180660077FAFD /* DTModelStorageTests.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
-				E6EA83611615EE6000F8B8C3 /* Example */,
+				9A9B17011B65771600D8ABD3 /* Example */,
 				9AF003191A5ABE7000ABFC90 /* XCTests */,
 				9A2A38BB1AEE285E0021E97D /* DTTableViewManager */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		9A36C7E11B6180660077FAFD /* XCTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XCTests.xctest;
+			remoteRef = 9A36C7E01B6180660077FAFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9A36C7E31B6180660077FAFD /* DTModelStorage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DTModelStorage.framework;
+			remoteRef = 9A36C7E21B6180660077FAFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
-		9A2A38BA1AEE285E0021E97D /* Resources */ = {
+		9A9B17001B65771600D8ABD3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A41FBE41B8A17E700508207 /* textured_paper.png in Resources */,
+				9AD9D9F21B6EBF8800AD49AC /* CustomHeaderFooterView.xib in Resources */,
+				9A9B170E1B65771600D8ABD3 /* Main.storyboard in Resources */,
+				9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */,
+				9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */,
+				9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */,
+				9A41FBE01B8A17C400508207 /* Banks.json in Resources */,
+				9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */,
+				9AD9D9EE1B6EBEAD00AD49AC /* CustomStringCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -899,124 +613,49 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A6FB6501A5B0262004ED709 /* ExampleCell.xib in Resources */,
-				9AD462881A5AD23C00936CA9 /* CellWithNib.xib in Resources */,
-				9AD462891A5AD23C00936CA9 /* SwiftCell.xib in Resources */,
-				9AD4628A1A5AD23C00936CA9 /* MockTableHeaderFooterView.xib in Resources */,
-				9AD4628B1A5AD23C00936CA9 /* SwiftHeaderFooterView.xib in Resources */,
-				9AD4628C1A5AD23C00936CA9 /* MockTableHeaderView.xib in Resources */,
-				9AD4628D1A5AD23C00936CA9 /* SwiftHeaderView.xib in Resources */,
-				9A7A03EA1A5ACA94003A4FA4 /* SwiftStoryboard.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6EA83601615EE6000F8B8C3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				952112BB1854886400063EA8 /* AppleCoreDataExampleController.xib in Resources */,
-				E6EA83711615EE6000F8B8C3 /* InfoPlist.strings in Resources */,
-				9A88F5A919EAC683008436C9 /* Images.xcassets in Resources */,
-				E6EA83831615EE6000F8B8C3 /* ExampleTableViewController.xib in Resources */,
-				956C39BB1854BA6400FC1A5B /* BankCell.xib in Resources */,
-				9A359E8019D859A60075ED16 /* NumberCell.xib in Resources */,
-				E666ACEA162C02C800A2DBF2 /* CustomCell.xib in Resources */,
-				9ADB0CB019D7051C0048B08E /* SwiftViewController.xib in Resources */,
-				E6402F8C162D788300DDE2B3 /* AddRemoveTableViewController.xib in Resources */,
-				E6402F96162D811F00DDE2B3 /* ReorderTableViewController.xib in Resources */,
-				E6402FB3162D8B4F00DDE2B3 /* CustomCellsTableViewController.xib in Resources */,
-				9AFDD02619D1BEF400AA6252 /* ExampleCell.xib in Resources */,
-				E6402FC7162D9A9500DDE2B3 /* MoveSectionTableViewController.xib in Resources */,
-				9A24F6A519DAA430009DE5D4 /* SwiftCell.xib in Resources */,
-				95A3B4B116FF62ED00F5897E /* CustomHeaderFooterView.xib in Resources */,
-				95A3B4B716FF649100F5897E /* textured_paper.png in Resources */,
-				9591074E18535AE40012B07E /* Banks.json in Resources */,
-				95A3B4BA16FF64AE00F5897E /* mochaGrunge.png in Resources */,
-				95BF2BA116FF72580050D0A7 /* CustomHeaderFooterController.xib in Resources */,
-				95FC93F918186A5B003225B7 /* ExampleStoryboard.storyboard in Resources */,
-				95B336691775C01900AF0A57 /* SearchController.xib in Resources */,
-				95B3366B1776D8CB00AF0A57 /* Capitals.plist in Resources */,
-				95BCE7301792C7B300526954 /* Default-568h@2x.png in Resources */,
-				952112CD1854A4DD00063EA8 /* BanksCoreDataViewController.xib in Resources */,
+				9A1A49A41B5455820006610B /* XibTableViewController.xib in Resources */,
+				9A952DFF1B567BE900B9255E /* NibCell.xib in Resources */,
+				9A952E041B56832100B9255E /* RandomNibNameCell.xib in Resources */,
+				9A71EDC01B61481300047DE0 /* ReactingHeaderFooterView.xib in Resources */,
+				9A1663ED1B5A68B200B2C3C8 /* NibView.xib in Resources */,
+				9A1663EF1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		47166CAB0FEBB3C33A1CDB91 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		5C900E1BBED0EA0E3DBAC554 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		61239D64CF8F43179FA68467 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7839AC0C4F255A96C15B64FD /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCTests/Pods-XCTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9A2A38B71AEE285E0021E97D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A2A38D51AEE288A0021E97D /* DTTableViewFactory.m in Sources */,
-				9A2A38D61AEE288A0021E97D /* DTSectionModel+SectionHeadersFooters.m in Sources */,
-				9A2A38D71AEE288A0021E97D /* DTTableViewCell.m in Sources */,
-				9A2A38D81AEE288A0021E97D /* UIView+DTLoading.m in Sources */,
-				9A2A38D91AEE288A0021E97D /* DTTableViewController.m in Sources */,
-				9A2A38DA1AEE288A0021E97D /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
+				9A04ED491B9C67B10021B658 /* SectionModel+HeaderFooter.swift in Sources */,
+				9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */,
+				9A08A9B91B8A23A100877C62 /* UIView+XibLoading.swift in Sources */,
+				9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */,
+				9A08A9BA1B8A23A100877C62 /* ViewModelMapping.swift in Sources */,
+				9A08A9B81B8A23A100877C62 /* TableViewReaction.swift in Sources */,
+				9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A9B16FE1B65771600D8ABD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AD9D9E41B6EB8AB00AD49AC /* ReorderViewController.swift in Sources */,
+				9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */,
+				9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */,
+				9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */,
+				9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */,
+				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,
+				9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */,
+				9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */,
+				9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */,
+				9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */,
+				9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */,
+				9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */,
+				9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,100 +663,63 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A24FF571A5C0777001D4BF4 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
-				9AD462861A5ACD9D00936CA9 /* XCTests.m in Sources */,
-				9A7A03EC1A5ACAA4003A4FA4 /* SwiftTableViewCell.swift in Sources */,
-				9A24FF521A5C0777001D4BF4 /* DTTableViewFactory.m in Sources */,
-				9A7A03EB1A5ACA9B003A4FA4 /* SwiftStoryboardViewController.swift in Sources */,
-				9AF003481A5AC20B00ABFC90 /* ExampleCell.m in Sources */,
-				9AF003471A5AC20700ABFC90 /* Example.m in Sources */,
-				9AD462851A5ACD8800936CA9 /* MockTableHeaderView.m in Sources */,
-				9AF003291A5ABEA700ABFC90 /* CellWithoutNib.m in Sources */,
-				9AF0032A1A5ABEA700ABFC90 /* CellWithNib.m in Sources */,
-				9AF0032B1A5ABEA700ABFC90 /* BaseMockCell.m in Sources */,
-				9AF003381A5ABEAB00ABFC90 /* DTTableViewController+UnitTests.m in Sources */,
-				9A24FF541A5C0777001D4BF4 /* DTTableViewCell.m in Sources */,
-				9AF0032C1A5ABEA700ABFC90 /* StringCell.m in Sources */,
-				9A24FF561A5C0777001D4BF4 /* DTTableViewController.m in Sources */,
-				9AF0032D1A5ABEA700ABFC90 /* SwiftCell.swift in Sources */,
-				9AF003301A5ABEA700ABFC90 /* MockTableHeaderFooterView.m in Sources */,
-				9AF003311A5ABEA700ABFC90 /* NiblessTableHeaderFooterView.m in Sources */,
-				9A24FF551A5C0777001D4BF4 /* UIView+DTLoading.m in Sources */,
-				9A24FF531A5C0777001D4BF4 /* DTSectionModel+SectionHeadersFooters.m in Sources */,
-				9AF003321A5ABEA700ABFC90 /* BaseHeaderFooterView.m in Sources */,
-				9AF003331A5ABEA700ABFC90 /* SwiftHeaderFooterView.swift in Sources */,
-				9AF003351A5ABEA700ABFC90 /* NiblessTableHeaderView.m in Sources */,
-				9AF003361A5ABEA700ABFC90 /* BaseHeaderView.m in Sources */,
-				9AF003371A5ABEA700ABFC90 /* SwiftHeaderView.swift in Sources */,
-				9AF003251A5ABE8F00ABFC90 /* MemoryStorageSpecs.mm in Sources */,
-				9AF003261A5ABE8F00ABFC90 /* DatasourceSpec.mm in Sources */,
-				9AF003271A5ABE8F00ABFC90 /* SearchSpec.mm in Sources */,
-				9AF003281A5ABE8F00ABFC90 /* MappingSpec.mm in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6EA835E1615EE6000F8B8C3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				952112D51854B59E00063EA8 /* BanksCoreDataStorage.m in Sources */,
-				9591075218535C600012B07E /* BanksCoreDataManager.m in Sources */,
-				E6EA83731615EE6000F8B8C3 /* main.m in Sources */,
-				95FC93F718186A3F003225B7 /* StoryboardController.m in Sources */,
-				E6EA83771615EE6000F8B8C3 /* AppDelegate.m in Sources */,
-				9A88F5A719EAC3AC008436C9 /* DTSectionModel+SectionHeadersFooters.m in Sources */,
-				9ADB0CAE19D701100048B08E /* NumberCell.swift in Sources */,
-				E6EA83801615EE6000F8B8C3 /* ExampleTableViewController.m in Sources */,
-				E638F1091619916B00694FBC /* Example.m in Sources */,
-				E638F10C1619919900694FBC /* ExampleCell.m in Sources */,
-				E666ACEF162C034000A2DBF2 /* CustomCell.m in Sources */,
-				E666ACF3162C037B00A2DBF2 /* CustomModel.m in Sources */,
-				E6402F8A162D788300DDE2B3 /* AddRemoveTableViewController.m in Sources */,
-				952112D11854A82100063EA8 /* BankCell.m in Sources */,
-				E6402F94162D811F00DDE2B3 /* ReorderTableViewController.m in Sources */,
-				E6402FB1162D8B4F00DDE2B3 /* CustomCellsTableViewController.m in Sources */,
-				E6402FC5162D9A9500DDE2B3 /* MoveSectionTableViewController.m in Sources */,
-				9A3CC14819A6082600D52963 /* DTMemoryStorage_DTTableViewManagerAdditions.m in Sources */,
-				952112C51854929300063EA8 /* EventCell.m in Sources */,
-				9ADB0CAB19D700CA0048B08E /* SwiftViewController.swift in Sources */,
-				952112CB1854A4DD00063EA8 /* BanksCoreDataViewController.m in Sources */,
-				E60CA01A1684AFEF00F4147E /* DTTableViewFactory.m in Sources */,
-				E60CA01C1684AFEF00F4147E /* DTTableViewController.m in Sources */,
-				9545FB9E16FDC8EF0042A1A3 /* UIView+DTLoading.m in Sources */,
-				95A3B4AE16FF62CA00F5897E /* CustomHeaderFooterView.m in Sources */,
-				95BF2B9F16FF72580050D0A7 /* CustomHeaderFooterController.m in Sources */,
-				9ADB0CB219D737B10048B08E /* ExecuteAfter.swift in Sources */,
-				9A24F6A419DAA430009DE5D4 /* SwiftCell.swift in Sources */,
-				95FC93FC18186BB1003225B7 /* PrototypedCell.m in Sources */,
-				950659EE1749030D008AB32D /* BaseExampleController.m in Sources */,
-				952112C1185491E500063EA8 /* Event.m in Sources */,
-				95065A02174C03DF008AB32D /* DTTableViewCell.m in Sources */,
-				95B336681775C01900AF0A57 /* SearchController.m in Sources */,
-				95B3366E1776E28800AF0A57 /* ControllerModel.m in Sources */,
-				952112B91854886400063EA8 /* AppleCoreDataExampleController.m in Sources */,
-				959107A51853624A0012B07E /* Bank.m in Sources */,
-				95BCE7DC1776E93200980281 /* ControllerCell.m in Sources */,
-				959107A2185361CA0012B07E /* Banks.xcdatamodeld in Sources */,
+				9A1A49A31B5455820006610B /* XibTableViewController.swift in Sources */,
+				9A75CEC41B55AF68007FB06C /* TableViewController+UnitTests.swift in Sources */,
+				9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */,
+				9A52DD6B1B5A99F30048F535 /* DatasourceTestCase.swift in Sources */,
+				9A75CEC11B55AE6F007FB06C /* MappingTestCase.swift in Sources */,
+				9A9793B51B5BDB4400908C72 /* ReactingToEventsTestCase.swift in Sources */,
+				9A244A1E1B6134B0007E4FAA /* ReactingHeaderFooters.swift in Sources */,
+				9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */,
+				9AF931551B5936A800456503 /* OptionalCells.swift in Sources */,
+				9ADA632F1B888DC60060B2C0 /* DTTestTableViewController.swift in Sources */,
+				9A75CEC71B55B2E2007FB06C /* FixtureCells.swift in Sources */,
+				9A1A499D1B54527E0006610B /* CreationTestCase.swift in Sources */,
+				9A1C66801B8672B500B3DEE0 /* TableViewManageableProtocolExtensionTestCase.swift in Sources */,
+				9A75CEC91B55B43B007FB06C /* NSIndexPath+Constructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9A1A499F1B5452FA0006610B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A2A38BB1AEE285E0021E97D /* DTTableViewManager */;
+			targetProxy = 9A1A499E1B5452FA0006610B /* PBXContainerItemProxy */;
+		};
+		9A36C7E71B6180750077FAFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ModelStorage;
+			targetProxy = 9A36C7E61B6180750077FAFD /* PBXContainerItemProxy */;
+		};
+		9A9B17291B65773500D8ABD3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ModelStorage;
+			targetProxy = 9A9B17281B65773500D8ABD3 /* PBXContainerItemProxy */;
+		};
+		9A9B172B1B65773800D8ABD3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A2A38BB1AEE285E0021E97D /* DTTableViewManager */;
+			targetProxy = 9A9B172A1B65773800D8ABD3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		E6EA836F1615EE6000F8B8C3 /* InfoPlist.strings */ = {
+		9A9B170C1B65771600D8ABD3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E6EA83701615EE6000F8B8C3 /* en */,
+				9A9B170D1B65771600D8ABD3 /* Base */,
 			);
-			name = InfoPlist.strings;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		E6EA83811615EE6000F8B8C3 /* ExampleTableViewController.xib */ = {
+		9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E6EA83821615EE6000F8B8C3 /* en */,
+				9A9B17121B65771600D8ABD3 /* Base */,
 			);
-			name = ExampleTableViewController.xib;
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1126,6 +728,7 @@
 		9A2A38CF1AEE285E0021E97D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1142,10 +745,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/../Carthage/Build/iOS",
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1161,8 +760,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlsdev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1172,6 +773,7 @@
 		9A2A38D01AEE285E0021E97D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1190,10 +792,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/../Carthage/Build/iOS",
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1205,6 +803,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlsdev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1213,9 +812,81 @@
 			};
 			name = Release;
 		};
+		9A9B17211B65771600D8ABD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9A9B17221B65771600D8ABD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		9AF003221A5ABE7000ABFC90 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D58125737AF56BDBFFD9CD1 /* Pods-XCTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1226,10 +897,12 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"../Carthage/Build/iOS/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/XCTests-Prefix.pch";
@@ -1246,14 +919,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "TableViewFactory/XCTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		9AF003231A5ABE7000ABFC90 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93A5C29EB3BA5E345F59D009 /* Pods-XCTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1264,11 +937,13 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"../Carthage/Build/iOS/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewFactory/XCTests-Prefix.pch";
@@ -1281,8 +956,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "TableViewFactory/XCTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -1291,14 +966,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1320,14 +994,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1335,55 +1007,6 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		E6EA83871615EE6000F8B8C3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 855464A7C4615BF02B6DD781 /* Pods-Example.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LIBRARY = "compiler-default";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TableViewFactory/DTTableViewManager-Prefix.pch";
-				GCC_VERSION = "";
-				INFOPLIST_FILE = "TableViewFactory/DTTableViewManager-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "TableViewFactory/Example-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		E6EA83881615EE6000F8B8C3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 495FF2F7E0E6CDFC842E2501 /* Pods-Example.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LIBRARY = "compiler-default";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TableViewFactory/DTTableViewManager-Prefix.pch";
-				GCC_VERSION = "";
-				INFOPLIST_FILE = "TableViewFactory/DTTableViewManager-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "TableViewFactory/Example-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -1395,6 +1018,15 @@
 			buildConfigurations = (
 				9A2A38CF1AEE285E0021E97D /* Debug */,
 				9A2A38D01AEE285E0021E97D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A9B17201B65771600D8ABD3 /* Build configuration list for PBXNativeTarget "Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A9B17211B65771600D8ABD3 /* Debug */,
+				9A9B17221B65771600D8ABD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1417,26 +1049,17 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6EA83861615EE6000F8B8C3 /* Build configuration list for PBXNativeTarget "Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6EA83871615EE6000F8B8C3 /* Debug */,
-				E6EA83881615EE6000F8B8C3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		959107A0185361CA0012B07E /* Banks.xcdatamodeld */ = {
+		9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				959107A1185361CA0012B07E /* Banks.xcdatamodel */,
+				9A41FBE61B8A181300508207 /* Banks.xcdatamodel */,
 			);
-			currentVersion = 959107A1185361CA0012B07E /* Banks.xcdatamodel */;
+			currentVersion = 9A41FBE61B8A181300508207 /* Banks.xcdatamodel */;
 			name = Banks.xcdatamodeld;
-			path = CoreData/Banks.xcdatamodeld;
+			path = "Example controllers/Search/Banks.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

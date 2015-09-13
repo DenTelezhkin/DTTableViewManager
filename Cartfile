@@ -1,1 +1,2 @@
-github "DenHeadless/DTModelStorage"
+github "DenHeadless/DTModelStorage" "master"
+github "Quick/Nimble" "swift-2.0"

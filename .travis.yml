@@ -1,3 +1,4 @@
+osx_image: xcode6.4
 sudo: false
 cache: cocoapods
 language: objective-c
@@ -5,6 +6,8 @@ language: objective-c
 before_install:
     - gem install cocoapods --no-document --quiet
     - export LANG=en_US.UTF-8
+    - brew install carthage
+    - carthage update --verbose
     - cd Example
 
 script: rake

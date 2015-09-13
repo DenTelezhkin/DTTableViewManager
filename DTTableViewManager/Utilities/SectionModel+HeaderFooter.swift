@@ -1,9 +1,9 @@
 //
-//  DTTableViewManager.h
+//  SectionModel+HeaderFooter.swift
 //  DTTableViewManager
 //
-//  Created by Denys Telezhkin on 9/23/15.
-//  Copyright (c) 2015 MLSDev. All rights reserved.
+//  Created by Denys Telezhkin on 06.09.15.
+//  Copyright © 2015 Denys Telezhkin. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+import Foundation
+import DTModelStorage
 
-FOUNDATION_EXPORT double DTTableViewManagerVersionNumber;
-FOUNDATION_EXPORT const unsigned char DTTableViewManagerVersionString[];
-
-
+/// Convenience getters and setters for table view header and footer models
+public extension SectionModel
+{
+    /// UITableView header model for current section
+    var tableHeaderModel : Any? {
+        get {
+            return self.supplementaryModelOfKind(DTTableViewElementSectionHeader)
+        }
+        set {
+            self.setSupplementaryModel(newValue, forKind: DTTableViewElementSectionHeader)
+        }
+    }
+    
+    /// UITableView footer model for current section
+    var tableFooterModel : Any? {
+        get {
+            return self.supplementaryModelOfKind(DTTableViewElementSectionFooter)
+        }
+        set {
+            self.setSupplementaryModel(newValue, forKind: DTTableViewElementSectionFooter)
+        }
+    }
+}
