@@ -30,7 +30,6 @@
 		9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE11B8A17E700508207 /* mochaGrunge.png */; };
 		9A41FBE41B8A17E700508207 /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE21B8A17E700508207 /* textured_paper.png */; };
 		9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */; };
-		9A4EB0151B88E48F006C2B8D /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A52DD6B1B5A99F30048F535 /* DatasourceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */; };
 		9A71EDC01B61481300047DE0 /* ReactingHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A71EDBF1B61481300047DE0 /* ReactingHeaderFooterView.xib */; };
@@ -40,7 +39,6 @@
 		9A75CEC91B55B43B007FB06C /* NSIndexPath+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC81B55B43B007FB06C /* NSIndexPath+Constructor.swift */; };
 		9A952DFF1B567BE900B9255E /* NibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952DFC1B567BE900B9255E /* NibCell.xib */; };
 		9A952E041B56832100B9255E /* RandomNibNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A952E021B56832100B9255E /* RandomNibNameCell.xib */; };
-		9A96484F1BA5C1D400647FDE /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */; };
 		9A9793B51B5BDB4400908C72 /* ReactingToEventsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */; };
 		9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9B17061B65771600D8ABD3 /* AppDelegate.swift */; };
@@ -48,7 +46,11 @@
 		9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170F1B65771600D8ABD3 /* Images.xcassets */; };
 		9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */; };
 		9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
-		9AA660021BA5C94900581D46 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AA3E6C01BA84784004950AE /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA3E6BF1BA84784004950AE /* DTModelStorage.framework */; settings = {ASSET_TAGS = (); }; };
+		9AA3E6C11BA84799004950AE /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9AA3E6BF1BA84784004950AE /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AA3E6C21BA84C98004950AE /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA3E6BF1BA84784004950AE /* DTModelStorage.framework */; };
+		9AA3E6C41BA84CAF004950AE /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9AA3E6BF1BA84784004950AE /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AA660031BA5C94900581D46 /* DTTableViewManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
@@ -64,7 +66,6 @@
 		9AD9D9F21B6EBF8800AD49AC /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */; };
 		9ADA632F1B888DC60060B2C0 /* DTTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */; };
 		9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA63321B88A56F0060B2C0 /* TableViewController.swift */; };
-		9AE1B7091BA5C116000B3AEC /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */; };
 		9AF931551B5936A800456503 /* OptionalCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF931541B5936A800456503 /* OptionalCells.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,7 +93,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9AA660021BA5C94900581D46 /* DTModelStorage.framework in CopyFiles */,
 				9AA660031BA5C94900581D46 /* DTTableViewManager.framework in CopyFiles */,
 				9A1C667A1B86619900B3DEE0 /* Nimble.framework in CopyFiles */,
 			);
@@ -104,7 +104,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9A96484F1BA5C1D400647FDE /* DTModelStorage.framework in CopyFiles */,
+				9AA3E6C11BA84799004950AE /* DTModelStorage.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AA3E6C31BA84CA5004950AE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */,
+				9AA3E6C41BA84CAF004950AE /* DTModelStorage.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +147,6 @@
 		9A41FBE11B8A17E700508207 /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mochaGrunge.png; path = Resources/mochaGrunge.png; sourceTree = "<group>"; };
 		9A41FBE21B8A17E700508207 /* textured_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textured_paper.png; path = Resources/textured_paper.png; sourceTree = "<group>"; };
 		9A41FBE61B8A181300508207 /* Banks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banks.xcdatamodel; sourceTree = "<group>"; };
-		9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = /Users/Denys/Projects/DTTableViewManager/Carthage/Checkouts/DTModelStorage/DTModelStorageTests/../../../Build/iOS/DTModelStorage.framework; sourceTree = "<absolute>"; };
 		9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatasourceTestCase.swift; sourceTree = "<group>"; };
 		9A71EDBF1B61481300047DE0 /* ReactingHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReactingHeaderFooterView.xib; path = Fixtures/ReactingHeaderFooterView.xib; sourceTree = "<group>"; };
 		9A75CEC01B55AE6F007FB06C /* MappingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingTestCase.swift; sourceTree = "<group>"; };
@@ -154,6 +164,7 @@
 		9A9B170D1B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A9B170F1B65771600D8ABD3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9A9B17121B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		9AA3E6BF1BA84784004950AE /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = ../Carthage/Build/iOS/DTModelStorage.framework; sourceTree = "<group>"; };
 		9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataSearchViewController.swift; path = "Example controllers/Search/CoreDataSearchViewController.swift"; sourceTree = "<group>"; };
 		9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9ABE07441B85FE4E00636D78 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = CoreData/Bank.swift; sourceTree = "<group>"; };
@@ -178,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AE1B7091BA5C116000B3AEC /* DTModelStorage.framework in Frameworks */,
+				9AA3E6C01BA84784004950AE /* DTModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
+				9AA3E6C21BA84C98004950AE /* DTModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +207,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1C66781B8660D600B3DEE0 /* Nimble.framework in Frameworks */,
-				9A4EB0151B88E48F006C2B8D /* DTModelStorage.framework in Frameworks */,
 				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,8 +286,8 @@
 		9A5292031B5D39F200DC8528 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AA3E6BF1BA84784004950AE /* DTModelStorage.framework */,
 				9A1C66771B8660D600B3DEE0 /* Nimble.framework */,
-				9A4EB0141B88E48F006C2B8D /* DTModelStorage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -469,6 +480,7 @@
 				9A9B16FE1B65771600D8ABD3 /* Sources */,
 				9A9B16FF1B65771600D8ABD3 /* Frameworks */,
 				9A9B17001B65771600D8ABD3 /* Resources */,
+				9AA3E6C31BA84CA5004950AE /* CopyFiles */,
 			);
 			buildRules = (
 			);
