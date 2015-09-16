@@ -200,9 +200,14 @@ You can view documentation online or you can install it locally using [cocoadocs
 
 Also check out [wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki) for some information on DTTableViewManager internals.
 
-## Examples
+## Running example project
 
 There is an example project, that shows some usage examples of `DTTableViewManager`.
+You need [Carthage](https://github.com/Carthage/Carthage) installed in order to run Example project. Also, make sure XCode 7 command-line tools are used. Steps to compile:
+
+1. git clone git@github.com:DenHeadless/DTTableViewManager.git
+2. cd DTTableViewManager && carthage update
+3. Open DTTableViewManager.xcodeproj and run Example target.
 
 ## Thanks
 
