@@ -66,6 +66,8 @@
 		9AD9D9F21B6EBF8800AD49AC /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */; };
 		9ADA632F1B888DC60060B2C0 /* DTTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA632E1B888DC60060B2C0 /* DTTestTableViewController.swift */; };
 		9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA63321B88A56F0060B2C0 /* TableViewController.swift */; };
+		9AE6549D1BABF8FF002C78B4 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9AA3E6BF1BA84784004950AE /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AE6549E1BABF909002C78B4 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA3E6BF1BA84784004950AE /* DTModelStorage.framework */; };
 		9AF931551B5936A800456503 /* OptionalCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF931541B5936A800456503 /* OptionalCells.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +95,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9AE6549D1BABF8FF002C78B4 /* DTModelStorage.framework in CopyFiles */,
 				9AA660031BA5C94900581D46 /* DTTableViewManager.framework in CopyFiles */,
 				9A1C667A1B86619900B3DEE0 /* Nimble.framework in CopyFiles */,
 			);
@@ -208,6 +211,7 @@
 			files = (
 				9A1C66781B8660D600B3DEE0 /* Nimble.framework in Frameworks */,
 				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
+				9AE6549E1BABF909002C78B4 /* DTModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
