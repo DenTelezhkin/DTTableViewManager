@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9A2A38BB1AEE285E0021E97D"
-               BuildableName = "DTTableViewManager.framework"
-               BlueprintName = "DTTableViewManager"
+               BlueprintIdentifier = "9A9B17011B65771600D8ABD3"
+               BuildableName = "Example.app"
+               BlueprintName = "Example"
                ReferencedContainer = "container:DTTableViewManager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,9 +43,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9A2A38BB1AEE285E0021E97D"
-            BuildableName = "DTTableViewManager.framework"
-            BlueprintName = "DTTableViewManager"
+            BlueprintIdentifier = "9A9B17011B65771600D8ABD3"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:DTTableViewManager.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -62,15 +62,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9A2A38BB1AEE285E0021E97D"
-            BuildableName = "DTTableViewManager.framework"
-            BlueprintName = "DTTableViewManager"
+            BlueprintIdentifier = "9A9B17011B65771600D8ABD3"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:DTTableViewManager.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -80,15 +81,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9A2A38BB1AEE285E0021E97D"
-            BuildableName = "DTTableViewManager.framework"
-            BlueprintName = "DTTableViewManager"
+            BlueprintIdentifier = "9A9B17011B65771600D8ABD3"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:DTTableViewManager.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
