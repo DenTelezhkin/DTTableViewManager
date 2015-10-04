@@ -306,6 +306,24 @@ public extension DTTableViewContentUpdatable where Self : DTTableViewManageable 
 // MARK: - Table view reactions
 extension DTTableViewManager
 {
+    public func cellSelection<T,U where T:ModelTransfer, T: UITableViewCell, U: DTTableViewManageable>( functionalClosure: U -> (T,T.ModelType, NSIndexPath) -> Void )
+    {
+        guard let _ = self.delegate as? U else { return }
+        
+        let closure = functionalClosure(self.delegate! as! U)
+        let reaction = TableViewReaction(reactionType: .Selection)
+        reaction.viewType = _reflect(T)
+        reaction.reactionBlock = { [weak self, reaction] in
+            if let indexPath = reaction.reactionData as? NSIndexPath,
+                let cell = self?.tableView.cellForRowAtIndexPath(indexPath),
+                let model = self?.storage.objectAtIndexPath(indexPath)
+            {
+                closure(cell as! T, model as! T.ModelType, indexPath)
+            }
+        }
+        self.tableViewReactions.append(reaction)
+    }
+    
     /// Define an action, that will be performed, when cell of specific type is selected.
     /// - Parameter cellClass: Type of UITableViewCell subclass
     /// - Parameter closure: closure to run when UITableViewCell is selected
