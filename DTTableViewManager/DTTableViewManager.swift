@@ -293,6 +293,16 @@ extension DTTableViewManager
     
 }
 
+public protocol DTTableViewContentUpdatable {
+    func beforeContentUpdate()
+    func afterContentUpdate()
+}
+
+public extension DTTableViewContentUpdatable where Self : DTTableViewManageable {
+    func beforeContentUpdate() {}
+    func afterContentUpdate() {}
+}
+
 // MARK: - Table view reactions
 extension DTTableViewManager
 {
@@ -375,20 +385,16 @@ extension DTTableViewManager
       
     /// Perform action before content will be updated.
     /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    @available(*, unavailable, message="Adopt DTTableViewContentUpdatable protocol on your DTTableViewManageable instance instead")
     public func beforeContentUpdate(block: () -> Void )
     {
-        let reaction = TableViewReaction(reactionType: .ControllerWillUpdateContent)
-        reaction.reactionBlock = block
-        self.tableViewReactions.append(reaction)
     }
     
     /// Perform action after content is updated.
     /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    @available(*, unavailable, message="Adopt DTTableViewContentUpdatable protocol on your DTTableViewManageable instance instead")
     public func afterContentUpdate(block : () -> Void )
     {
-        let reaction = TableViewReaction(reactionType: .ControllerDidUpdateContent)
-        reaction.reactionBlock = block
-        self.tableViewReactions.append(reaction)
     }
 }
 
@@ -563,18 +569,12 @@ extension DTTableViewManager : StorageUpdating
     
     private func controllerWillUpdateContent()
     {
-        if let reaction = self.reactionOfReactionType(.ControllerWillUpdateContent, forViewType: nil)
-        {
-            reaction.perform()
-        }
+        (self.delegate as? DTTableViewContentUpdatable)?.beforeContentUpdate()
     }
     
     private func controllerDidUpdateContent()
     {
-        if let reaction = self.reactionOfReactionType(.ControllerDidUpdateContent, forViewType: nil)
-        {
-            reaction.perform()
-        }
+        (self.delegate as? DTTableViewContentUpdatable)?.afterContentUpdate()
     }
 }
 

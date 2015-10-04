@@ -114,28 +114,22 @@ class ReactingToEventsTestCase: XCTestCase {
     {
         controller.manager.registerCellClass(NibCell)
         
-        var updated : Int?
-        controller.manager.afterContentUpdate { () -> Void in
-            updated = 42
-        }
+        expect(self.controller.afterContentUpdateValue) == false
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        expect(updated) == 42
+        expect(self.controller.afterContentUpdateValue) == true
     }
     
     func testShouldReactBeforeContentUpdate()
     {
         controller.manager.registerCellClass(NibCell)
         
-        var updated : Int?
-        controller.manager.beforeContentUpdate { () -> Void in
-            updated = 42
-        }
+        expect(self.controller.beforeContentUpdateValue) == false
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        expect(updated) == 42
+        expect(self.controller.beforeContentUpdateValue) == true
     }
     
     func testCellRegisterSelectionClosure()

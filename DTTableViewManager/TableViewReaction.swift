@@ -34,8 +34,6 @@ enum TableViewReactionType
     case CellConfiguration
     case HeaderConfiguration
     case FooterConfiguration
-    case ControllerWillUpdateContent
-    case ControllerDidUpdateContent
 }
 
 protocol TableViewReactionData {}
