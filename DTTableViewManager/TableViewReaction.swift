@@ -52,7 +52,7 @@ class TableViewReaction
         reactionBlock?()
     }
     
-    init(reactionType : TableViewReactionType)
+    init(_ reactionType : TableViewReactionType)
     {
         self.reactionType = reactionType
     }

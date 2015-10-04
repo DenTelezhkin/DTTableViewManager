@@ -121,7 +121,36 @@ For in-depth look at how subclassing storage classes can improve your code base,
 
 ## Reacting to events
 
-You can register closures, that will be executed on various events. First and most important is cell selection event.
+
+### Method pointers
+
+There are two types of events reaction. The first and recommended one is to pass method pointers to `DTTableViewManager`. For example, selection:
+
+```swift
+manager.cellSelection(PostViewController.selectedPost)
+
+func selectedPost(cell: PostCell, post: Post, indexPath: NSIndexPath) {
+  // Do something with Post
+}
+```
+
+`DTTableViewManager` automatically breaks retain cycles, that can happen when you pass method pointers around. There's no need to worry about [weak self] stuff.
+
+There are also methods for configuring cells, headers and footers:
+
+```swift
+manager.cellConfiguration(PostViewController.configurePostCell)
+manager.headerConfiguration(PostViewController.configurePostsHeader)
+manager.footerConfiguration(PostViewController.configurePostsFooter)
+```
+
+And of course, you can always use dynamicType instead of directly referencing type name:
+
+```swift
+manager.cellSelection(self.dynamicType.selectedPost)
+```
+
+Another way of dealing with events, is registrating closures, which work basically in the same way, however you need to break retain cycles yourself.
 
 **Important**
 
@@ -132,25 +161,21 @@ All events are stored on `DTTableViewManager` instance, so be sure to declare se
  Instead of reacting to cell selection at UITableView NSIndexPath, `DTTableViewManager` allows you to react when user selects concrete model:
 
 ```swift
-  manager.whenSelected(PostCell.self) { postCell, post, indexPath in
+  manager.whenSelected(PostCell.self) { [weak self] postCell, post, indexPath in
       print("Selected \(post) in \(postCell) at \(indexPath)")
   }
 ```
 
-Thanks to generics, `postCell` and `post` are already a concrete type, there's no need to check types and cast. There' also a shortcut to registration and selection method:
-
-```swift
-  manager.registerCellClass(PostCell.self, whenSelected: { postCell, post, indexPath in })
-```
+Thanks to generics, `postCell` and `post` are already a concrete type, there's no need to check types and cast.
 
 ### Configuration
 
 Although in most cases your cell can update it's UI with model inside `updateWithModel:` method, sometimes you may need to additionally configure it from controller. There are three events you can react to:
 
 ```swift
-  manager.configureCell(PostCell.self) { postCell, post, indexPath in }
-  manager.configureHeader(PostHeader.self) { postHeader, postHeaderModel, sectionIndex in }
-  manager.configureFooter(PostFooter.self) { postFooter, postFooterModel, sectionIndex in }
+  manager.configureCell(PostCell.self) { [weak self] postCell, post, indexPath in }
+  manager.configureHeader(PostHeader.self) { [weak self] postHeader, postHeaderModel, sectionIndex in }
+  manager.configureFooter(PostFooter.self) { [weak self] postFooter, postFooterModel, sectionIndex in }
 ```
 
 ### Content updates

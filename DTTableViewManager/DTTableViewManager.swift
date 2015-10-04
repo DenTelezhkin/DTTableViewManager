@@ -306,19 +306,21 @@ public extension DTTableViewContentUpdatable where Self : DTTableViewManageable 
 // MARK: - Table view reactions
 extension DTTableViewManager
 {
-    public func cellSelection<T,U where T:ModelTransfer, T: UITableViewCell, U: DTTableViewManageable>( functionalClosure: U -> (T,T.ModelType, NSIndexPath) -> Void )
+    /// Define an action, that will be performed, when cell of specific type is selected.
+    /// - Parameter methodPointer: pointer to `DTTableViewManageable` method with signature: (Cell, Model, NSIndexPath) closure to run when UITableViewCell is selected
+    /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere.
+    /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type. `DTTableViewManageable` instance is used to call selection event.
+    public func cellSelection<T,U where T:ModelTransfer, T: UITableViewCell, U: DTTableViewManageable>( methodPointer: U -> (T,T.ModelType, NSIndexPath) -> Void )
     {
-        guard let _ = self.delegate as? U else { return }
-        
-        let closure = functionalClosure(self.delegate! as! U)
-        let reaction = TableViewReaction(reactionType: .Selection)
+        let reaction = TableViewReaction(.Selection)
         reaction.viewType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let indexPath = reaction.reactionData as? NSIndexPath,
-                let cell = self?.tableView.cellForRowAtIndexPath(indexPath),
-                let model = self?.storage.objectAtIndexPath(indexPath)
+                let cell = self?.tableView.cellForRowAtIndexPath(indexPath) as? T,
+                let model = self?.storage.objectAtIndexPath(indexPath) as? T.ModelType,
+                let delegate = self?.delegate as? U
             {
-                closure(cell as! T, model as! T.ModelType, indexPath)
+                methodPointer(delegate)(cell, model, indexPath)
             }
         }
         self.tableViewReactions.append(reaction)
@@ -327,19 +329,18 @@ extension DTTableViewManager
     /// Define an action, that will be performed, when cell of specific type is selected.
     /// - Parameter cellClass: Type of UITableViewCell subclass
     /// - Parameter closure: closure to run when UITableViewCell is selected
-    /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
-    /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
-    /// - SeeAlso: `registerCellClass:selectionClosure` method
+    /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    /// - SeeAlso: 'cellSelection:'
     public func whenSelected<T:ModelTransfer where T:UITableViewCell>(cellClass:  T.Type, _ closure: (T,T.ModelType, NSIndexPath) -> Void)
     {
-        let reaction = TableViewReaction(reactionType: .Selection)
+        let reaction = TableViewReaction(.Selection)
         reaction.viewType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let indexPath = reaction.reactionData as? NSIndexPath,
-                let cell = self?.tableView.cellForRowAtIndexPath(indexPath),
-                let model = self?.storage.objectAtIndexPath(indexPath)
+                let cell = self?.tableView.cellForRowAtIndexPath(indexPath) as? T,
+                let model = self?.storage.objectAtIndexPath(indexPath) as? T.ModelType
             {
-                closure(cell as! T, model as! T.ModelType, indexPath)
+                closure(cell, model, indexPath)
             }
         }
         self.tableViewReactions.append(reaction)
@@ -348,28 +349,50 @@ extension DTTableViewManager
     /// Define additional configuration action, that will happen, when UITableViewCell subclass is requested by UITableView. This action will be performed *after* cell is created and updateWithModel: method is called.
     /// - Parameter cellClass: Type of UITableViewCell subclass
     /// - Parameter closure: closure to run when UITableViewCell is being configured
-    /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    /// - SeeAlso: 'cellConfiguration:'
     public func configureCell<T:ModelTransfer where T: UITableViewCell>(cellClass:T.Type, _ closure: (T, T.ModelType, NSIndexPath) -> Void)
     {
-        let reaction = TableViewReaction(reactionType: .CellConfiguration)
+        let reaction = TableViewReaction(.CellConfiguration)
         reaction.viewType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
-                let model = self?.storage.objectAtIndexPath(configuration.indexPath)
+                let view = configuration.view as? T,
+                let model = self?.storage.objectAtIndexPath(configuration.indexPath) as? T.ModelType
             {
-                closure(configuration.view as! T, model as! T.ModelType, configuration.indexPath)
+                closure(view, model, configuration.indexPath)
+            }
+        }
+        self.tableViewReactions.append(reaction)
+    }
+    
+    /// Define additional configuration action, that will happen, when UITableViewCell subclass is requested by UITableView. This action will be performed *after* cell is created and updateWithModel: method is called.
+    /// - Parameter methodPointer: pointer to `DTTableViewManageable` method with signature: (Cell, Model, NSIndexPath) closure to run when UITableViewCell is configured
+    /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
+    public func cellConfiguration<T,U where T:ModelTransfer, T: UITableViewCell, U: DTTableViewManageable>(methodPointer: U -> (T, T.ModelType, NSIndexPath) -> Void)
+    {
+        let reaction = TableViewReaction(.CellConfiguration)
+        reaction.viewType = _reflect(T)
+        reaction.reactionBlock = { [weak self, reaction] in
+            if let configuration = reaction.reactionData as? ViewConfiguration,
+                let view = configuration.view as? T,
+                let model = self?.storage.objectAtIndexPath(configuration.indexPath) as? T.ModelType,
+                let delegate = self?.delegate as? U
+            {
+                methodPointer(delegate)(view, model, configuration.indexPath)
             }
         }
         self.tableViewReactions.append(reaction)
     }
     
     /// Define additional configuration action, that will happen, when UIView header subclass is requested by UITableView. This action will be performed *after* header is created and updateWithModel: method is called.
-    /// - Parameter headerClass: Type of UIView or UITableReusableView subclass
-    /// - Parameter closure: closure to run when UITableReusableView is being configured
-    /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    /// - Parameter headerClass: Type of UIView or UITableHeaderFooterView subclass
+    /// - Parameter closure: closure to run when UITableHeaderFooterView is being configured
+    /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    /// - SeeAlso: 'headerConfiguration:'
     public func configureHeader<T:ModelTransfer where T: UIView>(headerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        let reaction = TableViewReaction(reactionType: .HeaderConfiguration)
+        let reaction = TableViewReaction(.HeaderConfiguration)
         reaction.viewType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
@@ -382,13 +405,34 @@ extension DTTableViewManager
         self.tableViewReactions.append(reaction)
     }
     
+    /// Define additional configuration action, that will happen, when UIView header subclass is requested by UITableView. This action will be performed *after* header is created and updateWithModel: method is called.
+    /// - Parameter methodPointer: pointer to `DTTableViewManageable` method with signature: (Header, Model, SectionIndex) closure to run when UIView or UITableViewHeaderFooterView header is configured
+    /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
+    public func headerConfiguration<T, U where T:ModelTransfer, T: UIView, U: DTTableViewManageable>(methodPointer: U -> (T, T.ModelType, Int) -> Void)
+    {
+        let reaction = TableViewReaction(.HeaderConfiguration)
+        reaction.viewType = _reflect(T)
+        reaction.reactionBlock = { [weak self, reaction] in
+            if let configuration = reaction.reactionData as? ViewConfiguration,
+                let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
+                let model = headerStorage.headerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType,
+                let view = configuration.view as? T,
+                let delegate = self?.delegate as? U
+            {
+                methodPointer(delegate)(view, model, configuration.indexPath.section)
+            }
+        }
+        self.tableViewReactions.append(reaction)
+    }
+    
     /// Define additional configuration action, that will happen, when UIView footer subclass is requested by UITableView. This action will be performed *after* footer is created and updateWithModel: method is called.
     /// - Parameter footerClass: Type of UIView or UITableReusableView subclass
     /// - Parameter closure: closure to run when UITableReusableView is being configured
-    /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    /// - SeeAlso: 'footerConfiguration:'
     public func configureFooter<T:ModelTransfer where T: UIView>(footerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        let reaction = TableViewReaction(reactionType: .FooterConfiguration)
+        let reaction = TableViewReaction(.FooterConfiguration)
         reaction.viewType = _reflect(T)
         reaction.reactionBlock = { [weak self, reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
@@ -396,6 +440,26 @@ extension DTTableViewManager
                 let model = footerStorage.footerModelForSectionIndex(configuration.indexPath.section)
             {
                 closure(configuration.view as! T, model as! T.ModelType, configuration.indexPath.section)
+            }
+        }
+        self.tableViewReactions.append(reaction)
+    }
+    
+    /// Define additional configuration action, that will happen, when UIView footer subclass is requested by UITableView. This action will be performed *after* footer is created and updateWithModel: method is called.
+    /// - Parameter methodPointer: pointer to `DTTableViewManageable` method with signature: (Footer, Model, SectionIndex) closure to run when UIView or UITableViewHeaderFooterView footer is configured
+    /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
+    public func footerConfiguration<T, U where T:ModelTransfer, T: UIView, U: DTTableViewManageable>(methodPointer: U -> (T, T.ModelType, Int) -> Void)
+    {
+        let reaction = TableViewReaction(.FooterConfiguration)
+        reaction.viewType = _reflect(T)
+        reaction.reactionBlock = { [weak self, reaction] in
+            if let configuration = reaction.reactionData as? ViewConfiguration,
+                let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
+                let model = headerStorage.footerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType,
+                let view = configuration.view as? T,
+                let delegate = self?.delegate as? U
+            {
+                methodPointer(delegate)(view, model, configuration.indexPath.section)
             }
         }
         self.tableViewReactions.append(reaction)
