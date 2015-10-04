@@ -31,7 +31,7 @@ Powerful protocol-oriented UITableView management framework, written in Swift 2.
 
 [CocoaPods](http://www.cocoapods.org):
 
-    pod 'DTTableViewManager', '~> 4.0.0'
+    pod 'DTTableViewManager', '~> 4.1.0'
 
 [Carthage](https://github.com/Carthage/Carthage):
 
@@ -121,7 +121,6 @@ For in-depth look at how subclassing storage classes can improve your code base,
 
 ## Reacting to events
 
-
 ### Method pointers
 
 There are two types of events reaction. The first and recommended one is to pass method pointers to `DTTableViewManager`. For example, selection:
@@ -154,7 +153,7 @@ Another way of dealing with events, is registrating closures, which work basical
 
 **Important**
 
-All events are stored on `DTTableViewManager` instance, so be sure to declare self weak in capture lists to prevent retain cycles.
+Unlike methods with method pointers, all events with closures are stored on `DTTableViewManager` instance, so be sure to declare [weak self] in capture lists to prevent retain cycles.
 
 ### Selection
 
@@ -180,11 +179,19 @@ Although in most cases your cell can update it's UI with model inside `updateWit
 
 ### Content updates
 
-Sometimes it's convenient to know, when data is updated, for example to hide UITableView, if there's no data.
+Sometimes it's convenient to know, when data is updated, for example to hide UITableView, if there's no data. Conform to `DTTableViewContentUpdatable` protocol and implement one of the following methods:
+
 
 ```swift
-  manager.beforeContentUpdate {}
-  manager.afterContentUpdate {}
+extension PostsViewController: DTTableViewContentUpdatable {
+  func beforeContentUpdate() {
+
+  }
+
+  func afterContentUpdate() {
+
+  }
+}
 ```
 
 ## UITableViewDelegate and UITableViewDatasource

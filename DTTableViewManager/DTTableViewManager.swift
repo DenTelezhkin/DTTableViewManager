@@ -293,6 +293,7 @@ extension DTTableViewManager
     
 }
 
+/// Protocol you can conform to react to content updates
 public protocol DTTableViewContentUpdatable {
     func beforeContentUpdate()
     func afterContentUpdate()
