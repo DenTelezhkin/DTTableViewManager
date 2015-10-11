@@ -122,7 +122,7 @@ class DatasourceTestCase: XCTestCase {
     func testRemoveItems()
     {
         controller.manager.memoryStorage.addItems([1,2,3], toSection: 0)
-        controller.manager.memoryStorage.removeAllTableItems()
+        controller.manager.memoryStorage.removeAllItems()
         
         expect(self.controller.manager.memoryStorage.itemsInSection(0)?.count) == 0
     }
@@ -130,7 +130,7 @@ class DatasourceTestCase: XCTestCase {
     func testMovingItems()
     {
         controller.manager.memoryStorage.addItems([1,2,3], toSection: 0)
-        controller.manager.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 0), toIndexPath: indexPath(2, 0))
+        controller.manager.memoryStorage.moveItemFromIndexPath(indexPath(0, 0), toIndexPath: indexPath(2, 0))
         
         expect(self.controller.verifySection([2,3,1], withSectionNumber: 0)) == true
     }
@@ -139,13 +139,13 @@ class DatasourceTestCase: XCTestCase {
     {
         controller.manager.memoryStorage.addItem([1,2,3], toSection: 0)
         
-        controller.manager.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 0), toIndexPath: indexPath(2, 1))
+        controller.manager.memoryStorage.moveItemFromIndexPath(indexPath(0, 0), toIndexPath: indexPath(2, 1))
     }
     
     func testShouldNotCrashWhenMovingFromBadRow()
     {
         controller.manager.memoryStorage.addItem([1,2,3], toSection: 0)
-        controller.manager.memoryStorage.moveTableItemAtIndexPath(indexPath(0, 1), toIndexPath: indexPath(0, 0))
+        controller.manager.memoryStorage.moveItemFromIndexPath(indexPath(0, 1), toIndexPath: indexPath(0, 0))
     }
     
     func testShouldMoveSections()
@@ -154,7 +154,7 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.memoryStorage.addItem(2, toSection: 1)
         controller.manager.memoryStorage.addItem(3, toSection: 2)
         
-        controller.manager.memoryStorage.moveTableViewSection(0, toSection: 1)
+        controller.manager.memoryStorage.moveSection(0, toSection: 1)
         
         expect(self.controller.verifySection([2], withSectionNumber: 0)) == true
         expect(self.controller.verifySection([1], withSectionNumber: 1)) == true

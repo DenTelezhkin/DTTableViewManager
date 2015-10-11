@@ -629,13 +629,27 @@ extension DTTableViewManager : StorageUpdating
 
         tableView.beginUpdates()
         
-        tableView.deleteSections(update.deletedSectionIndexes, withRowAnimation: configuration.deleteSectionAnimation)
-        tableView.insertSections(update.insertedSectionIndexes, withRowAnimation: configuration.insertSectionAnimation)
-        tableView.reloadSections(update.updatedSectionIndexes, withRowAnimation: configuration.reloadSectionAnimation)
+        if update.deletedRowIndexPaths.count > 0 { tableView.deleteRowsAtIndexPaths(Array(update.deletedRowIndexPaths), withRowAnimation: configuration.deleteRowAnimation) }
+        if update.insertedRowIndexPaths.count > 0 { tableView.insertRowsAtIndexPaths(Array(update.insertedRowIndexPaths), withRowAnimation: configuration.insertRowAnimation) }
+        if update.updatedRowIndexPaths.count > 0 { tableView.reloadRowsAtIndexPaths(Array(update.updatedRowIndexPaths), withRowAnimation: configuration.reloadRowAnimation) }
+        if update.movedRowIndexPaths.count > 0 {
+            for moveUpdate in update.movedRowIndexPaths {
+                if let from = moveUpdate.first, let to = moveUpdate.last {
+                    tableView.moveRowAtIndexPath(from, toIndexPath: to)
+                }
+            }
+        }
         
-        tableView.deleteRowsAtIndexPaths(update.deletedRowIndexPaths, withRowAnimation: configuration.deleteRowAnimation)
-        tableView.insertRowsAtIndexPaths(update.insertedRowIndexPaths, withRowAnimation: configuration.insertRowAnimation)
-        tableView.reloadRowsAtIndexPaths(update.updatedRowIndexPaths, withRowAnimation: configuration.reloadRowAnimation)
+        if update.deletedSectionIndexes.count > 0 { tableView.deleteSections(update.deletedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.deleteSectionAnimation) }
+        if update.insertedSectionIndexes.count > 0 { tableView.insertSections(update.insertedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.insertSectionAnimation) }
+        if update.updatedSectionIndexes.count > 0 { tableView.reloadSections(update.updatedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.reloadSectionAnimation)}
+        if update.movedSectionIndexes.count > 0 {
+            for moveUpdate in update.movedSectionIndexes {
+                if let from = moveUpdate.first, let to = moveUpdate.last {
+                    tableView.moveSection(from, toSection: to)
+                }
+            }
+        }
         
         tableView.endUpdates()
         

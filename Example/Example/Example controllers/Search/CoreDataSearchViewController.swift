@@ -33,13 +33,18 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 
         manager.registerCellClass(BankCell)
         manager.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
-        manager.afterContentUpdate { [weak self] in
-            self?.tableView.hidden = self?.tableView.numberOfSections == 0
-        }
+
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
+    }
+}
+
+extension CoreDataSearchViewController : DTTableViewContentUpdatable
+{
+    func afterContentUpdate() {
+        self.tableView.hidden = self.tableView.numberOfSections == 0
     }
 }
 
