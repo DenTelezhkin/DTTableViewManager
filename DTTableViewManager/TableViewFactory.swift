@@ -87,6 +87,20 @@ class TableViewFactory
         self.addMappingForViewType(.Cell, viewClass: T.self)
     }
     
+    func registerNiblessHeaderClass<T:ModelTransfer where T: UIView>(headerClass : T.Type)
+    {
+        let reuseIdentifier = RuntimeHelper.classNameFromReflection(_reflect(headerClass))
+        tableView.registerClass(headerClass, forHeaderFooterViewReuseIdentifier: reuseIdentifier)
+        self.addMappingForViewType(.Header, viewClass: T.self)
+    }
+    
+    func registerNiblessFooterClass<T:ModelTransfer where T: UIView>(footerClass : T.Type)
+    {
+        let reuseIdentifier = RuntimeHelper.classNameFromReflection(_reflect(footerClass))
+        tableView.registerClass(footerClass, forHeaderFooterViewReuseIdentifier: reuseIdentifier)
+        self.addMappingForViewType(.Header, viewClass: T.self)
+    }
+    
     func registerHeaderClass<T:ModelTransfer where T: UIView>(headerClass : T.Type)
     {
         self.registerNibNamed(RuntimeHelper.classNameFromReflection(_reflect(headerClass)), forHeaderClass: headerClass)

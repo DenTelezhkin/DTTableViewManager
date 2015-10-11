@@ -262,6 +262,24 @@ extension DTTableViewManager
         self.viewFactory.registerHeaderClass(headerClass)
     }
     
+    /// Register mapping from model class to custom header view class. This method is intended to be used for headers created from code - without UI made in XIB.
+    /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
+    /// - Parameter headerClass: UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
+    public func registerNiblessHeaderClass<T:ModelTransfer where T: UITableViewHeaderFooterView>(headerClass : T.Type)
+    {
+        configuration.sectionHeaderStyle = .View
+        self.viewFactory.registerNiblessHeaderClass(headerClass)
+    }
+    
+    /// Register mapping from model class to custom header view class. This method is intended to be used for footers created from code - without UI made in XIB.
+    /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
+    /// - Parameter footerClass: UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
+    public func registerNiblessFooterClass<T:ModelTransfer where T: UITableViewHeaderFooterView>(footerClass : T.Type)
+    {
+        configuration.sectionHeaderStyle = .View
+        self.viewFactory.registerNiblessHeaderClass(footerClass)
+    }
+    
     /// Register mapping from model class to custom footer view class. Method will automatically check for nib with the same name as `footerClass`. If it exists - nib will be registered instead of class.
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter footerClass: Type of UIView or UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
