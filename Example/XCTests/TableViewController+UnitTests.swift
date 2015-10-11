@@ -31,7 +31,7 @@ extension DTTestTableViewController
     func verifyItem<T:Equatable>(item: T, atIndexPath indexPath: NSIndexPath) -> Bool
     {
         let itemTable = (self.manager.tableView(self.tableView, cellForRowAtIndexPath: indexPath) as! ModelRetrievable).model as! T
-        let itemDatasource = recursiveForceUnwrap(self.manager.storage.objectAtIndexPath(indexPath)!) as! T
+        let itemDatasource = recursiveForceUnwrap(self.manager.storage.itemAtIndexPath(indexPath)!) as! T
         
         if !(item == itemDatasource)
         {

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'DTTableViewManager'
-  s.version  = '4.1.0'
+  s.version  = '4.2.0'
   s.license  = 'MIT'
   s.summary  = 'Protocol-oriented UITableView management, powered by generics and associated types.'
   s.homepage = 'https://github.com/DenHeadless/DTTableViewManager'
@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.ios.frameworks = 'UIKit', 'Foundation'
   s.platform = :ios,'8.0'
-  s.dependency 'DTModelStorage' , '~> 2.0.2'
+  s.dependency 'DTModelStorage' , '~> 2.1.1'
 end

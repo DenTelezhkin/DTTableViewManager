@@ -149,7 +149,7 @@ public class DTTableViewManager : NSObject {
         guard cell != nil else {  return nil }
         
         if let indexPath = self.tableView.indexPathForCell(cell!) {
-            return storage.objectAtIndexPath(indexPath) as? T.ModelType
+            return storage.itemAtIndexPath(indexPath) as? T.ModelType
         }
         return nil
     }
@@ -161,7 +161,7 @@ public class DTTableViewManager : NSObject {
     /// - Note: Method does not require cell to be visible, however it requires that storage really contains object of `ModelType` at specified index path, otherwise it will return nil.
     public func objectForCellClass<T:ModelTransfer where T:UITableViewCell>(cellClass: T.Type, atIndexPath indexPath: NSIndexPath) -> T.ModelType?
     {
-        return self.storage.objectForCellClass(T.self, atIndexPath: indexPath)
+        return self.storage.itemForCellClass(T.self, atIndexPath: indexPath)
     }
     
     /// Retrieve model of specific type for section index.
@@ -171,7 +171,7 @@ public class DTTableViewManager : NSObject {
     /// - Note: Method does not require header to be visible, however it requires that storage really contains object of `ModelType` at specified section index, and storage to comply to `HeaderFooterStorageProtocol`, otherwise it will return nil.
     public func objectForHeaderClass<T:ModelTransfer where T:UIView>(headerClass: T.Type, atSectionIndex sectionIndex: Int) -> T.ModelType?
     {
-        return self.storage.objectForHeaderClass(T.self, atSectionIndex: sectionIndex)
+        return self.storage.itemForHeaderClass(T.self, atSectionIndex: sectionIndex)
     }
     
     /// Retrieve model of specific type for section index.
@@ -181,12 +181,12 @@ public class DTTableViewManager : NSObject {
     /// - Note: Method does not require footer to be visible, however it requires that storage really contains object of `ModelType` at specified section index, and storage to comply to `HeaderFooterStorageProtocol`, otherwise it will return nil.
     public func objectForFooterClass<T:ModelTransfer where T:UIView>(footerClass: T.Type, atSectionIndex sectionIndex: Int) -> T.ModelType?
     {
-        return self.storage.objectForFooterClass(T.self, atSectionIndex: sectionIndex)
+        return self.storage.itemForFooterClass(T.self, atSectionIndex: sectionIndex)
     }
     
     private func headerModelForSectionIndex(index: Int) -> Any?
     {
-        if self.storage.sections[index].numberOfObjects == 0 && !configuration.displayHeaderOnEmptySection
+        if self.storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection
         {
             return nil
         }
@@ -195,7 +195,7 @@ public class DTTableViewManager : NSObject {
     
     private func footerModelForSectionIndex(index: Int) -> Any?
     {
-        if self.storage.sections[index].numberOfObjects == 0 && !configuration.displayFooterOnEmptySection
+        if self.storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection
         {
             return nil
         }
@@ -315,10 +315,10 @@ extension DTTableViewManager
     {
         let reaction = TableViewReaction(.Selection)
         reaction.viewType = _reflect(T)
-        reaction.reactionBlock = { [weak self, reaction] in
+        reaction.reactionBlock = { [weak self, unowned reaction] in
             if let indexPath = reaction.reactionData as? NSIndexPath,
                 let cell = self?.tableView.cellForRowAtIndexPath(indexPath) as? T,
-                let model = self?.storage.objectAtIndexPath(indexPath) as? T.ModelType,
+                let model = self?.storage.itemAtIndexPath(indexPath) as? T.ModelType,
                 let delegate = self?.delegate as? U
             {
                 methodPointer(delegate)(cell, model, indexPath)
@@ -336,10 +336,10 @@ extension DTTableViewManager
     {
         let reaction = TableViewReaction(.Selection)
         reaction.viewType = _reflect(T)
-        reaction.reactionBlock = { [weak self, reaction] in
+        reaction.reactionBlock = { [weak self, unowned reaction] in
             if let indexPath = reaction.reactionData as? NSIndexPath,
                 let cell = self?.tableView.cellForRowAtIndexPath(indexPath) as? T,
-                let model = self?.storage.objectAtIndexPath(indexPath) as? T.ModelType
+                let model = self?.storage.itemAtIndexPath(indexPath) as? T.ModelType
             {
                 closure(cell, model, indexPath)
             }
@@ -356,10 +356,10 @@ extension DTTableViewManager
     {
         let reaction = TableViewReaction(.CellConfiguration)
         reaction.viewType = _reflect(T)
-        reaction.reactionBlock = { [weak self, reaction] in
+        reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let view = configuration.view as? T,
-                let model = self?.storage.objectAtIndexPath(configuration.indexPath) as? T.ModelType
+                let model = self?.storage.itemAtIndexPath(configuration.indexPath) as? T.ModelType
             {
                 closure(view, model, configuration.indexPath)
             }
@@ -374,10 +374,10 @@ extension DTTableViewManager
     {
         let reaction = TableViewReaction(.CellConfiguration)
         reaction.viewType = _reflect(T)
-        reaction.reactionBlock = { [weak self, reaction] in
+        reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let view = configuration.view as? T,
-                let model = self?.storage.objectAtIndexPath(configuration.indexPath) as? T.ModelType,
+                let model = self?.storage.itemAtIndexPath(configuration.indexPath) as? T.ModelType,
                 let delegate = self?.delegate as? U
             {
                 methodPointer(delegate)(view, model, configuration.indexPath)
@@ -395,12 +395,12 @@ extension DTTableViewManager
     {
         let reaction = TableViewReaction(.HeaderConfiguration)
         reaction.viewType = _reflect(T)
-        reaction.reactionBlock = { [weak self, reaction] in
+        reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = headerStorage.headerModelForSectionIndex(configuration.indexPath.section)
+                let model = headerStorage.headerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType
             {
-                closure(configuration.view as! T, model as! T.ModelType, configuration.indexPath.section)
+                closure(configuration.view as! T, model, configuration.indexPath.section)
             }
         }
         self.tableViewReactions.append(reaction)
@@ -413,7 +413,7 @@ extension DTTableViewManager
     {
         let reaction = TableViewReaction(.HeaderConfiguration)
         reaction.viewType = _reflect(T)
-        reaction.reactionBlock = { [weak self, reaction] in
+        reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
                 let model = headerStorage.headerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType,
@@ -435,12 +435,12 @@ extension DTTableViewManager
     {
         let reaction = TableViewReaction(.FooterConfiguration)
         reaction.viewType = _reflect(T)
-        reaction.reactionBlock = { [weak self, reaction] in
+        reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let footerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = footerStorage.footerModelForSectionIndex(configuration.indexPath.section)
+                let model = footerStorage.footerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType
             {
-                closure(configuration.view as! T, model as! T.ModelType, configuration.indexPath.section)
+                closure(configuration.view as! T, model, configuration.indexPath.section)
             }
         }
         self.tableViewReactions.append(reaction)
@@ -453,7 +453,7 @@ extension DTTableViewManager
     {
         let reaction = TableViewReaction(.FooterConfiguration)
         reaction.viewType = _reflect(T)
-        reaction.reactionBlock = { [weak self, reaction] in
+        reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData as? ViewConfiguration,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
                 let model = headerStorage.footerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType,
@@ -485,7 +485,7 @@ extension DTTableViewManager
 extension DTTableViewManager: UITableViewDataSource
 {
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.storage.sections[section].numberOfObjects
+        return self.storage.sections[section].numberOfItems
     }
     
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -493,7 +493,7 @@ extension DTTableViewManager: UITableViewDataSource
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let model = self.storage.objectAtIndexPath(indexPath)!
+        let model = self.storage.itemAtIndexPath(indexPath)!
         let cell = self.viewFactory.cellForModel(model, atIndexPath: indexPath)
         
         if let reaction = self.reactionOfReactionType(.CellConfiguration, forViewType: _reflect(cell.dynamicType)) {
@@ -522,10 +522,10 @@ extension DTTableViewManager: UITableViewDataSource
             if let from = storage.sections[sourceIndexPath.section] as? SectionModel,
                let to = storage.sections[destinationIndexPath.section] as? SectionModel
             {
-                    let item = from.objects[sourceIndexPath.row]
+                    let item = from.items[sourceIndexPath.row]
                     
-                    from.objects.removeAtIndex(sourceIndexPath.row)
-                    to.objects.insert(item, atIndex: destinationIndexPath.row)
+                    from.items.removeAtIndex(sourceIndexPath.row)
+                    to.items.insert(item, atIndex: destinationIndexPath.row)
             }
         }
     }
