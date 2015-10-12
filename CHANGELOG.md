@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.2.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.2.1)
+
+### Updated
+
+* Improved stability by treating UITableView as optional
+
 ## [4.2.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.2.0)
 
 Dependency changelog -> [DTModelStorage 2.1 and higher](https://github.com/DenHeadless/DTModelStorage/releases)

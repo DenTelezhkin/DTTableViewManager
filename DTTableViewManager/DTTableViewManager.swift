@@ -62,7 +62,7 @@ extension DTTableViewManageable
 /// - SeeAlso: `startManagingWithDelegate:`
 public class DTTableViewManager : NSObject {
     
-    private var tableView : UITableView!
+    private var tableView : UITableView?
     {
         return self.delegate?.tableView
     }
@@ -72,8 +72,12 @@ public class DTTableViewManager : NSObject {
     ///  Factory for creating cells and views for UITableView
     private lazy var viewFactory: TableViewFactory = {
         precondition(self.tableView != nil, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
-        return TableViewFactory(tableView: self.tableView)
+        return TableViewFactory(tableView: self.tableView!)
     }()
+    
+    deinit {
+        delegate = nil
+    }
     
     /// Bundle to search your xib's in. This can sometimes be useful for unit-testing. Defaults to NSBundle.mainBundle()
     public var viewBundle = NSBundle.mainBundle()
@@ -148,7 +152,7 @@ public class DTTableViewManager : NSObject {
     {
         guard cell != nil else {  return nil }
         
-        if let indexPath = self.tableView.indexPathForCell(cell!) {
+        if let indexPath = tableView?.indexPathForCell(cell!) {
             return storage.itemAtIndexPath(indexPath) as? T.ModelType
         }
         return nil
@@ -335,7 +339,7 @@ extension DTTableViewManager
         reaction.viewType = _reflect(T)
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let indexPath = reaction.reactionData as? NSIndexPath,
-                let cell = self?.tableView.cellForRowAtIndexPath(indexPath) as? T,
+                let cell = self?.tableView?.cellForRowAtIndexPath(indexPath) as? T,
                 let model = self?.storage.itemAtIndexPath(indexPath) as? T.ModelType,
                 let delegate = self?.delegate as? U
             {
@@ -356,7 +360,7 @@ extension DTTableViewManager
         reaction.viewType = _reflect(T)
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let indexPath = reaction.reactionData as? NSIndexPath,
-                let cell = self?.tableView.cellForRowAtIndexPath(indexPath) as? T,
+                let cell = self?.tableView?.cellForRowAtIndexPath(indexPath) as? T,
                 let model = self?.storage.itemAtIndexPath(indexPath) as? T.ModelType
             {
                 closure(cell, model, indexPath)
@@ -602,7 +606,7 @@ extension DTTableViewManager: UITableViewDelegate
         
         if let _ = self.headerModelForSectionIndex(section)
         {
-            return self.tableView.sectionHeaderHeight
+            return self.tableView?.sectionHeaderHeight ?? CGFloat.min
         }
         return CGFloat.min
     }
@@ -624,7 +628,7 @@ extension DTTableViewManager: UITableViewDelegate
         }
         
         if let _ = self.footerModelForSectionIndex(section) {
-            return self.tableView.sectionFooterHeight
+            return self.tableView?.sectionFooterHeight ?? CGFloat.min
         }
         return CGFloat.min
     }
@@ -645,31 +649,31 @@ extension DTTableViewManager : StorageUpdating
     {
         self.controllerWillUpdateContent()
 
-        tableView.beginUpdates()
+        tableView?.beginUpdates()
         
-        if update.deletedRowIndexPaths.count > 0 { tableView.deleteRowsAtIndexPaths(Array(update.deletedRowIndexPaths), withRowAnimation: configuration.deleteRowAnimation) }
-        if update.insertedRowIndexPaths.count > 0 { tableView.insertRowsAtIndexPaths(Array(update.insertedRowIndexPaths), withRowAnimation: configuration.insertRowAnimation) }
-        if update.updatedRowIndexPaths.count > 0 { tableView.reloadRowsAtIndexPaths(Array(update.updatedRowIndexPaths), withRowAnimation: configuration.reloadRowAnimation) }
+        if update.deletedRowIndexPaths.count > 0 { tableView?.deleteRowsAtIndexPaths(Array(update.deletedRowIndexPaths), withRowAnimation: configuration.deleteRowAnimation) }
+        if update.insertedRowIndexPaths.count > 0 { tableView?.insertRowsAtIndexPaths(Array(update.insertedRowIndexPaths), withRowAnimation: configuration.insertRowAnimation) }
+        if update.updatedRowIndexPaths.count > 0 { tableView?.reloadRowsAtIndexPaths(Array(update.updatedRowIndexPaths), withRowAnimation: configuration.reloadRowAnimation) }
         if update.movedRowIndexPaths.count > 0 {
             for moveUpdate in update.movedRowIndexPaths {
                 if let from = moveUpdate.first, let to = moveUpdate.last {
-                    tableView.moveRowAtIndexPath(from, toIndexPath: to)
+                    tableView?.moveRowAtIndexPath(from, toIndexPath: to)
                 }
             }
         }
         
-        if update.deletedSectionIndexes.count > 0 { tableView.deleteSections(update.deletedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.deleteSectionAnimation) }
-        if update.insertedSectionIndexes.count > 0 { tableView.insertSections(update.insertedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.insertSectionAnimation) }
-        if update.updatedSectionIndexes.count > 0 { tableView.reloadSections(update.updatedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.reloadSectionAnimation)}
+        if update.deletedSectionIndexes.count > 0 { tableView?.deleteSections(update.deletedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.deleteSectionAnimation) }
+        if update.insertedSectionIndexes.count > 0 { tableView?.insertSections(update.insertedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.insertSectionAnimation) }
+        if update.updatedSectionIndexes.count > 0 { tableView?.reloadSections(update.updatedSectionIndexes.makeNSIndexSet(), withRowAnimation: configuration.reloadSectionAnimation)}
         if update.movedSectionIndexes.count > 0 {
             for moveUpdate in update.movedSectionIndexes {
                 if let from = moveUpdate.first, let to = moveUpdate.last {
-                    tableView.moveSection(from, toSection: to)
+                    tableView?.moveSection(from, toSection: to)
                 }
             }
         }
         
-        tableView.endUpdates()
+        tableView?.endUpdates()
         
         self.controllerDidUpdateContent()
     }
@@ -678,7 +682,7 @@ extension DTTableViewManager : StorageUpdating
     public func storageNeedsReloading()
     {
         self.controllerWillUpdateContent()
-        tableView.reloadData()
+        tableView?.reloadData()
         self.controllerDidUpdateContent()
     }
     
@@ -698,6 +702,7 @@ extension DTTableViewManager : TableViewStorageUpdating
     /// Perform animations you need for changes in UITableView. Method can be used for complex animations, that should be run simultaneously. 
     /// - Parameter block: animation block, that will be called
     public func performAnimatedUpdate(block: UITableView -> Void) {
-        block(self.tableView)
+        guard tableView != nil else { return }
+        block(self.tableView!)
     }
 }
