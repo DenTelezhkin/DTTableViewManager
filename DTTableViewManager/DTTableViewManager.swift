@@ -196,6 +196,8 @@ public class DTTableViewManager : NSObject {
     /// - Returns: header model
     private func headerModelForSectionIndex(index: Int) -> Any?
     {
+        guard self.storage.sections.count > index else { return nil }
+        
         if self.storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection
         {
             return nil
@@ -208,6 +210,8 @@ public class DTTableViewManager : NSObject {
     /// - Returns: footer model
     private func footerModelForSectionIndex(index: Int) -> Any?
     {
+        guard self.storage.sections.count > index else { return nil }
+        
         if self.storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection
         {
             return nil
