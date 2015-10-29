@@ -35,6 +35,7 @@ public protocol DTTableViewManageable : NSObjectProtocol
     var tableView : UITableView! { get }
 }
 
+/// This key is used to store `DTTableViewManager` instance on `DTTableViewManageable` class using object association.
 private var DTTableViewManagerAssociatedKey = "Manager Associated Key"
 
 /// Default implementation for `DTTableViewManageable` protocol, that will inject `manager` property to any object, that declares itself `DTTableViewManageable`.
@@ -62,11 +63,13 @@ extension DTTableViewManageable
 /// - SeeAlso: `startManagingWithDelegate:`
 public class DTTableViewManager : NSObject {
     
+    /// Internal weak link to `UITableView`
     private var tableView : UITableView?
     {
         return self.delegate?.tableView
     }
     
+    /// `DTTableViewManageable` delegate.
     private weak var delegate : DTTableViewManageable?
 
     ///  Factory for creating cells and views for UITableView
@@ -91,6 +94,10 @@ public class DTTableViewManager : NSObject {
     /// - SeeAlso: `TableViewReaction`.
     private var tableViewReactions = [TableViewReaction]()
     
+    /// Internal method to find specific reaction for specific event
+    /// - Parameter type: Type of reaction
+    /// - Parameter viewType: type of view that event is bind to
+    /// - Returns: `TableViewReaction` object
     private func reactionOfReactionType(type: TableViewReactionType, forViewType viewType: _MirrorType?) -> TableViewReaction?
     {
         return self.tableViewReactions.filter({ (reaction) -> Bool in
@@ -184,6 +191,9 @@ public class DTTableViewManager : NSObject {
         return self.storage.itemForFooterClass(T.self, atSectionIndex: sectionIndex)
     }
     
+    /// Getter for header model at section index
+    /// - Parameter index: index of section
+    /// - Returns: header model
     private func headerModelForSectionIndex(index: Int) -> Any?
     {
         if self.storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection
@@ -193,6 +203,9 @@ public class DTTableViewManager : NSObject {
         return (self.storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(index)
     }
     
+    /// Getter for footer model at section index
+    /// - Parameter index: index of section
+    /// - Returns: footer model
     private func footerModelForSectionIndex(index: Int) -> Any?
     {
         if self.storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection
@@ -207,11 +220,15 @@ public class DTTableViewManager : NSObject {
 extension DTTableViewManager
 {
     /// Any `UITableViewDatasource` and `UITableViewDelegate` method, that is not implemented by `DTTableViewManager` will be redirected to delegate, if it implements it.
+    /// - Parameter aSelector: selector to forward
+    /// - Returns: `DTTableViewManageable` delegate
     public override func forwardingTargetForSelector(aSelector: Selector) -> AnyObject? {
         return delegate
     }
     
     /// Any `UITableViewDatasource` and `UITableViewDelegate` method, that is not implemented by `DTTableViewManager` will be redirected to delegate, if it implements it.
+    /// - Parameter aSelector: selector to respond to
+    /// - Returns: whether delegate will respond to selector
     public override func respondsToSelector(aSelector: Selector) -> Bool {
         if self.delegate?.respondsToSelector(aSelector) ?? false {
             return true
@@ -313,7 +330,13 @@ extension DTTableViewManager
 
 /// Protocol you can conform to react to content updates
 public protocol DTTableViewContentUpdatable {
+    
+    /// This event is triggered before content update occurs. If you need to update UITableView and trigger these delegate callbacks, call `storageNeedsReloading` method on storage class.
+    /// - SeeAlso: `storageNeedsReloading`
     func beforeContentUpdate()
+    
+    /// This event is triggered after content update occurs. If you need to update UITableView and trigger these delegate callbacks, call `storageNeedsReloading` method on storage class.
+    /// - SeeAlso: `storageNeedsReloading`
     func afterContentUpdate()
 }
 
