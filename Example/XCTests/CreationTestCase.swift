@@ -8,8 +8,9 @@
 
 import UIKit
 import XCTest
-import DTTableViewManager
+@testable import DTTableViewManager
 import DTModelStorage
+import Nimble
 
 class FooCell : UITableViewCell, ModelTransfer
 {
@@ -33,5 +34,20 @@ class CreationTestCase: XCTestCase {
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
         controller.manager.registerCellClass(FooCell)
+    }
+    
+    func testConfigurationAssociation()
+    {
+        let foo = DTTestTableViewController(nibName: nil, bundle: nil)
+        foo.manager.startManagingWithDelegate(foo)
+        
+        expect(foo.manager) != nil
+        expect(foo.manager) == foo.manager // Test if lazily instantiating using associations works correctly
+    }
+    
+    func testLoadFromXibChecksCorrectClassName() {
+        let loadedView = StringCell.dt_loadFromXibNamed("NibCell", bundle: NSBundle(forClass: self.dynamicType))
+        
+        expect(loadedView).to(beNil())
     }
 }

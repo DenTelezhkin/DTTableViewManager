@@ -98,7 +98,7 @@ class TableViewFactory
     {
         let reuseIdentifier = RuntimeHelper.classNameFromReflection(_reflect(footerClass))
         tableView.registerClass(footerClass, forHeaderFooterViewReuseIdentifier: reuseIdentifier)
-        self.addMappingForViewType(.Header, viewClass: T.self)
+        self.addMappingForViewType(.Footer, viewClass: T.self)
     }
     
     func registerHeaderClass<T:ModelTransfer where T: UIView>(headerClass : T.Type)
@@ -136,8 +136,7 @@ class TableViewFactory
     func cellForModel(model: Any, atIndexPath indexPath:NSIndexPath) -> UITableViewCell
     {
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
-            assertionFailure("Received nil model at indexPath: \(indexPath)")
-            return UITableViewCell()
+            preconditionFailure("Received nil model at indexPath: \(indexPath)")
         }
         
         let typeMirror = RuntimeHelper.mirrorFromModel(unwrappedModel)
@@ -149,9 +148,7 @@ class TableViewFactory
             return cell
         }
         
-        assertionFailure("Unable to find cell mappings for type: \(_reflect(typeMirror.valueType).summary)")
-        
-        return UITableViewCell()
+        preconditionFailure("Unable to find cell mappings for type: \(_reflect(typeMirror.valueType).summary)")
     }
     
     func headerFooterViewWithMapping(mapping: ViewModelMapping, unwrappedModel: Any) -> UIView?
@@ -180,9 +177,8 @@ class TableViewFactory
     private func headerFooterViewOfType(type: ViewType, model : Any) -> UIView?
     {
         let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model)
-        if unwrappedModel == nil {
-            assertionFailure("Received nil model for headerFooterViewModel")
-        }
+        
+        precondition(unwrappedModel != nil, "Received nil model for headerFooterViewModel")
         
         let typeMirror = RuntimeHelper.mirrorFromModel(unwrappedModel!)
         

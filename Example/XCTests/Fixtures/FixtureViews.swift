@@ -21,3 +21,10 @@ class NibHeaderFooterView : UITableViewHeaderFooterView, ModelTransfer
     func updateWithModel(model: Int) {
     }
 }
+
+class NiblessHeaderFooterView : UITableViewHeaderFooterView, ModelTransfer
+{
+    func updateWithModel(model: Int) {
+        
+    }
+}

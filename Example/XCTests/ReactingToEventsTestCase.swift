@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 import DTModelStorage
-import DTTableViewManager
+@testable import DTTableViewManager
 import Nimble
 
 class AlwaysVisibleTableView: UITableView
@@ -147,5 +147,12 @@ class ReactingToEventsTestCase: XCTestCase {
         
         expect(reactingCell?.indexPath) == indexPath(1, 0)
         expect(reactingCell?.model) == 2
+    }
+    
+    func testViewModelMappingDescription() {
+        let viewModelMapping = ViewModelMapping(viewType: .Cell, viewTypeMirror: _reflect(UITableViewCell.self), modelTypeMirror: _reflect(String.self)) { (_, _) -> () in
+        }
+        
+        expect(viewModelMapping.debugDescription) != ""
     }
 }

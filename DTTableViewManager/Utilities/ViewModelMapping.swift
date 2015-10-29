@@ -39,9 +39,9 @@ struct ViewModelMapping
     let updateBlock : (Any, Any) -> ()
 }
 
-extension ViewModelMapping : CustomStringConvertible
+extension ViewModelMapping : CustomDebugStringConvertible
 {
-    var description : String
+    var debugDescription : String
     {
         return "Mapping type : \(viewType.rawValue) \n" +
             "View Type : \(viewTypeMirror.value) \n" +

@@ -2,9 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## Master
+
+## Fixed
+
+* `registerNiblessFooterClass` method now works correctly.
+
+## Removed
+
+* `TableViewStorageUpdating` protocol and conformance has been removed as unnecessary.
+
 ## [4.2.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.2.1)
 
-### Updated
+## Updated
 
 * Improved stability by treating UITableView as optional
 

@@ -142,4 +142,18 @@ class MappingTestCase: XCTestCase {
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView))
     }
+    
+    func testNiblessHeaderRegistrationWorks() {
+        controller.manager.registerNiblessHeaderClass(NiblessHeaderFooterView)
+        controller.manager.memoryStorage.setSectionHeaderModels([1])
+        let view = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0)
+        expect(view).to(beAKindOf(NiblessHeaderFooterView.self))
+    }
+    
+    func testNiblessFooterRegistrationWorks() {
+        controller.manager.registerNiblessFooterClass(NiblessHeaderFooterView)
+        controller.manager.memoryStorage.setSectionFooterModels([1])
+        let view = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
+        expect(view).to(beAKindOf(NiblessHeaderFooterView.self))
+    }
 }

@@ -280,8 +280,8 @@ extension DTTableViewManager
     /// - Parameter footerClass: UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
     public func registerNiblessFooterClass<T:ModelTransfer where T: UITableViewHeaderFooterView>(footerClass : T.Type)
     {
-        configuration.sectionHeaderStyle = .View
-        self.viewFactory.registerNiblessHeaderClass(footerClass)
+        configuration.sectionFooterStyle = .View
+        self.viewFactory.registerNiblessFooterClass(footerClass)
     }
     
     /// Register mapping from model class to custom footer view class. Method will automatically check for nib with the same name as `footerClass`. If it exists - nib will be registered instead of class.
@@ -694,15 +694,5 @@ extension DTTableViewManager : StorageUpdating
     private func controllerDidUpdateContent()
     {
         (self.delegate as? DTTableViewContentUpdatable)?.afterContentUpdate()
-    }
-}
-
-extension DTTableViewManager : TableViewStorageUpdating
-{
-    /// Perform animations you need for changes in UITableView. Method can be used for complex animations, that should be run simultaneously. 
-    /// - Parameter block: animation block, that will be called
-    public func performAnimatedUpdate(block: UITableView -> Void) {
-        guard tableView != nil else { return }
-        block(self.tableView!)
     }
 }
