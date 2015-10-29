@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 * `registerNiblessFooterClass` method now works correctly.
 
+## Renamed 
+
+* `objectForCellClass` category of methods have been removed to read item in their title instead of object.
+
 ## Removed
 
 * `TableViewStorageUpdating` protocol and conformance has been removed as unnecessary.

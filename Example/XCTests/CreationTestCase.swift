@@ -45,6 +45,16 @@ class CreationTestCase: XCTestCase {
         expect(foo.manager) == foo.manager // Test if lazily instantiating using associations works correctly
     }
     
+    func testManagerSetter()
+    {
+        let manager = DTTableViewManager()
+        let foo = DTTestTableViewController(nibName: nil, bundle: nil)
+        foo.manager = manager
+        foo.manager.startManagingWithDelegate(foo)
+        
+        expect(foo.manager === manager)
+    }
+    
     func testLoadFromXibChecksCorrectClassName() {
         let loadedView = StringCell.dt_loadFromXibNamed("NibCell", bundle: NSBundle(forClass: self.dynamicType))
         

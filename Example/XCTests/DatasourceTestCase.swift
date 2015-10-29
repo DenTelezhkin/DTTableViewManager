@@ -242,7 +242,7 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.registerCellClass(NibCell)
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        if let object = controller.manager.objectForCellClass(NibCell.self, atIndexPath: indexPath(0, 0))
+        if let object = controller.manager.itemForCellClass(NibCell.self, atIndexPath: indexPath(0, 0))
         {
             expect(object) == 1
         }
@@ -251,13 +251,22 @@ class DatasourceTestCase: XCTestCase {
         }
     }
     
+//    func testItemForVisibleCell() {
+//        controller.manager.registerCellClass(NibCell)
+//        controller.manager.memoryStorage.addItem(1)
+//        
+//        let item = controller.manager.itemForVisibleCell(controller.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0)) as? NibCell)
+//        
+//        expect(item) == 1
+//    }
+    
     func testObjectAtIndexPathGenericConversionFailsForNil()
     {
         controller.manager.registerCellClass(NibCell)
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
         
-        if let _ = controller.manager.objectForCellClass(StringCell.self, atIndexPath: indexPath(0, 0))
+        if let _ = controller.manager.itemForCellClass(StringCell.self, atIndexPath: indexPath(0, 0))
         {
             XCTFail()
         }
@@ -267,7 +276,7 @@ class DatasourceTestCase: XCTestCase {
     {
         controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderClass: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        if let _ = controller.manager.objectForHeaderClass(NibHeaderFooterView.self, atSectionIndex: 0)
+        if let _ = controller.manager.itemForHeaderClass(NibHeaderFooterView.self, atSectionIndex: 0)
         {
             
         }
@@ -280,7 +289,7 @@ class DatasourceTestCase: XCTestCase {
     {
         controller.manager.registerNibNamed("NibHeaderFooterView", forFooterClass: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        if let _ = controller.manager.objectForFooterClass(NibHeaderFooterView.self, atSectionIndex: 0)
+        if let _ = controller.manager.itemForFooterClass(NibHeaderFooterView.self, atSectionIndex: 0)
         {
             
         }
@@ -307,5 +316,15 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.memoryStorage.sectionAtIndex(0)?.tableFooterModel = "2"
         
         expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.tableFooterModel as? String) == "2"
+    }
+    
+    func testNilHeaderViewWithStyleTitle() {
+        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
+    }
+    
+    func testNilFooterViewWithStyleTitle() {
+        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
     }
 }

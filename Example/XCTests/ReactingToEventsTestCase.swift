@@ -24,13 +24,37 @@ class AlwaysVisibleTableView: UITableView
     }
 }
 
+class ReactingTestTableViewController: DTTestTableViewController
+{
+    var indexPath : NSIndexPath?
+    var model: Int?
+    var text : String?
+    
+    func cellConfiguration(cell: SelectionReactingTableCell, model: Int, indexPath: NSIndexPath) {
+        cell.indexPath = indexPath
+        cell.model = model
+        cell.textLabel?.text = "Foo"
+    }
+    
+    func headerConfiguration(header: ReactingHeaderFooterView, model: String, sectionIndex: Int) {
+        header.model = "Bar"
+        header.sectionIndex = sectionIndex
+    }
+    
+    func cellSelection(cell: SelectionReactingTableCell, model: Int, indexPath: NSIndexPath) {
+        self.indexPath = indexPath
+        self.model = model
+        self.text = "Bar"
+    }
+}
+
 class ReactingToEventsTestCase: XCTestCase {
 
-    var controller : DTTestTableViewController!
+    var controller : ReactingTestTableViewController!
     
     override func setUp() {
         super.setUp()
-        controller = DTTestTableViewController()
+        controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
@@ -154,5 +178,69 @@ class ReactingToEventsTestCase: XCTestCase {
         }
         
         expect(viewModelMapping.debugDescription) != ""
+    }
+    
+    func testMovingTableViewItems() {
+        controller.manager.memoryStorage.addItems([1,2,3])
+        controller.manager.memoryStorage.addItems([4,5,6], toSection: 1)
+        
+        controller.manager.tableView(controller.tableView, moveRowAtIndexPath: indexPath(0, 0), toIndexPath: indexPath(3, 1))
+        
+        expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.itemsOfType(Int)) == [2,3]
+        expect(self.controller.manager.memoryStorage.sectionAtIndex(1)?.itemsOfType(Int)) == [4,5,6,1]
+    }
+}
+
+// Method pointers tests
+extension ReactingToEventsTestCase
+{
+    func testCellConfigurationMethodPointer() {
+        controller.manager.registerCellClass(SelectionReactingTableCell)
+        controller.manager.cellConfiguration(ReactingTestTableViewController.self.cellConfiguration)
+        
+        controller.manager.memoryStorage.addItem(2, toSection: 0)
+        let reactingCell = controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0)) as? SelectionReactingTableCell
+        
+        expect(reactingCell?.indexPath) == indexPath(0, 0)
+        expect(reactingCell?.model) == 2
+        expect(reactingCell?.textLabel?.text) == "Foo"
+    }
+    
+    func testCellSelectionMethodPointer() {
+        controller.manager.registerCellClass(SelectionReactingTableCell)
+        controller.manager.cellSelection(ReactingTestTableViewController.self.cellSelection)
+        
+        controller.manager.memoryStorage.addItems([1,2], toSection: 0)
+        controller.manager.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
+        
+        expect(self.controller.indexPath) == indexPath(1, 0)
+        expect(self.controller.model) == 2
+        expect(self.controller.text) == "Bar"
+    }
+    
+    func testHeaderConfigurationMethodPointer() {
+        controller.manager.registerHeaderClass(ReactingHeaderFooterView)
+        
+        var reactingHeader : ReactingHeaderFooterView?
+        
+        controller.manager.headerConfiguration(ReactingTestTableViewController.self.headerConfiguration)
+        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        reactingHeader = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
+        
+        expect(reactingHeader?.sectionIndex) == 0
+        expect(reactingHeader?.model) == "Bar"
+    }
+    
+    func testFooterConfigurationMethodPointer() {
+        controller.manager.registerFooterClass(ReactingHeaderFooterView)
+        
+        var reactingFooter : ReactingHeaderFooterView?
+        
+        controller.manager.footerConfiguration(ReactingTestTableViewController.self.headerConfiguration)
+        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        reactingFooter = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
+        
+        expect(reactingFooter?.sectionIndex) == 0
+        expect(reactingFooter?.model) == "Bar"
     }
 }
