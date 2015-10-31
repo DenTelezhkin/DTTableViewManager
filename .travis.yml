@@ -3,13 +3,20 @@ sudo: false
 language: objective-c
 
 env:
+  global:
+    - IOS_SDK=iphonesimulator9.1
+    - IOS_SCHEME="DTTableViewManager-iOS"
+    - TVOS_SDK=appletvsimulator9.0
+    - TVOS_SCHEME="DTTableViewManager-tvOS"
   matrix:
-      - DESTINATION="OS=9.1,name=iPad 2"
-      - DESTINATION="OS=9.1,name=iPad Air"
-      - DESTINATION="OS=9.1,name=iPhone 5"
-      - DESTINATION="OS=9.1,name=iPhone 6s"
-      - DESTINATION="OS=8.4,name=iPhone 6"
-      - DESTINATION="OS=8.4,name=iPad Air"
+      - DESTINATION="OS=9.1,name=iPad 2"         SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
+      - DESTINATION="OS=9.1,name=iPad Air"       SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
+      - DESTINATION="OS=9.1,name=iPhone 5"       SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
+      - DESTINATION="OS=9.1,name=iPhone 6s"      SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
+      - DESTINATION="OS=8.4,name=iPhone 6"       SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
+      - DESTINATION="OS=8.4,name=iPad Air"       SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
+      - DESTINATION="OS=9.0,name=Apple TV 1080p" SDK="$TVOS_SDK" SCHEME="$TVOS_SCHEME"
+
 before_install:
     - cd Example
 
@@ -17,7 +24,7 @@ script:
     - set -o pipefail
     - git submodule update --init --recursive
     - xcodebuild -version
-    - xcodebuild -workspace DTTableViewManager.xcworkspace -scheme DTTableViewManager -configuration Debug -sdk iphonesimulator -destination "$DESTINATION" test -enableCodeCoverage YES | xcpretty -tc
+    - xcodebuild -workspace DTTableViewManager.xcworkspace -scheme "$SCHEME" -configuration Debug -sdk "$SDK" -destination "$DESTINATION" test -enableCodeCoverage YES | xcpretty -tc
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)

@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9AF003191A5ABE7000ABFC90"
-               BuildableName = "XCTests.xctest"
-               BlueprintName = "XCTests"
+               BuildableName = "Tests-iOS.xctest"
+               BlueprintName = "Tests-iOS"
                ReferencedContainer = "container:DTTableViewManager.xcodeproj">
             </BuildableReference>
          </TestableReference>

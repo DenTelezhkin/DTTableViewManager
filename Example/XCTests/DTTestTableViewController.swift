@@ -11,7 +11,7 @@ import DTTableViewManager
 
 class DTTestTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DTTableViewManageable {
 
-    var tableView : UITableView! = UITableView()
+    @IBOutlet var tableView : UITableView! = UITableView()
     
     var beforeContentUpdateValue = false
     var afterContentUpdateValue = false

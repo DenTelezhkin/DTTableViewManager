@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Master
 
+## Changed
+
+* Added support for Apple TV platform (tvOS).
+
 ## Fixed
 
 * `registerNiblessFooterClass` method now works correctly.
