@@ -24,7 +24,7 @@ script:
     - set -o pipefail
     - git submodule update --init --recursive
     - xcodebuild -version
-    - xcodebuild -workspace DTTableViewManager.xcworkspace -scheme "$SCHEME" -configuration Debug -sdk "$SDK" -destination "$DESTINATION" test -enableCodeCoverage YES | xcpretty -tc
+    - xcodebuild -workspace DTTableViewManager.xcworkspace -scheme "$SCHEME" -configuration Debug -sdk "$SDK" -destination "$DESTINATION" test -enableCodeCoverage YES | xcpretty
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
