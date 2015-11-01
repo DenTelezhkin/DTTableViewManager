@@ -26,7 +26,7 @@ Powerful protocol-oriented UITableView management framework, written in Swift 2.
 ## Requirements
 
 * XCode 7 and higher
-* iOS 8,9
+* iOS 8.0 and higher / tvOS 9.0 and higher
 * Swift 2
 
 ## Installation
