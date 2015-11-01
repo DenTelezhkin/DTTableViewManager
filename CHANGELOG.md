@@ -2,7 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## Master
+## [4.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.3.0)
+
+Dependency changelog -> [DTModelStorage 2.2 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
 
 ## Changed
 
@@ -12,7 +14,7 @@ All notable changes to this project will be documented in this file.
 
 * `registerNiblessFooterClass` method now works correctly.
 
-## Renamed 
+## Renamed
 
 * `objectForCellClass` category of methods have been removed to read item in their title instead of object.
 
