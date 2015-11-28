@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Master
+
+* New mapping system, using type checking instead of runtime introspection
+
 ## [4.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.3.0)
 
 Dependency changelog -> [DTModelStorage 2.2 and higher](https://github.com/DenHeadless/DTModelStorage/releases)

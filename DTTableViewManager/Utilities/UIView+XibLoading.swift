@@ -51,6 +51,6 @@ extension UIView
     /// - Returns: Loaded xib
     class func dt_loadFromXibInBundle(bundle: NSBundle) -> UIView?
     {
-        return self.dt_loadFromXibNamed(RuntimeHelper.classNameFromReflection(_reflect(self)), bundle : bundle)
+        return self.dt_loadFromXibNamed(String(self), bundle : bundle)
     }
 }

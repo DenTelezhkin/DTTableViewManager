@@ -173,13 +173,6 @@ class ReactingToEventsTestCase: XCTestCase {
         expect(reactingCell?.model) == 2
     }
     
-    func testViewModelMappingDescription() {
-        let viewModelMapping = ViewModelMapping(viewType: .Cell, viewTypeMirror: _reflect(UITableViewCell.self), modelTypeMirror: _reflect(String.self)) { (_, _) -> () in
-        }
-        
-        expect(viewModelMapping.debugDescription) != ""
-    }
-    
     func testMovingTableViewItems() {
         controller.manager.memoryStorage.addItems([1,2,3])
         controller.manager.memoryStorage.addItems([4,5,6], toSection: 1)
