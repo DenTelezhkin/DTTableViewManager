@@ -36,6 +36,8 @@ class TableViewFactory
     
     var bundle = NSBundle.mainBundle()
     
+    weak var mappingCustomizableDelegate : DTViewModelMappingCustomizable?
+    
     init(tableView: UITableView)
     {
         self.tableView = tableView
@@ -118,11 +120,20 @@ class TableViewFactory
             preconditionFailure("Received nil model at indexPath: \(indexPath)")
         }
         
-        if let mapping = mappings.mappingCandidatesForViewType(.Cell, model: unwrappedModel).first
+        let mappingCandidates = mappings.mappingCandidatesForViewType(.Cell, model: unwrappedModel)
+        let mapping : ViewModelMapping?
+        
+        if let customizedMapping = mappingCustomizableDelegate?.viewModelMappingFromCandidates(mappingCandidates, forModel: unwrappedModel) {
+            mapping = customizedMapping
+        } else if let defaultMapping = mappingCandidates.first {
+            mapping = defaultMapping
+        } else { mapping = nil }
+        
+        if mapping != nil
         {
-            let cellClassName = String(mapping.viewClass)
+            let cellClassName = String(mapping!.viewClass)
             let cell = tableView.dequeueReusableCellWithIdentifier(cellClassName, forIndexPath: indexPath)
-            mapping.updateBlock(cell, unwrappedModel)
+            mapping?.updateBlock(cell, unwrappedModel)
             return cell
         }
         
@@ -139,10 +150,7 @@ class TableViewFactory
         else {
             let view : UIView?
             
-            // Unfortunately, Swift 2.1 does not allow casting AnyClass.Type to UIView.Type even conditionally,
-            // that's why we're forced to cast through reflect value
-            let mirror = _reflect(mapping.viewClass)
-            if let type = mirror.value as? UIView.Type  {
+            if let type = mapping.viewClass as? UIView.Type {
                 view = type.dt_loadFromXibInBundle(bundle)
             }
             else {
@@ -156,26 +164,35 @@ class TableViewFactory
         }
     }
     
-    private func headerFooterViewOfType(type: ViewType, model : Any) -> UIView?
+    private func headerFooterViewOfType(type: ViewType, model : Any, atIndexPath indexPath: NSIndexPath) -> UIView?
     {
-        let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model)
-        
-        precondition(unwrappedModel != nil, "Received nil model for headerFooterViewModel")
-        
-        if let mapping = mappings.mappingCandidatesForViewType(type, model: unwrappedModel).first {
-            return self.headerFooterViewWithMapping(mapping, unwrappedModel: unwrappedModel!)
+        guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
+            preconditionFailure("Received nil model for headerFooterViewModel")
         }
+        
+        let mappingCandidates = mappings.mappingCandidatesForViewType(type, model: unwrappedModel)
+        let mapping : ViewModelMapping?
+        
+        if let customizedMapping = mappingCustomizableDelegate?.viewModelMappingFromCandidates(mappingCandidates, forModel: unwrappedModel) {
+            mapping = customizedMapping
+        } else if let defaultMapping = mappingCandidates.first {
+            mapping = defaultMapping
+        } else { mapping = nil }
+        
+        if mapping != nil { return self.headerFooterViewWithMapping(mapping!, unwrappedModel: unwrappedModel) }
         
         return nil
     }
     
-    func headerViewForModel(model: Any) -> UIView?
+    func headerViewForModel(model: Any, atIndexPath indexPath: NSIndexPath) -> UIView?
     {
-        return self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionHeader), model: model)
+        return self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionHeader),
+            model: model, atIndexPath: indexPath)
     }
     
-    func footerViewForModel(model: Any) -> UIView?
+    func footerViewForModel(model: Any, atIndexPath indexPath: NSIndexPath) -> UIView?
     {
-        return self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionFooter), model: model)
+        return self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionFooter),
+            model: model, atIndexPath: indexPath)
     }
 }

@@ -82,6 +82,8 @@
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
 		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
 		9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE074B1B86074900636D78 /* BankCell.swift */; };
+		9AC48D661C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC48D651C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift */; };
+		9AC48D671C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC48D651C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift */; };
 		9AD92BF01BE27AEA00E667FF /* DelegateForwardingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD92BEF1BE27AEA00E667FF /* DelegateForwardingTestCase.swift */; };
 		9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */; };
 		9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */; };
@@ -212,6 +214,7 @@
 		9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9ABE07441B85FE4E00636D78 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = CoreData/Bank.swift; sourceTree = "<group>"; };
 		9ABE074B1B86074900636D78 /* BankCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankCell.swift; path = "Example controllers/Search/BankCell.swift"; sourceTree = "<group>"; };
+		9AC48D651C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelMappingCustomizableTestCase.swift; sourceTree = "<group>"; };
 		9AD92BEE1BE266E800E667FF /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		9AD92BEF1BE27AEA00E667FF /* DelegateForwardingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateForwardingTestCase.swift; sourceTree = "<group>"; };
 		9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRemoveViewController.swift; path = "Example controllers/AddRemoveViewController.swift"; sourceTree = "<group>"; };
@@ -478,6 +481,7 @@
 				9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */,
 				9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */,
 				9AD92BEF1BE27AEA00E667FF /* DelegateForwardingTestCase.swift */,
+				9AC48D651C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift */,
 				9AF0031C1A5ABE7000ABFC90 /* Supporting Files */,
 			);
 			path = XCTests;
@@ -750,6 +754,7 @@
 				9A6CED5F1BE570750091B0AF /* DelegateForwardingTestCase.swift in Sources */,
 				9A6CED601BE570750091B0AF /* XibTableViewController.swift in Sources */,
 				9A6CED611BE570750091B0AF /* TableViewController+UnitTests.swift in Sources */,
+				9AC48D671C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				9A6CED621BE570750091B0AF /* FixtureViews.swift in Sources */,
 				9A6CED631BE570750091B0AF /* DatasourceTestCase.swift in Sources */,
 				9A6CED641BE570750091B0AF /* MappingTestCase.swift in Sources */,
@@ -803,6 +808,7 @@
 				9AD92BF01BE27AEA00E667FF /* DelegateForwardingTestCase.swift in Sources */,
 				9A1A49A31B5455820006610B /* XibTableViewController.swift in Sources */,
 				9A75CEC41B55AF68007FB06C /* TableViewController+UnitTests.swift in Sources */,
+				9AC48D661C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */,
 				9A52DD6B1B5A99F30048F535 /* DatasourceTestCase.swift in Sources */,
 				9A75CEC11B55AE6F007FB06C /* MappingTestCase.swift in Sources */,

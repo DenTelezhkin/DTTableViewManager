@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 * New mapping system, using type checking instead of runtime introspection.
 * Migrated to new `UIReaction` classes from `DTModelStorage` for selection and configuration events.
+* Allow customization of model -> view mapping using `DTViewModelMappingCustomizable` protocol.
 
 ## [4.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.3.0)
 

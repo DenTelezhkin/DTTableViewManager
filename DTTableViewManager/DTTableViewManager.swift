@@ -128,6 +128,7 @@ public class DTTableViewManager : NSObject {
     /// Call this method before calling any of `DTTableViewManager` methods.
     /// - Precondition: UITableView instance on `delegate` should not be nil.
     /// - Parameter delegate: Object, that has UITableView, that will be managed by `DTTableViewManager`.
+    /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
     public func startManagingWithDelegate(delegate : DTTableViewManageable)
     {
         precondition(delegate.tableView != nil,"Call startManagingWithDelegate: method only when UITableView has been created")
@@ -135,6 +136,9 @@ public class DTTableViewManager : NSObject {
         self.delegate = delegate
         delegate.tableView.delegate = self
         delegate.tableView.dataSource = self
+        if let mappingDelegate = delegate as? DTViewModelMappingCustomizable {
+            viewFactory.mappingCustomizableDelegate = mappingDelegate
+        }
     }
     
     /// Call this method to retrieve model from specific UITableViewCell subclass.
@@ -550,7 +554,7 @@ extension DTTableViewManager: UITableViewDelegate
         if configuration.sectionHeaderStyle == .Title { return nil }
         
         if let model = self.headerModelForSectionIndex(section) {
-            let view = self.viewFactory.headerViewForModel(model)
+            let view = self.viewFactory.headerViewForModel(model, atIndexPath: NSIndexPath(index: section))
             if let createdView = view,
                 let reaction = tableViewReactions.reactionsOfType(.SupplementaryConfiguration(kind: DTTableViewElementSectionHeader), forView: view).first
             {
@@ -566,7 +570,7 @@ extension DTTableViewManager: UITableViewDelegate
         if configuration.sectionFooterStyle == .Title { return nil }
         
         if let model = self.footerModelForSectionIndex(section) {
-            let view = self.viewFactory.footerViewForModel(model)
+            let view = self.viewFactory.footerViewForModel(model, atIndexPath: NSIndexPath(index: section))
             if let createdView = view,
                 let reaction = tableViewReactions.reactionsOfType(.SupplementaryConfiguration(kind: DTTableViewElementSectionFooter), forView: view).first
             {
