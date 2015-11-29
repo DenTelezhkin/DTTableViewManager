@@ -27,6 +27,23 @@ import UIKit
 import Foundation
 import DTModelStorage
 
+public enum DTTableViewFactoryError : ErrorType, CustomStringConvertible {
+    case NilCellModel(NSIndexPath)
+    case NoCellMappings(model: Any)
+    case NilHeaderFooterModel(section: Int)
+    
+    public var description : String {
+        switch self {
+        case .NilCellModel(let indexPath):
+            return "Received nil model for cell at index path: \(indexPath)"
+        case .NilHeaderFooterModel(let section):
+            return "Received nil model for header or footer model in section: \(section)"
+        case .NoCellMappings(let model):
+            return "Cell mapping is missing for model: \(model)"
+        }
+    }
+}
+
 /// Internal class, that is used to create table view cells, headers and footers.
 class TableViewFactory
 {
@@ -114,10 +131,10 @@ class TableViewFactory
         mappings.addMappingForViewType(.SupplementaryView(kind: DTTableViewElementSectionFooter), viewClass: T.self)
     }
     
-    func cellForModel(model: Any, atIndexPath indexPath:NSIndexPath) -> UITableViewCell
+    func cellForModel(model: Any, atIndexPath indexPath:NSIndexPath) throws -> UITableViewCell
     {
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
-            preconditionFailure("Received nil model at indexPath: \(indexPath)")
+            throw DTTableViewFactoryError.NilCellModel(indexPath)
         }
         
         let mappingCandidates = mappings.mappingCandidatesForViewType(.Cell, model: unwrappedModel)
@@ -137,7 +154,7 @@ class TableViewFactory
             return cell
         }
         
-        preconditionFailure("Unable to find cell mappings for type: \(model)")
+        throw DTTableViewFactoryError.NoCellMappings(model: unwrappedModel)
     }
     
     func headerFooterViewWithMapping(mapping: ViewModelMapping, unwrappedModel: Any) -> UIView?
@@ -148,26 +165,23 @@ class TableViewFactory
             return view
         }
         else {
-            let view : UIView?
+            var view : UIView? = nil
             
             if let type = mapping.viewClass as? UIView.Type {
                 view = type.dt_loadFromXibInBundle(bundle)
             }
-            else {
-                view = nil
+            
+            if view != nil {
+                mapping.updateBlock(view!,unwrappedModel)
             }
-            
-            precondition(view != nil,"failed creating view of type: \(viewClassName) for model: \(unwrappedModel)")
-            
-            mapping.updateBlock(view!,unwrappedModel)
             return view
         }
     }
     
-    private func headerFooterViewOfType(type: ViewType, model : Any, atIndexPath indexPath: NSIndexPath) -> UIView?
+    func headerFooterViewOfType(type: ViewType, model : Any, atIndexPath indexPath: NSIndexPath) throws -> UIView?
     {
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
-            preconditionFailure("Received nil model for headerFooterViewModel")
+            throw DTTableViewFactoryError.NilHeaderFooterModel(section: indexPath.section)
         }
         
         let mappingCandidates = mappings.mappingCandidatesForViewType(type, model: unwrappedModel)
@@ -184,15 +198,15 @@ class TableViewFactory
         return nil
     }
     
-    func headerViewForModel(model: Any, atIndexPath indexPath: NSIndexPath) -> UIView?
+    func headerViewForModel(model: Any, atIndexPath indexPath: NSIndexPath) throws -> UIView?
     {
-        return self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionHeader),
+        return try self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionHeader),
             model: model, atIndexPath: indexPath)
     }
     
-    func footerViewForModel(model: Any, atIndexPath indexPath: NSIndexPath) -> UIView?
+    func footerViewForModel(model: Any, atIndexPath indexPath: NSIndexPath) throws -> UIView?
     {
-        return self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionFooter),
+        return try self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionFooter),
             model: model, atIndexPath: indexPath)
     }
 }

@@ -73,7 +73,7 @@ public class DTTableViewManager : NSObject {
     private weak var delegate : DTTableViewManageable?
 
     ///  Factory for creating cells and views for UITableView
-    private lazy var viewFactory: TableViewFactory = {
+    lazy var viewFactory: TableViewFactory = {
         precondition(self.tableView != nil, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
         return TableViewFactory(tableView: self.tableView!)
     }()
@@ -93,6 +93,11 @@ public class DTTableViewManager : NSObject {
     /// Array of reactions for `DTTableViewManager`
     /// - SeeAlso: `TableViewReaction`.
     private var tableViewReactions = [UIReaction]()
+    
+    /// Error handler ot be executed when critical error happens with `TableViewFactory`.
+    /// This can be useful to provide more debug information for crash logs, since preconditionFailure Swift method provides little to zero insight about what happened and when.
+    /// This closure will be called prior to calling preconditionFailure in `handleTableViewFactoryError` method.
+    public var tableViewFactoryErrorHandler : (DTTableViewFactoryError -> Void)?
     
     /// Implicitly unwrap storage property to `MemoryStorage`.
     /// - Warning: if storage is not MemoryStorage, will throw an exception.
@@ -500,6 +505,11 @@ extension DTTableViewManager
 // MARK: - UITableViewDatasource
 extension DTTableViewManager: UITableViewDataSource
 {
+    func handleTableViewFactoryError(error: DTTableViewFactoryError) {
+        tableViewFactoryErrorHandler?(error)
+        preconditionFailure(error.description)
+    }
+    
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.storage.sections[section].numberOfItems
     }
@@ -510,7 +520,16 @@ extension DTTableViewManager: UITableViewDataSource
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let model = self.storage.itemAtIndexPath(indexPath)!
-        let cell = self.viewFactory.cellForModel(model, atIndexPath: indexPath)
+        
+        let cell : UITableViewCell
+        do {
+            cell = try self.viewFactory.cellForModel(model, atIndexPath: indexPath)
+        } catch let error as DTTableViewFactoryError {
+            handleTableViewFactoryError(error)
+            cell = UITableViewCell()
+        } catch {
+            cell = UITableViewCell()
+        }
         
         if let reaction = tableViewReactions.reactionsOfType(.CellConfiguration, forView: cell).first {
             reaction.reactionData = ViewData(view: cell, indexPath:indexPath)
@@ -554,7 +573,16 @@ extension DTTableViewManager: UITableViewDelegate
         if configuration.sectionHeaderStyle == .Title { return nil }
         
         if let model = self.headerModelForSectionIndex(section) {
-            let view = self.viewFactory.headerViewForModel(model, atIndexPath: NSIndexPath(index: section))
+            let view : UIView?
+            do {
+                view = try self.viewFactory.headerViewForModel(model, atIndexPath: NSIndexPath(index: section))
+            } catch let error as DTTableViewFactoryError {
+                handleTableViewFactoryError(error)
+                view = nil
+            } catch {
+                view = nil
+            }
+            
             if let createdView = view,
                 let reaction = tableViewReactions.reactionsOfType(.SupplementaryConfiguration(kind: DTTableViewElementSectionHeader), forView: view).first
             {
@@ -570,7 +598,16 @@ extension DTTableViewManager: UITableViewDelegate
         if configuration.sectionFooterStyle == .Title { return nil }
         
         if let model = self.footerModelForSectionIndex(section) {
-            let view = self.viewFactory.footerViewForModel(model, atIndexPath: NSIndexPath(index: section))
+            let view : UIView?
+            do {
+                view = try self.viewFactory.footerViewForModel(model, atIndexPath: NSIndexPath(index: section))
+            } catch let error as DTTableViewFactoryError {
+                handleTableViewFactoryError(error)
+                view = nil
+            } catch {
+                view = nil
+            }
+            
             if let createdView = view,
                 let reaction = tableViewReactions.reactionsOfType(.SupplementaryConfiguration(kind: DTTableViewElementSectionFooter), forView: view).first
             {

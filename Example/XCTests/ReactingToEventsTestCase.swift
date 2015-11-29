@@ -182,6 +182,14 @@ class ReactingToEventsTestCase: XCTestCase {
         expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.itemsOfType(Int)) == [2,3]
         expect(self.controller.manager.memoryStorage.sectionAtIndex(1)?.itemsOfType(Int)) == [4,5,6,1]
     }
+    
+//    func testTableViewFactoryErrorHandler() {
+//        var errorHandlerCalled = false
+//        
+//        controller.manager.tableViewFactoryErrorHandler = { error in
+//            errorHandlerCalled = true
+//        }
+//    }
 }
 
 // Method pointers tests
