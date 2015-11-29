@@ -12,7 +12,6 @@
 		9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
 		9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
 		9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
-		9A08A9B81B8A23A100877C62 /* TableViewReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */; };
 		9A08A9B91B8A23A100877C62 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */; };
 		9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */; };
 		9A1663ED1B5A68B200B2C3C8 /* NibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1663EC1B5A68B200B2C3C8 /* NibView.xib */; };
@@ -50,7 +49,6 @@
 		9A6CED961BE571AE0091B0AF /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
 		9A6CED971BE571AE0091B0AF /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
 		9A6CED981BE571AE0091B0AF /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
-		9A6CED991BE571AE0091B0AF /* TableViewReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */; };
 		9A6CED9A1BE571AE0091B0AF /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */; };
 		9A6CED9C1BE571AE0091B0AF /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */; };
 		9A6CED9D1BE571B90091B0AF /* DTTableViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A08A9AC1B8A23A100877C62 /* DTTableViewManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -162,7 +160,6 @@
 		9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTableViewManager.swift; sourceTree = "<group>"; };
 		9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFactory.swift; sourceTree = "<group>"; };
 		9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewConfiguration.swift; sourceTree = "<group>"; };
-		9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewReaction.swift; sourceTree = "<group>"; };
 		9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibLoading.swift"; sourceTree = "<group>"; };
 		9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FixtureViews.swift; path = Fixtures/FixtureViews.swift; sourceTree = "<group>"; };
 		9A1663EC1B5A68B200B2C3C8 /* NibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibView.xib; path = Fixtures/NibView.xib; sourceTree = "<group>"; };
@@ -288,7 +285,6 @@
 				9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */,
 				9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */,
 				9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */,
-				9A08A9B01B8A23A100877C62 /* TableViewReaction.swift */,
 				9A08A9B11B8A23A100877C62 /* Utilities */,
 			);
 			name = DTTableViewManager;
@@ -743,7 +739,6 @@
 				9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */,
 				9A08A9B91B8A23A100877C62 /* UIView+XibLoading.swift in Sources */,
 				9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */,
-				9A08A9B81B8A23A100877C62 /* TableViewReaction.swift in Sources */,
 				9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -776,7 +771,6 @@
 				9A6CED961BE571AE0091B0AF /* DTTableViewManager.swift in Sources */,
 				9A6CED971BE571AE0091B0AF /* TableViewFactory.swift in Sources */,
 				9A6CED981BE571AE0091B0AF /* TableViewConfiguration.swift in Sources */,
-				9A6CED991BE571AE0091B0AF /* TableViewReaction.swift in Sources */,
 				9A6CED9A1BE571AE0091B0AF /* UIView+XibLoading.swift in Sources */,
 				9A6CED9C1BE571AE0091B0AF /* SectionModel+HeaderFooter.swift in Sources */,
 			);

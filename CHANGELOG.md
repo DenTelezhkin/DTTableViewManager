@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Master
 
-* New mapping system, using type checking instead of runtime introspection
+* New mapping system, using type checking instead of runtime introspection.
+* Migrated to new `UIReaction` classes from `DTModelStorage` for selection and configuration events.
 
 ## [4.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.3.0)
 

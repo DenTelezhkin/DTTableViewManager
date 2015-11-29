@@ -92,18 +92,7 @@ public class DTTableViewManager : NSObject {
     
     /// Array of reactions for `DTTableViewManager`
     /// - SeeAlso: `TableViewReaction`.
-    private var tableViewReactions = [TableViewReaction]()
-    
-    /// Internal method to find specific reaction for specific event
-    /// - Parameter type: Type of reaction
-    /// - Parameter viewType: type of view that event is bind to
-    /// - Returns: `TableViewReaction` object
-    private func reactionOfReactionType(type: TableViewReactionType, forViewType viewType: _MirrorType?) -> TableViewReaction?
-    {
-        return self.tableViewReactions.filter({ (reaction) -> Bool in
-            return reaction.reactionType == type && reaction.viewType?.summary == viewType?.summary
-        }).first
-    }
+    private var tableViewReactions = [UIReaction]()
     
     /// Implicitly unwrap storage property to `MemoryStorage`.
     /// - Warning: if storage is not MemoryStorage, will throw an exception.
@@ -358,10 +347,9 @@ extension DTTableViewManager
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type. `DTTableViewManageable` instance is used to call selection event.
     public func cellSelection<T,U where T:ModelTransfer, T: UITableViewCell, U: DTTableViewManageable>( methodPointer: U -> (T,T.ModelType, NSIndexPath) -> Void )
     {
-        let reaction = TableViewReaction(.Selection)
-        reaction.viewType = _reflect(T)
+        let reaction = UIReaction(.CellSelection, viewClass: T.self)
         reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let indexPath = reaction.reactionData as? NSIndexPath,
+            if  let indexPath = reaction.reactionData?.indexPath,
                 let cell = self?.tableView?.cellForRowAtIndexPath(indexPath) as? T,
                 let model = self?.storage.itemAtIndexPath(indexPath) as? T.ModelType,
                 let delegate = self?.delegate as? U
@@ -379,10 +367,9 @@ extension DTTableViewManager
     /// - SeeAlso: 'cellSelection:'
     public func whenSelected<T:ModelTransfer where T:UITableViewCell>(cellClass:  T.Type, _ closure: (T,T.ModelType, NSIndexPath) -> Void)
     {
-        let reaction = TableViewReaction(.Selection)
-        reaction.viewType = _reflect(T)
+        let reaction = UIReaction(.CellSelection, viewClass: T.self)
         reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let indexPath = reaction.reactionData as? NSIndexPath,
+            if let indexPath = reaction.reactionData?.indexPath,
                 let cell = self?.tableView?.cellForRowAtIndexPath(indexPath) as? T,
                 let model = self?.storage.itemAtIndexPath(indexPath) as? T.ModelType
             {
@@ -399,10 +386,9 @@ extension DTTableViewManager
     /// - SeeAlso: 'cellConfiguration:'
     public func configureCell<T:ModelTransfer where T: UITableViewCell>(cellClass:T.Type, _ closure: (T, T.ModelType, NSIndexPath) -> Void)
     {
-        let reaction = TableViewReaction(.CellConfiguration)
-        reaction.viewType = _reflect(T)
+        let reaction = UIReaction(.CellConfiguration, viewClass: T.self)
         reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData as? ViewConfiguration,
+            if let configuration = reaction.reactionData,
                 let view = configuration.view as? T,
                 let model = self?.storage.itemAtIndexPath(configuration.indexPath) as? T.ModelType
             {
@@ -417,15 +403,14 @@ extension DTTableViewManager
     /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
     public func cellConfiguration<T,U where T:ModelTransfer, T: UITableViewCell, U: DTTableViewManageable>(methodPointer: U -> (T, T.ModelType, NSIndexPath) -> Void)
     {
-        let reaction = TableViewReaction(.CellConfiguration)
-        reaction.viewType = _reflect(T)
+        let reaction = UIReaction(.CellConfiguration, viewClass: T.self)
         reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData as? ViewConfiguration,
-                let view = configuration.view as? T,
-                let model = self?.storage.itemAtIndexPath(configuration.indexPath) as? T.ModelType,
+            if let viewData = reaction.reactionData,
+                let view = viewData.view as? T,
+                let model = self?.storage.itemAtIndexPath(viewData.indexPath) as? T.ModelType,
                 let delegate = self?.delegate as? U
             {
-                methodPointer(delegate)(view, model, configuration.indexPath)
+                methodPointer(delegate)(view, model, viewData.indexPath)
             }
         }
         self.tableViewReactions.append(reaction)
@@ -438,10 +423,9 @@ extension DTTableViewManager
     /// - SeeAlso: 'headerConfiguration:'
     public func configureHeader<T:ModelTransfer where T: UIView>(headerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        let reaction = TableViewReaction(.HeaderConfiguration)
-        reaction.viewType = _reflect(T)
+        let reaction = UIReaction(.SupplementaryConfiguration(kind: DTTableViewElementSectionHeader), viewClass: T.self)
         reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData as? ViewConfiguration,
+            if let configuration = reaction.reactionData,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
                 let model = headerStorage.headerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType
             {
@@ -456,10 +440,9 @@ extension DTTableViewManager
     /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
     public func headerConfiguration<T, U where T:ModelTransfer, T: UIView, U: DTTableViewManageable>(methodPointer: U -> (T, T.ModelType, Int) -> Void)
     {
-        let reaction = TableViewReaction(.HeaderConfiguration)
-        reaction.viewType = _reflect(T)
+        let reaction = UIReaction(.SupplementaryConfiguration(kind: DTTableViewElementSectionHeader), viewClass: T.self)
         reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData as? ViewConfiguration,
+            if let configuration = reaction.reactionData,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
                 let model = headerStorage.headerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType,
                 let view = configuration.view as? T,
@@ -478,10 +461,9 @@ extension DTTableViewManager
     /// - SeeAlso: 'footerConfiguration:'
     public func configureFooter<T:ModelTransfer where T: UIView>(footerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        let reaction = TableViewReaction(.FooterConfiguration)
-        reaction.viewType = _reflect(T)
+        let reaction = UIReaction(.SupplementaryConfiguration(kind: DTTableViewElementSectionFooter), viewClass: T.self)
         reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData as? ViewConfiguration,
+            if let configuration = reaction.reactionData,
                 let footerStorage = self?.storage as? HeaderFooterStorageProtocol,
                 let model = footerStorage.footerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType
             {
@@ -496,10 +478,9 @@ extension DTTableViewManager
     /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
     public func footerConfiguration<T, U where T:ModelTransfer, T: UIView, U: DTTableViewManageable>(methodPointer: U -> (T, T.ModelType, Int) -> Void)
     {
-        let reaction = TableViewReaction(.FooterConfiguration)
-        reaction.viewType = _reflect(T)
+        let reaction = UIReaction(.SupplementaryConfiguration(kind: DTTableViewElementSectionFooter), viewClass: T.self)
         reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData as? ViewConfiguration,
+            if let configuration = reaction.reactionData,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
                 let model = headerStorage.footerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType,
                 let view = configuration.view as? T,
@@ -509,20 +490,6 @@ extension DTTableViewManager
             }
         }
         self.tableViewReactions.append(reaction)
-    }
-      
-    /// Perform action before content will be updated.
-    /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
-    @available(*, unavailable, message="Adopt DTTableViewContentUpdatable protocol on your DTTableViewManageable instance instead")
-    public func beforeContentUpdate(block: () -> Void )
-    {
-    }
-    
-    /// Perform action after content is updated.
-    /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
-    @available(*, unavailable, message="Adopt DTTableViewContentUpdatable protocol on your DTTableViewManageable instance instead")
-    public func afterContentUpdate(block : () -> Void )
-    {
     }
 }
 
@@ -541,8 +508,8 @@ extension DTTableViewManager: UITableViewDataSource
         let model = self.storage.itemAtIndexPath(indexPath)!
         let cell = self.viewFactory.cellForModel(model, atIndexPath: indexPath)
         
-        if let reaction = self.reactionOfReactionType(.CellConfiguration, forViewType: _reflect(cell.dynamicType)) {
-            reaction.reactionData = ViewConfiguration(view: cell, indexPath:indexPath)
+        if let reaction = tableViewReactions.reactionsOfType(.CellConfiguration, forView: cell).first {
+            reaction.reactionData = ViewData(view: cell, indexPath:indexPath)
             reaction.perform()
         }
         return cell
@@ -584,10 +551,10 @@ extension DTTableViewManager: UITableViewDelegate
         
         if let model = self.headerModelForSectionIndex(section) {
             let view = self.viewFactory.headerViewForModel(model)
-            if let reaction = self.reactionOfReactionType(.HeaderConfiguration, forViewType: _reflect(view!.dynamicType)),
-                let createdView = view
+            if let createdView = view,
+                let reaction = tableViewReactions.reactionsOfType(.SupplementaryConfiguration(kind: DTTableViewElementSectionHeader), forView: view).first
             {
-                reaction.reactionData = ViewConfiguration(view: createdView, indexPath: NSIndexPath(index: section))
+                reaction.reactionData = ViewData(view: createdView, indexPath: NSIndexPath(index: section))
                 reaction.perform()
             }
             return view
@@ -600,10 +567,10 @@ extension DTTableViewManager: UITableViewDelegate
         
         if let model = self.footerModelForSectionIndex(section) {
             let view = self.viewFactory.footerViewForModel(model)
-            if let reaction = self.reactionOfReactionType(.FooterConfiguration, forViewType: _reflect(view!.dynamicType)),
-                let createdView = view
+            if let createdView = view,
+                let reaction = tableViewReactions.reactionsOfType(.SupplementaryConfiguration(kind: DTTableViewElementSectionFooter), forView: view).first
             {
-                reaction.reactionData = ViewConfiguration(view: createdView, indexPath: NSIndexPath(index: section))
+                reaction.reactionData = ViewData(view: createdView, indexPath: NSIndexPath(index: section))
                 reaction.perform()
             }
             return view
@@ -658,8 +625,8 @@ extension DTTableViewManager: UITableViewDelegate
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)!
-        if let reaction = self.reactionOfReactionType(.Selection, forViewType: _reflect(cell.dynamicType)) {
-            reaction.reactionData = indexPath
+        if let reaction = tableViewReactions.reactionsOfType(.CellSelection, forView: cell).first {
+            reaction.reactionData = ViewData(view: cell, indexPath: indexPath)
             reaction.perform()
         }
     }
@@ -723,6 +690,20 @@ extension DTTableViewManager : StorageUpdating
 /// Deprecated methods
 extension DTTableViewManager
 {
+    /// Perform action before content will be updated.
+    /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    @available(*, unavailable, message="Adopt DTTableViewContentUpdatable protocol on your DTTableViewManageable instance instead")
+    public func beforeContentUpdate(block: () -> Void )
+    {
+    }
+    
+    /// Perform action after content is updated.
+    /// - Note: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
+    @available(*, unavailable, message="Adopt DTTableViewContentUpdatable protocol on your DTTableViewManageable instance instead")
+    public func afterContentUpdate(block : () -> Void )
+    {
+    }
+    
     /// Call this method to retrieve model from specific UITableViewCell subclass.
     /// - Note: This method uses UITableView `indexPathForCell` method, that returns nil if cell is not visible. Therefore, if cell is not visible, this method will return nil as well.
     /// - SeeAlso: `StorageProtocol` method `objectForCell:atIndexPath:` - will return model even if cell is not visible
