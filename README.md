@@ -14,13 +14,14 @@ Powerful protocol-oriented UITableView management framework, written in Swift 2.
 ## Features
 
 - [x] Powerful mapping system between data models and cells, headers and footers
+- [x] Support for all Swift types - classes, structs, enums, tuples
+- [x] Support for protocols and subclasses as data models
 - [x] Views created from code, XIB, or storyboard
 - [x] Flexible Memory/CoreData/Custom storage options
 - [x] Automatic datasource and interface synchronization.
 - [x] Automatic XIB registration and dequeue
 - [x] No type casts required
 - [x] No need to subclass
-- [x] Support for all Swift types - classes, structs, enums, tuples
 - [x] Can be used with UITableViewController, or UIViewController with UITableView, or any other class, that contains UITableView
 
 ## Requirements
@@ -33,11 +34,11 @@ Powerful protocol-oriented UITableView management framework, written in Swift 2.
 
 [CocoaPods](http://www.cocoapods.org):
 
-    pod 'DTTableViewManager', '~> 4.3.0'
+    pod 'DTTableViewManager', '~> 4.4.0'
 
 [Carthage](https://github.com/Carthage/Carthage):
 
-    github "DenHeadless/DTTableViewManager" ~> 4.3.0
+    github "DenHeadless/DTTableViewManager" ~> 4.4.0
 
 After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to XCode project embedded binaries.
 
@@ -96,12 +97,68 @@ That's it! It's that easy!
 * `registerNibNamed:forHeaderClass:`
 * `registerFooterClass:`
 * `registerNibNamed:forFooterClass:`
+* `registerNiblessHeaderClass:`
+* `registerNiblessFooterClass`
 
 By default, `DTTableViewManager` uses section titles and `tableView(_:titleForHeaderInSection:)` UITableViewDatasource methods. However, if you call any mapping methods for headers or footers, it will automatically switch to using `tableView(_:viewForHeaderInSection:)` methods and dequeue `UITableViewHeaderFooterView` instances. Make your `UITableViewHeaderFooterView` subclasses conform to `ModelTransfer` protocol to allow them participate in mapping.
 
 You can also use UIView subclasses for headers and footers.
 
 For more detailed look at mapping in DTTableViewManager, check out dedicated *[Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping-and-registration)*.
+
+## Data models
+
+Starting from [4.4.0 release](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.4.0), `DTTableViewManager` supports all Swift and Objective-C types as data models. This also includes protocols and subclasses. So now this works:
+
+```swift
+protocol Food {}
+class Apple : Food {}
+class Carrot: Food {}
+
+class FoodTableViewCell : UITableViewCell, ModelTransfer {
+    func updateWithModel(model: Food) {
+        // Display food in a cell
+    }
+}
+manager.registerCellClass(FoodTableViewCell)
+manager.memoryStorage.addItems([Apple(),Carrot()])
+```
+
+Mappings are resolved simply by calling `is` type-check. In our example Apple is Food and Carrot is Food, so mapping will work.
+
+### Customizing mapping resolution
+
+There can be cases, where you might want to customize mappings based on some criteria. For example, you might want to display model in several kinds of cells:
+
+```swift
+class FoodTextCell: UITableViewCell, ModelTransfer {
+    func updateWithModel(model: Food) {
+        // Text representation
+    }
+}
+
+class FoodImageCell: UITableViewCell, ModelTransfer {
+    func updateWithModel(model: Food) {
+        // Photo representation
+    }
+}
+
+manager.registerCellClass(FoodTextCell)
+manager.registerCellClass(FoodImageCell)
+```
+
+If you don't do anything, FoodTextCell mapping will be selected as first mapping, however you can adopt `DTViewModelMappingCustomizable` protocol to adjust your mappings:
+
+```swift
+extension PostViewController : DTViewModelMappingCustomizable {
+    func viewModelMappingFromCandidates(candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
+        if let foodModel = model as? Food where foodModel.hasPhoto {
+            return candidates.last
+        }
+        return candidates.first
+    }
+}
+```
 
 ## DTModelStorage
 
@@ -224,6 +281,17 @@ There are various customization options available with `DTTableViewManager`. Tho
 * Section insert, update and delete animation
 * Section header and footer styles - title or view
 * Should section header and footer be displayed on empty section
+
+## Error reporting
+
+In some cases `DTTableViewManager` will not be able to create cell, header or footer view. This can happen when passed model is nil, or mapping is not set. By default, 'fatalError' method will be called and application will crash. You can improve crash logs by setting your own error handler via closure:
+
+```swift
+manager.viewFactoryErrorHandler = { error in
+    // DTTableViewFactoryError type
+    print(error.description)
+}
+```
 
 ## ObjectiveC
 

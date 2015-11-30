@@ -2,12 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
-## Master
+## [4.4.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.4.0)
 
-* New mapping system, using type checking instead of runtime introspection.
-* Migrated to new `UIReaction` classes from `DTModelStorage` for selection and configuration events.
-* Allow customization of model -> view mapping using `DTViewModelMappingCustomizable` protocol.
-* Better error reporting from `TableViewFactory` and `tableViewFactoryErrorHandler` property, that allows calling custom closure to execute before preconditionFailure will crash the application.
+Dependency changelog -> [DTModelStorage 2.3 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
+
+This release aims to improve mapping system and error reporting.
+
+## Added
+
+* [New mapping system](https://github.com/DenHeadless/DTTableViewManager#data-models) with support for protocols and subclasses
+* Mappings can now be [customized](https://github.com/DenHeadless/DTTableViewManager#customizing-mapping-resolution) using `DTViewModelMappingCustomizable` protocol.
+* [Custom error handler](https://github.com/DenHeadless/DTTableViewManager#error-reporting) for `DTTableViewFactoryError` errors.
+
+## Changed
+
+* preconditionFailures have been replaced with `DTTableViewFactoryError` ErrorType
+* Internal `TableViewReaction` class have been replaced by `UIReaction` class from DTModelStorage.
 
 ## [4.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.3.0)
 
