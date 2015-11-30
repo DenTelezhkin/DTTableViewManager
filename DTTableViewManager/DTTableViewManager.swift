@@ -97,7 +97,7 @@ public class DTTableViewManager : NSObject {
     /// Error handler ot be executed when critical error happens with `TableViewFactory`.
     /// This can be useful to provide more debug information for crash logs, since preconditionFailure Swift method provides little to zero insight about what happened and when.
     /// This closure will be called prior to calling preconditionFailure in `handleTableViewFactoryError` method.
-    public var tableViewFactoryErrorHandler : (DTTableViewFactoryError -> Void)?
+    public var viewFactoryErrorHandler : (DTTableViewFactoryError -> Void)?
     
     /// Implicitly unwrap storage property to `MemoryStorage`.
     /// - Warning: if storage is not MemoryStorage, will throw an exception.
@@ -506,8 +506,12 @@ extension DTTableViewManager
 extension DTTableViewManager: UITableViewDataSource
 {
     func handleTableViewFactoryError(error: DTTableViewFactoryError) {
-        tableViewFactoryErrorHandler?(error)
-        preconditionFailure(error.description)
+        if let handler = viewFactoryErrorHandler {
+            handler(error)
+        } else {
+            print(error.description)
+            fatalError(error.description)
+        }
     }
     
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
