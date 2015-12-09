@@ -28,6 +28,31 @@ class CreationTestCase: XCTestCase {
         controller.manager.registerCellClass(FooCell)
     }
     
+    func testDelegateIsNotNil() {
+        let controller = DTTestTableViewController()
+        controller.manager.startManagingWithDelegate(controller)
+        expect(controller.manager.storage.delegate != nil).to(beTrue())
+    }
+    
+    func testDelegateIsNotNilForMemoryStorage() {
+        let controller = DTTestTableViewController()
+        controller.manager.startManagingWithDelegate(controller)
+        expect(controller.manager.memoryStorage.delegate != nil).to(beTrue())
+    }
+    
+    func testSwitchingStorages() {
+        let controller = DTTestTableViewController()
+        let first = MemoryStorage()
+        let second = MemoryStorage()
+        controller.manager.storage = first
+        expect(first.delegate === controller.manager).to(beTrue())
+        
+        controller.manager.storage = second
+        
+        expect(first.delegate == nil).to(beTrue())
+        expect(second.delegate === controller.manager).to(beTrue())
+    }
+    
     func testCreatingTableControllerFromXIB()
     {
         let controller = XibTableViewController(nibName: "XibTableViewController", bundle: NSBundle(forClass: self.dynamicType))

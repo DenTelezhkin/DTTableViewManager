@@ -144,6 +144,7 @@ public class DTTableViewManager : NSObject {
         if let mappingDelegate = delegate as? DTViewModelMappingCustomizable {
             viewFactory.mappingCustomizableDelegate = mappingDelegate
         }
+        storage.delegate = self
     }
     
     /// Call this method to retrieve model from specific UITableViewCell subclass.

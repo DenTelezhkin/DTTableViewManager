@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.4.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.4.1)
+
+## Fixed
+
+* Issue with Swift 2.1.1 (XCode 7.2) where storage.delegate was not set during initialization
+
 ## [4.4.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.4.0)
 
 Dependency changelog -> [DTModelStorage 2.3 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
