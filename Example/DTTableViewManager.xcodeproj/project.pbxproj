@@ -43,9 +43,6 @@
 		9A6CED6C1BE570750091B0AF /* NSIndexPath+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CEC81B55B43B007FB06C /* NSIndexPath+Constructor.swift */; };
 		9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A6CED791BE570750091B0AF /* DTTableViewManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9A6CED841BE571240091B0AF /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6CED831BE571240091B0AF /* Nimble.framework */; };
-		9A6CED861BE571290091B0AF /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6CED851BE571290091B0AF /* DTModelStorage.framework */; };
-		9A6CED951BE571A30091B0AF /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6CED941BE571A30091B0AF /* DTModelStorage.framework */; };
 		9A6CED961BE571AE0091B0AF /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
 		9A6CED971BE571AE0091B0AF /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
 		9A6CED981BE571AE0091B0AF /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
@@ -72,12 +69,13 @@
 		9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170F1B65771600D8ABD3 /* Images.xcassets */; };
 		9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */; };
 		9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
-		9AA114611BB838820069DA82 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA114601BB838820069DA82 /* DTModelStorage.framework */; };
-		9AA114641BB838C20069DA82 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA114631BB838C20069DA82 /* DTModelStorage.framework */; };
-		9AA114681BB838DF0069DA82 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA114661BB838DF0069DA82 /* DTModelStorage.framework */; };
-		9AA114691BB838DF0069DA82 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA114671BB838DF0069DA82 /* Nimble.framework */; };
 		9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AA660031BA5C94900581D46 /* DTTableViewManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AB614AB1C19E300002269B7 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; };
+		9AB614AE1C19E315002269B7 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA51C19B91200784AF7 /* DTModelStorage.framework */; };
+		9AB614B21C19E3B3002269B7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEB21C19B91900784AF7 /* Nimble.framework */; };
+		9AB614B51C19E3C8002269B7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEBA1C19B91900784AF7 /* Nimble.framework */; };
+		9AB614B81C19E3E2002269B7 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; };
 		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
 		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
@@ -191,6 +189,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = 9A2A38BB1AEE285E0021E97D;
 			remoteInfo = DTTableViewManager;
+		};
+		9AB6149C1C19E1B4002269B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
+			remoteInfo = "DTModelStorage-iOS";
+		};
+		9AB614AC1C19E311002269B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A4C3BBB1BE4E32B000931BA;
+			remoteInfo = "DTModelStorage-tvOS";
+		};
+		9AB614B31C19E3C2002269B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F5DF1541BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOS";
+		};
+		9AB614B61C19E3CF002269B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F1A74281940169200FFFC47;
+			remoteInfo = "Nimble-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -312,7 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AA114611BB838820069DA82 /* DTModelStorage.framework in Frameworks */,
+				9AB614AB1C19E300002269B7 /* DTModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,8 +346,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A6CED861BE571290091B0AF /* DTModelStorage.framework in Frameworks */,
-				9A6CED841BE571240091B0AF /* Nimble.framework in Frameworks */,
+				9AB614B51C19E3C8002269B7 /* Nimble.framework in Frameworks */,
 				9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,7 +355,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A6CED951BE571A30091B0AF /* DTModelStorage.framework in Frameworks */,
+				9AB614AE1C19E315002269B7 /* DTModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +363,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AA114641BB838C20069DA82 /* DTModelStorage.framework in Frameworks */,
+				9AB614B81C19E3E2002269B7 /* DTModelStorage.framework in Frameworks */,
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,8 +372,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AA114681BB838DF0069DA82 /* DTModelStorage.framework in Frameworks */,
-				9AA114691BB838DF0069DA82 /* Nimble.framework in Frameworks */,
+				9AB614B21C19E3B3002269B7 /* Nimble.framework in Frameworks */,
 				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -657,6 +681,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9AB6149D1C19E1B4002269B7 /* PBXTargetDependency */,
 			);
 			name = "DTTableViewManager-iOS";
 			productName = DTTableViewManager;
@@ -675,6 +700,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9AB614B41C19E3C2002269B7 /* PBXTargetDependency */,
 				9A6CED9F1BE571F40091B0AF /* PBXTargetDependency */,
 			);
 			name = "Tests-tvOS";
@@ -694,6 +720,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9AB614AD1C19E311002269B7 /* PBXTargetDependency */,
 			);
 			name = "DTTableViewManager-tvOS";
 			productName = "DTTableViewManager-tvOS";
@@ -731,6 +758,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9AB614B71C19E3CF002269B7 /* PBXTargetDependency */,
 				9A1A499F1B5452FA0006610B /* PBXTargetDependency */,
 			);
 			name = "Tests-iOS";
@@ -1028,6 +1056,26 @@
 			target = 9A2A38BB1AEE285E0021E97D /* DTTableViewManager-iOS */;
 			targetProxy = 9A9B172A1B65773800D8ABD3 /* PBXContainerItemProxy */;
 		};
+		9AB6149D1C19E1B4002269B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTModelStorage-iOS";
+			targetProxy = 9AB6149C1C19E1B4002269B7 /* PBXContainerItemProxy */;
+		};
+		9AB614AD1C19E311002269B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTModelStorage-tvOS";
+			targetProxy = 9AB614AC1C19E311002269B7 /* PBXContainerItemProxy */;
+		};
+		9AB614B41C19E3C2002269B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Nimble-tvOS";
+			targetProxy = 9AB614B31C19E3C2002269B7 /* PBXContainerItemProxy */;
+		};
+		9AB614B71C19E3CF002269B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Nimble-iOS";
+			targetProxy = 9AB614B61C19E3CF002269B7 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1054,13 +1102,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1072,11 +1113,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = DTTableViewManager/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1085,7 +1121,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlsdev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DTTableViewManager;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1095,14 +1130,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1111,11 +1138,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = DTTableViewManager/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1124,7 +1146,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlsdev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DTTableViewManager;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1339,7 +1360,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1369,7 +1389,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1390,13 +1409,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1407,9 +1427,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1417,20 +1442,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
