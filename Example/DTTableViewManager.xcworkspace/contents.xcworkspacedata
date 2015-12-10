@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../Carthage/Checkouts/Nimble/Nimble.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../Carthage/Checkouts/DTModelStorage/DTModelStorageTests/DTModelStorage.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:DTTableViewManager.xcodeproj">
    </FileRef>
 </Workspace>
