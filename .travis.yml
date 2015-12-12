@@ -24,7 +24,7 @@ script:
     - set -o pipefail
     - git submodule update --init --recursive
     - xcodebuild -version
-    - xcodebuild -workspace DTTableViewManager.xcworkspace -scheme "$SCHEME" -configuration Debug -sdk "$SDK" -destination "$DESTINATION" test -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO "IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu`" | xcpretty
-
+    - xcodebuild -workspace DTTableViewManager.xcworkspace -scheme "$SCHEME" -configuration Debug -sdk "$SDK" -destination "$DESTINATION" clean build test -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO "IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu`" | xcpretty
+    - xcodebuild -workspace DTTableViewManager.xcworkspace -scheme "$IOS_SCHEME" -sdk "$IOS_SDK" -destination "$DESTINATION" test -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO "IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu`"
 after_success:
     - bash <(curl -s https://codecov.io/bash)
