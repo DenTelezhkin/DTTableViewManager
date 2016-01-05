@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Master
+
+## Added 
+
+* Support for Realm database storage - using `RealmStorage` class.
+* Ability to defer data binding until `tableView(_:willDisplayCell:forRowAtIndexPath:)` method is called. This can improve  scrolling perfomance for table view cells.
+```swift
+    manager.dataBindingBehaviour = .BeforeCellIsDisplayed
+```
+
 ## [4.4.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.4.1)
 
 ## Fixed

@@ -49,9 +49,11 @@ class TableViewFactory
 {
     private let tableView: UITableView
     
-    private var mappings = [ViewModelMapping]()
+    var mappings = [ViewModelMapping]()
     
     var bundle = NSBundle.mainBundle()
+    
+    var shouldPerformDataBindingForCells = true
     
     weak var mappingCustomizableDelegate : DTViewModelMappingCustomizable?
     
@@ -63,16 +65,18 @@ class TableViewFactory
     func registerCellClass<T:ModelTransfer where T: UITableViewCell>(cellClass : T.Type)
     {
         let reuseIdentifier = String(T)
-        if self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) == nil
+        if tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) == nil
         {
             // Storyboard prototype cell
             self.tableView.registerClass(T.self, forCellReuseIdentifier: reuseIdentifier)
             
             if UINib.nibExistsWithNibName(reuseIdentifier, inBundle: bundle) {
-                self.registerNibNamed(reuseIdentifier, forCellClass: T.self)
+                registerNibNamed(reuseIdentifier, forCellClass: T.self)
+            }
+            else {
+                mappings.addMappingForViewType(.Cell, viewClass: T.self)
             }
         }
-        mappings.addMappingForViewType(.Cell, viewClass: T.self)
     }
     
     func registerNibNamed<T:ModelTransfer where T: UITableViewCell>(nibName : String, forCellClass cellClass: T.Type)
@@ -82,7 +86,7 @@ class TableViewFactory
         let nib = UINib(nibName: nibName, bundle: bundle)
         let reuseIdentifier = String(T)
         self.tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
-        mappings.addMappingForViewType(.Cell, viewClass: T.self)
+        mappings.addMappingForViewType(.Cell, viewClass: T.self, xibName: nibName)
     }
     
     func registerNiblessHeaderClass<T:ModelTransfer where T: UIView>(headerClass : T.Type)
@@ -117,7 +121,7 @@ class TableViewFactory
         if T.isSubclassOfClass(UITableViewHeaderFooterView.self) {
             self.tableView.registerNib(UINib(nibName: nibName, bundle: bundle), forHeaderFooterViewReuseIdentifier: reuseIdentifier)
         }
-        mappings.addMappingForViewType(.SupplementaryView(kind: DTTableViewElementSectionHeader), viewClass: T.self)
+        mappings.addMappingForViewType(.SupplementaryView(kind: DTTableViewElementSectionHeader), viewClass: T.self, xibName: nibName)
     }
     
     func registerNibNamed<T:ModelTransfer where T:UIView>(nibName: String, forFooterClass footerClass: T.Type)
@@ -128,7 +132,23 @@ class TableViewFactory
         if T.isSubclassOfClass(UITableViewHeaderFooterView.self) {
             self.tableView.registerNib(UINib(nibName: nibName, bundle: bundle), forHeaderFooterViewReuseIdentifier: reuseIdentifier)
         }
-        mappings.addMappingForViewType(.SupplementaryView(kind: DTTableViewElementSectionFooter), viewClass: T.self)
+        mappings.addMappingForViewType(.SupplementaryView(kind: DTTableViewElementSectionFooter), viewClass: T.self, xibName: nibName)
+    }
+    
+    func viewModelMappingForViewType(viewType: ViewType, model: Any) -> ViewModelMapping?
+    {
+        guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
+            return nil
+        }
+        let mappingCandidates = mappings.mappingCandidatesForViewType(viewType, model: unwrappedModel)
+        
+        if let customizedMapping = mappingCustomizableDelegate?.viewModelMappingFromCandidates(mappingCandidates, forModel: unwrappedModel) {
+            return customizedMapping
+        } else if let defaultMapping = mappingCandidates.first {
+            return defaultMapping
+        } else {
+            return nil
+        }
     }
     
     func cellForModel(model: Any, atIndexPath indexPath:NSIndexPath) throws -> UITableViewCell
@@ -137,20 +157,13 @@ class TableViewFactory
             throw DTTableViewFactoryError.NilCellModel(indexPath)
         }
         
-        let mappingCandidates = mappings.mappingCandidatesForViewType(.Cell, model: unwrappedModel)
-        let mapping : ViewModelMapping?
-        
-        if let customizedMapping = mappingCustomizableDelegate?.viewModelMappingFromCandidates(mappingCandidates, forModel: unwrappedModel) {
-            mapping = customizedMapping
-        } else if let defaultMapping = mappingCandidates.first {
-            mapping = defaultMapping
-        } else { mapping = nil }
-        
-        if mapping != nil
+        if let mapping = viewModelMappingForViewType(.Cell, model: unwrappedModel)
         {
-            let cellClassName = String(mapping!.viewClass)
+            let cellClassName = String(mapping.viewClass)
             let cell = tableView.dequeueReusableCellWithIdentifier(cellClassName, forIndexPath: indexPath)
-            mapping?.updateBlock(cell, unwrappedModel)
+            if shouldPerformDataBindingForCells {
+                mapping.updateBlock(cell, unwrappedModel)
+            }
             return cell
         }
         
@@ -184,29 +197,22 @@ class TableViewFactory
             throw DTTableViewFactoryError.NilHeaderFooterModel(section: indexPath.section)
         }
         
-        let mappingCandidates = mappings.mappingCandidatesForViewType(type, model: unwrappedModel)
-        let mapping : ViewModelMapping?
-        
-        if let customizedMapping = mappingCustomizableDelegate?.viewModelMappingFromCandidates(mappingCandidates, forModel: unwrappedModel) {
-            mapping = customizedMapping
-        } else if let defaultMapping = mappingCandidates.first {
-            mapping = defaultMapping
-        } else { mapping = nil }
-        
-        if mapping != nil { return self.headerFooterViewWithMapping(mapping!, unwrappedModel: unwrappedModel) }
+        if let mapping = viewModelMappingForViewType(type, model: unwrappedModel) {
+            return headerFooterViewWithMapping(mapping, unwrappedModel: unwrappedModel)
+        }
         
         return nil
     }
     
     func headerViewForModel(model: Any, atIndexPath indexPath: NSIndexPath) throws -> UIView?
     {
-        return try self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionHeader),
+        return try headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionHeader),
             model: model, atIndexPath: indexPath)
     }
     
     func footerViewForModel(model: Any, atIndexPath indexPath: NSIndexPath) throws -> UIView?
     {
-        return try self.headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionFooter),
+        return try headerFooterViewOfType(.SupplementaryView(kind: DTTableViewElementSectionFooter),
             model: model, atIndexPath: indexPath)
     }
 }

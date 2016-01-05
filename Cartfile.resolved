@@ -1,2 +1,3 @@
-github "DenHeadless/DTModelStorage" "4d023702ad8f963dfb1e5af7caaf3468d1a1aa52"
 github "Quick/Nimble" "v3.0.0"
+github "realm/realm-cocoa" "v0.97.0"
+github "DenHeadless/DTModelStorage" "8dfe7e71419ed4f608ec59f442f81f9727197934"

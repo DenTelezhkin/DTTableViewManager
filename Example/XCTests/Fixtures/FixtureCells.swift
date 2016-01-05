@@ -11,7 +11,7 @@ import DTModelStorage
 
 class BaseTestCell : UITableViewCell, ModelTransfer, ModelRetrievable
 {
-    var model : Any!
+    var model : Any! = nil
     var awakedFromNib = false
     var inittedWithStyle = false
     

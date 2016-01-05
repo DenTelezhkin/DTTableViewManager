@@ -22,8 +22,9 @@ before_install:
 
 script:
     - set -o pipefail
-    - git submodule update --init --recursive
+    - git submodule foreach --recursive git submodule update --init
     - xcodebuild -version
-    - xcodebuild -workspace DTTableViewManager.xcworkspace -scheme "$SCHEME" -configuration Debug -sdk "$SDK" -destination "$DESTINATION" clean build test -enableCodeCoverage YES | xcpretty
+    - xcodebuild -project DTTableViewManager.xcodeproj -scheme "$SCHEME" -configuration Debug -sdk "$SDK" -destination "$DESTINATION" clean build test -enableCodeCoverage YES "IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu`" | xcpretty
+
 after_success:
     - bash <(curl -s https://codecov.io/bash)

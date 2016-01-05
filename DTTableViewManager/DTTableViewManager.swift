@@ -59,6 +59,16 @@ extension DTTableViewManageable
     }
 }
 
+/// Data binding behaviour for calling `ModelTransfer` `updateWithModel(_:)` method.
+public enum DataBindingBehaviour
+{
+    /// `updateWithModel(_:)` will be called in `tableView(_:cellForRowAtIndexPath:)` method.
+    case Immediately
+    
+    /// `updateWithModel(_:)` will be called in `tableView(_:willDisplayCell:forRowAtIndexPath:)` method.
+    case BeforeCellIsDisplayed
+}
+
 /// `DTTableViewManager` manages some of `UITableView` datasource and delegate methods and provides API for managing your data models in the table. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
 /// - SeeAlso: `startManagingWithDelegate:`
 public class DTTableViewManager : NSObject {
@@ -83,6 +93,14 @@ public class DTTableViewManager : NSObject {
     {
         didSet {
             viewFactory.bundle = viewBundle
+        }
+    }
+    
+    /// Property representing when data binding is performed. Immediately - in `tableView(_:cellForRowAtIndexPath:)` method. BeforeCellIsDisplayed - in `tableView(_:willDisplayCell:forRowAtIndexPath:)` method.
+    /// - Note: Changing value of this property may improve perfomance for complex table view cells.
+    public var dataBindingBehaviour = DataBindingBehaviour.Immediately {
+        didSet {
+            viewFactory.shouldPerformDataBindingForCells = dataBindingBehaviour == .Immediately
         }
     }
     
@@ -574,6 +592,18 @@ extension DTTableViewManager: UITableViewDataSource
 // MARK: - UITableViewDelegate
 extension DTTableViewManager: UITableViewDelegate
 {
+    public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if dataBindingBehaviour == .BeforeCellIsDisplayed {
+            guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.itemAtIndexPath(indexPath)),
+            let mapping = viewFactory.viewModelMappingForViewType(.Cell, model: model) else {
+                return
+            }
+            mapping.updateBlock(cell,model)
+        }
+        (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
+    }
+    
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if configuration.sectionHeaderStyle == .Title { return nil }
         

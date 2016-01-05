@@ -10,7 +10,7 @@ import UIKit
 import XCTest
 import Nimble
 import DTModelStorage
-import DTTableViewManager
+@testable import DTTableViewManager
 
 class MappingTestCase: XCTestCase {
 
@@ -155,5 +155,39 @@ class MappingTestCase: XCTestCase {
         controller.manager.memoryStorage.setSectionFooterModels([1])
         let view = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
         expect(view).to(beAKindOf(NiblessHeaderFooterView.self))
+    }
+}
+
+class NibNameViewModelMappingTestCase : XCTestCase {
+    var factory : TableViewFactory!
+    
+    override func setUp() {
+        super.setUp()
+        factory = TableViewFactory(tableView: UITableView())
+        factory.bundle = NSBundle(forClass: self.dynamicType)
+    }
+    
+    func testRegisterCellWithoutNibYieldsNoXibName() {
+        factory.registerCellClass(NiblessCell)
+        
+        expect(self.factory.mappings.first?.xibName).to(beNil())
+    }
+    
+    func testCellWithXibHasXibNameInMapping() {
+        factory.registerCellClass(NibCell)
+        
+        expect(self.factory.mappings.first?.xibName) == "NibCell"
+    }
+    
+    func testHeaderHasXibInMapping() {
+        factory.registerHeaderClass(NibHeaderFooterView)
+        
+        expect(self.factory.mappings.first?.xibName) == "NibHeaderFooterView"
+    }
+    
+    func testFooterHasXibInMapping() {
+        factory.registerFooterClass(NibHeaderFooterView)
+        
+        expect(self.factory.mappings.first?.xibName) == "NibHeaderFooterView"
     }
 }
