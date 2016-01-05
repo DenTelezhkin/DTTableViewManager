@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## Master
+## [4.5.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.5.0)
 
-## Added 
+## Added
 
 * Support for Realm database storage - using `RealmStorage` class.
 * Ability to defer data binding until `tableView(_:willDisplayCell:forRowAtIndexPath:)` method is called. This can improve  scrolling perfomance for table view cells.
