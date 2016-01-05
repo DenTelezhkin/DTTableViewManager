@@ -18,6 +18,7 @@ Powerful protocol-oriented UITableView management framework, written in Swift 2.
 - [x] Support for protocols and subclasses as data models
 - [x] Views created from code, XIB, or storyboard
 - [x] Flexible Memory/CoreData/Custom storage options
+- [x] Support for Realm.io databases
 - [x] Automatic datasource and interface synchronization.
 - [x] Automatic XIB registration and dequeue
 - [x] No type casts required
@@ -34,11 +35,11 @@ Powerful protocol-oriented UITableView management framework, written in Swift 2.
 
 [CocoaPods](http://www.cocoapods.org):
 
-    pod 'DTTableViewManager', '~> 4.4.1'
+    pod 'DTTableViewManager', '~> 4.5.0'
 
 [Carthage](https://github.com/Carthage/Carthage):
 
-    github "DenHeadless/DTTableViewManager" ~> 4.4.1
+    github "DenHeadless/DTTableViewManager" ~> 4.5.0
 
 After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to XCode project embedded binaries.
 

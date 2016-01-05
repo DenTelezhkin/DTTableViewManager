@@ -221,11 +221,11 @@
 
 /* Begin PBXFileReference section */
 		95BCE72F1792C7B300526954 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SectionModel+HeaderFooter.swift"; sourceTree = "<group>"; };
-		9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTableViewManager.swift; sourceTree = "<group>"; };
-		9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFactory.swift; sourceTree = "<group>"; };
-		9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewConfiguration.swift; sourceTree = "<group>"; };
-		9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibLoading.swift"; sourceTree = "<group>"; };
+		9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SectionModel+HeaderFooter.swift"; path = "../DTTableViewManager/Sources/SectionModel+HeaderFooter.swift"; sourceTree = "<group>"; };
+		9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewManager.swift; path = Sources/DTTableViewManager.swift; sourceTree = "<group>"; };
+		9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewFactory.swift; path = Sources/TableViewFactory.swift; sourceTree = "<group>"; };
+		9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewConfiguration.swift; path = Sources/TableViewConfiguration.swift; sourceTree = "<group>"; };
+		9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+XibLoading.swift"; path = "../DTTableViewManager/Sources/UIView+XibLoading.swift"; sourceTree = "<group>"; };
 		9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FixtureViews.swift; path = Fixtures/FixtureViews.swift; sourceTree = "<group>"; };
 		9A1663EC1B5A68B200B2C3C8 /* NibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibView.xib; path = Fixtures/NibView.xib; sourceTree = "<group>"; };
 		9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibHeaderFooterView.xib; path = Fixtures/NibHeaderFooterView.xib; sourceTree = "<group>"; };
@@ -358,7 +358,8 @@
 				9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */,
 				9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */,
 			);
-			path = Utilities;
+			name = Utilities;
+			path = Sources/Utilities;
 			sourceTree = "<group>";
 		};
 		9A1663E91B5A63BB00B2C3C8 /* Views */ = {
