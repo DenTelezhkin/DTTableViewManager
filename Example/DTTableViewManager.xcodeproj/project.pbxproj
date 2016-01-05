@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A04ED491B9C67B10021B658 /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */; };
 		9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
 		9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
 		9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
-		9A08A9B91B8A23A100877C62 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */; };
 		9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */; };
 		9A1663ED1B5A68B200B2C3C8 /* NibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1663EC1B5A68B200B2C3C8 /* NibView.xib */; };
 		9A1663EF1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */; };
@@ -19,6 +17,10 @@
 		9A1A49A31B5455820006610B /* XibTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A49A11B5455820006610B /* XibTableViewController.swift */; };
 		9A1A49A41B5455820006610B /* XibTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1A49A21B5455820006610B /* XibTableViewController.xib */; };
 		9A244A1E1B6134B0007E4FAA /* ReactingHeaderFooters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */; };
+		9A26E00B1C3C4C4700108443 /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A26E0091C3C4C4700108443 /* SectionModel+HeaderFooter.swift */; };
+		9A26E00C1C3C4C4700108443 /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A26E0091C3C4C4700108443 /* SectionModel+HeaderFooter.swift */; };
+		9A26E00D1C3C4C4700108443 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A26E00A1C3C4C4700108443 /* UIView+XibLoading.swift */; };
+		9A26E00E1C3C4C4700108443 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A26E00A1C3C4C4700108443 /* UIView+XibLoading.swift */; };
 		9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDA1B8A176300508207 /* BankCell.xib */; };
 		9A41FBE01B8A17C400508207 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDF1B8A17C400508207 /* Banks.json */; };
 		9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE11B8A17E700508207 /* mochaGrunge.png */; };
@@ -48,8 +50,6 @@
 		9A6CED961BE571AE0091B0AF /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
 		9A6CED971BE571AE0091B0AF /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
 		9A6CED981BE571AE0091B0AF /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
-		9A6CED9A1BE571AE0091B0AF /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */; };
-		9A6CED9C1BE571AE0091B0AF /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */; };
 		9A6CEDA31BE572B90091B0AF /* NibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CEDA21BE572B90091B0AF /* NibView.xib */; };
 		9A6CEDA51BE572E40091B0AF /* NibHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CEDA41BE572E40091B0AF /* NibHeaderFooterView.xib */; };
 		9A6CEDA71BE573080091B0AF /* XibTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CEDA61BE573080091B0AF /* XibTableViewController.xib */; };
@@ -221,11 +221,9 @@
 
 /* Begin PBXFileReference section */
 		95BCE72F1792C7B300526954 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SectionModel+HeaderFooter.swift"; path = "../DTTableViewManager/Sources/SectionModel+HeaderFooter.swift"; sourceTree = "<group>"; };
 		9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewManager.swift; path = Sources/DTTableViewManager.swift; sourceTree = "<group>"; };
 		9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewFactory.swift; path = Sources/TableViewFactory.swift; sourceTree = "<group>"; };
 		9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewConfiguration.swift; path = Sources/TableViewConfiguration.swift; sourceTree = "<group>"; };
-		9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+XibLoading.swift"; path = "../DTTableViewManager/Sources/UIView+XibLoading.swift"; sourceTree = "<group>"; };
 		9A1663EA1B5A63CA00B2C3C8 /* FixtureViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FixtureViews.swift; path = Fixtures/FixtureViews.swift; sourceTree = "<group>"; };
 		9A1663EC1B5A68B200B2C3C8 /* NibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibView.xib; path = Fixtures/NibView.xib; sourceTree = "<group>"; };
 		9A1663EE1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NibHeaderFooterView.xib; path = Fixtures/NibHeaderFooterView.xib; sourceTree = "<group>"; };
@@ -235,6 +233,8 @@
 		9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTModelStorage.xcodeproj; path = ../Carthage/Checkouts/DTModelStorage/DTModelStorageTests/DTModelStorage.xcodeproj; sourceTree = "<group>"; };
 		9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = ../Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingHeaderFooters.swift; path = Fixtures/ReactingHeaderFooters.swift; sourceTree = "<group>"; };
+		9A26E0091C3C4C4700108443 /* SectionModel+HeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SectionModel+HeaderFooter.swift"; path = "Sources/SectionModel+HeaderFooter.swift"; sourceTree = "<group>"; };
+		9A26E00A1C3C4C4700108443 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+XibLoading.swift"; path = "Sources/UIView+XibLoading.swift"; sourceTree = "<group>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A38BF1AEE285E0021E97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = DTTableViewManager/Info.plist; sourceTree = "<group>"; };
 		9A41FBDA1B8A176300508207 /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = Cells/BankCell.xib; sourceTree = "<group>"; };
@@ -343,23 +343,14 @@
 		9A08A9AB1B8A23A100877C62 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
+				9A26E0091C3C4C4700108443 /* SectionModel+HeaderFooter.swift */,
+				9A26E00A1C3C4C4700108443 /* UIView+XibLoading.swift */,
 				9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */,
 				9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */,
 				9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */,
-				9A08A9B11B8A23A100877C62 /* Utilities */,
 			);
 			name = DTTableViewManager;
 			path = ../DTTableViewManager;
-			sourceTree = "<group>";
-		};
-		9A08A9B11B8A23A100877C62 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				9A08A9B21B8A23A100877C62 /* UIView+XibLoading.swift */,
-				9A04ED481B9C67B10021B658 /* SectionModel+HeaderFooter.swift */,
-			);
-			name = Utilities;
-			path = Sources/Utilities;
 			sourceTree = "<group>";
 		};
 		9A1663E91B5A63BB00B2C3C8 /* Views */ = {
@@ -595,23 +586,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		9A2A38B91AEE285E0021E97D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9A6CED891BE571860091B0AF /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		9A2A38BB1AEE285E0021E97D /* DTTableViewManager-iOS */ = {
 			isa = PBXNativeTarget;
@@ -619,7 +593,6 @@
 			buildPhases = (
 				9A2A38B71AEE285E0021E97D /* Sources */,
 				9A2A38B81AEE285E0021E97D /* Frameworks */,
-				9A2A38B91AEE285E0021E97D /* Headers */,
 			);
 			buildRules = (
 			);
@@ -655,7 +628,6 @@
 			buildPhases = (
 				9A6CED871BE571860091B0AF /* Sources */,
 				9A6CED881BE571860091B0AF /* Frameworks */,
-				9A6CED891BE571860091B0AF /* Headers */,
 			);
 			buildRules = (
 			);
@@ -883,11 +855,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A04ED491B9C67B10021B658 /* SectionModel+HeaderFooter.swift in Sources */,
 				9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */,
-				9A08A9B91B8A23A100877C62 /* UIView+XibLoading.swift in Sources */,
+				9A26E00D1C3C4C4700108443 /* UIView+XibLoading.swift in Sources */,
 				9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */,
 				9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */,
+				9A26E00B1C3C4C4700108443 /* SectionModel+HeaderFooter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -920,10 +892,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A6CED961BE571AE0091B0AF /* DTTableViewManager.swift in Sources */,
+				9A26E00E1C3C4C4700108443 /* UIView+XibLoading.swift in Sources */,
 				9A6CED971BE571AE0091B0AF /* TableViewFactory.swift in Sources */,
 				9A6CED981BE571AE0091B0AF /* TableViewConfiguration.swift in Sources */,
-				9A6CED9A1BE571AE0091B0AF /* UIView+XibLoading.swift in Sources */,
-				9A6CED9C1BE571AE0091B0AF /* SectionModel+HeaderFooter.swift in Sources */,
+				9A26E00C1C3C4C4700108443 /* SectionModel+HeaderFooter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
