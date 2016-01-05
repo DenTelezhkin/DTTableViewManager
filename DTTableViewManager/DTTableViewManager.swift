@@ -379,7 +379,7 @@ extension DTTableViewManager
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if  let indexPath = reaction.reactionData?.indexPath,
                 let cell = self?.tableView?.cellForRowAtIndexPath(indexPath) as? T,
-                let model = self?.storage.itemAtIndexPath(indexPath) as? T.ModelType,
+                let model = RuntimeHelper.recursivelyUnwrapAnyValue(self?.storage.itemAtIndexPath(indexPath)) as? T.ModelType,
                 let delegate = self?.delegate as? U
             {
                 methodPointer(delegate)(cell, model, indexPath)
@@ -399,7 +399,7 @@ extension DTTableViewManager
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let indexPath = reaction.reactionData?.indexPath,
                 let cell = self?.tableView?.cellForRowAtIndexPath(indexPath) as? T,
-                let model = self?.storage.itemAtIndexPath(indexPath) as? T.ModelType
+                let model = RuntimeHelper.recursivelyUnwrapAnyValue(self?.storage.itemAtIndexPath(indexPath)) as? T.ModelType
             {
                 closure(cell, model, indexPath)
             }
@@ -418,7 +418,7 @@ extension DTTableViewManager
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData,
                 let view = configuration.view as? T,
-                let model = self?.storage.itemAtIndexPath(configuration.indexPath) as? T.ModelType
+                let model = RuntimeHelper.recursivelyUnwrapAnyValue(self?.storage.itemAtIndexPath(configuration.indexPath)) as? T.ModelType
             {
                 closure(view, model, configuration.indexPath)
             }
@@ -435,7 +435,7 @@ extension DTTableViewManager
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let viewData = reaction.reactionData,
                 let view = viewData.view as? T,
-                let model = self?.storage.itemAtIndexPath(viewData.indexPath) as? T.ModelType,
+                let model = RuntimeHelper.recursivelyUnwrapAnyValue(self?.storage.itemAtIndexPath(viewData.indexPath)) as? T.ModelType,
                 let delegate = self?.delegate as? U
             {
                 methodPointer(delegate)(view, model, viewData.indexPath)
@@ -455,7 +455,7 @@ extension DTTableViewManager
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = headerStorage.headerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType
+                let model = RuntimeHelper.recursivelyUnwrapAnyValue(headerStorage.headerModelForSectionIndex(configuration.indexPath.section)) as? T.ModelType
             {
                 closure(configuration.view as! T, model, configuration.indexPath.section)
             }
@@ -472,7 +472,7 @@ extension DTTableViewManager
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = headerStorage.headerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType,
+                let model = RuntimeHelper.recursivelyUnwrapAnyValue(headerStorage.headerModelForSectionIndex(configuration.indexPath.section)) as? T.ModelType,
                 let view = configuration.view as? T,
                 let delegate = self?.delegate as? U
             {
@@ -493,7 +493,7 @@ extension DTTableViewManager
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData,
                 let footerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = footerStorage.footerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType
+                let model = RuntimeHelper.recursivelyUnwrapAnyValue(footerStorage.footerModelForSectionIndex(configuration.indexPath.section)) as? T.ModelType
             {
                 closure(configuration.view as! T, model, configuration.indexPath.section)
             }
@@ -510,7 +510,7 @@ extension DTTableViewManager
         reaction.reactionBlock = { [weak self, unowned reaction] in
             if let configuration = reaction.reactionData,
                 let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = headerStorage.footerModelForSectionIndex(configuration.indexPath.section) as? T.ModelType,
+                let model = RuntimeHelper.recursivelyUnwrapAnyValue(headerStorage.footerModelForSectionIndex(configuration.indexPath.section)) as? T.ModelType,
                 let view = configuration.view as? T,
                 let delegate = self?.delegate as? U
             {

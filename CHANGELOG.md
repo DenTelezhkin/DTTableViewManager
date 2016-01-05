@@ -12,6 +12,10 @@ All notable changes to this project will be documented in this file.
     manager.dataBindingBehaviour = .BeforeCellIsDisplayed
 ```
 
+## Changed
+
+* UIReactions now properly unwrap data models, even for cases when model contains double optional value.
+
 ## [4.4.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.4.1)
 
 ## Fixed
