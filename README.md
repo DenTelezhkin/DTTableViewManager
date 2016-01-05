@@ -175,6 +175,16 @@ extension PostViewController : DTViewModelMappingCustomizable {
 
 Keep in mind, that MemoryStorage is not limited to objects in memory. For example, if you have CoreData database, and you now for sure, that number of items is not big, you can choose not to use CoreDataStorage and NSFetchedResultsController. You can fetch all required models, and store them in MemoryStorage.
 
+### RealmStorage
+
+`RealmStorage` is a class, that is meant to be used with [realm.io](https://realm.io) databases. To use `RealmStorage` with `DTTableViewManager`, add following line to your Podfile:
+
+```ruby
+    pod 'DTModelStorage/Realm'
+```
+
+If you are using Carthage, `RealmStorage` will be automatically built along with `DTModelStorage`.
+
 ## Subclassing storage classes
 
 For in-depth look at how subclassing storage classes can improve your code base, read [this article](https://github.com/DenHeadless/DTTableViewManager/wiki/Extracting-logic-into-storage-subclasses) on wiki.
