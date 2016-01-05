@@ -202,20 +202,6 @@
 			remoteGlobalIDString = 9A4C3BBB1BE4E32B000931BA;
 			remoteInfo = "DTModelStorage-tvOS";
 		};
-		9AB614B31C19E3C2002269B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F5DF1541BDCA0CE00C3A531;
-			remoteInfo = "Nimble-tvOS";
-		};
-		9AB614B61C19E3CF002269B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F1A74281940169200FFFC47;
-			remoteInfo = "Nimble-iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -651,7 +637,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				9AB614B41C19E3C2002269B7 /* PBXTargetDependency */,
 				9A6CED9F1BE571F40091B0AF /* PBXTargetDependency */,
 			);
 			name = "Tests-tvOS";
@@ -707,7 +692,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				9AB614B71C19E3CF002269B7 /* PBXTargetDependency */,
 				9A1A499F1B5452FA0006610B /* PBXTargetDependency */,
 			);
 			name = "Tests-iOS";
@@ -1009,16 +993,6 @@
 			isa = PBXTargetDependency;
 			name = "DTModelStorage-tvOS";
 			targetProxy = 9AB614AC1C19E311002269B7 /* PBXContainerItemProxy */;
-		};
-		9AB614B41C19E3C2002269B7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Nimble-tvOS";
-			targetProxy = 9AB614B31C19E3C2002269B7 /* PBXContainerItemProxy */;
-		};
-		9AB614B71C19E3CF002269B7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Nimble-iOS";
-			targetProxy = 9AB614B61C19E3CF002269B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
