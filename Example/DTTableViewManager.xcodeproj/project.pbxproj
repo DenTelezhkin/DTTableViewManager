@@ -75,7 +75,6 @@
 		9AB614AE1C19E315002269B7 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA51C19B91200784AF7 /* DTModelStorage.framework */; };
 		9AB614B21C19E3B3002269B7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEB21C19B91900784AF7 /* Nimble.framework */; };
 		9AB614B51C19E3C8002269B7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEBA1C19B91900784AF7 /* Nimble.framework */; };
-		9AB614B81C19E3E2002269B7 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; };
 		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
 		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
@@ -84,6 +83,8 @@
 		9AC48D671C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC48D651C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift */; };
 		9AC48D691C0B69E000531260 /* TableViewFactoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC48D681C0B69E000531260 /* TableViewFactoryTestCase.swift */; };
 		9AC48D6A1C0B69E000531260 /* TableViewFactoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC48D681C0B69E000531260 /* TableViewFactoryTestCase.swift */; };
+		9AD3D58B1C3D0DF20093DDE4 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; };
+		9AD3D58C1C3D0DF20093DDE4 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AD92BF01BE27AEA00E667FF /* DelegateForwardingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD92BEF1BE27AEA00E667FF /* DelegateForwardingTestCase.swift */; };
 		9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */; };
 		9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */; };
@@ -204,6 +205,13 @@
 			remoteGlobalIDString = 9A4C3BBB1BE4E32B000931BA;
 			remoteInfo = "DTModelStorage-tvOS";
 		};
+		9AD3D58D1C3D0DF20093DDE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
+			remoteInfo = "DTModelStorage-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -213,6 +221,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9AD3D58C1C3D0DF20093DDE4 /* DTModelStorage.framework in CopyFiles */,
 				9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,7 +331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AB614B81C19E3E2002269B7 /* DTModelStorage.framework in Frameworks */,
+				9AD3D58B1C3D0DF20093DDE4 /* DTModelStorage.framework in Frameworks */,
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -652,6 +661,7 @@
 			);
 			dependencies = (
 				9A9B172B1B65773800D8ABD3 /* PBXTargetDependency */,
+				9AD3D58E1C3D0DF20093DDE4 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -970,6 +980,11 @@
 			isa = PBXTargetDependency;
 			name = "DTModelStorage-tvOS";
 			targetProxy = 9AB614AC1C19E311002269B7 /* PBXContainerItemProxy */;
+		};
+		9AD3D58E1C3D0DF20093DDE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTModelStorage-iOS";
+			targetProxy = 9AD3D58D1C3D0DF20093DDE4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
