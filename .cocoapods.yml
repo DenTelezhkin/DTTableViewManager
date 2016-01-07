@@ -1,4 +1,4 @@
 try:
   install:
     pre:
-      - git submodule foreach --recursive git submodule update --init
+      - git submodule update --init --recursive
