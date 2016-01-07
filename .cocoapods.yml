@@ -2,3 +2,4 @@ try:
   install:
     pre:
       - git submodule update --init --recursive
+  project: 'Example/DTTableViewManager.xcodeproj'
