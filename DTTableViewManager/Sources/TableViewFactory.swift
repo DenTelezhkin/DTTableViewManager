@@ -67,7 +67,6 @@ class TableViewFactory
         let reuseIdentifier = String(T)
         if tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) == nil
         {
-            // Storyboard prototype cell
             self.tableView.registerClass(T.self, forCellReuseIdentifier: reuseIdentifier)
             
             if UINib.nibExistsWithNibName(reuseIdentifier, inBundle: bundle) {
@@ -76,6 +75,10 @@ class TableViewFactory
             else {
                 mappings.addMappingForViewType(.Cell, viewClass: T.self)
             }
+        }
+        else {
+            // Storyboard prototype cell
+            mappings.addMappingForViewType(.Cell, viewClass: T.self)
         }
     }
     

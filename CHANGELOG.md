@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.3](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.5.0)
+
+## Fixed
+
+* Fixed a bug, where prototype cell from storyboard could not be created after calling `registerCellClass(_:)` method.
+
 ## [4.5.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.5.0)
 
 ## Added

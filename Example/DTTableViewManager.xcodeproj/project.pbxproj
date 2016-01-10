@@ -21,6 +21,14 @@
 		9A26E00C1C3C4C4700108443 /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A26E0091C3C4C4700108443 /* SectionModel+HeaderFooter.swift */; };
 		9A26E00D1C3C4C4700108443 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A26E00A1C3C4C4700108443 /* UIView+XibLoading.swift */; };
 		9A26E00E1C3C4C4700108443 /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A26E00A1C3C4C4700108443 /* UIView+XibLoading.swift */; };
+		9A2C58101C42B2820047AAB4 /* FixtureStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A2C580F1C42B2820047AAB4 /* FixtureStoryboard.storyboard */; };
+		9A2C58111C42B2820047AAB4 /* FixtureStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A2C580F1C42B2820047AAB4 /* FixtureStoryboard.storyboard */; };
+		9A2C581B1C42B2A60047AAB4 /* StoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C581A1C42B2A60047AAB4 /* StoryboardViewController.swift */; };
+		9A2C581C1C42B2A60047AAB4 /* StoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C581A1C42B2A60047AAB4 /* StoryboardViewController.swift */; };
+		9A2C581E1C42B2E60047AAB4 /* StoryboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C581D1C42B2E60047AAB4 /* StoryboardCell.swift */; };
+		9A2C581F1C42B2E60047AAB4 /* StoryboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C581D1C42B2E60047AAB4 /* StoryboardCell.swift */; };
+		9A2C58211C42B3870047AAB4 /* StoryboardMappingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C58201C42B3870047AAB4 /* StoryboardMappingTestCase.swift */; };
+		9A2C58221C42B3870047AAB4 /* StoryboardMappingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C58201C42B3870047AAB4 /* StoryboardMappingTestCase.swift */; };
 		9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDA1B8A176300508207 /* BankCell.xib */; };
 		9A41FBE01B8A17C400508207 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDF1B8A17C400508207 /* Banks.json */; };
 		9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE11B8A17E700508207 /* mochaGrunge.png */; };
@@ -246,6 +254,10 @@
 		9A26E00A1C3C4C4700108443 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+XibLoading.swift"; path = "Sources/UIView+XibLoading.swift"; sourceTree = "<group>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A38BF1AEE285E0021E97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = DTTableViewManager/Info.plist; sourceTree = "<group>"; };
+		9A2C580F1C42B2820047AAB4 /* FixtureStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FixtureStoryboard.storyboard; path = Fixtures/FixtureStoryboard.storyboard; sourceTree = "<group>"; };
+		9A2C581A1C42B2A60047AAB4 /* StoryboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardViewController.swift; sourceTree = "<group>"; };
+		9A2C581D1C42B2E60047AAB4 /* StoryboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardCell.swift; sourceTree = "<group>"; };
+		9A2C58201C42B3870047AAB4 /* StoryboardMappingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardMappingTestCase.swift; sourceTree = "<group>"; };
 		9A41FBDA1B8A176300508207 /* BankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankCell.xib; path = Cells/BankCell.xib; sourceTree = "<group>"; };
 		9A41FBDF1B8A17C400508207 /* Banks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Banks.json; path = "Example controllers/Search/Banks.json"; sourceTree = "<group>"; };
 		9A41FBE11B8A17E700508207 /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mochaGrunge.png; path = Resources/mochaGrunge.png; sourceTree = "<group>"; };
@@ -447,6 +459,9 @@
 				9AF931541B5936A800456503 /* OptionalCells.swift */,
 				9A9793B21B5BDA7A00908C72 /* ReactingTableCell.swift */,
 				9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */,
+				9A2C580F1C42B2820047AAB4 /* FixtureStoryboard.storyboard */,
+				9A2C581D1C42B2E60047AAB4 /* StoryboardCell.swift */,
+				9A2C581A1C42B2A60047AAB4 /* StoryboardViewController.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -546,6 +561,7 @@
 				9A1A49A01B54555D0006610B /* Fixtures */,
 				9A1A499C1B54527E0006610B /* CreationTestCase.swift */,
 				9A75CEC01B55AE6F007FB06C /* MappingTestCase.swift */,
+				9A2C58201C42B3870047AAB4 /* StoryboardMappingTestCase.swift */,
 				9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */,
 				9A9793B41B5BDB4400908C72 /* ReactingToEventsTestCase.swift */,
 				9AD92BEF1BE27AEA00E667FF /* DelegateForwardingTestCase.swift */,
@@ -824,6 +840,7 @@
 				9A6CEDA91BE573930091B0AF /* NibCell.xib in Resources */,
 				9A6CEDA31BE572B90091B0AF /* NibView.xib in Resources */,
 				9A6CEDAE1BE573E40091B0AF /* ReactingHeaderFooterView.xib in Resources */,
+				9A2C58111C42B2820047AAB4 /* FixtureStoryboard.storyboard in Resources */,
 				9A6CEDAC1BE573C50091B0AF /* RandomNibNameCell.xib in Resources */,
 				9A6CEDA71BE573080091B0AF /* XibTableViewController.xib in Resources */,
 			);
@@ -853,6 +870,7 @@
 				9A952DFF1B567BE900B9255E /* NibCell.xib in Resources */,
 				9A952E041B56832100B9255E /* RandomNibNameCell.xib in Resources */,
 				9A71EDC01B61481300047DE0 /* ReactingHeaderFooterView.xib in Resources */,
+				9A2C58101C42B2820047AAB4 /* FixtureStoryboard.storyboard in Resources */,
 				9A1663ED1B5A68B200B2C3C8 /* NibView.xib in Resources */,
 				9A1663EF1B5A68BE00B2C3C8 /* NibHeaderFooterView.xib in Resources */,
 			);
@@ -884,8 +902,11 @@
 				9AC48D671C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				9A6CED621BE570750091B0AF /* FixtureViews.swift in Sources */,
 				9A6CED631BE570750091B0AF /* DatasourceTestCase.swift in Sources */,
+				9A2C58221C42B3870047AAB4 /* StoryboardMappingTestCase.swift in Sources */,
+				9A2C581C1C42B2A60047AAB4 /* StoryboardViewController.swift in Sources */,
 				9A6CED641BE570750091B0AF /* MappingTestCase.swift in Sources */,
 				9A6CED651BE570750091B0AF /* ReactingToEventsTestCase.swift in Sources */,
+				9A2C581F1C42B2E60047AAB4 /* StoryboardCell.swift in Sources */,
 				9A6CED661BE570750091B0AF /* ReactingHeaderFooters.swift in Sources */,
 				9A6CED671BE570750091B0AF /* ReactingTableCell.swift in Sources */,
 				9A6CED681BE570750091B0AF /* OptionalCells.swift in Sources */,
@@ -940,8 +961,11 @@
 				9AC48D661C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				9A1663EB1B5A63CA00B2C3C8 /* FixtureViews.swift in Sources */,
 				9A52DD6B1B5A99F30048F535 /* DatasourceTestCase.swift in Sources */,
+				9A2C58211C42B3870047AAB4 /* StoryboardMappingTestCase.swift in Sources */,
+				9A2C581B1C42B2A60047AAB4 /* StoryboardViewController.swift in Sources */,
 				9A75CEC11B55AE6F007FB06C /* MappingTestCase.swift in Sources */,
 				9A9793B51B5BDB4400908C72 /* ReactingToEventsTestCase.swift in Sources */,
+				9A2C581E1C42B2E60047AAB4 /* StoryboardCell.swift in Sources */,
 				9A244A1E1B6134B0007E4FAA /* ReactingHeaderFooters.swift in Sources */,
 				9A9793B31B5BDA7A00908C72 /* ReactingTableCell.swift in Sources */,
 				9AF931551B5936A800456503 /* OptionalCells.swift in Sources */,
