@@ -108,6 +108,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9A16AFAC1C5FC01400643BC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F1A74281940169200FFFC47;
+			remoteInfo = "Nimble-iOS";
+		};
+		9A16AFB61C5FC01F00643BC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
+			remoteInfo = "DTModelStorage-iOS";
+		};
+		9A16AFB81C5FC02900643BC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F5DF1541BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOS";
+		};
+		9A16AFBA1C5FC03100643BC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A4C3BBB1BE4E32B000931BA;
+			remoteInfo = "DTModelStorage-tvOS";
+		};
 		9A1A499E1B5452FA0006610B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E6EA83591615EE6000F8B8C3 /* Project object */;
@@ -640,6 +668,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				9A16AFBB1C5FC03100643BC7 /* PBXTargetDependency */,
+				9A16AFB91C5FC02900643BC7 /* PBXTargetDependency */,
 				9A6CED9F1BE571F40091B0AF /* PBXTargetDependency */,
 			);
 			name = "Tests-tvOS";
@@ -695,6 +725,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				9A16AFB71C5FC01F00643BC7 /* PBXTargetDependency */,
+				9A16AFAD1C5FC01400643BC7 /* PBXTargetDependency */,
 				9A1A499F1B5452FA0006610B /* PBXTargetDependency */,
 			);
 			name = "Tests-iOS";
@@ -980,6 +1012,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9A16AFAD1C5FC01400643BC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Nimble-iOS";
+			targetProxy = 9A16AFAC1C5FC01400643BC7 /* PBXContainerItemProxy */;
+		};
+		9A16AFB71C5FC01F00643BC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTModelStorage-iOS";
+			targetProxy = 9A16AFB61C5FC01F00643BC7 /* PBXContainerItemProxy */;
+		};
+		9A16AFB91C5FC02900643BC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Nimble-tvOS";
+			targetProxy = 9A16AFB81C5FC02900643BC7 /* PBXContainerItemProxy */;
+		};
+		9A16AFBB1C5FC03100643BC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTModelStorage-tvOS";
+			targetProxy = 9A16AFBA1C5FC03100643BC7 /* PBXContainerItemProxy */;
+		};
 		9A1A499F1B5452FA0006610B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9A2A38BB1AEE285E0021E97D /* DTTableViewManager-iOS */;
