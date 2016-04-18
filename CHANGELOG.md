@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## Master
 
 * Update to Swift 2.2. This release is not backwards compatible with Swift 2.1.
+* Require Only-App-Extension-Safe API is set to YES in framework targets.
 
 ## [4.5.3](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.5.0)
 
