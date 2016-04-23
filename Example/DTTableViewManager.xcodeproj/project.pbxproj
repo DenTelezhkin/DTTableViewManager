@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82F1162F1CCBA771005C5FC4 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F1162E1CCBA771005C5FC4 /* DTModelStorage.framework */; };
+		82F116311CCBA77E005C5FC4 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F116301CCBA77E005C5FC4 /* RealmSwift.framework */; };
+		82F116331CCBA789005C5FC4 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F116321CCBA789005C5FC4 /* Nimble.framework */; };
+		82F116351CCBA7AA005C5FC4 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F116341CCBA7AA005C5FC4 /* RealmSwift.framework */; };
+		82F116381CCBA7C8005C5FC4 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F116371CCBA7C8005C5FC4 /* DTModelStorage.framework */; };
+		82F1163C1CCBA839005C5FC4 /* RealmSwift.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F116341CCBA7AA005C5FC4 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		82F1163D1CCBA839005C5FC4 /* DTModelStorage.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F116371CCBA7C8005C5FC4 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		82F1163E1CCBA841005C5FC4 /* RealmSwift.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F116301CCBA77E005C5FC4 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		82F1163F1CCBA842005C5FC4 /* DTModelStorage.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F1162E1CCBA771005C5FC4 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		82F116401CCBA842005C5FC4 /* Nimble.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F116321CCBA789005C5FC4 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
 		9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
 		9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
@@ -37,8 +47,6 @@
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A52AA971C3BF6E20067FD84 /* DataBindingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52AA961C3BF6E20067FD84 /* DataBindingTestCase.swift */; };
 		9A52AA981C3BF6E20067FD84 /* DataBindingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52AA961C3BF6E20067FD84 /* DataBindingTestCase.swift */; };
-		9A52AAF41C3C13D80067FD84 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; };
-		9A52AAF51C3C13F60067FD84 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA51C19B91200784AF7 /* DTModelStorage.framework */; };
 		9A52DD6B1B5A99F30048F535 /* DatasourceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52DD6A1B5A99F30048F535 /* DatasourceTestCase.swift */; };
 		9A6CED5F1BE570750091B0AF /* DelegateForwardingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD92BEF1BE27AEA00E667FF /* DelegateForwardingTestCase.swift */; };
 		9A6CED601BE570750091B0AF /* XibTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1A49A11B5455820006610B /* XibTableViewController.swift */; };
@@ -79,10 +87,6 @@
 		9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */; };
 		9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9AB614AB1C19E300002269B7 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; };
-		9AB614AE1C19E315002269B7 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA51C19B91200784AF7 /* DTModelStorage.framework */; };
-		9AB614B21C19E3B3002269B7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEB21C19B91900784AF7 /* Nimble.framework */; };
-		9AB614B51C19E3C8002269B7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEBA1C19B91900784AF7 /* Nimble.framework */; };
 		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
 		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
@@ -91,8 +95,6 @@
 		9AC48D671C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC48D651C0B309D00531260 /* ViewModelMappingCustomizableTestCase.swift */; };
 		9AC48D691C0B69E000531260 /* TableViewFactoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC48D681C0B69E000531260 /* TableViewFactoryTestCase.swift */; };
 		9AC48D6A1C0B69E000531260 /* TableViewFactoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC48D681C0B69E000531260 /* TableViewFactoryTestCase.swift */; };
-		9AD3D58B1C3D0DF20093DDE4 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; };
-		9AD3D58C1C3D0DF20093DDE4 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AD92BF01BE27AEA00E667FF /* DelegateForwardingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD92BEF1BE27AEA00E667FF /* DelegateForwardingTestCase.swift */; };
 		9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */; };
 		9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */; };
@@ -108,110 +110,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9A16AFAC1C5FC01400643BC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F1A74281940169200FFFC47;
-			remoteInfo = "Nimble-iOS";
-		};
-		9A16AFB61C5FC01F00643BC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
-			remoteInfo = "DTModelStorage-iOS";
-		};
-		9A16AFB81C5FC02900643BC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F5DF1541BDCA0CE00C3A531;
-			remoteInfo = "Nimble-tvOS";
-		};
-		9A16AFBA1C5FC03100643BC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A4C3BBB1BE4E32B000931BA;
-			remoteInfo = "DTModelStorage-tvOS";
-		};
 		9A1A499E1B5452FA0006610B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E6EA83591615EE6000F8B8C3 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9A2A38BB1AEE285E0021E97D;
 			remoteInfo = DTTableViewManager;
-		};
-		9A1FEEA01C19B91200784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9A7D5BAB19D860700083673D;
-			remoteInfo = "Tests-iOS";
-		};
-		9A1FEEA21C19B91200784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9A2A385B1AEE24340021E97D;
-			remoteInfo = "DTModelStorage-iOS";
-		};
-		9A1FEEA41C19B91200784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9A4C3BBC1BE4E32B000931BA;
-			remoteInfo = "DTModelStorage-tvOS";
-		};
-		9A1FEEA61C19B91200784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9A4C3BED1BE4E377000931BA;
-			remoteInfo = "Tests-tvOS";
-		};
-		9A1FEEB11C19B91900784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F1A74291940169200FFFC47;
-			remoteInfo = "Nimble-iOS";
-		};
-		9A1FEEB31C19B91900784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F1A74341940169200FFFC47;
-			remoteInfo = "Nimble-iOSTests";
-		};
-		9A1FEEB51C19B91900784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F925EAD195C0D6300ED456B;
-			remoteInfo = "Nimble-OSX";
-		};
-		9A1FEEB71C19B91900784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F925EB7195C0D6300ED456B;
-			remoteInfo = "Nimble-OSXTests";
-		};
-		9A1FEEB91C19B91900784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F5DF1551BDCA0CE00C3A531;
-			remoteInfo = "Nimble-tvOS";
-		};
-		9A1FEEBB1C19B91900784AF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F5DF15E1BDCA0CE00C3A531;
-			remoteInfo = "Nimble-tvOSTests";
 		};
 		9A6CED9E1BE571F40091B0AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -227,37 +131,40 @@
 			remoteGlobalIDString = 9A2A38BB1AEE285E0021E97D;
 			remoteInfo = DTTableViewManager;
 		};
-		9AB6149C1C19E1B4002269B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
-			remoteInfo = "DTModelStorage-iOS";
-		};
-		9AB614AC1C19E311002269B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A4C3BBB1BE4E32B000931BA;
-			remoteInfo = "DTModelStorage-tvOS";
-		};
-		9AD3D58D1C3D0DF20093DDE4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A2A385A1AEE24340021E97D;
-			remoteInfo = "DTModelStorage-iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		82F1163A1CCBA827005C5FC4 /* Framework Copy */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				82F1163E1CCBA841005C5FC4 /* RealmSwift.framework in Framework Copy */,
+				82F1163F1CCBA842005C5FC4 /* DTModelStorage.framework in Framework Copy */,
+				82F116401CCBA842005C5FC4 /* Nimble.framework in Framework Copy */,
+			);
+			name = "Framework Copy";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82F1163B1CCBA82F005C5FC4 /* Framework Copy */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				82F1163C1CCBA839005C5FC4 /* RealmSwift.framework in Framework Copy */,
+				82F1163D1CCBA839005C5FC4 /* DTModelStorage.framework in Framework Copy */,
+			);
+			name = "Framework Copy";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9AA3E6C31BA84CA5004950AE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9AD3D58C1C3D0DF20093DDE4 /* DTModelStorage.framework in CopyFiles */,
 				9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +172,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		82F116201CCBA538005C5FC4 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
+		82F116211CCBA538005C5FC4 /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile.private; path = ../Cartfile.private; sourceTree = "<group>"; };
+		82F1162E1CCBA771005C5FC4 /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = ../Carthage/Build/iOS/DTModelStorage.framework; sourceTree = "<group>"; };
+		82F116301CCBA77E005C5FC4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = ../Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		82F116321CCBA789005C5FC4 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		82F116341CCBA7AA005C5FC4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = ../Carthage/Build/tvOS/RealmSwift.framework; sourceTree = "<group>"; };
+		82F116371CCBA7C8005C5FC4 /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = ../Carthage/Build/tvOS/DTModelStorage.framework; sourceTree = "<group>"; };
 		95BCE72F1792C7B300526954 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewManager.swift; path = Sources/DTTableViewManager.swift; sourceTree = "<group>"; };
 		9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewFactory.swift; path = Sources/TableViewFactory.swift; sourceTree = "<group>"; };
@@ -275,8 +189,6 @@
 		9A1A499C1B54527E0006610B /* CreationTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationTestCase.swift; sourceTree = "<group>"; };
 		9A1A49A11B5455820006610B /* XibTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XibTableViewController.swift; path = Fixtures/XibTableViewController.swift; sourceTree = "<group>"; };
 		9A1A49A21B5455820006610B /* XibTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XibTableViewController.xib; path = Fixtures/XibTableViewController.xib; sourceTree = "<group>"; };
-		9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTModelStorage.xcodeproj; path = ../Carthage/Checkouts/DTModelStorage/DTModelStorageTests/DTModelStorage.xcodeproj; sourceTree = "<group>"; };
-		9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = ../Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		9A244A1D1B6134B0007E4FAA /* ReactingHeaderFooters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingHeaderFooters.swift; path = Fixtures/ReactingHeaderFooters.swift; sourceTree = "<group>"; };
 		9A26E0091C3C4C4700108443 /* SectionModel+HeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SectionModel+HeaderFooter.swift"; path = "Sources/SectionModel+HeaderFooter.swift"; sourceTree = "<group>"; };
 		9A26E00A1C3C4C4700108443 /* UIView+XibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+XibLoading.swift"; path = "Sources/UIView+XibLoading.swift"; sourceTree = "<group>"; };
@@ -345,7 +257,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AB614AB1C19E300002269B7 /* DTModelStorage.framework in Frameworks */,
+				82F116311CCBA77E005C5FC4 /* RealmSwift.framework in Frameworks */,
+				82F1162F1CCBA771005C5FC4 /* DTModelStorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,8 +266,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A52AAF51C3C13F60067FD84 /* DTModelStorage.framework in Frameworks */,
-				9AB614B51C19E3C8002269B7 /* Nimble.framework in Frameworks */,
 				9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +274,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AB614AE1C19E315002269B7 /* DTModelStorage.framework in Frameworks */,
+				82F116381CCBA7C8005C5FC4 /* DTModelStorage.framework in Frameworks */,
+				82F116351CCBA7AA005C5FC4 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +283,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AD3D58B1C3D0DF20093DDE4 /* DTModelStorage.framework in Frameworks */,
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,15 +291,66 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A52AAF41C3C13D80067FD84 /* DTModelStorage.framework in Frameworks */,
-				9AB614B21C19E3B3002269B7 /* Nimble.framework in Frameworks */,
 				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
+				82F116331CCBA789005C5FC4 /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		82F116281CCBA6B9005C5FC4 /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				82F116291CCBA6D4005C5FC4 /* iOS */,
+				82F1162A1CCBA6D9005C5FC4 /* tvOS */,
+				82F1162B1CCBA733005C5FC4 /* Tests */,
+			);
+			name = Carthage;
+			sourceTree = "<group>";
+		};
+		82F116291CCBA6D4005C5FC4 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				82F116301CCBA77E005C5FC4 /* RealmSwift.framework */,
+				82F1162E1CCBA771005C5FC4 /* DTModelStorage.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		82F1162A1CCBA6D9005C5FC4 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				82F116341CCBA7AA005C5FC4 /* RealmSwift.framework */,
+				82F116371CCBA7C8005C5FC4 /* DTModelStorage.framework */,
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
+		82F1162B1CCBA733005C5FC4 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				82F1162C1CCBA73A005C5FC4 /* iOS */,
+				82F1162D1CCBA73E005C5FC4 /* tvOS */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		82F1162C1CCBA73A005C5FC4 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				82F116321CCBA789005C5FC4 /* Nimble.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		82F1162D1CCBA73E005C5FC4 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
 		9A08A9AB1B8A23A100877C62 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,30 +382,6 @@
 				9A1A49A11B5455820006610B /* XibTableViewController.swift */,
 			);
 			name = Fixtures;
-			sourceTree = "<group>";
-		};
-		9A1FEE9A1C19B91200784AF7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9A1FEEA11C19B91200784AF7 /* Tests-iOS.xctest */,
-				9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */,
-				9A1FEEA51C19B91200784AF7 /* DTModelStorage.framework */,
-				9A1FEEA71C19B91200784AF7 /* Tests-tvOS.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		9A1FEEA91C19B91900784AF7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9A1FEEB21C19B91900784AF7 /* Nimble.framework */,
-				9A1FEEB41C19B91900784AF7 /* NimbleTests.xctest */,
-				9A1FEEB61C19B91900784AF7 /* Nimble.framework */,
-				9A1FEEB81C19B91900784AF7 /* NimbleTests.xctest */,
-				9A1FEEBA1C19B91900784AF7 /* Nimble.framework */,
-				9A1FEEBC1C19B91900784AF7 /* NimbleTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		9A30334D1B77A303000B3355 /* Search */ = {
@@ -612,8 +550,8 @@
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
-				9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */,
-				9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */,
+				82F116201CCBA538005C5FC4 /* Cartfile */,
+				82F116211CCBA538005C5FC4 /* Cartfile.private */,
 				9AD92BED1BE266D700E667FF /* Documentation */,
 				9A08A9AB1B8A23A100877C62 /* DTTableViewManager */,
 				9A9B17031B65771600D8ABD3 /* Example */,
@@ -621,6 +559,7 @@
 				9A2A38BF1AEE285E0021E97D /* Info.plist */,
 				95BCE72F1792C7B300526954 /* Default-568h@2x.png */,
 				9AF0031B1A5ABE7000ABFC90 /* XCTests */,
+				82F116281CCBA6B9005C5FC4 /* Carthage */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -646,11 +585,11 @@
 			buildPhases = (
 				9A2A38B71AEE285E0021E97D /* Sources */,
 				9A2A38B81AEE285E0021E97D /* Frameworks */,
+				82F116361CCBA7BB005C5FC4 /* Carthage */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9AB6149D1C19E1B4002269B7 /* PBXTargetDependency */,
 			);
 			name = "DTTableViewManager-iOS";
 			productName = DTTableViewManager;
@@ -664,12 +603,11 @@
 				9A6CED5E1BE570750091B0AF /* Sources */,
 				9A6CED6D1BE570750091B0AF /* Frameworks */,
 				9A6CED711BE570750091B0AF /* Resources */,
+				82F1163B1CCBA82F005C5FC4 /* Framework Copy */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9A16AFBB1C5FC03100643BC7 /* PBXTargetDependency */,
-				9A16AFB91C5FC02900643BC7 /* PBXTargetDependency */,
 				9A6CED9F1BE571F40091B0AF /* PBXTargetDependency */,
 			);
 			name = "Tests-tvOS";
@@ -683,11 +621,11 @@
 			buildPhases = (
 				9A6CED871BE571860091B0AF /* Sources */,
 				9A6CED881BE571860091B0AF /* Frameworks */,
+				82F116391CCBA7EC005C5FC4 /* Carthage */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9AB614AD1C19E311002269B7 /* PBXTargetDependency */,
 			);
 			name = "DTTableViewManager-tvOS";
 			productName = "DTTableViewManager-tvOS";
@@ -707,7 +645,6 @@
 			);
 			dependencies = (
 				9A9B172B1B65773800D8ABD3 /* PBXTargetDependency */,
-				9AD3D58E1C3D0DF20093DDE4 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -721,12 +658,11 @@
 				9AF003161A5ABE7000ABFC90 /* Sources */,
 				9AF003171A5ABE7000ABFC90 /* Frameworks */,
 				9AF003181A5ABE7000ABFC90 /* Resources */,
+				82F1163A1CCBA827005C5FC4 /* Framework Copy */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9A16AFB71C5FC01F00643BC7 /* PBXTargetDependency */,
-				9A16AFAD1C5FC01400643BC7 /* PBXTargetDependency */,
 				9A1A499F1B5452FA0006610B /* PBXTargetDependency */,
 			);
 			name = "Tests-iOS";
@@ -769,99 +705,16 @@
 			mainGroup = E6EA83571615EE6000F8B8C3;
 			productRefGroup = E6EA83631615EE6000F8B8C3 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 9A1FEE9A1C19B91200784AF7 /* Products */;
-					ProjectRef = 9A1FEE991C19B91200784AF7 /* DTModelStorage.xcodeproj */;
-				},
-				{
-					ProductGroup = 9A1FEEA91C19B91900784AF7 /* Products */;
-					ProjectRef = 9A1FEEA81C19B91900784AF7 /* Nimble.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				9A9B17011B65771600D8ABD3 /* Example */,
-				9AF003191A5ABE7000ABFC90 /* Tests-iOS */,
 				9A2A38BB1AEE285E0021E97D /* DTTableViewManager-iOS */,
-				9A6CED5B1BE570750091B0AF /* Tests-tvOS */,
+				9AF003191A5ABE7000ABFC90 /* Tests-iOS */,
 				9A6CED8B1BE571860091B0AF /* DTTableViewManager-tvOS */,
+				9A6CED5B1BE570750091B0AF /* Tests-tvOS */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		9A1FEEA11C19B91200784AF7 /* Tests-iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Tests-iOS.xctest";
-			remoteRef = 9A1FEEA01C19B91200784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEA31C19B91200784AF7 /* DTModelStorage.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DTModelStorage.framework;
-			remoteRef = 9A1FEEA21C19B91200784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEA51C19B91200784AF7 /* DTModelStorage.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DTModelStorage.framework;
-			remoteRef = 9A1FEEA41C19B91200784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEA71C19B91200784AF7 /* Tests-tvOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Tests-tvOS.xctest";
-			remoteRef = 9A1FEEA61C19B91200784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEB21C19B91900784AF7 /* Nimble.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Nimble.framework;
-			remoteRef = 9A1FEEB11C19B91900784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEB41C19B91900784AF7 /* NimbleTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NimbleTests.xctest;
-			remoteRef = 9A1FEEB31C19B91900784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEB61C19B91900784AF7 /* Nimble.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Nimble.framework;
-			remoteRef = 9A1FEEB51C19B91900784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEB81C19B91900784AF7 /* NimbleTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NimbleTests.xctest;
-			remoteRef = 9A1FEEB71C19B91900784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEBA1C19B91900784AF7 /* Nimble.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Nimble.framework;
-			remoteRef = 9A1FEEB91C19B91900784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9A1FEEBC1C19B91900784AF7 /* NimbleTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NimbleTests.xctest;
-			remoteRef = 9A1FEEBB1C19B91900784AF7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9A6CED711BE570750091B0AF /* Resources */ = {
@@ -909,6 +762,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		82F116361CCBA7BB005C5FC4 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/DTModelStorage.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		82F116391CCBA7EC005C5FC4 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/tvOS/RealmSwift.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/DTModelStorage.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9A2A38B71AEE285E0021E97D /* Sources */ = {
@@ -1012,26 +900,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9A16AFAD1C5FC01400643BC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Nimble-iOS";
-			targetProxy = 9A16AFAC1C5FC01400643BC7 /* PBXContainerItemProxy */;
-		};
-		9A16AFB71C5FC01F00643BC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "DTModelStorage-iOS";
-			targetProxy = 9A16AFB61C5FC01F00643BC7 /* PBXContainerItemProxy */;
-		};
-		9A16AFB91C5FC02900643BC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Nimble-tvOS";
-			targetProxy = 9A16AFB81C5FC02900643BC7 /* PBXContainerItemProxy */;
-		};
-		9A16AFBB1C5FC03100643BC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "DTModelStorage-tvOS";
-			targetProxy = 9A16AFBA1C5FC03100643BC7 /* PBXContainerItemProxy */;
-		};
 		9A1A499F1B5452FA0006610B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9A2A38BB1AEE285E0021E97D /* DTTableViewManager-iOS */;
@@ -1046,21 +914,6 @@
 			isa = PBXTargetDependency;
 			target = 9A2A38BB1AEE285E0021E97D /* DTTableViewManager-iOS */;
 			targetProxy = 9A9B172A1B65773800D8ABD3 /* PBXContainerItemProxy */;
-		};
-		9AB6149D1C19E1B4002269B7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "DTModelStorage-iOS";
-			targetProxy = 9AB6149C1C19E1B4002269B7 /* PBXContainerItemProxy */;
-		};
-		9AB614AD1C19E311002269B7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "DTModelStorage-tvOS";
-			targetProxy = 9AB614AC1C19E311002269B7 /* PBXContainerItemProxy */;
-		};
-		9AD3D58E1C3D0DF20093DDE4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "DTModelStorage-iOS";
-			targetProxy = 9AD3D58D1C3D0DF20093DDE4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1095,6 +948,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1124,6 +981,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = DTTableViewManager/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1213,6 +1074,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../Carthage/Build/tvOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1223,7 +1088,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.DTTableViewManager-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlsdev.DTTableViewManager;
 				PRODUCT_NAME = DTTableViewManager;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -1252,6 +1117,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../Carthage/Build/tvOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1262,7 +1131,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.DTTableViewManager-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlsdev.DTTableViewManager;
 				PRODUCT_NAME = DTTableViewManager;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
