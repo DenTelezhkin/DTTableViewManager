@@ -17,6 +17,10 @@
 		82F1163E1CCBA841005C5FC4 /* RealmSwift.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F116301CCBA77E005C5FC4 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82F1163F1CCBA842005C5FC4 /* DTModelStorage.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F1162E1CCBA771005C5FC4 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82F116401CCBA842005C5FC4 /* Nimble.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F116321CCBA789005C5FC4 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		82F1165B1CCBB470005C5FC4 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F1165A1CCBB470005C5FC4 /* Realm.framework */; };
+		82F1165D1CCBB476005C5FC4 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F1165C1CCBB476005C5FC4 /* Realm.framework */; };
+		82F1165E1CCBB490005C5FC4 /* Realm.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F1165C1CCBB476005C5FC4 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		82F1165F1CCBB494005C5FC4 /* Realm.framework in Framework Copy */ = {isa = PBXBuildFile; fileRef = 82F1165C1CCBB476005C5FC4 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A08A9B51B8A23A100877C62 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */; };
 		9A08A9B61B8A23A100877C62 /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */; };
 		9A08A9B71B8A23A100877C62 /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A08A9AF1B8A23A100877C62 /* TableViewConfiguration.swift */; };
@@ -140,6 +144,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				82F1165E1CCBB490005C5FC4 /* Realm.framework in Framework Copy */,
 				82F1163E1CCBA841005C5FC4 /* RealmSwift.framework in Framework Copy */,
 				82F1163F1CCBA842005C5FC4 /* DTModelStorage.framework in Framework Copy */,
 				82F116401CCBA842005C5FC4 /* Nimble.framework in Framework Copy */,
@@ -153,6 +158,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				82F1165F1CCBB494005C5FC4 /* Realm.framework in Framework Copy */,
 				82F1163C1CCBA839005C5FC4 /* RealmSwift.framework in Framework Copy */,
 				82F1163D1CCBA839005C5FC4 /* DTModelStorage.framework in Framework Copy */,
 			);
@@ -179,6 +185,8 @@
 		82F116321CCBA789005C5FC4 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		82F116341CCBA7AA005C5FC4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = ../Carthage/Build/tvOS/RealmSwift.framework; sourceTree = "<group>"; };
 		82F116371CCBA7C8005C5FC4 /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = ../Carthage/Build/tvOS/DTModelStorage.framework; sourceTree = "<group>"; };
+		82F1165A1CCBB470005C5FC4 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		82F1165C1CCBB476005C5FC4 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../Carthage/Build/tvOS/Realm.framework; sourceTree = "<group>"; };
 		95BCE72F1792C7B300526954 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A08A9AD1B8A23A100877C62 /* DTTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTableViewManager.swift; path = Sources/DTTableViewManager.swift; sourceTree = "<group>"; };
 		9A08A9AE1B8A23A100877C62 /* TableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewFactory.swift; path = Sources/TableViewFactory.swift; sourceTree = "<group>"; };
@@ -257,6 +265,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F1165B1CCBB470005C5FC4 /* Realm.framework in Frameworks */,
 				82F116311CCBA77E005C5FC4 /* RealmSwift.framework in Frameworks */,
 				82F1162F1CCBA771005C5FC4 /* DTModelStorage.framework in Frameworks */,
 			);
@@ -274,6 +283,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F1165D1CCBB476005C5FC4 /* Realm.framework in Frameworks */,
 				82F116381CCBA7C8005C5FC4 /* DTModelStorage.framework in Frameworks */,
 				82F116351CCBA7AA005C5FC4 /* RealmSwift.framework in Frameworks */,
 			);
@@ -312,6 +322,7 @@
 		82F116291CCBA6D4005C5FC4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				82F1165A1CCBB470005C5FC4 /* Realm.framework */,
 				82F116301CCBA77E005C5FC4 /* RealmSwift.framework */,
 				82F1162E1CCBA771005C5FC4 /* DTModelStorage.framework */,
 			);
@@ -321,6 +332,7 @@
 		82F1162A1CCBA6D9005C5FC4 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				82F1165C1CCBB476005C5FC4 /* Realm.framework */,
 				82F116341CCBA7AA005C5FC4 /* RealmSwift.framework */,
 				82F116371CCBA7C8005C5FC4 /* DTModelStorage.framework */,
 			);
@@ -772,6 +784,7 @@
 			inputPaths = (
 				"$(SRCROOT)/../Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/DTModelStorage.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/Realm.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -788,6 +801,7 @@
 			inputPaths = (
 				"$(SRCROOT)/../Carthage/Build/tvOS/RealmSwift.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/DTModelStorage.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/Realm.framework",
 			);
 			name = Carthage;
 			outputPaths = (
