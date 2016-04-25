@@ -273,15 +273,15 @@ extension PostsViewController: DTTableViewContentUpdatable {
 There are several convenience model getters, that will allow you to get data model from storage classes. Those include cell, header or footer class types to gather type information and being able to return model of correct type. Again, no need for type casts.
 
 ```swift
-  let post = manager.objectForCellClass(PostCell.self, atIndexPath: indexPath)
-  let postHeaderModel = manager.objectForHeaderClass(PostHeaderClass.self, atSectionIndex: sectionIndex)
-  let postFooterModel = manager.objectForFooterClass(PostFooterClass.self, atSectionIndex: sectionIndex)
+  let post = manager.itemForCellClass(PostCell.self, atIndexPath: indexPath)
+  let postHeaderModel = manager.itemForHeaderClass(PostHeaderClass.self, atSectionIndex: sectionIndex)
+  let postFooterModel = manager.itemForFooterClass(PostFooterClass.self, atSectionIndex: sectionIndex)
 ```
 
 There's also convenience getter, that will allow you to get model from visible `UITableViewCell`.
 
 ```swift
-  let post = manager.objectForVisibleCell(postCell)
+  let post = manager.itemForVisibleCell(postCell)
 ```
 
 ## Configuration
