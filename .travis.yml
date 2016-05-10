@@ -1,30 +1,19 @@
-osx_image: xcode7.3
-sudo: false
+matrix:
+  include:
+    - os: osx
+      env: ACTION=iOS
+    - os: osx
+      env: ACTION=tvOS
+    - os: osx
+      env: ACTION=carthage
+    - os: osx
+      env: ACTION=cocoapods
+    # - os: osx
+    #   env: ACTION=oss-osx
+
 language: objective-c
-
-env:
-  global:
-    - IOS_SDK=iphonesimulator9.3
-    - IOS_SCHEME="DTTableViewManager-iOS"
-    - TVOS_SDK=appletvsimulator9.2
-    - TVOS_SCHEME="DTTableViewManager-tvOS"
-  matrix:
-      - DESTINATION="OS=9.3,name=iPad 2"         SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
-      - DESTINATION="OS=9.3,name=iPad Air"       SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
-      - DESTINATION="OS=9.3,name=iPhone 5"       SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
-      - DESTINATION="OS=9.3,name=iPhone 6s"      SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
-      - DESTINATION="OS=8.4,name=iPhone 6"       SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
-      - DESTINATION="OS=8.4,name=iPad Air"       SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"
-      - DESTINATION="OS=9.2,name=Apple TV 1080p" SDK="$TVOS_SDK" SCHEME="$TVOS_SCHEME"
-
-before_install:
-    - cd Example
+osx_image: xcode7.3
 
 script:
-    - set -o pipefail
-    - git submodule foreach --recursive git submodule update --init
-    - xcodebuild -version
-    - env NSUnbufferedIO=YES xcodebuild -project DTTableViewManager.xcodeproj -scheme "$SCHEME" -configuration Debug -sdk "$SDK" -destination "$DESTINATION" clean build test -enableCodeCoverage YES "IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu`" | xcpretty
-
-after_success:
-    - bash <(curl -s https://codecov.io/bash)
+  - git submodule update --init --recursive
+  - make install-$ACTION && make test-$ACTION
