@@ -32,7 +32,7 @@ test-carthage:
 	ls Carthage/build/iOS/DTTableViewManager.framework
 
 test-cocoapods:
-	pod lib lint --allow-warnings --verbose
+	pod repo update && pod lib lint --allow-warnings --verbose
 
 # test-oss-osx:
 # 	git clone https://github.com/apple/swift-package-manager
