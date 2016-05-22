@@ -266,7 +266,15 @@ extension PostsViewController: DTTableViewContentUpdatable {
 
 ## UITableViewDelegate and UITableViewDatasource
 
-`DTTableViewManager` serves as a datasource and the delegate to `UITableView`. However, it implements only some of UITableViewDelegate and UITableViewDatasource methods, other methods will be redirected to your controller, if it implements it.
+`DTTableViewManager` serves as a datasource and the delegate to `UITableView`. However, it implements only some of UITableViewDelegate and UITableViewDatasource methods, other methods will be redirected to your controller, if it implements it. So, for example when you need to implement cell height methods, just implement them normally on your UIViewController:
+
+```swift
+class ViewController : DTTableViewManageable, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    	return 44
+    }
+}
+```
 
 ## Convenience model getters
 
