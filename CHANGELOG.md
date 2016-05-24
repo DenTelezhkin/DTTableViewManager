@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.7.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.7.0)
+
+Dependency changelog -> [DTModelStorage 2.6.0 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
+
 ## [4.6.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.6.0)
 
 Dependency changelog -> [DTModelStorage 2.5 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
