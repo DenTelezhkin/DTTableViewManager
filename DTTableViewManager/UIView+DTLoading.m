@@ -28,9 +28,8 @@
 @implementation UIView (DTLoading)
 
 + (id) dt_loadFromXibNamed:(NSString *) xibName {
-    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:xibName
-                                                             owner:nil
-                                                           options:nil];
+    NSBundle *bundle = [NSBundle bundleForClass:self] ?: [NSBundle mainBundle];
+    NSArray *topLevelObjects = [bundle loadNibNamed:xibName owner:nil options:nil];
     for(id currentObject in topLevelObjects) {
         if([currentObject isKindOfClass:self]) {
             return currentObject;

@@ -1,5 +1,5 @@
 PODS:
-  - Cedar (0.11.3)
+  - Cedar (1.0)
   - DTModelStorage (1.2.4):
     - DTModelStorage/All (= 1.2.4)
   - DTModelStorage/All (1.2.4):
@@ -19,8 +19,10 @@ DEPENDENCIES:
   - OCMock (~> 2.2)
 
 SPEC CHECKSUMS:
-  Cedar: ab1ea4e5c8af4ee4a8fa0452936679861876dc80
+  Cedar: a641e5ed0353bd9d45782ce365d0822b7342cce3
   DTModelStorage: d33ad9ed9480f4a0d87467cf76589d3a60a9dfbe
   OCMock: a6a7dc0e3997fb9f35d99f72528698ebf60d64f2
 
-COCOAPODS: 0.37.2
+PODFILE CHECKSUM: 11eee403e5ea26c9333421929a08564ad3a06e96
+
+COCOAPODS: 1.0.1
