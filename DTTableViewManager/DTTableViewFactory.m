@@ -225,7 +225,7 @@
 
 -(BOOL)isNibExistsWithName:(NSString *)nibName forViewClass:(Class)viewClass
 {
-    NSBundle *bundle = [NSBundle bundleForClass:viewClass] ?: [NSBundle mainBundle];
+    NSBundle *bundle = [NSBundle bundleForClass:viewClass];
     NSString *path = [bundle pathForResource:nibName ofType:@"nib"];
     if (path)
     {
@@ -236,7 +236,7 @@
 
 -(UINib *)nibWithName:(NSString *)nibName forViewClass:(Class)viewClass
 {
-    NSBundle *bundle = [NSBundle bundleForClass:viewClass] ?: [NSBundle mainBundle];
+    NSBundle *bundle = [NSBundle bundleForClass:viewClass];
     return [UINib nibWithNibName:nibName bundle:bundle];
 }
 
