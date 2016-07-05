@@ -21,16 +21,16 @@ class SwiftViewController: DTTableViewController {
 
         self.refreshControl = UIRefreshControl()
         self.tableView.addSubview(self.refreshControl)
-        self.refreshControl.addTarget(self, action: "refreshShouldStart:",
+        self.refreshControl.addTarget(self, action: #selector(SwiftViewController.refreshShouldStart(_:)),
             forControlEvents: .ValueChanged)
         
-        executeAfter(1, { () -> Void in
+        executeAfter(1, block: { () -> Void in
             self.memoryStorage().setItems(self.randomNumbers(), forSectionIndex: 0)
         })
     }
     
     func refreshShouldStart(sender: UIRefreshControl) {
-        executeAfter(1, { () -> Void in
+        executeAfter(1, block: { () -> Void in
             self.refreshControl.endRefreshing()
             self.memoryStorage().setItems(self.randomNumbers(), forSectionIndex: 0)
         })
@@ -39,7 +39,7 @@ class SwiftViewController: DTTableViewController {
     func randomNumbers() -> [Int] {
         var items = [Int]()
         
-        for (var i=0; i<5; i++)
+        for _ in 0 ..< 5
         {
             items.append(Int(arc4random_uniform(10)))
         }
@@ -48,7 +48,7 @@ class SwiftViewController: DTTableViewController {
     }
 }
 
-extension SwiftViewController: DTTableViewControllerEvents {
+extension SwiftViewController {
     override func tableControllerDidUpdateContent() {
         if self.tableView.numberOfRowsInSection(0) > 0
         {
