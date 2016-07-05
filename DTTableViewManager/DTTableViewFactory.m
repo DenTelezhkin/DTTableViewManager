@@ -59,40 +59,26 @@
     return _footerMappingsDictionary;
 }
 
-#pragma mark - check for features
-
--(BOOL)nibExistsWIthNibName:(NSString *)nibName
-{
-    NSString *path = [[NSBundle mainBundle] pathForResource:nibName ofType:@"nib"];
-    if (path)
-    {
-        return YES;
-    }
-    return NO;
-}
-
 #pragma mark - class mapping
 
 -(void)registerCellClass:(Class)cellClass forModelClass:(Class)modelClass
 {
-    NSString * reuseIdentifier = [DTRuntimeHelper classStringForClass:cellClass];
+    NSString * className = [DTRuntimeHelper classStringForClass:cellClass];
+    NSString * reuseIdentifier = className;
     UITableViewCell * tableCell = [[self.delegate tableView] dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     if (!tableCell)
     {
         // Storyboard prototype cell
-        [[self.delegate tableView] registerClass:cellClass
-                          forCellReuseIdentifier:reuseIdentifier];
+        [[self.delegate tableView] registerClass:cellClass forCellReuseIdentifier:reuseIdentifier];
         
-        if ([self nibExistsWIthNibName:[DTRuntimeHelper classStringForClass:cellClass]])
+        if ([self isNibExistsWithName:className forViewClass:cellClass])
         {
-            [self registerNibNamed:[DTRuntimeHelper classStringForClass:cellClass]
-                      forCellClass:cellClass
-                        modelClass:modelClass];
+            [self registerNibNamed:className forCellClass:cellClass modelClass:modelClass];
         }
     }
 
-    [self.cellMappingsDictionary setObject:[DTRuntimeHelper classStringForClass:cellClass]
+    [self.cellMappingsDictionary setObject:className
                                     forKey:[DTRuntimeHelper modelStringForClass:modelClass]];
 }
 
@@ -100,9 +86,9 @@
            forCellClass:(Class)cellClass
              modelClass:(Class)modelClass
 {
-    NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
+    NSAssert([self isNibExistsWithName:nibName forViewClass:cellClass], @"Nib should exist for registerNibNamed method");
     
-    [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:[NSBundle mainBundle]]
+    [[self.delegate tableView] registerNib:[self nibWithName:nibName forViewClass:cellClass]
                     forCellReuseIdentifier:[DTRuntimeHelper classStringForClass:cellClass]];
     
     [self.cellMappingsDictionary setObject:[DTRuntimeHelper classStringForClass:cellClass]
@@ -119,11 +105,11 @@
 -(void)registerNibNamed:(NSString *)nibName forHeaderClass:(Class)headerClass
              modelClass:(Class)modelClass
 {
-    NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
+    NSAssert([self isNibExistsWithName:nibName forViewClass:headerClass], @"Nib should exist for registerNibNamed method");
     
     if ([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
-        [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:[NSBundle mainBundle]]
+        [[self.delegate tableView] registerNib:[self nibWithName:nibName forViewClass:headerClass]
             forHeaderFooterViewReuseIdentifier:[DTRuntimeHelper classStringForClass:headerClass]];
     }
     
@@ -141,11 +127,11 @@
 -(void)registerNibNamed:(NSString *)nibName forFooterClass:(Class)footerClass
              modelClass:(Class)modelClass
 {
-    NSAssert([self nibExistsWIthNibName:nibName], @"Nib should exist for registerNibNamed method");
+    NSAssert([self isNibExistsWithName:nibName forViewClass:footerClass], @"Nib should exist for registerNibNamed method");
     
     if ([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]])
     {
-        [[self.delegate tableView] registerNib:[UINib nibWithNibName:nibName bundle:[NSBundle mainBundle]]
+        [[self.delegate tableView] registerNib:[self nibWithName:nibName forViewClass:footerClass]
             forHeaderFooterViewReuseIdentifier:[DTRuntimeHelper classStringForClass:footerClass]];
     }
     
@@ -233,6 +219,25 @@
     NSAssert(footerClassString, @"DTCellFactory does not have footer mapping for model class: %@",[model class]);
     
     return NSClassFromString(footerClassString);
+}
+
+#pragma mark - UINib routine
+
+-(BOOL)isNibExistsWithName:(NSString *)nibName forViewClass:(Class)viewClass
+{
+    NSBundle *bundle = [NSBundle bundleForClass:viewClass] ?: [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:nibName ofType:@"nib"];
+    if (path)
+    {
+        return YES;
+    }
+    return NO;
+}
+
+-(UINib *)nibWithName:(NSString *)nibName forViewClass:(Class)viewClass
+{
+    NSBundle *bundle = [NSBundle bundleForClass:viewClass] ?: [NSBundle mainBundle];
+    return [UINib nibWithNibName:nibName bundle:bundle];
 }
 
 @end
