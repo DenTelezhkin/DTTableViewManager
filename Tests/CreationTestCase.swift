@@ -81,7 +81,7 @@ class CreationTestCase: XCTestCase {
     }
     
     func testLoadFromXibChecksCorrectClassName() {
-        let loadedView = StringCell.dt_loadFromXibNamed("NibCell", bundle: NSBundle(forClass: self.dynamicType))
+        let loadedView = StringCell.dt_loadFromXibNamed("NibCell")
         
         expect(loadedView).to(beNil())
     }

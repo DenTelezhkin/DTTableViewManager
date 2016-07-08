@@ -89,12 +89,8 @@ public class DTTableViewManager : NSObject {
     }()
     
     /// Bundle to search your xib's in. This can sometimes be useful for unit-testing. Defaults to NSBundle.mainBundle()
+    @available(*,deprecated, message="This property is deprecated, bundle is determined automatically while registering mapping")
     public var viewBundle = NSBundle.mainBundle()
-    {
-        didSet {
-            viewFactory.bundle = viewBundle
-        }
-    }
     
     /// Property representing when data binding is performed. Immediately - in `tableView(_:cellForRowAtIndexPath:)` method. BeforeCellIsDisplayed - in `tableView(_:willDisplayCell:forRowAtIndexPath:)` method.
     /// - Note: Changing value of this property may improve perfomance for complex table view cells.

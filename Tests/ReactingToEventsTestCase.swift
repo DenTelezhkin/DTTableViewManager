@@ -58,7 +58,6 @@ class ReactingToEventsTestCase: XCTestCase {
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
-        controller.manager.viewBundle = NSBundle(forClass: self.dynamicType)
         controller.manager.storage = MemoryStorage()
     }
     

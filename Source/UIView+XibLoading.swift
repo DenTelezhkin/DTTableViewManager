@@ -31,11 +31,10 @@ extension UIView
 {
     /// Load view from xib in specific bundle.
     /// - Parameter xibName: Name of xib file
-    /// - Parameter bundle: NSBundle to search xib in
     /// - Returns: Loaded xib
-    class func dt_loadFromXibNamed(xibName : String, bundle : NSBundle) -> UIView?
+    class func dt_loadFromXibNamed(xibName : String) -> UIView?
     {
-        let topLevelObjects = bundle.loadNibNamed(xibName, owner: nil, options: nil)
+        let topLevelObjects = NSBundle(forClass: self).loadNibNamed(xibName, owner: nil, options: nil)
         
         for object in topLevelObjects {
             if object.isKindOfClass(self) {
@@ -47,10 +46,9 @@ extension UIView
     
     /// Load view in specific bundle.
     /// - Note: Xib name used is identical to class name, without module part, for example. Foo.View class -> "View".xib
-    /// - Parameter bundle: NSBundle to search xib in
     /// - Returns: Loaded xib
-    class func dt_loadFromXibInBundle(bundle: NSBundle) -> UIView?
+    class func dt_loadFromXib() -> UIView?
     {
-        return self.dt_loadFromXibNamed(String(self), bundle : bundle)
+        return self.dt_loadFromXibNamed(String(self))
     }
 }
