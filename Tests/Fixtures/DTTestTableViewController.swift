@@ -16,15 +16,15 @@ class DTTestTableViewController: UIViewController, UITableViewDataSource, UITabl
     var beforeContentUpdateValue = false
     var afterContentUpdateValue = false
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return self.manager.tableView(tableView, cellForRowAtIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return self.manager.tableView(tableView, cellForRowAt: indexPath)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.manager.tableView(tableView, numberOfRowsInSection: section)
     }
 }

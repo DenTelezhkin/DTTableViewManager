@@ -14,7 +14,7 @@ import Nimble
 
 class FooCell : UITableViewCell, ModelTransfer
 {
-    func updateWithModel(model: Int) {
+    func updateWithModel(_ model: Int) {
         
     }
 }
@@ -25,7 +25,7 @@ class CreationTestCase: XCTestCase {
     {
         let controller = DTTestTableViewController()
         controller.manager.startManagingWithDelegate(controller)
-        controller.manager.registerCellClass(FooCell)
+        controller.manager.registerCellClass(FooCell.self)
     }
     
     func testDelegateIsNotNil() {
@@ -55,10 +55,10 @@ class CreationTestCase: XCTestCase {
     
     func testCreatingTableControllerFromXIB()
     {
-        let controller = XibTableViewController(nibName: "XibTableViewController", bundle: NSBundle(forClass: self.dynamicType))
+        let controller = XibTableViewController(nibName: "XibTableViewController", bundle: Bundle(for: self.dynamicType))
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
-        controller.manager.registerCellClass(FooCell)
+        controller.manager.registerCellClass(FooCell.self)
     }
     
     func testConfigurationAssociation()

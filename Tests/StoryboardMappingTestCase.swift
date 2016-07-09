@@ -18,17 +18,17 @@ class StoryboardMappingTestCase: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let storyboard = UIStoryboard(name: "FixtureStoryboard", bundle: NSBundle(forClass: self.dynamicType))
+        let storyboard = UIStoryboard(name: "FixtureStoryboard", bundle: Bundle(for: self.dynamicType))
         controller = storyboard.instantiateInitialViewController() as! StoryboardViewController
         _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
     }
     
     func testCellIsMappedAndOutletsAreCreated() {
-        controller.manager.registerCellClass(StoryboardCell)
+        controller.manager.registerCellClass(StoryboardCell.self)
         controller.manager.memoryStorage.addItem(1)
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0)) as! StoryboardCell
+        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell
         
         expect(cell.storyboardLabel).toNot(beNil())
     }

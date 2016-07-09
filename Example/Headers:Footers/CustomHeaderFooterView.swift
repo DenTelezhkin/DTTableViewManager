@@ -14,7 +14,7 @@ class CustomHeaderFooterView: UITableViewHeaderFooterView, ModelTransfer {
     @IBOutlet weak var backgroundPatternView: UIView!
     @IBOutlet weak var label: UILabel!
     
-    func updateWithModel(model: (String, UIImage) ) {
+    func updateWithModel(_ model: (String, UIImage) ) {
         label.text = model.0
         backgroundPatternView.backgroundColor = UIColor(patternImage: model.1)
     }

@@ -15,12 +15,13 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 
     @IBOutlet weak var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
-    let fetchResultsController: NSFetchedResultsController = {
+    let fetchResultsController: NSFetchedResultsController<Bank> = {
     
         let context = CoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: "Bank")
+        let request = NSFetchRequest<Bank>()
+        request.entity = NSEntityDescription.entity(forEntityName: "Bank", in: context)
         request.fetchBatchSize = 20
-        request.sortDescriptors = [NSSortDescriptor(key: "zip", ascending: true)]
+        request.sortDescriptors = [SortDescriptor(key: "zip", ascending: true)]
         
         let fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "state", cacheName: nil)
         try! fetchResultsController.performFetch()
@@ -31,7 +32,7 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
         super.viewDidLoad()
         manager.startManagingWithDelegate(self)
 
-        manager.registerCellClass(BankCell)
+        manager.registerCellClass(BankCell.self)
         manager.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
 
         searchController.searchResultsUpdater = self
@@ -44,18 +45,18 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 extension CoreDataSearchViewController : DTTableViewContentUpdatable
 {
     func afterContentUpdate() {
-        self.tableView.hidden = self.tableView.numberOfSections == 0
+        self.tableView.isHidden = self.tableView.numberOfSections == 0
     }
 }
 
 extension CoreDataSearchViewController : UISearchResultsUpdating
 {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let searchString = searchController.searchBar.text ?? ""
         if searchString == "" {
             self.fetchResultsController.fetchRequest.predicate = nil
         } else {
-            let predicate = NSPredicate(format: "name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString)
+            let predicate = Predicate(format: "name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString)
             self.fetchResultsController.fetchRequest.predicate = predicate
         }
         try! fetchResultsController.performFetch()

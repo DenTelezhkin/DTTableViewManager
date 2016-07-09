@@ -14,34 +14,34 @@ import Nimble
 
 class AlwaysVisibleTableView: UITableView
 {
-    override func cellForRowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell? {
-        return self.dataSource?.tableView(self, cellForRowAtIndexPath: indexPath)
+    override func cellForRow(at indexPath: IndexPath) -> UITableViewCell? {
+        return self.dataSource?.tableView(self, cellForRowAt: indexPath)
     }
     
     
-    override func headerViewForSection(section: Int) -> UITableViewHeaderFooterView? {
+    override func headerView(forSection section: Int) -> UITableViewHeaderFooterView? {
         return self.delegate?.tableView!(self, viewForHeaderInSection: section) as? UITableViewHeaderFooterView
     }
 }
 
 class ReactingTestTableViewController: DTTestTableViewController
 {
-    var indexPath : NSIndexPath?
+    var indexPath : IndexPath?
     var model: Int?
     var text : String?
     
-    func cellConfiguration(cell: SelectionReactingTableCell, model: Int, indexPath: NSIndexPath) {
+    func cellConfiguration(_ cell: SelectionReactingTableCell, model: Int, indexPath: IndexPath) {
         cell.indexPath = indexPath
         cell.model = model
         cell.textLabel?.text = "Foo"
     }
     
-    func headerConfiguration(header: ReactingHeaderFooterView, model: String, sectionIndex: Int) {
+    func headerConfiguration(_ header: ReactingHeaderFooterView, model: String, sectionIndex: Int) {
         header.model = "Bar"
         header.sectionIndex = sectionIndex
     }
     
-    func cellSelection(cell: SelectionReactingTableCell, model: Int, indexPath: NSIndexPath) {
+    func cellSelection(_ cell: SelectionReactingTableCell, model: Int, indexPath: IndexPath) {
         self.indexPath = indexPath
         self.model = model
         self.text = "Bar"
@@ -63,7 +63,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testCellSelectionClosure()
     {
-        controller.manager.registerCellClass(SelectionReactingTableCell)
+        controller.manager.registerCellClass(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
         controller.manager.whenSelected(SelectionReactingTableCell.self) { (cell, model, indexPath) in
             cell.indexPath = indexPath
@@ -72,7 +72,7 @@ class ReactingToEventsTestCase: XCTestCase {
         }
         
         controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        controller.manager.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
+        controller.manager.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
         
         expect(reactingCell?.indexPath) == indexPath(1, 0)
         expect(reactingCell?.model) == 2
@@ -80,7 +80,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testCellConfigurationClosure()
     {
-        controller.manager.registerCellClass(SelectionReactingTableCell)
+        controller.manager.registerCellClass(SelectionReactingTableCell.self)
         
         var reactingCell : SelectionReactingTableCell?
         
@@ -92,7 +92,7 @@ class ReactingToEventsTestCase: XCTestCase {
         })
         
         controller.manager.memoryStorage.addItem(2, toSection: 0)
-        controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        _ = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         
         expect(reactingCell?.indexPath) == indexPath(0, 0)
         expect(reactingCell?.model) == 2
@@ -101,7 +101,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testHeaderConfigurationClosure()
     {
-        controller.manager.registerHeaderClass(ReactingHeaderFooterView)
+        controller.manager.registerHeaderClass(ReactingHeaderFooterView.self)
         
         var reactingHeader : ReactingHeaderFooterView?
         
@@ -118,7 +118,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testFooterConfigurationClosure()
     {
-        controller.manager.registerFooterClass(ReactingHeaderFooterView)
+        controller.manager.registerFooterClass(ReactingHeaderFooterView.self)
         
         var reactingFooter : ReactingHeaderFooterView?
         
@@ -135,7 +135,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testShouldReactAfterContentUpdate()
     {
-        controller.manager.registerCellClass(NibCell)
+        controller.manager.registerCellClass(NibCell.self)
         
         expect(self.controller.afterContentUpdateValue) == false
         
@@ -146,7 +146,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testShouldReactBeforeContentUpdate()
     {
-        controller.manager.registerCellClass(NibCell)
+        controller.manager.registerCellClass(NibCell.self)
         
         expect(self.controller.beforeContentUpdateValue) == false
         
@@ -166,7 +166,7 @@ class ReactingToEventsTestCase: XCTestCase {
         })
 
         controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        controller.manager.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
+        controller.manager.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
         
         expect(reactingCell?.indexPath) == indexPath(1, 0)
         expect(reactingCell?.model) == 2
@@ -176,10 +176,10 @@ class ReactingToEventsTestCase: XCTestCase {
         controller.manager.memoryStorage.addItems([1,2,3])
         controller.manager.memoryStorage.addItems([4,5,6], toSection: 1)
         
-        controller.manager.tableView(controller.tableView, moveRowAtIndexPath: indexPath(0, 0), toIndexPath: indexPath(3, 1))
+        controller.manager.tableView(controller.tableView, moveRowAt: indexPath(0, 0), to: indexPath(3, 1))
         
-        expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.itemsOfType(Int)) == [2,3]
-        expect(self.controller.manager.memoryStorage.sectionAtIndex(1)?.itemsOfType(Int)) == [4,5,6,1]
+        expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.itemsOfType(Int.self)) == [2,3]
+        expect(self.controller.manager.memoryStorage.sectionAtIndex(1)?.itemsOfType(Int.self)) == [4,5,6,1]
     }
     
 //    func testTableViewFactoryErrorHandler() {
@@ -195,11 +195,11 @@ class ReactingToEventsTestCase: XCTestCase {
 extension ReactingToEventsTestCase
 {
     func testCellConfigurationMethodPointer() {
-        controller.manager.registerCellClass(SelectionReactingTableCell)
+        controller.manager.registerCellClass(SelectionReactingTableCell.self)
         controller.manager.cellConfiguration(ReactingTestTableViewController.self.cellConfiguration)
         
         controller.manager.memoryStorage.addItem(2, toSection: 0)
-        let reactingCell = controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0)) as? SelectionReactingTableCell
+        let reactingCell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as? SelectionReactingTableCell
         
         expect(reactingCell?.indexPath) == indexPath(0, 0)
         expect(reactingCell?.model) == 2
@@ -207,11 +207,11 @@ extension ReactingToEventsTestCase
     }
     
     func testCellSelectionMethodPointer() {
-        controller.manager.registerCellClass(SelectionReactingTableCell)
+        controller.manager.registerCellClass(SelectionReactingTableCell.self)
         controller.manager.cellSelection(ReactingTestTableViewController.self.cellSelection)
         
         controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        controller.manager.tableView(controller.tableView, didSelectRowAtIndexPath: indexPath(1, 0))
+        controller.manager.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
         
         expect(self.controller.indexPath) == indexPath(1, 0)
         expect(self.controller.model) == 2
@@ -219,7 +219,7 @@ extension ReactingToEventsTestCase
     }
     
     func testHeaderConfigurationMethodPointer() {
-        controller.manager.registerHeaderClass(ReactingHeaderFooterView)
+        controller.manager.registerHeaderClass(ReactingHeaderFooterView.self)
         
         var reactingHeader : ReactingHeaderFooterView?
         
@@ -232,7 +232,7 @@ extension ReactingToEventsTestCase
     }
     
     func testFooterConfigurationMethodPointer() {
-        controller.manager.registerFooterClass(ReactingHeaderFooterView)
+        controller.manager.registerFooterClass(ReactingHeaderFooterView.self)
         
         var reactingFooter : ReactingHeaderFooterView?
         

@@ -16,7 +16,7 @@ class TableViewController: UITableViewController, DTTableViewManageable {
         super.viewDidLoad()
 
         manager.startManagingWithDelegate(self)
-        manager.registerCellClass(StringCell)
+        manager.registerCellClass(StringCell.self)
         manager.memoryStorage.addItems(["1","2","3"])
     }
 }

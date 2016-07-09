@@ -12,7 +12,7 @@ import DTModelStorage
 
 class BankCell : UITableViewCell, ModelTransfer
 {
-    func updateWithModel(model: Bank) {
+    func updateWithModel(_ model: Bank) {
         self.textLabel?.text = model.name
         self.detailTextLabel?.text = model.city
     }

@@ -14,7 +14,7 @@ class ReorderViewController: UIViewController, DTTableViewManageable {
 
     @IBOutlet weak var tableView: UITableView!
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         self.tableView.setEditing(editing, animated: animated)
     }
@@ -22,7 +22,7 @@ class ReorderViewController: UIViewController, DTTableViewManageable {
     override func viewDidLoad() {
         super.viewDidLoad()
         manager.startManagingWithDelegate(self)
-        manager.registerCellClass(StringCell)
+        manager.registerCellClass(StringCell.self)
         
         manager.memoryStorage.addItems(["Section 1 cell", "Section 1 cell"], toSection: 0)
         manager.memoryStorage.addItems(["Section 2 cell"], toSection: 1)
@@ -33,11 +33,11 @@ class ReorderViewController: UIViewController, DTTableViewManageable {
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     func tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
     
-     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .None
+     func tableView(_ tableView: UITableView, editingStyleForRowAtIndexPath indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
     }
 }

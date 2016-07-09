@@ -32,12 +32,12 @@ extension UIView
     /// Load view from xib in specific bundle.
     /// - Parameter xibName: Name of xib file
     /// - Returns: Loaded xib
-    class func dt_loadFromXibNamed(xibName : String) -> UIView?
+    class func dt_loadFromXibNamed(_ xibName : String) -> UIView?
     {
-        let topLevelObjects = NSBundle(forClass: self).loadNibNamed(xibName, owner: nil, options: nil)
+        let topLevelObjects = Bundle(for: self).loadNibNamed(xibName, owner: nil, options: nil)
         
         for object in topLevelObjects {
-            if object.isKindOfClass(self) {
+            if object.isKind(of: self) {
                 return object as? UIView
             }
         }

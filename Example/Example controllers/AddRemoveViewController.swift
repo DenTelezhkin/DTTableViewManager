@@ -19,18 +19,18 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
         manager.registerCellClass(StringCell.self, whenSelected: { [weak self] (_, model, indexPath)  in
             let alert = UIAlertController(title: "Selected cell",
                 message: "with model: \(model) at indexPath: \(indexPath)",
-                preferredStyle: .Alert)
-            let action = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alert.addAction(action)
-            self?.presentViewController(alert, animated: true, completion: nil)
+            self?.present(alert, animated: true, completion: nil)
         })
     }
     
-    @IBAction func addItem(sender: AnyObject) {
+    @IBAction func addItem(_ sender: AnyObject) {
         manager.memoryStorage.addItem("Row # \(manager.memoryStorage.sectionAtIndex(0)?.numberOfItems ?? 0)")
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath)
     {
         manager.memoryStorage.removeItemsAtIndexPaths([indexPath])
     }

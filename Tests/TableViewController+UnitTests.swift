@@ -15,22 +15,22 @@ protocol ModelRetrievable
     var model : Any! { get }
 }
 
-func recursiveForceUnwrap<T>(any: T) -> T
+func recursiveForceUnwrap<T>(_ any: T) -> T
 {
-    let mirror = _reflect(any)
-    if mirror.disposition != .Optional
+    let mirror = Mirror(reflecting: any)
+    if mirror.displayStyle != .optional
     {
         return any
     }
-    let (_,some) = mirror[0]
-    return recursiveForceUnwrap(some.value as! T)
+    let (_,some) = mirror.children.first!
+    return recursiveForceUnwrap(some) as! T
 }
 
 extension DTTestTableViewController
 {
-    func verifyItem<T:Equatable>(item: T, atIndexPath indexPath: NSIndexPath) -> Bool
+    func verifyItem<T:Equatable>(_ item: T, atIndexPath indexPath: IndexPath) -> Bool
     {
-        let itemTable = (self.manager.tableView(self.tableView, cellForRowAtIndexPath: indexPath) as! ModelRetrievable).model as! T
+        let itemTable = (self.manager.tableView(self.tableView, cellForRowAt: indexPath) as! ModelRetrievable).model as! T
         let itemDatasource = recursiveForceUnwrap(self.manager.storage.itemAtIndexPath(indexPath)!) as! T
         
         if !(item == itemDatasource)
@@ -46,11 +46,11 @@ extension DTTestTableViewController
         return true
     }
     
-    func verifySection(section: [Int], withSectionNumber sectionNumber: Int) -> Bool
+    func verifySection(_ section: [Int], withSectionNumber sectionNumber: Int) -> Bool
     {
         for itemNumber in 0..<section.count
         {
-            if !(self.verifyItem(section[itemNumber], atIndexPath: NSIndexPath(forItem: itemNumber, inSection: sectionNumber)))
+            if !(self.verifyItem(section[itemNumber], atIndexPath: IndexPath(item: itemNumber, section: sectionNumber)))
             {
                 return false
             }

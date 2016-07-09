@@ -16,12 +16,12 @@ class DelegateTableViewController: DTTestTableViewController {
     var headerHeightRequested = false
     var footerHeightRequested = false
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         headerHeightRequested = true
         return 44
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         footerHeightRequested = true
         return 44
     }

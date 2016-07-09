@@ -12,19 +12,19 @@ import DTModelStorage
 
 class NibView : UIView, ModelTransfer
 {
-    func updateWithModel(model: Int) {
+    func updateWithModel(_ model: Int) {
     }
 }
 
 class NibHeaderFooterView : UITableViewHeaderFooterView, ModelTransfer
 {
-    func updateWithModel(model: Int) {
+    func updateWithModel(_ model: Int) {
     }
 }
 
 class NiblessHeaderFooterView : UITableViewHeaderFooterView, ModelTransfer
 {
-    func updateWithModel(model: Int) {
+    func updateWithModel(_ model: Int) {
         
     }
 }

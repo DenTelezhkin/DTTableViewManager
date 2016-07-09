@@ -19,11 +19,11 @@ class DataBindingViewController : UIViewController, DTTableViewManageable, UITab
         super.viewDidLoad()
         
         manager.startManagingWithDelegate(self)
-        manager.dataBindingBehaviour = .BeforeCellIsDisplayed
-        manager.registerCellClass(NibCell)
+        manager.dataBindingBehaviour = .beforeCellIsDisplayed
+        manager.registerCellClass(NibCell.self)
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if ((cell as? NibCell)?.model as? Int) == 3 {
             filledInWillDisplayCell = true
         }
@@ -43,10 +43,10 @@ class DataBindingTestCase: XCTestCase {
     func testModelIsFilled() {
         controller.manager.memoryStorage.addItem(3)
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         
         expect((cell as? NibCell)?.model as? Int).to(beNil())
-        controller.manager.tableView(controller.tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath(0,0))
+        controller.manager.tableView(controller.tableView, willDisplay: cell, forRowAt: indexPath(0,0))
         expect(self.controller.filledInWillDisplayCell).to(beTrue())
     }
     

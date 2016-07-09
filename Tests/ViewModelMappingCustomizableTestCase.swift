@@ -15,31 +15,31 @@ class CustomizableViewController: DTTestTableViewController, DTViewModelMappingC
     
     var mappingSelectableBlock : (([ViewModelMapping], Any) -> ViewModelMapping?)?
     
-    func viewModelMappingFromCandidates(candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
+    func viewModelMappingFromCandidates(_ candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
         return mappingSelectableBlock?(candidates, model)
     }
 }
 
 class IntCell : UITableViewCell, ModelTransfer {
-    func updateWithModel(model: Int) {
+    func updateWithModel(_ model: Int) {
         
     }
 }
 
 class AnotherIntCell : UITableViewCell, ModelTransfer {
-    func updateWithModel(model: Int) {
+    func updateWithModel(_ model: Int) {
         
     }
 }
 
 class IntHeader: UITableViewHeaderFooterView, ModelTransfer {
-    func updateWithModel(model: Int) {
+    func updateWithModel(_ model: Int) {
         
     }
 }
 
 class AnotherIntHeader: UITableViewHeaderFooterView, ModelTransfer {
-    func updateWithModel(model: Int) {
+    func updateWithModel(_ model: Int) {
         
     }
 }
@@ -58,38 +58,38 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
     }
     
     func testMappingCustomizableAllowsSelectingAnotherCellMapping() {
-        controller.manager.registerCellClass(IntCell)
-        controller.manager.registerCellClass(AnotherIntCell)
+        controller.manager.registerCellClass(IntCell.self)
+        controller.manager.registerCellClass(AnotherIntCell.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }
         
         controller.manager.memoryStorage.addItem(3)
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         
         expect(cell is AnotherIntCell).to(beTrue())
     }
     
     func testMappingCustomizableAllowsSelectingAnotherHeaderMapping() {
-        controller.manager.registerNiblessHeaderClass(IntHeader)
-        controller.manager.registerNiblessHeaderClass(AnotherIntHeader)
+        controller.manager.registerNiblessHeaderClass(IntHeader.self)
+        controller.manager.registerNiblessHeaderClass(AnotherIntHeader.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }
         
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(AnotherIntHeader))
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(AnotherIntHeader.self))
     }
     
     func testMappingCustomizableAllowsSelectingAnotherFooterMapping() {
-        controller.manager.registerNiblessFooterClass(IntHeader)
-        controller.manager.registerNiblessFooterClass(AnotherIntHeader)
+        controller.manager.registerNiblessFooterClass(IntHeader.self)
+        controller.manager.registerNiblessFooterClass(AnotherIntHeader.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }
         
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(AnotherIntHeader))
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(AnotherIntHeader.self))
     }
 }

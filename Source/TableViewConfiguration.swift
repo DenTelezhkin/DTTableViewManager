@@ -31,18 +31,18 @@ import UIKit
 /// - Note: When any mapping method for header or footer view is called, styles are automatically switched to .View
 public enum SupplementarySectionStyle
 {
-    case Title
-    case View
+    case title
+    case view
 }
 
 /// Defines most commonly used configuration properties for UITableView
 public struct TableViewConfiguration
 {
     /// Section header style. Default - .Title.
-    public var sectionHeaderStyle = SupplementarySectionStyle.Title
+    public var sectionHeaderStyle = SupplementarySectionStyle.title
     
     /// Section footer style. Default - .Title
-    public var sectionFooterStyle = SupplementarySectionStyle.Title
+    public var sectionFooterStyle = SupplementarySectionStyle.title
     
     /// Defines, whether to show header on a section, that does not contain any items. Default is true.
     public var displayHeaderOnEmptySection = true
@@ -51,20 +51,20 @@ public struct TableViewConfiguration
     public var displayFooterOnEmptySection = true
     
     /// Insert section animation. Default - .None.
-    public var insertSectionAnimation = UITableViewRowAnimation.None
+    public var insertSectionAnimation = UITableViewRowAnimation.none
     
     /// Delete section animation. Default - .Automatic
-    public var deleteSectionAnimation = UITableViewRowAnimation.Automatic
+    public var deleteSectionAnimation = UITableViewRowAnimation.automatic
     
     /// Reload section animation. Default - .Automatic.
-    public var reloadSectionAnimation = UITableViewRowAnimation.Automatic
+    public var reloadSectionAnimation = UITableViewRowAnimation.automatic
     
     /// Insert row animation. Default - .Automatic.
-    public var insertRowAnimation = UITableViewRowAnimation.Automatic
+    public var insertRowAnimation = UITableViewRowAnimation.automatic
     
     /// Delete row animation. Default - .Automatic.
-    public var deleteRowAnimation = UITableViewRowAnimation.Automatic
+    public var deleteRowAnimation = UITableViewRowAnimation.automatic
     
     /// Reload row animation. Default - .Automatic.
-    public var reloadRowAnimation = UITableViewRowAnimation.Automatic
+    public var reloadRowAnimation = UITableViewRowAnimation.automatic
 }
