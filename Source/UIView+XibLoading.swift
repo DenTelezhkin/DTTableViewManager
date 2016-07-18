@@ -34,7 +34,9 @@ extension UIView
     /// - Returns: Loaded xib
     class func dt_loadFromXibNamed(_ xibName : String) -> UIView?
     {
-        let topLevelObjects = Bundle(for: self).loadNibNamed(xibName, owner: nil, options: nil)
+        guard let topLevelObjects = Bundle(for: self).loadNibNamed(xibName, owner: nil, options: nil) else {
+            return nil
+        }
         
         for object in topLevelObjects {
             if object.isKind(of: self) {
