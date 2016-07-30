@@ -29,23 +29,6 @@ class ReactingTestTableViewController: DTTestTableViewController
     var indexPath : IndexPath?
     var model: Int?
     var text : String?
-    
-    func cellConfiguration(_ cell: SelectionReactingTableCell, model: Int, indexPath: IndexPath) {
-        cell.indexPath = indexPath
-        cell.model = model
-        cell.textLabel?.text = "Foo"
-    }
-    
-    func headerConfiguration(_ header: ReactingHeaderFooterView, model: String, sectionIndex: Int) {
-        header.model = "Bar"
-        header.sectionIndex = sectionIndex
-    }
-    
-    func cellSelection(_ cell: SelectionReactingTableCell, model: Int, indexPath: IndexPath) {
-        self.indexPath = indexPath
-        self.model = model
-        self.text = "Bar"
-    }
 }
 
 class ReactingToEventsTestCase: XCTestCase {
@@ -65,7 +48,7 @@ class ReactingToEventsTestCase: XCTestCase {
     {
         controller.manager.registerCellClass(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
-        controller.manager.whenSelected(SelectionReactingTableCell.self) { (cell, model, indexPath) in
+        controller.manager.didSelect(SelectionReactingTableCell.self) { (cell, model, indexPath) in
             cell.indexPath = indexPath
             cell.model = model
             reactingCell = cell
@@ -76,6 +59,17 @@ class ReactingToEventsTestCase: XCTestCase {
         
         expect(reactingCell?.indexPath) == indexPath(1, 0)
         expect(reactingCell?.model) == 2
+    }
+    
+    func testCellSelectionPerfomance() {
+        controller.manager.registerCellClass(SelectionReactingTableCell.self)
+        self.controller.manager.memoryStorage.addItems([1,2], toSection: 0)
+        measureMetrics([XCTPerformanceMetric_WallClockTime], automaticallyStartMeasuring: true) {
+            self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
+                self.stopMeasuring()
+            }
+            self.controller.manager.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
+        }
     }
     
     func testCellConfigurationClosure()
@@ -155,23 +149,6 @@ class ReactingToEventsTestCase: XCTestCase {
         expect(self.controller.beforeContentUpdateValue) == true
     }
     
-    func testCellRegisterSelectionClosure()
-    {
-        var reactingCell : SelectionReactingTableCell?
-        
-        controller.manager.registerCellClass(SelectionReactingTableCell.self, whenSelected: { (cell, model, indexPath) in
-            cell.indexPath = indexPath
-            cell.model = model
-            reactingCell = cell
-        })
-
-        controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        controller.manager.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
-        
-        expect(reactingCell?.indexPath) == indexPath(1, 0)
-        expect(reactingCell?.model) == 2
-    }
-    
     func testMovingTableViewItems() {
         controller.manager.memoryStorage.addItems([1,2,3])
         controller.manager.memoryStorage.addItems([4,5,6], toSection: 1)
@@ -181,66 +158,31 @@ class ReactingToEventsTestCase: XCTestCase {
         expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.itemsOfType(Int.self)) == [2,3]
         expect(self.controller.manager.memoryStorage.sectionAtIndex(1)?.itemsOfType(Int.self)) == [4,5,6,1]
     }
-    
-//    func testTableViewFactoryErrorHandler() {
-//        var errorHandlerCalled = false
-//        
-//        controller.manager.tableViewFactoryErrorHandler = { error in
-//            errorHandlerCalled = true
-//        }
-//    }
 }
 
-// Method pointers tests
-extension ReactingToEventsTestCase
-{
-    func testCellConfigurationMethodPointer() {
-        controller.manager.registerCellClass(SelectionReactingTableCell.self)
-        controller.manager.cellConfiguration(ReactingTestTableViewController.self.cellConfiguration)
-        
-        controller.manager.memoryStorage.addItem(2, toSection: 0)
-        let reactingCell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as? SelectionReactingTableCell
-        
-        expect(reactingCell?.indexPath) == indexPath(0, 0)
-        expect(reactingCell?.model) == 2
-        expect(reactingCell?.textLabel?.text) == "Foo"
+class ReactingToEventsFastTestCase : XCTestCase {
+    var controller : ReactingTestTableViewController!
+    
+    override func setUp() {
+        super.setUp()
+        controller = ReactingTestTableViewController()
+        controller.tableView = AlwaysVisibleTableView()
+        let _ = controller.view
+        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.storage = MemoryStorage()
     }
     
-    func testCellSelectionMethodPointer() {
-        controller.manager.registerCellClass(SelectionReactingTableCell.self)
-        controller.manager.cellSelection(ReactingTestTableViewController.self.cellSelection)
-        
-        controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        controller.manager.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
-        
-        expect(self.controller.indexPath) == indexPath(1, 0)
-        expect(self.controller.model) == 2
-        expect(self.controller.text) == "Bar"
-    }
-    
-    func testHeaderConfigurationMethodPointer() {
-        controller.manager.registerHeaderClass(ReactingHeaderFooterView.self)
-        
-        var reactingHeader : ReactingHeaderFooterView?
-        
-        controller.manager.headerConfiguration(ReactingTestTableViewController.self.headerConfiguration)
-        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        reactingHeader = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
-        
-        expect(reactingHeader?.sectionIndex) == 0
-        expect(reactingHeader?.model) == "Bar"
-    }
-    
-    func testFooterConfigurationMethodPointer() {
+    func testFooterConfigurationClosure()
+    {
         controller.manager.registerFooterClass(ReactingHeaderFooterView.self)
         
-        var reactingFooter : ReactingHeaderFooterView?
-        
-        controller.manager.footerConfiguration(ReactingTestTableViewController.self.headerConfiguration)
+        let exp = expectation(description: "Configure footer")
+        controller.manager.configureFooter(ReactingHeaderFooterView.self) { _ in
+            exp.fulfill()
+        }
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        reactingFooter = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
-        
-        expect(reactingFooter?.sectionIndex) == 0
-        expect(reactingFooter?.model) == "Bar"
+        _ = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
+        waitForExpectations(timeout: 1, handler: nil)
     }
 }
+

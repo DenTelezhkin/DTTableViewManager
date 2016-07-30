@@ -59,16 +59,6 @@ extension DTTableViewManageable
     }
 }
 
-/// Data binding behaviour for calling `ModelTransfer` `updateWithModel(_:)` method.
-public enum DataBindingBehaviour
-{
-    /// `updateWithModel(_:)` will be called in `tableView(_:cellForRowAtIndexPath:)` method.
-    case immediately
-    
-    /// `updateWithModel(_:)` will be called in `tableView(_:willDisplayCell:forRowAtIndexPath:)` method.
-    case beforeCellIsDisplayed
-}
-
 /// `DTTableViewManager` manages some of `UITableView` datasource and delegate methods and provides API for managing your data models in the table. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
 /// - SeeAlso: `startManagingWithDelegate:`
 public class DTTableViewManager : NSObject {
@@ -93,25 +83,13 @@ public class DTTableViewManager : NSObject {
         return TableViewFactory(tableView: self.tableView!)
     }()
     
-    /// Bundle to search your xib's in. This can sometimes be useful for unit-testing. Defaults to NSBundle.mainBundle()
-    @available(*,deprecated, message: "This property is deprecated, bundle is determined automatically while registering mapping")
-    public var viewBundle = Bundle.main
-    
-    /// Property representing when data binding is performed. Immediately - in `tableView(_:cellForRowAtIndexPath:)` method. BeforeCellIsDisplayed - in `tableView(_:willDisplayCell:forRowAtIndexPath:)` method.
-    /// - Note: Changing value of this property may improve perfomance for complex table view cells.
-    public var dataBindingBehaviour = DataBindingBehaviour.immediately {
-        didSet {
-            viewFactory.shouldPerformDataBindingForCells = dataBindingBehaviour == .immediately
-        }
-    }
-    
     /// Stores all configuration options for `DTTableViewManager`.
     /// - SeeAlso: `TableViewConfiguration`.
     public var configuration = TableViewConfiguration()
     
     /// Array of reactions for `DTTableViewManager`
     /// - SeeAlso: `TableViewReaction`.
-    private var tableViewReactions = [UIReaction]()
+    private var tableViewEventReactions = [EventReaction]()
     
     /// Error handler ot be executed when critical error happens with `TableViewFactory`.
     /// This can be useful to provide more debug information for crash logs, since preconditionFailure Swift method provides little to zero insight about what happened and when.
@@ -255,7 +233,13 @@ extension DTTableViewManager
         if self.delegate?.responds(to: aSelector) ?? false {
             return true
         }
-        return super.responds(to: aSelector)
+        if super.responds(to: aSelector) {
+            if let eventSelector = EventMethodSignatures(rawValue: String(aSelector)) {
+                return tableViewEventReactions.contains({ $0.methodSignature == eventSelector.rawValue })
+            }
+            return true
+        }
+        return false
     }
 }
 
@@ -268,19 +252,6 @@ extension DTTableViewManager
     public func registerCellClass<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type)
     {
         self.viewFactory.registerCellClass(cellClass)
-    }
-    
-    /// This method combines registerCellClass and whenSelected: methods together.
-    /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
-    /// - Parameter cellClass: Type of UITableViewCell subclass, that is being registered for using by `DTTableViewManager`
-    /// - Parameter selectionClosure: closure to run when UITableViewCell is selected
-    /// - Note: selectionClosure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
-    /// - SeeAlso: `registerCellClass`, `whenSelected` methods
-    public func registerCellClass<T:ModelTransfer where T:UITableViewCell>(_ cellClass: T.Type,
-        whenSelected selectionClosure: (T,T.ModelType, IndexPath) -> Void)
-    {
-        self.viewFactory.registerCellClass(cellClass)
-        self.whenSelected(cellClass, selectionClosure)
     }
 
     /// Register mapping from model class to custom cell class using specific nib file.
@@ -367,158 +338,73 @@ public extension DTTableViewContentUpdatable where Self : DTTableViewManageable 
     func afterContentUpdate() {}
 }
 
+private enum EventMethodSignatures: String {
+    case tableViewDidSelectRowAtIndexPath = "tableView:didSelectRowAtIndexPath:"
+    case tableViewConfigureCell = "tableViewConfigureCell_imaginarySelector"
+    case tableViewConfigureHeader = "tableViewConfigureHeader_imaginarySelector"
+    case tableViewConfigureFooter = "tableViewConfigureFooter_imaginarySelector"
+    
+    var eventSignatures: [EventMethodSignatures] {
+        return [
+            .tableViewDidSelectRowAtIndexPath,
+            .tableViewConfigureCell,
+            .tableViewConfigureHeader,
+            .tableViewConfigureFooter
+        ]
+    }
+}
+
 // MARK: - Table view reactions
 extension DTTableViewManager
 {
     /// Define an action, that will be performed, when cell of specific type is selected.
-    /// - Parameter methodPointer: pointer to `DTTableViewManageable` method with signature: (Cell, Model, NSIndexPath) closure to run when UITableViewCell is selected
-    /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere.
-    /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type. `DTTableViewManageable` instance is used to call selection event.
-    public func cellSelection<T,U where T:ModelTransfer, T: UITableViewCell, U: DTTableViewManageable>( _ methodPointer: (U) -> (T,T.ModelType, IndexPath) -> Void )
-    {
-        let reaction = UIReaction(.cellSelection, viewClass: T.self)
-        reaction.reactionBlock = { [weak self, unowned reaction] in
-            if  let indexPath = reaction.reactionData?.indexPath,
-                let cell = self?.tableView?.cellForRow(at: indexPath) as? T,
-                let model = RuntimeHelper.recursivelyUnwrapAnyValue(self?.storage.itemAtIndexPath(indexPath)) as? T.ModelType,
-                let delegate = self?.delegate as? U
-            {
-                methodPointer(delegate)(cell, model, indexPath)
-            }
-        }
-        self.tableViewReactions.append(reaction)
-    }
-    
-    /// Define an action, that will be performed, when cell of specific type is selected.
     /// - Parameter cellClass: Type of UITableViewCell subclass
     /// - Parameter closure: closure to run when UITableViewCell is selected
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
-    /// - SeeAlso: 'cellSelection:'
+    public func didSelect<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> Void)
+    {
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewDidSelectRowAtIndexPath.rawValue, modelClass: T.ModelType.self)
+        reaction.makeCellReaction(block: closure)
+        tableViewEventReactions.append(reaction)
+    }
+    
+    @available(*, unavailable, renamed:"didSelect(_:_:)")
     public func whenSelected<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> Void)
     {
-        let reaction = UIReaction(.cellSelection, viewClass: T.self)
-        reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let indexPath = reaction.reactionData?.indexPath,
-                let cell = self?.tableView?.cellForRow(at: indexPath) as? T,
-                let model = RuntimeHelper.recursivelyUnwrapAnyValue(self?.storage.itemAtIndexPath(indexPath)) as? T.ModelType
-            {
-                closure(cell, model, indexPath)
-            }
-        }
-        self.tableViewReactions.append(reaction)
+        didSelect(cellClass,closure)
     }
     
     /// Define additional configuration action, that will happen, when UITableViewCell subclass is requested by UITableView. This action will be performed *after* cell is created and updateWithModel: method is called.
     /// - Parameter cellClass: Type of UITableViewCell subclass
     /// - Parameter closure: closure to run when UITableViewCell is being configured
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
-    /// - SeeAlso: 'cellConfiguration:'
     public func configureCell<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
     {
-        let reaction = UIReaction(.cellConfiguration, viewClass: T.self)
-        reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData,
-                let view = configuration.view as? T,
-                let model = RuntimeHelper.recursivelyUnwrapAnyValue(self?.storage.itemAtIndexPath(configuration.indexPath)) as? T.ModelType
-            {
-                closure(view, model, configuration.indexPath)
-            }
-        }
-        self.tableViewReactions.append(reaction)
-    }
-    
-    /// Define additional configuration action, that will happen, when UITableViewCell subclass is requested by UITableView. This action will be performed *after* cell is created and updateWithModel: method is called.
-    /// - Parameter methodPointer: pointer to `DTTableViewManageable` method with signature: (Cell, Model, NSIndexPath) closure to run when UITableViewCell is configured
-    /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
-    public func cellConfiguration<T,U where T:ModelTransfer, T: UITableViewCell, U: DTTableViewManageable>(_ methodPointer: (U) -> (T, T.ModelType, IndexPath) -> Void)
-    {
-        let reaction = UIReaction(.cellConfiguration, viewClass: T.self)
-        reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let viewData = reaction.reactionData,
-                let view = viewData.view as? T,
-                let model = RuntimeHelper.recursivelyUnwrapAnyValue(self?.storage.itemAtIndexPath(viewData.indexPath)) as? T.ModelType,
-                let delegate = self?.delegate as? U
-            {
-                methodPointer(delegate)(view, model, viewData.indexPath)
-            }
-        }
-        self.tableViewReactions.append(reaction)
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureCell.rawValue, modelClass: T.ModelType.self)
+        reaction.makeCellReaction(block: closure)
+        tableViewEventReactions.append(reaction)
     }
     
     /// Define additional configuration action, that will happen, when UIView header subclass is requested by UITableView. This action will be performed *after* header is created and updateWithModel: method is called.
     /// - Parameter headerClass: Type of UIView or UITableHeaderFooterView subclass
     /// - Parameter closure: closure to run when UITableHeaderFooterView is being configured
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
-    /// - SeeAlso: 'headerConfiguration:'
     public func configureHeader<T:ModelTransfer where T: UIView>(_ headerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        let reaction = UIReaction(.supplementaryConfiguration(kind: DTTableViewElementSectionHeader), viewClass: T.self)
-        reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData,
-                let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = RuntimeHelper.recursivelyUnwrapAnyValue(headerStorage.headerModelForSectionIndex((configuration.indexPath as NSIndexPath).section)) as? T.ModelType
-            {
-                closure(configuration.view as! T, model, (configuration.indexPath as NSIndexPath).section)
-            }
-        }
-        self.tableViewReactions.append(reaction)
-    }
-    
-    /// Define additional configuration action, that will happen, when UIView header subclass is requested by UITableView. This action will be performed *after* header is created and updateWithModel: method is called.
-    /// - Parameter methodPointer: pointer to `DTTableViewManageable` method with signature: (Header, Model, SectionIndex) closure to run when UIView or UITableViewHeaderFooterView header is configured
-    /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
-    public func headerConfiguration<T, U where T:ModelTransfer, T: UIView, U: DTTableViewManageable>(_ methodPointer: (U) -> (T, T.ModelType, Int) -> Void)
-    {
-        let reaction = UIReaction(.supplementaryConfiguration(kind: DTTableViewElementSectionHeader), viewClass: T.self)
-        reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData,
-                let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = RuntimeHelper.recursivelyUnwrapAnyValue(headerStorage.headerModelForSectionIndex((configuration.indexPath as NSIndexPath).section)) as? T.ModelType,
-                let view = configuration.view as? T,
-                let delegate = self?.delegate as? U
-            {
-                methodPointer(delegate)(view, model, (configuration.indexPath as NSIndexPath).section)
-            }
-        }
-        self.tableViewReactions.append(reaction)
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureHeader.rawValue, modelClass: T.ModelType.self)
+        reaction.makeSupplementaryReaction(forKind: DTTableViewElementSectionHeader, block: closure)
+        tableViewEventReactions.append(reaction)
     }
     
     /// Define additional configuration action, that will happen, when UIView footer subclass is requested by UITableView. This action will be performed *after* footer is created and updateWithModel: method is called.
     /// - Parameter footerClass: Type of UIView or UITableReusableView subclass
     /// - Parameter closure: closure to run when UITableReusableView is being configured
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
-    /// - SeeAlso: 'footerConfiguration:'
     public func configureFooter<T:ModelTransfer where T: UIView>(_ footerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        let reaction = UIReaction(.supplementaryConfiguration(kind: DTTableViewElementSectionFooter), viewClass: T.self)
-        reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData,
-                let footerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = RuntimeHelper.recursivelyUnwrapAnyValue(footerStorage.footerModelForSectionIndex((configuration.indexPath as NSIndexPath).section)) as? T.ModelType
-            {
-                closure(configuration.view as! T, model, (configuration.indexPath as NSIndexPath).section)
-            }
-        }
-        self.tableViewReactions.append(reaction)
-    }
-    
-    /// Define additional configuration action, that will happen, when UIView footer subclass is requested by UITableView. This action will be performed *after* footer is created and updateWithModel: method is called.
-    /// - Parameter methodPointer: pointer to `DTTableViewManageable` method with signature: (Footer, Model, SectionIndex) closure to run when UIView or UITableViewHeaderFooterView footer is configured
-    /// - Note: This method automatically breaks retain cycles, that can happen when passing method pointer somewhere. `DTTableViewManageable` instance is used to call configuration event.
-    public func footerConfiguration<T, U where T:ModelTransfer, T: UIView, U: DTTableViewManageable>(_ methodPointer: (U) -> (T, T.ModelType, Int) -> Void)
-    {
-        let reaction = UIReaction(.supplementaryConfiguration(kind: DTTableViewElementSectionFooter), viewClass: T.self)
-        reaction.reactionBlock = { [weak self, unowned reaction] in
-            if let configuration = reaction.reactionData,
-                let headerStorage = self?.storage as? HeaderFooterStorageProtocol,
-                let model = RuntimeHelper.recursivelyUnwrapAnyValue(headerStorage.footerModelForSectionIndex((configuration.indexPath as NSIndexPath).section)) as? T.ModelType,
-                let view = configuration.view as? T,
-                let delegate = self?.delegate as? U
-            {
-                methodPointer(delegate)(view, model, (configuration.indexPath as NSIndexPath).section)
-            }
-        }
-        self.tableViewReactions.append(reaction)
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureFooter.rawValue, modelClass: T.ModelType.self)
+        reaction.makeSupplementaryReaction(forKind: DTTableViewElementSectionFooter,block: closure)
+        tableViewEventReactions.append(reaction)
     }
 }
 
@@ -555,10 +441,7 @@ extension DTTableViewManager: UITableViewDataSource
             cell = UITableViewCell()
         }
         
-        if let reaction = tableViewReactions.reactionsOfType(.cellConfiguration, forView: cell).first {
-            reaction.reactionData = ViewData(view: cell, indexPath:indexPath)
-            reaction.perform()
-        }
+        _ = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignatures.tableViewConfigureCell.rawValue, view: cell, model: model, location: indexPath)
         return cell
     }
     
@@ -581,10 +464,9 @@ extension DTTableViewManager: UITableViewDataSource
             if let from = storage.sections[sourceIndexPath.section] as? SectionModel,
                let to = storage.sections[destinationIndexPath.section] as? SectionModel
             {
-                    let item = from.items[sourceIndexPath.row]
-                    
-                    from.items.remove(at: sourceIndexPath.row)
-                    to.items.insert(item, at: destinationIndexPath.row)
+                let item = from.items[sourceIndexPath.row]
+                from.items.remove(at: sourceIndexPath.row)
+                to.items.insert(item, at: destinationIndexPath.row)
             }
         }
     }
@@ -595,13 +477,6 @@ extension DTTableViewManager: UITableViewDelegate
 {
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        if dataBindingBehaviour == .beforeCellIsDisplayed {
-            guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.itemAtIndexPath(indexPath)),
-            let mapping = viewFactory.viewModelMappingForViewType(.cell, model: model) else {
-                return
-            }
-            mapping.updateBlock(cell,model)
-        }
         (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
@@ -619,11 +494,11 @@ extension DTTableViewManager: UITableViewDelegate
                 view = nil
             }
             
-            if let createdView = view,
-                let reaction = tableViewReactions.reactionsOfType(.supplementaryConfiguration(kind: DTTableViewElementSectionHeader), forView: view).first
+            if let createdView = view
             {
-                reaction.reactionData = ViewData(view: createdView, indexPath: IndexPath(index: section))
-                reaction.perform()
+                _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader),
+                                                            signature: EventMethodSignatures.tableViewConfigureHeader.rawValue,
+                                                            view: createdView, model: model, location: section)
             }
             return view
         }
@@ -644,11 +519,11 @@ extension DTTableViewManager: UITableViewDelegate
                 view = nil
             }
             
-            if let createdView = view,
-                let reaction = tableViewReactions.reactionsOfType(.supplementaryConfiguration(kind: DTTableViewElementSectionFooter), forView: view).first
+            if let createdView = view
             {
-                reaction.reactionData = ViewData(view: createdView, indexPath: IndexPath(index: section))
-                reaction.perform()
+                _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter),
+                                                         signature: EventMethodSignatures.tableViewConfigureFooter.rawValue,
+                                                         view: createdView, model: model, location: section)
             }
             return view
         }
@@ -701,11 +576,14 @@ extension DTTableViewManager: UITableViewDelegate
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)!
-        if let reaction = tableViewReactions.reactionsOfType(.cellSelection, forView: cell).first {
-            reaction.reactionData = ViewData(view: cell, indexPath: indexPath)
-            reaction.perform()
-        }
+        defer { (self.delegate as? UITableViewDelegate)?.tableView?(tableView, didSelectRowAt: indexPath)}
+        guard let cell = tableView.cellForRow(at: indexPath),
+                let model = storage.itemAtIndexPath(indexPath)
+        else { return }
+        
+        _ = tableViewEventReactions.performReaction(ofType: .cell,
+                                                    signature: EventMethodSignatures.tableViewDidSelectRowAtIndexPath.rawValue,
+                                                    view: cell, model: model, location: indexPath)
     }
 }
 

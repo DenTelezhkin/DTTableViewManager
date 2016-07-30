@@ -51,8 +51,6 @@ class TableViewFactory
     
     var mappings = [ViewModelMapping]()
     
-    var shouldPerformDataBindingForCells = true
-    
     weak var mappingCustomizableDelegate : DTViewModelMappingCustomizable?
     
     init(tableView: UITableView)
@@ -162,9 +160,7 @@ class TableViewFactory
         {
             let cellClassName = String(mapping.viewClass)
             let cell = tableView.dequeueReusableCell(withIdentifier: cellClassName, for: indexPath)
-            if shouldPerformDataBindingForCells {
-                mapping.updateBlock(cell, unwrappedModel)
-            }
+            mapping.updateBlock(cell, unwrappedModel)
             return cell
         }
         
