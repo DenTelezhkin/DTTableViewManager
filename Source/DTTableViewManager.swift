@@ -81,10 +81,15 @@ public class DTTableViewManager : NSObject {
     
     /// `DTTableViewManageable` delegate.
     private weak var delegate : DTTableViewManageable?
+    
+    /// Bool property, that will be true, after `startManagingWithDelegate` method is called on `DTTableViewManager`.
+    public var isManagingTableView : Bool {
+        return tableView != nil
+    }
 
     ///  Factory for creating cells and views for UITableView
     lazy var viewFactory: TableViewFactory = {
-        precondition(self.tableView != nil, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
+        precondition(self.isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
         return TableViewFactory(tableView: self.tableView!)
     }()
     

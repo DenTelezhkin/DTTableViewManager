@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Master
 
+### Added
+
+* `isManagingTableView` property on `DTTableViewManager`
+
 ### Changed
 
 * Now all view registration methods use `NSBundle(forClass:)` constructor, instead of falling back on `DTTableViewManager` `viewBundle` property. This allows having cells from separate bundles or frameworks to be used with single `DTTableViewManager` instance.
