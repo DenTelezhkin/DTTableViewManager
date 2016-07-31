@@ -88,8 +88,15 @@ public class DTTableViewManager : NSObject {
     public var configuration = TableViewConfiguration()
     
     /// Array of reactions for `DTTableViewManager`
-    /// - SeeAlso: `TableViewReaction`.
-    private var tableViewEventReactions = [EventReaction]()
+    /// - SeeAlso: `EventReaction`.
+    private var tableViewEventReactions = [EventReaction]() {
+        didSet {
+            // Resetting delegate is needed, because UITableView caches results of `respondsToSelector` call, and never calls it again until `setDelegate` method is called.
+            // We force UITableView to flush that cache and query us again, because with new event we might have new delegate or datasource method to respond to.
+            tableView?.delegate = self
+            tableView?.dataSource = self
+        }
+    }
     
     /// Error handler ot be executed when critical error happens with `TableViewFactory`.
     /// This can be useful to provide more debug information for crash logs, since preconditionFailure Swift method provides little to zero insight about what happened and when.
@@ -343,13 +350,15 @@ private enum EventMethodSignatures: String {
     case tableViewConfigureCell = "tableViewConfigureCell_imaginarySelector"
     case tableViewConfigureHeader = "tableViewConfigureHeader_imaginarySelector"
     case tableViewConfigureFooter = "tableViewConfigureFooter_imaginarySelector"
+    case tableViewHeightForRowAtIndexPath = "tableView:heightForRowAtIndexPath:"
     
     var eventSignatures: [EventMethodSignatures] {
         return [
             .tableViewDidSelectRowAtIndexPath,
             .tableViewConfigureCell,
             .tableViewConfigureHeader,
-            .tableViewConfigureFooter
+            .tableViewConfigureFooter,
+            .tableViewHeightForRowAtIndexPath
         ]
     }
 }
@@ -363,7 +372,7 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func didSelect<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> Void)
     {
-        let reaction = EventReaction(signature: EventMethodSignatures.tableViewDidSelectRowAtIndexPath.rawValue, modelClass: T.ModelType.self)
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewDidSelectRowAtIndexPath.rawValue)
         reaction.makeCellReaction(block: closure)
         tableViewEventReactions.append(reaction)
     }
@@ -380,7 +389,7 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func configureCell<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
     {
-        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureCell.rawValue, modelClass: T.ModelType.self)
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureCell.rawValue)
         reaction.makeCellReaction(block: closure)
         tableViewEventReactions.append(reaction)
     }
@@ -391,7 +400,7 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func configureHeader<T:ModelTransfer where T: UIView>(_ headerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureHeader.rawValue, modelClass: T.ModelType.self)
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureHeader.rawValue)
         reaction.makeSupplementaryReaction(forKind: DTTableViewElementSectionHeader, block: closure)
         tableViewEventReactions.append(reaction)
     }
@@ -402,8 +411,21 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func configureFooter<T:ModelTransfer where T: UIView>(_ footerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureFooter.rawValue, modelClass: T.ModelType.self)
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureFooter.rawValue)
         reaction.makeSupplementaryReaction(forKind: DTTableViewElementSectionFooter,block: closure)
+        tableViewEventReactions.append(reaction)
+    }
+    
+    public func height<T>(forItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
+        let reaction = EventReaction(signature: EventMethodSignatures.tableViewHeightForRowAtIndexPath.rawValue)
+        reaction.type = .cell
+        reaction.modelTypeCheckingBlock = { return $0 is T }
+        reaction.reaction = { cell, model, indexPath in
+            guard let model = model as? T,
+                    let indexPath = indexPath as? IndexPath
+            else { return UITableViewAutomaticDimension }
+            return closure(model, indexPath)
+        }
         tableViewEventReactions.append(reaction)
     }
 }
@@ -584,6 +606,14 @@ extension DTTableViewManager: UITableViewDelegate
         _ = tableViewEventReactions.performReaction(ofType: .cell,
                                                     signature: EventMethodSignatures.tableViewDidSelectRowAtIndexPath.rawValue,
                                                     view: cell, model: model, location: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let model = storage.itemAtIndexPath(indexPath),
+            let height = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignatures.tableViewHeightForRowAtIndexPath.rawValue, view: nil, model: model, location: indexPath) as? CGFloat {
+            return height
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForRowAt: indexPath) ?? 44
     }
 }
 

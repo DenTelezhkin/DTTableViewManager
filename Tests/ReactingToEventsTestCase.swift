@@ -184,5 +184,19 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    func testHeightForRowAtIndexPathClosure()
+    {
+        controller.manager.registerCellClass(NibCell.self)
+        
+        let exp = expectation(description: "heightForRowAtIndexPath")
+        controller.manager.height(forItemType: Int.self, closure: { int, indexPath in
+            exp.fulfill()
+            return 0
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }
 

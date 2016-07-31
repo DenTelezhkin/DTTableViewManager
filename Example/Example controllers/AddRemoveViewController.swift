@@ -16,14 +16,18 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
     override func viewDidLoad() {
         super.viewDidLoad()
         manager.startManagingWithDelegate(self)
-        manager.registerCellClass(StringCell.self, whenSelected: { [weak self] (_, model, indexPath)  in
+        manager.registerCellClass(StringCell.self)
+        manager.didSelect(StringCell.self) { [weak self] (_, model, indexPath)  in
             let alert = UIAlertController(title: "Selected cell",
                 message: "with model: \(model) at indexPath: \(indexPath)",
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alert.addAction(action)
             self?.present(alert, animated: true, completion: nil)
-        })
+        }
+        manager.height(forItemType: String.self) { string, indexPath -> CGFloat in
+            return 80
+        }
     }
     
     @IBAction func addItem(_ sender: AnyObject) {
