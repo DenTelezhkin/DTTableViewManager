@@ -198,5 +198,18 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = controller.manager.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    func testWillSelectRowAtIndexPathClosure() {
+        controller.manager.registerCellClass(NibCell.self)
+        
+        let exp = expectation(description: "willSelect")
+        controller.manager.willSelect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
+            exp.fulfill()
+            return nil
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, willSelectRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }
 

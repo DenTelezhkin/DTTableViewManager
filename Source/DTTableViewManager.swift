@@ -101,7 +101,7 @@ public class DTTableViewManager : NSObject {
     /// Error handler ot be executed when critical error happens with `TableViewFactory`.
     /// This can be useful to provide more debug information for crash logs, since preconditionFailure Swift method provides little to zero insight about what happened and when.
     /// This closure will be called prior to calling preconditionFailure in `handleTableViewFactoryError` method.
-    public var viewFactoryErrorHandler : ((DTTableViewFactoryError) -> Void)?
+    @nonobjc public var viewFactoryErrorHandler : ((DTTableViewFactoryError) -> Void)?
     
     /// Implicitly unwrap storage property to `MemoryStorage`.
     /// - Warning: if storage is not MemoryStorage, will throw an exception.
@@ -242,7 +242,7 @@ extension DTTableViewManager
         }
         if super.responds(to: aSelector) {
             if let eventSelector = EventMethodSignatures(rawValue: String(aSelector)) {
-                return tableViewEventReactions.contains({ $0.methodSignature == eventSelector.rawValue })
+                return tableViewEventReactions.contains(where: { $0.methodSignature == eventSelector.rawValue })
             }
             return true
         }
@@ -346,6 +346,7 @@ public extension DTTableViewContentUpdatable where Self : DTTableViewManageable 
 }
 
 private enum EventMethodSignatures: String {
+    case tableViewWillSelectRowAtIndexPath = "tableView:willSelectRowAtIndexPath:"
     case tableViewDidSelectRowAtIndexPath = "tableView:didSelectRowAtIndexPath:"
     case tableViewConfigureCell = "tableViewConfigureCell_imaginarySelector"
     case tableViewConfigureHeader = "tableViewConfigureHeader_imaginarySelector"
@@ -354,6 +355,7 @@ private enum EventMethodSignatures: String {
     
     var eventSignatures: [EventMethodSignatures] {
         return [
+            .tableViewWillSelectRowAtIndexPath,
             .tableViewDidSelectRowAtIndexPath,
             .tableViewConfigureCell,
             .tableViewConfigureHeader,
@@ -366,15 +368,24 @@ private enum EventMethodSignatures: String {
 // MARK: - Table view reactions
 extension DTTableViewManager
 {
-    /// Define an action, that will be performed, when cell of specific type is selected.
+    private func appendReaction<T,U where T: ModelTransfer, T:UITableViewCell>(for cellClass: T.Type, signature: EventMethodSignatures, closure: (T,T.ModelType, IndexPath) -> U)
+    {
+        let reaction = EventReaction(signature: signature.rawValue)
+        reaction.makeCellReaction(block: closure)
+        tableViewEventReactions.append(reaction)
+    }
+    
+    /// Define an action, that will be performed, when cell of specific type is selected(didSelectRowAtIndexPath delegate method).
     /// - Parameter cellClass: Type of UITableViewCell subclass
     /// - Parameter closure: closure to run when UITableViewCell is selected
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func didSelect<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> Void)
     {
-        let reaction = EventReaction(signature: EventMethodSignatures.tableViewDidSelectRowAtIndexPath.rawValue)
-        reaction.makeCellReaction(block: closure)
-        tableViewEventReactions.append(reaction)
+        appendReaction(for: T.self, signature: EventMethodSignatures.tableViewDidSelectRowAtIndexPath, closure: closure)
+    }
+    
+    public func willSelect<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> IndexPath?) {
+        appendReaction(for: T.self, signature: EventMethodSignatures.tableViewWillSelectRowAtIndexPath, closure: closure)
     }
     
     @available(*, unavailable, renamed:"didSelect(_:_:)")
@@ -389,9 +400,7 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func configureCell<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
     {
-        let reaction = EventReaction(signature: EventMethodSignatures.tableViewConfigureCell.rawValue)
-        reaction.makeCellReaction(block: closure)
-        tableViewEventReactions.append(reaction)
+        appendReaction(for: T.self, signature: EventMethodSignatures.tableViewConfigureCell, closure: closure)
     }
     
     /// Define additional configuration action, that will happen, when UIView header subclass is requested by UITableView. This action will be performed *after* header is created and updateWithModel: method is called.
@@ -418,14 +427,7 @@ extension DTTableViewManager
     
     public func height<T>(forItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
         let reaction = EventReaction(signature: EventMethodSignatures.tableViewHeightForRowAtIndexPath.rawValue)
-        reaction.type = .cell
-        reaction.modelTypeCheckingBlock = { return $0 is T }
-        reaction.reaction = { cell, model, indexPath in
-            guard let model = model as? T,
-                    let indexPath = indexPath as? IndexPath
-            else { return UITableViewAutomaticDimension }
-            return closure(model, indexPath)
-        }
+        reaction.makeCellReaction(block: closure)
         tableViewEventReactions.append(reaction)
     }
 }
@@ -433,11 +435,11 @@ extension DTTableViewManager
 // MARK: - UITableViewDatasource
 extension DTTableViewManager: UITableViewDataSource
 {
-    func handleTableViewFactoryError(_ error: DTTableViewFactoryError) {
+    @nonobjc func handleTableViewFactoryError(_ error: DTTableViewFactoryError) {
         if let handler = viewFactoryErrorHandler {
             handler(error)
         } else {
-            print(error.description)
+            print((error as NSError).description)
             fatalError(error.description)
         }
     }
@@ -595,6 +597,16 @@ extension DTTableViewManager: UITableViewDelegate
             return self.tableView?.sectionFooterHeight ?? CGFloat.leastNormalMagnitude
         }
         return CGFloat.leastNormalMagnitude
+    }
+    
+    public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard let cell = tableView.cellForRow(at: indexPath),
+            let model = storage.itemAtIndexPath(indexPath)
+            else { return nil }
+        if let result = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignatures.tableViewWillSelectRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath) as? IndexPath {
+            return result
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, willSelectRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

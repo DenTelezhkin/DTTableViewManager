@@ -27,7 +27,7 @@ import UIKit
 import Foundation
 import DTModelStorage
 
-public enum DTTableViewFactoryError : ErrorProtocol, CustomStringConvertible {
+public enum DTTableViewFactoryError : Error {
     case nilCellModel(IndexPath)
     case noCellMappings(model: Any)
     case nilHeaderFooterModel(section: Int)
