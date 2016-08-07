@@ -25,7 +25,7 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
             alert.addAction(action)
             self?.present(alert, animated: true, completion: nil)
         }
-        manager.height(forItemType: String.self) { string, indexPath -> CGFloat in
+        manager.heightForCell(withItemType: String.self) { string, indexPath -> CGFloat in
             return 80
         }
     }

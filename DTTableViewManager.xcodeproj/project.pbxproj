@@ -56,8 +56,6 @@
 		9A383CF11CE1DBCA0081D843 /* CreationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE61CE1DBCA0081D843 /* CreationTestCase.swift */; };
 		9A383CF41CE1DBCA0081D843 /* DatasourceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */; };
 		9A383CF51CE1DBCA0081D843 /* DatasourceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */; };
-		9A383CF61CE1DBCA0081D843 /* DelegateForwardingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE91CE1DBCA0081D843 /* DelegateForwardingTestCase.swift */; };
-		9A383CF71CE1DBCA0081D843 /* DelegateForwardingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE91CE1DBCA0081D843 /* DelegateForwardingTestCase.swift */; };
 		9A383CF81CE1DBCA0081D843 /* MappingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */; };
 		9A383CF91CE1DBCA0081D843 /* MappingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */; };
 		9A383CFC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CEC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift */; };
@@ -301,7 +299,6 @@
 		9A383CE31CE1DBAA0081D843 /* DTTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTestTableViewController.swift; path = Tests/Fixtures/DTTestTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		9A383CE61CE1DBCA0081D843 /* CreationTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreationTestCase.swift; path = Tests/CreationTestCase.swift; sourceTree = SOURCE_ROOT; };
 		9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatasourceTestCase.swift; path = Tests/DatasourceTestCase.swift; sourceTree = SOURCE_ROOT; };
-		9A383CE91CE1DBCA0081D843 /* DelegateForwardingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DelegateForwardingTestCase.swift; path = Tests/DelegateForwardingTestCase.swift; sourceTree = SOURCE_ROOT; };
 		9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MappingTestCase.swift; path = Tests/MappingTestCase.swift; sourceTree = SOURCE_ROOT; };
 		9A383CEC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingToEventsTestCase.swift; path = Tests/ReactingToEventsTestCase.swift; sourceTree = SOURCE_ROOT; };
 		9A383CED1CE1DBCA0081D843 /* StoryboardMappingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardMappingTestCase.swift; path = Tests/StoryboardMappingTestCase.swift; sourceTree = SOURCE_ROOT; };
@@ -598,7 +595,6 @@
 				9A1A49A01B54555D0006610B /* Fixtures */,
 				9A383CE61CE1DBCA0081D843 /* CreationTestCase.swift */,
 				9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */,
-				9A383CE91CE1DBCA0081D843 /* DelegateForwardingTestCase.swift */,
 				9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */,
 				9A383CEC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift */,
 				9A383CED1CE1DBCA0081D843 /* StoryboardMappingTestCase.swift */,
@@ -945,7 +941,6 @@
 				9A383CE01CE1DB8A0081D843 /* ReactingTableCell.swift in Sources */,
 				9A383D011CE1DBCA0081D843 /* TableViewFactoryTestCase.swift in Sources */,
 				9A383CF91CE1DBCA0081D843 /* MappingTestCase.swift in Sources */,
-				9A383CF71CE1DBCA0081D843 /* DelegateForwardingTestCase.swift in Sources */,
 				9A383CE51CE1DBAA0081D843 /* DTTestTableViewController.swift in Sources */,
 				9A383CDC1CE1DB8A0081D843 /* OptionalCells.swift in Sources */,
 				9A383CFD1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift in Sources */,
@@ -1003,7 +998,6 @@
 				9A383CDF1CE1DB8A0081D843 /* ReactingTableCell.swift in Sources */,
 				9A383D001CE1DBCA0081D843 /* TableViewFactoryTestCase.swift in Sources */,
 				9A383CF81CE1DBCA0081D843 /* MappingTestCase.swift in Sources */,
-				9A383CF61CE1DBCA0081D843 /* DelegateForwardingTestCase.swift in Sources */,
 				9A383CE41CE1DBAA0081D843 /* DTTestTableViewController.swift in Sources */,
 				9A383CDB1CE1DB8A0081D843 /* OptionalCells.swift in Sources */,
 				9A383CFC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift in Sources */,

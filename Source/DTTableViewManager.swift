@@ -355,16 +355,31 @@ private enum EventMethodSignature: String {
     case canMoveRowAtIndexPath = "tableView:canMoveRowAtIndexPath:"
     
     /// UITableViewDelegate
-    case willSelectRowAtIndexPath = "tableView:willSelectRowAtIndexPath:"
-    case didSelectRowAtIndexPath = "tableView:didSelectRowAtIndexPath:"
-    case willDeselectRowAtIndexPath = "tableView:willDeselectRowAtIndexPath:"
-    case didDeselectRowAtIndexPath = "tableView:didDeselectRowAtIndexPath:"
     case heightForRowAtIndexPath = "tableView:heightForRowAtIndexPath:"
     case estimatedHeightForRowAtIndexPath = "tableView:estimatedHeightForRowAtIndexPath:"
     case indentationLevelForRowAtIndexPath = "tableView:indentationLevelForRowAtIndexPath:"
     case willDisplayCellForRowAtIndexPath = "tableView:willDisplayCell:forRowAtIndexPath:"
+    
     case editActionsForRowAtIndexPath = "tableView:editActionsForRowAtIndexPath:"
     case accessoryButtonTappedForRowAtIndexPath = "tableView:accessoryButtonTappedForRowAtIndexPath:"
+    
+    case willSelectRowAtIndexPath = "tableView:willSelectRowAtIndexPath:"
+    case didSelectRowAtIndexPath = "tableView:didSelectRowAtIndexPath:"
+    case willDeselectRowAtIndexPath = "tableView:willDeselectRowAtIndexPath:"
+    case didDeselectRowAtIndexPath = "tableView:didDeselectRowAtIndexPath:"
+    
+    case heightForHeaderInSection = "tableView:heightForHeaderInSection:"
+    case estimatedHeightForHeaderInSection = "tableView:estimatedHeightForHeaderInSection:"
+    case heightForFooterInSection = "tableView:heightForFooterInSection:"
+    case estimatedHeightForFooterInSection = "tableView:estimatedHeightForFooterInSection:"
+    case willDisplayHeaderForSection = "tableView:willDisplayHeaderView:forSection:"
+    case willDisplayFooterForSection = "tableView:willDisplayFooterView:forSection:"
+    
+    case willBeginEditingRowAtIndexPath = "tableView:willBeginEditingRowAtIndexPath:"
+    case didEndEditingRowAtIndexPath = "tableView:didEndEditingRowAtIndexPath:"
+    case editingStyleForRowAtIndexPath = "tableView:editingStyleForRowAtIndexPath:"
+    case titleForDeleteButtonForRowAtIndexPath = "tableView:titleForDeleteConfirmationButtonForRowAtIndexPath:"
+    case shouldIndentWhileEditingRowAtIndexPath = "tableView:shouldIndentWhileEditingRowAtIndexPath:"
     
     var eventSignatures: [EventMethodSignature] {
         return [
@@ -379,16 +394,31 @@ private enum EventMethodSignature: String {
             
             // UITableViewDelegate
             
-            .willSelectRowAtIndexPath,
-            .didSelectRowAtIndexPath,
-            .willDeselectRowAtIndexPath,
-            .didDeselectRowAtIndexPath,
             .heightForRowAtIndexPath,
             .estimatedHeightForRowAtIndexPath,
             .indentationLevelForRowAtIndexPath,
             .willDisplayCellForRowAtIndexPath,
+            
             .editActionsForRowAtIndexPath,
-            .accessoryButtonTappedForRowAtIndexPath
+            .accessoryButtonTappedForRowAtIndexPath,
+            
+            .willSelectRowAtIndexPath,
+            .didSelectRowAtIndexPath,
+            .willDeselectRowAtIndexPath,
+            .didDeselectRowAtIndexPath,
+            
+            .heightForHeaderInSection,
+            .estimatedHeightForHeaderInSection,
+            .heightForFooterInSection,
+            .estimatedHeightForFooterInSection,
+            .willDisplayHeaderForSection,
+            .willDisplayFooterForSection,
+            
+            .willBeginEditingRowAtIndexPath,
+            .didEndEditingRowAtIndexPath,
+            .editingStyleForRowAtIndexPath,
+            .titleForDeleteButtonForRowAtIndexPath,
+            .shouldIndentWhileEditingRowAtIndexPath
         ]
     }
 }
@@ -476,11 +506,11 @@ extension DTTableViewManager
         appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: EventMethodSignature.configureFooter, closure: closure)
     }
     
-    public func height<T>(forItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
+    public func heightForCell<T>(withItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
         appendReaction(for: T.self, signature: EventMethodSignature.heightForRowAtIndexPath, closure: closure)
     }
     
-    public func estimatedHeight<T>(forItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
+    public func estimatedHeightForCell<T>(withItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
         appendReaction(for: T.self, signature: EventMethodSignature.estimatedHeightForRowAtIndexPath, closure: closure)
     }
     
@@ -488,7 +518,7 @@ extension DTTableViewManager
         appendReaction(for: T.self, signature: EventMethodSignature.indentationLevelForRowAtIndexPath, closure: closure)
     }
     
-    public func willDisplay<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
+    public func willDisplayCell<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
     {
         appendReaction(for: T.self, signature: EventMethodSignature.willDisplayCellForRowAtIndexPath, closure: closure)
     }
@@ -522,6 +552,57 @@ extension DTTableViewManager
     
     public func canMove<T:ModelTransfer where T: UITableViewCell>(_ cellClass: T.Type, _ closure: (T, T.ModelType, IndexPath) -> Bool) {
         appendReaction(for: T.self, signature: EventMethodSignature.canMoveRowAtIndexPath, closure: closure)
+    }
+    
+    public func heightForHeader<T>(withItemType type: T.Type, _ closure: (T, Int) -> CGFloat) {
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, modelClass: T.self, signature: EventMethodSignature.heightForHeaderInSection, closure: closure)
+    }
+    
+    public func estimatedHeightForHeader<T>(withItemType type: T.Type, _ closure: (T, Int) -> CGFloat) {
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, modelClass: T.self, signature: EventMethodSignature.estimatedHeightForHeaderInSection, closure: closure)
+    }
+    
+    public func heightForFooter<T>(withItemType type: T.Type, _ closure: (T, Int) -> CGFloat) {
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, modelClass: T.self, signature: EventMethodSignature.heightForFooterInSection, closure: closure)
+    }
+    
+    public func estimatedHeightForFooter<T>(withItemType type: T.Type, _ closure: (T, Int) -> CGFloat) {
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, modelClass: T.self, signature: EventMethodSignature.estimatedHeightForFooterInSection, closure: closure)
+    }
+    
+    public func willDisplayHeaderView<T:ModelTransfer where T: UIView>(_ headerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
+    {
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, supplementaryClass: T.self, signature: EventMethodSignature.willDisplayHeaderForSection, closure: closure)
+    }
+    
+    public func willDisplayFooterView<T:ModelTransfer where T: UIView>(_ footerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
+    {
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: EventMethodSignature.willDisplayFooterForSection, closure: closure)
+    }
+    
+    public func willBeginEditing<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.willBeginEditingRowAtIndexPath, closure: closure)
+    }
+    
+    public func didEndEditing<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.didEndEditingRowAtIndexPath, closure: closure)
+    }
+    
+    public func editingStyle<T:ModelTransfer where T: UITableViewCell>(for cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> UITableViewCellEditingStyle)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.editingStyleForRowAtIndexPath, closure: closure)
+    }
+    
+    public func titleForDeleteConfirmationButton<T:ModelTransfer where T: UITableViewCell>(in cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> String?)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.titleForDeleteButtonForRowAtIndexPath, closure: closure)
+    }
+    
+    public func shouldIndentWhileEditing<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Bool)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.shouldIndentWhileEditingRowAtIndexPath, closure: closure)
     }
 }
 
@@ -624,7 +705,18 @@ extension DTTableViewManager: UITableViewDelegate
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath) }
         guard let model = storage.itemAtIndexPath(indexPath) else { return }
         _ = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
-        
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayHeaderView: view, forSection: section) }
+        guard let model = (storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(section) else { return }
+        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.willDisplayHeaderForSection.rawValue, view: view, model: model, location: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayFooterView: view, forSection: section) }
+        guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(section) else { return }
+        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.willDisplayFooterForSection.rawValue, view: view, model: model, location: section)
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -681,8 +773,7 @@ extension DTTableViewManager: UITableViewDelegate
     /// - Note: In most cases, it's enough to set sectionHeaderHeight property on UITableView and overriding this method is not actually needed
     /// - Note: If you override this method on a delegate, displayHeaderOnEmptySection property is ignored
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let height = (self.delegate as? UITableViewDelegate)?.tableView?(tableView, heightForHeaderInSection: section)
-        {
+        if let height = performHeaderReaction(signature: .heightForHeaderInSection, location: section, provideView: false) as? CGFloat {
             return height
         }
         if configuration.sectionHeaderStyle == .title {
@@ -700,15 +791,20 @@ extension DTTableViewManager: UITableViewDelegate
         return CGFloat.leastNormalMagnitude
     }
     
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        if let height = performHeaderReaction(signature: .estimatedHeightForHeaderInSection, location: section, provideView: false) as? CGFloat {
+            return height
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, estimatedHeightForHeaderInSection: section) ?? tableView.estimatedSectionHeaderHeight
+    }
+    
     /// You can implement this method on a `DTTableViewManageable` delegate, and then it will be called to determine footer height
     /// - Note: In most cases, it's enough to set sectionFooterHeight property on UITableView and overriding this method is not actually needed
     /// - Note: If you override this method on a delegate, displayFooterOnEmptySection property is ignored
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if let height = (self.delegate as? UITableViewDelegate)?.tableView?(tableView, heightForFooterInSection: section)
-        {
+        if let height = performFooterReaction(signature: .heightForFooterInSection, location: section, provideView: false) as? CGFloat {
             return height
         }
-        
         if configuration.sectionFooterStyle == .title {
             if let _ = self.footerModelForSectionIndex(section) {
                 return UITableViewAutomaticDimension
@@ -720,6 +816,13 @@ extension DTTableViewManager: UITableViewDelegate
             return self.tableView?.sectionFooterHeight ?? CGFloat.leastNormalMagnitude
         }
         return CGFloat.leastNormalMagnitude
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        if let height = performFooterReaction(signature: .estimatedHeightForFooterInSection, location: section, provideView: false) as? CGFloat {
+            return height
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, estimatedHeightForFooterInSection: section) ?? tableView.estimatedSectionFooterHeight
     }
     
     public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -777,6 +880,38 @@ extension DTTableViewManager: UITableViewDelegate
             return actions
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, editActionsForRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        _ = performCellReaction(signature: .willBeginEditingRowAtIndexPath, location: indexPath, provideCell: true)
+        (delegate as? UITableViewDelegate)?.tableView?(tableView, willBeginEditingRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndEditingRowAt: indexPath) }
+        guard let indexPath = indexPath else { return }
+        _ = performCellReaction(signature: .didEndEditingRowAtIndexPath, location: indexPath, provideCell: true)
+    }
+    
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if let editingStyle = performCellReaction(signature: .editingStyleForRowAtIndexPath, location: indexPath, provideCell: true) as? UITableViewCellEditingStyle {
+            return editingStyle
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, editingStyleForRowAt: indexPath) ?? .none
+    }
+    
+    public func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        if let title = performCellReaction(signature: .titleForDeleteButtonForRowAtIndexPath, location: indexPath, provideCell: true) as? String {
+            return title
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        if let should = performCellReaction(signature: .shouldIndentWhileEditingRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+            return should
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldIndentWhileEditingRowAt: indexPath) ?? true
     }
     
     private func performCellReaction(signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {

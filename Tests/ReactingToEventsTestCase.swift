@@ -188,7 +188,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "heightForRowAtIndexPath")
-        controller.manager.height(forItemType: Int.self, closure: { int, indexPath in
+        controller.manager.heightForCell(withItemType: Int.self, closure: { int, indexPath in
             exp.fulfill()
             return 0
         })
@@ -200,7 +200,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testEstimatedHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "estimatedHeightForRowAtIndexPath")
-        controller.manager.estimatedHeight(forItemType: Int.self, closure: { int, indexPath in
+        controller.manager.estimatedHeightForCell(withItemType: Int.self, closure: { int, indexPath in
             exp.fulfill()
             return 0
         })
@@ -256,7 +256,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testWillDisplayRowAtIndexPathClosure() {
         let exp = expectation(description: "willDisplay")
-        controller.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
+        controller.manager.willDisplayCell(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
         controller.manager.memoryStorage.addItem(3)
@@ -314,6 +314,119 @@ class ReactingToEventsFastTestCase : XCTestCase {
         })
         controller.manager.memoryStorage.addItem(3)
         _ = controller.manager.tableView(controller.tableView, canMoveRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testHeightForHeaderInSection() {
+        let exp = expectation(description: "heightForHeader")
+        controller.manager.heightForHeader(withItemType: String.self, { (model, section) -> CGFloat in
+            exp.fulfill()
+            return 0
+        })
+        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testEstimatedHeightForHeaderInSection() {
+        let exp = expectation(description: "estimatedHeightForHeader")
+        controller.manager.estimatedHeightForHeader(withItemType: String.self, { (model, section) -> CGFloat in
+            exp.fulfill()
+            return 0
+        })
+        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testHeightForFooterInSection() {
+        let exp = expectation(description: "heightForHeader")
+        controller.manager.heightForFooter(withItemType: String.self, { (model, section) -> CGFloat in
+            exp.fulfill()
+            return 0
+        })
+        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testEstimatedHeightForFooterInSection() {
+        let exp = expectation(description: "estimatedHeightForFooter")
+        controller.manager.estimatedHeightForFooter(withItemType: String.self, { (model, section) -> CGFloat in
+            exp.fulfill()
+            return 0
+        })
+        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testWillDisplayHeaderInSection() {
+        let exp = expectation(description: "willDisplayHeaderInSection")
+        controller.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        _ = controller.manager.tableView(controller.tableView, willDisplayHeaderView: ReactingHeaderFooterView(), forSection: 0)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testWillDisplayFooterInSection() {
+        let exp = expectation(description: "willDisplayFooterInSection")
+        controller.manager.willDisplayFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        _ = controller.manager.tableView(controller.tableView, willDisplayFooterView: ReactingHeaderFooterView(), forSection: 0)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testWillBeginEditingRowAtIndexPathClosure() {
+        let exp = expectation(description: "willBeginEditing")
+        controller.manager.willBeginEditing(NibCell.self, { cell, model, indexPath  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, willBeginEditingRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidEndEditingRowAtIndexPathClosure() {
+        let exp = expectation(description: "didEndEditing")
+        controller.manager.didEndEditing(NibCell.self, { cell, model, indexPath  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, didEndEditingRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testEditingStyleForRowAtIndexPath() {
+        let exp = expectation(description: "editingStyle")
+        controller.manager.editingStyle(for: NibCell.self, { (cell, model, indexPath) -> UITableViewCellEditingStyle in
+            exp.fulfill()
+            return .none
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, editingStyleForRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testTitleForDeleteButtonForRowAtIndexPath() {
+        let exp = expectation(description: "titleForDeleteButton")
+        controller.manager.titleForDeleteConfirmationButton(in: NibCell.self, { (cell, model, indexPath) -> String? in
+            exp.fulfill()
+            return nil
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, titleForDeleteConfirmationButtonForRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testShouldIndentRowWhileEditingAtIndexPath() {
+        let exp = expectation(description: "shouldIndent")
+        controller.manager.shouldIndentWhileEditing(NibCell.self, { (cell, model, indexPath) -> Bool in
+            exp.fulfill()
+            return true
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, shouldIndentWhileEditingRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
 }
