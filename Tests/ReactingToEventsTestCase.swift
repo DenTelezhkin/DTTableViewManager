@@ -170,12 +170,12 @@ class ReactingToEventsFastTestCase : XCTestCase {
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
         controller.manager.storage = MemoryStorage()
+        controller.manager.registerFooterClass(ReactingHeaderFooterView.self)
+        controller.manager.registerCellClass(NibCell.self)
     }
     
     func testFooterConfigurationClosure()
     {
-        controller.manager.registerFooterClass(ReactingHeaderFooterView.self)
-        
         let exp = expectation(description: "Configure footer")
         controller.manager.configureFooter(ReactingHeaderFooterView.self) { _ in
             exp.fulfill()
@@ -187,8 +187,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testHeightForRowAtIndexPathClosure()
     {
-        controller.manager.registerCellClass(NibCell.self)
-        
         let exp = expectation(description: "heightForRowAtIndexPath")
         controller.manager.height(forItemType: Int.self, closure: { int, indexPath in
             exp.fulfill()
@@ -200,8 +198,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testWillSelectRowAtIndexPathClosure() {
-        controller.manager.registerCellClass(NibCell.self)
-        
         let exp = expectation(description: "willSelect")
         controller.manager.willSelect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
             exp.fulfill()
