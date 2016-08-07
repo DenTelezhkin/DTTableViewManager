@@ -911,7 +911,7 @@ extension DTTableViewManager: UITableViewDelegate
         if let should = performCellReaction(signature: .shouldIndentWhileEditingRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
             return should
         }
-        return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldIndentWhileEditingRowAt: indexPath) ?? true
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldIndentWhileEditingRowAt: indexPath) ?? tableView.cellForRow(at: indexPath)?.shouldIndentWhileEditing ?? true
     }
     
     private func performCellReaction(signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {
