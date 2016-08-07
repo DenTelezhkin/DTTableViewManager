@@ -21,7 +21,7 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
         let request = NSFetchRequest<Bank>()
         request.entity = NSEntityDescription.entity(forEntityName: "Bank", in: context)
         request.fetchBatchSize = 20
-        request.sortDescriptors = [SortDescriptor(key: "zip", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "zip", ascending: true)]
         
         let fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "state", cacheName: nil)
         try! fetchResultsController.performFetch()
@@ -56,7 +56,7 @@ extension CoreDataSearchViewController : UISearchResultsUpdating
         if searchString == "" {
             self.fetchResultsController.fetchRequest.predicate = nil
         } else {
-            let predicate = Predicate(format: "name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString)
+            let predicate = NSPredicate(format: "name contains %@ OR city contains %@ OR state contains %@",searchString,searchString,searchString)
             self.fetchResultsController.fetchRequest.predicate = predicate
         }
         try! fetchResultsController.performFetch()

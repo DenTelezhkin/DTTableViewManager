@@ -197,6 +197,30 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testEstimatedHeightForRowAtIndexPathClosure()
+    {
+        let exp = expectation(description: "estimatedHeightForRowAtIndexPath")
+        controller.manager.estimatedHeight(forItemType: Int.self, closure: { int, indexPath in
+            exp.fulfill()
+            return 0
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, estimatedHeightForRowAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testIndentationLevelForRowAtIndexPathClosure()
+    {
+        let exp = expectation(description: "indentationLevelForRowAtIndexPath")
+        controller.manager.indentationLevel(forItemType: Int.self, closure: { int, indexPath in
+            exp.fulfill()
+            return 0
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, indentationLevelForRowAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     func testWillSelectRowAtIndexPathClosure() {
         let exp = expectation(description: "willSelect")
         controller.manager.willSelect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
@@ -205,6 +229,91 @@ class ReactingToEventsFastTestCase : XCTestCase {
         })
         controller.manager.memoryStorage.addItem(3)
         _ = controller.manager.tableView(controller.tableView, willSelectRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testWillDeselectRowAtIndexPathClosure() {
+        let exp = expectation(description: "willDeselect")
+        controller.manager.willDeselect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
+            exp.fulfill()
+            return nil
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, willDeselectRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidDeselectRowAtIndexPathClosure() {
+        let exp = expectation(description: "didDeselect")
+        controller.manager.didDeselect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
+            exp.fulfill()
+            return nil
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, didDeselectRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testWillDisplayRowAtIndexPathClosure() {
+        let exp = expectation(description: "willDisplay")
+        controller.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, willDisplay: NibCell(), forRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testEditActionsForRowAtIndexPathClosure() {
+        let exp = expectation(description: "editActions")
+        controller.manager.editActions(for: NibCell.self, { (cell, model, indexPath) -> [UITableViewRowAction]? in
+            exp.fulfill()
+            return nil
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, editActionsForRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testAccessoryButtonTappedForRowAtIndexPathClosure() {
+        let exp = expectation(description: "accessoryButtonTapped")
+        controller.manager.accessoryButtonTapped(in: NibCell.self, { cell, model, indexPath  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, accessoryButtonTappedForRowWith: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testCommitEditingStyleForRowAtIndexPathClosure() {
+        let exp = expectation(description: "commitEditingStyle")
+        controller.manager.commitEditingStyle(for: NibCell.self, { style, cell, model, indexPath  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, commit: .delete, forRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testCanEditRowAtIndexPathClosure() {
+        let exp = expectation(description: "canEditRow")
+        controller.manager.canEdit(NibCell.self, { (cell, model, indexPath) -> Bool in
+            exp.fulfill()
+            return false
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testCanMoveRowAtIndexPathClosure() {
+        let exp = expectation(description: "canMoveRow")
+        controller.manager.canMove(NibCell.self, { (cell, model, indexPath) -> Bool in
+            exp.fulfill()
+            return false
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, canMoveRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
 }

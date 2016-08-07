@@ -38,4 +38,5 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
     {
         manager.memoryStorage.removeItemsAtIndexPaths([indexPath])
     }
+    
 }

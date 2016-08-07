@@ -346,21 +346,49 @@ public extension DTTableViewContentUpdatable where Self : DTTableViewManageable 
 }
 
 private enum EventMethodSignature: String {
-    case tableViewWillSelectRowAtIndexPath = "tableView:willSelectRowAtIndexPath:"
-    case tableViewDidSelectRowAtIndexPath = "tableView:didSelectRowAtIndexPath:"
-    case tableViewConfigureCell = "tableViewConfigureCell_imaginarySelector"
-    case tableViewConfigureHeader = "tableViewConfigureHeader_imaginarySelector"
-    case tableViewConfigureFooter = "tableViewConfigureFooter_imaginarySelector"
-    case tableViewHeightForRowAtIndexPath = "tableView:heightForRowAtIndexPath:"
+    /// UITableViewDataSource
+    case configureCell = "tableViewConfigureCell_imaginarySelector"
+    case configureHeader = "tableViewConfigureHeader_imaginarySelector"
+    case configureFooter = "tableViewConfigureFooter_imaginarySelector"
+    case commitEditingStyleForRowAtIndexPath = "tableView:commitEditingStyle:forRowAtIndexPath:"
+    case canEditRowAtIndexPath = "tableView:canEditRowAtIndexPath:"
+    case canMoveRowAtIndexPath = "tableView:canMoveRowAtIndexPath:"
+    
+    /// UITableViewDelegate
+    case willSelectRowAtIndexPath = "tableView:willSelectRowAtIndexPath:"
+    case didSelectRowAtIndexPath = "tableView:didSelectRowAtIndexPath:"
+    case willDeselectRowAtIndexPath = "tableView:willDeselectRowAtIndexPath:"
+    case didDeselectRowAtIndexPath = "tableView:didDeselectRowAtIndexPath:"
+    case heightForRowAtIndexPath = "tableView:heightForRowAtIndexPath:"
+    case estimatedHeightForRowAtIndexPath = "tableView:estimatedHeightForRowAtIndexPath:"
+    case indentationLevelForRowAtIndexPath = "tableView:indentationLevelForRowAtIndexPath:"
+    case willDisplayCellForRowAtIndexPath = "tableView:willDisplayCell:forRowAtIndexPath:"
+    case editActionsForRowAtIndexPath = "tableView:editActionsForRowAtIndexPath:"
+    case accessoryButtonTappedForRowAtIndexPath = "tableView:accessoryButtonTappedForRowAtIndexPath:"
     
     var eventSignatures: [EventMethodSignature] {
         return [
-            .tableViewWillSelectRowAtIndexPath,
-            .tableViewDidSelectRowAtIndexPath,
-            .tableViewConfigureCell,
-            .tableViewConfigureHeader,
-            .tableViewConfigureFooter,
-            .tableViewHeightForRowAtIndexPath
+             // UITableViewDataSource
+            
+            .configureCell,
+            .configureHeader,
+            .configureFooter,
+            .commitEditingStyleForRowAtIndexPath,
+            .canEditRowAtIndexPath,
+            .canMoveRowAtIndexPath,
+            
+            // UITableViewDelegate
+            
+            .willSelectRowAtIndexPath,
+            .didSelectRowAtIndexPath,
+            .willDeselectRowAtIndexPath,
+            .didDeselectRowAtIndexPath,
+            .heightForRowAtIndexPath,
+            .estimatedHeightForRowAtIndexPath,
+            .indentationLevelForRowAtIndexPath,
+            .willDisplayCellForRowAtIndexPath,
+            .editActionsForRowAtIndexPath,
+            .accessoryButtonTappedForRowAtIndexPath
         ]
     }
 }
@@ -400,11 +428,19 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func didSelect<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> Void)
     {
-        appendReaction(for: T.self, signature: .tableViewDidSelectRowAtIndexPath, closure: closure)
+        appendReaction(for: T.self, signature: .didSelectRowAtIndexPath, closure: closure)
     }
     
     public func willSelect<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> IndexPath?) {
-        appendReaction(for: T.self, signature: .tableViewWillSelectRowAtIndexPath, closure: closure)
+        appendReaction(for: T.self, signature: .willSelectRowAtIndexPath, closure: closure)
+    }
+    
+    public func willDeselect<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> IndexPath?) {
+        appendReaction(for: T.self, signature: .willDeselectRowAtIndexPath, closure: closure)
+    }
+    
+    public func didDeselect<T:ModelTransfer where T:UITableViewCell>(_ cellClass:  T.Type, _ closure: (T,T.ModelType, IndexPath) -> IndexPath?) {
+        appendReaction(for: T.self, signature: .didDeselectRowAtIndexPath, closure: closure)
     }
     
     @available(*, unavailable, renamed:"didSelect(_:_:)")
@@ -419,7 +455,7 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func configureCell<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
     {
-        appendReaction(for: T.self, signature: .tableViewConfigureCell, closure: closure)
+        appendReaction(for: T.self, signature: .configureCell, closure: closure)
     }
     
     /// Define additional configuration action, that will happen, when UIView header subclass is requested by UITableView. This action will be performed *after* header is created and updateWithModel: method is called.
@@ -428,7 +464,7 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func configureHeader<T:ModelTransfer where T: UIView>(_ headerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, supplementaryClass: T.self, signature: EventMethodSignature.tableViewConfigureHeader, closure: closure)
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, supplementaryClass: T.self, signature: EventMethodSignature.configureHeader, closure: closure)
     }
     
     /// Define additional configuration action, that will happen, when UIView footer subclass is requested by UITableView. This action will be performed *after* footer is created and updateWithModel: method is called.
@@ -437,11 +473,55 @@ extension DTTableViewManager
     /// - Warning: Closure will be stored on `DTTableViewManager` instance, which can create a retain cycle, so make sure to declare weak self and any other `DTTableViewManager` property in capture lists.
     public func configureFooter<T:ModelTransfer where T: UIView>(_ footerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
     {
-        appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: EventMethodSignature.tableViewConfigureFooter, closure: closure)
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: EventMethodSignature.configureFooter, closure: closure)
     }
     
     public func height<T>(forItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
-        appendReaction(for: T.self, signature: EventMethodSignature.tableViewHeightForRowAtIndexPath, closure: closure)
+        appendReaction(for: T.self, signature: EventMethodSignature.heightForRowAtIndexPath, closure: closure)
+    }
+    
+    public func estimatedHeight<T>(forItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
+        appendReaction(for: T.self, signature: EventMethodSignature.estimatedHeightForRowAtIndexPath, closure: closure)
+    }
+    
+    public func indentationLevel<T>(forItemType: T.Type, closure: (T, IndexPath) -> CGFloat) {
+        appendReaction(for: T.self, signature: EventMethodSignature.indentationLevelForRowAtIndexPath, closure: closure)
+    }
+    
+    public func willDisplay<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.willDisplayCellForRowAtIndexPath, closure: closure)
+    }
+    
+    public func editActions<T:ModelTransfer where T: UITableViewCell>(for cellClass: T.Type, _ closure: (T, T.ModelType, IndexPath) -> [UITableViewRowAction]?) {
+        appendReaction(for: T.self, signature: EventMethodSignature.editActionsForRowAtIndexPath, closure: closure)
+    }
+    
+    public func accessoryButtonTapped<T:ModelTransfer where T: UITableViewCell>(in cellClass: T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void) {
+        appendReaction(for: T.self, signature: EventMethodSignature.accessoryButtonTappedForRowAtIndexPath, closure: closure)
+    }
+    
+    public func commitEditingStyle<T:ModelTransfer where T: UITableViewCell>(for cellClass: T.Type, _ closure: (UITableViewCellEditingStyle, T, T.ModelType, IndexPath) -> Void) {
+        let reaction = FourArgumentsEventReaction(signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue)
+        reaction.modelTypeCheckingBlock = { $0 is T.ModelType }
+        reaction.reaction4Arguments = { style, cell, model, indexPath in
+            guard let style = style as? UITableViewCellEditingStyle,
+                let cell = cell as? T,
+                let model = model as? T.ModelType,
+                let indexPath = indexPath as? IndexPath
+            else { return 0 }
+            closure(style, cell, model, indexPath)
+            return 0
+        }
+        tableViewEventReactions.append(reaction)
+    }
+    
+    public func canEdit<T:ModelTransfer where T: UITableViewCell>(_ cellClass: T.Type, _ closure: (T, T.ModelType, IndexPath) -> Bool) {
+        appendReaction(for: T.self, signature: EventMethodSignature.canEditRowAtIndexPath, closure: closure)
+    }
+    
+    public func canMove<T:ModelTransfer where T: UITableViewCell>(_ cellClass: T.Type, _ closure: (T, T.ModelType, IndexPath) -> Bool) {
+        appendReaction(for: T.self, signature: EventMethodSignature.canMoveRowAtIndexPath, closure: closure)
     }
 }
 
@@ -478,7 +558,7 @@ extension DTTableViewManager: UITableViewDataSource
             cell = UITableViewCell()
         }
         
-        _ = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignature.tableViewConfigureCell.rawValue, view: cell, model: model, location: indexPath)
+        _ = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignature.configureCell.rawValue, view: cell, model: model, location: indexPath)
         return cell
     }
     
@@ -496,6 +576,9 @@ extension DTTableViewManager: UITableViewDataSource
     
     /// `DTTableViewManager` automatically moves data models from source indexPath to destination indexPath, there's no need to implement this method on UITableViewDataSource
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        if (delegate as? UITableViewDataSource)?.tableView?(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath) != nil {
+            return
+        }
         if let storage = self.storage as? MemoryStorage
         {
             if let from = storage.sections[sourceIndexPath.section] as? SectionModel,
@@ -507,6 +590,30 @@ extension DTTableViewManager: UITableViewDataSource
             }
         }
     }
+    
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
+        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.itemAtIndexPath(indexPath)),
+            let cell = tableView.cellForRow(at: indexPath)
+            else { return }
+        if let reaction = tableViewEventReactions.reactionOfType(.cell, signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue, forModel: model) as? FourArgumentsEventReaction {
+            _ = reaction.performWithArguments(arguments: (editingStyle,cell,model,indexPath))
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if let canEdit = performCellReaction(signature: .canEditRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+            return canEdit
+        }
+        return (delegate as? UITableViewDataSource)?.tableView?(tableView, canEditRowAt: indexPath) ?? false
+    }
+    
+    public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if let canMove = performCellReaction(signature: .canMoveRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+            return canMove
+        }
+        return (delegate as? UITableViewDataSource)?.tableView?(tableView, canMoveRowAt: indexPath) ?? false
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -514,7 +621,10 @@ extension DTTableViewManager: UITableViewDelegate
 {
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath) }
+        guard let model = storage.itemAtIndexPath(indexPath) else { return }
+        _ = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
+        
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -534,7 +644,7 @@ extension DTTableViewManager: UITableViewDelegate
             if let createdView = view
             {
                 _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader),
-                                                            signature: EventMethodSignature.tableViewConfigureHeader.rawValue,
+                                                            signature: EventMethodSignature.configureHeader.rawValue,
                                                             view: createdView, model: model, location: section)
             }
             return view
@@ -559,7 +669,7 @@ extension DTTableViewManager: UITableViewDelegate
             if let createdView = view
             {
                 _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter),
-                                                         signature: EventMethodSignature.tableViewConfigureFooter.rawValue,
+                                                         signature: EventMethodSignature.configureFooter.rawValue,
                                                          view: createdView, model: model, location: section)
             }
             return view
@@ -613,22 +723,60 @@ extension DTTableViewManager: UITableViewDelegate
     }
     
     public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if let result = performCellReaction(signature: .tableViewWillSelectRowAtIndexPath, location: indexPath, provideCell: true) as? IndexPath {
+        if let result = performCellReaction(signature: .willSelectRowAtIndexPath, location: indexPath, provideCell: true) as? IndexPath {
             return result
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, willSelectRowAt: indexPath)
     }
     
+    public func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let result = performCellReaction(signature: .willDeselectRowAtIndexPath, location: indexPath, provideCell: true) as? IndexPath {
+            return result
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, willDeselectRowAt: indexPath)
+    }
+    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer { (self.delegate as? UITableViewDelegate)?.tableView?(tableView, didSelectRowAt: indexPath)}
-        _ = performCellReaction(signature: .tableViewDidSelectRowAtIndexPath, location: indexPath, provideCell: true)
+        _ = performCellReaction(signature: .didSelectRowAtIndexPath, location: indexPath, provideCell: true)
+        (self.delegate as? UITableViewDelegate)?.tableView?(tableView, didSelectRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        _ = performCellReaction(signature: .didDeselectRowAtIndexPath, location: indexPath, provideCell: true)
+        (self.delegate as? UITableViewDelegate)?.tableView?(tableView, didDeselectRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let height = performCellReaction(signature: .tableViewHeightForRowAtIndexPath, location: indexPath, provideCell: false) as? CGFloat {
+        if let height = performCellReaction(signature: .heightForRowAtIndexPath, location: indexPath, provideCell: false) as? CGFloat {
             return height
         }
-        return (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForRowAt: indexPath) ?? 44
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForRowAt: indexPath) ?? tableView.rowHeight
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let height = performCellReaction(signature: .estimatedHeightForRowAtIndexPath, location: indexPath, provideCell: false) as? CGFloat {
+            return height
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, estimatedHeightForRowAt: indexPath) ?? tableView.estimatedRowHeight
+    }
+    
+    public func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        if let level = performCellReaction(signature: .indentationLevelForRowAtIndexPath, location: indexPath, provideCell: false) as? Int {
+            return level
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, indentationLevelForRowAt: indexPath) ?? 0
+    }
+    
+    public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        _ = performCellReaction(signature: .accessoryButtonTappedForRowAtIndexPath, location: indexPath, provideCell: true)
+        (delegate as? UITableViewDelegate)?.tableView?(tableView, accessoryButtonTappedForRowWith: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if let actions = performCellReaction(signature: .editActionsForRowAtIndexPath, location: indexPath, provideCell: true) as? [UITableViewRowAction] {
+            return actions
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, editActionsForRowAt: indexPath)
     }
     
     private func performCellReaction(signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {

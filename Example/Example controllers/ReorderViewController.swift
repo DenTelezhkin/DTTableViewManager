@@ -30,7 +30,7 @@ class ReorderViewController: UIViewController, DTTableViewManageable {
         
         manager.memoryStorage.setSectionHeaderModels(["Section 1", "Section 2", "Section 3"])
         
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
      func tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {

@@ -13,7 +13,7 @@ class CoreDataManager
 {
     static let sharedInstance = CoreDataManager()
     private init(){
-        let storeURL = try! self.applicationDocumentsDirectory.appendingPathComponent("Banks.sqlite")
+        let storeURL = self.applicationDocumentsDirectory.appendingPathComponent("Banks.sqlite")
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         try! persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
         managedObjectContext = NSManagedObjectContext()
@@ -29,10 +29,10 @@ class CoreDataManager
         }
     }
     
-    private let applicationDocumentsDirectory = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).last!
+    private let applicationDocumentsDirectory = FileManager.default.urls(for :.documentDirectory, in: .userDomainMask).last!
     
     private let managedObjectModel : NSManagedObjectModel = {
-            let url = Bundle.main.urlForResource("Banks", withExtension: "momd")
+        let url = Bundle.main.url(forResource: "Banks", withExtension: "momd")
             return NSManagedObjectModel(contentsOf: url!)!
     }()
     
@@ -44,7 +44,7 @@ class CoreDataManager
     {
         if banksPreloaded { return }
         
-        if let filePath = Bundle.main.pathForResource("Banks", ofType: "json"),
+        if let filePath = Bundle.main.path(forResource: "Banks", ofType: "json"),
             let url = URL(string: filePath),
             let banksData = try? Data(contentsOf: url),
             let banks = try! JSONSerialization.jsonObject(with: banksData, options: []) as? [[String:AnyObject]]
