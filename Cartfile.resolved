@@ -1,2 +1,3 @@
-github "norio-nomura/Nimble" "97bc35989e142179851d84eb89d6fcae214ee32b"
-github "DenHeadless/DTModelStorage" "a12c113c899987f5431fdaaafd3bd74b04a793dc"
+github "norio-nomura/Nimble" "0dd42e0dac9f37962088e74ee78f0e3c412b227f"
+github "realm/realm-cocoa" "835a8840faece9ae575add1e836b9ada5d8c7064"
+github "DenHeadless/DTModelStorage" "ab5aabbd9c934598cad20ecd593c853e4a17483a"
