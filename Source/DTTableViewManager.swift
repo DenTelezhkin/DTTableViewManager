@@ -416,13 +416,19 @@ extension DTTableViewManager
     
     private func appendReaction<T,U where T: ModelTransfer, T: UIView>(forSupplementaryKind kind: String, supplementaryClass: T.Type, signature: EventMethodSignature, closure: (T, T.ModelType, Int) -> U) {
         let reaction = EventReaction(signature: signature.rawValue)
-        reaction.makeSupplementaryReaction(forKind: kind, block: closure)
+        let indexPathBlock : (T, T.ModelType, IndexPath) -> U = { cell, model, indexPath in
+            return closure(cell, model, indexPath.section)
+        }
+        reaction.makeSupplementaryReaction(forKind: kind, block: indexPathBlock)
         tableViewEventReactions.append(reaction)
     }
     
     private func appendReaction<T,U>(forSupplementaryKind kind: String, modelClass: T.Type, signature: EventMethodSignature, closure: (T, Int) -> U) {
         let reaction = EventReaction(signature: signature.rawValue)
-        reaction.makeSupplementaryReaction(for: kind, block: closure)
+        let indexPathBlock : (T, IndexPath) -> U = { model, indexPath in
+            return closure(model, indexPath.section)
+        }
+        reaction.makeSupplementaryReaction(for: kind, block: indexPathBlock)
         tableViewEventReactions.append(reaction)
     }
     
@@ -754,13 +760,13 @@ extension DTTableViewManager: UITableViewDelegate
     public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayHeaderView: view, forSection: section) }
         guard let model = (storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(section) else { return }
-        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.willDisplayHeaderForSection.rawValue, view: view, model: model, location: section)
+        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.willDisplayHeaderForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
     public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayFooterView: view, forSection: section) }
         guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(section) else { return }
-        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.willDisplayFooterForSection.rawValue, view: view, model: model, location: section)
+        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.willDisplayFooterForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -781,7 +787,7 @@ extension DTTableViewManager: UITableViewDelegate
             {
                 _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader),
                                                             signature: EventMethodSignature.configureHeader.rawValue,
-                                                            view: createdView, model: model, location: section)
+                                                            view: createdView, model: model, location: IndexPath(item: 0, section: section))
             }
             return view
         }
@@ -806,7 +812,7 @@ extension DTTableViewManager: UITableViewDelegate
             {
                 _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter),
                                                          signature: EventMethodSignature.configureFooter.rawValue,
-                                                         view: createdView, model: model, location: section)
+                                                         view: createdView, model: model, location: IndexPath(item: 0, section: section))
             }
             return view
         }
@@ -967,13 +973,13 @@ extension DTTableViewManager: UITableViewDelegate
     public func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section) }
         guard let model = (storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(section) else { return }
-        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue, view: view, model: model, location: section)
+        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingFooterView: view, forSection: section) }
         guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(section) else { return }
-        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue, view: view, model: model, location: section)
+        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
     public func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
@@ -1041,7 +1047,7 @@ extension DTTableViewManager: UITableViewDelegate
             view = tableView?.headerView(forSection: location)
         }
         guard let model = (storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(location) else { return nil}
-        return tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: signature.rawValue, view: view, model: model, location: location)
+        return tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
     }
     
     private func performFooterReaction(signature: EventMethodSignature, location: Int, provideView: Bool) -> Any? {
@@ -1050,7 +1056,7 @@ extension DTTableViewManager: UITableViewDelegate
             view = tableView?.footerView(forSection: location)
         }
         guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(location) else { return nil}
-        return tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: location)
+        return tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
     }
 }
 
