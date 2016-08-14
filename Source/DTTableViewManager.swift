@@ -89,7 +89,7 @@ public class DTTableViewManager : NSObject {
     
     /// Array of reactions for `DTTableViewManager`
     /// - SeeAlso: `EventReaction`.
-    private var tableViewEventReactions = [EventReaction]() {
+    private var tableViewEventReactions = ContiguousArray<EventReaction>() {
         didSet {
             // Resetting delegate is needed, because UITableView caches results of `respondsToSelector` call, and never calls it again until `setDelegate` method is called.
             // We force UITableView to flush that cache and query us again, because with new event we might have new delegate or datasource method to respond to.
