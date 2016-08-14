@@ -27,25 +27,25 @@ import Foundation
 import DTModelStorage
 
 /// Convenience getters and setters for table view header and footer models
-public extension SectionModel
+public extension SupplementaryAccessible
 {
     /// UITableView header model for current section
     var tableHeaderModel : Any? {
         get {
-            return self.supplementaryModelOfKind(DTTableViewElementSectionHeader)
+            return self.supplementaryModelOfKind(DTTableViewElementSectionHeader, atIndex: 0)
         }
         set {
-            self.setSupplementaryModel(newValue, forKind: DTTableViewElementSectionHeader)
+            self.setSupplementaryModel(newValue, forKind: DTTableViewElementSectionHeader, atIndex: 0)
         }
     }
     
     /// UITableView footer model for current section
     var tableFooterModel : Any? {
         get {
-            return self.supplementaryModelOfKind(DTTableViewElementSectionFooter)
+            return self.supplementaryModelOfKind(DTTableViewElementSectionFooter, atIndex: 0)
         }
         set {
-            self.setSupplementaryModel(newValue, forKind: DTTableViewElementSectionFooter)
+            self.setSupplementaryModel(newValue, forKind: DTTableViewElementSectionFooter, atIndex: 0)
         }
     }
 }
