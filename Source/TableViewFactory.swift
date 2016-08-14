@@ -181,8 +181,8 @@ class TableViewFactory
                 view = type.dt_loadFromXib()
             }
             
-            if view != nil {
-                mapping.updateBlock(view!,unwrappedModel)
+            if let view = view {
+                mapping.updateBlock(view,unwrappedModel)
             }
             return view
         }

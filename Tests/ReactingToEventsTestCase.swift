@@ -256,7 +256,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testWillDisplayRowAtIndexPathClosure() {
         let exp = expectation(description: "willDisplay")
-        controller.manager.willDisplayCell(NibCell.self, { cell, model, indexPath  in
+        controller.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
         controller.manager.memoryStorage.addItem(3)
@@ -428,6 +428,161 @@ class ReactingToEventsFastTestCase : XCTestCase {
         controller.manager.memoryStorage.addItem(3)
         _ = controller.manager.tableView(controller.tableView, shouldIndentWhileEditingRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidEndDisplayingRowAtIndexPathClosure() {
+        let exp = expectation(description: "didEndDispaying")
+        controller.manager.didEndDisplaying(NibCell.self, { cell, model, indexPath  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, didEndDisplaying:NibCell(), forRowAt : indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidEndDisplayingHeaderInSection() {
+        let exp = expectation(description: "didEndDisplayingHeaderInSection")
+        controller.manager.didEndDisplayingHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        _ = controller.manager.tableView(controller.tableView, didEndDisplayingHeaderView: ReactingHeaderFooterView(), forSection: 0)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidEndDisplayingFooterInSection() {
+        let exp = expectation(description: "didEndDisplayingFooterInSection")
+        controller.manager.didEndDisplayingFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
+            exp.fulfill()
+        })
+        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        _ = controller.manager.tableView(controller.tableView, didEndDisplayingFooterView: ReactingHeaderFooterView(), forSection: 0)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testShouldMenuForRowAtIndexPath() {
+        let exp = expectation(description: "shouldShowMenu")
+        controller.manager.shouldShowMenu(for: NibCell.self, { (cell, model, indexPath) -> Bool in
+            exp.fulfill()
+            return true
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, shouldShowMenuForRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testCanPerformActionForRowAtIndexPath() {
+        let exp = expectation(description: "canPerformActionForRowAtIndexPath")
+        controller.manager.canPerformAction(for: NibCell.self, { (selector, sender, cell, model, indexPath) -> Bool in
+            exp.fulfill()
+            return true
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, canPerformAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testPerformActionForRowAtIndexPath() {
+        let exp = expectation(description: "performActionForRowAtIndexPath")
+        controller.manager.performAction(for: NibCell.self, { (selector, sender, cell, model, indexPath) in
+            exp.fulfill()
+            return
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, performAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testShouldHighlightRowAtIndexPath() {
+        let exp = expectation(description: "shouldHighlight")
+        controller.manager.shouldHighlight(NibCell.self, { (cell, model, indexPath) -> Bool in
+            exp.fulfill()
+            return true
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, shouldHighlightRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidHighlightRowAtIndexPath() {
+        let exp = expectation(description: "didHighlight")
+        controller.manager.didHighlight(NibCell.self, { (cell, model, indexPath) in
+            exp.fulfill()
+            return
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, didHighlightRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidUnhighlightRowAtIndexPath() {
+        let exp = expectation(description: "didUnhighlight")
+        controller.manager.didUnhighlight(NibCell.self, { (cell, model, indexPath) in
+            exp.fulfill()
+            return
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, didUnhighlightRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    @available(iOS 9.0, tvOS 9.0, *)
+    func testCanFocusRowAtIndexPath() {
+        let exp = expectation(description: "canFocus")
+        controller.manager.canFocus(NibCell.self, { (cell, model, indexPath) -> Bool in
+            exp.fulfill()
+            return true
+        })
+        controller.manager.memoryStorage.addItem(3)
+        _ = controller.manager.tableView(controller.tableView, canFocusRowAt: indexPath(0,0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testAllDelegateMethodSignatures() {
+        expect(String(#selector(UITableViewDataSource.tableView(_:commit:forRowAt:)))) == EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDataSource.tableView(_:canEditRowAt:)))) == EventMethodSignature.canEditRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDataSource.tableView(_:canMoveRowAt:)))) == EventMethodSignature.canMoveRowAtIndexPath.rawValue
+        
+        expect(String(#selector(UITableViewDelegate.tableView(_:heightForRowAt:)))) == EventMethodSignature.heightForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:)))) == EventMethodSignature.estimatedHeightForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:indentationLevelForRowAt:)))) == EventMethodSignature.indentationLevelForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:)))) == EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue
+        
+        expect(String(#selector(UITableViewDelegate.tableView(_:editActionsForRowAt:)))) == EventMethodSignature.editActionsForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWith:)))) == EventMethodSignature.accessoryButtonTappedForRowAtIndexPath.rawValue
+        
+        expect(String(#selector(UITableViewDelegate.tableView(_:willSelectRowAt:)))) == EventMethodSignature.willSelectRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:didSelectRowAt:)))) == EventMethodSignature.didSelectRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:willDeselectRowAt:)))) == EventMethodSignature.willDeselectRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:didDeselectRowAt:)))) == EventMethodSignature.didDeselectRowAtIndexPath.rawValue
+        
+        expect(String(#selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:)))) == EventMethodSignature.heightForHeaderInSection.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:)))) == EventMethodSignature.estimatedHeightForHeaderInSection.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:heightForFooterInSection:)))) == EventMethodSignature.heightForFooterInSection.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:)))) == EventMethodSignature.estimatedHeightForFooterInSection.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:)))) == EventMethodSignature.willDisplayHeaderForSection.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:willDisplayFooterView:forSection:)))) == EventMethodSignature.willDisplayFooterForSection.rawValue
+        
+        expect(String(#selector(UITableViewDelegate.tableView(_:willBeginEditingRowAt:)))) == EventMethodSignature.willBeginEditingRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:didEndEditingRowAt:)))) == EventMethodSignature.didEndEditingRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:editingStyleForRowAt:)))) == EventMethodSignature.editingStyleForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:)))) == EventMethodSignature.titleForDeleteButtonForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:)))) == EventMethodSignature.shouldIndentWhileEditingRowAtIndexPath.rawValue
+        
+        expect(String(#selector(UITableViewDelegate.tableView(_:didEndDisplaying:forRowAt:)))) == EventMethodSignature.didEndDisplayingCellForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:didEndDisplayingHeaderView:forSection:)))) == EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:didEndDisplayingFooterView:forSection:)))) == EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue
+        
+        expect(String(#selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:)))) == EventMethodSignature.shouldShowMenuForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)))) == EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:)))) == EventMethodSignature.performActionForRowAtIndexPath.rawValue
+        
+        expect(String(#selector(UITableViewDelegate.tableView(_:shouldHighlightRowAt:)))) == EventMethodSignature.shouldHighlightRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:didHighlightRowAt:)))) == EventMethodSignature.didHighlightRowAtIndexPath.rawValue
+        expect(String(#selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:)))) == EventMethodSignature.didUnhighlightRowAtIndexPath.rawValue
+        if #available(iOS 9.0, tvOS 9.0, *) {
+            expect(String(#selector(UITableViewDelegate.tableView(_:canFocusRowAt:)))) == EventMethodSignature.canFocusRowAtIndexPath.rawValue
+        }
     }
 }
 

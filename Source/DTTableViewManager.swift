@@ -107,9 +107,10 @@ public class DTTableViewManager : NSObject {
     /// - Warning: if storage is not MemoryStorage, will throw an exception.
     public var memoryStorage : MemoryStorage!
     {
-        precondition(storage is MemoryStorage, "DTTableViewManager memoryStorage method should be called only if you are using MemoryStorage")
-        
-        return storage as! MemoryStorage
+        guard let storage = storage as? MemoryStorage else {
+            fatalError("DTTableViewManager memoryStorage method should be called only if you are using MemoryStorage")
+        }
+        return storage
     }
     
     /// Storage, that holds your UITableView models. By default, it's `MemoryStorage` instance.
@@ -345,7 +346,7 @@ public extension DTTableViewContentUpdatable where Self : DTTableViewManageable 
     func afterContentUpdate() {}
 }
 
-private enum EventMethodSignature: String {
+internal enum EventMethodSignature: String {
     /// UITableViewDataSource
     case configureCell = "tableViewConfigureCell_imaginarySelector"
     case configureHeader = "tableViewConfigureHeader_imaginarySelector"
@@ -361,7 +362,7 @@ private enum EventMethodSignature: String {
     case willDisplayCellForRowAtIndexPath = "tableView:willDisplayCell:forRowAtIndexPath:"
     
     case editActionsForRowAtIndexPath = "tableView:editActionsForRowAtIndexPath:"
-    case accessoryButtonTappedForRowAtIndexPath = "tableView:accessoryButtonTappedForRowAtIndexPath:"
+    case accessoryButtonTappedForRowAtIndexPath = "tableView:accessoryButtonTappedForRowWithIndexPath:"
     
     case willSelectRowAtIndexPath = "tableView:willSelectRowAtIndexPath:"
     case didSelectRowAtIndexPath = "tableView:didSelectRowAtIndexPath:"
@@ -381,46 +382,19 @@ private enum EventMethodSignature: String {
     case titleForDeleteButtonForRowAtIndexPath = "tableView:titleForDeleteConfirmationButtonForRowAtIndexPath:"
     case shouldIndentWhileEditingRowAtIndexPath = "tableView:shouldIndentWhileEditingRowAtIndexPath:"
     
-    var eventSignatures: [EventMethodSignature] {
-        return [
-             // UITableViewDataSource
-            
-            .configureCell,
-            .configureHeader,
-            .configureFooter,
-            .commitEditingStyleForRowAtIndexPath,
-            .canEditRowAtIndexPath,
-            .canMoveRowAtIndexPath,
-            
-            // UITableViewDelegate
-            
-            .heightForRowAtIndexPath,
-            .estimatedHeightForRowAtIndexPath,
-            .indentationLevelForRowAtIndexPath,
-            .willDisplayCellForRowAtIndexPath,
-            
-            .editActionsForRowAtIndexPath,
-            .accessoryButtonTappedForRowAtIndexPath,
-            
-            .willSelectRowAtIndexPath,
-            .didSelectRowAtIndexPath,
-            .willDeselectRowAtIndexPath,
-            .didDeselectRowAtIndexPath,
-            
-            .heightForHeaderInSection,
-            .estimatedHeightForHeaderInSection,
-            .heightForFooterInSection,
-            .estimatedHeightForFooterInSection,
-            .willDisplayHeaderForSection,
-            .willDisplayFooterForSection,
-            
-            .willBeginEditingRowAtIndexPath,
-            .didEndEditingRowAtIndexPath,
-            .editingStyleForRowAtIndexPath,
-            .titleForDeleteButtonForRowAtIndexPath,
-            .shouldIndentWhileEditingRowAtIndexPath
-        ]
-    }
+    case didEndDisplayingCellForRowAtIndexPath = "tableView:didEndDisplayingCell:forRowAtIndexPath:"
+    case didEndDisplayingHeaderViewForSection = "tableView:didEndDisplayingHeaderView:forSection:"
+    case didEndDisplayingFooterViewForSection = "tableView:didEndDisplayingFooterView:forSection:"
+    
+    case shouldShowMenuForRowAtIndexPath = "tableView:shouldShowMenuForRowAtIndexPath:"
+    case canPerformActionForRowAtIndexPath = "tableView:canPerformAction:forRowAtIndexPath:withSender:"
+    case performActionForRowAtIndexPath = "tableView:performAction:forRowAtIndexPath:withSender:"
+    
+    case shouldHighlightRowAtIndexPath = "tableView:shouldHighlightRowAtIndexPath:"
+    case didHighlightRowAtIndexPath = "tableView:didHighlightRowAtIndexPath:"
+    case didUnhighlightRowAtIndexPath = "tableView:didUnhighlightRowAtIndexPath:"
+    
+    case canFocusRowAtIndexPath = "tableView:canFocusRowAtIndexPath:"
 }
 
 // MARK: - Table view reactions
@@ -518,7 +492,7 @@ extension DTTableViewManager
         appendReaction(for: T.self, signature: EventMethodSignature.indentationLevelForRowAtIndexPath, closure: closure)
     }
     
-    public func willDisplayCell<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
+    public func willDisplay<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
     {
         appendReaction(for: T.self, signature: EventMethodSignature.willDisplayCellForRowAtIndexPath, closure: closure)
     }
@@ -604,6 +578,74 @@ extension DTTableViewManager
     {
         appendReaction(for: T.self, signature: EventMethodSignature.shouldIndentWhileEditingRowAtIndexPath, closure: closure)
     }
+    
+    public func didEndDisplaying<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void) {
+        appendReaction(for: T.self, signature: EventMethodSignature.didEndDisplayingCellForRowAtIndexPath, closure: closure)
+    }
+    
+    public func didEndDisplayingHeaderView<T:ModelTransfer where T: UIView>(_ headerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
+    {
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, supplementaryClass: T.self, signature: EventMethodSignature.didEndDisplayingHeaderViewForSection, closure: closure)
+    }
+    
+    public func didEndDisplayingFooterView<T:ModelTransfer where T: UIView>(_ footerClass: T.Type, _ closure: (T, T.ModelType, Int) -> Void)
+    {
+        appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: EventMethodSignature.didEndDisplayingFooterViewForSection, closure: closure)
+    }
+    
+    public func shouldShowMenu<T:ModelTransfer where T: UITableViewCell>(for cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Bool)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.shouldShowMenuForRowAtIndexPath, closure: closure)
+    }
+    
+    public func canPerformAction<T:ModelTransfer where T: UITableViewCell>(for cellClass: T.Type, _ closure: (Selector, AnyObject?, T, T.ModelType, IndexPath) -> Bool) {
+        let reaction = FiveArgumentsEventReaction(signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue)
+        reaction.modelTypeCheckingBlock = { $0 is T.ModelType }
+        reaction.reaction5Arguments = { selector, sender, cell, model, indexPath -> Any in
+            guard let selector = selector as? Selector,
+                let cell = cell as? T,
+                let model = model as? T.ModelType,
+                let indexPath = indexPath as? IndexPath
+                else { return false }
+            return closure(selector, sender as? AnyObject, cell, model, indexPath)
+        }
+        tableViewEventReactions.append(reaction)
+    }
+    
+    public func performAction<T:ModelTransfer where T: UITableViewCell>(for cellClass: T.Type, _ closure: (Selector, AnyObject?, T, T.ModelType, IndexPath) -> Void) {
+        let reaction = FiveArgumentsEventReaction(signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue)
+        reaction.modelTypeCheckingBlock = { $0 is T.ModelType }
+        reaction.reaction5Arguments = { selector, sender, cell, model, indexPath  in
+            guard let selector = selector as? Selector,
+                let cell = cell as? T,
+                let model = model as? T.ModelType,
+                let indexPath = indexPath as? IndexPath
+                else { return false }
+            return closure(selector, sender as? AnyObject, cell, model, indexPath)
+        }
+        tableViewEventReactions.append(reaction)
+    }
+    
+    public func shouldHighlight<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Bool)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.shouldHighlightRowAtIndexPath, closure: closure)
+    }
+    
+    public func didHighlight<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.didHighlightRowAtIndexPath, closure: closure)
+    }
+    
+    public func didUnhighlight<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Void)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.didUnhighlightRowAtIndexPath, closure: closure)
+    }
+    
+    @available(iOS 9.0, tvOS 9.0, *)
+    public func canFocus<T:ModelTransfer where T: UITableViewCell>(_ cellClass:T.Type, _ closure: (T, T.ModelType, IndexPath) -> Bool)
+    {
+        appendReaction(for: T.self, signature: EventMethodSignature.canFocusRowAtIndexPath, closure: closure)
+    }
 }
 
 // MARK: - UITableViewDatasource
@@ -627,7 +669,9 @@ extension DTTableViewManager: UITableViewDataSource
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = self.storage.itemAtIndexPath(indexPath)!
+        guard let model = self.storage.itemAtIndexPath(indexPath) else {
+            return UITableViewCell()
+        }
         
         let cell : UITableViewCell
         do {
@@ -912,6 +956,76 @@ extension DTTableViewManager: UITableViewDelegate
             return should
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldIndentWhileEditingRowAt: indexPath) ?? tableView.cellForRow(at: indexPath)?.shouldIndentWhileEditing ?? true
+    }
+    
+    public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath) }
+        guard let model = storage.itemAtIndexPath(indexPath) else { return }
+        _ = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignature.didEndDisplayingCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section) }
+        guard let model = (storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(section) else { return }
+        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue, view: view, model: model, location: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingFooterView: view, forSection: section) }
+        guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(section) else { return }
+        _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue, view: view, model: model, location: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        if let should = performCellReaction(signature: .shouldShowMenuForRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+            return should
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldShowMenuForRowAt: indexPath) ?? false
+    }
+    
+    public func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: AnyObject?) -> Bool {
+        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.itemAtIndexPath(indexPath)),
+            let cell = tableView.cellForRow(at: indexPath)
+            else { return false }
+        if let reaction = tableViewEventReactions.reactionOfType(.cell, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, forModel: model) as? FiveArgumentsEventReaction {
+            return reaction.performWithArguments(arguments: (action,sender,cell,model,indexPath)) as? Bool ?? false
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, canPerformAction: action, forRowAt: indexPath, withSender: sender) ?? false
+    }
+    
+    public func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: AnyObject?) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, performAction: action, forRowAt: indexPath, withSender: sender) }
+        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.itemAtIndexPath(indexPath)),
+            let cell = tableView.cellForRow(at: indexPath)
+            else { return }
+        if let reaction = tableViewEventReactions.reactionOfType(.cell, signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue, forModel: model) as? FiveArgumentsEventReaction {
+            _ = reaction.performWithArguments(arguments: (action,sender,cell,model,indexPath))
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        if let should = performCellReaction(signature: .shouldHighlightRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+            return should
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldHighlightRowAt: indexPath) ?? true
+    }
+    
+    public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didHighlightRowAt: indexPath) }
+        _ = performCellReaction(signature: .didHighlightRowAtIndexPath, location: indexPath, provideCell: true)
+    }
+    
+    public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didUnhighlightRowAt: indexPath) }
+        _ = performCellReaction(signature: .didUnhighlightRowAtIndexPath, location: indexPath, provideCell: true)
+    }
+    
+    @available(iOS 9.0, tvOS 9.0, *)
+    public func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        if let should = performCellReaction(signature: .canFocusRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+            return should
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, canFocusRowAt: indexPath) ?? tableView.cellForRow(at: indexPath)?.canBecomeFocused ?? true
     }
     
     private func performCellReaction(signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {

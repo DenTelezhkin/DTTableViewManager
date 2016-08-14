@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+* New events system that covers almost all available `UITableViewDelegate` and `UITableViewDataSource` delegate methods.
 * `isManagingTableView` property on `DTTableViewManager`
 
 ### Changed
