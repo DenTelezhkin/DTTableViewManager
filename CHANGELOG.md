@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removals
 
+* `itemForVisibleCell`, `itemForCellClass:atIndexPath:`, `itemForHeaderClass:atSectionIndex:`, `itemForFooterClass:atSectionIndex:` were removed - they were not particularly useful and can be replaced with much shorter Swift conditional typecasts.
 * `registerCellClass:whenSelected` method 
 * All events methods with method pointer semantics. Please use block based methods instead.
 * `dataBindingBehaviour` property. 

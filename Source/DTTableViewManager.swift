@@ -152,49 +152,6 @@ public class DTTableViewManager : NSObject {
         storage.delegate = self
     }
     
-    /// Call this method to retrieve model from specific UITableViewCell subclass.
-    /// - Note: This method uses UITableView `indexPathForCell` method, that returns nil if cell is not visible. Therefore, if cell is not visible, this method will return nil as well.
-    /// - SeeAlso: `StorageProtocol` method `objectForCell:atIndexPath:` - will return model even if cell is not visible
-    public func itemForVisibleCell<T:ModelTransfer where T:UITableViewCell>(_ cell:T?) -> T.ModelType?
-    {
-        guard let cell = cell else {  return nil }
-        
-        if let indexPath = tableView?.indexPath(for: cell) {
-            return storage.itemAtIndexPath(indexPath) as? T.ModelType
-        }
-        return nil
-    }
-    
-    /// Retrieve model of specific type at index path.
-    /// - Parameter cell: UITableViewCell type
-    /// - Parameter indexPath: NSIndexPath of the data model
-    /// - Returns: data model that belongs to this index path.
-    /// - Note: Method does not require cell to be visible, however it requires that storage really contains object of `ModelType` at specified index path, otherwise it will return nil.
-    public func itemForCellClass<T:ModelTransfer where T:UITableViewCell>(_ cellClass: T.Type, atIndexPath indexPath: IndexPath) -> T.ModelType?
-    {
-        return self.storage.itemForCellClass(T.self, atIndexPath: indexPath)
-    }
-    
-    /// Retrieve model of specific type for section index.
-    /// - Parameter headerView: UIView type
-    /// - Parameter indexPath: NSIndexPath of the view
-    /// - Returns: data model that belongs to this view
-    /// - Note: Method does not require header to be visible, however it requires that storage really contains object of `ModelType` at specified section index, and storage to comply to `HeaderFooterStorageProtocol`, otherwise it will return nil.
-    public func itemForHeaderClass<T:ModelTransfer where T:UIView>(_ headerClass: T.Type, atSectionIndex sectionIndex: Int) -> T.ModelType?
-    {
-        return self.storage.itemForHeaderClass(T.self, atSectionIndex: sectionIndex)
-    }
-    
-    /// Retrieve model of specific type for section index.
-    /// - Parameter footerView: UIView type
-    /// - Parameter indexPath: NSIndexPath of the view
-    /// - Returns: data model that belongs to this view
-    /// - Note: Method does not require footer to be visible, however it requires that storage really contains object of `ModelType` at specified section index, and storage to comply to `HeaderFooterStorageProtocol`, otherwise it will return nil.
-    public func itemForFooterClass<T:ModelTransfer where T:UIView>(_ footerClass: T.Type, atSectionIndex sectionIndex: Int) -> T.ModelType?
-    {
-        return self.storage.itemForFooterClass(T.self, atSectionIndex: sectionIndex)
-    }
-    
     /// Getter for header model at section index
     /// - Parameter index: index of section
     /// - Returns: header model
