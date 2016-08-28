@@ -564,9 +564,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:willDeselectRowAt:)))) == EventMethodSignature.willDeselectRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:didDeselectRowAt:)))) == EventMethodSignature.didDeselectRowAtIndexPath.rawValue
         
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:)))) == EventMethodSignature.heightForHeaderInSection.rawValue
+//        expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:)))) == EventMethodSignature.heightForHeaderInSection.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:)))) == EventMethodSignature.estimatedHeightForHeaderInSection.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:)))) == EventMethodSignature.heightForFooterInSection.rawValue
+//        expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:)))) == EventMethodSignature.heightForFooterInSection.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:)))) == EventMethodSignature.estimatedHeightForFooterInSection.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:)))) == EventMethodSignature.willDisplayHeaderForSection.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplayFooterView:forSection:)))) == EventMethodSignature.willDisplayFooterForSection.rawValue

@@ -326,9 +326,9 @@ internal enum EventMethodSignature: String {
     case willDeselectRowAtIndexPath = "tableView:willDeselectRowAtIndexPath:"
     case didDeselectRowAtIndexPath = "tableView:didDeselectRowAtIndexPath:"
     
-    case heightForHeaderInSection = "tableView:heightForHeaderInSection:"
+    case heightForHeaderInSection = "tableView:heightForHeaderInSection:_imaginarySelector"
     case estimatedHeightForHeaderInSection = "tableView:estimatedHeightForHeaderInSection:"
-    case heightForFooterInSection = "tableView:heightForFooterInSection:"
+    case heightForFooterInSection = "tableView:heightForFooterInSection:_imaginarySelector"
     case estimatedHeightForFooterInSection = "tableView:estimatedHeightForFooterInSection:"
     case willDisplayHeaderForSection = "tableView:willDisplayHeaderView:forSection:"
     case willDisplayFooterForSection = "tableView:willDisplayFooterView:forSection:"

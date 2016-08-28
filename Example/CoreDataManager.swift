@@ -45,7 +45,7 @@ class CoreDataManager
         if banksPreloaded { return }
         
         if let filePath = Bundle.main.path(forResource: "Banks", ofType: "json"),
-            let url = URL(string: filePath),
+            let url = URL(string: "file://\(filePath)"),
             let banksData = try? Data(contentsOf: url),
             let banks = try! JSONSerialization.jsonObject(with: banksData, options: []) as? [[String:AnyObject]]
         {

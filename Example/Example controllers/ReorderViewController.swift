@@ -10,7 +10,7 @@ import UIKit
 import DTTableViewManager
 import DTModelStorage
 
-class ReorderViewController: UIViewController, DTTableViewManageable {
+class ReorderViewController: UIViewController, DTTableViewManageable, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,11 +33,11 @@ class ReorderViewController: UIViewController, DTTableViewManageable {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-     func tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
+     @nonobjc func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-     func tableView(_ tableView: UITableView, editingStyleForRowAtIndexPath indexPath: IndexPath) -> UITableViewCellEditingStyle {
+     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .none
     }
 }
