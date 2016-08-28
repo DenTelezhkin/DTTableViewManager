@@ -55,7 +55,7 @@ class CreationTestCase: XCTestCase {
     
     func testCreatingTableControllerFromXIB()
     {
-        let controller = XibTableViewController(nibName: "XibTableViewController", bundle: Bundle(for: self.dynamicType))
+        let controller = XibTableViewController(nibName: "XibTableViewController", bundle: Bundle(for: type(of: self)))
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
         controller.manager.registerCellClass(FooCell.self)
