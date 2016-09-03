@@ -129,9 +129,42 @@ final class TableViewFactory
         let reuseIdentifier = String(describing: T.self)
         
         if T.isSubclass(of: UITableViewHeaderFooterView.self) {
-            self.tableView.register(UINib(nibName: nibName, bundle: Bundle(for: T.self)), forHeaderFooterViewReuseIdentifier: reuseIdentifier)
+            tableView.register(UINib(nibName: nibName, bundle: Bundle(for: T.self)), forHeaderFooterViewReuseIdentifier: reuseIdentifier)
         }
         mappings.addMappingForViewType(.supplementaryView(kind: DTTableViewElementSectionFooter), viewClass: T.self, xibName: nibName)
+    }
+    
+    func unregisterCellClass<T:ModelTransfer>(_ cellClass: T.Type) where T: UITableViewCell {
+        mappings = mappings.filter({ mapping in
+            if mapping.viewClass is T.Type && mapping.viewType == .cell { return false }
+            return true
+        })
+        let nilClass : AnyClass? = nil
+        let nilNib : UINib? = nil
+        tableView.register(nilClass, forCellReuseIdentifier: String(describing: T.self))
+        tableView.register(nilNib, forCellReuseIdentifier: String(describing: T.self))
+    }
+    
+    open func unregisterHeaderClass<T:ModelTransfer>(_ headerClass: T.Type) where T: UIView {
+        mappings = mappings.filter({ mapping in
+            if mapping.viewClass is T.Type && mapping.viewType == .supplementaryView(kind: DTTableViewElementSectionHeader) { return false }
+            return true
+        })
+        let nilClass : AnyClass? = nil
+        let nilNib : UINib? = nil
+        tableView.register(nilClass, forHeaderFooterViewReuseIdentifier: String(describing: T.self))
+        tableView.register(nilNib, forHeaderFooterViewReuseIdentifier: String(describing: self))
+    }
+    
+    open func unregisterFooterClass<T:ModelTransfer>(_ footerClass: T.Type) where T: UIView {
+        mappings = mappings.filter({ mapping in
+            if mapping.viewClass is T.Type && mapping.viewType == .supplementaryView(kind: DTTableViewElementSectionFooter) { return false }
+            return true
+        })
+        let nilClass : AnyClass? = nil
+        let nilNib : UINib? = nil
+        tableView.register(nilClass, forHeaderFooterViewReuseIdentifier: String(describing: T.self))
+        tableView.register(nilNib, forHeaderFooterViewReuseIdentifier: String(describing: self))
     }
     
     func viewModelMappingForViewType(_ viewType: ViewType, model: Any) -> ViewModelMapping?

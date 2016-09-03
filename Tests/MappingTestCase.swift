@@ -155,6 +155,43 @@ class MappingTestCase: XCTestCase {
         let view = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
         expect(view).to(beAKindOf(NiblessHeaderFooterView.self))
     }
+    
+    func testUnregisterCellClass() {
+        controller.manager.registerCellClass(NibCell.self)
+        controller.manager.unregisterCellClass(NibCell.self)
+        
+        expect(self.controller.manager.viewFactory.mappings.count) == 0
+    }
+    
+    func testUnregisterHeaderClass() {
+        controller.manager.registerHeaderClass(NibHeaderFooterView.self)
+        controller.manager.unregisterHeaderClass(NibHeaderFooterView.self)
+        
+        expect(self.controller.manager.viewFactory.mappings.count) == 0
+    }
+    
+    func testUnregisterFooterClass() {
+        controller.manager.registerFooterClass(NibHeaderFooterView.self)
+        controller.manager.unregisterFooterClass(NibHeaderFooterView.self)
+        
+        expect(self.controller.manager.viewFactory.mappings.count) == 0
+    }
+    
+    func testUnregisterHeaderClassDoesNotUnregisterCell() {
+        controller.manager.registerCellClass(NibCell.self)
+        controller.manager.registerHeaderClass(NibHeaderFooterView.self)
+        controller.manager.unregisterHeaderClass(NibCell.self)
+        
+        expect(self.controller.manager.viewFactory.mappings.count) == 2
+    }
+    
+    func testUnregisteringHeaderDoesNotUnregisterFooter() {
+        controller.manager.registerFooterClass(NibHeaderFooterView.self)
+        controller.manager.registerHeaderClass(NibHeaderFooterView.self)
+        controller.manager.unregisterHeaderClass(NibHeaderFooterView.self)
+        
+        expect(self.controller.manager.viewFactory.mappings.count) == 1
+    }
 }
 
 class NibNameViewModelMappingTestCase : XCTestCase {

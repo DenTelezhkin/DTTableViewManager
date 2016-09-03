@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 * New events system that covers almost all available `UITableViewDelegate` and `UITableViewDataSource` delegate methods.
 * `isManagingTableView` property on `DTTableViewManager`
+* `unregisterCellClass(_:)`, `unregisterHeaderClass(_:)`, `unregisterFooterClass(_:)` methods to unregister mappings from `DTTableViewManager` and `UITableView`
 
 ### Changed
 

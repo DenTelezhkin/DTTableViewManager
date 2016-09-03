@@ -284,6 +284,17 @@ extension DTTableViewManager
         viewFactory.registerNibNamed(nibName, forFooterClass: footerClass)
     }
     
+    open func unregisterCellClass<T:ModelTransfer>(_ cellClass: T.Type) where T:UITableViewCell {
+        viewFactory.unregisterCellClass(T.self)
+    }
+    
+    open func unregisterHeaderClass<T:ModelTransfer>(_ headerClass: T.Type) where T: UIView {
+        viewFactory.unregisterHeaderClass(T.self)
+    }
+  
+    open func unregisterFooterClass<T:ModelTransfer>(_ footerClass: T.Type) where T: UIView {
+        viewFactory.unregisterFooterClass(T.self)
+    }
 }
 
 /// Protocol you can conform to react to content updates
