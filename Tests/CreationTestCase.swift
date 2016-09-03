@@ -45,12 +45,12 @@ class CreationTestCase: XCTestCase {
         let first = MemoryStorage()
         let second = MemoryStorage()
         controller.manager.storage = first
-        expect(first.delegate === controller.manager).to(beTrue())
+        expect(first.delegate === controller.manager.tableViewUpdater).to(beTrue())
         
         controller.manager.storage = second
         
         expect(first.delegate == nil).to(beTrue())
-        expect(second.delegate === controller.manager).to(beTrue())
+        expect(second.delegate === controller.manager.tableViewUpdater).to(beTrue())
     }
     
     func testCreatingTableControllerFromXIB()

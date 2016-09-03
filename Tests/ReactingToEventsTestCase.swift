@@ -130,23 +130,25 @@ class ReactingToEventsTestCase: XCTestCase {
     func testShouldReactAfterContentUpdate()
     {
         controller.manager.registerCellClass(NibCell.self)
-        
-        expect(self.controller.afterContentUpdateValue) == false
-        
+        let exp = expectation(description: "didUpdateContent")
+        (self.controller.manager.tableViewUpdater as? TableViewUpdater)?.didUpdateContent = { _ in
+            exp.fulfill()
+        }
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        expect(self.controller.afterContentUpdateValue) == true
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testShouldReactBeforeContentUpdate()
     {
         controller.manager.registerCellClass(NibCell.self)
-        
-        expect(self.controller.beforeContentUpdateValue) == false
-        
+        let exp = expectation(description: "willUpdateContent")
+        (self.controller.manager.tableViewUpdater as? TableViewUpdater)?.willUpdateContent = { _ in
+            exp.fulfill()
+        }
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        expect(self.controller.beforeContentUpdateValue) == true
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testMovingTableViewItems() {

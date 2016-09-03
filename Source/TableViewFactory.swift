@@ -200,6 +200,14 @@ final class TableViewFactory
         throw DTTableViewFactoryError.noCellMappings(model: unwrappedModel)
     }
     
+    func updateCellAt(_ indexPath : IndexPath, with model: Any) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else { return }
+        if let mapping = viewModelMappingForViewType(.cell, model: unwrappedModel) {
+            mapping.updateBlock(cell, unwrappedModel)
+        }
+    }
+    
     func headerFooterViewWithMapping(_ mapping: ViewModelMapping, unwrappedModel: Any) -> UIView?
     {
         let viewClassName = String(describing: mapping.viewClass)

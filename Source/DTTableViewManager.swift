@@ -131,7 +131,13 @@ open class DTTableViewManager : NSObject {
             if let headerFooterCompatibleStorage = storage as? BaseStorage {
                 headerFooterCompatibleStorage.configureForTableViewUsage()
             }
-            storage.delegate = self
+            storage.delegate = tableViewUpdater
+        }
+    }
+    
+    open var tableViewUpdater : StorageUpdating? {
+        didSet {
+            storage.delegate = tableViewUpdater
         }
     }
     
@@ -141,15 +147,34 @@ open class DTTableViewManager : NSObject {
     /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
     open func startManagingWithDelegate(_ delegate : DTTableViewManageable)
     {
-        precondition(delegate.tableView != nil,"Call startManagingWithDelegate: method only when UITableView has been created")
+        guard let tableView = delegate.tableView else {
+            preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
+        }
         
         self.delegate = delegate
-        delegate.tableView.delegate = self
-        delegate.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         if let mappingDelegate = delegate as? DTViewModelMappingCustomizable {
             viewFactory.mappingCustomizableDelegate = mappingDelegate
         }
-        storage.delegate = self
+        tableViewUpdater = TableViewUpdater(tableView: tableView)
+        storage.delegate = tableViewUpdater
+    }
+    
+    open func updateCellClosure() -> (IndexPath) -> Void {
+        return { [weak self] in
+            guard let model = self?.storage.itemAtIndexPath($0) else { return }
+            self?.viewFactory.updateCellAt($0, with: model)
+        }
+    }
+    
+    open func coreDataUpdater() -> TableViewUpdater {
+        guard let tableView = delegate?.tableView else {
+            preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
+        }
+        return TableViewUpdater(tableView: tableView,
+                                reloadRow: updateCellClosure(),
+                                animateMoveAsDeleteAndInsert: true)
     }
     
     /// Getter for header model at section index
@@ -295,23 +320,6 @@ extension DTTableViewManager
     open func unregisterFooterClass<T:ModelTransfer>(_ footerClass: T.Type) where T: UIView {
         viewFactory.unregisterFooterClass(T.self)
     }
-}
-
-/// Protocol you can conform to react to content updates
-public protocol DTTableViewContentUpdatable {
-    
-    /// This event is triggered before content update occurs. If you need to update UITableView and trigger these delegate callbacks, call `storageNeedsReloading` method on storage class.
-    /// - SeeAlso: `storageNeedsReloading`
-    func beforeContentUpdate()
-    
-    /// This event is triggered after content update occurs. If you need to update UITableView and trigger these delegate callbacks, call `storageNeedsReloading` method on storage class.
-    /// - SeeAlso: `storageNeedsReloading`
-    func afterContentUpdate()
-}
-
-public extension DTTableViewContentUpdatable where Self : DTTableViewManageable {
-    func beforeContentUpdate() {}
-    func afterContentUpdate() {}
 }
 
 internal enum EventMethodSignature: String {
@@ -1041,60 +1049,5 @@ extension DTTableViewManager: UITableViewDelegate
         }
         guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(location) else { return nil}
         return tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
-    }
-}
-
-// MARK: - StorageUpdating
-extension DTTableViewManager : StorageUpdating
-{
-    open func storageDidPerformUpdate(_ update : StorageUpdate)
-    {
-        self.controllerWillUpdateContent()
-
-        tableView?.beginUpdates()
-        
-        if update.deletedRowIndexPaths.count > 0 { tableView?.deleteRows(at: Array(update.deletedRowIndexPaths), with: configuration.deleteRowAnimation) }
-        if update.insertedRowIndexPaths.count > 0 { tableView?.insertRows(at: Array(update.insertedRowIndexPaths), with: configuration.insertRowAnimation) }
-        if update.updatedRowIndexPaths.count > 0 { tableView?.reloadRows(at: Array(update.updatedRowIndexPaths), with: configuration.reloadRowAnimation) }
-        if update.movedRowIndexPaths.count > 0 {
-            for moveUpdate in update.movedRowIndexPaths {
-                if let from = moveUpdate.first, let to = moveUpdate.last {
-                    tableView?.moveRow(at: from, to: to)
-                }
-            }
-        }
-        
-        if update.deletedSectionIndexes.count > 0 { tableView?.deleteSections(IndexSet(update.deletedSectionIndexes), with: configuration.deleteSectionAnimation) }
-        if update.insertedSectionIndexes.count > 0 { tableView?.insertSections(IndexSet(update.insertedSectionIndexes), with: configuration.insertSectionAnimation) }
-        if update.updatedSectionIndexes.count > 0 { tableView?.reloadSections(IndexSet(update.updatedSectionIndexes), with: configuration.reloadSectionAnimation)}
-        if update.movedSectionIndexes.count > 0 {
-            for moveUpdate in update.movedSectionIndexes {
-                if let from = moveUpdate.first, let to = moveUpdate.last {
-                    tableView?.moveSection(from, toSection: to)
-                }
-            }
-        }
-        
-        tableView?.endUpdates()
-        
-        self.controllerDidUpdateContent()
-    }
-    
-    /// Call this method, if you want UITableView to be reloaded, and beforeContentUpdate: and afterContentUpdate: closures to be called.
-    open func storageNeedsReloading()
-    {
-        self.controllerWillUpdateContent()
-        tableView?.reloadData()
-        self.controllerDidUpdateContent()
-    }
-    
-    final fileprivate func controllerWillUpdateContent()
-    {
-        (self.delegate as? DTTableViewContentUpdatable)?.beforeContentUpdate()
-    }
-    
-    final fileprivate func controllerDidUpdateContent()
-    {
-        (self.delegate as? DTTableViewContentUpdatable)?.afterContentUpdate()
     }
 }

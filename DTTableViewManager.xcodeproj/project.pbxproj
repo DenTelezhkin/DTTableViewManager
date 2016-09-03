@@ -89,6 +89,8 @@
 		9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */; };
 		9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AB666CD1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */; };
+		9AB666CE1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */; };
 		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
 		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
@@ -320,6 +322,7 @@
 		9A9B170D1B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A9B170F1B65771600D8ABD3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9A9B17121B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewUpdater.swift; path = Source/TableViewUpdater.swift; sourceTree = "<group>"; };
 		9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataSearchViewController.swift; path = "Example controllers/Search/CoreDataSearchViewController.swift"; sourceTree = "<group>"; };
 		9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9ABE07441B85FE4E00636D78 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = CoreData/Bank.swift; sourceTree = "<group>"; };
@@ -389,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */,
+				9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */,
 				9A383C971CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift */,
 				9A383C981CE1D9FD0081D843 /* TableViewConfiguration.swift */,
 				9A383C991CE1D9FD0081D843 /* TableViewFactory.swift */,
@@ -451,10 +455,10 @@
 		9A587D5C1CE334EB0094C821 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9A587D651CE334EB0094C821 /* Nimble.framework */,
-				9A587D671CE334EB0094C821 /* NimbleTests.xctest */,
 				9A587D691CE334EB0094C821 /* Nimble.framework */,
 				9A587D6B1CE334EB0094C821 /* NimbleTests.xctest */,
+				9A587D651CE334EB0094C821 /* Nimble.framework */,
+				9A587D671CE334EB0094C821 /* NimbleTests.xctest */,
 				9A587D6D1CE334EB0094C821 /* Nimble.framework */,
 				9A587D6F1CE334EB0094C821 /* NimbleTests.xctest */,
 			);
@@ -916,6 +920,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A383C9D1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */,
+				9AB666CD1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
 				9A383CA31CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383C9F1CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
 				9A383C9B1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
@@ -953,6 +958,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A383C9E1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */,
+				9AB666CE1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
 				9A383CA41CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383CA01CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
 				9A383C9C1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,

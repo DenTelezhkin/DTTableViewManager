@@ -11,6 +11,23 @@ import XCTest
 import DTModelStorage
 import Nimble
 
+fileprivate class UpdatableModel {
+    var value: Bool = false
+}
+
+fileprivate class UpdatableCell : UITableViewCell, ModelTransfer {
+    var model : UpdatableModel?
+
+    func updateWithModel(_ model: UpdatableModel) {
+        self.model = model
+    }
+    
+    fileprivate override func prepareForReuse() {
+        super.prepareForReuse()
+        XCTFail()
+    }
+}
+
 class TableViewFactoryTestCase: XCTestCase {
     
     var controller : DTTestTableViewController!
@@ -18,7 +35,7 @@ class TableViewFactoryTestCase: XCTestCase {
     override func setUp() {
         super.setUp()
         controller = DTTestTableViewController()
-        controller.tableView = UITableView()
+        controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
         controller.manager.storage = MemoryStorage()
@@ -54,6 +71,17 @@ class TableViewFactoryTestCase: XCTestCase {
         } catch {
             XCTFail()
         }
+    }
+    
+    func testUpdateCellAtIndexPath() {
+        controller.manager.registerCellClass(UpdatableCell.self)
+        let model = UpdatableModel()
+        controller.manager.memoryStorage.addItem(model)
+        
+        controller.manager.tableViewUpdater = controller.manager.coreDataUpdater()
+        model.value = true
+        controller.manager.updateCellClosure()(indexPath(0, 0))
+        expect((self.controller.tableView.cellForRow(at: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
     }
     
 }

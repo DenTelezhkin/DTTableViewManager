@@ -49,22 +49,4 @@ public struct TableViewConfiguration
     
     /// Defines, whether to show footer on a section, that does not contain any items. Default is true.
     public var displayFooterOnEmptySection = true
-    
-    /// Insert section animation. Default - .None.
-    public var insertSectionAnimation = UITableViewRowAnimation.none
-    
-    /// Delete section animation. Default - .Automatic
-    public var deleteSectionAnimation = UITableViewRowAnimation.automatic
-    
-    /// Reload section animation. Default - .Automatic.
-    public var reloadSectionAnimation = UITableViewRowAnimation.automatic
-    
-    /// Insert row animation. Default - .Automatic.
-    public var insertRowAnimation = UITableViewRowAnimation.automatic
-    
-    /// Delete row animation. Default - .Automatic.
-    public var deleteRowAnimation = UITableViewRowAnimation.automatic
-    
-    /// Reload row animation. Default - .Automatic.
-    public var reloadRowAnimation = UITableViewRowAnimation.automatic
 }

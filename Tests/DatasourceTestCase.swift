@@ -14,11 +14,12 @@ import Nimble
 
 class DatasourceTestCase: XCTestCase {
 
-    var controller = DTTestTableViewController()
+    var controller : DTTestTableViewController!
     
     override func setUp() {
         super.setUp()
         
+        controller = DTTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
         controller.manager.startManagingWithDelegate(controller)
@@ -264,5 +265,18 @@ class DatasourceTestCase: XCTestCase {
     func testNilFooterViewWithStyleTitle() {
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
+    }
+    
+    func testReloadRowsClosure() {
+        let exp = expectation(description: "Reload row closure")
+        controller.manager.tableViewUpdater = TableViewUpdater(tableView: controller.tableView, reloadRow: { indexPath in
+            if indexPath.section == 0 && indexPath.item == 3 {
+                exp.fulfill()
+            }
+        })
+        
+        controller.manager.memoryStorage.addItems([1,2,3,4,5])
+        controller.manager.memoryStorage.reloadItem(4)
+        waitForExpectations(timeout: 0.5, handler: nil)
     }
 }

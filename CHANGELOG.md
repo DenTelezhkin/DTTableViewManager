@@ -2,11 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## Master
+## Next
 
 ### Added
 
 * New events system that covers almost all available `UITableViewDelegate` and `UITableViewDataSource` delegate methods.
+* New class - `TableViewUpdater`, that is calling all animation methods for `UITableView` when required by underlying storage.
+* `updateCellClosure` method on `DTTableViewManager`, that manually updates visible cell instead of calling `tableView.reloadRowsAt(_:)` method.
+* `coreDataUpdater` property on `DTTableViewManager`, that creates `TableViewUpdater` object, that follows Apple's guide for updating `UITableView` from `NSFetchedResultsControllerDelegate` events.
 * `isManagingTableView` property on `DTTableViewManager`
 * `unregisterCellClass(_:)`, `unregisterHeaderClass(_:)`, `unregisterFooterClass(_:)` methods to unregister mappings from `DTTableViewManager` and `UITableView`
 
@@ -14,6 +17,7 @@ All notable changes to this project will be documented in this file.
 
 * Event system is migrated to new `EventReaction` class from `DTModelStorage`
 * Now all view registration methods use `NSBundle(forClass:)` constructor, instead of falling back on `DTTableViewManager` `viewBundle` property. This allows having cells from separate bundles or frameworks to be used with single `DTTableViewManager` instance.
+* Section and row animations are now set on `TableViewUpdater` class instead of `TableViewConfiguration`
 
 ### Removals
 
@@ -22,6 +26,7 @@ All notable changes to this project will be documented in this file.
 * All events methods with method pointer semantics. Please use block based methods instead.
 * `dataBindingBehaviour` property. 
 * `viewBundle` property on `DTTableViewManager`. Bundle is not determined automatically based on view class.
+* `DTTableViewContentUpdatable` protocol. Use `TableViewUpdater` properties instead.
 
 ## [4.7.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.7.0)
 
