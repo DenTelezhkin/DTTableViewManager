@@ -11,35 +11,35 @@ import DTTableViewManager
 import DTModelStorage
 import Nimble
 
-class CustomizableViewController: DTTestTableViewController, DTViewModelMappingCustomizable {
+class CustomizableViewController: DTTestTableViewController, ViewModelMappingCustomizing {
     
     var mappingSelectableBlock : (([ViewModelMapping], Any) -> ViewModelMapping?)?
     
-    func viewModelMappingFromCandidates(_ candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
+    func viewModelMapping(fromCandidates candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
         return mappingSelectableBlock?(candidates, model)
     }
 }
 
 class IntCell : UITableViewCell, ModelTransfer {
-    func updateWithModel(_ model: Int) {
+    func update(with model: Int) {
         
     }
 }
 
 class AnotherIntCell : UITableViewCell, ModelTransfer {
-    func updateWithModel(_ model: Int) {
+    func update(with model: Int) {
         
     }
 }
 
 class IntHeader: UITableViewHeaderFooterView, ModelTransfer {
-    func updateWithModel(_ model: Int) {
+    func update(with model: Int) {
         
     }
 }
 
 class AnotherIntHeader: UITableViewHeaderFooterView, ModelTransfer {
-    func updateWithModel(_ model: Int) {
+    func update(with model: Int) {
         
     }
 }

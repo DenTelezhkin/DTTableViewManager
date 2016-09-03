@@ -13,7 +13,7 @@ class CustomStringCell: UITableViewCell, ModelTransfer {
 
     @IBOutlet weak var label: UILabel!
     
-    func updateWithModel(_ model: String) {
+    func update(with model: String) {
         self.label.text = model
     }
 }

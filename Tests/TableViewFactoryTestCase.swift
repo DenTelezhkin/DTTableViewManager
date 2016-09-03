@@ -18,7 +18,7 @@ fileprivate class UpdatableModel {
 fileprivate class UpdatableCell : UITableViewCell, ModelTransfer {
     var model : UpdatableModel?
 
-    func updateWithModel(_ model: UpdatableModel) {
+    func update(with model: UpdatableModel) {
         self.model = model
     }
     

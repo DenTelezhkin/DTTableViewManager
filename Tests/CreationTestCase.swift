@@ -14,7 +14,7 @@ import Nimble
 
 class FooCell : UITableViewCell, ModelTransfer
 {
-    func updateWithModel(_ model: Int) {
+    func update(with model: Int) {
         
     }
 }

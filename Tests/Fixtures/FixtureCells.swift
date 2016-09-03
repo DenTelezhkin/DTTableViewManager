@@ -29,7 +29,7 @@ class BaseTestCell : UITableViewCell, ModelTransfer, ModelRetrievable
         self.awakedFromNib = true
     }
     
-    func updateWithModel(_ model: Int) {
+    func update(with model: Int) {
         self.model = model
     }
 }
@@ -40,7 +40,7 @@ class NibCell: BaseTestCell {}
 
 class StringCell : UITableViewCell, ModelTransfer
 {
-    func updateWithModel(_ model: String) {
+    func update(with model: String) {
         
     }
 }

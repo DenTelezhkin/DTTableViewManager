@@ -1,3 +1,4 @@
+
 //
 //  TableViewController.swift
 //  DTTableViewManager
@@ -117,7 +118,7 @@ open class DTTableViewManager : NSObject {
     /// - Note: When setting custom storage for this property, it will be automatically configured for using with UITableView and it's delegate will be set to `DTTableViewManager` instance.
     /// - Note: Previous storage `delegate` property will be nilled out to avoid collisions.
     /// - SeeAlso: `MemoryStorage`, `CoreDataStorage`.
-    open var storage : StorageProtocol = {
+    open var storage : Storage = {
         let storage = MemoryStorage()
         storage.configureForTableViewUsage()
         return storage
@@ -154,7 +155,7 @@ open class DTTableViewManager : NSObject {
         self.delegate = delegate
         tableView.delegate = self
         tableView.dataSource = self
-        if let mappingDelegate = delegate as? DTViewModelMappingCustomizable {
+        if let mappingDelegate = delegate as? ViewModelMappingCustomizing {
             viewFactory.mappingCustomizableDelegate = mappingDelegate
         }
         tableViewUpdater = TableViewUpdater(tableView: tableView)
@@ -163,7 +164,7 @@ open class DTTableViewManager : NSObject {
     
     open func updateCellClosure() -> (IndexPath) -> Void {
         return { [weak self] in
-            guard let model = self?.storage.itemAtIndexPath($0) else { return }
+            guard let model = self?.storage.item(at: $0) else { return }
             self?.viewFactory.updateCellAt($0, with: model)
         }
     }
@@ -188,7 +189,7 @@ open class DTTableViewManager : NSObject {
         {
             return nil
         }
-        return (self.storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(index)
+        return (self.storage as? HeaderFooterStorage)?.headerModel(forSection: index)
     }
     
     /// Getter for footer model at section index
@@ -202,7 +203,7 @@ open class DTTableViewManager : NSObject {
         {
             return nil
         }
-        return (self.storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(index)
+        return (self.storage as? HeaderFooterStorage)?.footerModel(forSection: index)
     }
 }
 
@@ -659,7 +660,7 @@ extension DTTableViewManager: UITableViewDataSource
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = self.storage.itemAtIndexPath(indexPath) else {
+        guard let model = self.storage.item(at: indexPath) else {
             return UITableViewCell()
         }
         
@@ -708,7 +709,7 @@ extension DTTableViewManager: UITableViewDataSource
     
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
-        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.itemAtIndexPath(indexPath)),
+        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.item(at: indexPath)),
             let cell = tableView.cellForRow(at: indexPath)
             else { return }
         if let reaction = tableViewEventReactions.reactionOfType(.cell, signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue, forModel: model) as? FourArgumentsEventReaction {
@@ -737,19 +738,19 @@ extension DTTableViewManager: UITableViewDelegate
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath) }
-        guard let model = storage.itemAtIndexPath(indexPath) else { return }
+        guard let model = storage.item(at: indexPath) else { return }
         _ = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
     }
     
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayHeaderView: view, forSection: section) }
-        guard let model = (storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(section) else { return }
+        guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.willDisplayHeaderForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayFooterView: view, forSection: section) }
-        guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(section) else { return }
+        guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.willDisplayFooterForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
@@ -958,19 +959,19 @@ extension DTTableViewManager: UITableViewDelegate
     
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath) }
-        guard let model = storage.itemAtIndexPath(indexPath) else { return }
+        guard let model = storage.item(at: indexPath) else { return }
         _ = tableViewEventReactions.performReaction(ofType: .cell, signature: EventMethodSignature.didEndDisplayingCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
     }
     
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section) }
-        guard let model = (storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(section) else { return }
+        guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingFooterView: view, forSection: section) }
-        guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(section) else { return }
+        guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
@@ -982,7 +983,7 @@ extension DTTableViewManager: UITableViewDelegate
     }
     
     open func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.itemAtIndexPath(indexPath)),
+        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.item(at: indexPath)),
             let cell = tableView.cellForRow(at: indexPath)
             else { return false }
         if let reaction = tableViewEventReactions.reactionOfType(.cell, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, forModel: model) as? FiveArgumentsEventReaction {
@@ -993,7 +994,7 @@ extension DTTableViewManager: UITableViewDelegate
     
     open func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, performAction: action, forRowAt: indexPath, withSender: sender) }
-        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.itemAtIndexPath(indexPath)),
+        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.item(at: indexPath)),
             let cell = tableView.cellForRow(at: indexPath)
             else { return }
         if let reaction = tableViewEventReactions.reactionOfType(.cell, signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue, forModel: model) as? FiveArgumentsEventReaction {
@@ -1029,7 +1030,7 @@ extension DTTableViewManager: UITableViewDelegate
     final fileprivate func performCellReaction(_ signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
-        guard let model = storage.itemAtIndexPath(location) else { return nil }
+        guard let model = storage.item(at: location) else { return nil }
         return tableViewEventReactions.performReaction(ofType: .cell, signature: signature.rawValue, view: cell, model: model, location: location)
     }
     
@@ -1038,7 +1039,7 @@ extension DTTableViewManager: UITableViewDelegate
         if provideView {
             view = tableView?.headerView(forSection: location)
         }
-        guard let model = (storage as? HeaderFooterStorageProtocol)?.headerModelForSectionIndex(location) else { return nil}
+        guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: location) else { return nil}
         return tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionHeader), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
     }
     
@@ -1047,7 +1048,7 @@ extension DTTableViewManager: UITableViewDelegate
         if provideView {
             view = tableView?.footerView(forSection: location)
         }
-        guard let model = (storage as? HeaderFooterStorageProtocol)?.footerModelForSectionIndex(location) else { return nil}
+        guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: location) else { return nil}
         return tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
     }
 }
