@@ -301,7 +301,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testCanEditRowAtIndexPathClosure() {
         let exp = expectation(description: "canEditRow")
-        controller.manager.canEdit(NibCell.self, { (cell, model, indexPath) -> Bool in
+        controller.manager.canEditCell(withItemType: Int.self, { (model, indexPath) -> Bool in
             exp.fulfill()
             return false
         })

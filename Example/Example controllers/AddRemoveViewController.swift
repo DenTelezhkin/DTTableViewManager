@@ -25,6 +25,9 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
             alert.addAction(action)
             self?.present(alert, animated: true, completion: nil)
         }
+        manager.commitEditingStyle(for: StringCell.self) { [weak self] _, _, _, indexPath in
+            self?.manager.memoryStorage.removeItems(at: [indexPath])
+        }
         manager.heightForCell(withItemType: String.self) { string, indexPath -> CGFloat in
             return 80
         }
@@ -33,10 +36,4 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
     @IBAction func addItem(_ sender: AnyObject) {
         manager.memoryStorage.addItem("Row # \(manager.memoryStorage.sectionAtIndex(0)?.numberOfItems ?? 0)")
     }
-    
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath)
-    {
-        manager.memoryStorage.removeItemsAtIndexPaths([indexPath])
-    }
-    
 }

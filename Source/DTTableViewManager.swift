@@ -94,7 +94,9 @@ open class DTTableViewManager : NSObject {
         didSet {
             // Resetting delegate is needed, because UITableView caches results of `respondsToSelector` call, and never calls it again until `setDelegate` method is called.
             // We force UITableView to flush that cache and query us again, because with new event we might have new delegate or datasource method to respond to.
+            tableView?.delegate = nil
             tableView?.delegate = self
+            tableView?.dataSource = nil
             tableView?.dataSource = self
         }
     }
@@ -505,7 +507,7 @@ extension DTTableViewManager
         tableViewEventReactions.append(reaction)
     }
     
-    open func canEdit<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
+    open func canEditCell<T>(withItemType type: T.Type, _ closure: @escaping (T, IndexPath) -> Bool) {
         appendReaction(for: T.self, signature: EventMethodSignature.canEditRowAtIndexPath, closure: closure)
     }
     
@@ -718,7 +720,7 @@ extension DTTableViewManager: UITableViewDataSource
     }
     
     open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if let canEdit = performCellReaction(.canEditRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+        if let canEdit = performCellReaction(.canEditRowAtIndexPath, location: indexPath, provideCell: false) as? Bool {
             return canEdit
         }
         return (delegate as? UITableViewDataSource)?.tableView?(tableView, canEditRowAt: indexPath) ?? false
