@@ -1,6 +1,6 @@
 [submodule "Carthage/Checkouts/Nimble"]
 	path = Carthage/Checkouts/Nimble
-url=https://github.com/norio-nomura/Nimble.git
+url=https://github.com/Quick/Nimble.git
 [submodule "Carthage/Checkouts/realm-cocoa"]
 	path = Carthage/Checkouts/realm-cocoa
 	url = https://github.com/realm/realm-cocoa.git

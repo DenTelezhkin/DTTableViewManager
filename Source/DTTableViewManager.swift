@@ -1064,9 +1064,9 @@ extension DTTableViewManager : StorageUpdating
             }
         }
         
-        if update.deletedSectionIndexes.count > 0 { tableView?.deleteSections(update.deletedSectionIndexes.makeNSIndexSet(), with: configuration.deleteSectionAnimation) }
-        if update.insertedSectionIndexes.count > 0 { tableView?.insertSections(update.insertedSectionIndexes.makeNSIndexSet(), with: configuration.insertSectionAnimation) }
-        if update.updatedSectionIndexes.count > 0 { tableView?.reloadSections(update.updatedSectionIndexes.makeNSIndexSet(), with: configuration.reloadSectionAnimation)}
+        if update.deletedSectionIndexes.count > 0 { tableView?.deleteSections(IndexSet(update.deletedSectionIndexes), with: configuration.deleteSectionAnimation) }
+        if update.insertedSectionIndexes.count > 0 { tableView?.insertSections(IndexSet(update.insertedSectionIndexes), with: configuration.insertSectionAnimation) }
+        if update.updatedSectionIndexes.count > 0 { tableView?.reloadSections(IndexSet(update.updatedSectionIndexes), with: configuration.reloadSectionAnimation)}
         if update.movedSectionIndexes.count > 0 {
             for moveUpdate in update.movedSectionIndexes {
                 if let from = moveUpdate.first, let to = moveUpdate.last {
