@@ -35,6 +35,6 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
     }
     
     @IBAction func addItem(_ sender: AnyObject) {
-        manager.memoryStorage.addItem("Row # \(manager.memoryStorage.sectionAtIndex(0)?.numberOfItems ?? 0)")
+        manager.memoryStorage.addItem("Row # \(manager.memoryStorage.section(atIndex: 0)?.numberOfItems ?? 0)")
     }
 }

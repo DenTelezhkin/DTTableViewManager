@@ -27,9 +27,18 @@ import UIKit
 import Foundation
 import DTModelStorage
 
+/// Enum with possible `DTTableViewManager` errors.
+///
+/// - SeeAlso: `DTTableViewManager.viewFactoryErrorHandler` and `DTTableViewManager.handleTableViewFactoryError()`
 public enum DTTableViewFactoryError : Error {
+    
+    /// `UITableView` requested a cell, however model at indexPath is nil.
     case nilCellModel(IndexPath)
+    
+    /// `UITableView` requested a cell for `model`, however `DTTableViewManager` does not have mapping for it
     case noCellMappings(model: Any)
+    
+    /// `UITableView` requested a header or footer, however header or footer at `section` is nil.
     case nilHeaderFooterModel(section: Int)
     
     public var description : String {

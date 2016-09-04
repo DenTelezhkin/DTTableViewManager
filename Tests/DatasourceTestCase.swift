@@ -240,21 +240,21 @@ class DatasourceTestCase: XCTestCase {
     func testTableHeaderModel() {
         controller.manager.memoryStorage.addItem(4)
         controller.manager.memoryStorage.setSectionHeaderModels(["1"])
-        expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.tableHeaderModel as? String) == "1"
+        expect(self.controller.manager.memoryStorage.section(atIndex: 0)?.tableHeaderModel as? String) == "1"
         
-        controller.manager.memoryStorage.sectionAtIndex(0)?.tableHeaderModel = "2"
+        controller.manager.memoryStorage.section(atIndex: 0)?.tableHeaderModel = "2"
         
-        expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.tableHeaderModel as? String) == "2"
+        expect(self.controller.manager.memoryStorage.section(atIndex: 0)?.tableHeaderModel as? String) == "2"
     }
     
     func testTableFooterModel() {
         controller.manager.memoryStorage.addItem(4)
         controller.manager.memoryStorage.setSectionFooterModels(["1"])
-        expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.tableFooterModel as? String) == "1"
+        expect(self.controller.manager.memoryStorage.section(atIndex: 0)?.tableFooterModel as? String) == "1"
         
-        controller.manager.memoryStorage.sectionAtIndex(0)?.tableFooterModel = "2"
+        controller.manager.memoryStorage.section(atIndex: 0)?.tableFooterModel = "2"
         
-        expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.tableFooterModel as? String) == "2"
+        expect(self.controller.manager.memoryStorage.section(atIndex: 0)?.tableFooterModel as? String) == "2"
     }
     
     func testNilHeaderViewWithStyleTitle() {

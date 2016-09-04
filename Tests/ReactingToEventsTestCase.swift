@@ -157,8 +157,8 @@ class ReactingToEventsTestCase: XCTestCase {
         
         controller.manager.tableView(controller.tableView, moveRowAt: indexPath(0, 0), to: indexPath(3, 1))
         
-        expect(self.controller.manager.memoryStorage.sectionAtIndex(0)?.items(ofType: Int.self)) == [2,3]
-        expect(self.controller.manager.memoryStorage.sectionAtIndex(1)?.items(ofType: Int.self)) == [4,5,6,1]
+        expect(self.controller.manager.memoryStorage.section(atIndex: 0)?.items(ofType: Int.self)) == [2,3]
+        expect(self.controller.manager.memoryStorage.section(atIndex: 1)?.items(ofType: Int.self)) == [4,5,6,1]
     }
 }
 

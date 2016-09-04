@@ -10,10 +10,16 @@ import Foundation
 import UIKit
 import DTModelStorage
 
+/// `TableViewUpdater` is responsible for updating `UITableView`, when it receives storage updates.
 open class TableViewUpdater : StorageUpdating {
     
+    /// table view, that will be updated
     weak var tableView: UITableView?
+    
+    /// closure to be executed before content is updated
     public var willUpdateContent: ((StorageUpdate?) -> Void)? = nil
+    
+    /// closure to be executed after content is updated
     public var didUpdateContent: ((StorageUpdate?) -> Void)? = nil
     
     /// Insert section animation. Default - .None.
@@ -34,10 +40,16 @@ open class TableViewUpdater : StorageUpdating {
     /// Reload row animation. Default - .Automatic.
     public var reloadRowAnimation = UITableViewRowAnimation.automatic
     
+    /// Closure to be executed, when reloading a row.
+    ///
+    /// If this property is not nil, then reloadRowAnimation property is ignored.
+    /// - SeeAlso: `DTTableViewManager.updateCellClosure()` method and `DTTableViewManager.coreDataUpdater()` method.
     public var reloadRowClosure : ((IndexPath) -> Void)?
     
+    /// When this property is true, move events will be animated as delete event and insert event.
     public var animateMoveAsDeleteAndInsert: Bool
     
+    /// Creates updater with tableView.
     public init(tableView: UITableView, reloadRow: ((IndexPath) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {
         self.tableView = tableView
         self.reloadRowClosure = reloadRow
