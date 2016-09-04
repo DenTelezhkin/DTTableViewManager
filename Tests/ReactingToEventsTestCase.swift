@@ -190,7 +190,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "heightForRowAtIndexPath")
-        controller.manager.heightForCell(withItemType: Int.self, { int, indexPath in
+        controller.manager.heightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
@@ -202,7 +202,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testEstimatedHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "estimatedHeightForRowAtIndexPath")
-        controller.manager.estimatedHeightForCell(withItemType: Int.self, { int, indexPath in
+        controller.manager.estimatedHeightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
@@ -214,7 +214,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testIndentationLevelForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "indentationLevelForRowAtIndexPath")
-        controller.manager.indentationLevelForCell(withItemType: Int.self, { int, indexPath in
+        controller.manager.indentationLevelForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
@@ -301,7 +301,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testCanEditRowAtIndexPathClosure() {
         let exp = expectation(description: "canEditRow")
-        controller.manager.canEditCell(withItemType: Int.self, { (model, indexPath) -> Bool in
+        controller.manager.canEditCell(withItem: Int.self, { (model, indexPath) -> Bool in
             exp.fulfill()
             return false
         })
@@ -323,7 +323,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testHeightForHeaderInSection() {
         let exp = expectation(description: "heightForHeader")
-        controller.manager.heightForHeader(withItemType: String.self, { (model, section) -> CGFloat in
+        controller.manager.heightForHeader(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
@@ -333,7 +333,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEstimatedHeightForHeaderInSection() {
         let exp = expectation(description: "estimatedHeightForHeader")
-        controller.manager.estimatedHeightForHeader(withItemType: String.self, { (model, section) -> CGFloat in
+        controller.manager.estimatedHeightForHeader(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
@@ -343,7 +343,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testHeightForFooterInSection() {
         let exp = expectation(description: "heightForHeader")
-        controller.manager.heightForFooter(withItemType: String.self, { (model, section) -> CGFloat in
+        controller.manager.heightForFooter(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
@@ -353,7 +353,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEstimatedHeightForFooterInSection() {
         let exp = expectation(description: "estimatedHeightForFooter")
-        controller.manager.estimatedHeightForFooter(withItemType: String.self, { (model, section) -> CGFloat in
+        controller.manager.estimatedHeightForFooter(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
@@ -605,21 +605,21 @@ class ReactingToEventsFastTestCase : XCTestCase {
         let manager = self.controller.manager
         measure {
             manager.commitEditingStyle(for: NibCell.self, { _ in })
-            manager.canEditCell(withItemType: Int.self, { _ in return true })
+            manager.canEditCell(withItem: Int.self, { _ in return true })
             manager.canMove(NibCell.self, { _ in return true })
-            manager.heightForCell(withItemType: Int.self, { _ in return 44 })
-            manager.estimatedHeightForCell(withItemType: Int.self, { _ in return 44 })
-            manager.indentationLevelForCell(withItemType: Int.self,  { _ in return 0})
+            manager.heightForCell(withItem: Int.self, { _ in return 44 })
+            manager.estimatedHeightForCell(withItem: Int.self, { _ in return 44 })
+            manager.indentationLevelForCell(withItem: Int.self,  { _ in return 0})
             manager.willDisplay(NibCell.self, { _ in })
             manager.accessoryButtonTapped(in: NibCell.self, { _ in })
             manager.willSelect(NibCell.self, {_ in return indexPath(0, 0)})
             manager.didSelect(NibCell.self, {_ in})
             manager.willDeselect(NibCell.self, {_ in return indexPath(0, 0)} )
             manager.didDeselect(NibCell.self, { _ in return indexPath(0, 0)})
-            manager.heightForHeader(withItemType: Int.self, { _ in return 20 })
-            manager.heightForFooter(withItemType: Int.self, { _ in return 20 })
-            manager.estimatedHeightForHeader(withItemType: Int.self, { _ in return 20 })
-            manager.estimatedHeightForFooter(withItemType: Int.self, { _ in return 20 })
+            manager.heightForHeader(withItem: Int.self, { _ in return 20 })
+            manager.heightForFooter(withItem: Int.self, { _ in return 20 })
+            manager.estimatedHeightForHeader(withItem: Int.self, { _ in return 20 })
+            manager.estimatedHeightForFooter(withItem: Int.self, { _ in return 20 })
             manager.willDisplayHeaderView(NibHeaderFooterView.self, { _ in })
             manager.willDisplayFooterView(NibHeaderFooterView.self, { _ in})
             manager.editingStyle(for: NibCell.self, { _ in return .none })
@@ -639,21 +639,21 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testSearchForEventPerfomance() {
         let manager = self.controller.manager
         manager.commitEditingStyle(for: NibCell.self, { _ in })
-        manager.canEditCell(withItemType: Int.self, { _ in return true })
+        manager.canEditCell(withItem: Int.self, { _ in return true })
         manager.canMove(NibCell.self, { _ in return true })
-        manager.heightForCell(withItemType: Int.self, { _ in return 44 })
-        manager.estimatedHeightForCell(withItemType: Int.self, { _ in return 44 })
-        manager.indentationLevelForCell(withItemType: Int.self,  { _ in return 0})
+        manager.heightForCell(withItem: Int.self, { _ in return 44 })
+        manager.estimatedHeightForCell(withItem: Int.self, { _ in return 44 })
+        manager.indentationLevelForCell(withItem: Int.self,  { _ in return 0})
         manager.willDisplay(NibCell.self, { _ in })
         manager.accessoryButtonTapped(in: NibCell.self, { _ in })
         manager.willSelect(NibCell.self, {_ in return indexPath(0, 0)})
         manager.didSelect(NibCell.self, {_ in})
         manager.willDeselect(NibCell.self, {_ in return indexPath(0, 0)} )
         manager.didDeselect(NibCell.self, { _ in return indexPath(0, 0)})
-        manager.heightForHeader(withItemType: Int.self, { _ in return 20 })
-        manager.heightForFooter(withItemType: Int.self, { _ in return 20 })
-        manager.estimatedHeightForHeader(withItemType: Int.self, { _ in return 20 })
-        manager.estimatedHeightForFooter(withItemType: Int.self, { _ in return 20 })
+        manager.heightForHeader(withItem: Int.self, { _ in return 20 })
+        manager.heightForFooter(withItem: Int.self, { _ in return 20 })
+        manager.estimatedHeightForHeader(withItem: Int.self, { _ in return 20 })
+        manager.estimatedHeightForFooter(withItem: Int.self, { _ in return 20 })
         manager.willDisplayHeaderView(NibHeaderFooterView.self, { _ in })
         manager.willDisplayFooterView(NibHeaderFooterView.self, { _ in})
         manager.editingStyle(for: NibCell.self, { _ in return .none })

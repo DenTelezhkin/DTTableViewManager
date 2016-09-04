@@ -29,7 +29,7 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
         manager.commitEditingStyle(for: StringCell.self) { [weak self] _, _, _, indexPath in
             self?.manager.memoryStorage.removeItems(at: [indexPath])
         }
-        manager.heightForCell(withItemType: String.self) { string, indexPath -> CGFloat in
+        manager.heightForCell(withItem: String.self) { string, indexPath -> CGFloat in
             return 80
         }
     }

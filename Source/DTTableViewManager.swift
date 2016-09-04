@@ -111,7 +111,8 @@ open class DTTableViewManager : NSObject {
     open var memoryStorage : MemoryStorage!
     {
         guard let storage = storage as? MemoryStorage else {
-            fatalError("DTTableViewManager memoryStorage method should be called only if you are using MemoryStorage")
+            assertionFailure("DTTableViewManager memoryStorage method should be called only if you are using MemoryStorage")
+            return nil
         }
         return storage
     }
@@ -465,15 +466,15 @@ extension DTTableViewManager
         appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: EventMethodSignature.configureFooter, closure: closure)
     }
     
-    open func heightForCell<T>(withItemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
+    open func heightForCell<T>(withItem: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         appendReaction(for: T.self, signature: EventMethodSignature.heightForRowAtIndexPath, closure: closure)
     }
     
-    open func estimatedHeightForCell<T>(withItemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
+    open func estimatedHeightForCell<T>(withItem: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         appendReaction(for: T.self, signature: EventMethodSignature.estimatedHeightForRowAtIndexPath, closure: closure)
     }
     
-    open func indentationLevelForCell<T>(withItemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
+    open func indentationLevelForCell<T>(withItem: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         appendReaction(for: T.self, signature: EventMethodSignature.indentationLevelForRowAtIndexPath, closure: closure)
     }
     
@@ -507,7 +508,7 @@ extension DTTableViewManager
         tableViewEventReactions.append(reaction)
     }
     
-    open func canEditCell<T>(withItemType type: T.Type, _ closure: @escaping (T, IndexPath) -> Bool) {
+    open func canEditCell<T>(withItem type: T.Type, _ closure: @escaping (T, IndexPath) -> Bool) {
         appendReaction(for: T.self, signature: EventMethodSignature.canEditRowAtIndexPath, closure: closure)
     }
     
@@ -515,19 +516,19 @@ extension DTTableViewManager
         appendReaction(for: T.self, signature: EventMethodSignature.canMoveRowAtIndexPath, closure: closure)
     }
     
-    open func heightForHeader<T>(withItemType type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
+    open func heightForHeader<T>(withItem type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
         appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, modelClass: T.self, signature: EventMethodSignature.heightForHeaderInSection, closure: closure)
     }
     
-    open func estimatedHeightForHeader<T>(withItemType type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
+    open func estimatedHeightForHeader<T>(withItem type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
         appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, modelClass: T.self, signature: EventMethodSignature.estimatedHeightForHeaderInSection, closure: closure)
     }
     
-    open func heightForFooter<T>(withItemType type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
+    open func heightForFooter<T>(withItem type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
         appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, modelClass: T.self, signature: EventMethodSignature.heightForFooterInSection, closure: closure)
     }
     
-    open func estimatedHeightForFooter<T>(withItemType type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
+    open func estimatedHeightForFooter<T>(withItem type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
         appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, modelClass: T.self, signature: EventMethodSignature.estimatedHeightForFooterInSection, closure: closure)
     }
     
@@ -649,7 +650,7 @@ extension DTTableViewManager: UITableViewDataSource
             handler(error)
         } else {
             print((error as NSError).description)
-            fatalError(error.description)
+            assertionFailure(error.description)
         }
     }
     
