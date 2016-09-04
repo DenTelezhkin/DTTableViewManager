@@ -15,8 +15,9 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.startManagingWithDelegate(self)
-        manager.registerCellClass(StringCell.self)
+        
+        manager.startManaging(withDelegate: self)
+        manager.register(StringCell.self)
         manager.didSelect(StringCell.self) { [weak self] (_, model, indexPath)  in
             let alert = UIAlertController(title: "Selected cell",
                 message: "with model: \(model) at indexPath: \(indexPath)",

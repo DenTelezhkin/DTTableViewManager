@@ -40,13 +40,13 @@ class ReactingToEventsTestCase: XCTestCase {
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
         controller.manager.storage = MemoryStorage()
     }
     
     func testCellSelectionClosure()
     {
-        controller.manager.registerCellClass(SelectionReactingTableCell.self)
+        controller.manager.register(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
         controller.manager.didSelect(SelectionReactingTableCell.self) { (cell, model, indexPath) in
             cell.indexPath = indexPath
@@ -62,7 +62,7 @@ class ReactingToEventsTestCase: XCTestCase {
     }
     
     func testCellSelectionPerfomance() {
-        controller.manager.registerCellClass(SelectionReactingTableCell.self)
+        controller.manager.register(SelectionReactingTableCell.self)
         self.controller.manager.memoryStorage.addItems([1,2], toSection: 0)
         measureMetrics([XCTPerformanceMetric_WallClockTime], automaticallyStartMeasuring: true) {
             self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
@@ -74,7 +74,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testCellConfigurationClosure()
     {
-        controller.manager.registerCellClass(SelectionReactingTableCell.self)
+        controller.manager.register(SelectionReactingTableCell.self)
         
         var reactingCell : SelectionReactingTableCell?
         
@@ -95,7 +95,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testHeaderConfigurationClosure()
     {
-        controller.manager.registerHeaderClass(ReactingHeaderFooterView.self)
+        controller.manager.registerHeader(ReactingHeaderFooterView.self)
         
         var reactingHeader : ReactingHeaderFooterView?
         
@@ -112,7 +112,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testFooterConfigurationClosure()
     {
-        controller.manager.registerFooterClass(ReactingHeaderFooterView.self)
+        controller.manager.registerFooter(ReactingHeaderFooterView.self)
         
         var reactingFooter : ReactingHeaderFooterView?
         
@@ -129,7 +129,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testShouldReactAfterContentUpdate()
     {
-        controller.manager.registerCellClass(NibCell.self)
+        controller.manager.register(NibCell.self)
         let exp = expectation(description: "didUpdateContent")
         (self.controller.manager.tableViewUpdater as? TableViewUpdater)?.didUpdateContent = { _ in
             exp.fulfill()
@@ -141,7 +141,7 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testShouldReactBeforeContentUpdate()
     {
-        controller.manager.registerCellClass(NibCell.self)
+        controller.manager.register(NibCell.self)
         let exp = expectation(description: "willUpdateContent")
         (self.controller.manager.tableViewUpdater as? TableViewUpdater)?.willUpdateContent = { _ in
             exp.fulfill()
@@ -170,10 +170,10 @@ class ReactingToEventsFastTestCase : XCTestCase {
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
         controller.manager.storage = MemoryStorage()
-        controller.manager.registerFooterClass(ReactingHeaderFooterView.self)
-        controller.manager.registerCellClass(NibCell.self)
+        controller.manager.registerFooter(ReactingHeaderFooterView.self)
+        controller.manager.register(NibCell.self)
     }
     
     func testFooterConfigurationClosure()
@@ -190,7 +190,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "heightForRowAtIndexPath")
-        controller.manager.heightForCell(withItemType: Int.self, closure: { int, indexPath in
+        controller.manager.heightForCell(withItemType: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
@@ -202,7 +202,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testEstimatedHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "estimatedHeightForRowAtIndexPath")
-        controller.manager.estimatedHeightForCell(withItemType: Int.self, closure: { int, indexPath in
+        controller.manager.estimatedHeightForCell(withItemType: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
@@ -214,7 +214,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testIndentationLevelForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "indentationLevelForRowAtIndexPath")
-        controller.manager.indentationLevel(forItemType: Int.self, closure: { int, indexPath in
+        controller.manager.indentationLevelForCell(withItemType: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
@@ -598,6 +598,80 @@ class ReactingToEventsFastTestCase : XCTestCase {
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:)))) == EventMethodSignature.didUnhighlightRowAtIndexPath.rawValue
         if #available(iOS 9.0, tvOS 9.0, *) {
             expect(String(describing: #selector(UITableViewDelegate.tableView(_:canFocusRowAt:)))) == EventMethodSignature.canFocusRowAtIndexPath.rawValue
+        }
+    }
+    
+    func testEventsRegistrationPerfomance() {
+        let manager = self.controller.manager
+        measure {
+            manager.commitEditingStyle(for: NibCell.self, { _ in })
+            manager.canEditCell(withItemType: Int.self, { _ in return true })
+            manager.canMove(NibCell.self, { _ in return true })
+            manager.heightForCell(withItemType: Int.self, { _ in return 44 })
+            manager.estimatedHeightForCell(withItemType: Int.self, { _ in return 44 })
+            manager.indentationLevelForCell(withItemType: Int.self,  { _ in return 0})
+            manager.willDisplay(NibCell.self, { _ in })
+            manager.accessoryButtonTapped(in: NibCell.self, { _ in })
+            manager.willSelect(NibCell.self, {_ in return indexPath(0, 0)})
+            manager.didSelect(NibCell.self, {_ in})
+            manager.willDeselect(NibCell.self, {_ in return indexPath(0, 0)} )
+            manager.didDeselect(NibCell.self, { _ in return indexPath(0, 0)})
+            manager.heightForHeader(withItemType: Int.self, { _ in return 20 })
+            manager.heightForFooter(withItemType: Int.self, { _ in return 20 })
+            manager.estimatedHeightForHeader(withItemType: Int.self, { _ in return 20 })
+            manager.estimatedHeightForFooter(withItemType: Int.self, { _ in return 20 })
+            manager.willDisplayHeaderView(NibHeaderFooterView.self, { _ in })
+            manager.willDisplayFooterView(NibHeaderFooterView.self, { _ in})
+            manager.editingStyle(for: NibCell.self, { _ in return .none })
+            manager.shouldIndentWhileEditing(NibCell.self, { _ in return true })
+            manager.didEndDisplaying(NibCell.self, { _ in })
+            manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _ in })
+            manager.didEndDisplayingFooterView(NibHeaderFooterView.self, { _ in })
+            manager.shouldShowMenu(for: NibCell.self, { _ in return true})
+            manager.canPerformAction(for: NibCell.self, { _ in return true })
+            manager.performAction(for: NibCell.self, { _ in })
+            manager.shouldHighlight(NibCell.self, { _ in return true })
+            manager.didHighlight(NibCell.self, { _ in })
+            manager.didUnhighlight(NibCell.self, { _ in })
+        }
+    }
+    
+    func testSearchForEventPerfomance() {
+        let manager = self.controller.manager
+        manager.commitEditingStyle(for: NibCell.self, { _ in })
+        manager.canEditCell(withItemType: Int.self, { _ in return true })
+        manager.canMove(NibCell.self, { _ in return true })
+        manager.heightForCell(withItemType: Int.self, { _ in return 44 })
+        manager.estimatedHeightForCell(withItemType: Int.self, { _ in return 44 })
+        manager.indentationLevelForCell(withItemType: Int.self,  { _ in return 0})
+        manager.willDisplay(NibCell.self, { _ in })
+        manager.accessoryButtonTapped(in: NibCell.self, { _ in })
+        manager.willSelect(NibCell.self, {_ in return indexPath(0, 0)})
+        manager.didSelect(NibCell.self, {_ in})
+        manager.willDeselect(NibCell.self, {_ in return indexPath(0, 0)} )
+        manager.didDeselect(NibCell.self, { _ in return indexPath(0, 0)})
+        manager.heightForHeader(withItemType: Int.self, { _ in return 20 })
+        manager.heightForFooter(withItemType: Int.self, { _ in return 20 })
+        manager.estimatedHeightForHeader(withItemType: Int.self, { _ in return 20 })
+        manager.estimatedHeightForFooter(withItemType: Int.self, { _ in return 20 })
+        manager.willDisplayHeaderView(NibHeaderFooterView.self, { _ in })
+        manager.willDisplayFooterView(NibHeaderFooterView.self, { _ in})
+        manager.editingStyle(for: NibCell.self, { _ in return .none })
+        manager.shouldIndentWhileEditing(NibCell.self, { _ in return true })
+        manager.didEndDisplaying(NibCell.self, { _ in })
+        manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _ in })
+        manager.didEndDisplayingFooterView(NibHeaderFooterView.self, { _ in })
+        manager.shouldShowMenu(for: NibCell.self, { _ in return true})
+        manager.canPerformAction(for: NibCell.self, { _ in return true })
+        manager.performAction(for: NibCell.self, { _ in })
+        manager.shouldHighlight(NibCell.self, { _ in return true })
+        manager.didHighlight(NibCell.self, { _ in })
+        manager.didUnhighlight(NibCell.self, { _ in })
+        
+        manager.register(NibCell.self)
+        manager.memoryStorage.addItem(5)
+        measure {
+            manager.tableView(self.controller.tableView, didSelectRowAt: indexPath(0, 0))
         }
     }
 }

@@ -53,13 +53,13 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
         controller = CustomizableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
         controller.manager.storage = MemoryStorage()
     }
     
     func testMappingCustomizableAllowsSelectingAnotherCellMapping() {
-        controller.manager.registerCellClass(IntCell.self)
-        controller.manager.registerCellClass(AnotherIntCell.self)
+        controller.manager.register(IntCell.self)
+        controller.manager.register(AnotherIntCell.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }
@@ -72,8 +72,8 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
     }
     
     func testMappingCustomizableAllowsSelectingAnotherHeaderMapping() {
-        controller.manager.registerNiblessHeaderClass(IntHeader.self)
-        controller.manager.registerNiblessHeaderClass(AnotherIntHeader.self)
+        controller.manager.registerNiblessHeader(IntHeader.self)
+        controller.manager.registerNiblessHeader(AnotherIntHeader.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }
@@ -83,8 +83,8 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
     }
     
     func testMappingCustomizableAllowsSelectingAnotherFooterMapping() {
-        controller.manager.registerNiblessFooterClass(IntHeader.self)
-        controller.manager.registerNiblessFooterClass(AnotherIntHeader.self)
+        controller.manager.registerNiblessFooter(IntHeader.self)
+        controller.manager.registerNiblessFooter(AnotherIntHeader.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }

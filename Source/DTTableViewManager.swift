@@ -90,7 +90,7 @@ open class DTTableViewManager : NSObject {
     
     /// Array of reactions for `DTTableViewManager`
     /// - SeeAlso: `EventReaction`.
-    fileprivate var tableViewEventReactions = ContiguousArray<EventReaction>() {
+    fileprivate final var tableViewEventReactions = ContiguousArray<EventReaction>()  {
         didSet {
             // Resetting delegate is needed, because UITableView caches results of `respondsToSelector` call, and never calls it again until `setDelegate` method is called.
             // We force UITableView to flush that cache and query us again, because with new event we might have new delegate or datasource method to respond to.
@@ -148,7 +148,7 @@ open class DTTableViewManager : NSObject {
     /// - Precondition: UITableView instance on `delegate` should not be nil.
     /// - Parameter delegate: Object, that has UITableView, that will be managed by `DTTableViewManager`.
     /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
-    open func startManagingWithDelegate(_ delegate : DTTableViewManageable)
+    open func startManaging(withDelegate delegate : DTTableViewManageable)
     {
         guard let tableView = delegate.tableView else {
             preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
@@ -183,7 +183,7 @@ open class DTTableViewManager : NSObject {
     /// Getter for header model at section index
     /// - Parameter index: index of section
     /// - Returns: header model
-    final fileprivate func headerModelForSectionIndex(_ index: Int) -> Any?
+    final fileprivate func headerModel(forSection index: Int) -> Any?
     {
         guard self.storage.sections.count > index else { return nil }
         
@@ -242,7 +242,7 @@ extension DTTableViewManager
     /// Register mapping from model class to custom cell class. Method will automatically check for nib with the same name as `cellClass`. If it exists - nib will be registered instead of class.
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter cellClass: Type of UITableViewCell subclass, that is being registered for using by `DTTableViewManager`
-    open func registerCellClass<T:ModelTransfer>(_ cellClass:T.Type) where T: UITableViewCell
+    open func register<T:ModelTransfer>(_ cellClass:T.Type) where T: UITableViewCell
     {
         self.viewFactory.registerCellClass(cellClass)
     }
@@ -251,7 +251,7 @@ extension DTTableViewManager
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter nibName: Name of xib file to use
     /// - Parameter cellClass: Type of UITableViewCell subclass, that is being registered for using by `DTTableViewManager`
-    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, forCellClass cellClass: T.Type) where T: UITableViewCell
+    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, for cellClass: T.Type) where T: UITableViewCell
     {
         self.viewFactory.registerNibNamed(nibName, forCellClass: cellClass)
     }
@@ -259,7 +259,7 @@ extension DTTableViewManager
     /// Register mapping from model class to custom header view class. Method will automatically check for nib with the same name as `headerClass`. If it exists - nib will be registered instead of class.
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter headerClass: Type of UIView or UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
-    open func registerHeaderClass<T:ModelTransfer>(_ headerClass : T.Type) where T: UIView
+    open func registerHeader<T:ModelTransfer>(_ headerClass : T.Type) where T: UIView
     {
         configuration.sectionHeaderStyle = .view
         self.viewFactory.registerHeaderClass(headerClass)
@@ -268,7 +268,7 @@ extension DTTableViewManager
     /// Register mapping from model class to custom header view class. This method is intended to be used for headers created from code - without UI made in XIB.
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter headerClass: UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
-    open func registerNiblessHeaderClass<T:ModelTransfer>(_ headerClass : T.Type) where T: UITableViewHeaderFooterView
+    open func registerNiblessHeader<T:ModelTransfer>(_ headerClass : T.Type) where T: UITableViewHeaderFooterView
     {
         configuration.sectionHeaderStyle = .view
         self.viewFactory.registerNiblessHeaderClass(headerClass)
@@ -277,7 +277,7 @@ extension DTTableViewManager
     /// Register mapping from model class to custom header view class. This method is intended to be used for footers created from code - without UI made in XIB.
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter footerClass: UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
-    open func registerNiblessFooterClass<T:ModelTransfer>(_ footerClass : T.Type) where T: UITableViewHeaderFooterView
+    open func registerNiblessFooter<T:ModelTransfer>(_ footerClass : T.Type) where T: UITableViewHeaderFooterView
     {
         configuration.sectionFooterStyle = .view
         self.viewFactory.registerNiblessFooterClass(footerClass)
@@ -286,7 +286,7 @@ extension DTTableViewManager
     /// Register mapping from model class to custom footer view class. Method will automatically check for nib with the same name as `footerClass`. If it exists - nib will be registered instead of class.
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter footerClass: Type of UIView or UITableViewHeaderFooterView subclass, that is being registered for using by `DTTableViewManager`
-    open func registerFooterClass<T:ModelTransfer>(_ footerClass: T.Type) where T:UIView
+    open func registerFooter<T:ModelTransfer>(_ footerClass: T.Type) where T:UIView
     {
         configuration.sectionFooterStyle = .view
         viewFactory.registerFooterClass(footerClass)
@@ -296,7 +296,7 @@ extension DTTableViewManager
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter nibName: Name of xib file to use
     /// - Parameter headerClass: Type of UIView or UITableReusableView subclass, that is being registered for using by `DTTableViewManager`
-    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, forHeaderClass headerClass: T.Type) where T:UIView
+    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, forHeader headerClass: T.Type) where T:UIView
     {
         configuration.sectionHeaderStyle = .view
         viewFactory.registerNibNamed(nibName, forHeaderClass: headerClass)
@@ -306,21 +306,21 @@ extension DTTableViewManager
     /// - Note: Model type is automatically gathered from `ModelTransfer`.`ModelType` associated type.
     /// - Parameter nibName: Name of xib file to use
     /// - Parameter footerClass: Type of UIView or UITableReusableView subclass, that is being registered for using by `DTTableViewManager`
-    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, forFooterClass footerClass: T.Type) where T:UIView
+    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, forFooter footerClass: T.Type) where T:UIView
     {
         configuration.sectionFooterStyle = .view
         viewFactory.registerNibNamed(nibName, forFooterClass: footerClass)
     }
     
-    open func unregisterCellClass<T:ModelTransfer>(_ cellClass: T.Type) where T:UITableViewCell {
+    open func unregister<T:ModelTransfer>(_ cellClass: T.Type) where T:UITableViewCell {
         viewFactory.unregisterCellClass(T.self)
     }
     
-    open func unregisterHeaderClass<T:ModelTransfer>(_ headerClass: T.Type) where T: UIView {
+    open func unregisterHeader<T:ModelTransfer>(_ headerClass: T.Type) where T: UIView {
         viewFactory.unregisterHeaderClass(T.self)
     }
   
-    open func unregisterFooterClass<T:ModelTransfer>(_ footerClass: T.Type) where T: UIView {
+    open func unregisterFooter<T:ModelTransfer>(_ footerClass: T.Type) where T: UIView {
         viewFactory.unregisterFooterClass(T.self)
     }
 }
@@ -465,15 +465,15 @@ extension DTTableViewManager
         appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: EventMethodSignature.configureFooter, closure: closure)
     }
     
-    open func heightForCell<T>(withItemType: T.Type, closure: @escaping (T, IndexPath) -> CGFloat) {
+    open func heightForCell<T>(withItemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         appendReaction(for: T.self, signature: EventMethodSignature.heightForRowAtIndexPath, closure: closure)
     }
     
-    open func estimatedHeightForCell<T>(withItemType: T.Type, closure: @escaping (T, IndexPath) -> CGFloat) {
+    open func estimatedHeightForCell<T>(withItemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         appendReaction(for: T.self, signature: EventMethodSignature.estimatedHeightForRowAtIndexPath, closure: closure)
     }
     
-    open func indentationLevel<T>(forItemType: T.Type, closure: @escaping (T, IndexPath) -> CGFloat) {
+    open func indentationLevelForCell<T>(withItemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         appendReaction(for: T.self, signature: EventMethodSignature.indentationLevelForRowAtIndexPath, closure: closure)
     }
     
@@ -683,7 +683,7 @@ extension DTTableViewManager: UITableViewDataSource
     open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if configuration.sectionHeaderStyle == .view { return nil }
         
-        return self.headerModelForSectionIndex(section) as? String
+        return self.headerModel(forSection: section) as? String
     }
     
     open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -759,7 +759,7 @@ extension DTTableViewManager: UITableViewDelegate
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if configuration.sectionHeaderStyle == .title { return nil }
         
-        if let model = self.headerModelForSectionIndex(section) {
+        if let model = self.headerModel(forSection:section) {
             let view : UIView?
             do {
                 view = try self.viewFactory.headerViewForModel(model, atIndexPath: IndexPath(index: section))
@@ -814,14 +814,14 @@ extension DTTableViewManager: UITableViewDelegate
             return height
         }
         if configuration.sectionHeaderStyle == .title {
-            if let _ = self.headerModelForSectionIndex(section)
+            if let _ = self.headerModel(forSection:section)
             {
                 return UITableViewAutomaticDimension
             }
             return CGFloat.leastNormalMagnitude
         }
         
-        if let _ = self.headerModelForSectionIndex(section)
+        if let _ = self.headerModel(forSection:section)
         {
             return self.tableView?.sectionHeaderHeight ?? CGFloat.leastNormalMagnitude
         }
@@ -1052,5 +1052,63 @@ extension DTTableViewManager: UITableViewDelegate
         }
         guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: location) else { return nil}
         return tableViewEventReactions.performReaction(ofType: .supplementary(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
+    }
+}
+
+// DEPRECATED
+
+extension DTTableViewManager {
+    @available(*, unavailable, renamed: "startManaging(withDelegate:)")
+    open func startManagingWithDelegate(_ delegate : DTTableViewManageable)
+    {
+        fatalError("UNAVAILABLE")
+    }
+    
+    @available(*,unavailable,renamed:"register(_:)")
+    open func registerCellClass<T:ModelTransfer>(_ cellClass:T.Type) where T: UITableViewCell
+    {
+        fatalError("UNAVAILABLE")
+    }
+    
+    @available(*,unavailable,renamed:"registerNibNamed(_:for:)")
+    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, forCellClass cellClass: T.Type) where T: UITableViewCell
+    {
+        fatalError("UNAVAILABLE")
+    }
+    
+    @available(*,unavailable,renamed:"registerHeader(_:)")
+    open func registerHeaderClass<T:ModelTransfer>(_ headerClass : T.Type) where T: UIView
+    {
+        fatalError("UNAVAILABLE")
+    }
+    
+    @available(*,unavailable,renamed:"registerNiblessHeader(_:)")
+    open func registerNiblessHeaderClass<T:ModelTransfer>(_ headerClass : T.Type) where T: UITableViewHeaderFooterView
+    {
+        fatalError("UNAVAILABLE")
+    }
+    
+    @available(*,unavailable,renamed:"registerNiblessFooter(_:)")
+    open func registerNiblessFooterClass<T:ModelTransfer>(_ footerClass : T.Type) where T: UITableViewHeaderFooterView
+    {
+        fatalError("UNAVAILABLE")
+    }
+    
+    @available(*,unavailable,renamed:"registerFooter(_:)")
+    open func registerFooterClass<T:ModelTransfer>(_ footerClass: T.Type) where T:UIView
+    {
+        fatalError("UNAVAILABLE")
+    }
+    
+    @available(*,unavailable,renamed:"registerNibNamed(_:forHeader:)")
+    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, forHeaderClass headerClass: T.Type) where T:UIView
+    {
+        fatalError("UNAVAILABLE")
+    }
+    
+    @available(*,unavailable,renamed:"registerNibNamed(_:forFooter:)")
+    open func registerNibNamed<T:ModelTransfer>(_ nibName: String, forFooterClass footerClass: T.Type) where T:UIView
+    {
+        fatalError("UNAVAILABLE")
     }
 }

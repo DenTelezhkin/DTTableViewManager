@@ -21,11 +21,11 @@ class StoryboardMappingTestCase: XCTestCase {
         let storyboard = UIStoryboard(name: "FixtureStoryboard", bundle: Bundle(for: type(of: self)))
         controller = storyboard.instantiateInitialViewController() as! StoryboardViewController
         _ = controller.view
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
     }
     
     func testCellIsMappedAndOutletsAreCreated() {
-        controller.manager.registerCellClass(StoryboardCell.self)
+        controller.manager.register(StoryboardCell.self)
         controller.manager.memoryStorage.addItem(1)
         
         let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell

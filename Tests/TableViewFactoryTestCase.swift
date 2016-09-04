@@ -37,7 +37,7 @@ class TableViewFactoryTestCase: XCTestCase {
         controller = DTTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
         controller.manager.storage = MemoryStorage()
     }
     
@@ -74,7 +74,7 @@ class TableViewFactoryTestCase: XCTestCase {
     }
     
     func testUpdateCellAtIndexPath() {
-        controller.manager.registerCellClass(UpdatableCell.self)
+        controller.manager.register(UpdatableCell.self)
         let model = UpdatableModel()
         controller.manager.memoryStorage.addItem(model)
         

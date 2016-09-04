@@ -21,23 +21,17 @@ class ReorderViewController: UIViewController, DTTableViewManageable, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.startManagingWithDelegate(self)
-        manager.registerCellClass(StringCell.self)
+        manager.startManaging(withDelegate: self)
+        manager.register(StringCell.self)
         
         manager.memoryStorage.addItems(["Section 1 cell", "Section 1 cell"], toSection: 0)
         manager.memoryStorage.addItems(["Section 2 cell"], toSection: 1)
         manager.memoryStorage.addItems(["Section 3 cell", "Section 3 cell", "Section 3 cell"], toSection: 2)
+        manager.canMove(StringCell.self, { _ in return true })
+        manager.editingStyle(for: StringCell.self, { _ in return .none })
         
         manager.memoryStorage.setSectionHeaderModels(["Section 1", "Section 2", "Section 3"])
         
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-    
-     @nonobjc func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .none
     }
 }

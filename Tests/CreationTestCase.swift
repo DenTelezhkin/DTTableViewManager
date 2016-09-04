@@ -24,19 +24,19 @@ class CreationTestCase: XCTestCase {
     func testCreatingTableControllerFromCode()
     {
         let controller = DTTestTableViewController()
-        controller.manager.startManagingWithDelegate(controller)
-        controller.manager.registerCellClass(FooCell.self)
+        controller.manager.startManaging(withDelegate: controller)
+        controller.manager.register(FooCell.self)
     }
     
     func testDelegateIsNotNil() {
         let controller = DTTestTableViewController()
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
         expect(controller.manager.storage.delegate != nil).to(beTrue())
     }
     
     func testDelegateIsNotNilForMemoryStorage() {
         let controller = DTTestTableViewController()
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
         expect(controller.manager.memoryStorage.delegate != nil).to(beTrue())
     }
     
@@ -57,14 +57,14 @@ class CreationTestCase: XCTestCase {
     {
         let controller = XibTableViewController(nibName: "XibTableViewController", bundle: Bundle(for: type(of: self)))
         let _ = controller.view
-        controller.manager.startManagingWithDelegate(controller)
-        controller.manager.registerCellClass(FooCell.self)
+        controller.manager.startManaging(withDelegate: controller)
+        controller.manager.register(FooCell.self)
     }
     
     func testConfigurationAssociation()
     {
         let foo = DTTestTableViewController(nibName: nil, bundle: nil)
-        foo.manager.startManagingWithDelegate(foo)
+        foo.manager.startManaging(withDelegate: foo)
         
         expect(foo.manager) != nil
         expect(foo.manager) == foo.manager // Test if lazily instantiating using associations works correctly
@@ -75,7 +75,7 @@ class CreationTestCase: XCTestCase {
         let manager = DTTableViewManager()
         let foo = DTTestTableViewController(nibName: nil, bundle: nil)
         foo.manager = manager
-        foo.manager.startManagingWithDelegate(foo)
+        foo.manager.startManaging(withDelegate: foo)
         
         expect(foo.manager === manager).to(beTruthy())
     }

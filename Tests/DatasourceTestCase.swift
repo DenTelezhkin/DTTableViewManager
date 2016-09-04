@@ -22,10 +22,10 @@ class DatasourceTestCase: XCTestCase {
         controller = DTTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
         controller.manager.storage = MemoryStorage()
         
-        controller.manager.registerCellClass(NibCell.self)
+        controller.manager.register(NibCell.self)
     }
     
     func testTableItemAtIndexPath()
@@ -189,7 +189,7 @@ class DatasourceTestCase: XCTestCase {
     
     func testShouldShowViewHeaderOnEmptySEction()
     {
-        controller.manager.registerHeaderClass(NibView.self)
+        controller.manager.registerHeader(NibView.self)
         controller.manager.configuration.displayHeaderOnEmptySection = false
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
@@ -197,7 +197,7 @@ class DatasourceTestCase: XCTestCase {
     
     func testShouldShowViewFooterOnEmptySection()
     {
-        controller.manager.registerFooterClass(NibView.self)
+        controller.manager.registerFooter(NibView.self)
         controller.manager.configuration.displayFooterOnEmptySection = false
         controller.manager.memoryStorage.setSectionFooterModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
@@ -211,28 +211,28 @@ class DatasourceTestCase: XCTestCase {
     
     func testHeaderViewShouldBeCreated()
     {
-        controller.manager.registerHeaderClass(NibHeaderFooterView.self)
+        controller.manager.registerHeader(NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }
     
     func testFooterViewShouldBeCreated()
     {
-        controller.manager.registerFooterClass(NibHeaderFooterView.self)
+        controller.manager.registerFooter(NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }
     
     func testHeaderViewShouldBeCreatedFromXib()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forHeaderClass: NibHeaderFooterView.self)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }
     
     func testFooterViewShouldBeCreatedFromXib()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forFooterClass: NibHeaderFooterView.self)
+        controller.manager.registerNibNamed("NibHeaderFooterView", forFooter: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
         expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }

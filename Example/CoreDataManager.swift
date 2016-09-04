@@ -12,7 +12,7 @@ import CoreData
 class CoreDataManager
 {
     static let sharedInstance = CoreDataManager()
-    private init(){
+    fileprivate init(){
         let storeURL = self.applicationDocumentsDirectory.appendingPathComponent("Banks.sqlite")
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         try! persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
@@ -20,7 +20,7 @@ class CoreDataManager
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
     }
     
-    private var banksPreloaded : Bool {
+    fileprivate var banksPreloaded : Bool {
         get {
             return UserDefaults.standard.bool(forKey: "UserDefaultsBanksPreloaded")
         }
@@ -29,14 +29,14 @@ class CoreDataManager
         }
     }
     
-    private let applicationDocumentsDirectory = FileManager.default.urls(for :.documentDirectory, in: .userDomainMask).last!
+    fileprivate let applicationDocumentsDirectory = FileManager.default.urls(for :.documentDirectory, in: .userDomainMask).last!
     
-    private let managedObjectModel : NSManagedObjectModel = {
+    fileprivate let managedObjectModel : NSManagedObjectModel = {
         let url = Bundle.main.url(forResource: "Banks", withExtension: "momd")
             return NSManagedObjectModel(contentsOf: url!)!
     }()
     
-    private let persistentStoreCoordinator : NSPersistentStoreCoordinator
+    fileprivate let persistentStoreCoordinator : NSPersistentStoreCoordinator
     
     let managedObjectContext : NSManagedObjectContext
     
