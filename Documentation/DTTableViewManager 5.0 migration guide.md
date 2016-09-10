@@ -201,7 +201,7 @@ Here's full list of all delegate and datasource methods implemented:
 
 In 4.x release `DTTableViewManager` itself served as table view updater, implementing `StorageUpdating` protocol. 5.0 release introduces new property - `tableViewUpdater`, that holds table view updater object. All previous logic was extracted to separate `TableViewUpdater` class.
 
-Also, if you want to work with CoreData and NSFetchedResultsController, just call:
+If you want to work with CoreData and NSFetchedResultsController, just call:
 
 ```swift
 manager.tableViewUpdater = manager.coreDataUpdater()
