@@ -17,7 +17,6 @@ All notable changes to this project will be documented in this file.
 
 * Event system is migrated to new `EventReaction` class from `DTModelStorage`
 * Swift 3 API Design guidelines have been applied to all public API.
-* Now all view registration methods use `NSBundle(forClass:)` constructor, instead of falling back on `DTTableViewManager` `viewBundle` property. This allows having cells from separate bundles or frameworks to be used with single `DTTableViewManager` instance.
 * Section and row animations are now set on `TableViewUpdater` class instead of `TableViewConfiguration`
 
 ### Removals

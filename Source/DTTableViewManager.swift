@@ -456,7 +456,7 @@ extension DTTableViewManager
     /// Registers `closure` to be executed, when `UITableView` requests `cellClass` in `UITableViewDataSource.tableView(_:cellForRowAt:)` method and cell is being configured.
     ///
     /// This closure will be performed *after* cell is created and `update(with:)` method is called.
-    open func configureCell<T:ModelTransfer>(_ cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell
+    open func configure<T:ModelTransfer>(_ cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell
     {
         appendReaction(for: T.self, signature: .configureCell, closure: closure)
     }

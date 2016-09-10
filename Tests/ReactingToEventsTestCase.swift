@@ -78,7 +78,7 @@ class ReactingToEventsTestCase: XCTestCase {
         
         var reactingCell : SelectionReactingTableCell?
         
-        controller.manager.configureCell(SelectionReactingTableCell.self, { (cell, model, indexPath) in
+        controller.manager.configure(SelectionReactingTableCell.self, { (cell, model, indexPath) in
             cell.indexPath = indexPath
             cell.model = model
             cell.textLabel?.text = "Foo"
