@@ -16,8 +16,8 @@ Powerful generic-based UITableView management framework, written in Swift 3.
 - [Installation](#installation)
 - [Quick start](#quick-start)
 - [Usage](#usage)
-    - **Intro -** [Mapping and Registration](#mapping and registration), [Data Models](#data-models)
-    - **Storage classes -** [Memory Storage](#memory-storage), [CoreDataStorage](#core-data-storage), [RealmStorage](#realm-storage)
+    - **Intro -** [Mapping and Registration](#mapping-and-registration), [Data Models](#data-models)
+    - **Storage classes -** [Memory Storage](#memorystorage), [CoreDataStorage](#coredatastorage), [RealmStorage](#realmstorage)
     - **Reacting to events -** [Event types](#event-types), [Events list](#events-list)
 - [Advanced Usage](#advanced-usage)
 	- [Reacting to content updates](#reacting-to-content-updates)
@@ -410,8 +410,6 @@ manager.viewFactoryErrorHandler = { error in
 ## Documentation
 
 You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
-
-Also check out [wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki) for some information on DTTableViewManager internals.
 
 ## Running example project
 
