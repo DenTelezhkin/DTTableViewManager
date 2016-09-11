@@ -150,7 +150,7 @@ Here's full list of all delegate and datasource methods implemented:
 
 | DataSource method | Event method | Comment |
 | ----------------- | ------------ | ------- |
-|  cellForItemAt: | configure(_:_:) | Called after `update(with:)` method was called |
+|  cellForRowAt: | configure(_:_:) | Called after `update(with:)` method was called |
 |  viewForHeaderInSection: | configureHeader(_:_:) | Called after `update(with:)` method was called |
 |  viewForFooterInSection: | configureFooter(_:_:) | Called after `update(with:)` method was called |
 |  commit:forRowAt: | commitEditingStyle(for:_:) | - |

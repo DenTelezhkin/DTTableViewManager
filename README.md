@@ -112,20 +112,18 @@ That's it! It's that easy!
 
 ### Mapping and registration
 
-* `register:`
-* `registerNibNamed:for:`
-* `registerHeader:`
-* `registerNibNamed:forHeader:`
-* `registerFooter:`
-* `registerNibNamed:forFooter:`
-* `registerNiblessHeader:`
-* `registerNiblessFooter`
+* `register(_:)`
+* `registerNibNamed(_:for:)`
+* `registerHeader(_:)`
+* `registerNibNamed(_:forHeader:)`
+* `registerFooter(_:)`
+* `registerNibNamed(_:forFooter:)`
+* `registerNiblessHeader(_:)`
+* `registerNiblessFooter(_:)`
 
 By default, `DTTableViewManager` uses section titles and `tableView(_:titleForHeaderInSection:)` UITableViewDatasource methods. However, if you call any mapping methods for headers or footers, it will automatically switch to using `tableView(_:viewForHeaderInSection:)` methods and dequeue `UITableViewHeaderFooterView` instances. Make your `UITableViewHeaderFooterView` subclasses conform to `ModelTransfer` protocol to allow them participate in mapping.
 
 You can also use UIView subclasses for headers and footers.
-
-For more detailed look at mapping in DTTableViewManager, check out dedicated *[Mapping wiki page](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping-and-registration)*.
 
 ### Data models
 
@@ -157,7 +155,7 @@ Mappings are resolved simply by calling `is` type-check. In our example Apple is
 
 ### CoreDataStorage
 
-`CoreDataStorage` is meant to be used with ]NSFetchedResultsController]. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it's changes. All you need to do to display CoreData models in your UITableView, is create CoreDataStorage object and set it on your `storage` property of `DTTableViewManager`.
+`CoreDataStorage` is meant to be used with `NSFetchedResultsController`. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it's changes. All you need to do to display CoreData models in your UITableView, is create CoreDataStorage object and set it on your `storage` property of `DTTableViewManager`.
 
 It also recommended to use built-in CoreData updater to properly update UITableView:
 
