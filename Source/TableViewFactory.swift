@@ -154,7 +154,7 @@ final class TableViewFactory
         tableView.register(nilNib, forCellReuseIdentifier: String(describing: T.self))
     }
     
-    open func unregisterHeaderClass<T:ModelTransfer>(_ headerClass: T.Type) where T: UIView {
+    func unregisterHeaderClass<T:ModelTransfer>(_ headerClass: T.Type) where T: UIView {
         mappings = mappings.filter({ mapping in
             if mapping.viewClass is T.Type && mapping.viewType == .supplementaryView(kind: DTTableViewElementSectionHeader) { return false }
             return true
@@ -165,7 +165,7 @@ final class TableViewFactory
         tableView.register(nilNib, forHeaderFooterViewReuseIdentifier: String(describing: self))
     }
     
-    open func unregisterFooterClass<T:ModelTransfer>(_ footerClass: T.Type) where T: UIView {
+    func unregisterFooterClass<T:ModelTransfer>(_ footerClass: T.Type) where T: UIView {
         mappings = mappings.filter({ mapping in
             if mapping.viewClass is T.Type && mapping.viewType == .supplementaryView(kind: DTTableViewElementSectionFooter) { return false }
             return true

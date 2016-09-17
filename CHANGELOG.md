@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## Next
+## [5.0.0-beta.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.0.0-beta.1)
+
+This is a major release, written in Swift 3. Read [Migration guide](Documentation/DTTableViewManager 5.0 migration guide.md) with descriptions of all features and changes.
+
+Dependency changelog -> [DTModelStorage 3.0.0 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
 
 ### Added
 
@@ -22,9 +26,9 @@ All notable changes to this project will be documented in this file.
 ### Removals
 
 * `itemForVisibleCell`, `itemForCellClass:atIndexPath:`, `itemForHeaderClass:atSectionIndex:`, `itemForFooterClass:atSectionIndex:` were removed - they were not particularly useful and can be replaced with much shorter Swift conditional typecasts.
-* `registerCellClass:whenSelected` method 
+* `registerCellClass:whenSelected` method
 * All events methods with method pointer semantics. Please use block based methods instead.
-* `dataBindingBehaviour` property. 
+* `dataBindingBehaviour` property.
 * `viewBundle` property on `DTTableViewManager`. Bundle is not determined automatically based on view class.
 * `DTTableViewContentUpdatable` protocol. Use `TableViewUpdater` properties instead.
 

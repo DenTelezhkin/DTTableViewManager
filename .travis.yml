@@ -4,12 +4,10 @@ matrix:
       env: ACTION=iOS
     - os: osx
       env: ACTION=tvOS
-    # - os: osx
-    #   env: ACTION=carthage
+    - os: osx
+      env: ACTION=carthage
     - os: osx
       env: ACTION=cocoapods
-    # - os: osx
-    #   env: ACTION=oss-osx
 
 language: objective-c
 osx_image: xcode8
