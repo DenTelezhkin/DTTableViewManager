@@ -2,16 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.0.0-beta.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.0.0-beta.1)
+
+This is a major release, written in Swift 3. Read [Migration guide](Documentation/DTTableViewManager 5.0 migration guide.md) with descriptions of all features and changes.
+
+Dependency changelog -> [DTModelStorage 3.0.0 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
+
+### Added
+
+* New events system that covers almost all available `UITableViewDelegate` and `UITableViewDataSource` delegate methods.
+* New class - `TableViewUpdater`, that is calling all animation methods for `UITableView` when required by underlying storage.
+* `updateCellClosure` method on `DTTableViewManager`, that manually updates visible cell instead of calling `tableView.reloadRowsAt(_:)` method.
+* `coreDataUpdater` property on `DTTableViewManager`, that creates `TableViewUpdater` object, that follows Apple's guide for updating `UITableView` from `NSFetchedResultsControllerDelegate` events.
+* `isManagingTableView` property on `DTTableViewManager`
+* `unregisterCellClass(_:)`, `unregisterHeaderClass(_:)`, `unregisterFooterClass(_:)` methods to unregister mappings from `DTTableViewManager` and `UITableView`
+
+### Changed
+
+* Event system is migrated to new `EventReaction` class from `DTModelStorage`
+* Swift 3 API Design guidelines have been applied to all public API.
+* Section and row animations are now set on `TableViewUpdater` class instead of `TableViewConfiguration`
+
+### Removals
+
+* `itemForVisibleCell`, `itemForCellClass:atIndexPath:`, `itemForHeaderClass:atSectionIndex:`, `itemForFooterClass:atSectionIndex:` were removed - they were not particularly useful and can be replaced with much shorter Swift conditional typecasts.
+* `registerCellClass:whenSelected` method
+* All events methods with method pointer semantics. Please use block based methods instead.
+* `dataBindingBehaviour` property.
+* `viewBundle` property on `DTTableViewManager`. Bundle is not determined automatically based on view class.
+* `DTTableViewContentUpdatable` protocol. Use `TableViewUpdater` properties instead.
+
 ## [4.8.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.8.0)
 
 ### Changed
 
 * Support for building in both Swift 2.2 and Swift 2.3
 * Now all view registration methods use `NSBundle(forClass:)` constructor, instead of falling back on `DTTableViewManager` `viewBundle` property. This allows having cells from separate bundles or frameworks to be used with single `DTTableViewManager` instance.
-
-### Deprecations
-
-* `viewBundle` property on `DTTableViewManager`
 
 ## [4.7.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/4.7.0)
 

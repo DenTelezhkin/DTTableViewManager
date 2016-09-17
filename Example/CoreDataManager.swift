@@ -12,31 +12,31 @@ import CoreData
 class CoreDataManager
 {
     static let sharedInstance = CoreDataManager()
-    private init(){
-        let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Banks.sqlite")
+    fileprivate init(){
+        let storeURL = self.applicationDocumentsDirectory.appendingPathComponent("Banks.sqlite")
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        try! persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+        try! persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
         managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
     }
     
-    private var banksPreloaded : Bool {
+    fileprivate var banksPreloaded : Bool {
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey("UserDefaultsBanksPreloaded")
+            return UserDefaults.standard.bool(forKey: "UserDefaultsBanksPreloaded")
         }
         set {
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "UserDefaultsBanksPreloaded")
+            UserDefaults.standard.set(newValue, forKey: "UserDefaultsBanksPreloaded")
         }
     }
     
-    private let applicationDocumentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
+    fileprivate let applicationDocumentsDirectory = FileManager.default.urls(for :.documentDirectory, in: .userDomainMask).last!
     
-    private let managedObjectModel : NSManagedObjectModel = {
-            let url = NSBundle.mainBundle().URLForResource("Banks", withExtension: "momd")
-            return NSManagedObjectModel(contentsOfURL: url!)!
+    fileprivate let managedObjectModel : NSManagedObjectModel = {
+        let url = Bundle.main.url(forResource: "Banks", withExtension: "momd")
+            return NSManagedObjectModel(contentsOf: url!)!
     }()
     
-    private let persistentStoreCoordinator : NSPersistentStoreCoordinator
+    fileprivate let persistentStoreCoordinator : NSPersistentStoreCoordinator
     
     let managedObjectContext : NSManagedObjectContext
     
@@ -44,9 +44,10 @@ class CoreDataManager
     {
         if banksPreloaded { return }
         
-        if let filePath = NSBundle.mainBundle().pathForResource("Banks", ofType: "json"),
-            let banksData = NSData(contentsOfFile: filePath),
-        let banks = try! NSJSONSerialization.JSONObjectWithData(banksData, options: []) as? [[String:AnyObject]]
+        if let filePath = Bundle.main.path(forResource: "Banks", ofType: "json"),
+            let url = URL(string: "file://\(filePath)"),
+            let banksData = try? Data(contentsOf: url),
+            let banks = try! JSONSerialization.jsonObject(with: banksData, options: []) as? [[String:AnyObject]]
         {
             for bankInfo in banks {
                 let _ = Bank(info: bankInfo, inContext: managedObjectContext)

@@ -11,35 +11,35 @@ import DTTableViewManager
 import DTModelStorage
 import Nimble
 
-class CustomizableViewController: DTTestTableViewController, DTViewModelMappingCustomizable {
+class CustomizableViewController: DTTestTableViewController, ViewModelMappingCustomizing {
     
     var mappingSelectableBlock : (([ViewModelMapping], Any) -> ViewModelMapping?)?
     
-    func viewModelMappingFromCandidates(candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
+    func viewModelMapping(fromCandidates candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
         return mappingSelectableBlock?(candidates, model)
     }
 }
 
 class IntCell : UITableViewCell, ModelTransfer {
-    func updateWithModel(model: Int) {
+    func update(with model: Int) {
         
     }
 }
 
 class AnotherIntCell : UITableViewCell, ModelTransfer {
-    func updateWithModel(model: Int) {
+    func update(with model: Int) {
         
     }
 }
 
 class IntHeader: UITableViewHeaderFooterView, ModelTransfer {
-    func updateWithModel(model: Int) {
+    func update(with model: Int) {
         
     }
 }
 
 class AnotherIntHeader: UITableViewHeaderFooterView, ModelTransfer {
-    func updateWithModel(model: Int) {
+    func update(with model: Int) {
         
     }
 }
@@ -53,43 +53,43 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
         controller = CustomizableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManagingWithDelegate(controller)
+        controller.manager.startManaging(withDelegate: controller)
         controller.manager.storage = MemoryStorage()
     }
     
     func testMappingCustomizableAllowsSelectingAnotherCellMapping() {
-        controller.manager.registerCellClass(IntCell)
-        controller.manager.registerCellClass(AnotherIntCell)
+        controller.manager.register(IntCell.self)
+        controller.manager.register(AnotherIntCell.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }
         
         controller.manager.memoryStorage.addItem(3)
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAtIndexPath: indexPath(0, 0))
+        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         
         expect(cell is AnotherIntCell).to(beTrue())
     }
     
     func testMappingCustomizableAllowsSelectingAnotherHeaderMapping() {
-        controller.manager.registerNiblessHeaderClass(IntHeader)
-        controller.manager.registerNiblessHeaderClass(AnotherIntHeader)
+        controller.manager.registerNiblessHeader(IntHeader.self)
+        controller.manager.registerNiblessHeader(AnotherIntHeader.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }
         
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(AnotherIntHeader))
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(AnotherIntHeader.self))
     }
     
     func testMappingCustomizableAllowsSelectingAnotherFooterMapping() {
-        controller.manager.registerNiblessFooterClass(IntHeader)
-        controller.manager.registerNiblessFooterClass(AnotherIntHeader)
+        controller.manager.registerNiblessFooter(IntHeader.self)
+        controller.manager.registerNiblessFooter(AnotherIntHeader.self)
         controller.mappingSelectableBlock = { mappings, model in
             return mappings.last
         }
         
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(AnotherIntHeader))
+        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(AnotherIntHeader.self))
     }
 }

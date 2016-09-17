@@ -8,7 +8,7 @@
 
 import Foundation
 
-func indexPath(item: Int, _ section: Int) -> NSIndexPath
+func indexPath(_ item: Int, _ section: Int) -> IndexPath
 {
-    return NSIndexPath(forItem: item, inSection: section)
+    return IndexPath(item: item, section: section)
 }

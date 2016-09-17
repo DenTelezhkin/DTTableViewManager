@@ -11,7 +11,7 @@ import DTModelStorage
 import DTTableViewManager
 
 class StringCell: UITableViewCell, ModelTransfer {
-    func updateWithModel(model: String) {
+    func update(with model: String) {
         self.textLabel?.text = model
     }
 

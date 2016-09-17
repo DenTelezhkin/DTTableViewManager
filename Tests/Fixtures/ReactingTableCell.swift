@@ -11,7 +11,7 @@ import DTModelStorage
 
 class ReactingTableCell: UITableViewCell, ModelTransfer {
 
-    func updateWithModel(model: Int) {
+    func update(with model: Int) {
         
     }
 
@@ -19,7 +19,7 @@ class ReactingTableCell: UITableViewCell, ModelTransfer {
 
 class SelectionReactingTableCell: ReactingTableCell
 {
-    var indexPath: NSIndexPath?
+    var indexPath: IndexPath?
     var cell: SelectionReactingTableCell?
     var model : Int?
 }

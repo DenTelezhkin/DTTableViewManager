@@ -29,28 +29,24 @@ import DTModelStorage
 
 extension UIView
 {
-    /// Load view from xib in specific bundle.
-    /// - Parameter xibName: Name of xib file
-    /// - Returns: Loaded xib
-    class func dt_loadFromXibNamed(xibName : String) -> UIView?
+    /// Loads view from xib with `xibName` in bundle for current class.
+    static func dt_loadFromXibNamed(_ xibName : String) -> UIView?
     {
-        guard let topLevelObjects = NSBundle(forClass: self).loadNibNamed(xibName, owner: nil, options: nil) else {
+        guard let topLevelObjects = Bundle(for: self).loadNibNamed(xibName, owner: nil, options: nil) else {
             return nil
         }
-        
-        for object in topLevelObjects {
-            if object.isKindOfClass(self) {
+
+        for object in topLevelObjects.flatMap( { $0 as AnyObject }) {
+            if object.isKind(of: self) {
                 return object as? UIView
             }
         }
         return nil
     }
-    
-    /// Load view in specific bundle.
-    /// - Note: Xib name used is identical to class name, without module part, for example. Foo.View class -> "View".xib
-    /// - Returns: Loaded xib
-    class func dt_loadFromXib() -> UIView?
+
+    /// Loads view from xib with `String(describing:self)` name in bundle for current class.
+    static func dt_loadFromXib() -> UIView?
     {
-        return self.dt_loadFromXibNamed(String(self))
+        return self.dt_loadFromXibNamed(String(describing: self))
     }
 }

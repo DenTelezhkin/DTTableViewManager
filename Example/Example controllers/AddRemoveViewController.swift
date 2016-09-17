@@ -15,23 +15,26 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.startManagingWithDelegate(self)
-        manager.registerCellClass(StringCell.self, whenSelected: { [weak self] (_, model, indexPath)  in
+        
+        manager.startManaging(withDelegate: self)
+        manager.register(StringCell.self)
+        manager.didSelect(StringCell.self) { [weak self] (_, model, indexPath)  in
             let alert = UIAlertController(title: "Selected cell",
                 message: "with model: \(model) at indexPath: \(indexPath)",
-                preferredStyle: .Alert)
-            let action = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alert.addAction(action)
-            self?.presentViewController(alert, animated: true, completion: nil)
-        })
+            self?.present(alert, animated: true, completion: nil)
+        }
+        manager.commitEditingStyle(for: StringCell.self) { [weak self] _, _, _, indexPath in
+            self?.manager.memoryStorage.removeItems(at: [indexPath])
+        }
+        manager.heightForCell(withItem: String.self) { string, indexPath -> CGFloat in
+            return 80
+        }
     }
     
-    @IBAction func addItem(sender: AnyObject) {
-        manager.memoryStorage.addItem("Row # \(manager.memoryStorage.sectionAtIndex(0)?.numberOfItems ?? 0)")
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
-    {
-        manager.memoryStorage.removeItemsAtIndexPaths([indexPath])
+    @IBAction func addItem(_ sender: AnyObject) {
+        manager.memoryStorage.addItem("Row # \(manager.memoryStorage.section(atIndex: 0)?.numberOfItems ?? 0)")
     }
 }

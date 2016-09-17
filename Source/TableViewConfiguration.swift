@@ -31,40 +31,22 @@ import UIKit
 /// - Note: When any mapping method for header or footer view is called, styles are automatically switched to .View
 public enum SupplementarySectionStyle
 {
-    case Title
-    case View
+    case title
+    case view
 }
 
 /// Defines most commonly used configuration properties for UITableView
 public struct TableViewConfiguration
 {
     /// Section header style. Default - .Title.
-    public var sectionHeaderStyle = SupplementarySectionStyle.Title
+    public var sectionHeaderStyle = SupplementarySectionStyle.title
     
     /// Section footer style. Default - .Title
-    public var sectionFooterStyle = SupplementarySectionStyle.Title
+    public var sectionFooterStyle = SupplementarySectionStyle.title
     
     /// Defines, whether to show header on a section, that does not contain any items. Default is true.
     public var displayHeaderOnEmptySection = true
     
     /// Defines, whether to show footer on a section, that does not contain any items. Default is true.
     public var displayFooterOnEmptySection = true
-    
-    /// Insert section animation. Default - .None.
-    public var insertSectionAnimation = UITableViewRowAnimation.None
-    
-    /// Delete section animation. Default - .Automatic
-    public var deleteSectionAnimation = UITableViewRowAnimation.Automatic
-    
-    /// Reload section animation. Default - .Automatic.
-    public var reloadSectionAnimation = UITableViewRowAnimation.Automatic
-    
-    /// Insert row animation. Default - .Automatic.
-    public var insertRowAnimation = UITableViewRowAnimation.Automatic
-    
-    /// Delete row animation. Default - .Automatic.
-    public var deleteRowAnimation = UITableViewRowAnimation.Automatic
-    
-    /// Reload row animation. Default - .Automatic.
-    public var reloadRowAnimation = UITableViewRowAnimation.Automatic
 }

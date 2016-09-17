@@ -15,7 +15,7 @@ class ReactingHeaderFooterView : UITableViewHeaderFooterView, ModelTransfer
     var sectionIndex: Int?
     var model : String?
     
-    func updateWithModel(model: String) {
+    func update(with model: String) {
         self.model = model
     }
 }

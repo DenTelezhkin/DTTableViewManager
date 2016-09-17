@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,6 +17,20 @@
                BlueprintIdentifier = "9A2A38BB1AEE285E0021E97D"
                BuildableName = "DTTableViewManager.framework"
                BlueprintName = "DTTableViewManager-iOS"
+               ReferencedContainer = "container:DTTableViewManager.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9AF003191A5ABE7000ABFC90"
+               BuildableName = "Tests-iOS.xctest"
+               BlueprintName = "Tests-iOS"
                ReferencedContainer = "container:DTTableViewManager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

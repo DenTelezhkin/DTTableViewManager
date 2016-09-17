@@ -19,8 +19,8 @@ class Bank : NSManagedObject
     
     convenience init(info : [String:AnyObject], inContext context: NSManagedObjectContext)
     {
-        let entity = NSEntityDescription.entityForName("Bank", inManagedObjectContext: context)
-        self.init(entity: entity!, insertIntoManagedObjectContext: context)
+        let entity = NSEntityDescription.entity(forEntityName: "Bank", in: context)
+        self.init(entity: entity!, insertInto: context)
         name = info["name"] as? String ?? ""
         city = info["city"] as? String ?? ""
         zip = info["zip"] as? Int ?? 0

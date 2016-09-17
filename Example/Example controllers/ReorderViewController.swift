@@ -10,34 +10,28 @@ import UIKit
 import DTTableViewManager
 import DTModelStorage
 
-class ReorderViewController: UIViewController, DTTableViewManageable {
+class ReorderViewController: UIViewController, DTTableViewManageable, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         self.tableView.setEditing(editing, animated: animated)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.startManagingWithDelegate(self)
-        manager.registerCellClass(StringCell)
+        manager.startManaging(withDelegate: self)
+        manager.register(StringCell.self)
         
         manager.memoryStorage.addItems(["Section 1 cell", "Section 1 cell"], toSection: 0)
         manager.memoryStorage.addItems(["Section 2 cell"], toSection: 1)
         manager.memoryStorage.addItems(["Section 3 cell", "Section 3 cell", "Section 3 cell"], toSection: 2)
+        manager.canMove(StringCell.self, { _ in return true })
+        manager.editingStyle(for: StringCell.self, { _ in return .none })
         
         manager.memoryStorage.setSectionHeaderModels(["Section 1", "Section 2", "Section 3"])
         
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    
-     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .None
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 }

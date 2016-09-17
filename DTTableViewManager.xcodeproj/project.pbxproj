@@ -54,12 +54,8 @@
 		9A383CE51CE1DBAA0081D843 /* DTTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE31CE1DBAA0081D843 /* DTTestTableViewController.swift */; };
 		9A383CF01CE1DBCA0081D843 /* CreationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE61CE1DBCA0081D843 /* CreationTestCase.swift */; };
 		9A383CF11CE1DBCA0081D843 /* CreationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE61CE1DBCA0081D843 /* CreationTestCase.swift */; };
-		9A383CF21CE1DBCA0081D843 /* DataBindingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE71CE1DBCA0081D843 /* DataBindingTestCase.swift */; };
-		9A383CF31CE1DBCA0081D843 /* DataBindingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE71CE1DBCA0081D843 /* DataBindingTestCase.swift */; };
 		9A383CF41CE1DBCA0081D843 /* DatasourceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */; };
 		9A383CF51CE1DBCA0081D843 /* DatasourceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */; };
-		9A383CF61CE1DBCA0081D843 /* DelegateForwardingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE91CE1DBCA0081D843 /* DelegateForwardingTestCase.swift */; };
-		9A383CF71CE1DBCA0081D843 /* DelegateForwardingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CE91CE1DBCA0081D843 /* DelegateForwardingTestCase.swift */; };
 		9A383CF81CE1DBCA0081D843 /* MappingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */; };
 		9A383CF91CE1DBCA0081D843 /* MappingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */; };
 		9A383CFC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383CEC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift */; };
@@ -93,6 +89,8 @@
 		9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */; };
 		9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AB666CD1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */; };
+		9AB666CE1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */; };
 		9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */; };
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
 		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
@@ -302,9 +300,7 @@
 		9A383CD41CE1DB8A0081D843 /* StoryboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardCell.swift; path = Tests/Fixtures/StoryboardCell.swift; sourceTree = SOURCE_ROOT; };
 		9A383CE31CE1DBAA0081D843 /* DTTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DTTestTableViewController.swift; path = Tests/Fixtures/DTTestTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		9A383CE61CE1DBCA0081D843 /* CreationTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreationTestCase.swift; path = Tests/CreationTestCase.swift; sourceTree = SOURCE_ROOT; };
-		9A383CE71CE1DBCA0081D843 /* DataBindingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBindingTestCase.swift; path = Tests/DataBindingTestCase.swift; sourceTree = SOURCE_ROOT; };
 		9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatasourceTestCase.swift; path = Tests/DatasourceTestCase.swift; sourceTree = SOURCE_ROOT; };
-		9A383CE91CE1DBCA0081D843 /* DelegateForwardingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DelegateForwardingTestCase.swift; path = Tests/DelegateForwardingTestCase.swift; sourceTree = SOURCE_ROOT; };
 		9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MappingTestCase.swift; path = Tests/MappingTestCase.swift; sourceTree = SOURCE_ROOT; };
 		9A383CEC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactingToEventsTestCase.swift; path = Tests/ReactingToEventsTestCase.swift; sourceTree = SOURCE_ROOT; };
 		9A383CED1CE1DBCA0081D843 /* StoryboardMappingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardMappingTestCase.swift; path = Tests/StoryboardMappingTestCase.swift; sourceTree = SOURCE_ROOT; };
@@ -326,6 +322,7 @@
 		9A9B170D1B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A9B170F1B65771600D8ABD3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9A9B17121B65771600D8ABD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewUpdater.swift; path = Source/TableViewUpdater.swift; sourceTree = "<group>"; };
 		9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataSearchViewController.swift; path = "Example controllers/Search/CoreDataSearchViewController.swift"; sourceTree = "<group>"; };
 		9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9ABE07441B85FE4E00636D78 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = CoreData/Bank.swift; sourceTree = "<group>"; };
@@ -395,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */,
+				9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */,
 				9A383C971CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift */,
 				9A383C981CE1D9FD0081D843 /* TableViewConfiguration.swift */,
 				9A383C991CE1D9FD0081D843 /* TableViewFactory.swift */,
@@ -457,10 +455,10 @@
 		9A587D5C1CE334EB0094C821 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9A587D651CE334EB0094C821 /* Nimble.framework */,
-				9A587D671CE334EB0094C821 /* NimbleTests.xctest */,
 				9A587D691CE334EB0094C821 /* Nimble.framework */,
 				9A587D6B1CE334EB0094C821 /* NimbleTests.xctest */,
+				9A587D651CE334EB0094C821 /* Nimble.framework */,
+				9A587D671CE334EB0094C821 /* NimbleTests.xctest */,
 				9A587D6D1CE334EB0094C821 /* Nimble.framework */,
 				9A587D6F1CE334EB0094C821 /* NimbleTests.xctest */,
 			);
@@ -600,9 +598,7 @@
 				9A383CAA1CE1DAC40081D843 /* NSIndexPath+Constructor.swift */,
 				9A1A49A01B54555D0006610B /* Fixtures */,
 				9A383CE61CE1DBCA0081D843 /* CreationTestCase.swift */,
-				9A383CE71CE1DBCA0081D843 /* DataBindingTestCase.swift */,
 				9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */,
-				9A383CE91CE1DBCA0081D843 /* DelegateForwardingTestCase.swift */,
 				9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */,
 				9A383CEC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift */,
 				9A383CED1CE1DBCA0081D843 /* StoryboardMappingTestCase.swift */,
@@ -745,20 +741,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Denys Telezhkin";
 				TargetAttributes = {
 					9A2A38BB1AEE285E0021E97D = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0800;
 					};
 					9A6CED8B1BE571860091B0AF = {
 						CreatedOnToolsVersion = 7.1;
 					};
 					9A9B17011B65771600D8ABD3 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0800;
 					};
 					9AF003191A5ABE7000ABFC90 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -921,6 +920,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A383C9D1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */,
+				9AB666CD1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
 				9A383CA31CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383C9F1CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
 				9A383C9B1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
@@ -933,7 +933,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A383CDA1CE1DB8A0081D843 /* FixtureViews.swift in Sources */,
-				9A383CF31CE1DBCA0081D843 /* DataBindingTestCase.swift in Sources */,
 				9A383CF11CE1DBCA0081D843 /* CreationTestCase.swift in Sources */,
 				9A383D031CE1DBCA0081D843 /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				9A383CD61CE1DB8A0081D843 /* FixtureCells.swift in Sources */,
@@ -947,7 +946,6 @@
 				9A383CE01CE1DB8A0081D843 /* ReactingTableCell.swift in Sources */,
 				9A383D011CE1DBCA0081D843 /* TableViewFactoryTestCase.swift in Sources */,
 				9A383CF91CE1DBCA0081D843 /* MappingTestCase.swift in Sources */,
-				9A383CF71CE1DBCA0081D843 /* DelegateForwardingTestCase.swift in Sources */,
 				9A383CE51CE1DBAA0081D843 /* DTTestTableViewController.swift in Sources */,
 				9A383CDC1CE1DB8A0081D843 /* OptionalCells.swift in Sources */,
 				9A383CFD1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift in Sources */,
@@ -960,6 +958,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A383C9E1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */,
+				9AB666CE1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
 				9A383CA41CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383CA01CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
 				9A383C9C1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
@@ -992,7 +991,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A383CD91CE1DB8A0081D843 /* FixtureViews.swift in Sources */,
-				9A383CF21CE1DBCA0081D843 /* DataBindingTestCase.swift in Sources */,
 				9A383CF01CE1DBCA0081D843 /* CreationTestCase.swift in Sources */,
 				9A383D021CE1DBCA0081D843 /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				9A383CD51CE1DB8A0081D843 /* FixtureCells.swift in Sources */,
@@ -1006,7 +1004,6 @@
 				9A383CDF1CE1DB8A0081D843 /* ReactingTableCell.swift in Sources */,
 				9A383D001CE1DBCA0081D843 /* TableViewFactoryTestCase.swift in Sources */,
 				9A383CF81CE1DBCA0081D843 /* MappingTestCase.swift in Sources */,
-				9A383CF61CE1DBCA0081D843 /* DelegateForwardingTestCase.swift in Sources */,
 				9A383CE41CE1DBAA0081D843 /* DTTestTableViewController.swift in Sources */,
 				9A383CDB1CE1DB8A0081D843 /* OptionalCells.swift in Sources */,
 				9A383CFC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift in Sources */,
@@ -1112,6 +1109,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlsdev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DTTableViewManager;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1137,6 +1135,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlsdev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DTTableViewManager;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1145,6 +1145,7 @@
 		9A6CED7B1BE570750091B0AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1176,6 +1177,7 @@
 		9A6CED7C1BE570750091B0AF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1198,6 +1200,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1271,6 +1274,7 @@
 				PRODUCT_NAME = DTTableViewManager;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1280,6 +1284,7 @@
 		9A9B17211B65771600D8ABD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1288,7 +1293,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1312,6 +1316,7 @@
 		9A9B17221B65771600D8ABD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1321,7 +1326,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COPY_PHASE_STRIP = NO;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1342,6 +1346,7 @@
 		9AF003221A5ABE7000ABFC90 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1350,10 +1355,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Checkouts/DTModelStorage/Carthage/Checkouts/Nimble/build/Debug-iphoneos",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1368,12 +1369,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		9AF003231A5ABE7000ABFC90 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1383,10 +1386,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Checkouts/DTModelStorage/Carthage/Checkouts/Nimble/build/Debug-iphoneos",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1397,6 +1396,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1404,33 +1405,44 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1438,25 +1450,38 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};

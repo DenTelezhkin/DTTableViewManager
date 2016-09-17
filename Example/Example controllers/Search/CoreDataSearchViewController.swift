@@ -15,10 +15,11 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 
     @IBOutlet weak var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
-    let fetchResultsController: NSFetchedResultsController = {
+    let fetchResultsController: NSFetchedResultsController<Bank> = {
     
         let context = CoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: "Bank")
+        let request = NSFetchRequest<Bank>()
+        request.entity = NSEntityDescription.entity(forEntityName: "Bank", in: context)
         request.fetchBatchSize = 20
         request.sortDescriptors = [NSSortDescriptor(key: "zip", ascending: true)]
         
@@ -29,10 +30,13 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.startManagingWithDelegate(self)
+        manager.startManaging(withDelegate: self)
 
-        manager.registerCellClass(BankCell)
+        manager.register(BankCell.self)
         manager.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
+        (manager.tableViewUpdater as? TableViewUpdater)?.didUpdateContent = { [weak self] _ in
+            self?.tableView.isHidden = self?.tableView.numberOfSections == 0
+        }
 
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = true
@@ -41,16 +45,9 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
     }
 }
 
-extension CoreDataSearchViewController : DTTableViewContentUpdatable
-{
-    func afterContentUpdate() {
-        self.tableView.hidden = self.tableView.numberOfSections == 0
-    }
-}
-
 extension CoreDataSearchViewController : UISearchResultsUpdating
 {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let searchString = searchController.searchBar.text ?? ""
         if searchString == "" {
             self.fetchResultsController.fetchRequest.predicate = nil
@@ -59,6 +56,6 @@ extension CoreDataSearchViewController : UISearchResultsUpdating
             self.fetchResultsController.fetchRequest.predicate = predicate
         }
         try! fetchResultsController.performFetch()
-        manager.storageNeedsReloading()
+        tableView.reloadData()
     }
 }

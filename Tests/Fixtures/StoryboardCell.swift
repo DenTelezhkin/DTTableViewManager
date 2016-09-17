@@ -12,7 +12,7 @@ import DTModelStorage
 class StoryboardCell : UITableViewCell, ModelTransfer
 {
     @IBOutlet weak var storyboardLabel: UILabel!
-    func updateWithModel(model: Int) {
+    func update(with model: Int) {
         
     }
 }
