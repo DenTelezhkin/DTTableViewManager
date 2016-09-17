@@ -4,8 +4,8 @@ matrix:
       env: ACTION=iOS
     - os: osx
       env: ACTION=tvOS
-    - os: osx
-      env: ACTION=carthage
+    # - os: osx
+    #   env: ACTION=carthage
     - os: osx
       env: ACTION=cocoapods
 
