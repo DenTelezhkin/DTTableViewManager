@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Next
+
+### Added
+
+* `DTTableViewOptionalManageable` protocol, that is identical to `DTTableViewManageable`, but allows optional `tableView` property instead of implicitly unwrapped one.
+
 ## [5.0.0-beta.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.0.0-beta.1)
 
 This is a major release, written in Swift 3. Read [Migration guide](Documentation/DTTableViewManager 5.0 migration guide.md) with descriptions of all features and changes.

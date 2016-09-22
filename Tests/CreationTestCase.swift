@@ -19,8 +19,20 @@ class FooCell : UITableViewCell, ModelTransfer
     }
 }
 
+class OptionalTableViewController : UIViewController, DTTableViewOptionalManageable {
+    var tableView: UITableView?
+}
+
 class CreationTestCase: XCTestCase {
 
+    func testManagingWithOptionalTableViewWorks() {
+        let controller = OptionalTableViewController()
+        controller.tableView = UITableView()
+        controller.manager.startManaging(withDelegate: controller)
+        
+        expect(controller.manager.isManagingTableView).to(beTrue())
+    }
+    
     func testCreatingTableControllerFromCode()
     {
         let controller = DTTestTableViewController()

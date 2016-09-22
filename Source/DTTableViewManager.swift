@@ -36,6 +36,11 @@ public protocol DTTableViewManageable : class, NSObjectProtocol
     var tableView : UITableView! { get }
 }
 
+/// This protocol is similar to `DTTableViewManageable`, but allows using optional `UITableView` property.
+public protocol DTTableViewOptionalManageable : class, NSObjectProtocol {
+    var tableView : UITableView? { get }
+}
+
 /// This key is used to store `DTTableViewManager` instance on `DTTableViewManageable` class using object association.
 private var DTTableViewManagerAssociatedKey = "DTTableViewManager Associated Key"
 
@@ -60,6 +65,25 @@ extension DTTableViewManageable
     }
 }
 
+extension DTTableViewOptionalManageable {
+    /// Lazily instantiated `DTTableViewManager` instance. When your table view is loaded, call startManagingWithDelegate: method and `DTTableViewManager` will take over UITableView datasource and delegate. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
+    /// - SeeAlso: `startManagingWithDelegate:`
+    public var manager : DTTableViewManager
+        {
+        get {
+            var object = objc_getAssociatedObject(self, &DTTableViewManagerAssociatedKey)
+            if object == nil {
+                object = DTTableViewManager()
+                objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, object, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
+            return object as! DTTableViewManager
+        }
+        set {
+            objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+}
+
 /// `DTTableViewManager` manages many of `UITableView` datasource and delegate methods and provides API for managing your data models in the table. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
 /// - SeeAlso: `startManagingWithDelegate:`
 open class DTTableViewManager : NSObject {
@@ -67,11 +91,13 @@ open class DTTableViewManager : NSObject {
     /// Internal weak link to `UITableView`
     final fileprivate var tableView : UITableView?
     {
-        return self.delegate?.tableView
+        if let delegate = delegate as? DTTableViewManageable { return delegate.tableView }
+        if let delegate = delegate as? DTTableViewOptionalManageable { return delegate.tableView }
+        return nil
     }
     
     /// `DTTableViewManageable` delegate.
-    final fileprivate weak var delegate : DTTableViewManageable?
+    final fileprivate weak var delegate : AnyObject?
     
     /// Bool property, that will be true, after `startManagingWithDelegate` method is called on `DTTableViewManager`.
     open var isManagingTableView : Bool {
@@ -155,8 +181,25 @@ open class DTTableViewManager : NSObject {
         guard let tableView = delegate.tableView else {
             preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
         }
-        
         self.delegate = delegate
+        startManaging(with: tableView)
+    }
+    
+    /// Starts managing `UITableView`.
+    ///
+    /// Call this method before calling any of `DTTableViewManager` methods.
+    /// - Precondition: UITableView instance on `delegate` should not be nil.
+    /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
+    open func startManaging(withDelegate delegate : DTTableViewOptionalManageable)
+    {
+        guard let tableView = delegate.tableView else {
+            preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
+        }
+        self.delegate = delegate
+        startManaging(with: tableView)
+    }
+    
+    fileprivate func startManaging(with tableView: UITableView) {
         tableView.delegate = self
         tableView.dataSource = self
         if let mappingDelegate = delegate as? ViewModelMappingCustomizing {
@@ -180,7 +223,7 @@ open class DTTableViewManager : NSObject {
     /// 
     /// - Precondition: UITableView instance on `delegate` should not be nil.
     open func coreDataUpdater() -> TableViewUpdater {
-        guard let tableView = delegate?.tableView else {
+        guard let tableView = tableView else {
             preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
         }
         return TableViewUpdater(tableView: tableView,
