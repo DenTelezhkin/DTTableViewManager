@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## Next
+## [5.0.0-beta.2](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.0.0-beta.2)
 
 ### Added
 
 * `DTTableViewOptionalManageable` protocol, that is identical to `DTTableViewManageable`, but allows optional `tableView` property instead of implicitly unwrapped one.
+* Enabled `RealmStorage` from `DTModelStorage` dependency
 
 ## [5.0.0-beta.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.0.0-beta.1)
 

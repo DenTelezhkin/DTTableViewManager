@@ -279,6 +279,7 @@ catch let error as MemoryStorageError {
 
 #### Miscellaneous API Additions
 
+* `DTTableViewOptionalManageable` now mirrors `DTTableViewManageable` functionality, but allows using optional `tableView` property.
 * `SectionModel` and `RealmSection` objects now have `currentSectionIndex` property
 * `DTTableViewManager` how has `isManagingTableView` Bool property
 * `MemoryStorage` now has `removeItems(fromSection:)` method
