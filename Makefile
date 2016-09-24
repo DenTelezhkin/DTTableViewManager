@@ -29,4 +29,4 @@ test-carthage:
 	ls Carthage/build/iOS/DTTableViewManager.framework
 
 test-cocoapods:
-	FORK_XCODE_WRITING=true pod repo update && pod lib lint --allow-warnings --verbose
+	pod repo update && pod lib lint --allow-warnings --verbose
