@@ -908,7 +908,7 @@ extension DTTableViewManager: UITableViewDelegate
         {
             return self.tableView?.sectionHeaderHeight ?? CGFloat.leastNormalMagnitude
         }
-        return CGFloat.leastNormalMagnitude
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForHeaderInSection: section) ?? CGFloat.leastNormalMagnitude
     }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
@@ -932,7 +932,7 @@ extension DTTableViewManager: UITableViewDelegate
         if let _ = self.footerModelForSectionIndex(section) {
             return self.tableView?.sectionFooterHeight ?? CGFloat.leastNormalMagnitude
         }
-        return CGFloat.leastNormalMagnitude
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForFooterInSection: section) ?? CGFloat.leastNormalMagnitude
     }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
