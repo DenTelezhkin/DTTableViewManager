@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.0.0-beta.3](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.0.0-beta.3)
+
+* `DTModelStorage` dependency now requires `Realm 2.0`
+* `UITableViewDelegate` `heightForHeaderInSection` and `heightForFooterInSection` are now properly called on the delegate, if it implements it(thanks, @augmentedworks!).
+
 ## [5.0.0-beta.2](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.0.0-beta.2)
 
 ### Added

@@ -896,6 +896,9 @@ extension DTTableViewManager: UITableViewDelegate
         if let height = performHeaderReaction(.heightForHeaderInSection, location: section, provideView: false) as? CGFloat {
             return height
         }
+        if let height = (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForHeaderInSection: section) {
+            return height
+        }
         if configuration.sectionHeaderStyle == .title {
             if let _ = self.headerModel(forSection:section)
             {
@@ -908,7 +911,7 @@ extension DTTableViewManager: UITableViewDelegate
         {
             return self.tableView?.sectionHeaderHeight ?? CGFloat.leastNormalMagnitude
         }
-        return (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForHeaderInSection: section) ?? CGFloat.leastNormalMagnitude
+        return CGFloat.leastNormalMagnitude
     }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
@@ -922,6 +925,9 @@ extension DTTableViewManager: UITableViewDelegate
         if let height = performFooterReaction(.heightForFooterInSection, location: section, provideView: false) as? CGFloat {
             return height
         }
+        if let height = (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForFooterInSection: section) {
+            return height
+        }
         if configuration.sectionFooterStyle == .title {
             if let _ = self.footerModelForSectionIndex(section) {
                 return UITableViewAutomaticDimension
@@ -932,7 +938,7 @@ extension DTTableViewManager: UITableViewDelegate
         if let _ = self.footerModelForSectionIndex(section) {
             return self.tableView?.sectionFooterHeight ?? CGFloat.leastNormalMagnitude
         }
-        return (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForFooterInSection: section) ?? CGFloat.leastNormalMagnitude
+        return CGFloat.leastNormalMagnitude
     }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
