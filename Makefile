@@ -2,10 +2,10 @@ SHELL := /bin/bash
 # Install Tasks
 
 install-iOS:
-	true
+	xcrun instruments -w "iPhone 6s (10.0)" || true
 
 install-tvOS:
-	true
+	xcrun instruments -w "Apple TV 1080p (10.0)" || true
 
 install-carthage:
 	brew remove carthage --force || true
