@@ -176,12 +176,12 @@ final class TableViewFactory
         tableView.register(nilNib, forHeaderFooterViewReuseIdentifier: String(describing: self))
     }
     
-    func viewModelMappingForViewType(_ viewType: ViewType, model: Any) -> ViewModelMapping?
+    func viewModelMapping(for viewType: ViewType, model: Any) -> ViewModelMapping?
     {
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
             return nil
         }
-        let mappingCandidates = mappings.mappingCandidates(forViewType: viewType, withModel: unwrappedModel)
+        let mappingCandidates = mappings.mappingCandidates(for: viewType, withModel: unwrappedModel)
         
         if let customizedMapping = mappingCustomizableDelegate?.viewModelMapping(fromCandidates: mappingCandidates, forModel: unwrappedModel) {
             return customizedMapping
@@ -198,7 +198,7 @@ final class TableViewFactory
             throw DTTableViewFactoryError.nilCellModel(indexPath)
         }
         
-        if let mapping = viewModelMappingForViewType(.cell, model: unwrappedModel)
+        if let mapping = viewModelMapping(for: .cell, model: unwrappedModel)
         {
             let cellClassName = String(describing: mapping.viewClass)
             let cell = tableView.dequeueReusableCell(withIdentifier: cellClassName, for: indexPath)
@@ -212,7 +212,7 @@ final class TableViewFactory
     func updateCellAt(_ indexPath : IndexPath, with model: Any) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else { return }
-        if let mapping = viewModelMappingForViewType(.cell, model: unwrappedModel) {
+        if let mapping = viewModelMapping(for: .cell, model: unwrappedModel) {
             mapping.updateBlock(cell, unwrappedModel)
         }
     }
@@ -238,13 +238,13 @@ final class TableViewFactory
         }
     }
     
-    func headerFooterViewOfType(_ type: ViewType, model : Any, atIndexPath indexPath: IndexPath) throws -> UIView?
+    func headerFooterView(of type: ViewType, model : Any, atIndexPath indexPath: IndexPath) throws -> UIView?
     {
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
             throw DTTableViewFactoryError.nilHeaderFooterModel(section: (indexPath as NSIndexPath).section)
         }
         
-        if let mapping = viewModelMappingForViewType(type, model: unwrappedModel) {
+        if let mapping = viewModelMapping(for: type, model: unwrappedModel) {
             return headerFooterViewWithMapping(mapping, unwrappedModel: unwrappedModel)
         }
         
@@ -253,13 +253,13 @@ final class TableViewFactory
     
     func headerViewForModel(_ model: Any, atIndexPath indexPath: IndexPath) throws -> UIView?
     {
-        return try headerFooterViewOfType(.supplementaryView(kind: DTTableViewElementSectionHeader),
+        return try headerFooterView(of: .supplementaryView(kind: DTTableViewElementSectionHeader),
             model: model, atIndexPath: indexPath)
     }
     
     func footerViewForModel(_ model: Any, atIndexPath indexPath: IndexPath) throws -> UIView?
     {
-        return try headerFooterViewOfType(.supplementaryView(kind: DTTableViewElementSectionFooter),
+        return try headerFooterView(of: .supplementaryView(kind: DTTableViewElementSectionFooter),
             model: model, atIndexPath: indexPath)
     }
 }

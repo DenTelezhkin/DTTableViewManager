@@ -65,7 +65,7 @@ class TableViewFactoryTestCase: XCTestCase {
     func testNilHeaderFooterModel() {
         let model: Int? = nil
         do {
-            try _ = controller.manager.viewFactory.headerFooterViewOfType(.supplementaryView(kind: "Foo"), model: model, atIndexPath: IndexPath(index: 0))
+            try _ = controller.manager.viewFactory.headerFooterView(of: .supplementaryView(kind: "Foo"), model: model, atIndexPath: IndexPath(index: 0))
         } catch DTTableViewFactoryError.nilHeaderFooterModel(let section) {
             expect(section) == 0
         } catch {

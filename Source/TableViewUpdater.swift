@@ -17,37 +17,37 @@ open class TableViewUpdater : StorageUpdating {
     weak var tableView: UITableView?
     
     /// closure to be executed before content is updated
-    public var willUpdateContent: ((StorageUpdate?) -> Void)? = nil
+    open var willUpdateContent: ((StorageUpdate?) -> Void)? = nil
     
     /// closure to be executed after content is updated
-    public var didUpdateContent: ((StorageUpdate?) -> Void)? = nil
+    open var didUpdateContent: ((StorageUpdate?) -> Void)? = nil
     
     /// Insert section animation. Default - .None.
-    public var insertSectionAnimation = UITableViewRowAnimation.none
+    open var insertSectionAnimation = UITableViewRowAnimation.none
     
     /// Delete section animation. Default - .Automatic
-    public var deleteSectionAnimation = UITableViewRowAnimation.automatic
+    open var deleteSectionAnimation = UITableViewRowAnimation.automatic
     
     /// Reload section animation. Default - .Automatic.
-    public var reloadSectionAnimation = UITableViewRowAnimation.automatic
+    open var reloadSectionAnimation = UITableViewRowAnimation.automatic
     
     /// Insert row animation. Default - .Automatic.
-    public var insertRowAnimation = UITableViewRowAnimation.automatic
+    open var insertRowAnimation = UITableViewRowAnimation.automatic
     
     /// Delete row animation. Default - .Automatic.
-    public var deleteRowAnimation = UITableViewRowAnimation.automatic
+    open var deleteRowAnimation = UITableViewRowAnimation.automatic
     
     /// Reload row animation. Default - .Automatic.
-    public var reloadRowAnimation = UITableViewRowAnimation.automatic
+    open var reloadRowAnimation = UITableViewRowAnimation.automatic
     
     /// Closure to be executed, when reloading a row.
     ///
     /// If this property is not nil, then reloadRowAnimation property is ignored.
     /// - SeeAlso: `DTTableViewManager.updateCellClosure()` method and `DTTableViewManager.coreDataUpdater()` method.
-    public var reloadRowClosure : ((IndexPath) -> Void)?
+    open var reloadRowClosure : ((IndexPath) -> Void)?
     
     /// When this property is true, move events will be animated as delete event and insert event.
-    public var animateMoveAsDeleteAndInsert: Bool
+    open var animateMoveAsDeleteAndInsert: Bool
     
     /// Creates updater with tableView.
     public init(tableView: UITableView, reloadRow: ((IndexPath) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {

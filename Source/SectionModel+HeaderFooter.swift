@@ -32,7 +32,7 @@ public extension SupplementaryAccessible
     /// returns UITableView header model for current section
     ///
     /// - SeeAlso: `DTTableViewElementSectionHeader`
-    var tableHeaderModel : Any? {
+    public var tableHeaderModel : Any? {
         get {
             return self.supplementaryModel(ofKind: DTTableViewElementSectionHeader, atIndex: 0)
         }
@@ -44,7 +44,7 @@ public extension SupplementaryAccessible
     /// returns UITableView footer model for current section
     ///
     /// - SeeAlso: `DTTableViewElementSectionFooter`
-    var tableFooterModel : Any? {
+    public var tableFooterModel : Any? {
         get {
             return self.supplementaryModel(ofKind: DTTableViewElementSectionFooter, atIndex: 0)
         }
