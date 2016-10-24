@@ -62,40 +62,66 @@ open class TableViewUpdater : StorageUpdating {
         
         tableView?.beginUpdates()
         
-        if update.deletedRowIndexPaths.count > 0 { tableView?.deleteRows(at: Array(update.deletedRowIndexPaths), with: deleteRowAnimation) }
-        if update.insertedRowIndexPaths.count > 0 { tableView?.insertRows(at: Array(update.insertedRowIndexPaths), with: insertRowAnimation) }
-        if update.updatedRowIndexPaths.count > 0 {
-            if let closure = reloadRowClosure {
-                update.updatedRowIndexPaths.forEach(closure)
-            } else {
-                tableView?.reloadRows(at: Array(update.updatedRowIndexPaths), with: reloadRowAnimation)
-            }
-        }
-        if update.movedRowIndexPaths.count > 0 {
-            for moveUpdate in update.movedRowIndexPaths {
-                if let from = moveUpdate.first, let to = moveUpdate.last {
-                    if animateMoveAsDeleteAndInsert {
-                        tableView?.moveRow(at: from, to: to)
+        applyObjectChanges(from: update)
+        applySectionChanges(from: update)
+        
+        tableView?.endUpdates()
+        didUpdateContent?(update)
+    }
+    
+    private func applyObjectChanges(from update: StorageUpdate) {
+        for (change,indexPaths) in update.objectChanges {
+            switch change {
+            case .insert:
+                if let indexPath = indexPaths.first {
+                    tableView?.insertRows(at: [indexPath], with: insertRowAnimation)
+                }
+            case .delete:
+                if let indexPath = indexPaths.first {
+                    tableView?.deleteRows(at: [indexPath], with: deleteRowAnimation)
+                }
+            case .update:
+                if let indexPath = indexPaths.first {
+                    if let closure = reloadRowClosure {
+                        closure(indexPath)
                     } else {
-                        tableView?.deleteRows(at: [from], with: deleteRowAnimation)
-                        tableView?.insertRows(at: [to], with: insertRowAnimation)
+                        tableView?.reloadRows(at: [indexPath], with: reloadRowAnimation)
+                    }
+                }
+            case .move:
+                if let source = indexPaths.first, let destination = indexPaths.last {
+                    if animateMoveAsDeleteAndInsert {
+                        tableView?.moveRow(at: source, to: destination)
+                    } else {
+                        tableView?.deleteRows(at: [source], with: deleteRowAnimation)
+                        tableView?.insertRows(at: [destination], with: insertRowAnimation)
                     }
                 }
             }
         }
-        
-        if update.deletedSectionIndexes.count > 0 { tableView?.deleteSections(IndexSet(update.deletedSectionIndexes), with: deleteSectionAnimation) }
-        if update.insertedSectionIndexes.count > 0 { tableView?.insertSections(IndexSet(update.insertedSectionIndexes), with: insertSectionAnimation) }
-        if update.updatedSectionIndexes.count > 0 { tableView?.reloadSections(IndexSet(update.updatedSectionIndexes), with: reloadSectionAnimation)}
-        if update.movedSectionIndexes.count > 0 {
-            for moveUpdate in update.movedSectionIndexes {
-                if let from = moveUpdate.first, let to = moveUpdate.last {
-                    tableView?.moveSection(from, toSection: to)
+    }
+    
+    private func applySectionChanges(from update: StorageUpdate) {
+        for (change,indices) in update.sectionChanges {
+            switch change {
+            case .delete:
+                if let index = indices.first {
+                    tableView?.deleteSections([index], with: deleteSectionAnimation)
+                }
+            case .insert:
+                if let index = indices.first {
+                    tableView?.insertSections([index], with: insertSectionAnimation)
+                }
+            case .update:
+                if let index = indices.first {
+                    tableView?.reloadSections([index], with: reloadSectionAnimation)
+                }
+            case .move:
+                if let source = indices.first, let destination = indices.last {
+                    tableView?.moveSection(source, toSection: destination)
                 }
             }
         }
-        tableView?.endUpdates()
-        didUpdateContent?(update)
     }
     
     /// Call this method, if you want UITableView to be reloaded, and beforeContentUpdate: and afterContentUpdate: closures to be called.
