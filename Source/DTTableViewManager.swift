@@ -212,10 +212,9 @@ open class DTTableViewManager : NSObject {
     /// Returns closure, that updates cell at provided indexPath. 
     ///
     /// This is used by `coreDataUpdater` method and can be used to silently update a cell without reload row animation.
-    open func updateCellClosure() -> (IndexPath) -> Void {
-        return { [weak self] in
-            guard let model = self?.storage.item(at: $0) else { return }
-            self?.viewFactory.updateCellAt($0, with: model)
+    open func updateCellClosure() -> (IndexPath,Any) -> Void {
+        return { [weak self] indexPath, model in
+            self?.viewFactory.updateCellAt(indexPath, with: model)
         }
     }
     

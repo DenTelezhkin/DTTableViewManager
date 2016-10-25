@@ -80,7 +80,7 @@ class TableViewFactoryTestCase: XCTestCase {
         
         controller.manager.tableViewUpdater = controller.manager.coreDataUpdater()
         model.value = true
-        controller.manager.updateCellClosure()(indexPath(0, 0))
+        controller.manager.updateCellClosure()(indexPath(0, 0),model)
         expect((self.controller.tableView.cellForRow(at: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
     }
     

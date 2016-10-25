@@ -269,8 +269,8 @@ class DatasourceTestCase: XCTestCase {
     
     func testReloadRowsClosure() {
         let exp = expectation(description: "Reload row closure")
-        controller.manager.tableViewUpdater = TableViewUpdater(tableView: controller.tableView, reloadRow: { indexPath in
-            if indexPath.section == 0 && indexPath.item == 3 {
+        controller.manager.tableViewUpdater = TableViewUpdater(tableView: controller.tableView, reloadRow: { indexPath,model in
+            if indexPath.section == 0 && indexPath.item == 3 && (model as? Int) == 4 {
                 exp.fulfill()
             }
         })

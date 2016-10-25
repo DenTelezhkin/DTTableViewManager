@@ -44,13 +44,13 @@ open class TableViewUpdater : StorageUpdating {
     ///
     /// If this property is not nil, then reloadRowAnimation property is ignored.
     /// - SeeAlso: `DTTableViewManager.updateCellClosure()` method and `DTTableViewManager.coreDataUpdater()` method.
-    open var reloadRowClosure : ((IndexPath) -> Void)?
+    open var reloadRowClosure : ((IndexPath,Any) -> Void)?
     
     /// When this property is true, move events will be animated as delete event and insert event.
     open var animateMoveAsDeleteAndInsert: Bool
     
     /// Creates updater with tableView.
-    public init(tableView: UITableView, reloadRow: ((IndexPath) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {
+    public init(tableView: UITableView, reloadRow: ((IndexPath,Any) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {
         self.tableView = tableView
         self.reloadRowClosure = reloadRow
         self.animateMoveAsDeleteAndInsert = animateMoveAsDeleteAndInsert
@@ -82,8 +82,8 @@ open class TableViewUpdater : StorageUpdating {
                 }
             case .update:
                 if let indexPath = indexPaths.first {
-                    if let closure = reloadRowClosure {
-                        closure(indexPath)
+                    if let closure = reloadRowClosure, let model = update.updatedObjects[indexPath] {
+                        closure(indexPath,model)
                     } else {
                         tableView?.reloadRows(at: [indexPath], with: reloadRowAnimation)
                     }
