@@ -1,3 +1,3 @@
 github "Quick/Nimble" "v5.1.0"
-github "realm/realm-cocoa" "v2.0.2"
-github "DenHeadless/DTModelStorage" "3.0.0"
+github "realm/realm-cocoa" "v2.0.3"
+github "DenHeadless/DTModelStorage" "4.0.0"
