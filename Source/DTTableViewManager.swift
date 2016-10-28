@@ -796,7 +796,7 @@ extension DTTableViewManager: UITableViewDataSource
     
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
-        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.item(at: indexPath)),
+        guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
             let cell = tableView.cellForRow(at: indexPath)
             else { return }
         if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue, forModel: model) as? FourArgumentsEventReaction {
@@ -1070,22 +1070,22 @@ extension DTTableViewManager: UITableViewDelegate
     }
     
     open func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.item(at: indexPath)),
+        guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
             let cell = tableView.cellForRow(at: indexPath)
             else { return false }
         if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, forModel: model) as? FiveArgumentsEventReaction {
-            return reaction.performWithArguments((action,sender,cell,model,indexPath)) as? Bool ?? false
+            return reaction.performWithArguments((action,sender as Any,cell,model,indexPath)) as? Bool ?? false
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canPerformAction: action, forRowAt: indexPath, withSender: sender) ?? false
     }
     
     open func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, performAction: action, forRowAt: indexPath, withSender: sender) }
-        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage.item(at: indexPath)),
+        guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
             let cell = tableView.cellForRow(at: indexPath)
             else { return }
         if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue, forModel: model) as? FiveArgumentsEventReaction {
-            _ = reaction.performWithArguments((action,sender,cell,model,indexPath))
+            _ = reaction.performWithArguments((action,sender as Any,cell,model,indexPath))
         }
     }
     
