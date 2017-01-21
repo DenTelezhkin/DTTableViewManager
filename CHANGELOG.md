@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Master 
+
+### Breaking
+
+* `didDeselect(_:,_:)` method now accepts closure without return type - since `UITableViewDelegate` does not have return type in that method.
+
 ## [5.1.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.1.0)
 
 Dependency changelog -> [DTModelStorage 4.0.0 and higher](https://github.com/DenHeadless/DTModelStorage/releases)

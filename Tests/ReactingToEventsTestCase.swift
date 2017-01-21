@@ -247,9 +247,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testDidDeselectRowAtIndexPathClosure() {
         let exp = expectation(description: "didDeselect")
-        controller.manager.didDeselect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
+        controller.manager.didDeselect(NibCell.self, { cell, model, indexPath in
             exp.fulfill()
-            return nil
+            return
         })
         controller.manager.memoryStorage.addItem(3)
         _ = controller.manager.tableView(controller.tableView, didDeselectRowAt: indexPath(0,0))
@@ -615,7 +615,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             manager.willSelect(NibCell.self, {_ in return indexPath(0, 0)})
             manager.didSelect(NibCell.self, {_ in})
             manager.willDeselect(NibCell.self, {_ in return indexPath(0, 0)} )
-            manager.didDeselect(NibCell.self, { _ in return indexPath(0, 0)})
+            manager.didDeselect(NibCell.self, { _ in return })
             manager.heightForHeader(withItem: Int.self, { _ in return 20 })
             manager.heightForFooter(withItem: Int.self, { _ in return 20 })
             manager.estimatedHeightForHeader(withItem: Int.self, { _ in return 20 })
@@ -649,7 +649,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         manager.willSelect(NibCell.self, {_ in return indexPath(0, 0)})
         manager.didSelect(NibCell.self, {_ in})
         manager.willDeselect(NibCell.self, {_ in return indexPath(0, 0)} )
-        manager.didDeselect(NibCell.self, { _ in return indexPath(0, 0)})
+        manager.didDeselect(NibCell.self, { _ in return })
         manager.heightForHeader(withItem: Int.self, { _ in return 20 })
         manager.heightForFooter(withItem: Int.self, { _ in return 20 })
         manager.estimatedHeightForHeader(withItem: Int.self, { _ in return 20 })
