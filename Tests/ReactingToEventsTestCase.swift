@@ -545,7 +545,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = controller.manager.tableView(controller.tableView, canFocusRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
+    #if os(iOS)
     func testSectionIndexTitlesFor() {
         let exp = expectation(description: "sectionIndexTitles")
         controller.manager.sectionIndexTitles {
@@ -565,14 +565,16 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = controller.manager.tableView(controller.tableView, sectionForSectionIndexTitle: "2", at: 3)
         waitForExpectations(timeout: 0.5, handler: nil)
     }
+    #endif
     
     func testAllDelegateMethodSignatures() {
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:)))) == EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:canEditRowAt:)))) == EventMethodSignature.canEditRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:canMoveRowAt:)))) == EventMethodSignature.canMoveRowAtIndexPath.rawValue
+        #if os(iOS)
         expect(String(describing: #selector(UITableViewDataSource.sectionIndexTitles(for:)))) == EventMethodSignature.sectionIndexTitlesForTableView.rawValue
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:)))) == EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue
-        
+        #endif
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForRowAt:)))) == EventMethodSignature.heightForRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:)))) == EventMethodSignature.estimatedHeightForRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAt:)))) == EventMethodSignature.indentationLevelForRowAtIndexPath.rawValue

@@ -726,6 +726,7 @@ extension DTTableViewManager
         appendReaction(for: T.self, signature: EventMethodSignature.canFocusRowAtIndexPath, closure: closure)
     }
     
+    #if os(iOS)
     /// Registers `closure` to be executed, when `UITableViewDataSource.sectionIndexTitles(for:_) ` method is called.
     open func sectionIndexTitles(_ closure: @escaping (Void) -> [String]?) {
         let reaction = EventReaction(signature: EventMethodSignature.sectionIndexTitlesForTableView.rawValue)
@@ -741,6 +742,7 @@ extension DTTableViewManager
         reaction.modelTypeCheckingBlock = { _ in true }
         tableViewEventReactions.append(reaction)
     }
+    #endif
 }
 
 // MARK: - UITableViewDatasource
@@ -836,6 +838,7 @@ extension DTTableViewManager: UITableViewDataSource
         return (delegate as? UITableViewDataSource)?.tableView?(tableView, canMoveRowAt: indexPath) ?? false
     }
     
+   #if os(iOS)
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if let titles = tableViewEventReactions.filter( { $0.methodSignature == EventMethodSignature.sectionIndexTitlesForTableView.rawValue }).first?.reaction?(0,0,0) as? [String] {
             return titles
@@ -843,6 +846,7 @@ extension DTTableViewManager: UITableViewDataSource
         return (delegate as? UITableViewDataSource)?.sectionIndexTitles?(for: tableView) ?? nil
     }
     
+
     public func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         if let reaction = tableViewEventReactions.filter({ $0.methodSignature == EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue }).first,
             let section = reaction.reaction?(title, index, 0) as? Int
@@ -851,6 +855,7 @@ extension DTTableViewManager: UITableViewDataSource
         }
         return (delegate as? UITableViewDataSource)?.tableView?(tableView, sectionForSectionIndexTitle: title, at: index) ?? 0
     }
+    #endif
 }
 
 // MARK: - UITableViewDelegate
