@@ -396,6 +396,8 @@ internal enum EventMethodSignature: String {
     case commitEditingStyleForRowAtIndexPath = "tableView:commitEditingStyle:forRowAtIndexPath:"
     case canEditRowAtIndexPath = "tableView:canEditRowAtIndexPath:"
     case canMoveRowAtIndexPath = "tableView:canMoveRowAtIndexPath:"
+    case sectionIndexTitlesForTableView = "sectionIndexTitlesForTableView:"
+    case sectionForSectionIndexTitleAtIndex = "tableView:sectionForSectionIndexTitle:atIndex:"
     
     /// UITableViewDelegate
     case heightForRowAtIndexPath = "tableView:heightForRowAtIndexPath:"
@@ -723,6 +725,22 @@ extension DTTableViewManager
     {
         appendReaction(for: T.self, signature: EventMethodSignature.canFocusRowAtIndexPath, closure: closure)
     }
+    
+    /// Registers `closure` to be executed, when `UITableViewDataSource.sectionIndexTitles(for:_) ` method is called.
+    open func sectionIndexTitles(_ closure: @escaping (Void) -> [String]?) {
+        let reaction = EventReaction(signature: EventMethodSignature.sectionIndexTitlesForTableView.rawValue)
+        reaction.reaction = { _,_,_ in return closure() as Any }
+        reaction.modelTypeCheckingBlock = { _ in true }
+        tableViewEventReactions.append(reaction)
+    }
+    
+    /// Registers `closure` to be executed, when `UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:)` method is called.
+    open func sectionForSectionIndexTitle(_ closure: @escaping (String, Int) -> Int) {
+        let reaction = EventReaction(signature: EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue)
+        reaction.reaction = { title, index, _ in return closure(title as? String ?? "",index as? Int ?? 0) }
+        reaction.modelTypeCheckingBlock = { _ in true }
+        tableViewEventReactions.append(reaction)
+    }
 }
 
 // MARK: - UITableViewDatasource
@@ -816,6 +834,22 @@ extension DTTableViewManager: UITableViewDataSource
             return canMove
         }
         return (delegate as? UITableViewDataSource)?.tableView?(tableView, canMoveRowAt: indexPath) ?? false
+    }
+    
+    public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        if let titles = tableViewEventReactions.filter( { $0.methodSignature == EventMethodSignature.sectionIndexTitlesForTableView.rawValue }).first?.reaction?(0,0,0) as? [String] {
+            return titles
+        }
+        return (delegate as? UITableViewDataSource)?.sectionIndexTitles?(for: tableView) ?? nil
+    }
+    
+    public func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        if let reaction = tableViewEventReactions.filter({ $0.methodSignature == EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue }).first,
+            let section = reaction.reaction?(title, index, 0) as? Int
+        {
+            return section
+        }
+        return (delegate as? UITableViewDataSource)?.tableView?(tableView, sectionForSectionIndexTitle: title, at: index) ?? 0
     }
 }
 

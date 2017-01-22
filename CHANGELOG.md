@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Master 
 
-### Breaking
+### New
+
+* Added `sectionIndexTitles` event to replace `UITableViewDataSource.sectionIndexTitles(for:)` method.
+* Added `sectionForSectionIndexTitle` event to replace `UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at)` method.
+
+### Bugfixes
 
 * `didDeselect(_:,_:)` method now accepts closure without return type - since `UITableViewDelegate` does not have return type in that method.
 

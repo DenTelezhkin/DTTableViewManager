@@ -546,10 +546,32 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testSectionIndexTitlesFor() {
+        let exp = expectation(description: "sectionIndexTitles")
+        controller.manager.sectionIndexTitles {
+            exp.fulfill()
+            return ["1","2"]
+        }
+        _ = controller.manager.sectionIndexTitles(for: controller.tableView)
+        waitForExpectations(timeout: 0.5, handler: nil)
+    }
+    
+    func testSectionForSectionIndexTitleAt() {
+        let exp = expectation(description: "sectionForSectionIndexTitle")
+        controller.manager.sectionForSectionIndexTitle { title, index -> Int in
+            exp.fulfill()
+            return 5
+        }
+        _ = controller.manager.tableView(controller.tableView, sectionForSectionIndexTitle: "2", at: 3)
+        waitForExpectations(timeout: 0.5, handler: nil)
+    }
+    
     func testAllDelegateMethodSignatures() {
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:)))) == EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:canEditRowAt:)))) == EventMethodSignature.canEditRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:canMoveRowAt:)))) == EventMethodSignature.canMoveRowAtIndexPath.rawValue
+        expect(String(describing: #selector(UITableViewDataSource.sectionIndexTitles(for:)))) == EventMethodSignature.sectionIndexTitlesForTableView.rawValue
+        expect(String(describing: #selector(UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:)))) == EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue
         
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForRowAt:)))) == EventMethodSignature.heightForRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:)))) == EventMethodSignature.estimatedHeightForRowAtIndexPath.rawValue
