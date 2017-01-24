@@ -840,8 +840,8 @@ extension DTTableViewManager: UITableViewDataSource
     
    #if os(iOS)
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        if let titles = tableViewEventReactions.filter( { $0.methodSignature == EventMethodSignature.sectionIndexTitlesForTableView.rawValue }).first?.reaction?(0,0,0) as? [String] {
-            return titles
+        if let reaction = tableViewEventReactions.filter( { $0.methodSignature == EventMethodSignature.sectionIndexTitlesForTableView.rawValue }).first {
+            return reaction.reaction?(0,0,0) as? [String]
         }
         return (delegate as? UITableViewDataSource)?.sectionIndexTitles?(for: tableView) ?? nil
     }
@@ -987,15 +987,15 @@ extension DTTableViewManager: UITableViewDelegate
     }
     
     open func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if let result = performCellReaction(.willSelectRowAtIndexPath, location: indexPath, provideCell: true) as? IndexPath {
-            return result
+        if let eventReaction = cellReaction(.willSelectRowAtIndexPath, location: indexPath) {
+            return performCellReaction(eventReaction, location: indexPath, provideCell: true) as? IndexPath
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, willSelectRowAt: indexPath)
     }
     
     open func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
-        if let result = performCellReaction(.willDeselectRowAtIndexPath, location: indexPath, provideCell: true) as? IndexPath {
-            return result
+        if let eventReaction = cellReaction(.willDeselectRowAtIndexPath, location: indexPath) {
+            return performCellReaction(eventReaction, location: indexPath, provideCell: true) as? IndexPath
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, willDeselectRowAt: indexPath)
     }
@@ -1038,8 +1038,8 @@ extension DTTableViewManager: UITableViewDelegate
     
     #if os(iOS)
     open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if let actions = performCellReaction(.editActionsForRowAtIndexPath, location: indexPath, provideCell: true) as? [UITableViewRowAction] {
-            return actions
+        if let eventReaction = cellReaction(.editActionsForRowAtIndexPath, location: indexPath) {
+            return performCellReaction(eventReaction, location: indexPath, provideCell: true) as? [UITableViewRowAction]
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, editActionsForRowAt: indexPath)
     }
@@ -1069,8 +1069,8 @@ extension DTTableViewManager: UITableViewDelegate
     
     #if os(iOS)
     open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        if let title = performCellReaction(.titleForDeleteButtonForRowAtIndexPath, location: indexPath, provideCell: true) as? String {
-            return title
+        if let eventReaction = cellReaction(.titleForDeleteButtonForRowAtIndexPath, location: indexPath) {
+            return performCellReaction(eventReaction, location: indexPath, provideCell: true) as? String
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
     }
@@ -1153,11 +1153,23 @@ extension DTTableViewManager: UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canFocusRowAt: indexPath) ?? tableView.cellForRow(at: indexPath)?.canBecomeFocused ?? true
     }
     
+    final fileprivate func cellReaction(_ signature: EventMethodSignature, location: IndexPath) -> EventReaction? {
+        guard let model = storage.item(at: location) else { return nil }
+        return tableViewEventReactions.reaction(of: .cell, signature: signature.rawValue, forModel: model)
+    }
+    
     final fileprivate func performCellReaction(_ signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
         guard let model = storage.item(at: location) else { return nil }
         return tableViewEventReactions.performReaction(of: .cell, signature: signature.rawValue, view: cell, model: model, location: location)
+    }
+    
+    final fileprivate func performCellReaction(_ reaction: EventReaction, location: IndexPath, provideCell: Bool) -> Any? {
+        var cell : UITableViewCell?
+        if provideCell { cell = tableView?.cellForRow(at: location) }
+        guard let model = storage.item(at: location) else { return nil }
+        return reaction.performWithArguments((cell as Any,model,location))
     }
     
     final fileprivate func performHeaderReaction(_ signature: EventMethodSignature, location: Int, provideView: Bool) -> Any? {
