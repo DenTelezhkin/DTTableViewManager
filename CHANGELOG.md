@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bugfixes
 
+* All events that return Optional value now accept nil as a valid event result.
 * `didDeselect(_:,_:)` method now accepts closure without return type - since `UITableViewDelegate` does not have return type in that method.
 
 ## [5.1.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.1.0)
