@@ -279,4 +279,13 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.memoryStorage.reloadItem(4)
         waitForExpectations(timeout: 0.5, handler: nil)
     }
+    
+    func testTableViewUpdaterIsCalledWhenItsChanged() {
+        let exp = expectation(description: "DidUpdateContent")
+        let updater = TableViewUpdater(tableView: controller.tableView)
+        updater.didUpdateContent = { _ in  exp.fulfill() }
+        controller.manager.tableViewUpdater = updater
+        
+        waitForExpectations(timeout: 0.5, handler: nil)
+    }
 }

@@ -168,6 +168,7 @@ open class DTTableViewManager : NSObject {
     open var tableViewUpdater : StorageUpdating? {
         didSet {
             storage.delegate = tableViewUpdater
+            (tableViewUpdater as? TableViewUpdater)?.didUpdateContent?(nil)
         }
     }
     

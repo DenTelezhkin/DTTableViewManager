@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### New
 
+* Setting `TableViewUpdater` instance to `tableViewUpdater` property on `DTTableViewManager` now triggers `didUpdateContent` closure on `TableViewUpdater`.
 * Added `sectionIndexTitles` event to replace `UITableViewDataSource.sectionIndexTitles(for:)` method.
 * Added `sectionForSectionIndexTitle` event to replace `UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at)` method.
 
