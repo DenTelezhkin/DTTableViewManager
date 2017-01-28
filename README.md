@@ -55,11 +55,11 @@ Powerful generic-based UITableView management framework, written in Swift 3.
 
 [CocoaPods](http://www.cocoapods.org):
 
-    pod 'DTTableViewManager', '~> 5.1'
+    pod 'DTTableViewManager', '~> 5.2'
 
 [Carthage](https://github.com/Carthage/Carthage):
 
-    github "DenHeadless/DTTableViewManager" ~> 5.1.0
+    github "DenHeadless/DTTableViewManager" ~> 5.2.0
 
 After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to Xcode project embedded binaries.
 

@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Master 
+## [5.2.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.2.0)
 
 ### New
 
