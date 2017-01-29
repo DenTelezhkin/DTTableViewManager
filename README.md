@@ -250,6 +250,8 @@ Here's full list of all delegate and datasource methods implemented:
 |  commit:forRowAt: | commitEditingStyle(for:_:) | - |
 |  canEditRowAt: | canEditCell(withItem:_:) | - |
 |  canMoveRowAt: | canMove(_:_:) | - |
+|  sectionIndexTitlesFor: | sectionIndexTitles(_:) | iOS only |
+|  sectionForSectionIndexTitle:at: | sectionForSectionIndexTitle(_:_:) | iOS only |
 
 **UITableViewDelegate**
 
