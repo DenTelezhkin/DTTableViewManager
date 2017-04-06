@@ -1,9 +1,0 @@
-[submodule "Carthage/Checkouts/Nimble"]
-	path = Carthage/Checkouts/Nimble
-	url = https://github.com/Quick/Nimble.git
-[submodule "Carthage/Checkouts/realm-cocoa"]
-	path = Carthage/Checkouts/realm-cocoa
-	url = https://github.com/realm/realm-cocoa.git
-[submodule "Carthage/Checkouts/DTModelStorage"]
-	path = Carthage/Checkouts/DTModelStorage
-	url = https://github.com/DenHeadless/DTModelStorage.git
