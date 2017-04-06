@@ -445,35 +445,35 @@ internal enum EventMethodSignature: String {
 // MARK: - Table view reactions
 extension DTTableViewManager
 {
-    final fileprivate func appendReaction<T,U>(for cellClass: T.Type, signature: EventMethodSignature, closure: @escaping (T,T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
+    final internal func appendReaction<T,U>(for cellClass: T.Type, signature: EventMethodSignature, closure: @escaping (T,T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
     {
-        let reaction = EventReaction(signature: signature.rawValue)
-        reaction.makeCellReaction(closure)
+        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, viewClass: T.self)
+        reaction.makeReaction(closure)
         tableViewEventReactions.append(reaction)
     }
     
-    final fileprivate func appendReaction<T,U>(for modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, IndexPath) -> U)
+    final internal func appendReaction<T,U>(for modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, IndexPath) -> U)
     {
-        let reaction = EventReaction(signature: signature.rawValue)
-        reaction.makeCellReaction(closure)
+        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: T.self)
+        reaction.makeReaction(closure)
         tableViewEventReactions.append(reaction)
     }
     
     final fileprivate func appendReaction<T,U>(forSupplementaryKind kind: String, supplementaryClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, T.ModelType, Int) -> U) where T: ModelTransfer, T: UIView {
-        let reaction = EventReaction(signature: signature.rawValue)
+        let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), viewClass: T.self)
         let indexPathBlock : (T, T.ModelType, IndexPath) -> U = { cell, model, indexPath in
             return closure(cell, model, indexPath.section)
         }
-        reaction.makeSupplementaryReaction(forKind: kind, block: indexPathBlock)
+        reaction.makeReaction(indexPathBlock)
         tableViewEventReactions.append(reaction)
     }
     
     final fileprivate func appendReaction<T,U>(forSupplementaryKind kind: String, modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, Int) -> U) {
-        let reaction = EventReaction(signature: signature.rawValue)
+        let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), modelType: T.self)
         let indexPathBlock : (T, IndexPath) -> U = { model, indexPath in
             return closure(model, indexPath.section)
         }
-        reaction.makeSupplementaryReaction(for: kind, block: indexPathBlock)
+        reaction.makeReaction(indexPathBlock)
         tableViewEventReactions.append(reaction)
     }
     
@@ -557,8 +557,7 @@ extension DTTableViewManager
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)` method is called for `cellClass`.
     open func commitEditingStyle<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (UITableViewCellEditingStyle, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
-        let reaction = FourArgumentsEventReaction(signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue)
-        reaction.modelTypeCheckingBlock = { $0 is T.ModelType }
+        let reaction = FourArgumentsEventReaction(signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue, viewType: .cell, viewClass: T.self)
         reaction.reaction4Arguments = { style, cell, model, indexPath in
             guard let style = style as? UITableViewCellEditingStyle,
                 let cell = cell as? T,
@@ -674,8 +673,9 @@ extension DTTableViewManager
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func canPerformAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
-        let reaction = FiveArgumentsEventReaction(signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue)
-        reaction.modelTypeCheckingBlock = { $0 is T.ModelType }
+        let reaction = FiveArgumentsEventReaction(signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue,
+                                                  viewType: .cell,
+                                                  viewClass: T.self)
         reaction.reaction5Arguments = { selector, sender, cell, model, indexPath -> Any in
             guard let selector = selector as? Selector,
                 let cell = cell as? T,
@@ -689,8 +689,9 @@ extension DTTableViewManager
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func performAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
-        let reaction = FiveArgumentsEventReaction(signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue)
-        reaction.modelTypeCheckingBlock = { $0 is T.ModelType }
+        let reaction = FiveArgumentsEventReaction(signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue,
+                                                  viewType: .cell,
+                                                  viewClass: T.self)
         reaction.reaction5Arguments = { selector, sender, cell, model, indexPath  in
             guard let selector = selector as? Selector,
                 let cell = cell as? T,
@@ -730,17 +731,19 @@ extension DTTableViewManager
     #if os(iOS)
     /// Registers `closure` to be executed, when `UITableViewDataSource.sectionIndexTitles(for:_) ` method is called.
     open func sectionIndexTitles(_ closure: @escaping (Void) -> [String]?) {
-        let reaction = EventReaction(signature: EventMethodSignature.sectionIndexTitlesForTableView.rawValue)
+        let reaction = EventReaction(signature: EventMethodSignature.sectionIndexTitlesForTableView.rawValue,
+                                     viewType: .cell,
+                                     modelType: Any.self)
         reaction.reaction = { _,_,_ in return closure() as Any }
-        reaction.modelTypeCheckingBlock = { _ in true }
         tableViewEventReactions.append(reaction)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:)` method is called.
     open func sectionForSectionIndexTitle(_ closure: @escaping (String, Int) -> Int) {
-        let reaction = EventReaction(signature: EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue)
+        let reaction = EventReaction(signature: EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue,
+                                     viewType: .cell,
+                                     modelType: Any.self)
         reaction.reaction = { title, index, _ in return closure(title as? String ?? "",index as? Int ?? 0) }
-        reaction.modelTypeCheckingBlock = { _ in true }
         tableViewEventReactions.append(reaction)
     }
     #endif
@@ -820,7 +823,7 @@ extension DTTableViewManager: UITableViewDataSource
         guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
             let cell = tableView.cellForRow(at: indexPath)
             else { return }
-        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue, forModel: model) as? FourArgumentsEventReaction {
+        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue, forModel: model, view: cell) as? FourArgumentsEventReaction {
             _ = reaction.performWithArguments((editingStyle,cell,model,indexPath))
         }
     }
@@ -1113,7 +1116,7 @@ extension DTTableViewManager: UITableViewDelegate
         guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
             let cell = tableView.cellForRow(at: indexPath)
             else { return false }
-        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, forModel: model) as? FiveArgumentsEventReaction {
+        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, forModel: model, view: cell) as? FiveArgumentsEventReaction {
             return reaction.performWithArguments((action,sender as Any,cell,model,indexPath)) as? Bool ?? false
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canPerformAction: action, forRowAt: indexPath, withSender: sender) ?? false
@@ -1124,7 +1127,7 @@ extension DTTableViewManager: UITableViewDelegate
         guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
             let cell = tableView.cellForRow(at: indexPath)
             else { return }
-        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue, forModel: model) as? FiveArgumentsEventReaction {
+        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue, forModel: model, view: cell) as? FiveArgumentsEventReaction {
             _ = reaction.performWithArguments((action,sender as Any,cell,model,indexPath))
         }
     }
@@ -1156,7 +1159,7 @@ extension DTTableViewManager: UITableViewDelegate
     
     final fileprivate func cellReaction(_ signature: EventMethodSignature, location: IndexPath) -> EventReaction? {
         guard let model = storage.item(at: location) else { return nil }
-        return tableViewEventReactions.reaction(of: .cell, signature: signature.rawValue, forModel: model)
+        return tableViewEventReactions.reaction(of: .cell, signature: signature.rawValue, forModel: model, view: nil)
     }
     
     final fileprivate func performCellReaction(_ signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {

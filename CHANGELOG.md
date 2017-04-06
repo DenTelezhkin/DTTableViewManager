@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Master 
+
+* Use new events system from DTModelStorage, that allows events to be properly called for cells, that are created using `ViewModelMappingCustomizing` protocol.
+
 ## [5.2.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.2.0)
 
 ### New
