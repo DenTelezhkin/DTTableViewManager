@@ -2,7 +2,7 @@ SHELL := /bin/bash
 # Install Tasks
 
 install-iOS:
-	xcrun instruments -w "iPhone 7 (10.3)" || true
+	xcrun instruments -w "iPhone 6 Plus (10.3)" || true
 
 install-tvOS:
 	xcrun instruments -w "Apple TV 1080p (10.2)" || true
@@ -17,7 +17,7 @@ install-cocoapods:
 # Run Tasks
 
 test-iOS:
-	set -o pipefail && xcodebuild -project DTTableViewManager.xcodeproj -scheme DTTableViewManager-iOS -destination "name=iPhone 7" -enableCodeCoverage YES test -configuration "Release" | xcpretty -ct
+	set -o pipefail && xcodebuild -project DTTableViewManager.xcodeproj -scheme DTTableViewManager-iOS -destination "name=iPhone 6 Plus" -enableCodeCoverage YES test -configuration "Release" | xcpretty -ct
 	bash <(curl -s https://codecov.io/bash)
 
 test-tvOS:
