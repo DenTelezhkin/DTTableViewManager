@@ -10,7 +10,7 @@ matrix:
     #   env: ACTION=cocoapods
 
 language: objective-c
-osx_image: xcode8
+osx_image: xcode8.3
 
 script:
   - git submodule update --init --recursive
