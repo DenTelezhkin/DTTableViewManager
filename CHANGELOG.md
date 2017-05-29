@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+# Next
+
 ## [5.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.3.0)
 
 Dependency changelog -> [DTModelStorage 5.0.0 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
