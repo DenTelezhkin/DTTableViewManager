@@ -78,7 +78,7 @@ class CreationTestCase: XCTestCase {
         let foo = DTTestTableViewController(nibName: nil, bundle: nil)
         foo.manager.startManaging(withDelegate: foo)
         
-        expect(foo.manager) != nil
+        expect(foo.manager).toNot(beNil())
         expect(foo.manager) == foo.manager // Test if lazily instantiating using associations works correctly
     }
     
