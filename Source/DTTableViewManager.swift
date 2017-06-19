@@ -730,7 +730,7 @@ extension DTTableViewManager
     
     #if os(iOS)
     /// Registers `closure` to be executed, when `UITableViewDataSource.sectionIndexTitles(for:_) ` method is called.
-    open func sectionIndexTitles(_ closure: @escaping (Void) -> [String]?) {
+    open func sectionIndexTitles(_ closure: @escaping () -> [String]?) {
         let reaction = EventReaction(signature: EventMethodSignature.sectionIndexTitlesForTableView.rawValue,
                                      viewType: .cell,
                                      modelType: Any.self)
