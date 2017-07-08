@@ -74,6 +74,12 @@ class TableViewFactoryTestCase: XCTestCase {
     }
     
     func testUpdateCellAtIndexPath() {
+        if #available(iOS 11, tvOS 11, *) {
+            controller.tableView = UITableView()
+            controller.manager.startManaging(withDelegate: controller)
+            controller.manager.storage = MemoryStorage()
+        } 
+        
         controller.manager.register(UpdatableCell.self)
         let model = UpdatableModel()
         controller.manager.memoryStorage.addItem(model)
@@ -81,7 +87,11 @@ class TableViewFactoryTestCase: XCTestCase {
         controller.manager.tableViewUpdater = controller.manager.coreDataUpdater()
         model.value = true
         controller.manager.updateCellClosure()(indexPath(0, 0),model)
-        expect((self.controller.tableView.cellForRow(at: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
+        if #available(iOS 11, tvOS 11, *) {
+            expect((self.controller.tableView(self.controller.tableView, cellForRowAt: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
+        } else {
+            expect((self.controller.tableView.cellForRow(at: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
+        }
     }
     
 }

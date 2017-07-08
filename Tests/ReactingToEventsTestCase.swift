@@ -116,14 +116,26 @@ class ReactingToEventsTestCase: XCTestCase {
     }
     
     func testCellSelectionPerfomance() {
+        if #available(iOS 11, tvOS 11, *) {
+            controller.tableView = UITableView()
+        }
         controller.manager.register(SelectionReactingTableCell.self)
         self.controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        measureMetrics([XCTPerformanceMetric_WallClockTime], automaticallyStartMeasuring: true) {
+        #if swift(>=3.2)
+            measureMetrics([XCTPerformanceMetric.wallClockTime], automaticallyStartMeasuring: true) {
             self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
                 self.stopMeasuring()
             }
             self.controller.manager.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
-        }
+            }
+        #else
+            measureMetrics([XCTPerformanceMetric_WallClockTime], automaticallyStartMeasuring: true) {
+                self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
+                    self.stopMeasuring()
+                }
+                self.controller.manager.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
+            }
+        #endif
     }
     
     func testCellConfigurationClosure()
@@ -233,7 +245,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testFooterConfigurationClosure()
     {
         let exp = expectation(description: "Configure footer")
-        controller.manager.configureFooter(ReactingHeaderFooterView.self) { _ in
+        controller.manager.configureFooter(ReactingHeaderFooterView.self) { _,_,_ in
             exp.fulfill()
         }
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
@@ -377,31 +389,55 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testHeightForHeaderInSection() {
         let exp = expectation(description: "heightForHeader")
+        exp.expectedFulfillmentCount = 2
         controller.manager.heightForHeader(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        controller.tableView.beginUpdates()
+        controller.tableView.endUpdates()
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testEstimatedHeightForHeaderInSection() {
         let exp = expectation(description: "estimatedHeightForHeader")
+        #if os(iOS)
+            exp.expectedFulfillmentCount = 2
+        #endif
+        #if os(tvOS)
+            if #available(tvOS 11, *) {
+                
+            } else {
+               exp.expectedFulfillmentCount = 2
+            }
+        #endif
+        
         controller.manager.estimatedHeightForHeader(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        if #available(iOS 11, tvOS 11, *) {
+            
+        } else {
+            controller.tableView.beginUpdates()
+            controller.tableView.endUpdates()
+        }
+        
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testHeightForFooterInSection() {
         let exp = expectation(description: "heightForHeader")
+        exp.expectedFulfillmentCount = 2
         controller.manager.heightForFooter(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        controller.tableView.beginUpdates()
+        controller.tableView.endUpdates()
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -682,69 +718,70 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testEventsRegistrationPerfomance() {
         let manager = self.controller.manager
         measure {
-            manager.commitEditingStyle(for: NibCell.self, { _ in })
-            manager.canEditCell(withItem: Int.self, { _ in return true })
-            manager.canMove(NibCell.self, { _ in return true })
-            manager.heightForCell(withItem: Int.self, { _ in return 44 })
-            manager.estimatedHeightForCell(withItem: Int.self, { _ in return 44 })
-            manager.indentationLevelForCell(withItem: Int.self,  { _ in return 0})
-            manager.willDisplay(NibCell.self, { _ in })
-            manager.accessoryButtonTapped(in: NibCell.self, { _ in })
-            manager.willSelect(NibCell.self, {_ in return indexPath(0, 0)})
-            manager.didSelect(NibCell.self, {_ in})
-            manager.willDeselect(NibCell.self, {_ in return indexPath(0, 0)} )
-            manager.didDeselect(NibCell.self, { _ in return })
-            manager.heightForHeader(withItem: Int.self, { _ in return 20 })
-            manager.heightForFooter(withItem: Int.self, { _ in return 20 })
-            manager.estimatedHeightForHeader(withItem: Int.self, { _ in return 20 })
-            manager.estimatedHeightForFooter(withItem: Int.self, { _ in return 20 })
-            manager.willDisplayHeaderView(NibHeaderFooterView.self, { _ in })
-            manager.willDisplayFooterView(NibHeaderFooterView.self, { _ in})
-            manager.editingStyle(for: NibCell.self, { _ in return .none })
-            manager.shouldIndentWhileEditing(NibCell.self, { _ in return true })
-            manager.didEndDisplaying(NibCell.self, { _ in })
-            manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _ in })
-            manager.didEndDisplayingFooterView(NibHeaderFooterView.self, { _ in })
-            manager.shouldShowMenu(for: NibCell.self, { _ in return true})
-            manager.canPerformAction(for: NibCell.self, { _ in return true })
-            manager.performAction(for: NibCell.self, { _ in })
-            manager.shouldHighlight(NibCell.self, { _ in return true })
-            manager.didHighlight(NibCell.self, { _ in })
-            manager.didUnhighlight(NibCell.self, { _ in })
+            manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
+            manager.canEditCell(withItem: Int.self, { _,_ in return true })
+            manager.canMove(NibCell.self, { _,_,_ in return true })
+            manager.heightForCell(withItem: Int.self, { _,_ in return 44 })
+            manager.estimatedHeightForCell(withItem: Int.self, { _,_ in return 44 })
+            manager.indentationLevelForCell(withItem: Int.self,  { _,_ in return 0})
+            manager.willDisplay(NibCell.self, { _,_,_ in })
+            manager.accessoryButtonTapped(in: NibCell.self, { _,_,_ in })
+            manager.willSelect(NibCell.self, {_,_,_ in return indexPath(0, 0)})
+            manager.didSelect(NibCell.self, {_,_,_ in})
+            manager.willDeselect(NibCell.self, {_,_,_ in return indexPath(0, 0)} )
+            manager.didDeselect(NibCell.self, { _,_,_ in return })
+            manager.heightForHeader(withItem: Int.self, { _,_ in return 20 })
+            manager.heightForFooter(withItem: Int.self, { _,_ in return 20 })
+            manager.estimatedHeightForHeader(withItem: Int.self, { _,_ in return 20 })
+            manager.estimatedHeightForFooter(withItem: Int.self, { _,_ in return 20 })
+            manager.willDisplayHeaderView(NibHeaderFooterView.self, { _,_,_ in })
+            manager.willDisplayFooterView(NibHeaderFooterView.self, { _,_,_ in})
+            manager.editingStyle(for: NibCell.self, { _,_,_ in return .none })
+            manager.shouldIndentWhileEditing(NibCell.self, { _,_,_ in return true })
+            manager.didEndDisplaying(NibCell.self, { _,_,_ in })
+            manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _,_,_ in })
+            manager.didEndDisplayingFooterView(NibHeaderFooterView.self, { _,_,_ in })
+            manager.shouldShowMenu(for: NibCell.self, { _,_,_ in return true})
+            manager.canPerformAction(for: NibCell.self, { _,_,_,_,_ in return true })
+            manager.performAction(for: NibCell.self, { _,_,_,_,_ in })
+            manager.shouldHighlight(NibCell.self, { _,_,_ in return true })
+            manager.didHighlight(NibCell.self, { _,_,_ in })
+            manager.didUnhighlight(NibCell.self, { _,_,_ in })
         }
     }
     
     func testSearchForEventPerfomance() {
         let manager = self.controller.manager
-        manager.commitEditingStyle(for: NibCell.self, { _ in })
-        manager.canEditCell(withItem: Int.self, { _ in return true })
-        manager.canMove(NibCell.self, { _ in return true })
-        manager.heightForCell(withItem: Int.self, { _ in return 44 })
-        manager.estimatedHeightForCell(withItem: Int.self, { _ in return 44 })
-        manager.indentationLevelForCell(withItem: Int.self,  { _ in return 0})
-        manager.willDisplay(NibCell.self, { _ in })
-        manager.accessoryButtonTapped(in: NibCell.self, { _ in })
-        manager.willSelect(NibCell.self, {_ in return indexPath(0, 0)})
-        manager.didSelect(NibCell.self, {_ in})
-        manager.willDeselect(NibCell.self, {_ in return indexPath(0, 0)} )
-        manager.didDeselect(NibCell.self, { _ in return })
-        manager.heightForHeader(withItem: Int.self, { _ in return 20 })
-        manager.heightForFooter(withItem: Int.self, { _ in return 20 })
-        manager.estimatedHeightForHeader(withItem: Int.self, { _ in return 20 })
-        manager.estimatedHeightForFooter(withItem: Int.self, { _ in return 20 })
-        manager.willDisplayHeaderView(NibHeaderFooterView.self, { _ in })
-        manager.willDisplayFooterView(NibHeaderFooterView.self, { _ in})
-        manager.editingStyle(for: NibCell.self, { _ in return .none })
-        manager.shouldIndentWhileEditing(NibCell.self, { _ in return true })
-        manager.didEndDisplaying(NibCell.self, { _ in })
-        manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _ in })
-        manager.didEndDisplayingFooterView(NibHeaderFooterView.self, { _ in })
-        manager.shouldShowMenu(for: NibCell.self, { _ in return true})
-        manager.canPerformAction(for: NibCell.self, { _ in return true })
-        manager.performAction(for: NibCell.self, { _ in })
-        manager.shouldHighlight(NibCell.self, { _ in return true })
-        manager.didHighlight(NibCell.self, { _ in })
-        manager.didUnhighlight(NibCell.self, { _ in })
+        controller.tableView = UITableView()
+        manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
+        manager.canEditCell(withItem: Int.self, { _,_ in return true })
+        manager.canMove(NibCell.self, { _,_,_ in return true })
+        manager.heightForCell(withItem: Int.self, { _,_ in return 44 })
+        manager.estimatedHeightForCell(withItem: Int.self, { _,_ in return 44 })
+        manager.indentationLevelForCell(withItem: Int.self,  { _,_ in return 0})
+        manager.willDisplay(NibCell.self, { _,_,_ in })
+        manager.accessoryButtonTapped(in: NibCell.self, { _,_,_ in })
+        manager.willSelect(NibCell.self, {_,_,_ in return indexPath(0, 0)})
+        manager.didSelect(NibCell.self, {_,_,_ in})
+        manager.willDeselect(NibCell.self, {_,_,_ in return indexPath(0, 0)} )
+        manager.didDeselect(NibCell.self, { _,_,_ in return })
+        manager.heightForHeader(withItem: Int.self, { _,_ in return 20 })
+        manager.heightForFooter(withItem: Int.self, { _,_ in return 20 })
+        manager.estimatedHeightForHeader(withItem: Int.self, { _,_ in return 20 })
+        manager.estimatedHeightForFooter(withItem: Int.self, { _,_ in return 20 })
+        manager.willDisplayHeaderView(NibHeaderFooterView.self, { _,_,_ in })
+        manager.willDisplayFooterView(NibHeaderFooterView.self, { _,_,_ in})
+        manager.editingStyle(for: NibCell.self, { _,_,_ in return .none })
+        manager.shouldIndentWhileEditing(NibCell.self, { _,_,_ in return true })
+        manager.didEndDisplaying(NibCell.self, { _,_,_ in })
+        manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _,_,_ in })
+        manager.didEndDisplayingFooterView(NibHeaderFooterView.self, { _,_,_ in })
+        manager.shouldShowMenu(for: NibCell.self, { _,_,_ in return true})
+        manager.canPerformAction(for: NibCell.self, { _,_,_,_,_ in return true })
+        manager.performAction(for: NibCell.self, { _,_,_,_,_ in })
+        manager.shouldHighlight(NibCell.self, { _,_,_ in return true })
+        manager.didHighlight(NibCell.self, { _,_,_ in })
+        manager.didUnhighlight(NibCell.self, { _,_,_ in })
         
         manager.register(NibCell.self)
         manager.memoryStorage.addItem(5)

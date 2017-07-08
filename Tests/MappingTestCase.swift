@@ -19,7 +19,7 @@ class MappingTestCase: XCTestCase {
     override func setUp() {
         super.setUp()
         controller = DTTestTableViewController()
-        controller.tableView = UITableView()
+        controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
         controller.manager.startManaging(withDelegate: controller)
         controller.manager.storage = MemoryStorage()
@@ -31,11 +31,17 @@ class MappingTestCase: XCTestCase {
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
-        expect(self.controller.verifyItem(2, atIndexPath: indexPath(0, 0))) == false // Sanity check
+        let cell: NiblessCell
+        if #available(iOS 11, *) {
+            controller.tableView.beginUpdates()
+            controller.tableView.endUpdates()
+            
+            cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NiblessCell
+        } else {
+            cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NiblessCell
+        }
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NiblessCell
-        
+        expect(cell.model as? Int) == 1
         expect(cell.awakedFromNib) == false
         expect(cell.inittedWithStyle) == true
     }
@@ -66,11 +72,17 @@ class MappingTestCase: XCTestCase {
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
-        expect(self.controller.verifyItem(2, atIndexPath: indexPath(0, 0))) == false // Sanity check
+        let cell: NibCell
+        if #available(iOS 11, *) {
+            controller.tableView.beginUpdates()
+            controller.tableView.endUpdates()
+            
+            cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NibCell
+        } else {
+            cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NibCell
+        }
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NibCell
-        
+        expect(cell.model as? Int) == 1
         expect(cell.awakedFromNib) == true
         expect(cell.inittedWithStyle) == false
     }
@@ -81,11 +93,17 @@ class MappingTestCase: XCTestCase {
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
-        expect(self.controller.verifyItem(2, atIndexPath: indexPath(0, 0))) == false // Sanity check
+        let cell: BaseTestCell
+        if #available(iOS 11, tvOS 11, *) {
+            controller.tableView.beginUpdates()
+            controller.tableView.endUpdates()
+            
+            cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! BaseTestCell
+        } else {
+            cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! BaseTestCell
+        }
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! BaseTestCell
-        
+        expect(cell.model as? Int) == 1
         expect(cell.awakedFromNib) == true
         expect(cell.inittedWithStyle) == false
     }

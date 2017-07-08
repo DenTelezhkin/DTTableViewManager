@@ -1,28 +1,40 @@
 fastlane_version "1.98.0"
 
-lane :test_ios10 do
-  scan(devices: ["iPhone 7 (10.3)"], scheme: "DTTableViewManager-iOS")
+lane :test_ios11 do
+  scan(devices: ["iPhone 7 (11.0)"], scheme: 'DTTableViewManager-iOS')
   sh "bash ../codecov.sh"
 end
 
-lane :test_ios9 do
-  scan(devices: ["iPhone 6s (9.3)"], scheme: "DTTableViewManager-iOS")
+lane :test_ios10 do
+  scan(devices: ["iPhone 7 (10.3)"], scheme: "DTTableViewManager-iOS")
+end
+
+lane :test_tvos11 do
+  scan(devices: ["Apple TV 1080p (11.0)"], scheme: "DTTableViewManager-tvOS")
 end
 
 lane :test_tvos10 do
   scan(device: "Apple TV 1080p (10.2)", scheme: "DTTableViewManager-tvOS")
 end
 
-lane :test_macos do
-  scan(destination: "arch=x86_64")
+lane :test_ios10_legacy do
+  scan(devices: ["iPhone 6s (10.3)"], scheme: 'DTTableViewManager-iOS', xcargs: "SWIFT_VERSION=3.0")
 end
 
-lane :build_watchos do
-  xcodebuild(
-    build: true,
-    destination: "OS=3.2,name=Apple Watch - 42mm"
-  )
+lane :test_tvos10_legacy do
+  scan(devices: ["Apple TV 1080p (10.2)"], scheme: 'DTTableViewManager-tvOS', xcargs: "SWIFT_VERSION=3.0")
 end
+
+# lane :test_macos do
+#   scan(destination: "arch=x86_64")
+# end
+#
+# lane :build_watchos do
+#   xcodebuild(
+#     build: true,
+#     destination: "OS=3.2,name=Apple Watch - 42mm"
+#   )
+# end
 
 lane :pod_lint do
   pod_lib_lint(allow_warnings: true, verbose: true)
@@ -32,9 +44,9 @@ lane :carthage_build do
   carthage(command: "build", no_skip_current: true, verbose: false)
 end
 
-lane :spm_macos do
-  sh "swift build"
-end
+# lane :spm_macos do
+#   sh "swift build"
+# end
 
 lane :release do |params|
   version = params[:version]
