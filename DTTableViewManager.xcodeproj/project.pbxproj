@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E41498D1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */; };
+		3E41498E1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */; };
+		3EF6EB531F1E5E24007F610A /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */; };
+		3EFE2ED41F1E5F6700A73565 /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */; };
 		9A383C9B1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */; };
 		9A383C9C1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */; };
 		9A383C9D1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383C971CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift */; };
@@ -264,6 +268,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MappingConditionsTestCase.swift; path = Tests/MappingConditionsTestCase.swift; sourceTree = SOURCE_ROOT; };
+		3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/iOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
+		3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/tvOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A383C831CE1CC790081D843 /* Example.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Example.plist; path = "Supporting files/Example.plist"; sourceTree = "<group>"; };
 		9A383C841CE1CC790081D843 /* Framework.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Framework.plist; path = "Supporting files/Framework.plist"; sourceTree = "<group>"; };
@@ -476,6 +483,7 @@
 				9A383CBF1CE1DB4C0081D843 /* RandomNibNameCell.xib */,
 				9A383CC01CE1DB4C0081D843 /* ReactingHeaderFooterView.xib */,
 				9A383CC11CE1DB4C0081D843 /* XibTableViewController.xib */,
+				3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -489,6 +497,7 @@
 				9A383CB31CE1DAD80081D843 /* RandomNibNameCell.xib */,
 				9A383CB41CE1DAD80081D843 /* ReactingHeaderFooterView.xib */,
 				9A383CB51CE1DAD80081D843 /* XibTableViewController.xib */,
+				3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */,
 			);
 			name = tvOS;
 			sourceTree = "<group>";
@@ -615,6 +624,7 @@
 				9A383CED1CE1DBCA0081D843 /* StoryboardMappingTestCase.swift */,
 				9A383CEE1CE1DBCA0081D843 /* TableViewFactoryTestCase.swift */,
 				9A383CEF1CE1DBCA0081D843 /* ViewModelMappingCustomizableTestCase.swift */,
+				3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */,
 			);
 			name = Tests;
 			path = XCTests;
@@ -890,6 +900,7 @@
 				9A383CD81CE1DB8A0081D843 /* FixtureStoryboard.storyboard in Resources */,
 				9A383CB61CE1DAD80081D843 /* NibCell.xib in Resources */,
 				9A383CBA1CE1DAD80081D843 /* ReactingHeaderFooterView.xib in Resources */,
+				3EFE2ED41F1E5F6700A73565 /* CustomNibCell.xib in Resources */,
 				9A383CB81CE1DAD80081D843 /* NibView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -921,6 +932,7 @@
 				9A383CD71CE1DB8A0081D843 /* FixtureStoryboard.storyboard in Resources */,
 				9A383CC21CE1DB4C0081D843 /* NibCell.xib in Resources */,
 				9A383CC61CE1DB4C0081D843 /* ReactingHeaderFooterView.xib in Resources */,
+				3EF6EB531F1E5E24007F610A /* CustomNibCell.xib in Resources */,
 				9A383CC41CE1DB4C0081D843 /* NibView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -952,6 +964,7 @@
 				9A383D061CE1DC4F0081D843 /* StoryboardViewController.swift in Sources */,
 				9A383CE21CE1DB8A0081D843 /* StoryboardCell.swift in Sources */,
 				9A383CA91CE1DABF0081D843 /* TableViewController+UnitTests.swift in Sources */,
+				3E41498E1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */,
 				9A383CAC1CE1DAC40081D843 /* NSIndexPath+Constructor.swift in Sources */,
 				9A383CDE1CE1DB8A0081D843 /* ReactingHeaderFooters.swift in Sources */,
 				9A383CCD1CE1DB7D0081D843 /* XibTableViewController.swift in Sources */,
@@ -1010,6 +1023,7 @@
 				9A383D051CE1DC4F0081D843 /* StoryboardViewController.swift in Sources */,
 				9A383CE11CE1DB8A0081D843 /* StoryboardCell.swift in Sources */,
 				9A383CA81CE1DABF0081D843 /* TableViewController+UnitTests.swift in Sources */,
+				3E41498D1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */,
 				9A383CAB1CE1DAC40081D843 /* NSIndexPath+Constructor.swift in Sources */,
 				9A383CDD1CE1DB8A0081D843 /* ReactingHeaderFooters.swift in Sources */,
 				9A383CCC1CE1DB7D0081D843 /* XibTableViewController.swift in Sources */,
