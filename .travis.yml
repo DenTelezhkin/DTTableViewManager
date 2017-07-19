@@ -20,8 +20,8 @@ matrix:
       env: ACTION=test_tvos10_legacy
     # - os: osx
     #   env: ACTION=pod_lint
-    - os: osx
-      env: ACTION=carthage_build
+    # - os: osx
+    #   env: ACTION=carthage_build
     # - os: osx
     #   env: ACTION=spm_macos
 
