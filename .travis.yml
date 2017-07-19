@@ -18,10 +18,10 @@ matrix:
     - os: osx
       osx_image: xcode8.3
       env: ACTION=test_tvos10_legacy
-    - os: osx
-      env: ACTION=pod_lint
     # - os: osx
-    #   env: ACTION=carthage_build
+    #   env: ACTION=pod_lint
+    - os: osx
+      env: ACTION=carthage_build
     # - os: osx
     #   env: ACTION=spm_macos
 
