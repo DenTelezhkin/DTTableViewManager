@@ -442,6 +442,8 @@ internal enum EventMethodSignature: String {
     case canFocusRowAtIndexPath = "tableView:canFocusRowAtIndexPath:"
 }
 
+let TableViewMoveRowAtIndexPathToIndexPathSignature = "tableView:moveRowAtIndexPath:toIndexPath:"
+
 // MARK: - Table view reactions
 extension DTTableViewManager
 {
@@ -564,8 +566,7 @@ extension DTTableViewManager
                 let model = model as? T.ModelType,
                 let indexPath = indexPath as? IndexPath
             else { return 0 }
-            closure(style, cell, model, indexPath)
-            return 0
+            return closure(style, cell, model, indexPath)
         }
         tableViewEventReactions.append(reaction)
     }
@@ -575,9 +576,24 @@ extension DTTableViewManager
         appendReaction(for: T.self, signature: EventMethodSignature.canEditRowAtIndexPath, closure: closure)
     }
     
-    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canMoveCellForRowAt:)` method is called for `cellClass`.
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canMoveRowAt:)` method is called for `cellClass`.
     open func canMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
         appendReaction(for: T.self, signature: EventMethodSignature.canMoveRowAtIndexPath, closure: closure)
+    }
+    
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:moveRowAt:to:)` method is called for `cellClass`.
+    /// - note: 'MemoryStorage', you already have built-in behaviour, that moves items in the datasource. Use this method only if you want to customize how models are actually moved.
+    /// - warning: Do not use `MemoryStorage` methods in closure for this method, because changes only need to be made to the data model, as UI change has already happened and was animated when this method is called.
+    /// - SeeAlso: 'tableView:moveRowAt:to:' method
+    open func move<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (T, T.ModelType, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) where T: UITableViewCell {
+        let reaction = FourArgumentsEventReaction(signature: TableViewMoveRowAtIndexPathToIndexPathSignature, viewType: .cell, viewClass: T.self)
+        reaction.reaction4Arguments = { cell, model, sourceIndexPath, destinationIndexPath in
+            guard let cell = cell as? T, let model = model as? T.ModelType,
+                let sourceIndexPath = sourceIndexPath as? IndexPath,
+                let destinationIndexPath = destinationIndexPath as? IndexPath else { return 0 }
+            return closure(cell, model, sourceIndexPath, destinationIndexPath)
+        }
+        tableViewEventReactions.append(reaction)
     }
     
     /// Registers `closure` to be executed to determine header height in `UITableViewDelegate.tableView(_:heightForHeaderInSection:)` method, when it's called for header which model is of `itemType`.
@@ -806,6 +822,14 @@ extension DTTableViewManager: UITableViewDataSource
         if (delegate as? UITableViewDataSource)?.tableView?(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath) != nil {
             return
         }
+        guard let item = storage.item(at: sourceIndexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
+            let cell = tableView.cellForRow(at: sourceIndexPath)
+            else { return }
+        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: TableViewMoveRowAtIndexPathToIndexPathSignature, forModel: model, view: cell) as? FourArgumentsEventReaction {
+            _ = reaction.performWithArguments((cell,model,sourceIndexPath,destinationIndexPath))
+            return
+        }
+        
         if let storage = self.storage as? MemoryStorage
         {
             if let from = storage.sections[sourceIndexPath.section] as? SectionModel,

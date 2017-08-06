@@ -218,6 +218,7 @@ class ReactingToEventsTestCase: XCTestCase {
     }
     
     func testMovingTableViewItems() {
+        controller.manager.register(NibCell.self)
         controller.manager.memoryStorage.addItems([1,2,3])
         controller.manager.memoryStorage.addItems([4,5,6], toSection: 1)
         
@@ -656,6 +657,17 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     #endif
+    
+    func testMoveRowAtIndexPath() {
+        let exp = expectation(description: "Move row at indexPath")
+        controller.manager.move(NibCell.self, { (cell, model, sourceIndexPath, destinationIndexPath) in
+            exp.fulfill()
+            return
+        })
+        controller.manager.memoryStorage.addItems([3,4])
+        _ = controller.manager.tableView(controller.tableView, moveRowAt: indexPath(0,0), to: indexPath(1, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
     
     func testAllDelegateMethodSignatures() {
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:)))) == EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue

@@ -27,8 +27,8 @@ class ReorderViewController: UIViewController, DTTableViewManageable, UITableVie
         manager.memoryStorage.addItems(["Section 1 cell", "Section 1 cell"], toSection: 0)
         manager.memoryStorage.addItems(["Section 2 cell"], toSection: 1)
         manager.memoryStorage.addItems(["Section 3 cell", "Section 3 cell", "Section 3 cell"], toSection: 2)
-        manager.canMove(StringCell.self, { _ in return true })
-        manager.editingStyle(for: StringCell.self, { _ in return .none })
+        manager.canMove(StringCell.self, { _,_,_ in return true })
+        manager.editingStyle(for: StringCell.self, { _,_,_ in return .none })
         
         manager.memoryStorage.setSectionHeaderModels(["Section 1", "Section 2", "Section 3"])
         
