@@ -133,7 +133,7 @@ class ReactingToEventsTestCase: XCTestCase {
                 self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
                     self.stopMeasuring()
                 }
-                self.controller.manager.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
+                self.controller.manager.tableDelegate?.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
             }
         #endif
     }

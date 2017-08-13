@@ -204,11 +204,8 @@ open class DTTableViewManager : NSObject {
             viewFactory.mappingCustomizableDelegate = mappingDelegate
         }
         tableViewUpdater = TableViewUpdater(tableView: tableView)
-        storage.delegate = tableViewUpdater
         tableDelegate = DTTableViewDelegate(delegate: delegate, tableViewManager: self)
-        tableView.delegate = tableDelegate
         tableDataSource = DTTableViewDataSource(delegate: delegate, tableViewManager: self)
-        tableView.dataSource = tableDataSource
     }
     
     /// Returns closure, that updates cell at provided indexPath. 
