@@ -77,6 +77,12 @@
 		9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE11B8A17E700508207 /* mochaGrunge.png */; };
 		9A41FBE41B8A17E700508207 /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE21B8A17E700508207 /* textured_paper.png */; };
 		9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */; };
+		9A4610C61F408CD500480052 /* DTTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4610C51F408CD500480052 /* DTTableViewDataSource.swift */; };
+		9A4610C71F408CD500480052 /* DTTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4610C51F408CD500480052 /* DTTableViewDataSource.swift */; };
+		9A4610D01F408E7500480052 /* DTTableViewDelegateWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4610CF1F408E7500480052 /* DTTableViewDelegateWrapper.swift */; };
+		9A4610D11F408E7500480052 /* DTTableViewDelegateWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4610CF1F408E7500480052 /* DTTableViewDelegateWrapper.swift */; };
+		9A4610D31F40950400480052 /* DTTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4610D21F40950400480052 /* DTTableViewDelegate.swift */; };
+		9A4610D41F40950400480052 /* DTTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4610D21F40950400480052 /* DTTableViewDelegate.swift */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A587D721CE335250094C821 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A587D541CE334E70094C821 /* DTModelStorage.framework */; };
 		9A587D751CE3352E0094C821 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A587D581CE334E70094C821 /* DTModelStorage.framework */; };
@@ -319,6 +325,9 @@
 		9A41FBE11B8A17E700508207 /* mochaGrunge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mochaGrunge.png; path = Resources/mochaGrunge.png; sourceTree = "<group>"; };
 		9A41FBE21B8A17E700508207 /* textured_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textured_paper.png; path = Resources/textured_paper.png; sourceTree = "<group>"; };
 		9A41FBE61B8A181300508207 /* Banks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banks.xcdatamodel; sourceTree = "<group>"; };
+		9A4610C51F408CD500480052 /* DTTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDataSource.swift; path = Source/DTTableViewDataSource.swift; sourceTree = "<group>"; };
+		9A4610CF1F408E7500480052 /* DTTableViewDelegateWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDelegateWrapper.swift; path = Source/DTTableViewDelegateWrapper.swift; sourceTree = "<group>"; };
+		9A4610D21F40950400480052 /* DTTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDelegate.swift; path = Source/DTTableViewDelegate.swift; sourceTree = "<group>"; };
 		9A587D4A1CE334E70094C821 /* DTModelStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTModelStorage.xcodeproj; path = Carthage/Checkouts/DTModelStorage/DTModelStorage.xcodeproj; sourceTree = "<group>"; };
 		9A587D5B1CE334EB0094C821 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		9A6CED7D1BE570750091B0AF /* Tests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -401,11 +410,14 @@
 			isa = PBXGroup;
 			children = (
 				9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */,
+				9A4610C51F408CD500480052 /* DTTableViewDataSource.swift */,
+				9A4610D21F40950400480052 /* DTTableViewDelegate.swift */,
 				9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */,
 				9A383C971CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift */,
 				9A383C981CE1D9FD0081D843 /* TableViewConfiguration.swift */,
 				9A383C991CE1D9FD0081D843 /* TableViewFactory.swift */,
 				9A383C9A1CE1D9FD0081D843 /* UIView+XibLoading.swift */,
+				9A4610CF1F408E7500480052 /* DTTableViewDelegateWrapper.swift */,
 			);
 			name = DTTableViewManager;
 			path = ../DTTableViewManager;
@@ -948,6 +960,9 @@
 				9AB666CD1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
 				9A383CA31CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383C9F1CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
+				9A4610C61F408CD500480052 /* DTTableViewDataSource.swift in Sources */,
+				9A4610D31F40950400480052 /* DTTableViewDelegate.swift in Sources */,
+				9A4610D01F408E7500480052 /* DTTableViewDelegateWrapper.swift in Sources */,
 				9A383C9B1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
 				9A383CA11CE1D9FD0081D843 /* TableViewFactory.swift in Sources */,
 			);
@@ -987,6 +1002,9 @@
 				9AB666CE1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
 				9A383CA41CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383CA01CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
+				9A4610C71F408CD500480052 /* DTTableViewDataSource.swift in Sources */,
+				9A4610D41F40950400480052 /* DTTableViewDelegate.swift in Sources */,
+				9A4610D11F408E7500480052 /* DTTableViewDelegateWrapper.swift in Sources */,
 				9A383C9C1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
 				9A383CA21CE1D9FD0081D843 /* TableViewFactory.swift in Sources */,
 			);

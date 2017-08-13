@@ -28,7 +28,7 @@ class StoryboardMappingTestCase: XCTestCase {
         controller.manager.register(StoryboardCell.self)
         controller.manager.memoryStorage.addItem(1)
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell
+        let cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell
         
         expect(cell.storyboardLabel).toNot(beNil())
     }

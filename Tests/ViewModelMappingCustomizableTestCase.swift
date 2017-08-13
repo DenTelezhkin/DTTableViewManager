@@ -66,7 +66,7 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
         
         controller.manager.memoryStorage.addItem(3)
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        let cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         
         expect(cell is AnotherIntCell).to(beTrue())
     }
@@ -79,7 +79,7 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
         }
         
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(AnotherIntHeader.self))
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(AnotherIntHeader.self))
     }
     
     func testMappingCustomizableAllowsSelectingAnotherFooterMapping() {
@@ -90,6 +90,6 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
         }
         
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(AnotherIntHeader.self))
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(AnotherIntHeader.self))
     }
 }

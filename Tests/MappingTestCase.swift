@@ -38,7 +38,7 @@ class MappingTestCase: XCTestCase {
             
             cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NiblessCell
         } else {
-            cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NiblessCell
+            cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NiblessCell
         }
         
         expect(cell.model as? Int) == 1
@@ -79,7 +79,7 @@ class MappingTestCase: XCTestCase {
             
             cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NibCell
         } else {
-            cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NibCell
+            cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NibCell
         }
         
         expect(cell.model as? Int) == 1
@@ -100,7 +100,7 @@ class MappingTestCase: XCTestCase {
             
             cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! BaseTestCell
         } else {
-            cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! BaseTestCell
+            cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! BaseTestCell
         }
         
         expect(cell.model as? Int) == 1
@@ -124,7 +124,7 @@ class MappingTestCase: XCTestCase {
         controller.manager.registerHeader(NibView.self)
         
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        let view = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0)
+        let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         expect(view).to(beAKindOf(NibView.self))
     }
     
@@ -132,7 +132,7 @@ class MappingTestCase: XCTestCase {
     {
         controller.manager.registerHeader(NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        let view = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0)
+        let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         expect(view).to(beAKindOf(NibHeaderFooterView.self))
     }
     
@@ -141,7 +141,7 @@ class MappingTestCase: XCTestCase {
         controller.manager.registerFooter(NibView.self)
         
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        let view = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
+        let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         expect(view).to(beAKindOf(NibView.self))
     }
     
@@ -149,7 +149,7 @@ class MappingTestCase: XCTestCase {
     {
         controller.manager.registerHeader(ReactingHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        let view = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0)
+        let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         expect(view).to(beAKindOf(ReactingHeaderFooterView.self))
     }
     
@@ -157,20 +157,20 @@ class MappingTestCase: XCTestCase {
     {
         controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }
     
     func testNiblessHeaderRegistrationWorks() {
         controller.manager.registerNiblessHeader(NiblessHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        let view = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0)
+        let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         expect(view).to(beAKindOf(NiblessHeaderFooterView.self))
     }
     
     func testNiblessFooterRegistrationWorks() {
         controller.manager.registerNiblessFooter(NiblessHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        let view = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
+        let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         expect(view).to(beAKindOf(NiblessHeaderFooterView.self))
     }
     

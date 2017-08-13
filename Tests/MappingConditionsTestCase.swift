@@ -35,10 +35,10 @@ class MappingConditionsTestCase: XCTestCase {
         controller.manager.memoryStorage.addItem(1)
         controller.manager.memoryStorage.addItem(2, toSection: 1)
         
-        let nibCell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        let nibCell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         expect(nibCell is NibCell) == true
         
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 1))
+        let cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 1))
         
         expect(cell is AnotherIntCell).to(beTrue())
     }
@@ -58,11 +58,11 @@ class MappingConditionsTestCase: XCTestCase {
         }
         
         controller.manager.memoryStorage.addItem(3)
-        let cell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        let cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         expect(cell is NibCell) == true
         
         controller.manager.memoryStorage.addItem(1)
-        let anotherCell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(1, 0))
+        let anotherCell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(1, 0))
         expect(anotherCell is AnotherIntCell) == true
     }
     
@@ -79,10 +79,10 @@ class MappingConditionsTestCase: XCTestCase {
         controller.manager.memoryStorage.addItem(1)
         controller.manager.memoryStorage.addItem(2, toSection: 1)
         
-        let nibCell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as? NibCell
+        let nibCell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as? NibCell
         XCTAssertNil(nibCell?.customLabel)
         
-        let customNibCell = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 1)) as? NibCell
+        let customNibCell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 1)) as? NibCell
         
         XCTAssertNotNil(customNibCell?.customLabel)
     }

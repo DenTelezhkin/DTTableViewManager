@@ -42,8 +42,8 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.memoryStorage.addItems([1,1,1,1], toSection: 0)
         controller.manager.memoryStorage.addItems([2,2,2], toSection: 1)
         let tableView = controller.tableView
-        expect(self.controller.manager.tableView(tableView!, numberOfRowsInSection: 0)) == 4
-        expect(self.controller.manager.tableView(tableView!, numberOfRowsInSection: 1)) == 3
+        expect(self.controller.manager.tableDataSource?.tableView(tableView!, numberOfRowsInSection: 0)) == 4
+        expect(self.controller.manager.tableDataSource?.tableView(tableView!, numberOfRowsInSection: 1)) == 3
     }
     
     func testShouldReturnCorrectNumberOfSections()
@@ -52,23 +52,23 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.memoryStorage.addItem(4, toSection: 3)
         controller.manager.memoryStorage.addItem(2, toSection: 2)
         
-        expect(self.controller.manager.numberOfSections(in:self.controller.tableView)) == 4
+        expect(self.controller.manager.tableDataSource?.numberOfSections(in:self.controller.tableView)) == 4
     }
     
     func testShouldSetSectionTitles()
     {
         controller.manager.memoryStorage.setSectionHeaderModels(["one","two"])
         let tableView = self.controller.tableView
-        expect(self.controller.manager.tableView(tableView!, titleForHeaderInSection: 0)) == "one"
-        expect(self.controller.manager.tableView(tableView!, titleForHeaderInSection: 1)) == "two"
+        expect(self.controller.manager.tableDataSource?.tableView(tableView!, titleForHeaderInSection: 0)) == "one"
+        expect(self.controller.manager.tableDataSource?.tableView(tableView!, titleForHeaderInSection: 1)) == "two"
     }
     
     func testSHouldSetSectionFooterTitles()
     {
         controller.manager.memoryStorage.setSectionFooterModels(["one","two"])
         let tableView = self.controller.tableView
-        expect(self.controller.manager.tableView(tableView!, titleForFooterInSection: 0)) == "one"
-        expect(self.controller.manager.tableView(tableView!, titleForFooterInSection: 1)) == "two"
+        expect(self.controller.manager.tableDataSource?.tableView(tableView!, titleForFooterInSection: 0)) == "one"
+        expect(self.controller.manager.tableDataSource?.tableView(tableView!, titleForFooterInSection: 1)) == "two"
     }
     
     func testShouldHandleAbsenceOfHeadersFooters()
@@ -76,8 +76,8 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         controller.manager.memoryStorage.addItem(2, toSection: 1)
         
-        _ = controller.manager.tableView(controller.tableView, titleForHeaderInSection: 0)
-        _ = controller.manager.tableView(controller.tableView, titleForFooterInSection: 1)
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, titleForHeaderInSection: 0)
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, titleForFooterInSection: 1)
     }
 
     func testShouldAddTableItems()
@@ -177,14 +177,14 @@ class DatasourceTestCase: XCTestCase {
     {
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
         controller.manager.configuration.displayHeaderOnEmptySection = false
-        expect(self.controller.manager.tableView(self.controller.tableView, titleForHeaderInSection: 0)).to(beNil())
+        expect(self.controller.manager.tableDataSource?.tableView(self.controller.tableView, titleForHeaderInSection: 0)).to(beNil())
     }
     
     func testShouldShowTitleOnEmptySectionFooter()
     {
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
         controller.manager.configuration.displayFooterOnEmptySection = false
-        expect(self.controller.manager.tableView(self.controller.tableView, titleForFooterInSection: 0)).to(beNil())
+        expect(self.controller.manager.tableDataSource?.tableView(self.controller.tableView, titleForFooterInSection: 0)).to(beNil())
     }
     
     func testShouldShowViewHeaderOnEmptySEction()
@@ -192,7 +192,7 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.registerHeader(NibView.self)
         controller.manager.configuration.displayHeaderOnEmptySection = false
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
     }
     
     func testShouldShowViewFooterOnEmptySection()
@@ -200,7 +200,7 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.registerFooter(NibView.self)
         controller.manager.configuration.displayFooterOnEmptySection = false
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
     }
     
     func testSupplementaryKindsShouldBeSet()
@@ -213,28 +213,28 @@ class DatasourceTestCase: XCTestCase {
     {
         controller.manager.registerHeader(NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }
     
     func testFooterViewShouldBeCreated()
     {
         controller.manager.registerFooter(NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }
     
     func testHeaderViewShouldBeCreatedFromXib()
     {
         controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }
     
     func testFooterViewShouldBeCreatedFromXib()
     {
         controller.manager.registerNibNamed("NibHeaderFooterView", forFooter: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
     }
 
     func testTableHeaderModel() {
@@ -259,12 +259,12 @@ class DatasourceTestCase: XCTestCase {
     
     func testNilHeaderViewWithStyleTitle() {
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beNil())
     }
     
     func testNilFooterViewWithStyleTitle() {
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        expect(self.controller.manager.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
+        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForFooterInSection: 0)).to(beNil())
     }
     
     func testReloadRowsClosure() {

@@ -30,7 +30,7 @@ extension DTTestTableViewController
 {
     func verifyItem<T:Equatable>(_ item: T, atIndexPath indexPath: IndexPath) -> Bool
     {
-        let itemTable = (self.manager.tableView(self.tableView, cellForRowAt: indexPath) as! ModelRetrievable).model as! T
+        let itemTable = (self.manager.tableDataSource?.tableView(self.tableView, cellForRowAt: indexPath) as! ModelRetrievable).model as! T
         let itemDatasource = recursiveForceUnwrap(self.manager.storage.item(at: indexPath)!) as! T
         
         if !(item == itemDatasource)
@@ -55,7 +55,7 @@ extension DTTestTableViewController
                 return false
             }
         }
-        if self.manager.tableView(self.tableView, numberOfRowsInSection: sectionNumber) == section.count
+        if self.manager.tableDataSource?.tableView(self.tableView, numberOfRowsInSection: sectionNumber) == section.count
         {
             return true
         }

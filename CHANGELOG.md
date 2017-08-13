@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+* `UITableViewDelegate` and `UITableViewDatasource` implementations have been refactored from `DTTableViewManager` to `DTTableViewDelegate` and `DTTableViewDataSource` classes.
+* `DTTableViewManager` now allows registering mappings for specific sections, or mappings with any custom condition.
 * Added `move(_:_:)` method to allow setting up events, reacting to `tableView:moveRowAt:to:` method.
 
 ## [5.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.3.0)

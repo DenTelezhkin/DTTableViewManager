@@ -18,10 +18,10 @@ class DTTestTableViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.manager.tableView(tableView, cellForRowAt: indexPath)
+        return self.manager.tableDataSource?.tableView(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.manager.tableView(tableView, numberOfRowsInSection: section)
+        return self.manager.tableDataSource?.tableView(tableView, numberOfRowsInSection: section) ?? 0
     }
 }

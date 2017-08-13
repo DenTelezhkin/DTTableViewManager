@@ -79,7 +79,7 @@ class ViewModelMappingCustomizationTestCase : XCTestCase {
         }
         
         sut.manager.memoryStorage.addItems([1,2], toSection: 0)
-        sut.manager.tableView(sut.tableView, didSelectRowAt: indexPath(0, 0))
+        sut.manager.tableDelegate?.tableView(sut.tableView, didSelectRowAt: indexPath(0, 0))
         
         waitForExpectations(timeout: 0.5, handler: nil)
     }
@@ -109,7 +109,7 @@ class ReactingToEventsTestCase: XCTestCase {
         }
         
         controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        controller.manager.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
+        controller.manager.tableDelegate?.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
         
         expect(reactingCell?.indexPath) == indexPath(1, 0)
         expect(reactingCell?.model) == 2
@@ -126,7 +126,7 @@ class ReactingToEventsTestCase: XCTestCase {
             self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
                 self.stopMeasuring()
             }
-            self.controller.manager.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
+            self.controller.manager.tableDelegate?.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
             }
         #else
             measureMetrics([XCTPerformanceMetric_WallClockTime], automaticallyStartMeasuring: true) {
@@ -152,7 +152,7 @@ class ReactingToEventsTestCase: XCTestCase {
         })
         
         controller.manager.memoryStorage.addItem(2, toSection: 0)
-        _ = controller.manager.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         
         expect(reactingCell?.indexPath) == indexPath(0, 0)
         expect(reactingCell?.model) == 2
@@ -170,7 +170,7 @@ class ReactingToEventsTestCase: XCTestCase {
             header.sectionIndex = sectionIndex
         }
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        reactingHeader = controller.manager.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
+        reactingHeader = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
         
         expect(reactingHeader?.sectionIndex) == 0
         expect(reactingHeader?.model) == "Bar"
@@ -187,7 +187,7 @@ class ReactingToEventsTestCase: XCTestCase {
             footer.sectionIndex = sectionIndex
         }
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        reactingFooter = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
+        reactingFooter = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
         
         expect(reactingFooter?.sectionIndex) == 0
         expect(reactingFooter?.model) == "Bar"
@@ -222,7 +222,7 @@ class ReactingToEventsTestCase: XCTestCase {
         controller.manager.memoryStorage.addItems([1,2,3])
         controller.manager.memoryStorage.addItems([4,5,6], toSection: 1)
         
-        controller.manager.tableView(controller.tableView, moveRowAt: indexPath(0, 0), to: indexPath(3, 1))
+        controller.manager.tableDataSource?.tableView(controller.tableView, moveRowAt: indexPath(0, 0), to: indexPath(3, 1))
         
         expect(self.controller.manager.memoryStorage.section(atIndex: 0)?.items(ofType: Int.self)) == [2,3]
         expect(self.controller.manager.memoryStorage.section(atIndex: 1)?.items(ofType: Int.self)) == [4,5,6,1]
@@ -250,7 +250,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         }
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        _ = controller.manager.tableView(controller.tableView, viewForFooterInSection: 0)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -262,7 +262,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -274,7 +274,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, estimatedHeightForRowAt: indexPath(0, 0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, estimatedHeightForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -286,7 +286,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, indentationLevelForRowAt: indexPath(0, 0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, indentationLevelForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -297,7 +297,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return nil
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, willSelectRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willSelectRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -308,7 +308,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return nil
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, willDeselectRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDeselectRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -319,7 +319,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, didDeselectRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didDeselectRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -329,7 +329,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, willDisplay: NibCell(), forRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDisplay: NibCell(), forRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -341,7 +341,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return nil
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, editActionsForRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, editActionsForRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     #endif
@@ -352,7 +352,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, accessoryButtonTappedForRowWith: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, accessoryButtonTappedForRowWith: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -362,7 +362,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, commit: .delete, forRowAt: indexPath(0,0))
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, commit: .delete, forRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -373,7 +373,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return false
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -384,7 +384,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return false
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, canMoveRowAt: indexPath(0,0))
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, canMoveRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -458,7 +458,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        _ = controller.manager.tableView(controller.tableView, willDisplayHeaderView: ReactingHeaderFooterView(), forSection: 0)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDisplayHeaderView: ReactingHeaderFooterView(), forSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -468,7 +468,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        _ = controller.manager.tableView(controller.tableView, willDisplayFooterView: ReactingHeaderFooterView(), forSection: 0)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDisplayFooterView: ReactingHeaderFooterView(), forSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -479,7 +479,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, willBeginEditingRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willBeginEditingRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -489,7 +489,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, didEndEditingRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didEndEditingRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     #endif
@@ -501,7 +501,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return .none
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, editingStyleForRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, editingStyleForRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -513,7 +513,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return nil
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, titleForDeleteConfirmationButtonForRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, titleForDeleteConfirmationButtonForRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     #endif
@@ -525,7 +525,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return true
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, shouldIndentWhileEditingRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldIndentWhileEditingRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -535,7 +535,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, didEndDisplaying:NibCell(), forRowAt : indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didEndDisplaying:NibCell(), forRowAt : indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -545,7 +545,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        _ = controller.manager.tableView(controller.tableView, didEndDisplayingHeaderView: ReactingHeaderFooterView(), forSection: 0)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didEndDisplayingHeaderView: ReactingHeaderFooterView(), forSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -555,7 +555,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
         })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        _ = controller.manager.tableView(controller.tableView, didEndDisplayingFooterView: ReactingHeaderFooterView(), forSection: 0)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didEndDisplayingFooterView: ReactingHeaderFooterView(), forSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -566,7 +566,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return true
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, shouldShowMenuForRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldShowMenuForRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -577,7 +577,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return true
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, canPerformAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, canPerformAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -588,7 +588,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, performAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, performAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -599,7 +599,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return true
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, shouldHighlightRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldHighlightRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -610,7 +610,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, didHighlightRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didHighlightRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -621,7 +621,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, didUnhighlightRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didUnhighlightRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -633,7 +633,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return true
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableView(controller.tableView, canFocusRowAt: indexPath(0,0))
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, canFocusRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     #if os(iOS)
@@ -643,7 +643,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
             return ["1","2"]
         }
-        _ = controller.manager.sectionIndexTitles(for: controller.tableView)
+        _ = controller.manager.tableDataSource?.sectionIndexTitles(for: controller.tableView)
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     
@@ -653,7 +653,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
             return 5
         }
-        _ = controller.manager.tableView(controller.tableView, sectionForSectionIndexTitle: "2", at: 3)
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, sectionForSectionIndexTitle: "2", at: 3)
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     #endif
@@ -665,7 +665,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return
         })
         controller.manager.memoryStorage.addItems([3,4])
-        _ = controller.manager.tableView(controller.tableView, moveRowAt: indexPath(0,0), to: indexPath(1, 0))
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, moveRowAt: indexPath(0,0), to: indexPath(1, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -798,7 +798,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         manager.register(NibCell.self)
         manager.memoryStorage.addItem(5)
         measure {
-            manager.tableView(self.controller.tableView, didSelectRowAt: indexPath(0, 0))
+            manager.tableDelegate?.tableView(self.controller.tableView, didSelectRowAt: indexPath(0, 0))
         }
     }
 }
