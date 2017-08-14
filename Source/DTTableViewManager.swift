@@ -94,6 +94,8 @@ open class DTTableViewManager {
         return nil
     }
     
+    public init() {}
+    
     /// `DTTableViewManageable` delegate.
     final fileprivate weak var delegate : AnyObject?
     
