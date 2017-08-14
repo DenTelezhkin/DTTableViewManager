@@ -30,14 +30,14 @@ import DTModelStorage
 
 /// Adopting this protocol will automatically inject `manager` property to your object, that lazily instantiates `DTTableViewManager` object.
 /// Target is not required to be `UITableViewController`, and can be a regular UIViewController with UITableView, or even different object like UICollectionViewCell.
-public protocol DTTableViewManageable : class, NSObjectProtocol
+public protocol DTTableViewManageable : class
 {
     /// Table view, that will be managed by DTTableViewManager
     var tableView : UITableView! { get }
 }
 
 /// This protocol is similar to `DTTableViewManageable`, but allows using optional `UITableView` property.
-public protocol DTTableViewOptionalManageable : class, NSObjectProtocol {
+public protocol DTTableViewOptionalManageable : class {
     var tableView : UITableView? { get }
 }
 
@@ -84,7 +84,7 @@ extension DTTableViewOptionalManageable {
 
 /// `DTTableViewManager` manages many of `UITableView` datasource and delegate methods and provides API for managing your data models in the table. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
 /// - SeeAlso: `startManagingWithDelegate:`
-open class DTTableViewManager : NSObject {
+open class DTTableViewManager {
     
     /// Internal weak link to `UITableView`
     final var tableView : UITableView?
