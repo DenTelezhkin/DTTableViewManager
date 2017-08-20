@@ -159,14 +159,14 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     
     open func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if let eventReaction = cellReaction(.willSelectRowAtIndexPath, location: indexPath) {
-            return performCellReaction(eventReaction, location: indexPath, provideCell: true) as? IndexPath
+            return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? IndexPath
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, willSelectRowAt: indexPath)
     }
     
     open func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         if let eventReaction = cellReaction(.willDeselectRowAtIndexPath, location: indexPath) {
-            return performCellReaction(eventReaction, location: indexPath, provideCell: true) as? IndexPath
+            return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? IndexPath
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, willDeselectRowAt: indexPath)
     }
@@ -210,7 +210,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     #if os(iOS)
     open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if let eventReaction = cellReaction(.editActionsForRowAtIndexPath, location: indexPath) {
-            return performCellReaction(eventReaction, location: indexPath, provideCell: true) as? [UITableViewRowAction]
+            return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? [UITableViewRowAction]
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, editActionsForRowAt: indexPath)
     }
@@ -241,7 +241,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     #if os(iOS)
     open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         if let eventReaction = cellReaction(.titleForDeleteButtonForRowAtIndexPath, location: indexPath) {
-            return performCellReaction(eventReaction, location: indexPath, provideCell: true) as? String
+            return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? String
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
     }
@@ -280,23 +280,23 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     open func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
-            let cell = tableView.cellForRow(at: indexPath)
-            else { return false }
-        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, forModel: model, view: cell) as? FiveArgumentsEventReaction {
-            return reaction.performWithArguments((action,sender as Any,cell,model,indexPath)) as? Bool ?? false
+        if let canPerform = perform5ArgumentsCellReaction(.canPerformActionForRowAtIndexPath,
+                                                          argumentOne: action,
+                                                          argumentTwo: sender as Any,
+                                                          location: indexPath,
+                                                          provideCell: true) as? Bool {
+            return canPerform
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canPerformAction: action, forRowAt: indexPath, withSender: sender) ?? false
     }
     
     open func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, performAction: action, forRowAt: indexPath, withSender: sender) }
-        guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
-            let cell = tableView.cellForRow(at: indexPath)
-            else { return }
-        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue, forModel: model, view: cell) as? FiveArgumentsEventReaction {
-            _ = reaction.performWithArguments((action,sender as Any,cell,model,indexPath))
-        }
+        _ = perform5ArgumentsCellReaction(.performActionForRowAtIndexPath,
+                                      argumentOne: action,
+                                      argumentTwo: sender as Any,
+                                      location: indexPath,
+                                      provideCell: true)
     }
     
     open func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {

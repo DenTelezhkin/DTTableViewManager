@@ -89,6 +89,32 @@ open class DTTableViewDelegateWrapper : NSObject {
         tableViewEventReactions.append(reaction)
     }
     
+    final internal func append4ArgumentsReaction<CellClass,Argument,ReturnValue>
+        (for cellClass: CellClass.Type,
+         signature: EventMethodSignature,
+         closure: @escaping (Argument, CellClass, CellClass.ModelType, IndexPath) -> ReturnValue)
+        where CellClass: ModelTransfer, CellClass: UITableViewCell
+    {
+        let reaction = FourArgumentsEventReaction(signature: signature.rawValue,
+                                                  viewType: .cell,
+                                                  viewClass: CellClass.self)
+        reaction.make4ArgumentsReaction(closure)
+        tableViewEventReactions.append(reaction)
+    }
+    
+    final internal func append5ArgumentsReaction<CellClass, ArgumentOne, ArgumentTwo, ReturnValue>
+        (for cellClass: CellClass.Type,
+         signature: EventMethodSignature,
+         closure: @escaping (ArgumentOne, ArgumentTwo, CellClass, CellClass.ModelType, IndexPath) -> ReturnValue)
+        where CellClass: ModelTransfer, CellClass: UITableViewCell
+    {
+        let reaction = FiveArgumentsEventReaction(signature: signature.rawValue,
+                                                  viewType: .cell,
+                                                  viewClass: CellClass.self)
+        reaction.make5ArgumentsReaction(closure)
+        tableViewEventReactions.append(reaction)
+    }
+    
     final internal func appendReaction<T,U>(for modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, IndexPath) -> U)
     {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: T.self)
@@ -121,7 +147,36 @@ open class DTTableViewDelegateWrapper : NSObject {
         return tableViewEventReactions.performReaction(of: .cell, signature: signature.rawValue, view: cell, model: model, location: location)
     }
     
-    final func performCellReaction(_ reaction: EventReaction, location: IndexPath, provideCell: Bool) -> Any? {
+    final func perform4ArgumentsCellReaction(_ signature: EventMethodSignature, argument: Any, location: IndexPath, provideCell: Bool) -> Any? {
+        var cell : UITableViewCell?
+        if provideCell { cell = tableView?.cellForRow(at: location) }
+        guard let model = storage.item(at: location) else { return nil }
+        return tableViewEventReactions.perform4ArgumentsReaction(of: .cell,
+                                                                 signature: signature.rawValue,
+                                                                 argument: argument,
+                                                                 view: cell,
+                                                                 model: model,
+                                                                 location: location)
+    }
+    
+    final func perform5ArgumentsCellReaction(_ signature: EventMethodSignature,
+                                             argumentOne: Any,
+                                             argumentTwo: Any,
+                                             location: IndexPath,
+                                             provideCell: Bool) -> Any? {
+        var cell : UITableViewCell?
+        if provideCell { cell = tableView?.cellForRow(at: location) }
+        guard let model = storage.item(at: location) else { return nil }
+        return tableViewEventReactions.perform5ArgumentsReaction(of: .cell,
+                                                                 signature: signature.rawValue,
+                                                                 firstArgument: argumentOne,
+                                                                 secondArgument: argumentTwo,
+                                                                 view: cell,
+                                                                 model: model,
+                                                                 location: location)
+    }
+    
+    final func performNillableCellReaction(_ reaction: EventReaction, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
         guard let model = storage.item(at: location) else { return nil }

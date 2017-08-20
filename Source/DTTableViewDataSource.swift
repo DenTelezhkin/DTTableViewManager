@@ -99,12 +99,10 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
-        guard let item = storage.item(at: indexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
-            let cell = tableView.cellForRow(at: indexPath)
-            else { return }
-        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue, forModel: model, view: cell) as? FourArgumentsEventReaction {
-            _ = reaction.performWithArguments((editingStyle,cell,model,indexPath))
-        }
+        _ = perform4ArgumentsCellReaction(.commitEditingStyleForRowAtIndexPath,
+                                      argument: editingStyle,
+                                      location: indexPath,
+                                      provideCell: true)
     }
     
     open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

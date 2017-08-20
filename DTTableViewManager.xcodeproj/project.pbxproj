@@ -93,6 +93,12 @@
 		9A587D861CE335D80094C821 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A587D541CE334E70094C821 /* DTModelStorage.framework */; };
 		9A587D871CE335DF0094C821 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A587D541CE334E70094C821 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
+		9A7E870F1F49EDCE00110671 /* DragAndDropTextsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E870E1F49EDCE00110671 /* DragAndDropTextsViewController.swift */; };
+		9A7E87111F49EE1100110671 /* DragAndDropImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87101F49EE1100110671 /* DragAndDropImagesViewController.swift */; };
+		9A7E87131F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */; };
+		9A7E87141F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */; };
+		9A7E87161F49F2EF00110671 /* DTTableViewDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */; };
+		9A7E87171F49F2EF00110671 /* DTTableViewDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */; };
 		9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9B17061B65771600D8ABD3 /* AppDelegate.swift */; };
 		9A9B170E1B65771600D8ABD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170C1B65771600D8ABD3 /* Main.storyboard */; };
 		9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170F1B65771600D8ABD3 /* Images.xcassets */; };
@@ -332,6 +338,10 @@
 		9A587D5B1CE334EB0094C821 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		9A6CED7D1BE570750091B0AF /* Tests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6CED8C1BE571860091B0AF /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A7E870E1F49EDCE00110671 /* DragAndDropTextsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DragAndDropTextsViewController.swift; path = "Example controllers/DragAndDrop/DragAndDropTextsViewController.swift"; sourceTree = "<group>"; };
+		9A7E87101F49EE1100110671 /* DragAndDropImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DragAndDropImagesViewController.swift; path = "Example controllers/DragAndDrop/DragAndDropImagesViewController.swift"; sourceTree = "<group>"; };
+		9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDragDelegate.swift; path = Source/DTTableViewDragDelegate.swift; sourceTree = "<group>"; };
+		9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDropDelegate.swift; path = Source/DTTableViewDropDelegate.swift; sourceTree = "<group>"; };
 		9A88F5A819EAC683008436C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Images.xcassets; sourceTree = "<group>"; };
 		9A892A6E1D997ACD0044A4A9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../../Library/Developer/Xcode/DerivedData/DTTableViewManager-bgztwrskkkqkkrgpcppbfjlazcye/Build/Products/Debug-iphoneos/Realm.framework"; sourceTree = "<group>"; };
 		9A892A701D997AD10044A4A9 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../Library/Developer/Xcode/DerivedData/DTTableViewManager-bgztwrskkkqkkrgpcppbfjlazcye/Build/Products/Debug-iphoneos/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -411,6 +421,8 @@
 			children = (
 				9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */,
 				9A4610C51F408CD500480052 /* DTTableViewDataSource.swift */,
+				9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */,
+				9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */,
 				9A4610D21F40950400480052 /* DTTableViewDelegate.swift */,
 				9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */,
 				9A383C971CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift */,
@@ -591,6 +603,8 @@
 				9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */,
 				9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */,
 				9ADA63321B88A56F0060B2C0 /* TableViewController.swift */,
+				9A7E870E1F49EDCE00110671 /* DragAndDropTextsViewController.swift */,
+				9A7E87101F49EE1100110671 /* DragAndDropImagesViewController.swift */,
 			);
 			name = ExampleControllers;
 			sourceTree = "<group>";
@@ -958,8 +972,10 @@
 			files = (
 				9A383C9D1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */,
 				9AB666CD1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
+				9A7E87161F49F2EF00110671 /* DTTableViewDropDelegate.swift in Sources */,
 				9A383CA31CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383C9F1CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
+				9A7E87131F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */,
 				9A4610C61F408CD500480052 /* DTTableViewDataSource.swift in Sources */,
 				9A4610D31F40950400480052 /* DTTableViewDelegate.swift in Sources */,
 				9A4610D01F408E7500480052 /* DTTableViewDelegateWrapper.swift in Sources */,
@@ -1000,8 +1016,10 @@
 			files = (
 				9A383C9E1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */,
 				9AB666CE1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
+				9A7E87171F49F2EF00110671 /* DTTableViewDropDelegate.swift in Sources */,
 				9A383CA41CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383CA01CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
+				9A7E87141F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */,
 				9A4610C71F408CD500480052 /* DTTableViewDataSource.swift in Sources */,
 				9A4610D41F40950400480052 /* DTTableViewDelegate.swift in Sources */,
 				9A4610D11F408E7500480052 /* DTTableViewDelegateWrapper.swift in Sources */,
@@ -1018,10 +1036,12 @@
 				9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */,
 				9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */,
 				9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */,
+				9A7E87111F49EE1100110671 /* DragAndDropImagesViewController.swift in Sources */,
 				9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */,
 				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,
 				9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */,
 				9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */,
+				9A7E870F1F49EDCE00110671 /* DragAndDropTextsViewController.swift in Sources */,
 				9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */,
 				9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */,
 				9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */,
@@ -1349,6 +1369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting files/Example.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1378,6 +1399,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting files/Example.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";

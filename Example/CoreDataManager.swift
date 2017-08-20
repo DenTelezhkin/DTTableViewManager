@@ -16,7 +16,7 @@ class CoreDataManager
         let storeURL = self.applicationDocumentsDirectory.appendingPathComponent("Banks.sqlite")
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         try! persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
-        managedObjectContext = NSManagedObjectContext()
+        managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
     }
     

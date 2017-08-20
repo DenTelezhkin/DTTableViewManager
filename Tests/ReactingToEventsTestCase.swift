@@ -12,6 +12,32 @@ import DTModelStorage
 @testable import DTTableViewManager
 import Nimble
 
+#if os(iOS)
+@available (iOS 11, *)
+class DragAndDropMock : NSObject, UIDragSession {
+    func canLoadObjects(ofClass aClass: NSItemProviderReading.Type) -> Bool {
+        return false
+    }
+    
+    var items: [UIDragItem] = []
+    
+    func location(in view: UIView) -> CGPoint {
+        return CGPoint()
+    }
+    
+    var allowsMoveOperation: Bool = true
+    
+    var isRestrictedToDraggingApplication: Bool = false
+    
+    func hasItemsConforming(toTypeIdentifiers typeIdentifiers: [String]) -> Bool {
+        return false
+    }
+    
+    var localContext: Any?
+}
+    
+#endif
+
 class AlwaysVisibleTableView: UITableView
 {
     override func cellForRow(at indexPath: IndexPath) -> UITableViewCell? {
@@ -668,6 +694,20 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = controller.manager.tableDataSource?.tableView(controller.tableView, moveRowAt: indexPath(0,0), to: indexPath(1, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    #if os(iOS)
+    @available(iOS 11, *)
+    func testItemsForBeginningInDragSession() {
+        let exp = expectation(description: "ItemsForBeginningInDragSession")
+        controller.manager.itemsForBeginningDragSession(from: NibCell.self) { session, cell, model, _ in
+            exp.fulfill()
+            return []
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, itemsForBeginning: DragAndDropMock(), at: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    #endif
     
     func testAllDelegateMethodSignatures() {
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:)))) == EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue

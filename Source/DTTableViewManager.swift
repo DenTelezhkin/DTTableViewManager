@@ -173,6 +173,34 @@ open class DTTableViewManager {
         }
     }
     
+    #if os(iOS)
+    private var _tableDragDelegatePrivate : AnyObject?
+    @available(iOS 11, *)
+    // Object, that is responsible for implementing `UITableViewDragDelegate` protocol
+    open var tableDragDelegate : DTTableViewDragDelegate? {
+        get {
+            return _tableDragDelegatePrivate as? DTTableViewDragDelegate
+        }
+        set {
+            _tableDragDelegatePrivate = newValue
+            tableView?.dragDelegate = newValue
+        }
+    }
+    
+    private var _tableDropDelegatePrivate : AnyObject?
+    @available(iOS 11, *)
+    // Object, that is responsible for implementing `UITableViewDropDelegate` protocol
+    open var tableDropDelegate : DTTableViewDropDelegate? {
+        get {
+            return _tableDropDelegatePrivate as? DTTableViewDropDelegate
+        }
+        set {
+            _tableDropDelegatePrivate = newValue
+            tableView?.dropDelegate = newValue
+        }
+    }
+    #endif
+    
     /// Starts managing `UITableView`.
     ///
     /// Call this method before calling any of `DTTableViewManager` methods.
@@ -208,6 +236,12 @@ open class DTTableViewManager {
         tableViewUpdater = TableViewUpdater(tableView: tableView)
         tableDelegate = DTTableViewDelegate(delegate: delegate, tableViewManager: self)
         tableDataSource = DTTableViewDataSource(delegate: delegate, tableViewManager: self)
+        #if os(iOS)
+        if #available(iOS 11.0, *) {
+            tableDragDelegate = DTTableViewDragDelegate(delegate: delegate, tableViewManager: self)
+            tableDropDelegate = DTTableViewDropDelegate(delegate: delegate, tableViewManager: self)
+        }
+        #endif
     }
     
     /// Returns closure, that updates cell at provided indexPath. 
@@ -331,6 +365,7 @@ extension DTTableViewManager
     }
 }
 
+// MARK: - Method signatures
 /// All supported Objective-C method signatures.
 ///
 /// Some of signatures are made up, so that we would be able to link them with event, however they don't stop "responds(to:)" method from returning true.
@@ -385,6 +420,9 @@ internal enum EventMethodSignature: String {
     case didUnhighlightRowAtIndexPath = "tableView:didUnhighlightRowAtIndexPath:"
     
     case canFocusRowAtIndexPath = "tableView:canFocusRowAtIndexPath:"
+    
+    /// UITableViewDragDelegate
+    case itemsForBeginningDragSession = "tableView:itemsForBeginningDragSession:atIndexPath:"
 }
 
 let TableViewMoveRowAtIndexPathToIndexPathSignature = "tableView:moveRowAtIndexPath:toIndexPath:"
@@ -467,21 +505,14 @@ extension DTTableViewManager
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:accessoryButtonTappedForRowAt:)` method is called for `cellClass`.
     open func accessoryButtonTapped<T:ModelTransfer>(in cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
-        tableDelegate?.appendReaction(for: T.self, signature: EventMethodSignature.accessoryButtonTappedForRowAtIndexPath, closure: closure)
+        tableDelegate?.appendReaction(for: T.self, signature: .accessoryButtonTappedForRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)` method is called for `cellClass`.
     open func commitEditingStyle<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (UITableViewCellEditingStyle, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
-        let reaction = FourArgumentsEventReaction(signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue, viewType: .cell, viewClass: T.self)
-        reaction.reaction4Arguments = { style, cell, model, indexPath in
-            guard let style = style as? UITableViewCellEditingStyle,
-                let cell = cell as? T,
-                let model = model as? T.ModelType,
-                let indexPath = indexPath as? IndexPath
-            else { return 0 }
-            return closure(style, cell, model, indexPath)
-        }
-        tableDataSource?.tableViewEventReactions.append(reaction)
+        tableDataSource?.append4ArgumentsReaction(for: T.self,
+                                                  signature: .commitEditingStyleForRowAtIndexPath,
+                                                  closure: closure)
     }
     
     /// Registers `closure` to be executed in `UITableViewDelegate.tableView(_:canEditCellForRowAt:)` method, when it's called for cell which model is of `itemType`.
@@ -602,34 +633,16 @@ extension DTTableViewManager
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func canPerformAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
-        let reaction = FiveArgumentsEventReaction(signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue,
-                                                  viewType: .cell,
-                                                  viewClass: T.self)
-        reaction.reaction5Arguments = { selector, sender, cell, model, indexPath -> Any in
-            guard let selector = selector as? Selector,
-                let cell = cell as? T,
-                let model = model as? T.ModelType,
-                let indexPath = indexPath as? IndexPath
-                else { return false }
-            return closure(selector, sender, cell, model, indexPath)
-        }
-        tableDelegate?.tableViewEventReactions.append(reaction)
+        tableDelegate?.append5ArgumentsReaction(for: T.self,
+                                                signature: .canPerformActionForRowAtIndexPath,
+                                                closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func performAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
-        let reaction = FiveArgumentsEventReaction(signature: EventMethodSignature.performActionForRowAtIndexPath.rawValue,
-                                                  viewType: .cell,
-                                                  viewClass: T.self)
-        reaction.reaction5Arguments = { selector, sender, cell, model, indexPath  in
-            guard let selector = selector as? Selector,
-                let cell = cell as? T,
-                let model = model as? T.ModelType,
-                let indexPath = indexPath as? IndexPath
-                else { return false }
-            return closure(selector, sender, cell, model, indexPath)
-        }
-        tableDelegate?.tableViewEventReactions.append(reaction)
+        tableDelegate?.append5ArgumentsReaction(for: T.self,
+                                                signature: .performActionForRowAtIndexPath,
+                                                closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:shouldHighlightRowAt:)` method is called for `cellClass`.
@@ -676,4 +689,20 @@ extension DTTableViewManager
         tableDataSource?.tableViewEventReactions.append(reaction)
     }
     #endif
+    
+    #if os(iOS)
+    
+    // MARK: - Drag
+    @available(iOS 11, *)
+    open func itemsForBeginningDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, T,T.ModelType, IndexPath) -> [UIDragItem]) where T:UITableViewCell
+    {
+        tableDragDelegate?.append4ArgumentsReaction(for: T.self,
+                                                    signature: .itemsForBeginningDragSession,
+                                                    closure: closure)
+    }
+    
+    // MARK: - Drop
+    
+    #endif
 }
+
