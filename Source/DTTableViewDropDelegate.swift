@@ -8,8 +8,7 @@
 
 import UIKit
 
-#if os(iOS)
-    
+#if os(iOS) && swift(>=3.2)
 @available(iOS 11.0, *)
 open class DTTableViewDropDelegate: DTTableViewDelegateWrapper, UITableViewDropDelegate {
     public func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
@@ -21,5 +20,4 @@ open class DTTableViewDropDelegate: DTTableViewDelegateWrapper, UITableViewDropD
         tableView?.dropDelegate = self
     }
 }
-    
 #endif

@@ -12,7 +12,7 @@ import DTModelStorage
 @testable import DTTableViewManager
 import Nimble
 
-#if os(iOS)
+#if os(iOS) && swift(>=3.2)
 @available (iOS 11, *)
 class DragAndDropMock : NSObject, UIDragSession {
     func canLoadObjects(ofClass aClass: NSItemProviderReading.Type) -> Bool {
@@ -695,9 +695,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    #if os(iOS)
-    @available(iOS 11, *)
+    #if os(iOS) && swift(>=3.2)
     func testItemsForBeginningInDragSession() {
+        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "ItemsForBeginningInDragSession")
         controller.manager.itemsForBeginningDragSession(from: NibCell.self) { session, cell, model, _ in
             exp.fulfill()

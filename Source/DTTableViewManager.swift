@@ -173,7 +173,7 @@ open class DTTableViewManager {
         }
     }
     
-    #if os(iOS)
+    #if os(iOS) && swift(>=3.2)
     private var _tableDragDelegatePrivate : AnyObject?
     @available(iOS 11, *)
     // Object, that is responsible for implementing `UITableViewDragDelegate` protocol
@@ -236,7 +236,7 @@ open class DTTableViewManager {
         tableViewUpdater = TableViewUpdater(tableView: tableView)
         tableDelegate = DTTableViewDelegate(delegate: delegate, tableViewManager: self)
         tableDataSource = DTTableViewDataSource(delegate: delegate, tableViewManager: self)
-        #if os(iOS)
+        #if os(iOS) && swift(>=3.2)
         if #available(iOS 11.0, *) {
             tableDragDelegate = DTTableViewDragDelegate(delegate: delegate, tableViewManager: self)
             tableDropDelegate = DTTableViewDropDelegate(delegate: delegate, tableViewManager: self)
@@ -690,7 +690,7 @@ extension DTTableViewManager
     }
     #endif
     
-    #if os(iOS)
+    #if os(iOS) && swift(>=3.2)
     
     // MARK: - Drag
     @available(iOS 11, *)

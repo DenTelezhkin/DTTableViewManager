@@ -9,8 +9,8 @@
 import UIKit
 import DTModelStorage
 
-#if os(iOS)
-
+#if os(iOS) && swift(>=3.2)
+    
 @available(iOS 11.0, *)
 open class DTTableViewDragDelegate: DTTableViewDelegateWrapper, UITableViewDragDelegate {
     public func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
@@ -34,5 +34,4 @@ open class DTTableViewDragDelegate: DTTableViewDelegateWrapper, UITableViewDragD
         tableView?.dragDelegate = self
     }
 }
-
 #endif
