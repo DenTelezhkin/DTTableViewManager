@@ -707,6 +707,30 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, itemsForBeginning: DragAndDropMock(), at: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    func testItemsForAddingToDragSession() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "ItemsForAddingToDragSession")
+        controller.manager.itemsForAddingToDragSession(from: NibCell.self) { session, point, cell, model, _ in
+            exp.fulfill()
+            return []
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, itemsForAddingTo: DragAndDropMock(), at: indexPath(0,0), point: .zero)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDragPreviewParametersForRowAtIndexPath() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dragPreviewParametersForRowAtIndexPath")
+        controller.manager.dragPreviewParameters(for: NibCell.self) { cell, model, indexPath in
+            exp.fulfill()
+            return nil
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragPreviewParametersForRowAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
     #endif
     
     func testAllDelegateMethodSignatures() {

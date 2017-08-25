@@ -13,20 +13,38 @@ import DTModelStorage
     
 @available(iOS 11.0, *)
 open class DTTableViewDragDelegate: DTTableViewDelegateWrapper, UITableViewDragDelegate {
-    public func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        guard let item = storage.item(at: indexPath),
-            let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
-            let cell = tableView.cellForRow(at: indexPath) else { return [] }
-        if let items = tableViewEventReactions
-               .perform4ArgumentsReaction(of: .cell,
-                                   signature: EventMethodSignature.itemsForBeginningDragSession.rawValue,
-                                    argument: session,
-                                        view: cell,
-                                       model: model,
-                                    location: indexPath) as? [UIDragItem] {
+    public func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession,
+                          at indexPath: IndexPath) -> [UIDragItem]
+    {
+        if let items = performCellReaction(.itemsForBeginningDragSession,
+                                                     argument: session,
+                                                     location: indexPath,
+                                                     provideCell: true) as? [UIDragItem]
+        {
             return items
         }
         return (delegate as? UITableViewDragDelegate)?.tableView(tableView, itemsForBeginning: session, at:indexPath) ?? []
+    }
+    
+    public func tableView(_ tableView: UITableView, itemsForAddingTo session: UIDragSession,
+                          at indexPath: IndexPath,
+                          point: CGPoint) -> [UIDragItem]
+    {
+        if let items = performCellReaction(.itemsForAddingToDragSession,
+                                           argumentOne: session,
+                                           argumentTwo: point,
+                                           location: indexPath,
+                                           provideCell: true) as? [UIDragItem] {
+            return items
+        }
+        return (delegate as? UITableViewDragDelegate)?.tableView?(tableView, itemsForAddingTo: session, at: indexPath, point: point) ?? []
+    }
+    
+    public func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        if let reaction = cellReaction(.dragPreviewParametersForRowAtIndexPath, location: indexPath) {
+            return performNillableCellReaction(reaction, location: indexPath, provideCell: true) as? UIDragPreviewParameters
+        }
+        return nil
     }
     
     override func delegateWasReset() {

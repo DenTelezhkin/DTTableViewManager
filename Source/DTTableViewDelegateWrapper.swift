@@ -89,10 +89,10 @@ open class DTTableViewDelegateWrapper : NSObject {
         tableViewEventReactions.append(reaction)
     }
     
-    final internal func append4ArgumentsReaction<CellClass,Argument,ReturnValue>
+    final internal func appendReaction<CellClass,Argument,Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
-         closure: @escaping (Argument, CellClass, CellClass.ModelType, IndexPath) -> ReturnValue)
+         closure: @escaping (Argument, CellClass, CellClass.ModelType, IndexPath) -> Result)
         where CellClass: ModelTransfer, CellClass: UITableViewCell
     {
         let reaction = FourArgumentsEventReaction(signature: signature.rawValue,
@@ -102,10 +102,10 @@ open class DTTableViewDelegateWrapper : NSObject {
         tableViewEventReactions.append(reaction)
     }
     
-    final internal func append5ArgumentsReaction<CellClass, ArgumentOne, ArgumentTwo, ReturnValue>
+    final internal func appendReaction<CellClass, ArgumentOne, ArgumentTwo, Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
-         closure: @escaping (ArgumentOne, ArgumentTwo, CellClass, CellClass.ModelType, IndexPath) -> ReturnValue)
+         closure: @escaping (ArgumentOne, ArgumentTwo, CellClass, CellClass.ModelType, IndexPath) -> Result)
         where CellClass: ModelTransfer, CellClass: UITableViewCell
     {
         let reaction = FiveArgumentsEventReaction(signature: signature.rawValue,
@@ -140,6 +140,34 @@ open class DTTableViewDelegateWrapper : NSObject {
         tableViewEventReactions.append(reaction)
     }
     
+    final func appendNonCellReaction(_ signature: EventMethodSignature, closure: @escaping () -> Any) {
+        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
+        reaction.reaction = { _,_,_ in
+            return closure()
+        }
+        tableViewEventReactions.append(reaction)
+    }
+    
+    final func appendNonCellReaction<Arg>(_ signature: EventMethodSignature, closure: @escaping (Arg) -> Any) {
+        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
+        reaction.reaction = { arg,_,_ in
+            guard let arg = arg as? Arg else { return nil as Any? as Any }
+            return closure(arg)
+        }
+        tableViewEventReactions.append(reaction)
+    }
+    
+    final func appendNonCellReaction<Arg1,Arg2,Result>(_ signature: EventMethodSignature, closure: @escaping (Arg1,Arg2) -> Result) {
+        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
+        reaction.reaction = { arg1, arg2, _ in
+            guard let arg1 = arg1 as? Arg1,
+                let arg2 = arg2 as? Arg2
+            else { return nil as Any? as Any }
+            return closure(arg1,arg2)
+        }
+        tableViewEventReactions.append(reaction)
+    }
+    
     final func performCellReaction(_ signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
@@ -147,7 +175,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         return tableViewEventReactions.performReaction(of: .cell, signature: signature.rawValue, view: cell, model: model, location: location)
     }
     
-    final func perform4ArgumentsCellReaction(_ signature: EventMethodSignature, argument: Any, location: IndexPath, provideCell: Bool) -> Any? {
+    final func performCellReaction(_ signature: EventMethodSignature, argument: Any, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
         guard let model = storage.item(at: location) else { return nil }
@@ -159,7 +187,7 @@ open class DTTableViewDelegateWrapper : NSObject {
                                                                  location: location)
     }
     
-    final func perform5ArgumentsCellReaction(_ signature: EventMethodSignature,
+    final func performCellReaction(_ signature: EventMethodSignature,
                                              argumentOne: Any,
                                              argumentTwo: Any,
                                              location: IndexPath,
@@ -204,6 +232,24 @@ open class DTTableViewDelegateWrapper : NSObject {
         }
         guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: location) else { return nil}
         return tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
+    }
+    
+    func performNonCellReaction(_ signature: EventMethodSignature) -> Any? {
+        return tableViewEventReactions.filter { $0.methodSignature == signature.rawValue }
+            .first?
+            .performWithArguments((0,0,0))
+    }
+    
+    func performNonCellReaction<T>(_ signature: EventMethodSignature, argument: T) -> Any? {
+        return tableViewEventReactions.filter { $0.methodSignature == signature.rawValue }
+            .first?
+            .performWithArguments((argument,0,0))
+    }
+    
+    func performNonCellReaction<T,U>(_ signature: EventMethodSignature, argumentOne: T, argumentTwo: U) -> Any? {
+        return tableViewEventReactions.filter { $0.methodSignature == signature.rawValue }
+            .first?
+            .performWithArguments((argumentOne,argumentTwo,0))
     }
     
     /// Calls `viewFactoryErrorHandler` with `error`. If it's nil, prints error into console and asserts.

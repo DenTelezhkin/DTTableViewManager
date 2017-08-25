@@ -99,7 +99,7 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
-        _ = perform4ArgumentsCellReaction(.commitEditingStyleForRowAtIndexPath,
+        _ = performCellReaction(.commitEditingStyleForRowAtIndexPath,
                                       argument: editingStyle,
                                       location: indexPath,
                                       provideCell: true)
@@ -121,16 +121,16 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     
     #if os(iOS)
     open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        if let reaction = tableViewEventReactions.filter( { $0.methodSignature == EventMethodSignature.sectionIndexTitlesForTableView.rawValue }).first {
-            return reaction.reaction?(0,0,0) as? [String]
+        if let _ = tableViewEventReactions.filter( { $0.methodSignature == EventMethodSignature.sectionIndexTitlesForTableView.rawValue }).first {
+            return performNonCellReaction(.sectionIndexTitlesForTableView) as? [String]
         }
         return (delegate as? UITableViewDataSource)?.sectionIndexTitles?(for: tableView) ?? nil
     }
 
     open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        if let reaction = tableViewEventReactions.filter({ $0.methodSignature == EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue }).first,
-            let section = reaction.reaction?(title, index, 0) as? Int
-        {
+        if let section = performNonCellReaction(.sectionForSectionIndexTitleAtIndex,
+                                                argumentOne: title,
+                                                argumentTwo: index) as? Int {
             return section
         }
         return (delegate as? UITableViewDataSource)?.tableView?(tableView, sectionForSectionIndexTitle: title, at: index) ?? 0
