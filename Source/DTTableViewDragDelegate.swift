@@ -16,7 +16,7 @@ open class DTTableViewDragDelegate: DTTableViewDelegateWrapper, UITableViewDragD
     public func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession,
                           at indexPath: IndexPath) -> [UIDragItem]
     {
-        if let items = performCellReaction(.itemsForBeginningDragSession,
+        if let items = perform4ArgumentCellReaction(.itemsForBeginningDragSession,
                                                      argument: session,
                                                      location: indexPath,
                                                      provideCell: true) as? [UIDragItem]
@@ -30,7 +30,7 @@ open class DTTableViewDragDelegate: DTTableViewDelegateWrapper, UITableViewDragD
                           at indexPath: IndexPath,
                           point: CGPoint) -> [UIDragItem]
     {
-        if let items = performCellReaction(.itemsForAddingToDragSession,
+        if let items = perform5ArgumentCellReaction(.itemsForAddingToDragSession,
                                            argumentOne: session,
                                            argumentTwo: point,
                                            location: indexPath,
@@ -45,6 +45,30 @@ open class DTTableViewDragDelegate: DTTableViewDelegateWrapper, UITableViewDragD
             return performNillableCellReaction(reaction, location: indexPath, provideCell: true) as? UIDragPreviewParameters
         }
         return nil
+    }
+    
+    public func tableView(_ tableView: UITableView, dragSessionWillBegin session: UIDragSession) {
+        _ = performNonCellReaction(.dragSessionWillBegin, argument: session)
+        (delegate as? UITableViewDragDelegate)?.tableView?(tableView, dragSessionWillBegin: session)
+    }
+    
+    public func tableView(_ tableView: UITableView, dragSessionDidEnd session: UIDragSession) {
+        _ = performNonCellReaction(.dragSessionDidEnd, argument: session)
+        (delegate as? UITableViewDragDelegate)?.tableView?(tableView, dragSessionDidEnd: session)
+    }
+    
+    public func tableView(_ tableView: UITableView, dragSessionAllowsMoveOperation session: UIDragSession) -> Bool {
+        if let allows = performNonCellReaction(.dragSessionAllowsMoveOperation, argument: session) as? Bool {
+            return allows
+        }
+        return (delegate as? UITableViewDragDelegate)?.tableView?(tableView, dragSessionAllowsMoveOperation: session) ?? true
+    }
+    
+    public func tableView(_ tableView: UITableView, dragSessionIsRestrictedToDraggingApplication session: UIDragSession) -> Bool {
+        if let allows = performNonCellReaction(.dragSessionIsRestrictedToDraggingApplication, argument: session) as? Bool {
+            return allows
+        }
+        return (delegate as? UITableViewDragDelegate)?.tableView?(tableView, dragSessionIsRestrictedToDraggingApplication: session) ?? false
     }
     
     override func delegateWasReset() {

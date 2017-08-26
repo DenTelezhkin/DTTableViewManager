@@ -280,7 +280,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     open func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        if let canPerform = performCellReaction(.canPerformActionForRowAtIndexPath,
+        if let canPerform = perform5ArgumentCellReaction(.canPerformActionForRowAtIndexPath,
                                                           argumentOne: action,
                                                           argumentTwo: sender as Any,
                                                           location: indexPath,
@@ -292,7 +292,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     
     open func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, performAction: action, forRowAt: indexPath, withSender: sender) }
-        _ = performCellReaction(.performActionForRowAtIndexPath,
+        _ = perform5ArgumentCellReaction(.performActionForRowAtIndexPath,
                                       argumentOne: action,
                                       argumentTwo: sender as Any,
                                       location: indexPath,

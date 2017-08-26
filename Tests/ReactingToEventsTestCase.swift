@@ -731,6 +731,48 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragPreviewParametersForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    func testDragSessionWillBegin() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dragSessionWillBegin")
+        controller.manager.dragSessionWillBegin { _ in
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionWillBegin: DragAndDropMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDragSessionDidEnd() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dragSessionDidEnd")
+        controller.manager.dragSessionDidEnd { _ in
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionDidEnd: DragAndDropMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDragSessionAllowsMoveOperation() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dragSessionAllowsMoveOperation")
+        controller.manager.dragSessionAllowsMoveOperation{ _  in
+            exp.fulfill()
+            return true
+        }
+        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionAllowsMoveOperation: DragAndDropMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDragSessionIsRestrictedToDraggingApplication() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dragSessionRestrictedToDraggingApplication")
+        controller.manager.dragSessionIsRestrictedToDraggingApplication{ _  in
+            exp.fulfill()
+            return true
+        }
+        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionIsRestrictedToDraggingApplication: DragAndDropMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
     #endif
     
     func testAllDelegateMethodSignatures() {
@@ -789,6 +831,20 @@ class ReactingToEventsFastTestCase : XCTestCase {
         if #available(iOS 9.0, tvOS 9.0, *) {
             expect(String(describing: #selector(UITableViewDelegate.tableView(_:canFocusRowAt:)))) == EventMethodSignature.canFocusRowAtIndexPath.rawValue
         }
+        
+        // MARK: - UITableViewDragDelegate
+        #if os(iOS) && swift(>=3.2)
+        if #available(iOS 11, *) {
+            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)))) == EventMethodSignature.itemsForBeginningDragSession.rawValue
+            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)))) == EventMethodSignature.itemsForAddingToDragSession.rawValue
+            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)))) == EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue
+            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionWillBegin:)))) == EventMethodSignature.dragSessionWillBegin.rawValue
+            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionDidEnd:)))) == EventMethodSignature.dragSessionDidEnd.rawValue
+            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionAllowsMoveOperation:)))) == EventMethodSignature.dragSessionAllowsMoveOperation.rawValue
+            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionIsRestrictedToDraggingApplication:)))) == EventMethodSignature.dragSessionIsRestrictedToDraggingApplication.rawValue
+        }
+        
+        #endif
     }
     
     func testEventsRegistrationPerfomance() {
@@ -823,6 +879,17 @@ class ReactingToEventsFastTestCase : XCTestCase {
             manager.shouldHighlight(NibCell.self, { _,_,_ in return true })
             manager.didHighlight(NibCell.self, { _,_,_ in })
             manager.didUnhighlight(NibCell.self, { _,_,_ in })
+            #if os(iOS) && swift(>=3.2)
+            if #available(iOS 11, *) {
+                manager.itemsForBeginningDragSession(from: NibCell.self, { (_, _, _, _) in [] })
+                manager.itemsForAddingToDragSession(from: NibCell.self, { (_, _, _, _, _) in [] })
+                manager.dragPreviewParameters(for: NibCell.self, { (_, _, _) in nil })
+                manager.dragSessionWillBegin{ _ in }
+                manager.dragSessionDidEnd{ _ in }
+                manager.dragSessionAllowsMoveOperation{ _ in false }
+                manager.dragSessionIsRestrictedToDraggingApplication{ _ in false }
+            }
+            #endif
         }
     }
     

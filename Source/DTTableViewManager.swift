@@ -425,6 +425,10 @@ internal enum EventMethodSignature: String {
     case itemsForBeginningDragSession = "tableView:itemsForBeginningDragSession:atIndexPath:"
     case itemsForAddingToDragSession = "tableView:itemsForAddingToDragSession:atIndexPath:point:"
     case dragPreviewParametersForRowAtIndexPath = "tableView:dragPreviewParametersForRowAtIndexPath:"
+    case dragSessionWillBegin = "tableView:dragSessionWillBegin:"
+    case dragSessionDidEnd = "tableView:dragSessionDidEnd:"
+    case dragSessionAllowsMoveOperation = "tableView:dragSessionAllowsMoveOperation:"
+    case dragSessionIsRestrictedToDraggingApplication = "tableView:dragSessionIsRestrictedToDraggingApplication:"
 }
 
 let TableViewMoveRowAtIndexPathToIndexPathSignature = "tableView:moveRowAtIndexPath:toIndexPath:"
@@ -512,7 +516,7 @@ extension DTTableViewManager
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)` method is called for `cellClass`.
     open func commitEditingStyle<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (UITableViewCellEditingStyle, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
-        tableDataSource?.appendReaction(for: T.self,
+        tableDataSource?.append4ArgumentReaction(for: T.self,
                                                   signature: .commitEditingStyleForRowAtIndexPath,
                                                   closure: closure)
     }
@@ -635,14 +639,14 @@ extension DTTableViewManager
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func canPerformAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
-        tableDelegate?.appendReaction(for: T.self,
+        tableDelegate?.append5ArgumentReaction(for: T.self,
                                                 signature: .canPerformActionForRowAtIndexPath,
                                                 closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func performAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
-        tableDelegate?.appendReaction(for: T.self,
+        tableDelegate?.append5ArgumentReaction(for: T.self,
                                                 signature: .performActionForRowAtIndexPath,
                                                 closure: closure)
     }
@@ -690,7 +694,7 @@ extension DTTableViewManager
     @available(iOS 11, *)
     open func itemsForBeginningDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, T,T.ModelType, IndexPath) -> [UIDragItem]) where T:UITableViewCell
     {
-        tableDragDelegate?.appendReaction(for: T.self,
+        tableDragDelegate?.append4ArgumentReaction(for: T.self,
                                                     signature: .itemsForBeginningDragSession,
                                                     closure: closure)
     }
@@ -698,7 +702,7 @@ extension DTTableViewManager
     @available(iOS 11, *)
     open func itemsForAddingToDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, CGPoint, T, T.ModelType, IndexPath) -> [UIDragItem]) where T: UITableViewCell
     {
-        tableDragDelegate?.appendReaction(for: T.self,
+        tableDragDelegate?.append5ArgumentReaction(for: T.self,
                                           signature: .itemsForAddingToDragSession,
                                           closure: closure)
     }
@@ -708,6 +712,26 @@ extension DTTableViewManager
         tableDragDelegate?.appendReaction(for: T.self,
                                           signature: .dragPreviewParametersForRowAtIndexPath,
                                           closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dragSessionWillBegin(_ closure: @escaping (UIDragSession) -> Void) {
+        tableDragDelegate?.appendNonCellReaction(.dragSessionWillBegin, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dragSessionDidEnd(_ closure: @escaping (UIDragSession) -> Void) {
+        tableDragDelegate?.appendNonCellReaction(.dragSessionDidEnd, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dragSessionAllowsMoveOperation(_ closure: @escaping (UIDragSession) -> Bool) {
+        tableDragDelegate?.appendNonCellReaction(.dragSessionAllowsMoveOperation, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dragSessionIsRestrictedToDraggingApplication(_ closure: @escaping (UIDragSession) -> Bool) {
+        tableDragDelegate?.appendNonCellReaction(.dragSessionIsRestrictedToDraggingApplication, closure: closure)
     }
     
     // MARK: - Drop

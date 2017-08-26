@@ -99,7 +99,7 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
-        _ = performCellReaction(.commitEditingStyleForRowAtIndexPath,
+        _ = perform4ArgumentCellReaction(.commitEditingStyleForRowAtIndexPath,
                                       argument: editingStyle,
                                       location: indexPath,
                                       provideCell: true)

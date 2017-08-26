@@ -89,7 +89,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         tableViewEventReactions.append(reaction)
     }
     
-    final internal func appendReaction<CellClass,Argument,Result>
+    final internal func append4ArgumentReaction<CellClass,Argument,Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
          closure: @escaping (Argument, CellClass, CellClass.ModelType, IndexPath) -> Result)
@@ -102,7 +102,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         tableViewEventReactions.append(reaction)
     }
     
-    final internal func appendReaction<CellClass, ArgumentOne, ArgumentTwo, Result>
+    final internal func append5ArgumentReaction<CellClass, ArgumentOne, ArgumentTwo, Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
          closure: @escaping (ArgumentOne, ArgumentTwo, CellClass, CellClass.ModelType, IndexPath) -> Result)
@@ -175,7 +175,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         return tableViewEventReactions.performReaction(of: .cell, signature: signature.rawValue, view: cell, model: model, location: location)
     }
     
-    final func performCellReaction(_ signature: EventMethodSignature, argument: Any, location: IndexPath, provideCell: Bool) -> Any? {
+    final func perform4ArgumentCellReaction(_ signature: EventMethodSignature, argument: Any, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
         guard let model = storage.item(at: location) else { return nil }
@@ -187,7 +187,7 @@ open class DTTableViewDelegateWrapper : NSObject {
                                                                  location: location)
     }
     
-    final func performCellReaction(_ signature: EventMethodSignature,
+    final func perform5ArgumentCellReaction(_ signature: EventMethodSignature,
                                              argumentOne: Any,
                                              argumentTwo: Any,
                                              location: IndexPath,
