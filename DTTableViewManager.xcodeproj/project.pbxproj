@@ -93,6 +93,16 @@
 		9A587D861CE335D80094C821 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A587D541CE334E70094C821 /* DTModelStorage.framework */; };
 		9A587D871CE335DF0094C821 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A587D541CE334E70094C821 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
+		9A7658191F51C8180067F94B /* DTTableViewManager+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658181F51C8180067F94B /* DTTableViewManager+Registration.swift */; };
+		9A76581A1F51C8180067F94B /* DTTableViewManager+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658181F51C8180067F94B /* DTTableViewManager+Registration.swift */; };
+		9A7658231F51C8A80067F94B /* DTTableViewManager+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658221F51C8A80067F94B /* DTTableViewManager+DataSource.swift */; };
+		9A7658241F51C8A80067F94B /* DTTableViewManager+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658221F51C8A80067F94B /* DTTableViewManager+DataSource.swift */; };
+		9A7658261F51C9F30067F94B /* DTTableViewManager+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658251F51C9F30067F94B /* DTTableViewManager+Delegate.swift */; };
+		9A7658271F51C9F30067F94B /* DTTableViewManager+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658251F51C9F30067F94B /* DTTableViewManager+Delegate.swift */; };
+		9A7658291F51CA2D0067F94B /* DTTableViewManager+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658281F51CA2D0067F94B /* DTTableViewManager+Drag.swift */; };
+		9A76582A1F51CA2D0067F94B /* DTTableViewManager+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658281F51CA2D0067F94B /* DTTableViewManager+Drag.swift */; };
+		9A76582C1F51CC2D0067F94B /* DTTableViewManager+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A76582B1F51CC2D0067F94B /* DTTableViewManager+Drop.swift */; };
+		9A76582D1F51CC2D0067F94B /* DTTableViewManager+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A76582B1F51CC2D0067F94B /* DTTableViewManager+Drop.swift */; };
 		9A7E870F1F49EDCE00110671 /* DragAndDropTextsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E870E1F49EDCE00110671 /* DragAndDropTextsViewController.swift */; };
 		9A7E87111F49EE1100110671 /* DragAndDropImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87101F49EE1100110671 /* DragAndDropImagesViewController.swift */; };
 		9A7E87131F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */; };
@@ -338,6 +348,11 @@
 		9A587D5B1CE334EB0094C821 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		9A6CED7D1BE570750091B0AF /* Tests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6CED8C1BE571860091B0AF /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A7658181F51C8180067F94B /* DTTableViewManager+Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DTTableViewManager+Registration.swift"; path = "Source/DTTableViewManager+Registration.swift"; sourceTree = "<group>"; };
+		9A7658221F51C8A80067F94B /* DTTableViewManager+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DTTableViewManager+DataSource.swift"; path = "Source/DTTableViewManager+DataSource.swift"; sourceTree = "<group>"; };
+		9A7658251F51C9F30067F94B /* DTTableViewManager+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DTTableViewManager+Delegate.swift"; path = "Source/DTTableViewManager+Delegate.swift"; sourceTree = "<group>"; };
+		9A7658281F51CA2D0067F94B /* DTTableViewManager+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DTTableViewManager+Drag.swift"; path = "Source/DTTableViewManager+Drag.swift"; sourceTree = "<group>"; };
+		9A76582B1F51CC2D0067F94B /* DTTableViewManager+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DTTableViewManager+Drop.swift"; path = "Source/DTTableViewManager+Drop.swift"; sourceTree = "<group>"; };
 		9A7E870E1F49EDCE00110671 /* DragAndDropTextsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DragAndDropTextsViewController.swift; path = "Example controllers/DragAndDrop/DragAndDropTextsViewController.swift"; sourceTree = "<group>"; };
 		9A7E87101F49EE1100110671 /* DragAndDropImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DragAndDropImagesViewController.swift; path = "Example controllers/DragAndDrop/DragAndDropImagesViewController.swift"; sourceTree = "<group>"; };
 		9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDragDelegate.swift; path = Source/DTTableViewDragDelegate.swift; sourceTree = "<group>"; };
@@ -420,6 +435,11 @@
 			isa = PBXGroup;
 			children = (
 				9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */,
+				9A7658181F51C8180067F94B /* DTTableViewManager+Registration.swift */,
+				9A7658221F51C8A80067F94B /* DTTableViewManager+DataSource.swift */,
+				9A7658251F51C9F30067F94B /* DTTableViewManager+Delegate.swift */,
+				9A7658281F51CA2D0067F94B /* DTTableViewManager+Drag.swift */,
+				9A76582B1F51CC2D0067F94B /* DTTableViewManager+Drop.swift */,
 				9A4610C51F408CD500480052 /* DTTableViewDataSource.swift */,
 				9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */,
 				9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */,
@@ -971,15 +991,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A383C9D1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */,
+				9A7658231F51C8A80067F94B /* DTTableViewManager+DataSource.swift in Sources */,
 				9AB666CD1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
+				9A7658191F51C8180067F94B /* DTTableViewManager+Registration.swift in Sources */,
 				9A7E87161F49F2EF00110671 /* DTTableViewDropDelegate.swift in Sources */,
 				9A383CA31CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383C9F1CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
 				9A7E87131F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */,
 				9A4610C61F408CD500480052 /* DTTableViewDataSource.swift in Sources */,
 				9A4610D31F40950400480052 /* DTTableViewDelegate.swift in Sources */,
+				9A7658261F51C9F30067F94B /* DTTableViewManager+Delegate.swift in Sources */,
+				9A7658291F51CA2D0067F94B /* DTTableViewManager+Drag.swift in Sources */,
 				9A4610D01F408E7500480052 /* DTTableViewDelegateWrapper.swift in Sources */,
 				9A383C9B1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
+				9A76582C1F51CC2D0067F94B /* DTTableViewManager+Drop.swift in Sources */,
 				9A383CA11CE1D9FD0081D843 /* TableViewFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1015,15 +1040,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A383C9E1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */,
+				9A7658241F51C8A80067F94B /* DTTableViewManager+DataSource.swift in Sources */,
 				9AB666CE1D7AE31C00A6CEED /* TableViewUpdater.swift in Sources */,
+				9A76581A1F51C8180067F94B /* DTTableViewManager+Registration.swift in Sources */,
 				9A7E87171F49F2EF00110671 /* DTTableViewDropDelegate.swift in Sources */,
 				9A383CA41CE1D9FD0081D843 /* UIView+XibLoading.swift in Sources */,
 				9A383CA01CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */,
 				9A7E87141F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */,
 				9A4610C71F408CD500480052 /* DTTableViewDataSource.swift in Sources */,
 				9A4610D41F40950400480052 /* DTTableViewDelegate.swift in Sources */,
+				9A7658271F51C9F30067F94B /* DTTableViewManager+Delegate.swift in Sources */,
+				9A76582A1F51CA2D0067F94B /* DTTableViewManager+Drag.swift in Sources */,
 				9A4610D11F408E7500480052 /* DTTableViewDelegateWrapper.swift in Sources */,
 				9A383C9C1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
+				9A76582D1F51CC2D0067F94B /* DTTableViewManager+Drop.swift in Sources */,
 				9A383CA21CE1D9FD0081D843 /* TableViewFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

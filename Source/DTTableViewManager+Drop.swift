@@ -1,8 +1,8 @@
 //
-//  DTTableViewDropDelegate.swift
+//  DTTableViewManager+Drop.swift
 //  DTTableViewManager
 //
-//  Created by Denys Telezhkin on 20.08.17.
+//  Created by Denys Telezhkin on 26.08.17.
 //  Copyright © 2017 Denys Telezhkin. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,18 +23,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 import UIKit
+import DTModelStorage
 
-#if os(iOS) && swift(>=3.2)
-@available(iOS 11.0, *)
-open class DTTableViewDropDelegate: DTTableViewDelegateWrapper, UITableViewDropDelegate {
-    public func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        
-    }
+extension DTTableViewManager
+{
+    #if os(iOS) && swift(>=3.2)
     
-    override func delegateWasReset() {
-        tableView?.dropDelegate = nil
-        tableView?.dropDelegate = self
-    }
+    // MARK: - Drop
+//    @available(iOS 11, *)
+    
+    #endif
 }
-#endif
