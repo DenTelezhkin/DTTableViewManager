@@ -332,6 +332,15 @@ internal enum EventMethodSignature: String {
     case dragSessionDidEnd = "tableView:dragSessionDidEnd:"
     case dragSessionAllowsMoveOperation = "tableView:dragSessionAllowsMoveOperation:"
     case dragSessionIsRestrictedToDraggingApplication = "tableView:dragSessionIsRestrictedToDraggingApplication:"
+    
+    /// UITableViewDropDelegate
+    case performDropWithCoordinator = "tableView:performDropWithCoordinator:"
+    case canHandleDropSession = "tableView:canHandleDropSession:"
+    case dropSessionDidEnter = "tableView:dropSessionDidEnter:"
+    case dropSessionDidUpdateWithDestinationIndexPath = "tableView:dropSessionDidUpdate:withDestinationIndexPath:"
+    case dropSessionDidExit = "tableView:dropSessionDidExit:"
+    case dropSessionDidEnd = "tableView:dropSessionDidEnd:"
+    case dropPreviewParametersForRowAtIndexPath = "tableView:dropPreviewParametersForRowAtIndexPath:"
 }
 
 let TableViewMoveRowAtIndexPathToIndexPathSignature = "tableView:moveRowAtIndexPath:toIndexPath:"

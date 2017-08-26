@@ -14,9 +14,19 @@ import Nimble
 
 #if os(iOS) && swift(>=3.2)
 @available (iOS 11, *)
-class DragAndDropMock : NSObject, UIDragSession {
+class DragAndDropMock : NSObject, UIDragSession, UIDropSession {
+    var progress: Progress = Progress()
+    
+    var localDragSession: UIDragSession?
+    
+    var progressIndicatorStyle: UIDropSessionProgressIndicatorStyle = .default
+    
     func canLoadObjects(ofClass aClass: NSItemProviderReading.Type) -> Bool {
         return false
+    }
+    
+    func loadObjects(ofClass aClass: NSItemProviderReading.Type, completion: @escaping ([NSItemProviderReading]) -> Void) -> Progress {
+        return Progress()
     }
     
     var items: [UIDragItem] = []
@@ -34,6 +44,59 @@ class DragAndDropMock : NSObject, UIDragSession {
     }
     
     var localContext: Any?
+}
+    
+@available (iOS 11, *)
+class DropPlaceholderContextMock : NSObject, UITableViewDropPlaceholderContext {
+    var dragItem: UIDragItem = UIDragItem(itemProvider: NSItemProvider(contentsOf: URL(fileURLWithPath: ""))!)
+    func commitInsertion(dataSourceUpdates: (IndexPath) -> Void) -> Bool {
+        return true
+    }
+    
+    func deletePlaceholder() -> Bool {
+        return true
+    }
+    
+    func addAnimations(_ animations: @escaping () -> Void) {
+        
+    }
+    
+    func addCompletion(_ completion: @escaping (UIViewAnimatingPosition) -> Void) {
+        
+    }
+}
+    
+@available (iOS 11, *)
+class DropCoordinatorMock: NSObject, UITableViewDropCoordinator {
+    var items: [UITableViewDropItem] = []
+    
+    var destinationIndexPath: IndexPath?
+    
+    var proposal: UITableViewDropProposal = .init(operation: .copy, intent: .automatic)
+    
+    var session: UIDropSession = DragAndDropMock()
+    
+    override init() {
+        super.init()
+    }
+    
+    func drop(_ dragItem: UIDragItem, to placeholder: UITableViewDropPlaceholder) -> UITableViewDropPlaceholderContext {
+        return DropPlaceholderContextMock()
+    }
+    
+    func drop(_ dragItem: UIDragItem, toRowAt indexPath: IndexPath) -> UIDragAnimating {
+        return DropPlaceholderContextMock()
+    }
+    
+    func drop(_ dragItem: UIDragItem, intoRowAt indexPath: IndexPath, rect: CGRect) -> UIDragAnimating {
+        return DropPlaceholderContextMock()
+    }
+    
+    func drop(_ dragItem: UIDragItem, to target: UIDragPreviewTarget) -> UIDragAnimating {
+        return DropPlaceholderContextMock()
+    }
+        
+    
 }
     
 #endif
@@ -773,6 +836,82 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionIsRestrictedToDraggingApplication: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    /// MARK: - UITableViewDropDelegate
+    
+    func testPerformDropWithCoordinator() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "performDropWithCoordinator")
+        controller.manager.performDropWithCoordinator { _ in
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, performDropWith: DropCoordinatorMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testCanHandleDropSession() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "canHandleDropSession")
+        controller.manager.canHandleDropSession { _ in
+            exp.fulfill()
+            return true
+        }
+        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, canHandle: DragAndDropMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDropSessionDidEnter() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dropSessionDidEnter")
+        controller.manager.dropSessionDidEnter { _ in
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropSessionDidEnter: DragAndDropMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDropSessionDidUpdate() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dropSessionDidUpdate")
+        controller.manager.dropSessionDidUpdate { _, _ in
+            exp.fulfill()
+            return UITableViewDropProposal(operation: .cancel)
+        }
+        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropSessionDidUpdate: DragAndDropMock(), withDestinationIndexPath: nil)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDropSessionDidExit() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dropSessionDidExit")
+        controller.manager.dropSessionDidExit { _ in
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropSessionDidExit: DragAndDropMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDropSessionDidEnd() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dropSessionDidEnd")
+        controller.manager.dropSessionDidEnd { _ in
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropSessionDidEnd: DragAndDropMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDropPreviewParametersForRowAtIndexPath() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "dropPreviewParametersForRowAtIndexPath")
+        controller.manager.dropPreviewParameters { _ in
+            exp.fulfill()
+            return nil
+        }
+        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropPreviewParametersForRowAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     #endif
     
     func testAllDelegateMethodSignatures() {
@@ -842,6 +981,14 @@ class ReactingToEventsFastTestCase : XCTestCase {
             expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionDidEnd:)))) == EventMethodSignature.dragSessionDidEnd.rawValue
             expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionAllowsMoveOperation:)))) == EventMethodSignature.dragSessionAllowsMoveOperation.rawValue
             expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionIsRestrictedToDraggingApplication:)))) == EventMethodSignature.dragSessionIsRestrictedToDraggingApplication.rawValue
+            
+            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:performDropWith:)))) == EventMethodSignature.performDropWithCoordinator.rawValue
+            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:canHandle:)))) == EventMethodSignature.canHandleDropSession.rawValue
+            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnter:)))) == EventMethodSignature.dropSessionDidEnter.rawValue
+            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidUpdate:withDestinationIndexPath:)))) == EventMethodSignature.dropSessionDidUpdateWithDestinationIndexPath.rawValue
+            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidExit:)))) == EventMethodSignature.dropSessionDidExit.rawValue
+            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnd:)))) == EventMethodSignature.dropSessionDidEnd.rawValue
+            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropPreviewParametersForRowAt:)))) == EventMethodSignature.dropPreviewParametersForRowAtIndexPath.rawValue
         }
         
         #endif

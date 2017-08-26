@@ -32,7 +32,40 @@ extension DTTableViewManager
     #if os(iOS) && swift(>=3.2)
     
     // MARK: - Drop
-//    @available(iOS 11, *)
+    @available(iOS 11, *)
+    open func performDropWithCoordinator(_ closure: @escaping (UITableViewDropCoordinator) -> Void) {
+        tableDropDelegate?.appendNonCellReaction(.performDropWithCoordinator, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func canHandleDropSession(_ closure: @escaping (UIDropSession) -> Bool) {
+        tableDropDelegate?.appendNonCellReaction(.canHandleDropSession, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dropSessionDidEnter(_ closure: @escaping (UIDropSession) -> Void) {
+        tableDropDelegate?.appendNonCellReaction(.dropSessionDidEnter, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dropSessionDidUpdate(_ closure: @escaping (UIDropSession, IndexPath?) -> UITableViewDropProposal) {
+        tableDropDelegate?.appendNonCellReaction(.dropSessionDidUpdateWithDestinationIndexPath, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dropSessionDidExit(_ closure: @escaping (UIDropSession) -> Void) {
+        tableDropDelegate?.appendNonCellReaction(.dropSessionDidExit, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dropSessionDidEnd(_ closure: @escaping (UIDropSession) -> Void) {
+        tableDropDelegate?.appendNonCellReaction(.dropSessionDidEnd, closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func dropPreviewParameters(_ closure: @escaping (IndexPath) -> UIDragPreviewParameters?) {
+        tableDropDelegate?.appendNonCellReaction(.dropPreviewParametersForRowAtIndexPath, closure: closure)
+    }
     
     #endif
 }
