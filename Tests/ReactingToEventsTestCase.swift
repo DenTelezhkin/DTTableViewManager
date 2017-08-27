@@ -13,6 +13,18 @@ import DTModelStorage
 import Nimble
 
 #if os(iOS) && swift(>=3.2)
+    
+@available (iOS 11, *)
+class SpringLoadedContextMock : NSObject, UISpringLoadedInteractionContext {
+    var state: UISpringLoadedInteractionEffectState = .activated
+    
+    var targetView: UIView?
+    var targetItem: Any?
+    func location(in view: UIView?) -> CGPoint {
+        return .zero
+    }
+}
+    
 @available (iOS 11, *)
 class DragAndDropMock : NSObject, UIDragSession, UIDropSession {
     var progress: Progress = Progress()
@@ -901,12 +913,73 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testLeadingSwipeActionsConfiguration() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "leadingSwipeActionsConfiguration")
+        controller.manager.leadingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
+            exp.fulfill()
+            return nil
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, leadingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testTrailingSwipeActionsConfiguration() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "trailingSwipeActionsConfiguration")
+        controller.manager.trailingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
+            exp.fulfill()
+            return nil
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, trailingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testShouldSpringLoadRow() {
+        guard #available(iOS 11, *) else { return }
+        let exp = expectation(description: "shouldSpringLoadRow")
+        controller.manager.shouldSpringLoad(NibCell.self) { _,_,_,_ in
+            exp.fulfill()
+            return false
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldSpringLoadRowAt: indexPath(0, 0), with: SpringLoadedContextMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     #endif
+    
+    func testTargetIndexPathForMoveFromTo() {
+        let exp = expectation(description: "targetIndexPathForMoveFromRowToRow")
+        controller.manager.targetIndexPathForMove(NibCell.self) { _, _, _, _ in
+            exp.fulfill()
+            return indexPath(0, 0)
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView,
+                                                        targetIndexPathForMoveFromRowAt: indexPath(0, 0),
+                                                        toProposedIndexPath: indexPath(1, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    @available (iOS 9, *)
+    func testIndexPathForPreferredFocusedView() {
+        let exp = expectation(description: "indexPathForPreferredFocusedView")
+        controller.manager.indexPathForPreferredFocusedView {
+            exp.fulfill()
+            return nil
+        }
+        _ = controller.manager.tableDelegate?.indexPathForPreferredFocusedView(in: controller.tableView)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
     
     func testAllDelegateMethodSignatures() {
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:)))) == EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:canEditRowAt:)))) == EventMethodSignature.canEditRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:canMoveRowAt:)))) == EventMethodSignature.canMoveRowAtIndexPath.rawValue
+        expect(String(describing: #selector(UITableViewDataSource.tableView(_:moveRowAt:to:)))) == EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue
         #if os(iOS)
         expect(String(describing: #selector(UITableViewDataSource.sectionIndexTitles(for:)))) == EventMethodSignature.sectionIndexTitlesForTableView.rawValue
         expect(String(describing: #selector(UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:)))) == EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue
@@ -956,8 +1029,12 @@ class ReactingToEventsFastTestCase : XCTestCase {
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAt:)))) == EventMethodSignature.shouldHighlightRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:)))) == EventMethodSignature.didHighlightRowAtIndexPath.rawValue
         expect(String(describing: #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:)))) == EventMethodSignature.didUnhighlightRowAtIndexPath.rawValue
+        expect(String(describing: #selector(UITableViewDelegate.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:)))) == EventMethodSignature.targetIndexPathForMoveFromRowAtIndexPath.rawValue
         if #available(iOS 9.0, tvOS 9.0, *) {
             expect(String(describing: #selector(UITableViewDelegate.tableView(_:canFocusRowAt:)))) == EventMethodSignature.canFocusRowAtIndexPath.rawValue
+            expect(String(describing: #selector(UITableViewDelegate.tableView(_:shouldUpdateFocusIn:)))) == EventMethodSignature.shouldUpdateFocusInContext.rawValue
+            expect(String(describing: #selector(UITableViewDelegate.tableView(_:didUpdateFocusIn:with:)))) == EventMethodSignature.didUpdateFocusInContextWithAnimationCoordinator.rawValue
+            expect(String(describing: #selector(UITableViewDelegate.indexPathForPreferredFocusedView(in:)))) == EventMethodSignature.indexPathForPreferredFocusedViewInTableView.rawValue
         }
         
         // MARK: - UITableViewDragDelegate
@@ -978,6 +1055,10 @@ class ReactingToEventsFastTestCase : XCTestCase {
             expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidExit:)))) == EventMethodSignature.dropSessionDidExit.rawValue
             expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnd:)))) == EventMethodSignature.dropSessionDidEnd.rawValue
             expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropPreviewParametersForRowAt:)))) == EventMethodSignature.dropPreviewParametersForRowAtIndexPath.rawValue
+            
+            expect(String(describing: #selector(UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)))) == EventMethodSignature.leadingSwipeActionsConfigurationForRowAtIndexPath.rawValue
+            expect(String(describing: #selector(UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:)))) == EventMethodSignature.trailingSwipeActionsConfigurationForRowAtIndexPath.rawValue
+            expect(String(describing: #selector(UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:with:)))) == EventMethodSignature.shouldSpringLoadRowAtIndexPathWithContext.rawValue
         }
         
         #endif

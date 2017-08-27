@@ -325,6 +325,14 @@ internal enum EventMethodSignature: String {
     
     case canFocusRowAtIndexPath = "tableView:canFocusRowAtIndexPath:"
     
+    case leadingSwipeActionsConfigurationForRowAtIndexPath = "tableView:leadingSwipeActionsConfigurationForRowAtIndexPath:"
+    case trailingSwipeActionsConfigurationForRowAtIndexPath = "tableView:trailingSwipeActionsConfigurationForRowAtIndexPath:"
+    case targetIndexPathForMoveFromRowAtIndexPath = "tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:"
+    case shouldUpdateFocusInContext = "tableView:shouldUpdateFocusInContext:"
+    case didUpdateFocusInContextWithAnimationCoordinator = "tableView:didUpdateFocusInContext:withAnimationCoordinator:"
+    case indexPathForPreferredFocusedViewInTableView = "indexPathForPreferredFocusedViewInTableView:"
+    case shouldSpringLoadRowAtIndexPathWithContext = "tableView:shouldSpringLoadRowAtIndexPath:withContext:"
+    
     /// UITableViewDragDelegate
     case itemsForBeginningDragSession = "tableView:itemsForBeginningDragSession:atIndexPath:"
     case itemsForAddingToDragSession = "tableView:itemsForAddingToDragSession:atIndexPath:point:"

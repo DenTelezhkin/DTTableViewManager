@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+* Added event for `UITableViewDelegate` `tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:`
+* Added events for focus engine on iOS 9
+* Added events for iOS 11 `UITableViewDelegate` methods: `tableView(_:leadingSwipeActionsConfigurationForRowAt:`, `tableView(_:trailingSwipeActionsConfigurationForRowAt:`, `tableView(_:shouldSpringLoadRowAt:withContext:`
 * `UITableViewDelegate` and `UITableViewDatasource` implementations have been refactored from `DTTableViewManager` to `DTTableViewDelegate` and `DTTableViewDataSource` classes.
 * `DTTableViewManager` now allows registering mappings for specific sections, or mappings with any custom condition.
 * Added `move(_:_:)` method to allow setting up events, reacting to `tableView:moveRowAt:to:` method.

@@ -211,4 +211,51 @@ extension DTTableViewManager {
     {
         tableDelegate?.appendReaction(for: T.self, signature: .canFocusRowAtIndexPath, closure: closure)
     }
+    
+    @available(iOS 9.0, tvOS 9.0, *)
+    open func shouldUpdateFocus(_ closure: @escaping (UITableViewFocusUpdateContext) -> Bool)
+    {
+        tableDelegate?.appendNonCellReaction(.shouldUpdateFocusInContext, closure: closure)
+    }
+    
+    @available(iOS 9.0, tvOS 9.0, *)
+    open func didUpdateFocus(_ closure: @escaping (UITableViewFocusUpdateContext, UIFocusAnimationCoordinator) -> Void)
+    {
+        tableDelegate?.appendNonCellReaction(.didUpdateFocusInContextWithAnimationCoordinator, closure: closure)
+    }
+    
+    @available(iOS 9.0, tvOS 9.0, *)
+    open func indexPathForPreferredFocusedView(_ closure: @escaping () -> IndexPath?)
+    {
+        tableDelegate?.appendNonCellReaction(.indexPathForPreferredFocusedViewInTableView, closure: closure)
+    }
+    
+    #if os(iOS) && swift(>=3.2)
+    @available(iOS 11, *)
+    open func leadingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T,T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
+        tableDelegate?.appendReaction(for: T.self,
+                                      signature: .leadingSwipeActionsConfigurationForRowAtIndexPath,
+                                      closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func trailingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T,T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
+        tableDelegate?.appendReaction(for: T.self,
+                                      signature: .trailingSwipeActionsConfigurationForRowAtIndexPath,
+                                      closure: closure)
+    }
+    
+    @available(iOS 11, *)
+    open func shouldSpringLoad<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (UISpringLoadedInteractionContext,T,T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
+        tableDelegate?.append4ArgumentReaction(for: T.self,
+                                               signature: .shouldSpringLoadRowAtIndexPathWithContext,
+                                               closure: closure)
+    }
+    #endif
+    
+    open func targetIndexPathForMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (IndexPath, T,T.ModelType, IndexPath) -> IndexPath) where T:UITableViewCell {
+        tableDelegate?.append4ArgumentReaction(for: T.self,
+                                               signature: .targetIndexPathForMoveFromRowAtIndexPath,
+                                               closure: closure)
+    }
 }
