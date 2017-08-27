@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 * `DTTableViewManager` now allows registering mappings for specific sections, or mappings with any custom condition.
 * Added `move(_:_:)` method to allow setting up events, reacting to `tableView:moveRowAt:to:` method.
 
+# Breaking
+
+* `tableView(UITableView, moveRowAt: IndexPath, to: IndexPath)` no longer automatically moves items, if current storage is `MemoryStorage`. Please use `MemoryStorage` convenience method `moveItemWithoutAnimation(from:to:)` to move items manually.
+
 ## [5.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/5.3.0)
 
 Dependency changelog -> [DTModelStorage 5.0.0 and higher](https://github.com/DenHeadless/DTModelStorage/releases)

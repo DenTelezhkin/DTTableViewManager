@@ -84,17 +84,6 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
             _ = reaction.performWithArguments((cell,model,sourceIndexPath,destinationIndexPath))
             return
         }
-        
-        if let storage = self.storage as? MemoryStorage
-        {
-            if let from = storage.sections[sourceIndexPath.section] as? SectionModel,
-                let to = storage.sections[destinationIndexPath.section] as? SectionModel
-            {
-                let item = from.items[sourceIndexPath.row]
-                from.items.remove(at: sourceIndexPath.row)
-                to.items.insert(item, at: destinationIndexPath.row)
-            }
-        }
     }
     
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

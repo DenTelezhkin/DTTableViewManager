@@ -305,17 +305,6 @@ class ReactingToEventsTestCase: XCTestCase {
         
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
-    func testMovingTableViewItems() {
-        controller.manager.register(NibCell.self)
-        controller.manager.memoryStorage.addItems([1,2,3])
-        controller.manager.memoryStorage.addItems([4,5,6], toSection: 1)
-        
-        controller.manager.tableDataSource?.tableView(controller.tableView, moveRowAt: indexPath(0, 0), to: indexPath(3, 1))
-        
-        expect(self.controller.manager.memoryStorage.section(atIndex: 0)?.items(ofType: Int.self)) == [2,3]
-        expect(self.controller.manager.memoryStorage.section(atIndex: 1)?.items(ofType: Int.self)) == [4,5,6,1]
-    }
 }
 
 class ReactingToEventsFastTestCase : XCTestCase {
