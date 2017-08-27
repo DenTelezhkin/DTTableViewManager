@@ -31,6 +31,9 @@ class ReorderViewController: UIViewController, DTTableViewManageable, UITableVie
         manager.editingStyle(for: StringCell.self, { _,_,_ in return .none })
         
         manager.memoryStorage.setSectionHeaderModels(["Section 1", "Section 2", "Section 3"])
+        manager.move(StringCell.self) { [weak manager] _, _, source, destination in
+            manager?.memoryStorage.moveItemWithoutAnimation(from: source, to: destination)
+        }
         
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
