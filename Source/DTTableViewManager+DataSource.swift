@@ -63,7 +63,7 @@ extension DTTableViewManager
     /// - warning: Do not use `MemoryStorage` methods in closure for this method, because changes only need to be made to the data model, as UI change has already happened and was animated when this method is called.
     /// - SeeAlso: 'tableView:moveRowAt:to:' method
     open func move<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (T, T.ModelType, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) where T: UITableViewCell {
-        let reaction = FourArgumentsEventReaction(signature: TableViewMoveRowAtIndexPathToIndexPathSignature, viewType: .cell, viewClass: T.self)
+        let reaction = FourArgumentsEventReaction(signature: EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue, viewType: .cell, viewClass: T.self)
         reaction.reaction4Arguments = { cell, model, sourceIndexPath, destinationIndexPath in
             guard let cell = cell as? T, let model = model as? T.ModelType,
                 let sourceIndexPath = sourceIndexPath as? IndexPath,

@@ -74,16 +74,18 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     
     /// `DTTableViewManager` automatically moves data models from source indexPath to destination indexPath, there's no need to implement this method on UITableViewDataSource
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        if (delegate as? UITableViewDataSource)?.tableView?(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath) != nil {
-            return
-        }
+        
         guard let item = storage.item(at: sourceIndexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
             let cell = tableView.cellForRow(at: sourceIndexPath)
             else { return }
-        if let reaction = tableViewEventReactions.reaction(of: .cell, signature: TableViewMoveRowAtIndexPathToIndexPathSignature, forModel: model, view: cell) as? FourArgumentsEventReaction {
+        if let reaction = tableViewEventReactions.reaction(of: .cell,
+                                                           signature: EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue,
+                                                           forModel: model, view: cell) as? FourArgumentsEventReaction
+        {
             _ = reaction.performWithArguments((cell,model,sourceIndexPath,destinationIndexPath))
             return
         }
+        (delegate as? UITableViewDataSource)?.tableView?(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath)
     }
     
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

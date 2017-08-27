@@ -282,6 +282,7 @@ internal enum EventMethodSignature: String {
     case canMoveRowAtIndexPath = "tableView:canMoveRowAtIndexPath:"
     case sectionIndexTitlesForTableView = "sectionIndexTitlesForTableView:"
     case sectionForSectionIndexTitleAtIndex = "tableView:sectionForSectionIndexTitle:atIndex:"
+    case moveRowAtIndexPathToIndexPath = "tableView:moveRowAtIndexPath:toIndexPath:"
     
     /// UITableViewDelegate
     case heightForRowAtIndexPath = "tableView:heightForRowAtIndexPath:"
@@ -342,6 +343,4 @@ internal enum EventMethodSignature: String {
     case dropSessionDidEnd = "tableView:dropSessionDidEnd:"
     case dropPreviewParametersForRowAtIndexPath = "tableView:dropPreviewParametersForRowAtIndexPath:"
 }
-
-let TableViewMoveRowAtIndexPathToIndexPathSignature = "tableView:moveRowAtIndexPath:toIndexPath:"
 
