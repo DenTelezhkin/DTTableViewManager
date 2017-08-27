@@ -66,6 +66,12 @@ extension DTTableViewManager
     open func dropPreviewParameters(_ closure: @escaping (IndexPath) -> UIDragPreviewParameters?) {
         tableDropDelegate?.appendNonCellReaction(.dropPreviewParametersForRowAtIndexPath, closure: closure)
     }
+    @available(iOS 11, *)
+    open func drop(_ item: UIDragItem, to placeholder: UITableViewDropPlaceholder,
+                   with coordinator: UITableViewDropCoordinator) -> DTTableViewDropPlaceholderContext {
+        let context = coordinator.drop(item, to: placeholder)
+        return DTTableViewDropPlaceholderContext(context: context, storage: storage)
+    }
     
     #endif
 }
