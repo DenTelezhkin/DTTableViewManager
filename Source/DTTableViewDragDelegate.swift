@@ -61,7 +61,7 @@ open class DTTableViewDragDelegate: DTTableViewDelegateWrapper, UITableViewDragD
         if let reaction = cellReaction(.dragPreviewParametersForRowAtIndexPath, location: indexPath) {
             return performNillableCellReaction(reaction, location: indexPath, provideCell: true) as? UIDragPreviewParameters
         }
-        return nil
+        return (delegate as? UITableViewDragDelegate)?.tableView?(tableView, dragPreviewParametersForRowAt: indexPath)
     }
     
     open func tableView(_ tableView: UITableView, dragSessionWillBegin session: UIDragSession) {
