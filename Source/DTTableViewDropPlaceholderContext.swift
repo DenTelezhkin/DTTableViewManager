@@ -31,7 +31,7 @@ import DTModelStorage
 @available(iOS 11, *)
 open class DTTableViewDropPlaceholderContext {
     
-    let context : UITableViewDropPlaceholderContext
+    open let context : UITableViewDropPlaceholderContext
     weak var storage: Storage?
     
     public init(context: UITableViewDropPlaceholderContext, storage: Storage) {
