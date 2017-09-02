@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+* Implement `configureEvents(for:_:)` method, that allows batching in several cell events to avoid using T.ModelType for events, that do not have cell created.
 * Added event for `UITableViewDelegate` `tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:`
 * Added events for focus engine on iOS 9
 * Added events for iOS 11 `UITableViewDelegate` methods: `tableView(_:leadingSwipeActionsConfigurationForRowAt:`, `tableView(_:trailingSwipeActionsConfigurationForRowAt:`, `tableView(_:shouldSpringLoadRowAt:withContext:`

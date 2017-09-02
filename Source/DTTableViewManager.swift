@@ -266,6 +266,10 @@ open class DTTableViewManager {
                                 reloadRow: updateCellClosure(),
                                 animateMoveAsDeleteAndInsert: true)
     }
+    
+    open func configureEvents<T:ModelTransfer>(for klass: T.Type, _ closure: (T.Type, T.ModelType.Type) -> Void) {
+        closure(T.self, T.ModelType.self)
+    }
 }
 
 // MARK: - Method signatures

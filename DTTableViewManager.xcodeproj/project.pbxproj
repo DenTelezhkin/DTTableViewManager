@@ -105,8 +105,6 @@
 		9A76582A1F51CA2D0067F94B /* DTTableViewManager+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7658281F51CA2D0067F94B /* DTTableViewManager+Drag.swift */; };
 		9A76582C1F51CC2D0067F94B /* DTTableViewManager+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A76582B1F51CC2D0067F94B /* DTTableViewManager+Drop.swift */; };
 		9A76582D1F51CC2D0067F94B /* DTTableViewManager+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A76582B1F51CC2D0067F94B /* DTTableViewManager+Drop.swift */; };
-		9A7E870F1F49EDCE00110671 /* DragAndDropTextsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E870E1F49EDCE00110671 /* DragAndDropTextsViewController.swift */; };
-		9A7E87111F49EE1100110671 /* DragAndDropImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87101F49EE1100110671 /* DragAndDropImagesViewController.swift */; };
 		9A7E87131F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */; };
 		9A7E87141F49F23600110671 /* DTTableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */; };
 		9A7E87161F49F2EF00110671 /* DTTableViewDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */; };
@@ -356,8 +354,6 @@
 		9A7658251F51C9F30067F94B /* DTTableViewManager+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DTTableViewManager+Delegate.swift"; path = "Source/DTTableViewManager+Delegate.swift"; sourceTree = "<group>"; };
 		9A7658281F51CA2D0067F94B /* DTTableViewManager+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DTTableViewManager+Drag.swift"; path = "Source/DTTableViewManager+Drag.swift"; sourceTree = "<group>"; };
 		9A76582B1F51CC2D0067F94B /* DTTableViewManager+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DTTableViewManager+Drop.swift"; path = "Source/DTTableViewManager+Drop.swift"; sourceTree = "<group>"; };
-		9A7E870E1F49EDCE00110671 /* DragAndDropTextsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DragAndDropTextsViewController.swift; path = "Example controllers/DragAndDrop/DragAndDropTextsViewController.swift"; sourceTree = "<group>"; };
-		9A7E87101F49EE1100110671 /* DragAndDropImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DragAndDropImagesViewController.swift; path = "Example controllers/DragAndDrop/DragAndDropImagesViewController.swift"; sourceTree = "<group>"; };
 		9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDragDelegate.swift; path = Source/DTTableViewDragDelegate.swift; sourceTree = "<group>"; };
 		9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDropDelegate.swift; path = Source/DTTableViewDropDelegate.swift; sourceTree = "<group>"; };
 		9A88F5A819EAC683008436C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Images.xcassets; sourceTree = "<group>"; };
@@ -627,8 +623,6 @@
 				9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */,
 				9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */,
 				9ADA63321B88A56F0060B2C0 /* TableViewController.swift */,
-				9A7E870E1F49EDCE00110671 /* DragAndDropTextsViewController.swift */,
-				9A7E87101F49EE1100110671 /* DragAndDropImagesViewController.swift */,
 			);
 			name = ExampleControllers;
 			sourceTree = "<group>";
@@ -1072,12 +1066,10 @@
 				9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */,
 				9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */,
 				9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */,
-				9A7E87111F49EE1100110671 /* DragAndDropImagesViewController.swift in Sources */,
 				9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */,
 				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,
 				9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */,
 				9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */,
-				9A7E870F1F49EDCE00110671 /* DragAndDropTextsViewController.swift in Sources */,
 				9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */,
 				9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */,
 				9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */,

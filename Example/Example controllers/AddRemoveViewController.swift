@@ -17,20 +17,23 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
         super.viewDidLoad()
         
         manager.startManaging(withDelegate: self)
-        manager.register(StringCell.self)
-        manager.didSelect(StringCell.self) { [weak self] (_, model, indexPath)  in
-            let alert = UIAlertController(title: "Selected cell",
-                message: "with model: \(model) at indexPath: \(indexPath)",
-                preferredStyle: .alert)
-            let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-            alert.addAction(action)
-            self?.present(alert, animated: true, completion: nil)
-        }
-        manager.commitEditingStyle(for: StringCell.self) { [weak self] _, _, _, indexPath in
-            self?.manager.memoryStorage.removeItems(at: [indexPath])
-        }
-        manager.heightForCell(withItem: String.self) { string, indexPath -> CGFloat in
-            return 80
+        
+        manager.configureEvents(for: StringCell.self) { [weak self] cellType, modelType in
+            manager.register(cellType)
+            manager.didSelect(cellType) { _, model, indexPath  in
+                let alert = UIAlertController(title: "Selected cell",
+                                              message: "with model: \(model) at indexPath: \(indexPath)",
+                    preferredStyle: .alert)
+                let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                alert.addAction(action)
+                self?.present(alert, animated: true, completion: nil)
+            }
+            manager.commitEditingStyle(for: cellType) { _, _, _, indexPath in
+                self?.manager.memoryStorage.removeItems(at: [indexPath])
+            }
+            manager.heightForCell(withItem: modelType) { string, indexPath -> CGFloat in
+                return 80
+            }
         }
     }
     
