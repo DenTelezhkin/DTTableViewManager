@@ -39,7 +39,7 @@ open class DTTableViewDropPlaceholderContext {
         self.storage = storage
     }
     
-    open func commitInsertion<T>(ofItem item: T) {
+    open func commitInsertion<T>(ofItem item: T, _ insertionIndexPathClosure: ((IndexPath) -> Void)? = nil) {
         DispatchQueue.main.async { [weak self] in
             self?.context.commitInsertion { insertionIndexPath in
                 guard let storage = self?.storage else { return }
@@ -49,6 +49,7 @@ open class DTTableViewDropPlaceholderContext {
                 {
                     section.items.insert(item, at: insertionIndexPath.row)
                 }
+                insertionIndexPathClosure?(insertionIndexPath)
             }
         }
     }
