@@ -255,6 +255,16 @@ open class DTTableViewManager {
         }
     }
     
+    open func updateVisibleCells(_ closure: ((UITableViewCell) -> Void)? = nil) {
+        (tableView?.indexPathsForVisibleRows ?? []).forEach { indexPath in
+            guard let model = storage.item(at: indexPath),
+                let visibleCell = tableView?.cellForRow(at: indexPath)
+            else { return }
+            updateCellClosure()(indexPath,model)
+            closure?(visibleCell)
+        }
+    }
+    
     /// Returns `TableViewUpdater`, configured to work with `CoreDataStorage` and `NSFetchedResultsController` updates.
     /// 
     /// - Precondition: UITableView instance on `delegate` should not be nil.
