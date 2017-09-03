@@ -54,6 +54,7 @@ open class DTTableViewDropPlaceholderContext {
         }
     }
     
+    @discardableResult
     open func deletePlaceholder() -> Bool {
         return context.deletePlaceholder()
     }
