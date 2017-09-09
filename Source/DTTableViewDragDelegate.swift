@@ -29,6 +29,8 @@ import DTModelStorage
 #if os(iOS) && swift(>=3.2)
     
 @available(iOS 11.0, *)
+    
+/// Object, that implements `UITableViewDragDelegate` methods for `DTTableViewManager`.
 open class DTTableViewDragDelegate: DTTableViewDelegateWrapper, UITableViewDragDelegate {
     open func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession,
                           at indexPath: IndexPath) -> [UIDragItem]

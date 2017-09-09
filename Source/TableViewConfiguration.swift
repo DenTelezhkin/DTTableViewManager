@@ -26,9 +26,9 @@
 import Foundation
 import UIKit
 
-/// Style of section headers for table view. Depending on style, datasource methods will return title for section or view for section. Default is .Title.
-/// - Note: you don't need any mapping methods, if you use .Title style, just add String objects to Storage, and that's it
-/// - Note: When any mapping method for header or footer view is called, styles are automatically switched to .View
+/// Style of section headers for table view. Depending on style, datasource methods will return title for section or view for section. Default is .title.
+/// - Note: you don't need any mapping methods, if you use .title style, just add String objects to Storage, and that's it
+/// - Note: When any mapping method for header or footer view is called, styles are automatically switched to .view
 public enum SupplementarySectionStyle
 {
     case title

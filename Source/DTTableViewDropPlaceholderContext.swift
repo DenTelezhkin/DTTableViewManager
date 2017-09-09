@@ -29,16 +29,26 @@ import DTModelStorage
 
 #if os(iOS) && swift(>=3.2)
 @available(iOS 11, *)
+
+/// Thin wrapper around `UITableViewDropPlaceholderContext`, which automates insertion of `dragItems` if you are using `MemoryStorage`.
+/// Typically, you would not create this class directly, but use `DTTableViewManager.drop(_:to:with:)` convenience method.
 open class DTTableViewDropPlaceholderContext {
     
+    /// Drop context
     open let context : UITableViewDropPlaceholderContext
+    
+    /// Storage, on which drop operation is performed
     weak var storage: Storage?
     
+    
+    /// Creates `DTTableViewDropPlaceholderContext` with `context` and `storage`
     public init(context: UITableViewDropPlaceholderContext, storage: Storage) {
         self.context = context
         self.storage = storage
     }
     
+    /// Commits insertion of item, using `UITableViewDropPlaceholderContext.commitInsertion(_:)` method. Both commit and `insertionIndexPathClosure` will be automatically dispatched to `DispatchQueue.main`.
+    /// If you are using `MemoryStorage`, model will be automatically inserted, and no additional actions are required.
     open func commitInsertion<T>(ofItem item: T, _ insertionIndexPathClosure: ((IndexPath) -> Void)? = nil) {
         DispatchQueue.main.async { [weak self] in
             self?.context.commitInsertion { insertionIndexPath in
@@ -55,6 +65,7 @@ open class DTTableViewDropPlaceholderContext {
     }
     
     @discardableResult
+    /// Convenience method to call `context.deletePlaceholder`.
     open func deletePlaceholder() -> Bool {
         return context.deletePlaceholder()
     }

@@ -27,6 +27,8 @@ import UIKit
 
 #if os(iOS) && swift(>=3.2)
 @available(iOS 11.0, *)
+    
+/// Object, that implements `UITableViewDropDelegate` for `DTTableViewManager`.
 open class DTTableViewDropDelegate: DTTableViewDelegateWrapper, UITableViewDropDelegate {
     open func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         _ = performNonCellReaction(.performDropWithCoordinator, argument: coordinator)

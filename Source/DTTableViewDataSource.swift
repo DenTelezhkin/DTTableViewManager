@@ -26,6 +26,8 @@
 import UIKit
 import DTModelStorage
 
+
+/// Object, that implements `UITableViewDataSource` methods for `DTTableViewManager`.
 open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSource {
     
     override func delegateWasReset() {
@@ -72,7 +74,6 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
         return self.footerModel(forSection: section) as? String
     }
     
-    /// `DTTableViewManager` automatically moves data models from source indexPath to destination indexPath, there's no need to implement this method on UITableViewDataSource
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         guard let item = storage.item(at: sourceIndexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),

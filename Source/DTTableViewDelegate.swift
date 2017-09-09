@@ -26,6 +26,7 @@
 import UIKit
 import DTModelStorage
 
+/// Object, that implements `UITableViewDelegate` for `DTTableViewManager`.
 open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate {
     override func delegateWasReset() {
         tableView?.delegate = nil

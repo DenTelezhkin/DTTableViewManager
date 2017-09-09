@@ -30,6 +30,7 @@ import DTModelStorage
 /// Enum with possible `DTTableViewManager` errors.
 ///
 /// - SeeAlso: `DTTableViewManager.viewFactoryErrorHandler` and `DTTableViewManager.handleTableViewFactoryError()`
+@available(*, deprecated, message: "Error handling system is deprecated and may be removed or replaced in future version of the framework. Usage of this enum is discouraged.")
 public enum DTTableViewFactoryError : Error {
     
     /// `UITableView` requested a cell, however model at indexPath is nil.

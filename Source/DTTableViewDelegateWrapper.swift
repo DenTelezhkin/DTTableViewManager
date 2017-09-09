@@ -26,16 +26,19 @@
 import UIKit
 import DTModelStorage
 
+/// Base class for objects, that implement various datasource and delegate methods from `UITableView`. Even though this class is declared as `open`, subclassing it is discouraged. Please subsclass concrete subclass of this class, such as `DTTableViewDelegate`.
 open class DTTableViewDelegateWrapper : NSObject {
     weak var delegate: AnyObject?
     weak var tableView: UITableView? { return manager.tableView }
     var viewFactory: TableViewFactory { return manager.viewFactory }
     var storage: Storage { return manager.storage }
     var configuration: TableViewConfiguration { return manager.configuration }
+    
+    @available(*, deprecated, message: "Error handling system is deprecated and will be removed in future versions of the framework")
     var viewFactoryErrorHandler: ((DTTableViewFactoryError) -> Void)? { return manager.viewFactoryErrorHandler }
     private unowned let manager: DTTableViewManager
     
-    init(delegate: AnyObject?, tableViewManager: DTTableViewManager) {
+    public init(delegate: AnyObject?, tableViewManager: DTTableViewManager) {
         self.delegate = delegate
         manager = tableViewManager
     }
@@ -253,6 +256,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     }
     
     /// Calls `viewFactoryErrorHandler` with `error`. If it's nil, prints error into console and asserts.
+    @available(*, deprecated, message: "Error handling system is deprecated and will be removed in future versions of the framework.")
     @nonobjc func handleTableViewFactoryError(_ error: DTTableViewFactoryError) {
         if let handler = viewFactoryErrorHandler {
             handler(error)
