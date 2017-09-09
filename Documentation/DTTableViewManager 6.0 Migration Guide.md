@@ -58,11 +58,11 @@ As a consequence, `DTTableViewManager` and `DTCollectionViewManager` no longer i
 
 ### Backwards compatibility
 
-Usually backwards compatibility is not considered a "feature", but since last year Swift 3 migration was huge and painful, maintaining backwards compatibility is actually huge. 6.x release contains several CI jobs setup to ensure compatibility with operating systems, Xcode releases and Swift compilers. Supported releases include:
+Usually backwards compatibility is not considered a "feature", but since last year Swift 3 migration was huge and painful, maintaining backwards compatibility is actually pretty important. 6.x release contains several CI jobs setup to ensure compatibility with operating systems, Xcode releases and Swift compilers. Supported releases include:
 
-* iOS 8.x - iOS 11.x, tvOS 9.0 - tvOS 11.x
-* Xcode 8.3, Xcode 9.0
-* Swift 3.1, 3.2, 4.0
+* **iOS 8.x - iOS 11.x, tvOS 9.0 - tvOS 11.x**
+* **Xcode 8.3, Xcode 9.0**
+* **Swift 3.1, 3.2, 4.0**
 
 ### Drag and Drop
 
@@ -76,7 +76,7 @@ To demonstrate `Drag&Drop` usage with `DTTableViewManager` and `DTCollectionView
 
 Back in 4.x release, there were only 6 events implemented. 5.x release introduced support for 37 `UITableView` events, and 27 `UICollectionView` events. 6.x release boosts this system to whole new level.
 
-`DTTableViewManager` now has **61** event, that cover all delegate and datasource protocols `UITableView` has. `DTCollectionViewManager` now has **54** event, which brings total number of events to crazy **115**, if you count events for entire system.
+`DTTableViewManager` now has **61** event, that cover all delegate and datasource protocols `UITableView` has. `DTCollectionViewManager` now has **54** events, which brings total number of events to crazy **115**, if you count events for entire system :tada:.
 
 New events include iOS 11 API, as well as some iOS 9 and iOS 10 API, that was missed or was not implemented previously. If you are afraid of perfomance hit this may imply on your app - don't worry. Both `DTTableViewManager` and `DTCollectionViewManager` intelligently tell `UITableView` and `UICollectionView` only about events and methods, that are being actually used, which means that there's no perfomance cost needed to be paid for additional events.
 
@@ -130,7 +130,7 @@ Starting with 6.x, this functionality is soft-deprecated, and replaced with new,
   manager.register(SectionSectionCell.self) { mapping in mapping.condition = .section(1) }
 ```
 
-Is is much simpler, and much more readable. Conditional mappings have three possible behaviors - .none allows mappings everywhere, .section allows mapping to be tied to specific section, and also there is .custom for everything else.
+Is is much simpler, and much more readable. Conditional mappings have three possible behaviors - `.none` allows mappings everywhere, `.section` allows mapping to be tied to specific section, and also there is `.custom` for everything else.
 
 For example, if want your mapping to work only for Int models, that are larger than 2, here's how you would implement it:
 
@@ -143,7 +143,7 @@ For example, if want your mapping to work only for Int models, that are larger t
   }
 ```
 
-As you can see, .custom case has a closure of type `(IndexPath,Any) -> Bool` which allows you to customize mapping as you want. Apart from condition, you can also change reuseIdentifier to be used for mappings. This is rare case, however if you want for example to use different XIBs for the same cell class, you would need to do this:
+`.custom` case has a closure of type `(IndexPath,Any) -> Bool` which allows you to customize mapping as you want. Apart from condition, you can also change `reuseIdentifier` to be used for mappings. This is rare case, however if you want for example to use different XIBs for the same cell class in different sections, you would need to do this:
 
 ```swift
 manager.register(NibCell.self) { mapping in
