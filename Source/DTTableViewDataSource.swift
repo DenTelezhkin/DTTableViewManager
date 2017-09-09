@@ -75,17 +75,10 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     }
     
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        guard let item = storage.item(at: sourceIndexPath), let model = RuntimeHelper.recursivelyUnwrapAnyValue(item),
-            let cell = tableView.cellForRow(at: sourceIndexPath)
-            else { return }
-        if let reaction = tableViewEventReactions.reaction(of: .cell,
-                                                           signature: EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue,
-                                                           forModel: model, view: cell) as? FourArgumentsEventReaction
-        {
-            _ = reaction.performWithArguments((cell,model,sourceIndexPath,destinationIndexPath))
-            return
-        }
+        _ = perform4ArgumentCellReaction(.moveRowAtIndexPathToIndexPath,
+                                         argument: destinationIndexPath,
+                                         location: sourceIndexPath,
+                                         provideCell: true)
         (delegate as? UITableViewDataSource)?.tableView?(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath)
     }
     

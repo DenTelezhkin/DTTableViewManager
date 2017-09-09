@@ -40,7 +40,6 @@ open class DTTableViewDropPlaceholderContext {
     /// Storage, on which drop operation is performed
     weak var storage: Storage?
     
-    
     /// Creates `DTTableViewDropPlaceholderContext` with `context` and `storage`
     public init(context: UITableViewDropPlaceholderContext, storage: Storage) {
         self.context = context

@@ -59,18 +59,12 @@ extension DTTableViewManager
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:moveRowAt:to:)` method is called for `cellClass`.
-    /// - note: 'MemoryStorage', you already have built-in behaviour, that moves items in the datasource. Use this method only if you want to customize how models are actually moved.
-    /// - warning: Do not use `MemoryStorage` methods in closure for this method, because changes only need to be made to the data model, as UI change has already happened and was animated when this method is called.
+    /// - warning: This method requires items to be moved without animations, since animation has already happened when user moved those cells. If you use `MemoryStorage`, it's appropriate to call `memoryStorage.moveItemWithoutAnimation(from:to:)` method to achieve desired behavior.
     /// - SeeAlso: 'tableView:moveRowAt:to:' method
-    open func move<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (T, T.ModelType, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) where T: UITableViewCell {
-        let reaction = FourArgumentsEventReaction(signature: EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue, viewType: .cell, viewClass: T.self)
-        reaction.reaction4Arguments = { cell, model, sourceIndexPath, destinationIndexPath in
-            guard let cell = cell as? T, let model = model as? T.ModelType,
-                let sourceIndexPath = sourceIndexPath as? IndexPath,
-                let destinationIndexPath = destinationIndexPath as? IndexPath else { return 0 }
-            return closure(cell, model, sourceIndexPath, destinationIndexPath)
-        }
-        tableDataSource?.tableViewEventReactions.append(reaction)
+    open func move<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (_ destinationIndexPath: IndexPath, T, T.ModelType, _ sourceIndexPath: IndexPath) -> Void) where T: UITableViewCell {
+        tableDataSource?.append4ArgumentReaction(for: T.self,
+                                                 signature: .moveRowAtIndexPathToIndexPath,
+                                                 closure: closure)
     }
     
     #if os(iOS)

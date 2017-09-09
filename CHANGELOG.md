@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 # Breaking
 
+* Signature of `move(_:_:)` method has been changed to make it consistent with other events. Arguments received in closure are now: `(destinationIndexPath: IndexPath, cell: T, model: T.ModelType, sourceIndexPath: IndexPath)`
 * `tableView(UITableView, moveRowAt: IndexPath, to: IndexPath)` no longer automatically moves items, if current storage is `MemoryStorage`. Please use `MemoryStorage` convenience method `moveItemWithoutAnimation(from:to:)` to move items manually.
 
 # Deprecated
