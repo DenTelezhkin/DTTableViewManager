@@ -8,12 +8,14 @@ This guide is provided in order to ease the transition of existing applications 
 - [Benefits of Upgrading](#benefits-of-upgrading)
 - [Breaking API Changes](#breaking-api-changes)
 	- [Delegate implementations](#delegate-implementations)
+	- [Realm storage](#realm-storage)
 	- [Other breaking changes](#other-breaking-changes)
 - [New Features](#new-features)
 	- [Backwards compatibility](#backwards-compatibility)
 	- [Drag and Drop](#drag-and-drop)
   - [Improvements to events system](#improvements-to-events-system)
   - [Conditional mappings](#conditional-mappings)
+	- [Improved Carthage support](#improved-carthage-support)
   - [Miscellaneous stuff](#miscellaneous-stuff)
 
 ## Requirements
@@ -28,6 +30,7 @@ This guide is provided in order to ease the transition of existing applications 
 - **Support for Drag&Drop in iOS 11**, including convenience handling for `MemoryStorage`.
 - **Improvements to events system** provide compile-time safety for events registration and lots of new events.
 - **Conditional mappings** provide a powerful way of customizing your view mappings.
+- **Improved Carthage support** will now include prebuilt binaries, attached via GitHub releases.
 
 ## Breaking API Changes
 
@@ -47,6 +50,12 @@ In all previous releases, `DTTableViewManager` and `DTCollectionViewManager` wer
 - `UICollectionViewDragDelegate` -> `DTCollectionViewDragDelegate`
 
 As a consequence, `DTTableViewManager` and `DTCollectionViewManager` no longer implement any of those datasource and delegate methods. If you relied on this fact, or have subclasses or extensions of `DTTableViewManager` or `DTCollectionViewManager`, you should subclass or extend new classes instead.
+
+### Realm Storage
+
+`RealmStorage` class is a `Storage` implementation for [Realm database](https://realm.io). It is great to have the ability to work independently with in-memory datasources, CoreData datasources, or Realm datasources. What's not great, is wait times if you use Carthage. `RealmSwift` framework, even in zipped prebuilt binary form, is 250 Mb in size. That's a lot even if you use some form of Carthage cache. And this penalty is applied to all `DTTableViewManager` Carthage users, even if they don't use Realm at all.
+
+So, starting with 6.0, `RealmStorage` extension will not be made available through Carthage. If you use `CocoaPods`, `RealmStorage` is still available via a subspec, and as for Carthage users - for now I can recommend only copy pasting Realm classes into your projects, and depending on Realm-Cocoa directly. If Carthage developers ever decide to implement subspec-like functionality, I'll be happy to bring those classes back. Another hope is Carthage `Ignorefile`, that is currently in development - https://github.com/Carthage/Carthage/pull/1990, if this will be implemented, `RealmStorage` will be once again made available through Carthage.
 
 ### Other breaking changes
 
@@ -157,6 +166,12 @@ controller.manager.registerNibNamed("CustomNibCell", for: NibCell.self) { mappin
 ```
 
 This is needed because even though mappings are stored on `DTTableViewManager` instance, `UITableView` actually has no idea we are pulling such tricks, and when we'll try to dequeue cell based on reuseIdentifier, if we use the same reuseIdentifier, second mapping will simply be erased from `UITableView` memory. But since we are able to use two different reuseIdentifiers, we are golden :100:.
+
+### Improved Carthage support
+
+Thanks to dropping `Realm` dependency from `DTModelStorage`, build times should be significantly faster for Carthage users. To improve this even more, starting with 6.x release, prebuilt binaries will be now made available as a part of GitHub release for `DTModelStorage`, `DTTableViewManager` and `DTCollectionViewManager`.
+
+Prebuilt binaries will only be compiled using latest version of compiler, so for example for Xcode 9.0 it will be Swift 4.0 compiler.
 
 ### Miscellaneous stuff
 
