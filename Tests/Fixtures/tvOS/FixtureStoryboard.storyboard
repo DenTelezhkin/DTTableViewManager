@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13189.4" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MJo-j5-n1p">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Storyboard View Controller-->
+        <scene sceneID="jxJ-Fv-c10">
+            <objects>
+                <viewController storyboardIdentifier="StoryboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MJo-j5-n1p" customClass="StoryboardViewController" customModule="Tests_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a8I-oi-tYH"/>
+                        <viewControllerLayoutGuide type="bottom" id="vhI-dq-Kzm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dCb-OB-q2S">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="xks-ls-ngC">
+                                <rect key="frame" x="90" y="60" width="1740" height="960"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StoryboardCell" id="MjB-Wd-C3Q" customClass="StoryboardCell" customModule="Tests_tvOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="66" width="1740" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MjB-Wd-C3Q" id="m5p-73-iD3">
+                                            <rect key="frame" x="0.0" y="0.0" width="1740" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMm-4F-gRM">
+                                                    <rect key="frame" x="823" y="10" width="93" height="46"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yMm-4F-gRM" firstAttribute="centerX" secondItem="m5p-73-iD3" secondAttribute="centerX" id="f48-UW-yJ8"/>
+                                                <constraint firstItem="yMm-4F-gRM" firstAttribute="centerY" secondItem="m5p-73-iD3" secondAttribute="centerY" id="sd0-d8-qBA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="storyboardLabel" destination="yMm-4F-gRM" id="xcE-jM-a6A"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="BfK-9X-nns" firstAttribute="trailing" secondItem="xks-ls-ngC" secondAttribute="trailing" id="MfE-El-Q6i"/>
+                            <constraint firstItem="vhI-dq-Kzm" firstAttribute="top" secondItem="xks-ls-ngC" secondAttribute="bottom" id="PfE-vO-0ya"/>
+                            <constraint firstItem="xks-ls-ngC" firstAttribute="leading" secondItem="BfK-9X-nns" secondAttribute="leading" id="UTa-cx-HCE"/>
+                            <constraint firstItem="xks-ls-ngC" firstAttribute="top" secondItem="a8I-oi-tYH" secondAttribute="bottom" id="bg8-21-c1t"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BfK-9X-nns"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="xks-ls-ngC" id="PZi-Fo-Rso"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RSW-oc-xHV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="316" y="787"/>
+        </scene>
+    </scenes>
+</document>

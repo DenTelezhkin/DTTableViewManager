@@ -2,6 +2,10 @@ language: objective-c
 sudo: false
 osx_image: xcode9
 
+cache:
+  directories:
+  - Carthage
+
 matrix:
   include:
     - os: osx
@@ -18,16 +22,19 @@ matrix:
     - os: osx
       osx_image: xcode8.3
       env: ACTION=test_tvos10_legacy
-    # - os: osx
-    #   env: ACTION=pod_lint
-    # - os: osx
-    #   env: ACTION=carthage_build
-    # - os: osx
-    #   env: ACTION=spm_macos
+    - os: osx
+      env: ACTION=pod_lint
+    - os: osx
+      env: ACTION=carthage_build
 
 before_script:
   - brew update
   - brew outdated carthage || brew upgrade carthage
+  - carthage bootstrap --cache-builds
 
 script:
   - bundle exec fastlane $ACTION
+
+env:
+  global:
+    secure: k7szPQW4SmTEA29auFG3+fEeNIz6MZtYHiA+GLof5fWnTXbAEdmlxqQTgHSi+5u07cJqJPoR1k2/DN/5dMYLe5LBsMkRlx3XOUVS/Ean/bELefm270QHRXapt6mqQLHanZH9duTscUBgDgpdFxEKblc9fge24z6TyEgPHswtgT4=
