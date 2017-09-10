@@ -555,6 +555,7 @@
 				9A6CED5E1BE570750091B0AF /* Sources */,
 				9A6CED6D1BE570750091B0AF /* Frameworks */,
 				9A6CED711BE570750091B0AF /* Resources */,
+				9A23500D1F655D7600A13B55 /* Copy Carthage frameworks */,
 			);
 			buildRules = (
 			);
@@ -592,6 +593,7 @@
 				9AF003161A5ABE7000ABFC90 /* Sources */,
 				9AF003171A5ABE7000ABFC90 /* Frameworks */,
 				9AF003181A5ABE7000ABFC90 /* Resources */,
+				9A23500E1F655D9600A13B55 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -706,6 +708,38 @@
 			files = (
 			);
 			inputPaths = (
+				DTModelStorage.framework,
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"";
+		};
+		9A23500D1F655D7600A13B55 /* Copy Carthage frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				DTModelStorage.framework,
+				Nimble.framework,
+			);
+			name = "Copy Carthage frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"";
+		};
+		9A23500E1F655D9600A13B55 /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				Nimble.framework,
 				DTModelStorage.framework,
 			);
 			name = "Copy Carthage Frameworks";
@@ -923,10 +957,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -959,10 +989,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1051,10 +1077,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1085,10 +1107,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
