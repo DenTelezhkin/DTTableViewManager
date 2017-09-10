@@ -17,12 +17,12 @@ lane :test_tvos10 do
   scan(device: "Apple TV 1080p (10.2)", scheme: "Tests-tvOS")
 end
 
-lane :test_ios10_legacy do
-  scan(devices: ["iPhone 6s (10.3)"], scheme: 'Tests-iOS', xcargs: "SWIFT_VERSION=3.0")
+lane :test_ios_swift3 do
+  scan(devices: ["iPhone 7 (11.0)"], scheme: 'Tests-iOS', xcargs: "SWIFT_VERSION=3.0")
 end
 
-lane :test_tvos10_legacy do
-  scan(devices: ["Apple TV 1080p (10.2)"], scheme: 'Tests-tvOS', xcargs: "SWIFT_VERSION=3.0")
+lane :test_tvos_swift3 do
+  scan(devices: ["Apple TV 1080p (11.0)"], scheme: 'Tests-tvOS', xcargs: "SWIFT_VERSION=3.0")
 end
 
 lane :pod_lint do

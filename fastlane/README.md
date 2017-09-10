@@ -29,14 +29,19 @@ xcode-select --install
 </table>
 
 # Available Actions
+### test_ios11
+```
+fastlane test_ios11
+```
+
 ### test_ios10
 ```
 fastlane test_ios10
 ```
 
-### test_ios9
+### test_tvos11
 ```
-fastlane test_ios9
+fastlane test_tvos11
 ```
 
 ### test_tvos10
@@ -44,14 +49,14 @@ fastlane test_ios9
 fastlane test_tvos10
 ```
 
-### test_macos
+### test_ios_swift3
 ```
-fastlane test_macos
+fastlane test_ios_swift3
 ```
 
-### build_watchos
+### test_tvos_swift3
 ```
-fastlane build_watchos
+fastlane test_tvos_swift3
 ```
 
 ### pod_lint
@@ -62,11 +67,6 @@ fastlane pod_lint
 ### carthage_build
 ```
 fastlane carthage_build
-```
-
-### spm_macos
-```
-fastlane spm_macos
 ```
 
 ### release

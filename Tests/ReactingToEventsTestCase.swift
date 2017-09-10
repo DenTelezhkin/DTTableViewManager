@@ -222,7 +222,7 @@ class ReactingToEventsTestCase: XCTestCase {
         }
         controller.manager.register(SelectionReactingTableCell.self)
         self.controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        #if swift(>=3.2)
+        #if swift(>=4.0)
             measureMetrics([XCTPerformanceMetric.wallClockTime], automaticallyStartMeasuring: true) {
             self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
                 self.stopMeasuring()

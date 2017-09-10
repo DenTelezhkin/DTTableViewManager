@@ -17,11 +17,9 @@ matrix:
     - os: osx
       env: ACTION=test_tvos10
     - os: osx
-      osx_image: xcode8.3
-      env: ACTION=test_ios10_legacy
+      env: ACTION=test_ios_swift3
     - os: osx
-      osx_image: xcode8.3
-      env: ACTION=test_tvos10_legacy
+      env: ACTION=test_tvos_swift3
     - os: osx
       env: ACTION=pod_lint
     - os: osx
