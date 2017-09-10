@@ -5,11 +5,11 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
-DTTableViewManager 5
+DTTableViewManager 6
 ================
 > This is a sister-project for [DTCollectionViewManager](https://github.com/DenHeadless/DTCollectionViewManager) - great tool for UICollectionView management, built on the same principles.
 
-Powerful generic-based UITableView management framework, written in Swift 3.
+Powerful generic-based UITableView management framework, written in Swift.
 
 - [Features](#features)
 - [Requirements](#requirements)
@@ -18,48 +18,46 @@ Powerful generic-based UITableView management framework, written in Swift 3.
 - [Usage](#usage)
     - **Intro -** [Mapping and Registration](#mapping-and-registration), [Data Models](#data-models)
     - **Storage classes -** [Memory Storage](#memorystorage), [CoreDataStorage](#coredatastorage), [RealmStorage](#realmstorage)
-    - **Reacting to events -** [Event types](#event-types), [Events list](#events-list)
+    - **Reacting to events -** [Event types](#event-types), [Events configuration](#events-configuration)
 - [Advanced Usage](#advanced-usage)
+  - [Drag and Drop in iOS 11](#drag-and-drop-in-ios-11)
 	- [Reacting to content updates](#reacting-to-content-updates)
 	- [Customizing UITableView updates](#customizing-uitableview-updates)
 	- [Display header on empty section](#display-header-on-empty-section)
-  - [Customizing mapping resolution](#customizing-mapping-resolution)
+  - [Conditional mappings](#conditional-mappings)
   - [Unregistering mappings](#unregistering-mappings)
-  - [Error reporting](#error-reporting)
 - [ObjectiveC support](#objectivec-support)
-- [Documentation](#documentation)
-- [Running example project](#running-example-project)
 - [Thanks](#thanks)
 
 ## Features
 
 - [x] Powerful mapping system between data models and cells, headers and footers
 - [x] Support for all Swift types - classes, structs, enums, tuples
-- [x] Support for protocols and subclasses as data models
-- [x] Powerful events system, that covers most of UITableView delegate methods
+- [x] Powerful events system, that covers all UITableView delegate and datasource methods
 - [x] Views created from code, XIB, or storyboard
 - [x] Flexible Memory/CoreData/Realm.io storage options
 - [x] Automatic datasource and interface synchronization.
 - [x] Automatic XIB registration and dequeue
 - [x] No type casts required
 - [x] No need to subclass
+- [x] Support for Drag&Drop in iOS 11
 - [x] Can be used with UITableViewController, or UIViewController with UITableView, or any other class, that contains UITableView
 
 ## Requirements
 
-* Xcode 8 and higher
+* Xcode 8 / Xcode 9
 * iOS 8.0 and higher / tvOS 9.0 and higher
-* Swift 3
+* Swift 3 / Swift 4
 
 ## Installation
 
 [CocoaPods](http://www.cocoapods.org):
 
-    pod 'DTTableViewManager', '~> 5.2'
+    pod 'DTTableViewManager', '~> 6.0'
 
 [Carthage](https://github.com/Carthage/Carthage):
 
-    github "DenHeadless/DTTableViewManager" ~> 5.2.0
+    github "DenHeadless/DTTableViewManager" ~> 6.0
 
 After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to Xcode project embedded binaries.
 
@@ -77,7 +75,7 @@ The core object of a framework is `DTTableViewManager`. Declare your class as `D
 Make sure your UITableView outlet is wired to your class and call in viewDidLoad:
 
 ```swift
-	manager.startManaging(withDelegate:self)
+	manager.startManaging(withDelegate: self)
 ```
 
 Let's say you have an array of Posts you want to display in UITableView. To quickly show them using DTTableViewManager, here's what you need to do:
@@ -228,7 +226,7 @@ It's also important to understand, that event system is implemented using `respo
 * If `DTTableViewManageable` is implementing delegate method, `responds(to:)` returns true
 * If `DTTableViewManager` has events tied to selector being called, `responds(to:)` also returns true
 
-What this approach allows us to do, is configuring UITableView knowledge about what delegate method is implemented and what is not. For example, `DTTableViewManager` is implementing `tableView(_:heightForRowAt:)` method, however if you don't call `heightForCell(withItem:_:)` method, you are safe to use self-sizing cells in UITableView. While **37** delegate methods are implemented, only those that have events or are implemented by delegate will be called by `UITableView`.
+What this approach allows us to do, is configuring UITableView knowledge about what delegate method is implemented and what is not. For example, `DTTableViewManager` is implementing `tableView(_:heightForRowAt:)` method, however if you don't call `heightForCell(withItem:_:)` method, you are safe to use self-sizing cells in UITableView. While all delegate methods are implemented, only those that have events or are implemented by delegate will be called by `UITableView`.
 
 `DTTableViewManager` has the same approach for handling each delegate and datasource method:
 
@@ -236,62 +234,24 @@ What this approach allows us to do, is configuring UITableView knowledge about w
 * Try to call delegate or datasource method on `DTTableViewManageable` instance
 * If two previous scenarios fail, fallback to whatever default `UITableView` has for this delegate or datasource method
 
-### Events list
+### Events configuration
 
-Here's full list of all delegate and datasource methods implemented:
+To have compile safety when registering events, you can use `configureEvents` method:
 
-**UITableViewDataSource**
-
-| DataSource method | Event method | Comment |
-| ----------------- | ------------ | ------- |
-|  cellForItemAt: | configure(_:_:) | Called after `update(with:)` method was called |
-|  viewForHeaderInSection: | configureHeader(_:_:) | Called after `update(with:)` method was called |
-|  viewForFooterInSection: | configureFooter(_:_:) | Called after `update(with:)` method was called |
-|  commit:forRowAt: | commitEditingStyle(for:_:) | - |
-|  canEditRowAt: | canEditCell(withItem:_:) | - |
-|  canMoveRowAt: | canMove(_:_:) | - |
-|  sectionIndexTitlesFor: | sectionIndexTitles(_:) | iOS only |
-|  sectionForSectionIndexTitle:at: | sectionForSectionIndexTitle(_:_:) | iOS only |
-
-**UITableViewDelegate**
-
-| Delegate method | Event method | Comment |
-| ----------------- | ------------ | ------ |
-|  heightForRowAt: | heightForCell(withItem:_:) | - |
-|  estimatedHeightForRowAt: | estimatedHeightForCell(withItem:_:) | - |
-|  indentationLevelForRowAt: | indentationLevelForCell(withItem:_:) | - |
-|  willDisplay:forRowAt: | willDisplay(_:_:) | - |
-|  editActionsForRowAt: | editActions(for:_:) | iOS only |
-|  accessoryButtonTappedForRowAt: | accessoryButtonTapped(in:_:) | - |
-|  willSelectRowAt: | willSelect(_:_:) | - |
-|  didSelectRowAt: | didSelect(_:_:) | - |
-|  willDeselectRowAt: | willDeselect(_:_:) | - |
-|  didDeselectRowAt: | didDeselect(_:_:) | - |
-|  willSelectRowAt: | willSelect(_:_:) | - |
-|  heightForHeaderInSection: | heightForHeader(withItem:_:) | - |
-|  heightForFooterInSection: | heightForFooter(withItem:_:) | - |
-|  estimatedHeightForHeaderInSection: | estimatedHeightForHeader(withItem:_:) | - |
-|  estimatedHeightForFooterInSection: | estimatedHeightForFooter(withItem:_:) | - |
-|  heightForHeaderInSection: | heightForHeader(withItem:_:) | - |
-|  willDisplayHeaderView:forSection: | willDisplayHeaderView(_:_:) | - |
-|  willDisplayFooterView:forSection: | willDisplayFooterView(_:_:) | - |
-|  willBeginEditingRowAt: | willBeginEditing(_:_:) | iOS only |
-|  didEndEditingRowAt: | didEndEditing(_:_:) | iOS only |
-|  editingStyleForRowAt: | editingStyle(for:_:) | - |
-|  titleForDeleteConfirmationButtonForRowAt: | titleForDeleteConfirmationButton(in:_:) | iOS only |
-|  shouldIndentWhileEditingRowAt: | shouldIndentWhileEditing(_:_:) | - |
-|  didEndDisplaying:forRowAt: | didEndDisplaying(_:_:) | - |
-|  didEndDisplayingHeaderView:forSection: | didEndDisplayingHeaderView(_:_:) | - |
-|  didEndDisplayingFooterView:forSection: | didEndDisplayingFooterView(_:_:) | - |
-|  shouldShowMenuForRowAt: | shouldShowMenu(for:_:) | - |
-|  canPerformAction:forRowAt:withSender: | canPerformAction(for:_:) | - |
-|  performAction:forRowAt:withSender: | performAction(for:_:) | - |
-|  shouldHighlightRowAt: | shouldHighlight(_:_:) | - |
-|  didHighlightRowAt: | didHighlight(_:_:) | - |
-|  didUnhighlightRowAt: | didUnhighlight(_:_:) | - |
-|  canFocusRowAt: | canFocus(_:_:) | iOS/tvOS 9.0+ |
+```swift
+manager.configureEvents(for: IntCell.self) { cellType, modelType in
+  manager.register(cellType)
+  manager.estimatedHeight(for: modelType) { _,_ in
+    return 44
+  }
+}
+```
 
 ## Advanced usage
+
+### Drag and Drop in iOS 11
+
+There is a [dedicated repo](https://github.com/DenHeadless/DTDragAndDropExample), containing Apple's sample on Drag&Drop, enhanced with `DTTableViewManager` and `DTCollectionViewManager`. Most of the stuff is just usual drop and drag delegate events, but there is also special support for UITableView and UICollectionView placeholders, that makes sure calls are dispatched to main thread, and if you use `MemoryStorage`, performs datasource updates automatically.
 
 ### Reacting to content updates
 
@@ -346,9 +306,9 @@ manager.configuration.displayFooterOnEmptySection = false
 
 Also you can use simple String models for header and footer models, without any registration, and they will be used in `tableView(_:titleForHeaderInSection:)` method automatically.
 
-### Customizing mapping resolution
+### Conditional mappings
 
-There can be cases, where you might want to customize mappings based on some criteria. For example, you might want to display model in several kinds of cells:
+There can be cases, where you might want to customize mappings based on some criteria. For example, you might want to display model in several kinds of cells for different sections:
 
 ```swift
 class FoodTextCell: UITableViewCell, ModelTransfer {
@@ -363,20 +323,31 @@ class FoodImageCell: UITableViewCell, ModelTransfer {
     }
 }
 
-manager.register(FoodTextCell.self)
-manager.register(FoodImageCell.self)
+manager.register(FoodTextCell.self) { mapping in mapping.condition = .section(0) }
+manager.register(FoodImageCell.self) { mapping in mapping.condition = .section(1) }
 ```
 
-If you don't do anything, FoodTextCell mapping will be selected as first mapping, however you can adopt `ViewModelMappingCustomizing` protocol to adjust your mappings:
+Or you may implement completely custom conditions:
 
 ```swift
-extension PostViewController : ViewModelMappingCustomizing {
-    func viewModelMapping(fromCandidates candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
-        if let foodModel = model as? Food where foodModel.hasPhoto {
-            return candidates.last
-        }
-        return candidates.first
-    }
+manager.register(FooCell.self) { mapping in
+  mapping.condition = .custom({ indexPath, model in
+    guard let model = model as? Int else { return false }
+    return model > 2
+  })
+}
+```
+
+You can also change reuseIdentifier to be used:
+
+```swift
+manager.register(NibCell.self) { mapping in
+    mapping.condition = .section(0)
+    mapping.reuseIdentifier = "NibCell One"
+}
+controller.manager.registerNibNamed("CustomNibCell", for: NibCell.self) { mapping in
+    mapping.condition = .section(1)
+    mapping.reuseIdentifier = "NibCell Two"
 }
 ```
 
@@ -392,30 +363,9 @@ manager.unregisterFooter(FooterView.self)
 
 This is equivalent to calling `tableView(register:nil,forCellWithReuseIdenfier: "FooCell")`
 
-### Error reporting
-
-In some cases `DTTableViewManager` will not be able to create cell, header or footer view. This can happen when passed model is nil, or mapping is not set. By default, 'fatalError' method will be called and application will crash. You can improve crash logs by setting your own error handler via closure:
-
-```swift
-manager.viewFactoryErrorHandler = { error in
-    // DTTableViewFactoryError type
-    print(error.description)
-}
-```
-
 ## ObjectiveC support
 
 `DTTableViewManager` is heavily relying on Swift protocol extensions, generics and associated types. Enabling this stuff to work on Objective-c right now is not possible. Because of this DTTableViewManager 4 and greater only supports building from Swift. If you need to use Objective-C, you can use [latest Objective-C compatible version of `DTTableViewManager`](https://github.com/DenHeadless/DTTableViewManager/releases/tag/3.3.0).
-
-## Documentation
-
-You can view documentation online or you can install it locally using [cocoadocs](http://cocoadocs.org/docsets/DTTableViewManager)!
-
-## Running example project
-
-```bash
-pod try DTTableViewManager
-```
 
 ## Thanks
 

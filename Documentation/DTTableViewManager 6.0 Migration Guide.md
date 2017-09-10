@@ -181,4 +181,4 @@ For example, there's a new `updateVisibleCells(_:)` method on `DTTableViewManage
 
 `MemoryStorage` now has `moveItemWithoutAnimation(from:to:)` method, that can be used when reordering items.
 
-There is now `DTTableViewOptionalManageable` protocol, that allows you to have outlet of `UITableView` declared as optional `UITableView?`.
+There is now `DTTableViewOptionalManageable` protocol, that allows you to have outlet of `UITableView` declared as optional `UITableView?`. There's also `DTCollectionViewNonOptionalManageable` protocol for `UICollectionView!`.
