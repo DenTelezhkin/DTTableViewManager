@@ -15,7 +15,7 @@ This guide is provided in order to ease the transition of existing applications 
 	- [Drag and Drop](#drag-and-drop)
   - [Improvements to events system](#improvements-to-events-system)
   - [Conditional mappings](#conditional-mappings)
-	- [Improved Carthage support](#improved-carthage-support)
+  - [Improved Carthage support](#improved-carthage-support)
   - [Miscellaneous stuff](#miscellaneous-stuff)
 
 ## Requirements
