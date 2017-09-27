@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [6.0.0-beta.2](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.0.0-beta.2)
+
+* Build with Xcode 9.0 final release.
+* Fixed partial-availability warnings.
+
 ## [6.0.0-beta.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.0.0-beta.1)
 
 **This is a major release with some breaking changes, please read [DTTableViewManager 6.0 Migration Guide](https://github.com/DenHeadless/DTTableViewManager/blob/master/Documentation/DTTableViewManager%206.0%20Migration%20Guide.md)**

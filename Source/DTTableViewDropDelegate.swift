@@ -30,6 +30,7 @@ import UIKit
     
 /// Object, that implements `UITableViewDropDelegate` for `DTTableViewManager`.
 open class DTTableViewDropDelegate: DTTableViewDelegateWrapper, UITableViewDropDelegate {
+    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         _ = performNonCellReaction(.performDropWithCoordinator, argument: coordinator)
         (delegate as? UITableViewDropDelegate)?.tableView(tableView, performDropWith: coordinator)
@@ -40,6 +41,7 @@ open class DTTableViewDropDelegate: DTTableViewDelegateWrapper, UITableViewDropD
         tableView?.dropDelegate = self
     }
     
+    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
         if let canHandle = performNonCellReaction(.canHandleDropSession, argument: session) as? Bool {
             return canHandle
@@ -47,11 +49,13 @@ open class DTTableViewDropDelegate: DTTableViewDelegateWrapper, UITableViewDropD
         return (delegate as? UITableViewDropDelegate)?.tableView?(tableView, canHandle: session) ?? true
     }
     
+    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, dropSessionDidEnter session: UIDropSession) {
         _ = performNonCellReaction(.dropSessionDidEnter, argument: session)
         (delegate as? UITableViewDropDelegate)?.tableView?(tableView, dropSessionDidEnter: session)
     }
     
+    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         if let proposal = performNonCellReaction(.dropSessionDidUpdateWithDestinationIndexPath,
                                                  argumentOne: session,
@@ -63,16 +67,19 @@ open class DTTableViewDropDelegate: DTTableViewDelegateWrapper, UITableViewDropD
                                                                   withDestinationIndexPath: destinationIndexPath) ?? UITableViewDropProposal(operation: .cancel)
     }
     
+    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, dropSessionDidExit session: UIDropSession) {
         _ = performNonCellReaction(.dropSessionDidExit, argument: session)
         (delegate as? UITableViewDropDelegate)?.tableView?(tableView, dropSessionDidExit: session)
     }
     
+    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, dropSessionDidEnd session: UIDropSession) {
         _ = performNonCellReaction(.dropSessionDidEnd, argument: session)
         (delegate as? UITableViewDropDelegate)?.tableView?(tableView, dropSessionDidEnd: session)
     }
     
+    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, dropPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
         if let reaction = tableViewEventReactions.filter({ $0.methodSignature == EventMethodSignature.dropPreviewParametersForRowAtIndexPath.rawValue }).first {
             return reaction.performWithArguments((indexPath,0,0)) as? UIDragPreviewParameters

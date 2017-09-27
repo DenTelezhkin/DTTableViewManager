@@ -64,6 +64,9 @@ lane :release do |params|
     sh "git tag #{version} -m '#{message}'"
     sh "git push --follow-tags"
 
+    puts "Updating Specs repo"
+    sh "bundle exec pod repo update"
+
     puts "Pushing to CocoaPods trunk."
     sh "bundle exec pod trunk push DTTableViewManager.podspec --allow-warnings"
 
