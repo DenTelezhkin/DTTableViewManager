@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [6.0.0-beta.3](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.0.0-beta.3)
+
 * Makes `DTTableViewManager` property weak instead of unowned to prevent iOS 10-specific memory issues/crashes.
 
 ## [6.0.0-beta.2](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.0.0-beta.2)
