@@ -29,14 +29,14 @@ import DTModelStorage
 /// Base class for objects, that implement various datasource and delegate methods from `UITableView`. Even though this class is declared as `open`, subclassing it is discouraged. Please subsclass concrete subclass of this class, such as `DTTableViewDelegate`.
 open class DTTableViewDelegateWrapper : NSObject {
     weak var delegate: AnyObject?
-    weak var tableView: UITableView? { return manager.tableView }
-    var viewFactory: TableViewFactory { return manager.viewFactory }
-    var storage: Storage { return manager.storage }
-    var configuration: TableViewConfiguration { return manager.configuration }
+    weak var tableView: UITableView? { return manager?.tableView }
+    var viewFactory: TableViewFactory? { return manager?.viewFactory }
+    var storage: Storage? { return manager?.storage }
+    var configuration: TableViewConfiguration? { return manager?.configuration }
     
     @available(*, deprecated, message: "Error handling system is deprecated and will be removed in future versions of the framework")
-    var viewFactoryErrorHandler: ((DTTableViewFactoryError) -> Void)? { return manager.viewFactoryErrorHandler }
-    private unowned let manager: DTTableViewManager
+    var viewFactoryErrorHandler: ((DTTableViewFactoryError) -> Void)? { return manager?.viewFactoryErrorHandler }
+    private weak var manager: DTTableViewManager?
     
     public init(delegate: AnyObject?, tableViewManager: DTTableViewManager) {
         self.delegate = delegate
@@ -62,6 +62,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     /// If `TableViewConfiguration` `displayHeaderOnEmptySection` is false, this method also returns nil.
     final func headerModel(forSection index: Int) -> Any?
     {
+        guard let storage = storage, let configuration = configuration else { return nil }
         guard storage.sections.count > index else { return nil }
         
         if storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection
@@ -76,6 +77,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     /// If `TableViewConfiguration` `displayFooterOnEmptySection` is false, this method also returns nil.
     final func footerModel(forSection index: Int) -> Any?
     {
+        guard let storage = storage, let configuration = configuration else { return nil }
         guard storage.sections.count > index else { return nil }
         
         if storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection
@@ -174,14 +176,14 @@ open class DTTableViewDelegateWrapper : NSObject {
     final func performCellReaction(_ signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
-        guard let model = storage.item(at: location) else { return nil }
+        guard let model = storage?.item(at: location) else { return nil }
         return tableViewEventReactions.performReaction(of: .cell, signature: signature.rawValue, view: cell, model: model, location: location)
     }
     
     final func perform4ArgumentCellReaction(_ signature: EventMethodSignature, argument: Any, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
-        guard let model = storage.item(at: location) else { return nil }
+        guard let model = storage?.item(at: location) else { return nil }
         return tableViewEventReactions.perform4ArgumentsReaction(of: .cell,
                                                                  signature: signature.rawValue,
                                                                  argument: argument,
@@ -197,7 +199,7 @@ open class DTTableViewDelegateWrapper : NSObject {
                                              provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
-        guard let model = storage.item(at: location) else { return nil }
+        guard let model = storage?.item(at: location) else { return nil }
         return tableViewEventReactions.perform5ArgumentsReaction(of: .cell,
                                                                  signature: signature.rawValue,
                                                                  firstArgument: argumentOne,
@@ -210,12 +212,12 @@ open class DTTableViewDelegateWrapper : NSObject {
     final func performNillableCellReaction(_ reaction: EventReaction, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
-        guard let model = storage.item(at: location) else { return nil }
+        guard let model = storage?.item(at: location) else { return nil }
         return reaction.performWithArguments((cell as Any,model,location))
     }
     
     final func cellReaction(_ signature: EventMethodSignature, location: IndexPath) -> EventReaction? {
-        guard let model = storage.item(at: location) else { return nil }
+        guard let model = storage?.item(at: location) else { return nil }
         return tableViewEventReactions.reaction(of: .cell, signature: signature.rawValue, forModel: model, view: nil)
     }
     

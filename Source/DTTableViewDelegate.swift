@@ -36,7 +36,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath) }
-        guard let model = storage.item(at: indexPath) else { return }
+        guard let model = storage?.item(at: indexPath) else { return }
         _ = tableViewEventReactions.performReaction(of: .cell, signature: EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
     }
     
@@ -53,12 +53,12 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if configuration.sectionHeaderStyle == .title { return nil }
+        if configuration?.sectionHeaderStyle == .title { return nil }
         
         if let model = self.headerModel(forSection:section) {
             let view : UIView?
             do {
-                view = try self.viewFactory.headerViewForModel(model, atIndexPath: IndexPath(index: section))
+                view = try viewFactory?.headerViewForModel(model, atIndexPath: IndexPath(index: section))
             } catch let error as DTTableViewFactoryError {
                 handleTableViewFactoryError(error)
                 view = nil
@@ -78,12 +78,12 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if configuration.sectionFooterStyle == .title { return nil }
+        if configuration?.sectionFooterStyle == .title { return nil }
         
         if let model = self.footerModel(forSection: section) {
             let view : UIView?
             do {
-                view = try self.viewFactory.footerViewForModel(model, atIndexPath: IndexPath(index: section))
+                view = try viewFactory?.footerViewForModel(model, atIndexPath: IndexPath(index: section))
             } catch let error as DTTableViewFactoryError {
                 handleTableViewFactoryError(error)
                 view = nil
@@ -109,7 +109,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         if let height = (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForHeaderInSection: section) {
             return height
         }
-        if configuration.sectionHeaderStyle == .title {
+        if configuration?.sectionHeaderStyle == .title {
             if let _ = self.headerModel(forSection:section)
             {
                 return UITableViewAutomaticDimension
@@ -138,7 +138,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         if let height = (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForFooterInSection: section) {
             return height
         }
-        if configuration.sectionFooterStyle == .title {
+        if configuration?.sectionFooterStyle == .title {
             if let _ = self.footerModel(forSection:section) {
                 return UITableViewAutomaticDimension
             }
@@ -257,7 +257,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath) }
-        guard let model = storage.item(at: indexPath) else { return }
+        guard let model = storage?.item(at: indexPath) else { return }
         _ = tableViewEventReactions.performReaction(of: .cell, signature: EventMethodSignature.didEndDisplayingCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
     }
     

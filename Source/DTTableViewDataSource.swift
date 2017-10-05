@@ -36,21 +36,21 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     }
     
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.storage.sections[section].numberOfItems
+        return storage?.sections[section].numberOfItems ?? 0
     }
     
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return self.storage.sections.count
+        return storage?.sections.count ?? 0
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = self.storage.item(at: indexPath) else {
+        guard let model = storage?.item(at: indexPath) else {
             return UITableViewCell()
         }
         
         let cell : UITableViewCell
         do {
-            cell = try self.viewFactory.cellForModel(model, atIndexPath: indexPath)
+            cell = try viewFactory?.cellForModel(model, atIndexPath: indexPath) ?? UITableViewCell()
         } catch let error as DTTableViewFactoryError {
             handleTableViewFactoryError(error)
             cell = UITableViewCell()
@@ -63,13 +63,13 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     }
     
     open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if configuration.sectionHeaderStyle == .view { return nil }
+        if configuration?.sectionHeaderStyle == .view { return nil }
         
         return self.headerModel(forSection: section) as? String
     }
     
     open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if configuration.sectionFooterStyle == .view { return nil }
+        if configuration?.sectionFooterStyle == .view { return nil }
         
         return self.footerModel(forSection: section) as? String
     }
