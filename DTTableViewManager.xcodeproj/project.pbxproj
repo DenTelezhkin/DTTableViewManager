@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3E41498D1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */; };
 		3E41498E1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */; };
+		3EA4FF291FA9FF6600B3D853 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; };
+		3EA4FF2A1FA9FF6600B3D853 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3EF6EB531F1E5E24007F610A /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */; };
 		3EFE2ED41F1E5F6700A73565 /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */; };
 		9A0889811F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */; };
@@ -142,6 +144,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3EA4FF2A1FA9FF6600B3D853 /* DTModelStorage.framework in CopyFiles */,
 				9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +265,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EA4FF291FA9FF6600B3D853 /* DTModelStorage.framework in Frameworks */,
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1015,6 +1019,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				DEVELOPMENT_TEAM = L94VC9ZZXC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1050,6 +1058,10 @@
 				DEVELOPMENT_TEAM = L94VC9ZZXC;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
