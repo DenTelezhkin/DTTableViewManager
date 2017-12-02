@@ -25,6 +25,7 @@ class MappingConditionsTestCase: XCTestCase {
     }
     
     func testMappingCanBeSwitchedBetweenSections() {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(NibCell.self) { mapping in
             mapping.condition = .section(0)
         }
@@ -44,6 +45,7 @@ class MappingConditionsTestCase: XCTestCase {
     }
     
     func testCustomMappingIsRevolvableForTheSameModel() {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(NibCell.self) { mapping in
             mapping.condition = .custom({ indexPath, model in
                 guard let model = model as? Int else { return false }
@@ -67,6 +69,7 @@ class MappingConditionsTestCase: XCTestCase {
     }
     
     func testMappingCanBeSwitchedForNibNames() {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(NibCell.self) { mapping in
             mapping.condition = .section(0)
             mapping.reuseIdentifier = "NibCell One"

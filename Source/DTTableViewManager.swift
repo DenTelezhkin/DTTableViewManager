@@ -153,10 +153,10 @@ open class DTTableViewManager {
     }
     
     /// Object, that is responsible for updating `UITableView`, when received update from `Storage`
-    open var tableViewUpdater : StorageUpdating? {
+    open var tableViewUpdater : TableViewUpdater? {
         didSet {
             storage.delegate = tableViewUpdater
-            (tableViewUpdater as? TableViewUpdater)?.didUpdateContent?(nil)
+            tableViewUpdater?.didUpdateContent?(nil)
         }
     }
     

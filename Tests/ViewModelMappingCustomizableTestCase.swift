@@ -58,6 +58,7 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
     }
     
     func testMappingCustomizableAllowsSelectingAnotherCellMapping() {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(IntCell.self)
         controller.manager.register(AnotherIntCell.self)
         controller.mappingSelectableBlock = { mappings, model in

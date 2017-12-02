@@ -27,6 +27,7 @@ class MappingTestCase: XCTestCase {
 
     func testShouldCreateCellFromCode()
     {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(NiblessCell.self)
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
@@ -48,6 +49,7 @@ class MappingTestCase: XCTestCase {
     
     func testOptionalUnwrapping()
     {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(NiblessCell.self)
         
         let intOptional : Int? = 3
@@ -58,6 +60,7 @@ class MappingTestCase: XCTestCase {
     
     func testSeveralLevelsOfOptionalUnwrapping()
     {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(NiblessCell.self)
         
         let intOptional : Int?? = 3
@@ -68,6 +71,7 @@ class MappingTestCase: XCTestCase {
     
     func testCellMappingFromNib()
     {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(NibCell.self)
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
@@ -89,6 +93,7 @@ class MappingTestCase: XCTestCase {
     
     func testCellMappingFromNibWithDifferentName()
     {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.registerNibNamed("RandomNibNameCell", for: BaseTestCell.self)
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)

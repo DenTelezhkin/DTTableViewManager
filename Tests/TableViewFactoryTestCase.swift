@@ -74,6 +74,7 @@ class TableViewFactoryTestCase: XCTestCase {
     }
     
     func testUpdateCellAtIndexPath() {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         if #available(iOS 11, tvOS 11, *) {
             controller.tableView = UITableView()
             controller.manager.startManaging(withDelegate: controller)
@@ -88,7 +89,7 @@ class TableViewFactoryTestCase: XCTestCase {
         model.value = true
         controller.manager.updateCellClosure()(indexPath(0, 0),model)
         if #available(iOS 11, tvOS 11, *) {
-            expect((self.controller.tableView(self.controller.tableView, cellForRowAt: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
+            expect((self.controller.manager.tableDataSource?.tableView(self.controller.tableView, cellForRowAt: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
         } else {
             expect((self.controller.tableView.cellForRow(at: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
         }

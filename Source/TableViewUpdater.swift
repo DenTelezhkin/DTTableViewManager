@@ -66,6 +66,11 @@ open class TableViewUpdater : StorageUpdating {
     /// When this property is true, move events will be animated as delete event and insert event.
     open var animateMoveAsDeleteAndInsert: Bool
     
+    /// If turned on, `TableViewUpdater` will use `tableView.beginUpdates` and `tableView.endUpdates` methods instead of iOS/tvOS 11 `performBatchUpdates` method.
+    /// This flag is turned on by default, but will be turned off in the future.
+    /// If you don't use this legacy flag and use `MemoryStorage`, consider turning `defersDatasourceUpdates` property on, that prevents various issues from happening when using new API.
+    open var usesLegacyTableViewUpdateMethods = true
+    
     /// Creates updater with tableView.
     public init(tableView: UITableView, reloadRow: ((IndexPath,Any) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {
         self.tableView = tableView
@@ -77,13 +82,27 @@ open class TableViewUpdater : StorageUpdating {
     {
         willUpdateContent?(update)
         
-        tableView?.beginUpdates()
-        
-        applyObjectChanges(from: update)
-        applySectionChanges(from: update)
-        
-        tableView?.endUpdates()
-        didUpdateContent?(update)
+        if #available(iOS 11, tvOS 11, *), !usesLegacyTableViewUpdateMethods {
+            tableView?.performBatchUpdates({ [weak self] in
+                if update.containsDeferredDatasourceUpdates {
+                    update.applyDeferredDatasourceUpdates()
+                }
+                self?.applyObjectChanges(from: update)
+                self?.applySectionChanges(from: update)
+            }, completion: { [weak self] completed in
+                self?.didUpdateContent?(update)
+            })
+        } else {
+            tableView?.beginUpdates()
+            if update.containsDeferredDatasourceUpdates {
+                update.applyDeferredDatasourceUpdates()
+            }
+            applyObjectChanges(from: update)
+            applySectionChanges(from: update)
+            
+            tableView?.endUpdates()
+            didUpdateContent?(update)
+        }
     }
     
     private func applyObjectChanges(from update: StorageUpdate) {

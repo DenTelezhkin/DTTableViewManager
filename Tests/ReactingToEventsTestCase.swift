@@ -167,6 +167,7 @@ class ViewModelMappingCustomizationTestCase : XCTestCase {
     }
     
     func testEventReactionsSupportViewModelMappingCustomization() {
+        sut.manager.memoryStorage.defersDatasourceUpdates = true
         sut.manager.register(FirstTableViewCell.self)
         sut.manager.register(SecondTableViewCell.self)
         
@@ -197,10 +198,12 @@ class ReactingToEventsTestCase: XCTestCase {
         let _ = controller.view
         controller.manager.startManaging(withDelegate: controller)
         controller.manager.storage = MemoryStorage()
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
     }
     
     func testCellSelectionClosure()
     {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
         controller.manager.didSelect(SelectionReactingTableCell.self) { (cell, model, indexPath) in
@@ -298,7 +301,7 @@ class ReactingToEventsTestCase: XCTestCase {
     {
         controller.manager.register(NibCell.self)
         let exp = expectation(description: "didUpdateContent")
-        (self.controller.manager.tableViewUpdater as? TableViewUpdater)?.didUpdateContent = { _ in
+        controller.manager.tableViewUpdater?.didUpdateContent = { _ in
             exp.fulfill()
         }
         controller.manager.memoryStorage.addItem(1, toSection: 0)
@@ -310,7 +313,7 @@ class ReactingToEventsTestCase: XCTestCase {
     {
         controller.manager.register(NibCell.self)
         let exp = expectation(description: "willUpdateContent")
-        (self.controller.manager.tableViewUpdater as? TableViewUpdater)?.willUpdateContent = { _ in
+        controller.manager.tableViewUpdater?.willUpdateContent = { _ in
             exp.fulfill()
         }
         controller.manager.memoryStorage.addItem(1, toSection: 0)
@@ -331,6 +334,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         controller.manager.storage = MemoryStorage()
         controller.manager.registerFooter(ReactingHeaderFooterView.self)
         controller.manager.register(NibCell.self)
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
     }
     
     func testFooterConfigurationClosure()
@@ -347,18 +351,20 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "heightForRowAtIndexPath")
+        exp.expectedFulfillmentCount = 2
         controller.manager.heightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
+//        _ = controller.manager.tableDelegate?.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testEstimatedHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "estimatedHeightForRowAtIndexPath")
+        exp.expectedFulfillmentCount = 2
         controller.manager.estimatedHeightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
@@ -371,6 +377,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testIndentationLevelForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "indentationLevelForRowAtIndexPath")
+        exp.expectedFulfillmentCount = 2
         controller.manager.indentationLevelForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
@@ -415,6 +422,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testWillDisplayRowAtIndexPathClosure() {
         let exp = expectation(description: "willDisplay")
+        exp.expectedFulfillmentCount = 2
         controller.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
@@ -463,7 +471,11 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return false
         })
         controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
+        if #available(iOS 11, tvOS 11, *), !(controller.manager.tableViewUpdater?.usesLegacyTableViewUpdateMethods ?? false) {
+
+            } else {
+                _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
+        }
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -749,6 +761,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     #endif
     
     func testMoveRowAtIndexPath() {
+        controller.manager.memoryStorage.defersDatasourceUpdates = true
         let exp = expectation(description: "Move row at indexPath")
         controller.manager.move(NibCell.self, { (cell, model, sourceIndexPath, destinationIndexPath) in
             exp.fulfill()
