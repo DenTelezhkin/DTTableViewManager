@@ -12,6 +12,15 @@ import DTModelStorage
 @testable import DTTableViewManager
 import Nimble
 
+extension DTTableViewManager {
+    var usesLegacyUpdateAPI : Bool {
+        if #available(iOS 11, tvOS 11, *) {
+            return tableViewUpdater?.usesLegacyTableViewUpdateMethods ?? false
+        }
+        return true
+    }
+}
+
 #if os(iOS) && swift(>=3.2)
     
 @available (iOS 11, *)
@@ -351,20 +360,26 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "heightForRowAtIndexPath")
-        exp.expectedFulfillmentCount = 2
+        if !controller.manager.usesLegacyUpdateAPI {
+            exp.expectedFulfillmentCount = 4
+        }
         controller.manager.heightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
         controller.manager.memoryStorage.addItem(3)
-//        _ = controller.manager.tableDelegate?.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
+        if controller.manager.usesLegacyUpdateAPI {
+            _ = controller.manager.tableDelegate?.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
+        }
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testEstimatedHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "estimatedHeightForRowAtIndexPath")
-        exp.expectedFulfillmentCount = 2
+        if !controller.manager.usesLegacyUpdateAPI {
+            exp.expectedFulfillmentCount = 2
+        }
         controller.manager.estimatedHeightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
@@ -377,7 +392,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testIndentationLevelForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "indentationLevelForRowAtIndexPath")
-        exp.expectedFulfillmentCount = 2
+        if !controller.manager.usesLegacyUpdateAPI {
+            exp.expectedFulfillmentCount = 2
+        }
         controller.manager.indentationLevelForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
@@ -422,7 +439,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testWillDisplayRowAtIndexPathClosure() {
         let exp = expectation(description: "willDisplay")
-        exp.expectedFulfillmentCount = 2
+        if !controller.manager.usesLegacyUpdateAPI {
+            exp.expectedFulfillmentCount = 2
+        }
         controller.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
@@ -471,10 +490,8 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return false
         })
         controller.manager.memoryStorage.addItem(3)
-        if #available(iOS 11, tvOS 11, *), !(controller.manager.tableViewUpdater?.usesLegacyTableViewUpdateMethods ?? false) {
-
-            } else {
-                _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
+        if controller.manager.usesLegacyUpdateAPI {
+            _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
         }
         waitForExpectations(timeout: 1, handler: nil)
     }

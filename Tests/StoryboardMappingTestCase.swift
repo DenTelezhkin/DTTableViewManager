@@ -29,8 +29,17 @@ class StoryboardMappingTestCase: XCTestCase {
         controller.manager.register(StoryboardCell.self)
         controller.manager.memoryStorage.addItem(1)
         
-        let cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell
-        
+        let cell: StoryboardCell
+        if controller.manager.usesLegacyUpdateAPI {
+            cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell
+        } else {
+            if #available(iOS 11, tvOS 11, *) {
+                cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! StoryboardCell
+            } else {
+                cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell
+            }
+        }
+    
         expect(cell.storyboardLabel).toNot(beNil())
     }
 }

@@ -74,11 +74,11 @@ class TableViewFactoryTestCase: XCTestCase {
     }
     
     func testUpdateCellAtIndexPath() {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         if #available(iOS 11, tvOS 11, *) {
             controller.tableView = UITableView()
             controller.manager.startManaging(withDelegate: controller)
             controller.manager.storage = MemoryStorage()
+            controller.manager.memoryStorage.defersDatasourceUpdates = true
         } 
         
         controller.manager.register(UpdatableCell.self)
