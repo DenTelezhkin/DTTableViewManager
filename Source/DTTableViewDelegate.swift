@@ -33,6 +33,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         tableView?.delegate = self
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath) }
@@ -40,18 +41,21 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         _ = tableViewEventReactions.performReaction(of: .cell, signature: EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayHeaderView: view, forSection: section) }
         guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.willDisplayHeaderForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayFooterView: view, forSection: section) }
         guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.willDisplayFooterForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if configuration?.sectionHeaderStyle == .title { return nil }
         
@@ -77,6 +81,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return nil
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if configuration?.sectionFooterStyle == .title { return nil }
         
@@ -102,6 +107,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return nil
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if let height = performHeaderReaction(.heightForHeaderInSection, location: section, provideView: false) as? CGFloat {
             return height
@@ -124,6 +130,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return CGFloat.leastNormalMagnitude
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         if let height = performHeaderReaction(.estimatedHeightForHeaderInSection, location: section, provideView: false) as? CGFloat {
             return height
@@ -131,6 +138,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, estimatedHeightForHeaderInSection: section) ?? tableView.estimatedSectionHeaderHeight
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if let height = performFooterReaction(.heightForFooterInSection, location: section, provideView: false) as? CGFloat {
             return height
@@ -151,6 +159,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return CGFloat.leastNormalMagnitude
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
         if let height = performFooterReaction(.estimatedHeightForFooterInSection, location: section, provideView: false) as? CGFloat {
             return height
@@ -158,6 +167,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, estimatedHeightForFooterInSection: section) ?? tableView.estimatedSectionFooterHeight
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if let eventReaction = cellReaction(.willSelectRowAtIndexPath, location: indexPath) {
             return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? IndexPath
@@ -165,6 +175,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, willSelectRowAt: indexPath)
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         if let eventReaction = cellReaction(.willDeselectRowAtIndexPath, location: indexPath) {
             return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? IndexPath
@@ -172,16 +183,19 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, willDeselectRowAt: indexPath)
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = performCellReaction(.didSelectRowAtIndexPath, location: indexPath, provideCell: true)
         (self.delegate as? UITableViewDelegate)?.tableView?(tableView, didSelectRowAt: indexPath)
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         _ = performCellReaction(.didDeselectRowAtIndexPath, location: indexPath, provideCell: true)
         (self.delegate as? UITableViewDelegate)?.tableView?(tableView, didDeselectRowAt: indexPath)
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let height = performCellReaction(.heightForRowAtIndexPath, location: indexPath, provideCell: false) as? CGFloat {
             return height
@@ -189,6 +203,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForRowAt: indexPath) ?? tableView.rowHeight
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if let height = performCellReaction(.estimatedHeightForRowAtIndexPath, location: indexPath, provideCell: false) as? CGFloat {
             return height
@@ -196,6 +211,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, estimatedHeightForRowAt: indexPath) ?? tableView.estimatedRowHeight
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
         if let level = performCellReaction(.indentationLevelForRowAtIndexPath, location: indexPath, provideCell: false) as? Int {
             return level
@@ -203,12 +219,14 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, indentationLevelForRowAt: indexPath) ?? 0
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         _ = performCellReaction(.accessoryButtonTappedForRowAtIndexPath, location: indexPath, provideCell: true)
         (delegate as? UITableViewDelegate)?.tableView?(tableView, accessoryButtonTappedForRowWith: indexPath)
     }
     
     #if os(iOS)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if let eventReaction = cellReaction(.editActionsForRowAtIndexPath, location: indexPath) {
             return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? [UITableViewRowAction]
@@ -218,6 +236,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     #endif
     
     #if os(iOS)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         _ = performCellReaction(.willBeginEditingRowAtIndexPath, location: indexPath, provideCell: true)
         (delegate as? UITableViewDelegate)?.tableView?(tableView, willBeginEditingRowAt: indexPath)
@@ -225,6 +244,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     #endif
     
     #if os(iOS)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndEditingRowAt: indexPath) }
         guard let indexPath = indexPath else { return }
@@ -232,6 +252,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     #endif
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if let editingStyle = performCellReaction(.editingStyleForRowAtIndexPath, location: indexPath, provideCell: true) as? UITableViewCellEditingStyle {
             return editingStyle
@@ -240,6 +261,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     #if os(iOS)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         if let eventReaction = cellReaction(.titleForDeleteButtonForRowAtIndexPath, location: indexPath) {
             return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? String
@@ -248,6 +270,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     #endif
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         if let should = performCellReaction(.shouldIndentWhileEditingRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
             return should
@@ -255,24 +278,28 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldIndentWhileEditingRowAt: indexPath) ?? tableView.cellForRow(at: indexPath)?.shouldIndentWhileEditing ?? true
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath) }
         guard let model = storage?.item(at: indexPath) else { return }
         _ = tableViewEventReactions.performReaction(of: .cell, signature: EventMethodSignature.didEndDisplayingCellForRowAtIndexPath.rawValue, view: cell, model: model, location: indexPath)
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section) }
         guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingFooterView: view, forSection: section) }
         guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         if let should = performCellReaction(.shouldShowMenuForRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
             return should
@@ -280,6 +307,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldShowMenuForRowAt: indexPath) ?? false
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         if let canPerform = perform5ArgumentCellReaction(.canPerformActionForRowAtIndexPath,
                                                           argumentOne: action,
@@ -291,6 +319,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canPerformAction: action, forRowAt: indexPath, withSender: sender) ?? false
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, performAction: action, forRowAt: indexPath, withSender: sender) }
         _ = perform5ArgumentCellReaction(.performActionForRowAtIndexPath,
@@ -300,6 +329,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                                       provideCell: true)
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         if let should = performCellReaction(.shouldHighlightRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
             return should
@@ -307,17 +337,20 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldHighlightRowAt: indexPath) ?? true
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didHighlightRowAt: indexPath) }
         _ = performCellReaction(.didHighlightRowAtIndexPath, location: indexPath, provideCell: true)
     }
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didUnhighlightRowAt: indexPath) }
         _ = performCellReaction(.didUnhighlightRowAtIndexPath, location: indexPath, provideCell: true)
     }
     
     @available(iOS 9.0, tvOS 9.0, *)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         if let should = performCellReaction(.canFocusRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
             return should
@@ -326,6 +359,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     #if os(iOS) && swift(>=3.2)
     @available (iOS 11, *)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if let reaction = cellReaction(.leadingSwipeActionsConfigurationForRowAtIndexPath, location: indexPath) {
             return performNillableCellReaction(reaction, location: indexPath, provideCell: true) as? UISwipeActionsConfiguration
@@ -335,6 +369,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     @available (iOS 11, *)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if let reaction = cellReaction(.trailingSwipeActionsConfigurationForRowAtIndexPath, location: indexPath) {
             return performNillableCellReaction(reaction, location: indexPath, provideCell: true) as? UISwipeActionsConfiguration
@@ -344,6 +379,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     @available (iOS 11, *)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldSpringLoadRowAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
         if let shouldSpringLoad = perform4ArgumentCellReaction(.shouldSpringLoadRowAtIndexPathWithContext,
                                                                argument: context,
@@ -357,6 +393,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     #endif
     
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         if let indexPath = perform4ArgumentCellReaction(.targetIndexPathForMoveFromRowAtIndexPath,
                                                         argument: proposedDestinationIndexPath,
@@ -370,6 +407,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     @available(iOS 9, *)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
         if let should = performNonCellReaction(.shouldUpdateFocusInContext, argument: context) as? Bool {
             return should
@@ -378,6 +416,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     @available(iOS 9, *)
+    /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         _ = performNonCellReaction(.didUpdateFocusInContextWithAnimationCoordinator,
                                    argumentOne: context,
@@ -388,9 +427,10 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     @available(iOS 9, *)
+    /// Implementation for `UITableViewDelegate` protocol
     open func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
-        if let reaction = tableViewEventReactions.filter({ $0.methodSignature == EventMethodSignature.indexPathForPreferredFocusedViewInTableView.rawValue }).first {
-            return reaction.performWithArguments((0,0,0)) as? IndexPath
+        if let reaction = tableViewEventReactions.first(where: { $0.methodSignature == EventMethodSignature.indexPathForPreferredFocusedViewInTableView.rawValue }) {
+            return reaction.performWithArguments((0, 0, 0)) as? IndexPath
         }
         return (delegate as? UITableViewDelegate)?.indexPathForPreferredFocusedView?(in: tableView)
     }

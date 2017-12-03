@@ -29,23 +29,23 @@ import DTModelStorage
 
 extension DTTableViewManager {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didSelectRowAt:)` method is called for `cellClass`.
-    open func didSelect<T:ModelTransfer>(_ cellClass:  T.Type, _ closure: @escaping (T,T.ModelType, IndexPath) -> Void) where T:UITableViewCell
+    open func didSelect<T:ModelTransfer>(_ cellClass:  T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T:UITableViewCell
     {
         tableDelegate?.appendReaction(for: T.self, signature: .didSelectRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willSelectRowAt:)` method is called for `cellClass`.
-    open func willSelect<T:ModelTransfer>(_ cellClass:  T.Type, _ closure: @escaping (T,T.ModelType, IndexPath) -> IndexPath?) where T:UITableViewCell {
+    open func willSelect<T:ModelTransfer>(_ cellClass:  T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> IndexPath?) where T:UITableViewCell {
         tableDelegate?.appendReaction(for: T.self, signature: .willSelectRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willDeselectRowAt:)` method is called for `cellClass`.
-    open func willDeselect<T:ModelTransfer>(_ cellClass:  T.Type, _ closure: @escaping (T,T.ModelType, IndexPath) -> IndexPath?) where T:UITableViewCell {
+    open func willDeselect<T:ModelTransfer>(_ cellClass:  T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> IndexPath?) where T:UITableViewCell {
         tableDelegate?.appendReaction(for: T.self, signature: .willDeselectRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didDeselectRowAt:)` method is called for `cellClass`.
-    open func didDeselect<T:ModelTransfer>(_ cellClass:  T.Type, _ closure: @escaping (T,T.ModelType, IndexPath) -> Void) where T:UITableViewCell {
+    open func didDeselect<T:ModelTransfer>(_ cellClass:  T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T:UITableViewCell {
         tableDelegate?.appendReaction(for: T.self, signature: .didDeselectRowAtIndexPath, closure: closure)
     }
     
@@ -236,7 +236,7 @@ extension DTTableViewManager {
     #if os(iOS) && swift(>=3.2)
     @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)` method is called for `cellClass`
-    open func leadingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T,T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
+    open func leadingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
         tableDelegate?.appendReaction(for: T.self,
                                       signature: .leadingSwipeActionsConfigurationForRowAtIndexPath,
                                       closure: closure)
@@ -244,7 +244,7 @@ extension DTTableViewManager {
     
     @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:)` method is called for `cellClass`
-    open func trailingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T,T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
+    open func trailingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
         tableDelegate?.appendReaction(for: T.self,
                                       signature: .trailingSwipeActionsConfigurationForRowAtIndexPath,
                                       closure: closure)
@@ -252,7 +252,7 @@ extension DTTableViewManager {
     
     @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:)` method is called for `cellClass`.
-    open func shouldSpringLoad<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (UISpringLoadedInteractionContext,T,T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
+    open func shouldSpringLoad<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (UISpringLoadedInteractionContext, T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
         tableDelegate?.append4ArgumentReaction(for: T.self,
                                                signature: .shouldSpringLoadRowAtIndexPathWithContext,
                                                closure: closure)
@@ -260,7 +260,7 @@ extension DTTableViewManager {
     #endif
     
     /// Registers `closure` to be executed when `UITableViewDelegate.targetIndexPathForMoveFromRowAt(_:toProposed:)` method is called for `cellClass`
-    open func targetIndexPathForMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (IndexPath, T,T.ModelType, IndexPath) -> IndexPath) where T:UITableViewCell {
+    open func targetIndexPathForMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (IndexPath, T, T.ModelType, IndexPath) -> IndexPath) where T:UITableViewCell {
         tableDelegate?.append4ArgumentReaction(for: T.self,
                                                signature: .targetIndexPathForMoveFromRowAtIndexPath,
                                                closure: closure)

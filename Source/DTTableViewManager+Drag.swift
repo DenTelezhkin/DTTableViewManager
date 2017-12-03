@@ -33,7 +33,7 @@ extension DTTableViewManager
     
     @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)` method is called for `cellClass`.
-    open func itemsForBeginningDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, T,T.ModelType, IndexPath) -> [UIDragItem]) where T:UITableViewCell
+    open func itemsForBeginningDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, T, T.ModelType, IndexPath) -> [UIDragItem]) where T:UITableViewCell
     {
         tableDragDelegate?.append4ArgumentReaction(for: T.self,
                                                    signature: .itemsForBeginningDragSession,

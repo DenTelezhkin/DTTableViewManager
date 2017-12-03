@@ -27,10 +27,11 @@ import UIKit
 import Foundation
 import DTModelStorage
 
+
+@available(*, deprecated, message: "Error handling system is deprecated and may be removed or replaced in future version of the framework. Usage of this enum is discouraged.")
 /// Enum with possible `DTTableViewManager` errors.
 ///
 /// - SeeAlso: `DTTableViewManager.viewFactoryErrorHandler` and `DTTableViewManager.handleTableViewFactoryError()`
-@available(*, deprecated, message: "Error handling system is deprecated and may be removed or replaced in future version of the framework. Usage of this enum is discouraged.")
 public enum DTTableViewFactoryError : Error {
     
     /// `UITableView` requested a cell, however model at indexPath is nil.
@@ -42,6 +43,7 @@ public enum DTTableViewFactoryError : Error {
     /// `UITableView` requested a header or footer, however header or footer at `section` is nil.
     case nilHeaderFooterModel(section: Int)
     
+    /// Prints description of factory error
     public var description : String {
         switch self {
         case .nilCellModel(let indexPath):
@@ -77,12 +79,10 @@ final class TableViewFactory
             
             if UINib.nibExists(withNibName: String(describing: T.self), inBundle: Bundle(for: T.self)) {
                 registerNibNamed(String(describing: T.self), forCellClass: T.self, mappingBlock: mappingBlock)
-            }
-            else {
+            } else {
                 mappings.append(mapping)
             }
-        }
-        else {
+        } else {
             // Storyboard prototype cell
             mappings.append(mapping)
         }
@@ -219,10 +219,9 @@ final class TableViewFactory
     func headerFooterViewWithMapping(_ mapping: ViewModelMapping, unwrappedModel: Any) -> UIView?
     {
         if let view = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: mapping.reuseIdentifier) {
-            mapping.updateBlock(view,unwrappedModel)
+            mapping.updateBlock(view, unwrappedModel)
             return view
-        }
-        else {
+        } else {
             var view : UIView? = nil
             
             if let type = mapping.viewClass as? UIView.Type {
@@ -230,7 +229,7 @@ final class TableViewFactory
             }
             
             if let view = view {
-                mapping.updateBlock(view,unwrappedModel)
+                mapping.updateBlock(view, unwrappedModel)
             }
             return view
         }

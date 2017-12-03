@@ -74,7 +74,8 @@ extension DTTableViewManager
     }
     
     @available(iOS 11, *)
-    /// Convenience method for dropping `item` into `placeholder`. Returns `DTTableViewDropPlaceholderContext`, which is a replacement for `UITableViewDropPlaceholderContext`, that automatically handles drop if you are using `MemoryStorage`. It also automatically dispatches insertion to `DispatchQueue.main`.
+    /// Convenience method for dropping `item` into `placeholder`.
+    /// Returns `DTTableViewDropPlaceholderContext`, which is a replacement for `UITableViewDropPlaceholderContext`, that automatically handles drop if you are using `MemoryStorage`. It also automatically dispatches insertion to `DispatchQueue.main`.
     open func drop(_ item: UIDragItem, to placeholder: UITableViewDropPlaceholder,
                    with coordinator: UITableViewDropCoordinator) -> DTTableViewDropPlaceholderContext {
         let context = coordinator.drop(item, to: placeholder)

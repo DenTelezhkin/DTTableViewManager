@@ -1,4 +1,3 @@
-
 //
 //  TableViewController.swift
 //  DTTableViewManager
@@ -94,6 +93,7 @@ open class DTTableViewManager {
         return nil
     }
     
+    /// Creates `DTTableViewManager`. Usually you don't need to call this method directly, as `manager` property on `DTTableViewManageable` instance is filled automatically.
     public init() {}
     
     /// `DTTableViewManageable` delegate.
@@ -107,6 +107,7 @@ open class DTTableViewManager {
     ///  Factory for creating cells and views for UITableView
     final lazy var viewFactory: TableViewFactory = {
         precondition(self.isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
+        //swiftlint:disable:next force_unwrapping
         return TableViewFactory(tableView: self.tableView!)
     }()
     
@@ -114,10 +115,10 @@ open class DTTableViewManager {
     /// - SeeAlso: `TableViewConfiguration`.
     open var configuration = TableViewConfiguration()
     
+    @available(*, deprecated, message: "This property and error handling behavior is deprecated and will be removed in future versions of the framework. If you have a use case for it, please open issue on GitHub.")
     /// Error handler ot be executed when critical error happens with `TableViewFactory`.
     /// This can be useful to provide more debug information for crash logs, since preconditionFailure Swift method provides little to zero insight about what happened and when.
     /// This closure will be called prior to calling preconditionFailure in `handleTableViewFactoryError` method.
-    @available(*, deprecated, message: "This property and error handling behavior is deprecated and will be removed in future versions of the framework. If you have a use case for it, please open issue on GitHub.")
     @nonobjc open var viewFactoryErrorHandler : ((DTTableViewFactoryError) -> Void)?
     
     /// Implicitly unwrap storage property to `MemoryStorage`.
@@ -178,7 +179,7 @@ open class DTTableViewManager {
     // Yeah, @availability macros does not work on stored properties ¯\_(ツ)_/¯
     private var _tableDragDelegatePrivate : AnyObject?
     @available(iOS 11, *)
-    // Object, that is responsible for implementing `UITableViewDragDelegate` protocol
+    /// Object, that is responsible for implementing `UITableViewDragDelegate` protocol
     open var tableDragDelegate : DTTableViewDragDelegate? {
         get {
             return _tableDragDelegatePrivate as? DTTableViewDragDelegate
@@ -192,7 +193,7 @@ open class DTTableViewManager {
     // Yeah, @availability macros does not work on stored properties ¯\_(ツ)_/¯
     private var _tableDropDelegatePrivate : AnyObject?
     @available(iOS 11, *)
-    // Object, that is responsible for implementing `UITableViewDropDelegate` protocol
+    /// Object, that is responsible for implementing `UITableViewDropDelegate` protocol
     open var tableDropDelegate : DTTableViewDropDelegate? {
         get {
             return _tableDropDelegatePrivate as? DTTableViewDropDelegate
@@ -250,7 +251,7 @@ open class DTTableViewManager {
     /// Returns closure, that updates cell at provided indexPath. 
     ///
     /// This is used by `coreDataUpdater` method and can be used to silently update a cell without reload row animation.
-    open func updateCellClosure() -> (IndexPath,Any) -> Void {
+    open func updateCellClosure() -> (IndexPath, Any) -> Void {
         return { [weak self] indexPath, model in
             self?.viewFactory.updateCellAt(indexPath, with: model)
         }
@@ -265,7 +266,7 @@ open class DTTableViewManager {
             guard let model = storage.item(at: indexPath),
                 let visibleCell = tableView?.cellForRow(at: indexPath)
             else { return }
-            updateCellClosure()(indexPath,model)
+            updateCellClosure()(indexPath, model)
             closure?(visibleCell)
         }
     }
@@ -285,7 +286,8 @@ open class DTTableViewManager {
     
     /// Immediately runs closure to provide access to both T and T.ModelType for `klass`.
     ///
-    /// - Discussion: This is particularly useful for registering events, because near 1/3 of events don't have cell or view before they are getting run, which prevents view type from being known, and required developer to remember, which model is mapped to which cell. By using this container closure you will be able to provide compile-time safety for all events.
+    /// - Discussion: This is particularly useful for registering events, because near 1/3 of events don't have cell or view before they are getting run, which prevents view type from being known, and required developer to remember, which model is mapped to which cell.
+    /// By using this container closure you will be able to provide compile-time safety for all events.
     /// - Parameters:
     ///   - klass: Class of reusable view to be used in configuration container
     ///   - closure: closure to run with view types.
@@ -377,4 +379,3 @@ internal enum EventMethodSignature: String {
     case dropSessionDidEnd = "tableView:dropSessionDidEnd:"
     case dropPreviewParametersForRowAtIndexPath = "tableView:dropPreviewParametersForRowAtIndexPath:"
 }
-

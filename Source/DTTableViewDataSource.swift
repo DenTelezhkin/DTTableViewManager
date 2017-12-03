@@ -35,14 +35,17 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
         tableView?.dataSource = self
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return storage?.sections[section].numberOfItems ?? 0
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func numberOfSections(in tableView: UITableView) -> Int {
         return storage?.sections.count ?? 0
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = storage?.item(at: indexPath) else {
             return UITableViewCell()
@@ -62,18 +65,21 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
         return cell
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if configuration?.sectionHeaderStyle == .view { return nil }
         
         return self.headerModel(forSection: section) as? String
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if configuration?.sectionFooterStyle == .view { return nil }
         
         return self.footerModel(forSection: section) as? String
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         _ = perform4ArgumentCellReaction(.moveRowAtIndexPathToIndexPath,
                                          argument: destinationIndexPath,
@@ -82,6 +88,7 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
         (delegate as? UITableViewDataSource)?.tableView?(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath)
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
         _ = perform4ArgumentCellReaction(.commitEditingStyleForRowAtIndexPath,
@@ -90,6 +97,7 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
                                       provideCell: true)
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if let canEdit = performCellReaction(.canEditRowAtIndexPath, location: indexPath, provideCell: false) as? Bool {
             return canEdit
@@ -97,6 +105,7 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
         return (delegate as? UITableViewDataSource)?.tableView?(tableView, canEditRowAt: indexPath) ?? false
     }
     
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         if let canMove = performCellReaction(.canMoveRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
             return canMove
@@ -105,13 +114,15 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     }
     
     #if os(iOS)
+    /// Implementation for `UITableViewDataSource` protocol
     open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        if let _ = tableViewEventReactions.filter( { $0.methodSignature == EventMethodSignature.sectionIndexTitlesForTableView.rawValue }).first {
+        if let _ = tableViewEventReactions.first(where: { $0.methodSignature == EventMethodSignature.sectionIndexTitlesForTableView.rawValue }) {
             return performNonCellReaction(.sectionIndexTitlesForTableView) as? [String]
         }
         return (delegate as? UITableViewDataSource)?.sectionIndexTitles?(for: tableView) ?? nil
     }
 
+    /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         if let section = performNonCellReaction(.sectionForSectionIndexTitleAtIndex,
                                                 argumentOne: title,

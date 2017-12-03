@@ -34,10 +34,10 @@ open class TableViewUpdater : StorageUpdating {
     weak var tableView: UITableView?
     
     /// closure to be executed before content is updated
-    open var willUpdateContent: ((StorageUpdate?) -> Void)? = nil
+    open var willUpdateContent: ((StorageUpdate?) -> Void)?
     
     /// closure to be executed after content is updated
-    open var didUpdateContent: ((StorageUpdate?) -> Void)? = nil
+    open var didUpdateContent: ((StorageUpdate?) -> Void)?
     
     /// Insert section animation. Default - .None.
     open var insertSectionAnimation = UITableViewRowAnimation.none
@@ -61,7 +61,7 @@ open class TableViewUpdater : StorageUpdating {
     ///
     /// If this property is not nil, then reloadRowAnimation property is ignored.
     /// - SeeAlso: `DTTableViewManager.updateCellClosure()` method and `DTTableViewManager.coreDataUpdater()` method.
-    open var reloadRowClosure : ((IndexPath,Any) -> Void)?
+    open var reloadRowClosure : ((IndexPath, Any) -> Void)?
     
     /// When this property is true, move events will be animated as delete event and insert event.
     open var animateMoveAsDeleteAndInsert: Bool
@@ -72,12 +72,14 @@ open class TableViewUpdater : StorageUpdating {
     open var usesLegacyTableViewUpdateMethods = true
     
     /// Creates updater with tableView.
-    public init(tableView: UITableView, reloadRow: ((IndexPath,Any) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {
+    public init(tableView: UITableView, reloadRow: ((IndexPath, Any) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {
         self.tableView = tableView
         self.reloadRowClosure = reloadRow
         self.animateMoveAsDeleteAndInsert = animateMoveAsDeleteAndInsert
     }
     
+    /// Updates `UITableView` with received `update`. This method applies object and section changes in `performBatchUpdates` method or `tableView.beginUpdates` - `tableView.endUpdates` block.
+    /// To enable iOS 11 `performBatchUpdates` method usage, set `usesLegacyTableViewUpdateMethods` to false. It is also highly recommended to turn on `MemoryStorage.defersDatasourceUpdates` flag on to prevent multiple issues that can happen if you try to use iOS 11 `performBatchUpdates` API.
     open func storageDidPerformUpdate(_ update : StorageUpdate)
     {
         willUpdateContent?(update)
@@ -89,7 +91,7 @@ open class TableViewUpdater : StorageUpdating {
                 }
                 self?.applyObjectChanges(from: update)
                 self?.applySectionChanges(from: update)
-            }, completion: { [weak self] completed in
+            }, completion: { [weak self] _ in
                 self?.didUpdateContent?(update)
             })
         } else {
@@ -106,7 +108,7 @@ open class TableViewUpdater : StorageUpdating {
     }
     
     private func applyObjectChanges(from update: StorageUpdate) {
-        for (change,indexPaths) in update.objectChanges {
+        for (change, indexPaths) in update.objectChanges {
             switch change {
             case .insert:
                 if let indexPath = indexPaths.first {
@@ -119,7 +121,7 @@ open class TableViewUpdater : StorageUpdating {
             case .update:
                 if let indexPath = indexPaths.first {
                     if let closure = reloadRowClosure, let model = update.updatedObjects[indexPath] {
-                        closure(indexPath,model)
+                        closure(indexPath, model)
                     } else {
                         tableView?.reloadRows(at: [indexPath], with: reloadRowAnimation)
                     }
@@ -138,7 +140,7 @@ open class TableViewUpdater : StorageUpdating {
     }
     
     private func applySectionChanges(from update: StorageUpdate) {
-        for (change,indices) in update.sectionChanges {
+        for (change, indices) in update.sectionChanges {
             switch change {
             case .delete:
                 if let index = indices.first {

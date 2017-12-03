@@ -38,6 +38,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     var viewFactoryErrorHandler: ((DTTableViewFactoryError) -> Void)? { return manager?.viewFactoryErrorHandler }
     private weak var manager: DTTableViewManager?
     
+    /// Creates base wrapper for datasource and delegate implementations
     public init(delegate: AnyObject?, tableViewManager: DTTableViewManager) {
         self.delegate = delegate
         manager = tableViewManager
@@ -87,14 +88,14 @@ open class DTTableViewDelegateWrapper : NSObject {
         return (storage as? HeaderFooterStorage)?.footerModel(forSection: index)
     }
     
-    final internal func appendReaction<T,U>(for cellClass: T.Type, signature: EventMethodSignature, closure: @escaping (T,T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
+    final internal func appendReaction<T, U>(for cellClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
     {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, viewClass: T.self)
         reaction.makeReaction(closure)
         tableViewEventReactions.append(reaction)
     }
     
-    final internal func append4ArgumentReaction<CellClass,Argument,Result>
+    final internal func append4ArgumentReaction<CellClass, Argument, Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
          closure: @escaping (Argument, CellClass, CellClass.ModelType, IndexPath) -> Result)
@@ -120,14 +121,14 @@ open class DTTableViewDelegateWrapper : NSObject {
         tableViewEventReactions.append(reaction)
     }
     
-    final internal func appendReaction<T,U>(for modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, IndexPath) -> U)
+    final internal func appendReaction<T, U>(for modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, IndexPath) -> U)
     {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: T.self)
         reaction.makeReaction(closure)
         tableViewEventReactions.append(reaction)
     }
     
-    final func appendReaction<T,U>(forSupplementaryKind kind: String, supplementaryClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, T.ModelType, Int) -> U) where T: ModelTransfer, T: UIView {
+    final func appendReaction<T, U>(forSupplementaryKind kind: String, supplementaryClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, T.ModelType, Int) -> U) where T: ModelTransfer, T: UIView {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), viewClass: T.self)
         let indexPathBlock : (T, T.ModelType, IndexPath) -> U = { cell, model, indexPath in
             return closure(cell, model, indexPath.section)
@@ -136,7 +137,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         tableViewEventReactions.append(reaction)
     }
     
-    final func appendReaction<T,U>(forSupplementaryKind kind: String, modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, Int) -> U) {
+    final func appendReaction<T, U>(forSupplementaryKind kind: String, modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, Int) -> U) {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), modelType: T.self)
         let indexPathBlock : (T, IndexPath) -> U = { model, indexPath in
             return closure(model, indexPath.section)
@@ -147,7 +148,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     
     final func appendNonCellReaction(_ signature: EventMethodSignature, closure: @escaping () -> Any) {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
-        reaction.reaction = { _,_,_ in
+        reaction.reaction = { _, _, _ in
             return closure()
         }
         tableViewEventReactions.append(reaction)
@@ -155,20 +156,20 @@ open class DTTableViewDelegateWrapper : NSObject {
     
     final func appendNonCellReaction<Arg>(_ signature: EventMethodSignature, closure: @escaping (Arg) -> Any) {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
-        reaction.reaction = { arg,_,_ in
+        reaction.reaction = { arg, _, _ in
             guard let arg = arg as? Arg else { return nil as Any? as Any }
             return closure(arg)
         }
         tableViewEventReactions.append(reaction)
     }
     
-    final func appendNonCellReaction<Arg1,Arg2,Result>(_ signature: EventMethodSignature, closure: @escaping (Arg1,Arg2) -> Result) {
+    final func appendNonCellReaction<Arg1, Arg2, Result>(_ signature: EventMethodSignature, closure: @escaping (Arg1, Arg2) -> Result) {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
         reaction.reaction = { arg1, arg2, _ in
             guard let arg1 = arg1 as? Arg1,
                 let arg2 = arg2 as? Arg2
             else { return nil as Any? as Any }
-            return closure(arg1,arg2)
+            return closure(arg1, arg2)
         }
         tableViewEventReactions.append(reaction)
     }
@@ -213,7 +214,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
         guard let model = storage?.item(at: location) else { return nil }
-        return reaction.performWithArguments((cell as Any,model,location))
+        return reaction.performWithArguments((cell as Any, model, location))
     }
     
     final func cellReaction(_ signature: EventMethodSignature, location: IndexPath) -> EventReaction? {
@@ -226,7 +227,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         if provideView {
             view = tableView?.headerView(forSection: location)
         }
-        guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: location) else { return nil}
+        guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: location) else { return nil }
         return tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionHeader), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
     }
     
@@ -235,26 +236,23 @@ open class DTTableViewDelegateWrapper : NSObject {
         if provideView {
             view = tableView?.footerView(forSection: location)
         }
-        guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: location) else { return nil}
+        guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: location) else { return nil }
         return tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
     }
     
     func performNonCellReaction(_ signature: EventMethodSignature) -> Any? {
-        return tableViewEventReactions.filter { $0.methodSignature == signature.rawValue }
-            .first?
-            .performWithArguments((0,0,0))
+        return tableViewEventReactions.first(where: { $0.methodSignature == signature.rawValue })?
+            .performWithArguments((0, 0, 0))
     }
     
     func performNonCellReaction<T>(_ signature: EventMethodSignature, argument: T) -> Any? {
-        return tableViewEventReactions.filter { $0.methodSignature == signature.rawValue }
-            .first?
-            .performWithArguments((argument,0,0))
+        return tableViewEventReactions.first(where: { $0.methodSignature == signature.rawValue })?
+            .performWithArguments((argument, 0, 0))
     }
     
-    func performNonCellReaction<T,U>(_ signature: EventMethodSignature, argumentOne: T, argumentTwo: U) -> Any? {
-        return tableViewEventReactions.filter { $0.methodSignature == signature.rawValue }
-            .first?
-            .performWithArguments((argumentOne,argumentTwo,0))
+    func performNonCellReaction<T, U>(_ signature: EventMethodSignature, argumentOne: T, argumentTwo: U) -> Any? {
+        return tableViewEventReactions.first(where: { $0.methodSignature == signature.rawValue })?
+            .performWithArguments((argumentOne, argumentTwo, 0))
     }
     
     /// Calls `viewFactoryErrorHandler` with `error`. If it's nil, prints error into console and asserts.

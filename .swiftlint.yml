@@ -1,0 +1,64 @@
+disabled_rules:
+  - colon
+  - opening_brace
+  - trailing_whitespace
+  - vertical_whitespace
+  - unused_optional_binding
+  - identifier_name
+  - redundant_string_enum_value
+  - vertical_parameter_alignment
+  - attributes
+  - xctfail_message
+opt_in_rules: # some rules are only opt-in
+  - force_unwrapping
+  - overridden_super_call
+  - closure_spacing
+  - contains_over_first_not_nil
+  - first_where
+  - closure_end_indentation
+  - sorted_first_last
+  # Find all the available rules by running:
+  # swiftlint rules
+included:
+  - Source
+
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+
+cyclomatic_complexity:
+  ignores_case_statements: true
+function_body_length:
+  - 300 #warning
+type_body_length:
+  - 300 # warning
+  - 400 # error
+# or they can set both explicitly
+line_length:
+  - 300
+file_length:
+  warning: 500
+  error: 1200
+  ignore_comment_only_lines: true
+# naming rules can set warnings/errors for min_length and max_length
+# additionally they can set excluded names
+type_name:
+  min_length: 3 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded:
+    - iPhone
+    - API
+    - E
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
+
+custom_rules:
+  missing_docs:
+      included: ".*.swift"
+      regex: '\n *(?!\/\/\/)(\/\/)?[^\n\/]*\n *(?:@\S+ )*(?:public|open)'
+      name: "Missing Docs"
+      message: "Types, properties and methods with public or open access level should be documented."
+      severity: warning
