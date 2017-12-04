@@ -67,9 +67,8 @@ open class TableViewUpdater : StorageUpdating {
     open var animateMoveAsDeleteAndInsert: Bool
     
     /// If turned on, `TableViewUpdater` will use `tableView.beginUpdates` and `tableView.endUpdates` methods instead of iOS/tvOS 11 `performBatchUpdates` method.
-    /// This flag is turned on by default, but will be turned off in the future.
-    /// If you don't use this legacy flag and use `MemoryStorage`, consider turning `defersDatasourceUpdates` property on, that prevents various issues from happening when using new API.
-    open var usesLegacyTableViewUpdateMethods = true
+    /// Defaults to `false`.
+    open var usesLegacyTableViewUpdateMethods = false
     
     /// Creates updater with tableView.
     public init(tableView: UITableView, reloadRow: ((IndexPath, Any) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {
