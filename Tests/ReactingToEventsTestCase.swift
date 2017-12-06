@@ -361,11 +361,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     {
         let exp = expectation(description: "heightForRowAtIndexPath")
         if !controller.manager.usesLegacyUpdateAPI {
-            if #available(tvOS 11, *) {
-                
-            } else {
+            #if os(iOS)
                 exp.expectedFulfillmentCount = 4
-            }
+            #endif
         }
         controller.manager.heightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
@@ -397,11 +395,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     {
         let exp = expectation(description: "indentationLevelForRowAtIndexPath")
         if !controller.manager.usesLegacyUpdateAPI {
-            if #available(tvOS 11, *) {
-                
-            } else {
+            #if os(iOS)
                 exp.expectedFulfillmentCount = 2
-            }
+            #endif
         }
         controller.manager.indentationLevelForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
@@ -448,11 +444,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testWillDisplayRowAtIndexPathClosure() {
         let exp = expectation(description: "willDisplay")
         if !controller.manager.usesLegacyUpdateAPI {
-            if #available(tvOS 11, *) {
-                
-            } else {
-               exp.expectedFulfillmentCount = 2
-            }
+            #if os(iOS)
+                exp.expectedFulfillmentCount = 2
+            #endif
         }
         controller.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
@@ -505,9 +499,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
         if controller.manager.usesLegacyUpdateAPI {
             _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
         }
-        if #available(tvOS 11, *) {
+        #if os(tvOS)
             _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
-        }
+        #endif
         waitForExpectations(timeout: 1, handler: nil)
     }
     
