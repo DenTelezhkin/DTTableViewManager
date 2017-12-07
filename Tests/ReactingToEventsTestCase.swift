@@ -500,7 +500,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
             _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
         }
         #if os(tvOS)
-            _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
+            if #available(tvOS 11, *) {
+                _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
+            }
         #endif
         waitForExpectations(timeout: 1, handler: nil)
     }
