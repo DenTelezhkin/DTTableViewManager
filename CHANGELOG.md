@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [6.1.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.1.0)
+
 ## [6.1.0-beta.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.1.0-beta.1)
 
 * Implemented new system for deferring datasource updates until `performBatchUpdates` block. This system is intended to fight crash, that might happen when `performBatchUpdates` method is called after `UITableView.reloadData` method(for example after calling `memoryStorage.setItems`, and then immediately `memoryStorage.addItems`). This issue is detailed in https://github.com/DenHeadless/DTCollectionViewManager/issues/27 and https://github.com/DenHeadless/DTCollectionViewManager/issues/23. This crash can also happen, if iOS 11 API `UITableView.performBatchUpdates` is used. This system is turned on by default. If, for some reason, you want to disable it and have old behavior, call:
