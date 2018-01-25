@@ -1,7 +1,6 @@
-![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.svg?branch=master) &nbsp;
+[![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.svg?branch=master)](https://travis-ci.org/DenHeadless/DTTableViewManager)
 [![codecov.io](http://codecov.io/github/DenHeadless/DTTableViewManager/coverage.svg?branch=master)](http://codecov.io/github/DenHeadless/DTTableViewManager?branch=master)
-![CocoaPod platform](https://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.png) &nbsp;
-![CocoaPod version](https://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.png) &nbsp;
+[![CocoaPods compatible](https://img.shields.io/cocoapods/v/DTTableViewManager.svg)](https://cocoapods.org/pods/DTTableViewManager)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
