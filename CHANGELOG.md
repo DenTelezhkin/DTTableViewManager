@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+* Updates for Xcode 9.3 and Swift 4.1
+
 ## [6.1.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.1.0)
 
 ## [6.1.0-beta.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.1.0-beta.1)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E06D784206EDC3C006F5A7E /* BackwardsCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06D783206EDC3C006F5A7E /* BackwardsCompatibility.swift */; };
 		3E41498D1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */; };
 		3E41498E1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */; };
 		3EA4FF291FA9FF6600B3D853 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; };
@@ -152,6 +153,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E06D783206EDC3C006F5A7E /* BackwardsCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackwardsCompatibility.swift; path = Source/BackwardsCompatibility.swift; sourceTree = "<group>"; };
 		3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MappingConditionsTestCase.swift; path = Tests/MappingConditionsTestCase.swift; sourceTree = SOURCE_ROOT; };
 		3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/iOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
 		3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/tvOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
@@ -303,6 +305,7 @@
 				9A383C991CE1D9FD0081D843 /* TableViewFactory.swift */,
 				9A383C9A1CE1D9FD0081D843 /* UIView+XibLoading.swift */,
 				9A4610CF1F408E7500480052 /* DTTableViewDelegateWrapper.swift */,
+				3E06D783206EDC3C006F5A7E /* BackwardsCompatibility.swift */,
 			);
 			name = DTTableViewManager;
 			path = ../DTTableViewManager;
@@ -616,7 +619,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Denys Telezhkin";
 				TargetAttributes = {
 					9A2A38BB1AEE285E0021E97D = {
@@ -791,6 +794,7 @@
 				9A383C9B1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
 				9A76582C1F51CC2D0067F94B /* DTTableViewManager+Drop.swift in Sources */,
 				9A383CA11CE1D9FD0081D843 /* TableViewFactory.swift in Sources */,
+				3E06D784206EDC3C006F5A7E /* BackwardsCompatibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1078,11 +1082,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -1141,11 +1147,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;

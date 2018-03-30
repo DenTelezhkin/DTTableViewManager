@@ -1,9 +1,9 @@
 //
-//  UIView+XibLoading.swift
+//  BackwardsCompatibility.swift
 //  DTTableViewManager
 //
-//  Created by Denys Telezhkin on 18.07.15.
-//  Copyright (c) 2015 Denys Telezhkin. All rights reserved.
+//  Created by Denys Telezhkin on 30.03.2018.
+//  Copyright © 2018 Denys Telezhkin. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,29 +24,13 @@
 // THE SOFTWARE.
 
 import Foundation
-import UIKit
-import DTModelStorage
 
-extension UIView
-{
-    /// Loads view from xib with `xibName` in bundle for current class.
-    static func dt_loadFromXibNamed(_ xibName : String) -> UIView?
-    {
-        guard let topLevelObjects = Bundle(for: self).loadNibNamed(xibName, owner: nil, options: nil) else {
-            return nil
-        }
-
-        for object in topLevelObjects.compactMap( { $0 as AnyObject }) {
-            if object.isKind(of: self) {
-                return object as? UIView
-            }
-        }
-        return nil
-    }
-
-    /// Loads view from xib with `String(describing:self)` name in bundle for current class.
-    static func dt_loadFromXib() -> UIView?
-    {
-        return self.dt_loadFromXibNamed(String(describing: self))
+#if swift(>=4.1)
+#else
+/// Extension for adding Swift 4.1 methods, to support Swift 4.0 and Swift 3.2/3.3 concurrently.
+extension Sequence {
+    func compactMap<ElementOfResult>(_ transform: (Self.Element) throws -> ElementOfResult?) rethrows -> [ElementOfResult] {
+        return try flatMap(transform)
     }
 }
+#endif
