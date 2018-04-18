@@ -626,7 +626,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEditingStyleForRowAtIndexPath() {
         let exp = expectation(description: "editingStyle")
-        controller.manager.editingStyle(for: NibCell.self, { (cell, model, indexPath) -> UITableViewCellEditingStyle in
+        controller.manager.editingStyle(forItem: Int.self, { model, indexPath in
             exp.fulfill()
             return .none
         })
@@ -1126,7 +1126,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             manager.estimatedHeightForFooter(withItem: Int.self, { _,_ in return 20 })
             manager.willDisplayHeaderView(NibHeaderFooterView.self, { _,_,_ in })
             manager.willDisplayFooterView(NibHeaderFooterView.self, { _,_,_ in})
-            manager.editingStyle(for: NibCell.self, { _,_,_ in return .none })
+            manager.editingStyle(forItem: Int.self, { _,_ in return .none })
             manager.shouldIndentWhileEditing(NibCell.self, { _,_,_ in return true })
             manager.didEndDisplaying(NibCell.self, { _,_,_ in })
             manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _,_,_ in })
@@ -1172,7 +1172,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         manager.estimatedHeightForFooter(withItem: Int.self, { _,_ in return 20 })
         manager.willDisplayHeaderView(NibHeaderFooterView.self, { _,_,_ in })
         manager.willDisplayFooterView(NibHeaderFooterView.self, { _,_,_ in})
-        manager.editingStyle(for: NibCell.self, { _,_,_ in return .none })
+        manager.editingStyle(forItem: Int.self, { _,_ in return .none })
         manager.shouldIndentWhileEditing(NibCell.self, { _,_,_ in return true })
         manager.didEndDisplaying(NibCell.self, { _,_,_ in })
         manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _,_,_ in })

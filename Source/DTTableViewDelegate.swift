@@ -254,7 +254,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if let editingStyle = performCellReaction(.editingStyleForRowAtIndexPath, location: indexPath, provideCell: true) as? UITableViewCellEditingStyle {
+        if let editingStyle = performCellReaction(.editingStyleForRowAtIndexPath, location: indexPath, provideCell: false) as? UITableViewCellEditingStyle {
             return editingStyle
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, editingStyleForRowAt: indexPath) ?? .none

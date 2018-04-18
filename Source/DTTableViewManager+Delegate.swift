@@ -130,8 +130,8 @@ extension DTTableViewManager {
     }
     #endif
     
-    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for `cellClass`.
-    open func editingStyle<T:ModelTransfer>(for cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UITableViewCellEditingStyle) where T: UITableViewCell
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for cell that contains item `ofType` at `indexPath`.
+    open func editingStyle<T>(forItem ofType:T.Type, _ closure: @escaping (T, IndexPath) -> UITableViewCellEditingStyle)
     {
         tableDelegate?.appendReaction(for: T.self, signature: .editingStyleForRowAtIndexPath, closure: closure)
     }

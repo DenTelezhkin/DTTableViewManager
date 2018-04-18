@@ -24,6 +24,8 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
+import DTModelStorage
 
 #if swift(>=4.1)
 #else
@@ -34,3 +36,12 @@ extension Sequence {
     }
 }
 #endif
+
+
+extension DTTableViewManager {
+    @available(*, unavailable, message: "This method was removed, please use editingStyle(forItem:,_:) instead.")
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for `cellClass`.
+    open func editingStyle<T: ModelTransfer>(for cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UITableViewCellEditingStyle) where T: UITableViewCell
+    {
+    }
+}
