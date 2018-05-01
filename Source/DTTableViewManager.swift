@@ -85,19 +85,16 @@ extension DTTableViewOptionalManageable {
 /// - SeeAlso: `startManagingWithDelegate:`
 open class DTTableViewManager {
     
-    /// Internal weak link to `UITableView`
-    final var tableView : UITableView?
-    {
-        if let delegate = delegate as? DTTableViewManageable { return delegate.tableView }
-        if let delegate = delegate as? DTTableViewOptionalManageable { return delegate.tableView }
-        return nil
-    }
-    
     /// Creates `DTTableViewManager`. Usually you don't need to call this method directly, as `manager` property on `DTTableViewManageable` instance is filled automatically.
     public init() {}
     
-    /// `DTTableViewManageable` delegate.
-    final fileprivate weak var delegate : AnyObject?
+    /// Stores all configuration options for `DTTableViewManager`.
+    /// - SeeAlso: `TableViewConfiguration`.
+    open var configuration = TableViewConfiguration()
+    
+#if swift(>=4.1)
+    open var anomalyHandler : DTTableViewManagerAnomalyHandler = .init()
+#endif
     
     /// Bool property, that will be true, after `startManagingWithDelegate` method is called on `DTTableViewManager`.
     open var isManagingTableView : Bool {
@@ -111,9 +108,16 @@ open class DTTableViewManager {
         return TableViewFactory(tableView: self.tableView!)
     }()
     
-    /// Stores all configuration options for `DTTableViewManager`.
-    /// - SeeAlso: `TableViewConfiguration`.
-    open var configuration = TableViewConfiguration()
+    /// Internal weak link to `UITableView`
+    final var tableView : UITableView?
+    {
+        if let delegate = delegate as? DTTableViewManageable { return delegate.tableView }
+        if let delegate = delegate as? DTTableViewOptionalManageable { return delegate.tableView }
+        return nil
+    }
+    
+    /// `DTTableViewManageable` delegate.
+    final fileprivate weak var delegate : AnyObject?
     
     @available(*, deprecated, message: "This property and error handling behavior is deprecated and will be removed in future versions of the framework. If you have a use case for it, please open issue on GitHub.")
     /// Error handler ot be executed when critical error happens with `TableViewFactory`.

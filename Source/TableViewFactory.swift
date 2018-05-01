@@ -34,9 +34,6 @@ import DTModelStorage
 /// - SeeAlso: `DTTableViewManager.viewFactoryErrorHandler` and `DTTableViewManager.handleTableViewFactoryError()`
 public enum DTTableViewFactoryError : Error {
     
-    /// `UITableView` requested a cell, however model at indexPath is nil.
-    case nilCellModel(IndexPath)
-    
     /// `UITableView` requested a cell for `model`, however `DTTableViewManager` does not have mapping for it
     case noCellMappings(model: Any)
     
@@ -46,8 +43,6 @@ public enum DTTableViewFactoryError : Error {
     /// Prints description of factory error
     public var description : String {
         switch self {
-        case .nilCellModel(let indexPath):
-            return "Received nil model for cell at index path: \(indexPath)"
         case .nilHeaderFooterModel(let section):
             return "Received nil model for header or footer model in section: \(section)"
         case .noCellMappings(let model):
@@ -194,18 +189,14 @@ final class TableViewFactory
     
     func cellForModel(_ model: Any, atIndexPath indexPath:IndexPath) throws -> UITableViewCell
     {
-        guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
-            throw DTTableViewFactoryError.nilCellModel(indexPath)
-        }
-        
-        if let mapping = viewModelMapping(for: .cell, model: unwrappedModel, indexPath: indexPath)
+        if let mapping = viewModelMapping(for: .cell, model: model, indexPath: indexPath)
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: mapping.reuseIdentifier, for: indexPath)
-            mapping.updateBlock(cell, unwrappedModel)
+            mapping.updateBlock(cell, model)
             return cell
         }
         
-        throw DTTableViewFactoryError.noCellMappings(model: unwrappedModel)
+        throw DTTableViewFactoryError.noCellMappings(model: model)
     }
     
     func updateCellAt(_ indexPath : IndexPath, with model: Any) {
@@ -246,17 +237,5 @@ final class TableViewFactory
         }
         
         return nil
-    }
-    
-    func headerViewForModel(_ model: Any, atIndexPath indexPath: IndexPath) throws -> UIView?
-    {
-        return try headerFooterView(of: .supplementaryView(kind: DTTableViewElementSectionHeader),
-            model: model, atIndexPath: indexPath)
-    }
-    
-    func footerViewForModel(_ model: Any, atIndexPath indexPath: IndexPath) throws -> UIView?
-    {
-        return try headerFooterView(of: .supplementaryView(kind: DTTableViewElementSectionFooter),
-            model: model, atIndexPath: indexPath)
     }
 }

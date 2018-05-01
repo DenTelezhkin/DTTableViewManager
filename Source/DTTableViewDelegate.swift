@@ -58,11 +58,11 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if configuration?.sectionHeaderStyle == .title { return nil }
-        
-        if let model = self.headerModel(forSection:section) {
+        let viewKind = ViewType.supplementaryView(kind: DTTableViewElementSectionHeader)
+        if let model = headerModel(forSection:section) {
             let view : UIView?
             do {
-                view = try viewFactory?.headerViewForModel(model, atIndexPath: IndexPath(index: section))
+                view = try viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
             } catch let error as DTTableViewFactoryError {
                 handleTableViewFactoryError(error)
                 view = nil
@@ -72,9 +72,10 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
             
             if let createdView = view
             {
-                _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionHeader),
+                _ = tableViewEventReactions.performReaction(of: viewKind,
                                                             signature: EventMethodSignature.configureHeader.rawValue,
-                                                            view: createdView, model: model, location: IndexPath(item: 0, section: section))
+                                                            view: createdView, model: model,
+                                                            location: IndexPath(item: 0, section: section))
             }
             return view
         }
@@ -84,11 +85,11 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if configuration?.sectionFooterStyle == .title { return nil }
-        
+        let viewKind = ViewType.supplementaryView(kind: DTTableViewElementSectionFooter)
         if let model = self.footerModel(forSection: section) {
             let view : UIView?
             do {
-                view = try viewFactory?.footerViewForModel(model, atIndexPath: IndexPath(index: section))
+                view = try viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
             } catch let error as DTTableViewFactoryError {
                 handleTableViewFactoryError(error)
                 view = nil
@@ -98,7 +99,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
             
             if let createdView = view
             {
-                _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter),
+                _ = tableViewEventReactions.performReaction(of: viewKind,
                                                             signature: EventMethodSignature.configureFooter.rawValue,
                                                             view: createdView, model: model, location: IndexPath(item: 0, section: section))
             }

@@ -15,6 +15,9 @@
 		3EF6EB531F1E5E24007F610A /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */; };
 		3EFE2ED41F1E5F6700A73565 /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */; };
 		9A0889811F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */; };
+		9A12E9A12099266700B48231 /* DTTableViewManagerAnomalyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A12E9A02099266700B48231 /* DTTableViewManagerAnomalyHandler.swift */; };
+		9A12E9A32099297400B48231 /* AnomaliesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A12E9A22099297400B48231 /* AnomaliesTestCase.swift */; };
+		9A12E9A42099297A00B48231 /* AnomaliesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A12E9A22099297400B48231 /* AnomaliesTestCase.swift */; };
 		9A234FFC1F65485B00A13B55 /* FixtureStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A234FFB1F65485B00A13B55 /* FixtureStoryboard.storyboard */; };
 		9A2350021F654B8B00A13B55 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350011F654B8B00A13B55 /* DTModelStorage.framework */; };
 		9A2350041F654BA200A13B55 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350031F654BA200A13B55 /* Nimble.framework */; };
@@ -158,6 +161,8 @@
 		3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/iOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
 		3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/tvOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
 		9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDropPlaceholderContext.swift; path = Source/DTTableViewDropPlaceholderContext.swift; sourceTree = "<group>"; };
+		9A12E9A02099266700B48231 /* DTTableViewManagerAnomalyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewManagerAnomalyHandler.swift; path = Source/DTTableViewManagerAnomalyHandler.swift; sourceTree = "<group>"; };
+		9A12E9A22099297400B48231 /* AnomaliesTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnomaliesTestCase.swift; sourceTree = "<group>"; };
 		9A234FFB1F65485B00A13B55 /* FixtureStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FixtureStoryboard.storyboard; path = Tests/Fixtures/tvOS/FixtureStoryboard.storyboard; sourceTree = SOURCE_ROOT; };
 		9A2350011F654B8B00A13B55 /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = Carthage/Build/tvOS/DTModelStorage.framework; sourceTree = "<group>"; };
 		9A2350031F654BA200A13B55 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/tvOS/Nimble.framework; sourceTree = "<group>"; };
@@ -288,24 +293,25 @@
 		9A08A9AB1B8A23A100877C62 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
+				3E06D783206EDC3C006F5A7E /* BackwardsCompatibility.swift */,
+				9A4610C51F408CD500480052 /* DTTableViewDataSource.swift */,
+				9A4610D21F40950400480052 /* DTTableViewDelegate.swift */,
+				9A4610CF1F408E7500480052 /* DTTableViewDelegateWrapper.swift */,
+				9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */,
+				9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */,
+				9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */,
 				9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */,
-				9A7658181F51C8180067F94B /* DTTableViewManager+Registration.swift */,
 				9A7658221F51C8A80067F94B /* DTTableViewManager+DataSource.swift */,
 				9A7658251F51C9F30067F94B /* DTTableViewManager+Delegate.swift */,
 				9A7658281F51CA2D0067F94B /* DTTableViewManager+Drag.swift */,
 				9A76582B1F51CC2D0067F94B /* DTTableViewManager+Drop.swift */,
-				9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */,
-				9A4610C51F408CD500480052 /* DTTableViewDataSource.swift */,
-				9A7E87121F49F23600110671 /* DTTableViewDragDelegate.swift */,
-				9A7E87151F49F2EF00110671 /* DTTableViewDropDelegate.swift */,
-				9A4610D21F40950400480052 /* DTTableViewDelegate.swift */,
-				9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */,
+				9A7658181F51C8180067F94B /* DTTableViewManager+Registration.swift */,
+				9A12E9A02099266700B48231 /* DTTableViewManagerAnomalyHandler.swift */,
 				9A383C971CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift */,
 				9A383C981CE1D9FD0081D843 /* TableViewConfiguration.swift */,
 				9A383C991CE1D9FD0081D843 /* TableViewFactory.swift */,
+				9AB666CC1D7AE31C00A6CEED /* TableViewUpdater.swift */,
 				9A383C9A1CE1D9FD0081D843 /* UIView+XibLoading.swift */,
-				9A4610CF1F408E7500480052 /* DTTableViewDelegateWrapper.swift */,
-				3E06D783206EDC3C006F5A7E /* BackwardsCompatibility.swift */,
 			);
 			name = DTTableViewManager;
 			path = ../DTTableViewManager;
@@ -498,6 +504,7 @@
 				9A1A49A01B54555D0006610B /* Fixtures */,
 				9A383CE61CE1DBCA0081D843 /* CreationTestCase.swift */,
 				9A383CE81CE1DBCA0081D843 /* DatasourceTestCase.swift */,
+				9A12E9A22099297400B48231 /* AnomaliesTestCase.swift */,
 				9A383CEA1CE1DBCA0081D843 /* MappingTestCase.swift */,
 				9A383CEC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift */,
 				9A383CED1CE1DBCA0081D843 /* StoryboardMappingTestCase.swift */,
@@ -794,6 +801,7 @@
 				9A383C9B1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */,
 				9A76582C1F51CC2D0067F94B /* DTTableViewManager+Drop.swift in Sources */,
 				9A383CA11CE1D9FD0081D843 /* TableViewFactory.swift in Sources */,
+				9A12E9A12099266700B48231 /* DTTableViewManagerAnomalyHandler.swift in Sources */,
 				3E06D784206EDC3C006F5A7E /* BackwardsCompatibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -821,6 +829,7 @@
 				9A383CDC1CE1DB8A0081D843 /* OptionalCells.swift in Sources */,
 				9A383CFD1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift in Sources */,
 				9A383CFF1CE1DBCA0081D843 /* StoryboardMappingTestCase.swift in Sources */,
+				9A12E9A42099297A00B48231 /* AnomaliesTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,6 +876,7 @@
 				9A383CDB1CE1DB8A0081D843 /* OptionalCells.swift in Sources */,
 				9A383CFC1CE1DBCA0081D843 /* ReactingToEventsTestCase.swift in Sources */,
 				9A383CFE1CE1DBCA0081D843 /* StoryboardMappingTestCase.swift in Sources */,
+				9A12E9A32099297400B48231 /* AnomaliesTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

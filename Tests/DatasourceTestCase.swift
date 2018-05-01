@@ -303,4 +303,17 @@ class DatasourceTestCase: XCTestCase {
         
         waitForExpectations(timeout: 0.5, handler: nil)
     }
+    
+#if swift(>=4.1)
+    func testNilModelInStorageLeadsToNilModelAnomaly() {
+        let exp = expectation(description: "Nil model in storage")
+        let model: Int?? = nil
+        let anomaly = DTTableViewManagerAnomaly.nilCellModel(indexPath(0, 0))
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.memoryStorage.addItem(model)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell at [0, 0], however the model at that indexPath was nil.")
+    }
+#endif
 }

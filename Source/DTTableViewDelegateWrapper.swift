@@ -36,7 +36,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     
     @available(*, deprecated, message: "Error handling system is deprecated and will be removed in future versions of the framework")
     var viewFactoryErrorHandler: ((DTTableViewFactoryError) -> Void)? { return manager?.viewFactoryErrorHandler }
-    private weak var manager: DTTableViewManager?
+    weak var manager: DTTableViewManager?
     
     /// Creates base wrapper for datasource and delegate implementations
     public init(delegate: AnyObject?, tableViewManager: DTTableViewManager) {
