@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [6.2.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.2.0)
+
 ### Breaking
 
 * `editingStyle(for:_,_:)` method was replaced with `editingStyle(forItem:_,:_)` method, that accepts model and indexPath closure, without cell. Reason for that is that `UITableView` may call this method when cell is not actually on screen, in which case this event would not fire, and current editingStyle of the cell would be lost.
