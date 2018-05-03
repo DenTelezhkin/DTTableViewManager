@@ -381,7 +381,7 @@ class DatasourceTestCase: XCTestCase {
     
     func testNoCellMappingsTriggerAnomaly() {
         let exp = expectation(description: "No cell mappings found for model")
-        let anomaly = DTTableViewManagerAnomaly.noCellMappingFound(modelDescription: "3")
+        let anomaly = DTTableViewManagerAnomaly.noCellMappingFound(modelDescription: "3", indexPath: indexPath(0, 0))
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.memoryStorage.addItem("3")
         #if os(tvOS)
@@ -393,7 +393,20 @@ class DatasourceTestCase: XCTestCase {
         }
         waitForExpectations(timeout: 0.1)
         
-        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell for model, but view model mapping for it was not found, model description: 3")
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell for model at [0, 0], but view model mapping for it was not found, model description: 3")
+    }
+    
+    func testNoHeaderMappingTriggersToAnomaly() {
+        let exp = expectation(description: "No header mapping found")
+        let anomaly = DTTableViewManagerAnomaly.noHeaderFooterMappingFound(modelDescription: "0", indexPath: IndexPath(index: 0))
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.memoryStorage.setSectionHeaderModel(0, forSection: 0)
+        controller.manager.configuration.displayHeaderOnEmptySection = true
+        controller.manager.configuration.sectionHeaderStyle = .view
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a header/footer view for model ar [0], but view model mapping for it was not found, model description: 0")
     }
 #endif
 }

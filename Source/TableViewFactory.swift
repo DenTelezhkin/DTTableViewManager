@@ -174,7 +174,7 @@ final class TableViewFactory
             return cell
         }
         #if swift(>=4.1)
-            anomalyHandler?.reportAnomaly(.noCellMappingFound(modelDescription: String(describing: model)))
+        anomalyHandler?.reportAnomaly(.noCellMappingFound(modelDescription: String(describing: model), indexPath: indexPath))
         #endif
         return nil
     }
@@ -189,7 +189,12 @@ final class TableViewFactory
     
     func headerFooterView(of type: ViewType, model : Any, atIndexPath indexPath: IndexPath) -> UIView?
     {
-        guard let mapping = viewModelMapping(for: type, model: model, indexPath: indexPath) else { return nil }
+        guard let mapping = viewModelMapping(for: type, model: model, indexPath: indexPath) else {
+#if swift(>=4.1)
+            anomalyHandler?.reportAnomaly(.noHeaderFooterMappingFound(modelDescription: String(describing: model), indexPath: indexPath))
+#endif
+            return nil
+        }
       
         if let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: mapping.reuseIdentifier) {
             mapping.updateBlock(view, model)
