@@ -51,17 +51,6 @@ class TableViewFactoryTestCase: XCTestCase {
         }
     }
     
-    func testNilHeaderFooterModel() {
-        let model: Int? = nil
-        do {
-            try _ = controller.manager.viewFactory.headerFooterView(of: .supplementaryView(kind: "Foo"), model: model as Any, atIndexPath: IndexPath(index: 0))
-        } catch DTTableViewFactoryError.nilHeaderFooterModel(let section) {
-            expect(section) == 0
-        } catch {
-            XCTFail()
-        }
-    }
-    
     func testUpdateCellAtIndexPath() {
         if #available(iOS 11, tvOS 11, *) {
             controller.tableView = UITableView()

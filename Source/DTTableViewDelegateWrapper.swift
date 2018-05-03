@@ -58,19 +58,29 @@ open class DTTableViewDelegateWrapper : NSObject {
         // We force UITableView to flush that cache and query us again, because with new event we might have new delegate or datasource method to respond to.
     }
     
+    func shouldDisplayHeaderView(forSection index: Int) -> Bool {
+        guard let storage = storage, let configuration = configuration, storage.sections.count > index else { return false }
+        if storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection {
+            return false
+        }
+        return true
+    }
+    
+    func shouldDisplayFooterView(forSection index: Int) -> Bool {
+        guard let storage = storage, let configuration = configuration, storage.sections.count > index else { return false }
+        if storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection {
+            return false
+        }
+        return true
+    }
+    
     /// Returns header model for section at `index`, or nil if it is not found.
     ///
     /// If `TableViewConfiguration` `displayHeaderOnEmptySection` is false, this method also returns nil.
     final func headerModel(forSection index: Int) -> Any?
     {
-        guard let storage = storage, let configuration = configuration else { return nil }
-        guard storage.sections.count > index else { return nil }
-        
-        if storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection
-        {
-            return nil
-        }
-        return (self.storage as? HeaderFooterStorage)?.headerModel(forSection: index)
+        if !shouldDisplayHeaderView(forSection: index) { return nil }
+        return (storage as? HeaderFooterStorage)?.headerModel(forSection: index)
     }
     
     /// Returns footer model for section at `index`, or nil if it is not found.
@@ -78,13 +88,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     /// If `TableViewConfiguration` `displayFooterOnEmptySection` is false, this method also returns nil.
     final func footerModel(forSection index: Int) -> Any?
     {
-        guard let storage = storage, let configuration = configuration else { return nil }
-        guard storage.sections.count > index else { return nil }
-        
-        if storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection
-        {
-            return nil
-        }
+        if !shouldDisplayFooterView(forSection: index) { return nil }
         return (storage as? HeaderFooterStorage)?.footerModel(forSection: index)
     }
     

@@ -37,14 +37,9 @@ public enum DTTableViewFactoryError : Error {
     /// `UITableView` requested a cell for `model`, however `DTTableViewManager` does not have mapping for it
     case noCellMappings(model: Any)
     
-    /// `UITableView` requested a header or footer, however header or footer at `section` is nil.
-    case nilHeaderFooterModel(section: Int)
-    
     /// Prints description of factory error
     public var description : String {
         switch self {
-        case .nilHeaderFooterModel(let section):
-            return "Received nil model for header or footer model in section: \(section)"
         case .noCellMappings(let model):
             return "Cell mapping is missing for model: \(model)"
         }
@@ -70,7 +65,7 @@ final class TableViewFactory
         let mapping = ViewModelMapping(viewType: .cell, viewClass: T.self, mappingBlock: mappingBlock)
         if tableView.dequeueReusableCell(withIdentifier: mapping.reuseIdentifier) == nil
         {
-            self.tableView.register(T.self, forCellReuseIdentifier: mapping.reuseIdentifier)
+            tableView.register(T.self, forCellReuseIdentifier: mapping.reuseIdentifier)
             
             if UINib.nibExists(withNibName: String(describing: T.self), inBundle: Bundle(for: T.self)) {
                 registerNibNamed(String(describing: T.self), forCellClass: T.self, mappingBlock: mappingBlock)
@@ -88,7 +83,7 @@ final class TableViewFactory
         assert(UINib.nibExists(withNibName: nibName, inBundle: Bundle(for: T.self)), "Register cell nib method should be called only if nib exists")
         let mapping = ViewModelMapping(viewType: .cell, viewClass: T.self, xibName: nibName, mappingBlock: mappingBlock)
         let nib = UINib(nibName: nibName, bundle: Bundle(for: T.self))
-        self.tableView.register(nib, forCellReuseIdentifier: mapping.reuseIdentifier)
+        tableView.register(nib, forCellReuseIdentifier: mapping.reuseIdentifier)
         mappings.append(mapping)
     }
     
@@ -108,12 +103,12 @@ final class TableViewFactory
     
     func registerHeaderClass<T:ModelTransfer>(_ headerClass : T.Type, mappingBlock: ((ViewModelMapping) -> Void)?) where T: UIView
     {
-        self.registerNibNamed(String(describing: T.self), forHeaderClass: headerClass, mappingBlock: mappingBlock)
+        registerNibNamed(String(describing: T.self), forHeaderClass: headerClass, mappingBlock: mappingBlock)
     }
     
     func registerFooterClass<T:ModelTransfer>(_ footerClass: T.Type, mappingBlock: ((ViewModelMapping) -> Void)?) where T:UIView
     {
-        self.registerNibNamed(String(describing: T.self), forFooterClass: footerClass, mappingBlock: mappingBlock)
+        registerNibNamed(String(describing: T.self), forFooterClass: footerClass, mappingBlock: mappingBlock)
     }
     
     func registerNibNamed<T:ModelTransfer>(_ nibName: String, forHeaderClass headerClass: T.Type, mappingBlock: ((ViewModelMapping) -> Void)?) where T:UIView
@@ -207,10 +202,12 @@ final class TableViewFactory
         }
     }
     
-    func headerFooterViewWithMapping(_ mapping: ViewModelMapping, unwrappedModel: Any) -> UIView?
+    func headerFooterView(of type: ViewType, model : Any, atIndexPath indexPath: IndexPath) -> UIView?
     {
-        if let view = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: mapping.reuseIdentifier) {
-            mapping.updateBlock(view, unwrappedModel)
+        guard let mapping = viewModelMapping(for: type, model: model, indexPath: indexPath) else { return nil }
+      
+        if let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: mapping.reuseIdentifier) {
+            mapping.updateBlock(view, model)
             return view
         } else {
             var view : UIView? = nil
@@ -220,22 +217,9 @@ final class TableViewFactory
             }
             
             if let view = view {
-                mapping.updateBlock(view, unwrappedModel)
+                mapping.updateBlock(view, model)
             }
             return view
         }
-    }
-    
-    func headerFooterView(of type: ViewType, model : Any, atIndexPath indexPath: IndexPath) throws -> UIView?
-    {
-        guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
-            throw DTTableViewFactoryError.nilHeaderFooterModel(section: (indexPath as NSIndexPath).section)
-        }
-        
-        if let mapping = viewModelMapping(for: type, model: unwrappedModel, indexPath: indexPath) {
-            return headerFooterViewWithMapping(mapping, unwrappedModel: unwrappedModel)
-        }
-        
-        return nil
     }
 }

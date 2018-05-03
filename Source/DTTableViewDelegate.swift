@@ -60,24 +60,20 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         if configuration?.sectionHeaderStyle == .title { return nil }
         let viewKind = ViewType.supplementaryView(kind: DTTableViewElementSectionHeader)
         if let model = headerModel(forSection:section) {
-            let view : UIView?
-            do {
-                view = try viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
-            } catch let error as DTTableViewFactoryError {
-                handleTableViewFactoryError(error)
-                view = nil
-            } catch {
-                view = nil
-            }
-            
-            if let createdView = view
+            if let createdView = viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
             {
                 _ = tableViewEventReactions.performReaction(of: viewKind,
                                                             signature: EventMethodSignature.configureHeader.rawValue,
                                                             view: createdView, model: model,
                                                             location: IndexPath(item: 0, section: section))
+                return createdView
             }
-            return view
+        } else {
+#if swift(>=4.1)
+            if shouldDisplayHeaderView(forSection: section) {
+                manager?.anomalyHandler.reportAnomaly(.nilHeaderModel(section))
+            }
+#endif
         }
         return nil
     }
@@ -87,23 +83,19 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         if configuration?.sectionFooterStyle == .title { return nil }
         let viewKind = ViewType.supplementaryView(kind: DTTableViewElementSectionFooter)
         if let model = self.footerModel(forSection: section) {
-            let view : UIView?
-            do {
-                view = try viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
-            } catch let error as DTTableViewFactoryError {
-                handleTableViewFactoryError(error)
-                view = nil
-            } catch {
-                view = nil
-            }
-            
-            if let createdView = view
+            if let createdView = viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
             {
                 _ = tableViewEventReactions.performReaction(of: viewKind,
                                                             signature: EventMethodSignature.configureFooter.rawValue,
                                                             view: createdView, model: model, location: IndexPath(item: 0, section: section))
+                return createdView
             }
-            return view
+        } else {
+#if swift(>=4.1)
+            if shouldDisplayFooterView(forSection: section) {
+                manager?.anomalyHandler.reportAnomaly(.nilFooterModel(section))
+            }
+#endif
         }
         return nil
     }

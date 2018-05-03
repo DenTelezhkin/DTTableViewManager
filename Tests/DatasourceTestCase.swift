@@ -324,5 +324,59 @@ class DatasourceTestCase: XCTestCase {
         
         XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell at [0, 0], however the model at that indexPath was nil.")
     }
+    
+    func testNilHeaderModelLeadsToAnomaly() {
+        let exp = expectation(description: "Nil header model in storage")
+        let model: Int?? = nil
+        let anomaly = DTTableViewManagerAnomaly.nilHeaderModel(0)
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerHeader(NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionHeaderModel(model, forSection: 0)
+        controller.manager.configuration.displayHeaderOnEmptySection = true
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a header view at section 0, however the model was nil.")
+    }
+    
+    func testNilFooterModelLeadsToAnomaly() {
+        let exp = expectation(description: "Nil footer model in storage")
+        let model: Int?? = nil
+        let anomaly = DTTableViewManagerAnomaly.nilFooterModel(0)
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerFooter(NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionFooterModel(model, forSection: 0)
+        controller.manager.configuration.displayFooterOnEmptySection = true
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a footer view at section 0, however the model was nil.")
+    }
+    
+    func testNilHeaderModelDoesNotLeadToAnomalyIfItShouldNotBeDisplayedInTheFirstPlace() {
+        let exp = expectation(description: "Nil header model in storage")
+        exp.isInverted = true
+        let model: Int?? = nil
+        controller.manager.configuration.displayHeaderOnEmptySection = false
+        let anomaly = DTTableViewManagerAnomaly.nilHeaderModel(0)
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerHeader(NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionHeaderModel(model, forSection: 0)
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
+        waitForExpectations(timeout: 0.1)
+    }
+    
+    func testNilFooterModelDoesNotLeadToAnomalyIfItShouldNotBeDisplayedInTheFirstPlace() {
+        let exp = expectation(description: "Nil footer model in storage")
+        exp.isInverted = true
+        let model: Int?? = nil
+        controller.manager.configuration.displayFooterOnEmptySection = false
+        let anomaly = DTTableViewManagerAnomaly.nilFooterModel(0)
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerFooter(NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionFooterModel(model, forSection: 0)
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
+        waitForExpectations(timeout: 0.1)
+    }
 #endif
 }
