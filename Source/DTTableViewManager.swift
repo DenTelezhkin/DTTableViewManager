@@ -105,7 +105,11 @@ open class DTTableViewManager {
     final lazy var viewFactory: TableViewFactory = {
         precondition(isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
         //swiftlint:disable:next force_unwrapping
-        return TableViewFactory(tableView: self.tableView!, anomalyHandler: anomalyHandler)
+        let factory = TableViewFactory(tableView: self.tableView!)
+        #if swift(>=4.1)
+        factory.anomalyHandler = anomalyHandler
+        #endif
+        return factory
     }()
     
     /// Internal weak link to `UITableView`

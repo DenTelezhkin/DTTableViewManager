@@ -35,12 +35,14 @@ final class TableViewFactory
     var mappings = [ViewModelMapping]()
     
     weak var mappingCustomizableDelegate : ViewModelMappingCustomizing?
-    weak var anomalyHandler : DTTableViewManagerAnomalyHandler?
     
-    init(tableView: UITableView, anomalyHandler: DTTableViewManagerAnomalyHandler)
+    #if swift(>=4.1)
+    weak var anomalyHandler : DTTableViewManagerAnomalyHandler?
+    #endif
+    
+    init(tableView: UITableView)
     {
         self.tableView = tableView
-        self.anomalyHandler = anomalyHandler
     }
     
     func registerCellClass<T:ModelTransfer>(_ cellClass : T.Type, mappingBlock: ((ViewModelMapping) -> Void)?) where T: UITableViewCell
