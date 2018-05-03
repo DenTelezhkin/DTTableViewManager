@@ -311,6 +311,15 @@ class DatasourceTestCase: XCTestCase {
         let anomaly = DTTableViewManagerAnomaly.nilCellModel(indexPath(0, 0))
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.memoryStorage.addItem(model)
+        
+        #if os(tvOS)
+            let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        #endif
+        if #available(iOS 11, *) {}
+        else {
+            let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        }
+        
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell at [0, 0], however the model at that indexPath was nil.")
