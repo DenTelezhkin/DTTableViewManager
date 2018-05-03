@@ -33,9 +33,6 @@ open class DTTableViewDelegateWrapper : NSObject {
     var viewFactory: TableViewFactory? { return manager?.viewFactory }
     var storage: Storage? { return manager?.storage }
     var configuration: TableViewConfiguration? { return manager?.configuration }
-    
-    @available(*, deprecated, message: "Error handling system is deprecated and will be removed in future versions of the framework")
-    var viewFactoryErrorHandler: ((DTTableViewFactoryError) -> Void)? { return manager?.viewFactoryErrorHandler }
     weak var manager: DTTableViewManager?
     
     /// Creates base wrapper for datasource and delegate implementations
@@ -257,17 +254,6 @@ open class DTTableViewDelegateWrapper : NSObject {
     func performNonCellReaction<T, U>(_ signature: EventMethodSignature, argumentOne: T, argumentTwo: U) -> Any? {
         return tableViewEventReactions.first(where: { $0.methodSignature == signature.rawValue })?
             .performWithArguments((argumentOne, argumentTwo, 0))
-    }
-    
-    /// Calls `viewFactoryErrorHandler` with `error`. If it's nil, prints error into console and asserts.
-    @available(*, deprecated, message: "Error handling system is deprecated and will be removed in future versions of the framework.")
-    @nonobjc func handleTableViewFactoryError(_ error: DTTableViewFactoryError) {
-        if let handler = viewFactoryErrorHandler {
-            handler(error)
-        } else {
-            print((error as NSError).description)
-            assertionFailure(error.description)
-        }
     }
     
     // MARK: - Target Forwarding

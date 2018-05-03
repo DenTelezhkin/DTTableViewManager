@@ -103,9 +103,9 @@ open class DTTableViewManager {
 
     ///  Factory for creating cells and views for UITableView
     final lazy var viewFactory: TableViewFactory = {
-        precondition(self.isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
+        precondition(isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
         //swiftlint:disable:next force_unwrapping
-        return TableViewFactory(tableView: self.tableView!)
+        return TableViewFactory(tableView: self.tableView!, anomalyHandler: anomalyHandler)
     }()
     
     /// Internal weak link to `UITableView`
@@ -118,12 +118,6 @@ open class DTTableViewManager {
     
     /// `DTTableViewManageable` delegate.
     final fileprivate weak var delegate : AnyObject?
-    
-    @available(*, deprecated, message: "This property and error handling behavior is deprecated and will be removed in future versions of the framework. If you have a use case for it, please open issue on GitHub.")
-    /// Error handler ot be executed when critical error happens with `TableViewFactory`.
-    /// This can be useful to provide more debug information for crash logs, since preconditionFailure Swift method provides little to zero insight about what happened and when.
-    /// This closure will be called prior to calling preconditionFailure in `handleTableViewFactoryError` method.
-    @nonobjc open var viewFactoryErrorHandler : ((DTTableViewFactoryError) -> Void)?
     
     /// Implicitly unwrap storage property to `MemoryStorage`.
     /// - Warning: if storage is not MemoryStorage, will throw an exception.

@@ -32,12 +32,14 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
     case nilCellModel(IndexPath)
     case nilHeaderModel(Int)
     case nilFooterModel(Int)
+    case noCellMappingFound(modelDescription: String)
     
     public var debugDescription: String {
         switch self {
         case .nilCellModel(let indexPath): return "❗️[DTTableViewManager] UITableView requested a cell at \(indexPath), however the model at that indexPath was nil."
         case .nilHeaderModel(let section): return "❗️[DTTableViewManager] UITableView requested a header view at section \(section), however the model was nil."
         case .nilFooterModel(let section): return "❗️[DTTableViewManager] UITableView requested a footer view at section \(section), however the model was nil."
+        case .noCellMappingFound(modelDescription: let description): return "❗️[DTTableViewManager] UITableView requested a cell for model, but view model mapping for it was not found, model description: \(description)"
         }
     }
 }

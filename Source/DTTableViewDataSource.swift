@@ -53,17 +53,9 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
 #endif
             return UITableViewCell()
         }
-        
-        let cell : UITableViewCell
-        do {
-            cell = try viewFactory?.cellForModel(model, atIndexPath: indexPath) ?? UITableViewCell()
-        } catch let error as DTTableViewFactoryError {
-            handleTableViewFactoryError(error)
-            cell = UITableViewCell()
-        } catch {
-            cell = UITableViewCell()
+        guard let cell = viewFactory?.cellForModel(model, atIndexPath: indexPath) else {
+            return UITableViewCell()
         }
-        
         _ = tableViewEventReactions.performReaction(of: .cell, signature: EventMethodSignature.configureCell.rawValue, view: cell, model: model, location: indexPath)
         return cell
     }

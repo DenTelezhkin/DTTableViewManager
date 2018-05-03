@@ -41,16 +41,6 @@ class TableViewFactoryTestCase: XCTestCase {
         controller.manager.storage = MemoryStorage()
     }
     
-    func testNoMappingsFound() {
-        do {
-            try _ = controller.manager.viewFactory.cellForModel(1, atIndexPath: indexPath(0, 0))
-        } catch DTTableViewFactoryError.noCellMappings(let model) {
-            expect(model as? Int) == 1
-        } catch {
-            XCTFail()
-        }
-    }
-    
     func testUpdateCellAtIndexPath() {
         if #available(iOS 11, tvOS 11, *) {
             controller.tableView = UITableView()

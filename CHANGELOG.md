@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Added
+
+* Anomaly detecting system for various errors in `DTTableViewManager`.
+
 ### Breaking
 
+* `viewFactoryErrorHandler` deprecated property on `DTTableViewManager` was removed. All previously reported errors and warnings are now a part of anomaly detecting system.
 * `editingStyle(for:_,_:)` method was replaced with `editingStyle(forItem:_,:_)` method, that accepts model and indexPath closure, without cell. Reason for that is that `UITableView` may call this method when cell is not actually on screen, in which case this event would not fire, and current editingStyle of the cell would be lost.
 
 ## [6.1.1](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.1.1)

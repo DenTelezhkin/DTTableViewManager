@@ -222,7 +222,7 @@ class NibNameViewModelMappingTestCase : XCTestCase {
     
     override func setUp() {
         super.setUp()
-        factory = TableViewFactory(tableView: UITableView())
+        factory = TableViewFactory(tableView: UITableView(), anomalyHandler: .init())
     }
     
     func testRegisterCellWithoutNibYieldsNoXibName() {

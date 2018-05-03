@@ -27,25 +27,6 @@ import UIKit
 import Foundation
 import DTModelStorage
 
-
-@available(*, deprecated, message: "Error handling system is deprecated and may be removed or replaced in future version of the framework. Usage of this enum is discouraged.")
-/// Enum with possible `DTTableViewManager` errors.
-///
-/// - SeeAlso: `DTTableViewManager.viewFactoryErrorHandler` and `DTTableViewManager.handleTableViewFactoryError()`
-public enum DTTableViewFactoryError : Error {
-    
-    /// `UITableView` requested a cell for `model`, however `DTTableViewManager` does not have mapping for it
-    case noCellMappings(model: Any)
-    
-    /// Prints description of factory error
-    public var description : String {
-        switch self {
-        case .noCellMappings(let model):
-            return "Cell mapping is missing for model: \(model)"
-        }
-    }
-}
-
 /// Internal class, that is used to create table view cells, headers and footers.
 final class TableViewFactory
 {
@@ -54,10 +35,12 @@ final class TableViewFactory
     var mappings = [ViewModelMapping]()
     
     weak var mappingCustomizableDelegate : ViewModelMappingCustomizing?
+    weak var anomalyHandler : DTTableViewManagerAnomalyHandler?
     
-    init(tableView: UITableView)
+    init(tableView: UITableView, anomalyHandler: DTTableViewManagerAnomalyHandler)
     {
         self.tableView = tableView
+        self.anomalyHandler = anomalyHandler
     }
     
     func registerCellClass<T:ModelTransfer>(_ cellClass : T.Type, mappingBlock: ((ViewModelMapping) -> Void)?) where T: UITableViewCell
@@ -182,7 +165,7 @@ final class TableViewFactory
         }
     }
     
-    func cellForModel(_ model: Any, atIndexPath indexPath:IndexPath) throws -> UITableViewCell
+    func cellForModel(_ model: Any, atIndexPath indexPath:IndexPath) -> UITableViewCell?
     {
         if let mapping = viewModelMapping(for: .cell, model: model, indexPath: indexPath)
         {
@@ -190,8 +173,10 @@ final class TableViewFactory
             mapping.updateBlock(cell, model)
             return cell
         }
-        
-        throw DTTableViewFactoryError.noCellMappings(model: model)
+        #if swift(>=4.1)
+            anomalyHandler?.reportAnomaly(.noCellMappingFound(modelDescription: String(describing: model)))
+        #endif
+        return nil
     }
     
     func updateCellAt(_ indexPath : IndexPath, with model: Any) {
