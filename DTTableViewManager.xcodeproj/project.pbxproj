@@ -22,6 +22,8 @@
 		9A12E9A12099266700B48231 /* DTTableViewManagerAnomalyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A12E9A02099266700B48231 /* DTTableViewManagerAnomalyHandler.swift */; };
 		9A12E9A32099297400B48231 /* AnomaliesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A12E9A22099297400B48231 /* AnomaliesTestCase.swift */; };
 		9A12E9A42099297A00B48231 /* AnomaliesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A12E9A22099297400B48231 /* AnomaliesTestCase.swift */; };
+		9A1D804620A09D27001E9B4F /* EmptyXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1D804520A09D27001E9B4F /* EmptyXib.xib */; };
+		9A1D804820A09D3B001E9B4F /* EmptyXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1D804720A09D3B001E9B4F /* EmptyXib.xib */; };
 		9A234FFC1F65485B00A13B55 /* FixtureStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A234FFB1F65485B00A13B55 /* FixtureStoryboard.storyboard */; };
 		9A2350021F654B8B00A13B55 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350011F654B8B00A13B55 /* DTModelStorage.framework */; };
 		9A2350041F654BA200A13B55 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350031F654BA200A13B55 /* Nimble.framework */; };
@@ -171,6 +173,8 @@
 		9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDropPlaceholderContext.swift; path = Source/DTTableViewDropPlaceholderContext.swift; sourceTree = "<group>"; };
 		9A12E9A02099266700B48231 /* DTTableViewManagerAnomalyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewManagerAnomalyHandler.swift; path = Source/DTTableViewManagerAnomalyHandler.swift; sourceTree = "<group>"; };
 		9A12E9A22099297400B48231 /* AnomaliesTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnomaliesTestCase.swift; sourceTree = "<group>"; };
+		9A1D804520A09D27001E9B4F /* EmptyXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EmptyXib.xib; path = Fixtures/tvOS/EmptyXib.xib; sourceTree = "<group>"; };
+		9A1D804720A09D3B001E9B4F /* EmptyXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EmptyXib.xib; path = Fixtures/iOS/EmptyXib.xib; sourceTree = "<group>"; };
 		9A234FFB1F65485B00A13B55 /* FixtureStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FixtureStoryboard.storyboard; path = Tests/Fixtures/tvOS/FixtureStoryboard.storyboard; sourceTree = SOURCE_ROOT; };
 		9A2350011F654B8B00A13B55 /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = Carthage/Build/tvOS/DTModelStorage.framework; sourceTree = "<group>"; };
 		9A2350031F654BA200A13B55 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/tvOS/Nimble.framework; sourceTree = "<group>"; };
@@ -388,6 +392,7 @@
 				3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */,
 				3E665CA720A03F8800BA5718 /* WrongReuseIdentifierCell.xib */,
 				3E665CB120A083A300BA5718 /* RandomNameWrongReuseIdentifierCell.xib */,
+				9A1D804720A09D3B001E9B4F /* EmptyXib.xib */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -405,6 +410,7 @@
 				9A234FFB1F65485B00A13B55 /* FixtureStoryboard.storyboard */,
 				3E665CAD20A0832400BA5718 /* RandomNameWrongReuseIdentifierCell.xib */,
 				3E665CAB20A0400600BA5718 /* WrongReuseIdentifierCell.xib */,
+				9A1D804520A09D27001E9B4F /* EmptyXib.xib */,
 			);
 			name = tvOS;
 			sourceTree = "<group>";
@@ -690,6 +696,7 @@
 				9A383CB61CE1DAD80081D843 /* NibCell.xib in Resources */,
 				9A383CBA1CE1DAD80081D843 /* ReactingHeaderFooterView.xib in Resources */,
 				3EFE2ED41F1E5F6700A73565 /* CustomNibCell.xib in Resources */,
+				9A1D804620A09D27001E9B4F /* EmptyXib.xib in Resources */,
 				3E665CB220A083A300BA5718 /* RandomNameWrongReuseIdentifierCell.xib in Resources */,
 				9A383CB81CE1DAD80081D843 /* NibView.xib in Resources */,
 			);
@@ -724,6 +731,7 @@
 				3E665CA820A03F8800BA5718 /* WrongReuseIdentifierCell.xib in Resources */,
 				9A383CC21CE1DB4C0081D843 /* NibCell.xib in Resources */,
 				9A383CC61CE1DB4C0081D843 /* ReactingHeaderFooterView.xib in Resources */,
+				9A1D804820A09D3B001E9B4F /* EmptyXib.xib in Resources */,
 				3EF6EB531F1E5E24007F610A /* CustomNibCell.xib in Resources */,
 				9A383CC41CE1DB4C0081D843 /* NibView.xib in Resources */,
 			);

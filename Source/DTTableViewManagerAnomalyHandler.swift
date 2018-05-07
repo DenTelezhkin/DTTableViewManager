@@ -35,6 +35,8 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
     case noCellMappingFound(modelDescription: String, indexPath: IndexPath)
     case noHeaderFooterMappingFound(modelDescription: String, indexPath: IndexPath)
     case differentCellReuseIdentifier(mappingReuseIdentifier: String, cellReuseIdentifier: String)
+    case differentCellClass(xibName: String, cellClass: String, expectedCellClass: String)
+    case emptyXibFile(xibName: String, expectedViewClass: String)
     
     public var debugDescription: String {
         switch self {
@@ -48,6 +50,10 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
                 return "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: \(cellReuseIdentifier) does not match reuseIdentifier used to register with UITableView: \(mappingReuseIdentifier). \n" +
                     "If you are using XIB, please remove reuseIdentifier from XIB file, or change it to name of UITableViewCell subclass. If you are using Storyboards, please change UITableViewCell identifier to name of the class. \n" +
             "If you need different reuseIdentifier for any reason, you can change reuseIdentifier when registering mapping."
+        case .differentCellClass(xibName: let xibName, cellClass: let cellClass, expectedCellClass: let expectedCellClass):
+            return "⚠️[DTTableViewManager] Attempted to register xib \(xibName), but view found in a xib was of type \(cellClass), while expected type is \(expectedCellClass). This can lead cells to not be filled with models, as cells are not of the expected type."
+        case .emptyXibFile(xibName: let xibName, expectedViewClass: let expectedViewClass):
+            return "⚠️[DTTableViewManager] Attempted to register xib \(xibName) for \(expectedViewClass), but this xib does not contain any views."
         }
     }
 }

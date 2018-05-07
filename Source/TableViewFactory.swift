@@ -72,8 +72,19 @@ final class TableViewFactory
         var cell = T(frame: .zero)
         if let nibName = nibName, UINib.nibExists(withNibName: nibName, inBundle: Bundle(for: T.self)) {
             let nib = UINib(nibName: nibName, bundle: Bundle(for: T.self))
-            if let instantiatedCell = nib.instantiate(withOwner: cell, options: nil).first as? T {
+            let objects = nib.instantiate(withOwner: cell, options: nil)
+            if let instantiatedCell = objects.first as? T {
                 cell = instantiatedCell
+            } else {
+                #if swift(>=4.1)
+                if let first = objects.first {
+                    anomalyHandler?.reportAnomaly(.differentCellClass(xibName: nibName,
+                                                                      cellClass: String(describing: type(of: first)),
+                                                                      expectedCellClass: String(describing: T.self)))
+                } else {
+                    anomalyHandler?.reportAnomaly(.emptyXibFile(xibName: nibName, expectedViewClass: String(describing: T.self)))
+                }
+                #endif
             }
         }
 #if swift(>=4.1)
