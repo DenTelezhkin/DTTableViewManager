@@ -36,6 +36,7 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
     case noHeaderFooterMappingFound(modelDescription: String, indexPath: IndexPath)
     case differentCellReuseIdentifier(mappingReuseIdentifier: String, cellReuseIdentifier: String)
     case differentCellClass(xibName: String, cellClass: String, expectedCellClass: String)
+    case differentHeaderFooterClass(xibName: String, viewClass: String, expectedViewClass: String)
     case emptyXibFile(xibName: String, expectedViewClass: String)
     
     public var debugDescription: String {
@@ -47,11 +48,13 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
         case .noHeaderFooterMappingFound(modelDescription: let description, let indexPath): return "❗️[DTTableViewManager] UITableView requested a header/footer view for model ar \(indexPath), but view model mapping for it was not found, model description: \(description)"
         case .differentCellReuseIdentifier(mappingReuseIdentifier: let mappingReuseIdentifier,
                                            cellReuseIdentifier: let cellReuseIdentifier):
-                return "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: \(cellReuseIdentifier) does not match reuseIdentifier used to register with UITableView: \(mappingReuseIdentifier). \n" +
+            return "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: \(cellReuseIdentifier) does not match reuseIdentifier used to register with UITableView: \(mappingReuseIdentifier). \n" +
                     "If you are using XIB, please remove reuseIdentifier from XIB file, or change it to name of UITableViewCell subclass. If you are using Storyboards, please change UITableViewCell identifier to name of the class. \n" +
             "If you need different reuseIdentifier for any reason, you can change reuseIdentifier when registering mapping."
         case .differentCellClass(xibName: let xibName, cellClass: let cellClass, expectedCellClass: let expectedCellClass):
-            return "⚠️[DTTableViewManager] Attempted to register xib \(xibName), but view found in a xib was of type \(cellClass), while expected type is \(expectedCellClass). This can lead cells to not be filled with models, as cells are not of the expected type."
+            return "⚠️[DTTableViewManager] Attempted to register xib \(xibName), but view found in a xib was of type \(cellClass), while expected type is \(expectedCellClass). This can prevent cells from being updated with models and react to events."
+        case .differentHeaderFooterClass(xibName: let xibName, viewClass: let viewClass, expectedViewClass: let expectedViewClass):
+            return "⚠️[DTTableViewManager] Attempted to register xib \(xibName), but view found in a xib was of type \(viewClass), while expected type is \(expectedViewClass). This can prevent headers/footers from being updated with models and react to events."
         case .emptyXibFile(xibName: let xibName, expectedViewClass: let expectedViewClass):
             return "⚠️[DTTableViewManager] Attempted to register xib \(xibName) for \(expectedViewClass), but this xib does not contain any views."
         }

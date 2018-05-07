@@ -443,7 +443,7 @@ class DatasourceTestCase: XCTestCase {
         controller.manager.registerNibNamed("RandomNibNameCell", for: StringCell.self)
         waitForExpectations(timeout: 0.1)
         
-        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib RandomNibNameCell, but view found in a xib was of type BaseTestCell, while expected type is StringCell. This can lead cells to not be filled with models, as cells are not of the expected type.")
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib RandomNibNameCell, but view found in a xib was of type BaseTestCell, while expected type is StringCell. This can prevent cells from being updated with models and react to events.")
     }
     
     func testWrongClassTableViewCellComingFromDequeue() {
@@ -455,6 +455,30 @@ class DatasourceTestCase: XCTestCase {
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib EmptyXib for StringCell, but this xib does not contain any views.")
+    }
+    
+    func testWrongHeaderClassComingFromXibLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong header class")
+        let anomaly = DTTableViewManagerAnomaly.differentHeaderFooterClass(xibName: "NibView",
+                                                                           viewClass: "NibView",
+                                                                           expectedViewClass: "ReactingHeaderFooterView")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerNibNamed("NibView", forHeader: ReactingHeaderFooterView.self)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib NibView, but view found in a xib was of type NibView, while expected type is ReactingHeaderFooterView. This can prevent headers/footers from being updated with models and react to events.")
+    }
+    
+    func testWrongFooterClassComingFromXibLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong header class")
+        let anomaly = DTTableViewManagerAnomaly.differentHeaderFooterClass(xibName: "NibView",
+                                                                           viewClass: "NibView",
+                                                                           expectedViewClass: "ReactingHeaderFooterView")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerNibNamed("NibView", forFooter: ReactingHeaderFooterView.self)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib NibView, but view found in a xib was of type NibView, while expected type is ReactingHeaderFooterView. This can prevent headers/footers from being updated with models and react to events.")
     }
 #endif
 }
