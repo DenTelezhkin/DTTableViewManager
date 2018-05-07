@@ -34,7 +34,7 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 
         manager.register(BankCell.self)
         manager.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
-        (manager.tableViewUpdater as? TableViewUpdater)?.didUpdateContent = { [weak self] _ in
+        manager.tableViewUpdater?.didUpdateContent = { [weak self] _ in
             self?.tableView.isHidden = self?.tableView.numberOfSections == 0
         }
 

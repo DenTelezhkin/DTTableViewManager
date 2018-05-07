@@ -34,6 +34,7 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
     case nilFooterModel(Int)
     case noCellMappingFound(modelDescription: String, indexPath: IndexPath)
     case noHeaderFooterMappingFound(modelDescription: String, indexPath: IndexPath)
+    case differentCellReuseIdentifier(mappingReuseIdentifier: String, cellReuseIdentifier: String)
     
     public var debugDescription: String {
         switch self {
@@ -42,6 +43,11 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
         case .nilFooterModel(let section): return "❗️[DTTableViewManager] UITableView requested a footer view at section \(section), however the model was nil."
         case .noCellMappingFound(modelDescription: let description, indexPath: let indexPath): return "❗️[DTTableViewManager] UITableView requested a cell for model at \(indexPath), but view model mapping for it was not found, model description: \(description)"
         case .noHeaderFooterMappingFound(modelDescription: let description, let indexPath): return "❗️[DTTableViewManager] UITableView requested a header/footer view for model ar \(indexPath), but view model mapping for it was not found, model description: \(description)"
+        case .differentCellReuseIdentifier(mappingReuseIdentifier: let mappingReuseIdentifier,
+                                           cellReuseIdentifier: let cellReuseIdentifier):
+                return "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: \(cellReuseIdentifier) does not match reuseIdentifier used to register with UITableView: \(mappingReuseIdentifier). \n" +
+                    "If you are using XIB, please remove reuseIdentifier from XIB file, or change it to name of UITableViewCell subclass. If you are using Storyboards, please change UITableViewCell identifier to name of the class. \n" +
+            "If you need different reuseIdentifier for any reason, you can change reuseIdentifier when registering mapping."
         }
     }
 }

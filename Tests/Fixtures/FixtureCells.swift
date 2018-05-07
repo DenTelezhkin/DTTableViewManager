@@ -46,3 +46,5 @@ class StringCell : UITableViewCell, ModelTransfer
         
     }
 }
+
+class WrongReuseIdentifierCell : BaseTestCell {}

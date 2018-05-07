@@ -48,19 +48,39 @@ final class TableViewFactory
     func registerCellClass<T:ModelTransfer>(_ cellClass : T.Type, mappingBlock: ((ViewModelMapping) -> Void)?) where T: UITableViewCell
     {
         let mapping = ViewModelMapping(viewType: .cell, viewClass: T.self, mappingBlock: mappingBlock)
-        if tableView.dequeueReusableCell(withIdentifier: mapping.reuseIdentifier) == nil
-        {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: mapping.reuseIdentifier) {
+            // Storyboard prototype cell
+            mappings.append(mapping)
+#if swift(>=4.1)
+            if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != mapping.reuseIdentifier {
+                anomalyHandler?.reportAnomaly(.differentCellReuseIdentifier(mappingReuseIdentifier: mapping.reuseIdentifier, cellReuseIdentifier: cellReuseIdentifier))
+            }
+#endif
+        } else {
             tableView.register(T.self, forCellReuseIdentifier: mapping.reuseIdentifier)
             
             if UINib.nibExists(withNibName: String(describing: T.self), inBundle: Bundle(for: T.self)) {
                 registerNibNamed(String(describing: T.self), forCellClass: T.self, mappingBlock: mappingBlock)
             } else {
                 mappings.append(mapping)
+                verifyCell(T.self, nibName: nil, withReuseIdentifier: mapping.reuseIdentifier)
             }
-        } else {
-            // Storyboard prototype cell
-            mappings.append(mapping)
         }
+    }
+    
+    func verifyCell<T:UITableViewCell>(_ cell: T.Type, nibName: String?, withReuseIdentifier reuseIdentifier: String) {
+        var cell = T(frame: .zero)
+        if let nibName = nibName, UINib.nibExists(withNibName: nibName, inBundle: Bundle(for: T.self)) {
+            let nib = UINib(nibName: nibName, bundle: Bundle(for: T.self))
+            if let instantiatedCell = nib.instantiate(withOwner: cell, options: nil).first as? T {
+                cell = instantiatedCell
+            }
+        }
+#if swift(>=4.1)
+        if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != reuseIdentifier {
+            anomalyHandler?.reportAnomaly(.differentCellReuseIdentifier(mappingReuseIdentifier: reuseIdentifier, cellReuseIdentifier: cellReuseIdentifier))
+        }
+#endif
     }
     
     func registerNibNamed<T:ModelTransfer>(_ nibName : String, forCellClass cellClass: T.Type, mappingBlock: ((ViewModelMapping) -> Void)?) where T: UITableViewCell
@@ -70,6 +90,7 @@ final class TableViewFactory
         let nib = UINib(nibName: nibName, bundle: Bundle(for: T.self))
         tableView.register(nib, forCellReuseIdentifier: mapping.reuseIdentifier)
         mappings.append(mapping)
+        verifyCell(T.self, nibName: nibName, withReuseIdentifier: mapping.reuseIdentifier)
     }
     
     func registerNiblessHeaderClass<T:ModelTransfer>(_ headerClass : T.Type, mappingBlock: ((ViewModelMapping) -> Void)?) where T: UIView

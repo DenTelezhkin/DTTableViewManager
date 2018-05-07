@@ -408,5 +408,30 @@ class DatasourceTestCase: XCTestCase {
         
         XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a header/footer view for model ar [0], but view model mapping for it was not found, model description: 0")
     }
+    
+    func testWrongReuseIdentifierLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong reuse identifier")
+        let anomaly = DTTableViewManagerAnomaly.differentCellReuseIdentifier(mappingReuseIdentifier: "WrongReuseIdentifierCell",
+                                                                             cellReuseIdentifier: "Foo")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.register(WrongReuseIdentifierCell.self)
+        
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: Foo does not match reuseIdentifier used to register with UITableView: WrongReuseIdentifierCell. \n" +
+            "If you are using XIB, please remove reuseIdentifier from XIB file, or change it to name of UITableViewCell subclass. If you are using Storyboards, please change UITableViewCell identifier to name of the class. \n" +
+        "If you need different reuseIdentifier for any reason, you can change reuseIdentifier when registering mapping.")
+    }
+    
+    func testWrongReuseIdentifierWithDifferentCellClassNameLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong reuse identifier")
+        let anomaly = DTTableViewManagerAnomaly.differentCellReuseIdentifier(mappingReuseIdentifier: "WrongReuseIdentifierCell",
+                                                                             cellReuseIdentifier: "Foo")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerNibNamed("RandomNameWrongReuseIdentifierCell", for: WrongReuseIdentifierCell.self)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: Foo does not match reuseIdentifier used to register with UITableView: WrongReuseIdentifierCell. \nIf you are using XIB, please remove reuseIdentifier from XIB file, or change it to name of UITableViewCell subclass. If you are using Storyboards, please change UITableViewCell identifier to name of the class. \nIf you need different reuseIdentifier for any reason, you can change reuseIdentifier when registering mapping.")
+    }
 #endif
 }

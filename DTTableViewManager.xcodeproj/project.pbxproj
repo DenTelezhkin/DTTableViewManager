@@ -10,6 +10,10 @@
 		3E06D784206EDC3C006F5A7E /* BackwardsCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06D783206EDC3C006F5A7E /* BackwardsCompatibility.swift */; };
 		3E41498D1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */; };
 		3E41498E1F1B880F00E3B370 /* MappingConditionsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */; };
+		3E665CA820A03F8800BA5718 /* WrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E665CA720A03F8800BA5718 /* WrongReuseIdentifierCell.xib */; };
+		3E665CAC20A0400600BA5718 /* WrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E665CAB20A0400600BA5718 /* WrongReuseIdentifierCell.xib */; };
+		3E665CB220A083A300BA5718 /* RandomNameWrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E665CB120A083A300BA5718 /* RandomNameWrongReuseIdentifierCell.xib */; };
+		3E665CB320A0840500BA5718 /* RandomNameWrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E665CAD20A0832400BA5718 /* RandomNameWrongReuseIdentifierCell.xib */; };
 		3EA4FF291FA9FF6600B3D853 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; };
 		3EA4FF2A1FA9FF6600B3D853 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3EF6EB531F1E5E24007F610A /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */; };
@@ -158,6 +162,10 @@
 /* Begin PBXFileReference section */
 		3E06D783206EDC3C006F5A7E /* BackwardsCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackwardsCompatibility.swift; path = Source/BackwardsCompatibility.swift; sourceTree = "<group>"; };
 		3E41498C1F1B880F00E3B370 /* MappingConditionsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MappingConditionsTestCase.swift; path = Tests/MappingConditionsTestCase.swift; sourceTree = SOURCE_ROOT; };
+		3E665CA720A03F8800BA5718 /* WrongReuseIdentifierCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WrongReuseIdentifierCell.xib; path = Fixtures/iOS/WrongReuseIdentifierCell.xib; sourceTree = "<group>"; };
+		3E665CAB20A0400600BA5718 /* WrongReuseIdentifierCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WrongReuseIdentifierCell.xib; path = Fixtures/tvOS/WrongReuseIdentifierCell.xib; sourceTree = "<group>"; };
+		3E665CAD20A0832400BA5718 /* RandomNameWrongReuseIdentifierCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RandomNameWrongReuseIdentifierCell.xib; path = Fixtures/iOS/RandomNameWrongReuseIdentifierCell.xib; sourceTree = "<group>"; };
+		3E665CB120A083A300BA5718 /* RandomNameWrongReuseIdentifierCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RandomNameWrongReuseIdentifierCell.xib; path = Fixtures/tvOS/RandomNameWrongReuseIdentifierCell.xib; sourceTree = "<group>"; };
 		3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/iOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
 		3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/tvOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
 		9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDropPlaceholderContext.swift; path = Source/DTTableViewDropPlaceholderContext.swift; sourceTree = "<group>"; };
@@ -378,6 +386,8 @@
 				9A383CC01CE1DB4C0081D843 /* ReactingHeaderFooterView.xib */,
 				9A383CC11CE1DB4C0081D843 /* XibTableViewController.xib */,
 				3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */,
+				3E665CA720A03F8800BA5718 /* WrongReuseIdentifierCell.xib */,
+				3E665CB120A083A300BA5718 /* RandomNameWrongReuseIdentifierCell.xib */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -393,6 +403,8 @@
 				9A383CB51CE1DAD80081D843 /* XibTableViewController.xib */,
 				3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */,
 				9A234FFB1F65485B00A13B55 /* FixtureStoryboard.storyboard */,
+				3E665CAD20A0832400BA5718 /* RandomNameWrongReuseIdentifierCell.xib */,
+				3E665CAB20A0400600BA5718 /* WrongReuseIdentifierCell.xib */,
 			);
 			name = tvOS;
 			sourceTree = "<group>";
@@ -674,9 +686,11 @@
 				9A383CB91CE1DAD80081D843 /* RandomNibNameCell.xib in Resources */,
 				9A383CBB1CE1DAD80081D843 /* XibTableViewController.xib in Resources */,
 				9A234FFC1F65485B00A13B55 /* FixtureStoryboard.storyboard in Resources */,
+				3E665CAC20A0400600BA5718 /* WrongReuseIdentifierCell.xib in Resources */,
 				9A383CB61CE1DAD80081D843 /* NibCell.xib in Resources */,
 				9A383CBA1CE1DAD80081D843 /* ReactingHeaderFooterView.xib in Resources */,
 				3EFE2ED41F1E5F6700A73565 /* CustomNibCell.xib in Resources */,
+				3E665CB220A083A300BA5718 /* RandomNameWrongReuseIdentifierCell.xib in Resources */,
 				9A383CB81CE1DAD80081D843 /* NibView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,7 +719,9 @@
 				9A383CC31CE1DB4C0081D843 /* NibHeaderFooterView.xib in Resources */,
 				9A383CC51CE1DB4C0081D843 /* RandomNibNameCell.xib in Resources */,
 				9A383CC71CE1DB4C0081D843 /* XibTableViewController.xib in Resources */,
+				3E665CB320A0840500BA5718 /* RandomNameWrongReuseIdentifierCell.xib in Resources */,
 				9A383CD71CE1DB8A0081D843 /* FixtureStoryboard.storyboard in Resources */,
+				3E665CA820A03F8800BA5718 /* WrongReuseIdentifierCell.xib in Resources */,
 				9A383CC21CE1DB4C0081D843 /* NibCell.xib in Resources */,
 				9A383CC61CE1DB4C0081D843 /* ReactingHeaderFooterView.xib in Resources */,
 				3EF6EB531F1E5E24007F610A /* CustomNibCell.xib in Resources */,
@@ -1010,7 +1026,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting files/Example.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1035,7 +1051,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting files/Example.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
