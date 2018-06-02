@@ -52,19 +52,16 @@ extension DTTableViewManager {
     /// Registers `closure` to be executed to determine cell height in `UITableViewDelegate.tableView(_:heightForRowAt:)` method, when it's called for cell which model is of `itemType`.
     open func heightForCell<T>(withItem itemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         tableDelegate?.appendReaction(for: T.self, signature: .heightForRowAtIndexPath, closure: closure)
-        verifyItemEvent(for: T.self)
     }
     
     /// Registers `closure` to be executed to determine estimated cell height in `UITableViewDelegate.tableView(_:estimatedHeightForRowAt:)` method, when it's called for cell which model is of `itemType`.
     open func estimatedHeightForCell<T>(withItem itemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         tableDelegate?.appendReaction(for: T.self, signature: .estimatedHeightForRowAtIndexPath, closure: closure)
-        verifyItemEvent(for: T.self)
     }
     
     /// Registers `closure` to be executed to determine indentation level in `UITableViewDelegate.tableView(_:indentationLevelForRowAt:)` method, when it's called for cell which model is of `itemType`.
     open func indentationLevelForCell<T>(withItem itemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
         tableDelegate?.appendReaction(for: T.self, signature: .indentationLevelForRowAtIndexPath, closure: closure)
-        verifyItemEvent(for: T.self)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willDisplayCell:forRowAt:)` method is called for `cellClass`.
@@ -93,19 +90,16 @@ extension DTTableViewManager {
     /// Registers `closure` to be executed to determine estimated header height in `UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:)` method, when it's called for header which model is of `itemType`.
     open func estimatedHeightForHeader<T>(withItem type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
         tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, modelClass: T.self, signature: .estimatedHeightForHeaderInSection, closure: closure)
-        verifyItemEvent(for: T.self)
     }
     
     /// Registers `closure` to be executed to determine footer height in `UITableViewDelegate.tableView(_:heightForFooterInSection:)` method, when it's called for footer which model is of `itemType`.
     open func heightForFooter<T>(withItem type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
         tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, modelClass: T.self, signature: .heightForFooterInSection, closure: closure)
-        verifyItemEvent(for: T.self)
     }
     
     /// Registers `closure` to be executed to determine estimated footer height in `UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:)` method, when it's called for footer which model is of `itemType`.
     open func estimatedHeightForFooter<T>(withItem type: T.Type, _ closure: @escaping (T, Int) -> CGFloat) {
         tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, modelClass: T.self, signature: .estimatedHeightForFooterInSection, closure: closure)
-        verifyItemEvent(for: T.self)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:)` method is called for `headerClass`.
@@ -140,7 +134,6 @@ extension DTTableViewManager {
     open func editingStyle<T>(forItem ofType:T.Type, _ closure: @escaping (T, IndexPath) -> UITableViewCellEditingStyle)
     {
         tableDelegate?.appendReaction(for: T.self, signature: .editingStyleForRowAtIndexPath, closure: closure)
-        verifyItemEvent(for: T.self)
     }
     
     #if os(iOS)

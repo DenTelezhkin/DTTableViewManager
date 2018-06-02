@@ -89,6 +89,5 @@ extension DTTableViewManager
     /// Registers `closure` to be executed in `UITableViewDelegate.tableView(_:canEditCellForRowAt:)` method, when it's called for cell which model is of `itemType`.
     open func canEditCell<T>(withItem itemType: T.Type, _ closure: @escaping (T, IndexPath) -> Bool) {
         tableDataSource?.appendReaction(for: T.self, signature: EventMethodSignature.canEditRowAtIndexPath, closure: closure)
-        verifyItemEvent(for: T.self)
     }
 }

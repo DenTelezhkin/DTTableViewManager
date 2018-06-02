@@ -316,7 +316,7 @@ open class DTTableViewManager {
         closure(T.self, T.ModelType.self)
     }
     
-    func verifyItemEvent<T>(for itemType: T.Type, eventMethod: String = #function) {
+    func verifyItemEvent<T>(for itemType: T.Type, eventMethod: String) {
         #if swift(>=4.1)
         switch itemType {
         case is UICollectionReusableView.Type:
@@ -325,6 +325,16 @@ open class DTTableViewManager {
             anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UITableViewCell"))
         case is UITableViewHeaderFooterView.Type: anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UITableViewHeaderFooterView"))
         default: ()
+        }
+        #endif
+    }
+    
+    func verifyViewEvent<T:ModelTransfer>(for viewType: T.Type, methodName: String) {
+        #if swift(>=4.1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            if self?.viewFactory.mappings.filter({ $0.viewClass == T.self }).count == 0 {
+                self?.anomalyHandler.reportAnomaly(DTTableViewManagerAnomaly.unusedEventDetected(viewType: String(describing: T.self), methodName: methodName))
+            }
         }
         #endif
     }

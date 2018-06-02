@@ -39,6 +39,7 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
     case differentHeaderFooterClass(xibName: String, viewClass: String, expectedViewClass: String)
     case emptyXibFile(xibName: String, expectedViewClass: String)
     case modelEventCalledWithCellClass(modelType: String, methodName: String, subclassOf: String)
+    case unusedEventDetected(viewType: String, methodName: String)
     
     public var debugDescription: String {
         switch self {
@@ -74,6 +75,8 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
             return 44
         }
 """
+        case .unusedEventDetected(viewType: let view, methodName: let methodName):
+            return "⚠️[DTTableViewManager] \(methodName) event registered for \(view), but there were no view mappings registered for \(view) type. This event will never be called."
         }
     }
 }

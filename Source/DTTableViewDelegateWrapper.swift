@@ -89,16 +89,18 @@ open class DTTableViewDelegateWrapper : NSObject {
         return (storage as? HeaderFooterStorage)?.footerModel(forSection: index)
     }
     
-    final internal func appendReaction<T, U>(for cellClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
+    final internal func appendReaction<T, U>(for cellClass: T.Type, signature: EventMethodSignature, methodName: String = #function, closure: @escaping (T, T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
     {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, viewClass: T.self)
         reaction.makeReaction(closure)
         tableViewEventReactions.append(reaction)
+        manager?.verifyViewEvent(for: T.self, methodName: methodName)
     }
     
     final internal func append4ArgumentReaction<CellClass, Argument, Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
+         methodName: String = #function,
          closure: @escaping (Argument, CellClass, CellClass.ModelType, IndexPath) -> Result)
         where CellClass: ModelTransfer, CellClass: UITableViewCell
     {
@@ -107,11 +109,13 @@ open class DTTableViewDelegateWrapper : NSObject {
                                                   viewClass: CellClass.self)
         reaction.make4ArgumentsReaction(closure)
         tableViewEventReactions.append(reaction)
+        manager?.verifyViewEvent(for: CellClass.self, methodName: methodName)
     }
     
     final internal func append5ArgumentReaction<CellClass, ArgumentOne, ArgumentTwo, Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
+         methodName: String = #function,
          closure: @escaping (ArgumentOne, ArgumentTwo, CellClass, CellClass.ModelType, IndexPath) -> Result)
         where CellClass: ModelTransfer, CellClass: UITableViewCell
     {
@@ -120,31 +124,48 @@ open class DTTableViewDelegateWrapper : NSObject {
                                                   viewClass: CellClass.self)
         reaction.make5ArgumentsReaction(closure)
         tableViewEventReactions.append(reaction)
+        manager?.verifyViewEvent(for: CellClass.self, methodName: methodName)
     }
     
-    final internal func appendReaction<T, U>(for modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, IndexPath) -> U)
+    final internal func appendReaction<T, U>(for modelClass: T.Type,
+                                             signature: EventMethodSignature,
+                                             methodName: String = #function,
+                                             closure: @escaping (T, IndexPath) -> U)
     {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: T.self)
         reaction.makeReaction(closure)
         tableViewEventReactions.append(reaction)
+        manager?.verifyItemEvent(for: T.self, eventMethod: methodName)
     }
     
-    final func appendReaction<T, U>(forSupplementaryKind kind: String, supplementaryClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, T.ModelType, Int) -> U) where T: ModelTransfer, T: UIView {
+    final func appendReaction<T, U>(forSupplementaryKind kind: String,
+                                    supplementaryClass: T.Type,
+                                    signature: EventMethodSignature,
+                                    methodName: String = #function,
+                                    closure: @escaping (T, T.ModelType, Int) -> U) where T: ModelTransfer, T: UIView
+    {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), viewClass: T.self)
         let indexPathBlock : (T, T.ModelType, IndexPath) -> U = { cell, model, indexPath in
             return closure(cell, model, indexPath.section)
         }
         reaction.makeReaction(indexPathBlock)
         tableViewEventReactions.append(reaction)
+        manager?.verifyViewEvent(for: T.self, methodName: methodName)
     }
     
-    final func appendReaction<T, U>(forSupplementaryKind kind: String, modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, Int) -> U) {
+    final func appendReaction<T, U>(forSupplementaryKind kind: String,
+                                    modelClass: T.Type,
+                                    signature: EventMethodSignature,
+                                    methodName: String = #function,
+                                    closure: @escaping (T, Int) -> U)
+    {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), modelType: T.self)
         let indexPathBlock : (T, IndexPath) -> U = { model, indexPath in
             return closure(model, indexPath.section)
         }
         reaction.makeReaction(indexPathBlock)
         tableViewEventReactions.append(reaction)
+        manager?.verifyItemEvent(for: T.self, eventMethod: methodName)
     }
     
     final func appendNonCellReaction(_ signature: EventMethodSignature, closure: @escaping () -> Any) {
