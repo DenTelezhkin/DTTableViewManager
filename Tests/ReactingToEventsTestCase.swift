@@ -1101,7 +1101,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEventsRegistrationPerfomance() {
         let manager = self.controller.manager
+        #if swift(>=4.1)
         manager.anomalyHandler.anomalyAction = { _ in }
+        #endif
         measure {
             manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
             manager.canEditCell(withItem: Int.self, { _,_ in return true })
@@ -1149,7 +1151,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testSearchForEventPerfomance() {
         let manager = self.controller.manager
         controller.tableView = UITableView()
+        #if swift(>=4.1)
         manager.anomalyHandler.anomalyAction = { _ in }
+        #endif
         manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
         manager.canEditCell(withItem: Int.self, { _,_ in return true })
         manager.canMove(NibCell.self, { _,_,_ in return true })

@@ -106,6 +106,7 @@ open class DTTableViewManager {
     open var configuration = TableViewConfiguration()
     
 #if swift(>=4.1)
+    /// Anomaly handler, that handles reported by `DTTableViewManager` anomalies.
     open var anomalyHandler : DTTableViewManagerAnomalyHandler = .init()
 #endif
     

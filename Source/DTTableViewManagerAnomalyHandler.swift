@@ -27,7 +27,9 @@ import Foundation
 import DTModelStorage
 
 #if swift(>=4.1)
-public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
+/// `DTTableViewManagerAnomaly` represents various errors and unwanted behaviors that can happen when using `DTTableViewManager` class.
+/// - SeeAlso: `MemoryStorageAnomaly`, `DTCollectionViewManagerAnomaly`
+public enum DTTableViewManagerAnomaly: Equatable, CustomStringConvertible, CustomDebugStringConvertible {
     
     case nilCellModel(IndexPath)
     case nilHeaderModel(Int)
@@ -41,6 +43,7 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
     case modelEventCalledWithCellClass(modelType: String, methodName: String, subclassOf: String)
     case unusedEventDetected(viewType: String, methodName: String)
     
+    /// Debug information for happened anomaly
     public var debugDescription: String {
         switch self {
         case .nilCellModel(let indexPath): return "❗️[DTTableViewManager] UITableView requested a cell at \(indexPath), however the model at that indexPath was nil."
@@ -79,14 +82,35 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
             return "⚠️[DTTableViewManager] \(methodName) event registered for \(view), but there were no view mappings registered for \(view) type. This event will never be called."
         }
     }
+    
+    /// Short description for `DTTableViewManagerAnomaly`. Useful for sending to analytics, which might have character limit.
+    public var description: String {
+        switch self {
+        case .nilCellModel(let indexPath): return "DTTableViewManagerAnomaly.nilCellModel(\(indexPath))"
+        case .nilHeaderModel(let section): return "DTTableViewManagerAnomaly.nilHeaderModel(\(section))"
+        case .nilFooterModel(let section): return "DTTableViewManagerAnomaly.nilFooterModel(\(section))"
+        case .noCellMappingFound(modelDescription: let description, indexPath: let indexPath): return "DTTableViewManagerAnomaly.noCellMappingFound(\(description), \(indexPath))"
+        case .noHeaderFooterMappingFound(modelDescription: let description, indexPath: let indexPath): return "DTTableViewManagerAnomaly.noHeaderFooterMappingFound(\(description), \(indexPath))"
+        case .differentCellReuseIdentifier(mappingReuseIdentifier: let mappingIdentifier, cellReuseIdentifier: let cellIdentifier): return "DTTableViewManagerAnomaly.differentCellReuseIdentifier(\(mappingIdentifier), \(cellIdentifier))"
+        case .differentCellClass(xibName: let xibName, cellClass: let cellClass, expectedCellClass: let expected): return "DTTableViewManagerAnomaly.differentCellClass(\(xibName), \(cellClass), \(expected))"
+        case .differentHeaderFooterClass(xibName: let xibName, viewClass: let viewClass, expectedViewClass: let expected): return "DTTableViewManagerAnomaly.differentHeaderFooterClass(\(xibName), \(viewClass), \(expected))"
+        case .emptyXibFile(xibName: let xibName, expectedViewClass: let expected): return "DTTableViewManagerAnomaly.emptyXibFile(\(xibName), \(expected))"
+        case .modelEventCalledWithCellClass(modelType: let model, methodName: let method, subclassOf: let subclass): return "DTTableViewManagerAnomaly.modelEventCalledWithCellClass(\(model), \(method), \(subclass))"
+        case .unusedEventDetected(viewType: let view, methodName: let method): return "DTTableViewManagerAnomaly.unusedEventDetected(\(view), \(method))"
+        }
+    }
 }
 
-
+/// `DTTableViewManagerAnomalyHandler` handles anomalies from `DTTableViewManager`.
 open class DTTableViewManagerAnomalyHandler : AnomalyHandler {
+    
+    /// Default action to perform when anomaly is detected. Prints debugDescription of anomaly by default.
     open static var defaultAction : (DTTableViewManagerAnomaly) -> Void = { print($0.debugDescription) }
     
+    /// Action to perform when anomaly is detected. Defaults to `defaultAction`.
     open var anomalyAction: (DTTableViewManagerAnomaly) -> Void = DTTableViewManagerAnomalyHandler.defaultAction
     
+    /// Creates `DTTableViewManagerAnomalyHandler`.
     public init() {}
 }
 #endif
