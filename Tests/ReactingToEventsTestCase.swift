@@ -171,8 +171,6 @@ class ViewModelMappingCustomizationTestCase : XCTestCase {
         sut = ViewModelMappingCustomizingController()
         sut.tableView = AlwaysVisibleTableView()
         _ = sut.view
-        sut.manager.startManaging(withDelegate: sut)
-        sut.manager.storage = MemoryStorage()
     }
     
     func testEventReactionsSupportViewModelMappingCustomization() {
@@ -205,8 +203,6 @@ class ReactingToEventsTestCase: XCTestCase {
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
-        controller.manager.storage = MemoryStorage()
         controller.manager.memoryStorage.defersDatasourceUpdates = true
     }
     
@@ -339,8 +335,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
-        controller.manager.storage = MemoryStorage()
         controller.manager.registerFooter(ReactingHeaderFooterView.self)
         controller.manager.register(NibCell.self)
         controller.manager.memoryStorage.defersDatasourceUpdates = true

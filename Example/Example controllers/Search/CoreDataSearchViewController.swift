@@ -30,8 +30,6 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.startManaging(withDelegate: self)
-
         manager.register(BankCell.self)
         manager.storage = CoreDataStorage(fetchedResultsController: fetchResultsController)
         manager.tableViewUpdater?.didUpdateContent = { [weak self] _ in

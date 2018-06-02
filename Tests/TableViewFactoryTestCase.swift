@@ -37,15 +37,11 @@ class TableViewFactoryTestCase: XCTestCase {
         controller = DTTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
-        controller.manager.storage = MemoryStorage()
     }
     
     func testUpdateCellAtIndexPath() {
         if #available(iOS 11, tvOS 11, *) {
             controller.tableView = UITableView()
-            controller.manager.startManaging(withDelegate: controller)
-            controller.manager.storage = MemoryStorage()
             controller.manager.memoryStorage.defersDatasourceUpdates = true
         } 
         

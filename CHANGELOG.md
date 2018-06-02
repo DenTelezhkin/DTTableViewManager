@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 * Anomaly detecting system for various errors in `DTTableViewManager`.
 
+### Changed
+
+* Calling `startManaging(withDelegate:_)` method is no longer required.
+
 ### Breaking
 
 * `viewFactoryErrorHandler` deprecated property on `DTTableViewManager` was removed. All previously reported errors and warnings are now a part of anomaly detecting system.

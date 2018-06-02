@@ -53,8 +53,6 @@ class ViewModelMappingCustomizableTestCase: XCTestCase {
         controller = CustomizableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
-        controller.manager.storage = MemoryStorage()
     }
     
     func testMappingCustomizableAllowsSelectingAnotherCellMapping() {

@@ -21,7 +21,6 @@ class ReorderViewController: UIViewController, DTTableViewManageable, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.startManaging(withDelegate: self)
         manager.register(StringCell.self)
         
         manager.memoryStorage.addItems(["Section 1 cell", "Section 1 cell"], toSection: 0)

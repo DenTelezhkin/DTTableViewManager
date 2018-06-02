@@ -47,13 +47,20 @@ private var DTTableViewManagerAssociatedKey = "DTTableViewManager Associated Key
 extension DTTableViewManageable
 {
     /// Lazily instantiated `DTTableViewManager` instance. When your table view is loaded, call startManagingWithDelegate: method and `DTTableViewManager` will take over UITableView datasource and delegate. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
+    /// If this property is accessed when UITableView is loaded, and DTTableViewManager is not configured yet, startManaging(withDelegate:_) method will automatically be called once to initialize DTTableViewManager.
     /// - SeeAlso: `startManagingWithDelegate:`
     public var manager : DTTableViewManager {
         get {
             if let manager = objc_getAssociatedObject(self, &DTTableViewManagerAssociatedKey) as? DTTableViewManager {
+                if !manager.isConfigured && tableView != nil {
+                    manager.startManaging(withDelegate: self)
+                }
                 return manager
             }
             let manager = DTTableViewManager()
+            if tableView != nil {
+                manager.startManaging(withDelegate: self)
+            }
             objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, manager, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return manager
         }
@@ -69,9 +76,15 @@ extension DTTableViewOptionalManageable {
     public var manager : DTTableViewManager {
         get {
             if let manager = objc_getAssociatedObject(self, &DTTableViewManagerAssociatedKey) as? DTTableViewManager {
+                if !manager.isConfigured && tableView != nil {
+                    manager.startManaging(withDelegate: self)
+                }
                 return manager
             }
             let manager = DTTableViewManager()
+            if tableView != nil {
+                manager.startManaging(withDelegate: self)
+            }
             objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, manager, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return manager
         }
@@ -214,6 +227,7 @@ open class DTTableViewManager {
     /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
     open func startManaging(withDelegate delegate : DTTableViewManageable)
     {
+        guard !isConfigured else { return }
         guard let tableView = delegate.tableView else {
             preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
         }
@@ -228,6 +242,7 @@ open class DTTableViewManager {
     /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
     open func startManaging(withDelegate delegate : DTTableViewOptionalManageable)
     {
+        guard !isConfigured else { return }
         guard let tableView = delegate.tableView else {
             preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
         }
@@ -235,7 +250,11 @@ open class DTTableViewManager {
         startManaging(with: tableView)
     }
     
+    fileprivate var isConfigured = false
+    
     private func startManaging(with tableView: UITableView) {
+        guard !isConfigured else { return }
+        defer { isConfigured = true }
         if let mappingDelegate = delegate as? ViewModelMappingCustomizing {
             viewFactory.mappingCustomizableDelegate = mappingDelegate
         }

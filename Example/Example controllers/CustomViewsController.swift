@@ -15,8 +15,6 @@ class CustomViewsController: UIViewController, DTTableViewManageable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        manager.startManaging(withDelegate: self)
         manager.register(CustomStringCell.self)
         manager.registerHeader(CustomHeaderFooterView.self)
         manager.registerFooter(CustomHeaderFooterView.self)

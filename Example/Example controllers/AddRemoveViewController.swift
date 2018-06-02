@@ -16,8 +16,6 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        manager.startManaging(withDelegate: self)
-        
         manager.configureEvents(for: StringCell.self) { [weak self] cellType, modelType in
             manager.register(cellType)
             manager.didSelect(cellType) { _, model, indexPath  in

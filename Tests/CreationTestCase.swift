@@ -28,7 +28,6 @@ class CreationTestCase: XCTestCase {
     func testManagingWithOptionalTableViewWorks() {
         let controller = OptionalTableViewController()
         controller.tableView = UITableView()
-        controller.manager.startManaging(withDelegate: controller)
         
         expect(controller.manager.isManagingTableView).to(beTrue())
     }
@@ -36,19 +35,16 @@ class CreationTestCase: XCTestCase {
     func testCreatingTableControllerFromCode()
     {
         let controller = DTTestTableViewController()
-        controller.manager.startManaging(withDelegate: controller)
         controller.manager.register(FooCell.self)
     }
     
     func testDelegateIsNotNil() {
         let controller = DTTestTableViewController()
-        controller.manager.startManaging(withDelegate: controller)
         expect(controller.manager.storage.delegate != nil).to(beTrue())
     }
     
     func testDelegateIsNotNilForMemoryStorage() {
         let controller = DTTestTableViewController()
-        controller.manager.startManaging(withDelegate: controller)
         expect(controller.manager.memoryStorage.delegate != nil).to(beTrue())
     }
     
@@ -69,14 +65,12 @@ class CreationTestCase: XCTestCase {
     {
         let controller = XibTableViewController(nibName: "XibTableViewController", bundle: Bundle(for: type(of: self)))
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
         controller.manager.register(FooCell.self)
     }
     
     func testConfigurationAssociation()
     {
         let foo = DTTestTableViewController(nibName: nil, bundle: nil)
-        foo.manager.startManaging(withDelegate: foo)
         
         expect(foo.manager).toNot(beNil())
         expect(foo.manager) === foo.manager // Test if lazily instantiating using associations works correctly
@@ -87,7 +81,6 @@ class CreationTestCase: XCTestCase {
         let manager = DTTableViewManager()
         let foo = DTTestTableViewController(nibName: nil, bundle: nil)
         foo.manager = manager
-        foo.manager.startManaging(withDelegate: foo)
         
         expect(foo.manager === manager).to(beTruthy())
     }
@@ -96,5 +89,11 @@ class CreationTestCase: XCTestCase {
         let loadedView = StringCell.dt_loadFromXibNamed("NibCell")
         
         expect(loadedView).to(beNil())
+    }
+    
+    func testCallingStartManagingMethodIsNotRequired() {
+        let controller = DTTestTableViewController()
+        controller.manager.register(NibCell.self)
+        controller.manager.memoryStorage.addItem(3)
     }
 }
