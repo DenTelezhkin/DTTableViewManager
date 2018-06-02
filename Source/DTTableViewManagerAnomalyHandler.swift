@@ -38,6 +38,7 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
     case differentCellClass(xibName: String, cellClass: String, expectedCellClass: String)
     case differentHeaderFooterClass(xibName: String, viewClass: String, expectedViewClass: String)
     case emptyXibFile(xibName: String, expectedViewClass: String)
+    case modelEventCalledWithCellClass(modelType: String, methodName: String, subclassOf: String)
     
     public var debugDescription: String {
         switch self {
@@ -57,6 +58,22 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomDebugStringConvertible {
             return "⚠️[DTTableViewManager] Attempted to register xib \(xibName), but view found in a xib was of type \(viewClass), while expected type is \(expectedViewClass). This can prevent headers/footers from being updated with models and react to events."
         case .emptyXibFile(xibName: let xibName, expectedViewClass: let expectedViewClass):
             return "⚠️[DTTableViewManager] Attempted to register xib \(xibName) for \(expectedViewClass), but this xib does not contain any views."
+        case .modelEventCalledWithCellClass(modelType: let modelType, methodName: let methodName, subclassOf: let subclassOf):
+            return
+    """
+    ⚠️[DTTableViewManager] Event \(methodName) registered with model type, that happens to be a subclass of \(subclassOf): \(modelType).
+
+    This is likely not what you want, because this event expects to receive model type used for current indexPath instead of cell/view.
+    Reasoning behind it is the fact that for some events views have not yet been created(for example: tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)).
+    Because they are not created yet, this event cannot be called with cell/view object, and even it's type is unknown at this point, as the mapping resolution will happen later.
+
+    Most likely you need to use model type, that will be passed to this cell/view through ModelTransfer protocol.
+    For example, for height of cell that expects to receive model Int, event would look like so:
+            
+        manager.heightForCell(withItem: Int.self) { model, indexPath in
+            return 44
+        }
+"""
         }
     }
 }
