@@ -47,13 +47,20 @@ private var DTTableViewManagerAssociatedKey = "DTTableViewManager Associated Key
 extension DTTableViewManageable
 {
     /// Lazily instantiated `DTTableViewManager` instance. When your table view is loaded, call startManagingWithDelegate: method and `DTTableViewManager` will take over UITableView datasource and delegate. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
+    /// If this property is accessed when UITableView is loaded, and DTTableViewManager is not configured yet, startManaging(withDelegate:_) method will automatically be called once to initialize DTTableViewManager.
     /// - SeeAlso: `startManagingWithDelegate:`
     public var manager : DTTableViewManager {
         get {
             if let manager = objc_getAssociatedObject(self, &DTTableViewManagerAssociatedKey) as? DTTableViewManager {
+                if !manager.isConfigured && tableView != nil {
+                    manager.startManaging(withDelegate: self)
+                }
                 return manager
             }
             let manager = DTTableViewManager()
+            if tableView != nil {
+                manager.startManaging(withDelegate: self)
+            }
             objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, manager, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return manager
         }
@@ -69,9 +76,15 @@ extension DTTableViewOptionalManageable {
     public var manager : DTTableViewManager {
         get {
             if let manager = objc_getAssociatedObject(self, &DTTableViewManagerAssociatedKey) as? DTTableViewManager {
+                if !manager.isConfigured && tableView != nil {
+                    manager.startManaging(withDelegate: self)
+                }
                 return manager
             }
             let manager = DTTableViewManager()
+            if tableView != nil {
+                manager.startManaging(withDelegate: self)
+            }
             objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, manager, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return manager
         }
@@ -85,19 +98,17 @@ extension DTTableViewOptionalManageable {
 /// - SeeAlso: `startManagingWithDelegate:`
 open class DTTableViewManager {
     
-    /// Internal weak link to `UITableView`
-    final var tableView : UITableView?
-    {
-        if let delegate = delegate as? DTTableViewManageable { return delegate.tableView }
-        if let delegate = delegate as? DTTableViewOptionalManageable { return delegate.tableView }
-        return nil
-    }
-    
     /// Creates `DTTableViewManager`. Usually you don't need to call this method directly, as `manager` property on `DTTableViewManageable` instance is filled automatically.
     public init() {}
     
-    /// `DTTableViewManageable` delegate.
-    final fileprivate weak var delegate : AnyObject?
+    /// Stores all configuration options for `DTTableViewManager`.
+    /// - SeeAlso: `TableViewConfiguration`.
+    open var configuration = TableViewConfiguration()
+    
+#if swift(>=4.1)
+    /// Anomaly handler, that handles reported by `DTTableViewManager` anomalies.
+    open var anomalyHandler : DTTableViewManagerAnomalyHandler = .init()
+#endif
     
     /// Bool property, that will be true, after `startManagingWithDelegate` method is called on `DTTableViewManager`.
     open var isManagingTableView : Bool {
@@ -108,18 +119,23 @@ open class DTTableViewManager {
     final lazy var viewFactory: TableViewFactory = {
         precondition(self.isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
         //swiftlint:disable:next force_unwrapping
-        return TableViewFactory(tableView: self.tableView!)
+        let factory = TableViewFactory(tableView: self.tableView!)
+        #if swift(>=4.1)
+        factory.anomalyHandler = anomalyHandler
+        #endif
+        return factory
     }()
     
-    /// Stores all configuration options for `DTTableViewManager`.
-    /// - SeeAlso: `TableViewConfiguration`.
-    open var configuration = TableViewConfiguration()
+    /// Internal weak link to `UITableView`
+    final var tableView : UITableView?
+    {
+        if let delegate = delegate as? DTTableViewManageable { return delegate.tableView }
+        if let delegate = delegate as? DTTableViewOptionalManageable { return delegate.tableView }
+        return nil
+    }
     
-    @available(*, deprecated, message: "This property and error handling behavior is deprecated and will be removed in future versions of the framework. If you have a use case for it, please open issue on GitHub.")
-    /// Error handler ot be executed when critical error happens with `TableViewFactory`.
-    /// This can be useful to provide more debug information for crash logs, since preconditionFailure Swift method provides little to zero insight about what happened and when.
-    /// This closure will be called prior to calling preconditionFailure in `handleTableViewFactoryError` method.
-    @nonobjc open var viewFactoryErrorHandler : ((DTTableViewFactoryError) -> Void)?
+    /// `DTTableViewManageable` delegate.
+    final fileprivate weak var delegate : AnyObject?
     
     /// Implicitly unwrap storage property to `MemoryStorage`.
     /// - Warning: if storage is not MemoryStorage, will throw an exception.
@@ -212,6 +228,7 @@ open class DTTableViewManager {
     /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
     open func startManaging(withDelegate delegate : DTTableViewManageable)
     {
+        guard !isConfigured else { return }
         guard let tableView = delegate.tableView else {
             preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
         }
@@ -226,6 +243,7 @@ open class DTTableViewManager {
     /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
     open func startManaging(withDelegate delegate : DTTableViewOptionalManageable)
     {
+        guard !isConfigured else { return }
         guard let tableView = delegate.tableView else {
             preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
         }
@@ -233,7 +251,11 @@ open class DTTableViewManager {
         startManaging(with: tableView)
     }
     
+    fileprivate var isConfigured = false
+    
     private func startManaging(with tableView: UITableView) {
+        guard !isConfigured else { return }
+        defer { isConfigured = true }
         if let mappingDelegate = delegate as? ViewModelMappingCustomizing {
             viewFactory.mappingCustomizableDelegate = mappingDelegate
         }
@@ -293,6 +315,29 @@ open class DTTableViewManager {
     ///   - closure: closure to run with view types.
     open func configureEvents<T:ModelTransfer>(for klass: T.Type, _ closure: (T.Type, T.ModelType.Type) -> Void) {
         closure(T.self, T.ModelType.self)
+    }
+    
+    func verifyItemEvent<T>(for itemType: T.Type, eventMethod: String) {
+        #if swift(>=4.1)
+        switch itemType {
+        case is UICollectionReusableView.Type:
+            anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UICollectionReusableView"))
+        case is UITableViewCell.Type:
+            anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UITableViewCell"))
+        case is UITableViewHeaderFooterView.Type: anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UITableViewHeaderFooterView"))
+        default: ()
+        }
+        #endif
+    }
+    
+    func verifyViewEvent<T:ModelTransfer>(for viewType: T.Type, methodName: String) {
+        #if swift(>=4.1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            if self?.viewFactory.mappings.filter({ $0.viewClass == T.self }).count == 0 {
+                self?.anomalyHandler.reportAnomaly(DTTableViewManagerAnomaly.unusedEventDetected(viewType: String(describing: T.self), methodName: methodName))
+            }
+        }
+        #endif
     }
 }
 

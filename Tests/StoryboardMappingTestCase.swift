@@ -21,7 +21,6 @@ class StoryboardMappingTestCase: XCTestCase {
         let storyboard = UIStoryboard(name: "FixtureStoryboard", bundle: Bundle(for: type(of: self)))
         controller = storyboard.instantiateInitialViewController() as! StoryboardViewController
         _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
     }
     
     func testCellIsMappedAndOutletsAreCreated() {

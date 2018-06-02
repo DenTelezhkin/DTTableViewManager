@@ -171,8 +171,6 @@ class ViewModelMappingCustomizationTestCase : XCTestCase {
         sut = ViewModelMappingCustomizingController()
         sut.tableView = AlwaysVisibleTableView()
         _ = sut.view
-        sut.manager.startManaging(withDelegate: sut)
-        sut.manager.storage = MemoryStorage()
     }
     
     func testEventReactionsSupportViewModelMappingCustomization() {
@@ -205,8 +203,6 @@ class ReactingToEventsTestCase: XCTestCase {
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
-        controller.manager.storage = MemoryStorage()
         controller.manager.memoryStorage.defersDatasourceUpdates = true
     }
     
@@ -339,8 +335,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
-        controller.manager.storage = MemoryStorage()
         controller.manager.registerFooter(ReactingHeaderFooterView.self)
         controller.manager.register(NibCell.self)
         controller.manager.memoryStorage.defersDatasourceUpdates = true
@@ -1107,6 +1101,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEventsRegistrationPerfomance() {
         let manager = self.controller.manager
+        #if swift(>=4.1)
+        manager.anomalyHandler.anomalyAction = { _ in }
+        #endif
         measure {
             manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
             manager.canEditCell(withItem: Int.self, { _,_ in return true })
@@ -1154,6 +1151,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testSearchForEventPerfomance() {
         let manager = self.controller.manager
         controller.tableView = UITableView()
+        #if swift(>=4.1)
+        manager.anomalyHandler.anomalyAction = { _ in }
+        #endif
         manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
         manager.canEditCell(withItem: Int.self, { _,_ in return true })
         manager.canMove(NibCell.self, { _,_,_ in return true })
@@ -1190,5 +1190,27 @@ class ReactingToEventsFastTestCase : XCTestCase {
             manager.tableDelegate?.tableView(self.controller.tableView, didSelectRowAt: indexPath(0, 0))
         }
     }
+    
+#if swift(>=4.1)
+    func testModelEventCalledWithCellTypeLeadsToAnomaly() {
+        let exp = expectation(description: "Model event called with cell")
+        let anomaly = DTTableViewManagerAnomaly.modelEventCalledWithCellClass(modelType: "NibCell", methodName: "canEditCell(withItem:_:)", subclassOf: "UITableViewCell")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.canEditCell(withItem: NibCell.self) { _, _ in true }
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "    ⚠️[DTTableViewManager] Event canEditCell(withItem:_:) registered with model type, that happens to be a subclass of UITableViewCell: NibCell.\n\n    This is likely not what you want, because this event expects to receive model type used for current indexPath instead of cell/view.\n    Reasoning behind it is the fact that for some events views have not yet been created(for example: tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)).\n    Because they are not created yet, this event cannot be called with cell/view object, and even it\'s type is unknown at this point, as the mapping resolution will happen later.\n\n    Most likely you need to use model type, that will be passed to this cell/view through ModelTransfer protocol.\n    For example, for height of cell that expects to receive model Int, event would look like so:\n            \n        manager.heightForCell(withItem: Int.self) { model, indexPath in\n            return 44\n        }")
+    }
+    
+    func testUnusedEventLeadsToAnomaly() {
+        let exp = expectation(description: "Unused event")
+        let anomaly = DTTableViewManagerAnomaly.unusedEventDetected(viewType: "StringCell", methodName: "didSelect")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.didSelect(StringCell.self) { _, _, _ in }
+        waitForExpectations(timeout: 1.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] didSelect event registered for StringCell, but there were no view mappings registered for StringCell type. This event will never be called.")
+    }
+#endif
 }
 

@@ -31,6 +31,7 @@ before_script:
   - carthage bootstrap --cache-builds
 
 script:
+  - instruments -s devices # List all available simulators
   - bundle exec fastlane $ACTION
 
 env:

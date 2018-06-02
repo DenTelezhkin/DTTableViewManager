@@ -33,10 +33,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     var viewFactory: TableViewFactory? { return manager?.viewFactory }
     var storage: Storage? { return manager?.storage }
     var configuration: TableViewConfiguration? { return manager?.configuration }
-    
-    @available(*, deprecated, message: "Error handling system is deprecated and will be removed in future versions of the framework")
-    var viewFactoryErrorHandler: ((DTTableViewFactoryError) -> Void)? { return manager?.viewFactoryErrorHandler }
-    private weak var manager: DTTableViewManager?
+    weak var manager: DTTableViewManager?
     
     /// Creates base wrapper for datasource and delegate implementations
     public init(delegate: AnyObject?, tableViewManager: DTTableViewManager) {
@@ -58,19 +55,29 @@ open class DTTableViewDelegateWrapper : NSObject {
         // We force UITableView to flush that cache and query us again, because with new event we might have new delegate or datasource method to respond to.
     }
     
+    func shouldDisplayHeaderView(forSection index: Int) -> Bool {
+        guard let storage = storage, let configuration = configuration, storage.sections.count > index else { return false }
+        if storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection {
+            return false
+        }
+        return true
+    }
+    
+    func shouldDisplayFooterView(forSection index: Int) -> Bool {
+        guard let storage = storage, let configuration = configuration, storage.sections.count > index else { return false }
+        if storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection {
+            return false
+        }
+        return true
+    }
+    
     /// Returns header model for section at `index`, or nil if it is not found.
     ///
     /// If `TableViewConfiguration` `displayHeaderOnEmptySection` is false, this method also returns nil.
     final func headerModel(forSection index: Int) -> Any?
     {
-        guard let storage = storage, let configuration = configuration else { return nil }
-        guard storage.sections.count > index else { return nil }
-        
-        if storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection
-        {
-            return nil
-        }
-        return (self.storage as? HeaderFooterStorage)?.headerModel(forSection: index)
+        if !shouldDisplayHeaderView(forSection: index) { return nil }
+        return (storage as? HeaderFooterStorage)?.headerModel(forSection: index)
     }
     
     /// Returns footer model for section at `index`, or nil if it is not found.
@@ -78,26 +85,22 @@ open class DTTableViewDelegateWrapper : NSObject {
     /// If `TableViewConfiguration` `displayFooterOnEmptySection` is false, this method also returns nil.
     final func footerModel(forSection index: Int) -> Any?
     {
-        guard let storage = storage, let configuration = configuration else { return nil }
-        guard storage.sections.count > index else { return nil }
-        
-        if storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection
-        {
-            return nil
-        }
+        if !shouldDisplayFooterView(forSection: index) { return nil }
         return (storage as? HeaderFooterStorage)?.footerModel(forSection: index)
     }
     
-    final internal func appendReaction<T, U>(for cellClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
+    final internal func appendReaction<T, U>(for cellClass: T.Type, signature: EventMethodSignature, methodName: String = #function, closure: @escaping (T, T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
     {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, viewClass: T.self)
         reaction.makeReaction(closure)
         tableViewEventReactions.append(reaction)
+        manager?.verifyViewEvent(for: T.self, methodName: methodName)
     }
     
     final internal func append4ArgumentReaction<CellClass, Argument, Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
+         methodName: String = #function,
          closure: @escaping (Argument, CellClass, CellClass.ModelType, IndexPath) -> Result)
         where CellClass: ModelTransfer, CellClass: UITableViewCell
     {
@@ -106,11 +109,13 @@ open class DTTableViewDelegateWrapper : NSObject {
                                                   viewClass: CellClass.self)
         reaction.make4ArgumentsReaction(closure)
         tableViewEventReactions.append(reaction)
+        manager?.verifyViewEvent(for: CellClass.self, methodName: methodName)
     }
     
     final internal func append5ArgumentReaction<CellClass, ArgumentOne, ArgumentTwo, Result>
         (for cellClass: CellClass.Type,
          signature: EventMethodSignature,
+         methodName: String = #function,
          closure: @escaping (ArgumentOne, ArgumentTwo, CellClass, CellClass.ModelType, IndexPath) -> Result)
         where CellClass: ModelTransfer, CellClass: UITableViewCell
     {
@@ -119,31 +124,48 @@ open class DTTableViewDelegateWrapper : NSObject {
                                                   viewClass: CellClass.self)
         reaction.make5ArgumentsReaction(closure)
         tableViewEventReactions.append(reaction)
+        manager?.verifyViewEvent(for: CellClass.self, methodName: methodName)
     }
     
-    final internal func appendReaction<T, U>(for modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, IndexPath) -> U)
+    final internal func appendReaction<T, U>(for modelClass: T.Type,
+                                             signature: EventMethodSignature,
+                                             methodName: String = #function,
+                                             closure: @escaping (T, IndexPath) -> U)
     {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: T.self)
         reaction.makeReaction(closure)
         tableViewEventReactions.append(reaction)
+        manager?.verifyItemEvent(for: T.self, eventMethod: methodName)
     }
     
-    final func appendReaction<T, U>(forSupplementaryKind kind: String, supplementaryClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, T.ModelType, Int) -> U) where T: ModelTransfer, T: UIView {
+    final func appendReaction<T, U>(forSupplementaryKind kind: String,
+                                    supplementaryClass: T.Type,
+                                    signature: EventMethodSignature,
+                                    methodName: String = #function,
+                                    closure: @escaping (T, T.ModelType, Int) -> U) where T: ModelTransfer, T: UIView
+    {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), viewClass: T.self)
         let indexPathBlock : (T, T.ModelType, IndexPath) -> U = { cell, model, indexPath in
             return closure(cell, model, indexPath.section)
         }
         reaction.makeReaction(indexPathBlock)
         tableViewEventReactions.append(reaction)
+        manager?.verifyViewEvent(for: T.self, methodName: methodName)
     }
     
-    final func appendReaction<T, U>(forSupplementaryKind kind: String, modelClass: T.Type, signature: EventMethodSignature, closure: @escaping (T, Int) -> U) {
+    final func appendReaction<T, U>(forSupplementaryKind kind: String,
+                                    modelClass: T.Type,
+                                    signature: EventMethodSignature,
+                                    methodName: String = #function,
+                                    closure: @escaping (T, Int) -> U)
+    {
         let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), modelType: T.self)
         let indexPathBlock : (T, IndexPath) -> U = { model, indexPath in
             return closure(model, indexPath.section)
         }
         reaction.makeReaction(indexPathBlock)
         tableViewEventReactions.append(reaction)
+        manager?.verifyItemEvent(for: T.self, eventMethod: methodName)
     }
     
     final func appendNonCellReaction(_ signature: EventMethodSignature, closure: @escaping () -> Any) {
@@ -253,17 +275,6 @@ open class DTTableViewDelegateWrapper : NSObject {
     func performNonCellReaction<T, U>(_ signature: EventMethodSignature, argumentOne: T, argumentTwo: U) -> Any? {
         return tableViewEventReactions.first(where: { $0.methodSignature == signature.rawValue })?
             .performWithArguments((argumentOne, argumentTwo, 0))
-    }
-    
-    /// Calls `viewFactoryErrorHandler` with `error`. If it's nil, prints error into console and asserts.
-    @available(*, deprecated, message: "Error handling system is deprecated and will be removed in future versions of the framework.")
-    @nonobjc func handleTableViewFactoryError(_ error: DTTableViewFactoryError) {
-        if let handler = viewFactoryErrorHandler {
-            handler(error)
-        } else {
-            print((error as NSError).description)
-            assertionFailure(error.description)
-        }
     }
     
     // MARK: - Target Forwarding

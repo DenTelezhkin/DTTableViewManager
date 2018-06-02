@@ -69,14 +69,6 @@ import DTTableViewManager
 import DTModelStorage
 ```
 
-The core object of a framework is `DTTableViewManager`. Declare your class as `DTTableViewManageable`, and it will be automatically injected with `manager` property, that will hold an instance of `DTTableViewManager`.
-
-Make sure your UITableView outlet is wired to your class and call in viewDidLoad:
-
-```swift
-	manager.startManaging(withDelegate: self)
-```
-
 Let's say you have an array of Posts you want to display in UITableView. To quickly show them using DTTableViewManager, here's what you need to do:
 
 * Create UITableViewCell subclass, let's say PostCell. Adopt ModelTransfer protocol
@@ -89,7 +81,9 @@ class PostCell : UITableViewCell, ModelTransfer {
 }
 ```
 
-* Call registration methods on your `DTTableViewManageable` instance
+* Declare your class as `DTTableViewManageable`, and it will be automatically injected with `manager` property, that will hold an instance of `DTTableViewManager`.
+
+* Make sure your UITableView outlet is wired to your class and call registration methods (typically in viewDidLoad method):
 
 ```swift
 	manager.register(PostCell.self)

@@ -47,20 +47,15 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     
     /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = storage?.item(at: indexPath) else {
+        guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(storage?.item(at: indexPath) as Any) else {
+#if swift(>=4.1)
+            manager?.anomalyHandler.reportAnomaly(.nilCellModel(indexPath))
+#endif
             return UITableViewCell()
         }
-        
-        let cell : UITableViewCell
-        do {
-            cell = try viewFactory?.cellForModel(model, atIndexPath: indexPath) ?? UITableViewCell()
-        } catch let error as DTTableViewFactoryError {
-            handleTableViewFactoryError(error)
-            cell = UITableViewCell()
-        } catch {
-            cell = UITableViewCell()
+        guard let cell = viewFactory?.cellForModel(model, atIndexPath: indexPath) else {
+            return UITableViewCell()
         }
-        
         _ = tableViewEventReactions.performReaction(of: .cell, signature: EventMethodSignature.configureCell.rawValue, view: cell, model: model, location: indexPath)
         return cell
     }

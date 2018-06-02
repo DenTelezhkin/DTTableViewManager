@@ -22,8 +22,6 @@ class DatasourceTestCase: XCTestCase {
         controller = DTTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
-        controller.manager.storage = MemoryStorage()
         
         controller.manager.register(NibCell.self)
     }
@@ -303,4 +301,182 @@ class DatasourceTestCase: XCTestCase {
         
         waitForExpectations(timeout: 0.5, handler: nil)
     }
+    
+#if swift(>=4.1)
+    func testNilModelInStorageLeadsToNilModelAnomaly() {
+        let exp = expectation(description: "Nil model in storage")
+        let model: Int?? = nil
+        let anomaly = DTTableViewManagerAnomaly.nilCellModel(indexPath(0, 0))
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.memoryStorage.addItem(model)
+        
+        #if os(tvOS)
+            let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        #endif
+        if #available(iOS 11, *) {}
+        else {
+            let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        }
+        
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell at [0, 0], however the model at that indexPath was nil.")
+    }
+    
+    func testNilHeaderModelLeadsToAnomaly() {
+        let exp = expectation(description: "Nil header model in storage")
+        let model: Int?? = nil
+        let anomaly = DTTableViewManagerAnomaly.nilHeaderModel(0)
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerHeader(NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionHeaderModel(model, forSection: 0)
+        controller.manager.configuration.displayHeaderOnEmptySection = true
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a header view at section 0, however the model was nil.")
+    }
+    
+    func testNilFooterModelLeadsToAnomaly() {
+        let exp = expectation(description: "Nil footer model in storage")
+        let model: Int?? = nil
+        let anomaly = DTTableViewManagerAnomaly.nilFooterModel(0)
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerFooter(NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionFooterModel(model, forSection: 0)
+        controller.manager.configuration.displayFooterOnEmptySection = true
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a footer view at section 0, however the model was nil.")
+    }
+    
+    func testNilHeaderModelDoesNotLeadToAnomalyIfItShouldNotBeDisplayedInTheFirstPlace() {
+        let exp = expectation(description: "Nil header model in storage")
+        exp.isInverted = true
+        let model: Int?? = nil
+        controller.manager.configuration.displayHeaderOnEmptySection = false
+        let anomaly = DTTableViewManagerAnomaly.nilHeaderModel(0)
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerHeader(NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionHeaderModel(model, forSection: 0)
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
+        waitForExpectations(timeout: 0.1)
+    }
+    
+    func testNilFooterModelDoesNotLeadToAnomalyIfItShouldNotBeDisplayedInTheFirstPlace() {
+        let exp = expectation(description: "Nil footer model in storage")
+        exp.isInverted = true
+        let model: Int?? = nil
+        controller.manager.configuration.displayFooterOnEmptySection = false
+        let anomaly = DTTableViewManagerAnomaly.nilFooterModel(0)
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerFooter(NibHeaderFooterView.self)
+        controller.manager.memoryStorage.setSectionFooterModel(model, forSection: 0)
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
+        waitForExpectations(timeout: 0.1)
+    }
+    
+    func testNoCellMappingsTriggerAnomaly() {
+        let exp = expectation(description: "No cell mappings found for model")
+        let anomaly = DTTableViewManagerAnomaly.noCellMappingFound(modelDescription: "3", indexPath: indexPath(0, 0))
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.memoryStorage.addItem("3")
+        #if os(tvOS)
+        let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        #endif
+        if #available(iOS 11, *) {}
+        else {
+            let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        }
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell for model at [0, 0], but view model mapping for it was not found, model description: 3")
+    }
+    
+    func testNoHeaderMappingTriggersToAnomaly() {
+        let exp = expectation(description: "No header mapping found")
+        let anomaly = DTTableViewManagerAnomaly.noHeaderFooterMappingFound(modelDescription: "0", indexPath: IndexPath(index: 0))
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.memoryStorage.setSectionHeaderModel(0, forSection: 0)
+        controller.manager.configuration.displayHeaderOnEmptySection = true
+        controller.manager.configuration.sectionHeaderStyle = .view
+        let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a header/footer view for model ar [0], but view model mapping for it was not found, model description: 0")
+    }
+    
+    func testWrongReuseIdentifierLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong reuse identifier")
+        let anomaly = DTTableViewManagerAnomaly.differentCellReuseIdentifier(mappingReuseIdentifier: "WrongReuseIdentifierCell",
+                                                                             cellReuseIdentifier: "Foo")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.register(WrongReuseIdentifierCell.self)
+        
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: Foo does not match reuseIdentifier used to register with UITableView: WrongReuseIdentifierCell. \n" +
+            "If you are using XIB, please remove reuseIdentifier from XIB file, or change it to name of UITableViewCell subclass. If you are using Storyboards, please change UITableViewCell identifier to name of the class. \n" +
+        "If you need different reuseIdentifier for any reason, you can change reuseIdentifier when registering mapping.")
+    }
+    
+    func testWrongReuseIdentifierWithDifferentCellClassNameLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong reuse identifier")
+        let anomaly = DTTableViewManagerAnomaly.differentCellReuseIdentifier(mappingReuseIdentifier: "WrongReuseIdentifierCell",
+                                                                             cellReuseIdentifier: "Foo")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerNibNamed("RandomNameWrongReuseIdentifierCell", for: WrongReuseIdentifierCell.self)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: Foo does not match reuseIdentifier used to register with UITableView: WrongReuseIdentifierCell. \nIf you are using XIB, please remove reuseIdentifier from XIB file, or change it to name of UITableViewCell subclass. If you are using Storyboards, please change UITableViewCell identifier to name of the class. \nIf you need different reuseIdentifier for any reason, you can change reuseIdentifier when registering mapping.")
+    }
+    
+    func testWrongTableViewCellClassComingFromXibLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong cell class")
+        let anomaly = DTTableViewManagerAnomaly.differentCellClass(xibName: "RandomNibNameCell",
+                                                                   cellClass: "BaseTestCell",
+                                                                   expectedCellClass: "StringCell")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerNibNamed("RandomNibNameCell", for: StringCell.self)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib RandomNibNameCell, but view found in a xib was of type BaseTestCell, while expected type is StringCell. This can prevent cells from being updated with models and react to events.")
+    }
+    
+    func testWrongClassTableViewCellComingFromDequeue() {
+        let exp = expectation(description: "Wrong cell class")
+        let anomaly = DTTableViewManagerAnomaly.emptyXibFile(xibName: "EmptyXib",
+                                                             expectedViewClass: "StringCell")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerNibNamed("EmptyXib", for: StringCell.self)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib EmptyXib for StringCell, but this xib does not contain any views.")
+    }
+    
+    func testWrongHeaderClassComingFromXibLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong header class")
+        let anomaly = DTTableViewManagerAnomaly.differentHeaderFooterClass(xibName: "NibView",
+                                                                           viewClass: "NibView",
+                                                                           expectedViewClass: "ReactingHeaderFooterView")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerNibNamed("NibView", forHeader: ReactingHeaderFooterView.self)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib NibView, but view found in a xib was of type NibView, while expected type is ReactingHeaderFooterView. This can prevent headers/footers from being updated with models and react to events.")
+    }
+    
+    func testWrongFooterClassComingFromXibLeadsToAnomaly() {
+        let exp = expectation(description: "Wrong header class")
+        let anomaly = DTTableViewManagerAnomaly.differentHeaderFooterClass(xibName: "NibView",
+                                                                           viewClass: "NibView",
+                                                                           expectedViewClass: "ReactingHeaderFooterView")
+        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        controller.manager.registerNibNamed("NibView", forFooter: ReactingHeaderFooterView.self)
+        waitForExpectations(timeout: 0.1)
+        
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib NibView, but view found in a xib was of type NibView, while expected type is ReactingHeaderFooterView. This can prevent headers/footers from being updated with models and react to events.")
+    }
+#endif
 }

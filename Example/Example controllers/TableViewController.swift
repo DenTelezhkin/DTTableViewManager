@@ -15,7 +15,6 @@ class TableViewController: UITableViewController, DTTableViewManageable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        manager.startManaging(withDelegate: self)
         manager.register(StringCell.self)
         manager.memoryStorage.addItems(["1","2","3"])
     }

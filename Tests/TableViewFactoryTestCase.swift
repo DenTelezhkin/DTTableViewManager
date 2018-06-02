@@ -37,47 +37,11 @@ class TableViewFactoryTestCase: XCTestCase {
         controller = DTTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.startManaging(withDelegate: controller)
-        controller.manager.storage = MemoryStorage()
-    }
-    
-    func testCellForModelNilModelError() {
-        let model: Int? = nil
-        do {
-            try _ = controller.manager.viewFactory.cellForModel(model as Any, atIndexPath: indexPath(0, 0))
-        } catch DTTableViewFactoryError.nilCellModel(let indexPath) {
-            expect(indexPath) == IndexPath(item: 0, section: 0)
-        } catch {
-            XCTFail()
-        }
-    }
-    
-    func testNoMappingsFound() {
-        do {
-            try _ = controller.manager.viewFactory.cellForModel(1, atIndexPath: indexPath(0, 0))
-        } catch DTTableViewFactoryError.noCellMappings(let model) {
-            expect(model as? Int) == 1
-        } catch {
-            XCTFail()
-        }
-    }
-    
-    func testNilHeaderFooterModel() {
-        let model: Int? = nil
-        do {
-            try _ = controller.manager.viewFactory.headerFooterView(of: .supplementaryView(kind: "Foo"), model: model as Any, atIndexPath: IndexPath(index: 0))
-        } catch DTTableViewFactoryError.nilHeaderFooterModel(let section) {
-            expect(section) == 0
-        } catch {
-            XCTFail()
-        }
     }
     
     func testUpdateCellAtIndexPath() {
         if #available(iOS 11, tvOS 11, *) {
             controller.tableView = UITableView()
-            controller.manager.startManaging(withDelegate: controller)
-            controller.manager.storage = MemoryStorage()
             controller.manager.memoryStorage.defersDatasourceUpdates = true
         } 
         
