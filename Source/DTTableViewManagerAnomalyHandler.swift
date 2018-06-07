@@ -105,7 +105,7 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomStringConvertible, Custo
 open class DTTableViewManagerAnomalyHandler : AnomalyHandler {
     
     /// Default action to perform when anomaly is detected. Prints debugDescription of anomaly by default.
-    open static var defaultAction : (DTTableViewManagerAnomaly) -> Void = { print($0.debugDescription) }
+    public static var defaultAction : (DTTableViewManagerAnomaly) -> Void = { print($0.debugDescription) }
     
     /// Action to perform when anomaly is detected. Defaults to `defaultAction`.
     open var anomalyAction: (DTTableViewManagerAnomaly) -> Void = DTTableViewManagerAnomalyHandler.defaultAction
