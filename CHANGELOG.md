@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [6.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.3.0)
+
 ### Added
 
 * Anomaly detecting system for various errors in `DTTableViewManager`. Read more about it in [Anomaly Handler Readme section](https://github.com/DenHeadless/DTTableViewManager#anomaly-handler). Anomaly handler system **requires Swift 4.1 and higher**.

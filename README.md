@@ -354,7 +354,7 @@ Messages are prefixed, so for `DTCollectionViewManager` messages will have `[DTC
 
 By default, anomaly handler only prints information into console and does not do anything beyond that, but you can change it's behavior by assigning a custom handler for anomalies:
 
-```
+```swift
 manager.anomalyHandler.anomalyAction = { anomaly in
   // invoke custom action
 }
@@ -362,7 +362,7 @@ manager.anomalyHandler.anomalyAction = { anomaly in
 
 For example, you may want to send all detected anomalies to analytics you have in your app. For this case anomalies implement shorter description, that is more suitable for analytics, that often have limits for amount of data you can put in. To do that globally for all instances of `DTTableViewManager` that will be created during runtime of your app, set default action:
 
-```
+```swift
 DTTableViewManagerAnomalyHandler.defaultAction = { anomaly in
   print(anomaly.debugDescription)
 
