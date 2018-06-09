@@ -39,9 +39,14 @@ extension Sequence {
 
 
 extension DTTableViewManager {
+#if swift(>=4.2)
     @available(*, unavailable, message: "This method was removed, please use editingStyle(forItem:,_:) instead.")
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for `cellClass`.
-    open func editingStyle<T: ModelTransfer>(for cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UITableViewCellEditingStyle) where T: UITableViewCell
-    {
-    }
+    open func editingStyle<T: ModelTransfer>(for cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UITableViewCell.EditingStyle) where T: UITableViewCell {}
+#else
+    @available(*, unavailable, message: "This method was removed, please use editingStyle(forItem:,_:) instead.")
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for `cellClass`.
+    open func editingStyle<T: ModelTransfer>(for cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UITableViewCellEditingStyle) where T: UITableViewCell {}
+#endif
+    
 }

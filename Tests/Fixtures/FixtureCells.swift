@@ -15,10 +15,18 @@ class BaseTestCell : UITableViewCell, ModelTransfer, ModelRetrievable
     var awakedFromNib = false
     var inittedWithStyle = false
     
+#if swift(>=4.2)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.inittedWithStyle = true
+    }
+#else
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.inittedWithStyle = true
     }
+#endif
+    
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

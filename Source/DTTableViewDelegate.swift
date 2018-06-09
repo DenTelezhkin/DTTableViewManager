@@ -111,7 +111,11 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         if configuration?.sectionHeaderStyle == .title {
             if let _ = self.headerModel(forSection:section)
             {
-                return UITableViewAutomaticDimension
+                #if swift(>=4.2)
+                    return UITableView.automaticDimension
+                #else
+                    return UITableViewAutomaticDimension
+                #endif
             }
             return CGFloat.leastNormalMagnitude
         }
@@ -141,7 +145,11 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         if configuration?.sectionFooterStyle == .title {
             if let _ = self.footerModel(forSection:section) {
+                #if swift(>=4.2)
+                return UITableView.automaticDimension
+                #else
                 return UITableViewAutomaticDimension
+                #endif
             }
             return CGFloat.leastNormalMagnitude
         }
@@ -245,6 +253,15 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     #endif
     
+#if swift(>=4.2)
+    /// Implementation for `UITableViewDelegate` protocol
+    open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if let editingStyle = performCellReaction(.editingStyleForRowAtIndexPath, location: indexPath, provideCell: false) as? UITableViewCell.EditingStyle {
+            return editingStyle
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, editingStyleForRowAt: indexPath) ?? .none
+    }
+#else
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if let editingStyle = performCellReaction(.editingStyleForRowAtIndexPath, location: indexPath, provideCell: false) as? UITableViewCellEditingStyle {
@@ -252,6 +269,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, editingStyleForRowAt: indexPath) ?? .none
     }
+#endif
     
     #if os(iOS)
     /// Implementation for `UITableViewDelegate` protocol

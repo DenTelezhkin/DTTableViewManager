@@ -130,11 +130,19 @@ extension DTTableViewManager {
     }
     #endif
     
+#if swift(>=4.2)
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for cell that contains item `ofType` at `indexPath`.
+    open func editingStyle<T>(forItem ofType:T.Type, _ closure: @escaping (T, IndexPath) -> UITableViewCell.EditingStyle)
+    {
+        tableDelegate?.appendReaction(for: T.self, signature: .editingStyleForRowAtIndexPath, closure: closure)
+    }
+#else
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for cell that contains item `ofType` at `indexPath`.
     open func editingStyle<T>(forItem ofType:T.Type, _ closure: @escaping (T, IndexPath) -> UITableViewCellEditingStyle)
     {
         tableDelegate?.appendReaction(for: T.self, signature: .editingStyleForRowAtIndexPath, closure: closure)
     }
+#endif
     
     #if os(iOS)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:)` method is called for `cellClass`.

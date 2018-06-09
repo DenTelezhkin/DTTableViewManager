@@ -79,12 +79,22 @@ extension DTTableViewManager
     }
     #endif
     
+#if swift(>=4.2)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)` method is called for `cellClass`.
-    open func commitEditingStyle<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (UITableViewCellEditingStyle, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
+    open func commitEditingStyle<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (UITableViewCell.EditingStyle, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
         tableDataSource?.append4ArgumentReaction(for: T.self,
                                                  signature: .commitEditingStyleForRowAtIndexPath,
                                                  closure: closure)
     }
+#else
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)` method is called for `cellClass`.
+    open func commitEditingStyle<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (UITableViewCellEditingStyle, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
+        tableDataSource?.append4ArgumentReaction(for: T.self,
+                                           signature: .commitEditingStyleForRowAtIndexPath,
+                                             closure: closure)
+    }
+#endif
+    
     
     /// Registers `closure` to be executed in `UITableViewDelegate.tableView(_:canEditCellForRowAt:)` method, when it's called for cell which model is of `itemType`.
     open func canEditCell<T>(withItem itemType: T.Type, _ closure: @escaping (T, IndexPath) -> Bool) {

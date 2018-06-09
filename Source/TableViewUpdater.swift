@@ -39,24 +39,44 @@ open class TableViewUpdater : StorageUpdating {
     /// closure to be executed after content is updated
     open var didUpdateContent: ((StorageUpdate?) -> Void)?
     
-    /// Insert section animation. Default - .None.
+#if swift(>=4.2)
+    /// Insert section animation. Default - .none.
+    open var insertSectionAnimation = UITableView.RowAnimation.none
+    
+    /// Delete section animation. Default - .automatic
+    open var deleteSectionAnimation = UITableView.RowAnimation.automatic
+    
+    /// Reload section animation. Default - .automatic.
+    open var reloadSectionAnimation = UITableView.RowAnimation.automatic
+    
+    /// Insert row animation. Default - .automatic.
+    open var insertRowAnimation = UITableView.RowAnimation.automatic
+    
+    /// Delete row animation. Default - .automatic.
+    open var deleteRowAnimation = UITableView.RowAnimation.automatic
+    
+    /// Reload row animation. Default - .automatic.
+    open var reloadRowAnimation = UITableView.RowAnimation.automatic
+#else
+    /// Insert section animation. Default - .none.
     open var insertSectionAnimation = UITableViewRowAnimation.none
     
-    /// Delete section animation. Default - .Automatic
+    /// Delete section animation. Default - .automatic
     open var deleteSectionAnimation = UITableViewRowAnimation.automatic
     
-    /// Reload section animation. Default - .Automatic.
+    /// Reload section animation. Default - .automatic.
     open var reloadSectionAnimation = UITableViewRowAnimation.automatic
     
-    /// Insert row animation. Default - .Automatic.
+    /// Insert row animation. Default - .automatic.
     open var insertRowAnimation = UITableViewRowAnimation.automatic
     
-    /// Delete row animation. Default - .Automatic.
+    /// Delete row animation. Default - .automatic.
     open var deleteRowAnimation = UITableViewRowAnimation.automatic
     
-    /// Reload row animation. Default - .Automatic.
+    /// Reload row animation. Default - .automatic.
     open var reloadRowAnimation = UITableViewRowAnimation.automatic
-    
+#endif
+
     /// Closure to be executed, when reloading a row.
     ///
     /// If this property is not nil, then reloadRowAnimation property is ignored.
