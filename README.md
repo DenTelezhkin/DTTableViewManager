@@ -24,6 +24,7 @@ Powerful generic-based UITableView management framework, written in Swift.
 	- [Customizing UITableView updates](#customizing-uitableview-updates)
 	- [Display header on empty section](#display-header-on-empty-section)
   - [Conditional mappings](#conditional-mappings)
+  - [Anomaly handler](#anomaly-handler)
   - [Unregistering mappings](#unregistering-mappings)
 - [ObjectiveC support](#objectivec-support)
 - [Thanks](#thanks)
@@ -31,7 +32,7 @@ Powerful generic-based UITableView management framework, written in Swift.
 ## Features
 
 - [x] Powerful mapping system between data models and cells, headers and footers
-- [x] Support for all Swift types - classes, structs, enums, tuples
+- [x] Support for all Swift types - classes, structs, enums, tuples, protocols
 - [x] Powerful events system, that covers all UITableView delegate and datasource methods
 - [x] Views created from code, XIB, or storyboard
 - [x] Flexible Memory/CoreData/Realm.io storage options
@@ -44,19 +45,19 @@ Powerful generic-based UITableView management framework, written in Swift.
 
 ## Requirements
 
-* Xcode 8 / Xcode 9
+* Xcode 8 and higher
 * iOS 8.0 and higher / tvOS 9.0 and higher
-* Swift 3 / Swift 4
+* Swift 3 and higher
 
 ## Installation
 
 [CocoaPods](http://www.cocoapods.org):
 
-    pod 'DTTableViewManager', '~> 6.0'
+    pod 'DTTableViewManager', '~> 6.3'
 
 [Carthage](https://github.com/Carthage/Carthage):
 
-    github "DenHeadless/DTTableViewManager" ~> 6.0
+    github "DenHeadless/DTTableViewManager" ~> 6.3
 
 After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to Xcode project embedded binaries.
 
@@ -134,8 +135,6 @@ manager.register(FoodTableViewCell.self)
 manager.memoryStorage.addItems([Apple(),Carrot()])
 ```
 
-Mappings are resolved simply by calling `is` type-check. In our example Apple is Food and Carrot is Food, so mapping will work.
-
 ## Storage classes
 
 [DTModelStorage](https://github.com/DenHeadless/DTModelStorage/) is a framework, that provides storage classes for `DTTableViewManager`. By default, storage property on `DTTableViewManager` holds a `MemoryStorage` instance.
@@ -177,15 +176,12 @@ Keep in mind, that MemoryStorage is not limited to objects in memory. For exampl
     pod 'DTModelStorage/Realm'
 ```
 
-If you are using Carthage, `RealmStorage` will be automatically built along with `DTModelStorage`.
-
-
 ## Reacting to events
 
 Event system in DTTableViewManager 5 allows you to react to `UITableViewDelegate` and `UITableViewDataSource` events based on view and model types, completely bypassing any switches or ifs when working with UITableView API. For example:
 
 ```swift
-manager.didSelect(PostCell.self) { cell,model,indexPath in
+manager.didSelect(PostCell.self) { cell, model, indexPath in
   print("Selected PostCell with \(model) at \(indexPath)")
 }
 ```
@@ -342,6 +338,44 @@ controller.manager.registerNibNamed("CustomNibCell", for: NibCell.self) { mappin
     mapping.condition = .section(1)
     mapping.reuseIdentifier = "NibCell Two"
 }
+```
+
+### Anomaly handler
+
+`DTTableViewManager` is built on some conventions. For example, your cell needs to have reuseIdentifier that matches the name of your class, XIB files need to be named also identical to the name of your class(to work with default mapping without customization). However when those conventions are not followed, or something unexpected happens, your app may crash or behave inconsistently. Most of the errors are reported by `UITableView` API, but there's space to improve.
+
+And so, starting with 6.3.0 release, `DTTableViewManager` as well as `DTCollectionViewManager` and `DTModelStorage` now have dedicated anomaly analyzer, that tries to find inconsistencies and programmer errors when using those frameworks. It detects stuff like missing mappings, inconsistencies in xib files, and even unused events. By default, detected anomalies will be printed in console while you are debugging your app. For example, if you try to register an empty xib to use for your cell, here's what you'll see in console:
+
+```
+⚠️[DTTableViewManager] Attempted to register xib EmptyXib for PostCell, but this xib does not contain any views.
+```
+
+Messages are prefixed, so for `DTCollectionViewManager` messages will have `[DTCollectionViewManager]` prefix.
+
+By default, anomaly handler only prints information into console and does not do anything beyond that, but you can change it's behavior by assigning a custom handler for anomalies:
+
+```
+manager.anomalyHandler.anomalyAction = { anomaly in
+  // invoke custom action
+}
+```
+
+For example, you may want to send all detected anomalies to analytics you have in your app. For this case anomalies implement shorter description, that is more suitable for analytics, that often have limits for amount of data you can put in. To do that globally for all instances of `DTTableViewManager` that will be created during runtime of your app, set default action:
+
+```
+DTTableViewManagerAnomalyHandler.defaultAction = { anomaly in
+  print(anomaly.debugDescription)
+
+  analytics.postEvent("DTTableViewManager", anomaly.description)
+}
+```
+
+If you use `DTTableViewManager` and `DTCollectionViewManager`, you can override 3 default actions for both manager frameworks and `DTModelStorage`, presumably during app initialization, before any views are loaded:
+
+```swift
+DTTableViewManagerAnomalyHandler.defaultAction = { anomaly in }
+DTCollectionViewManagerAnomalyHandler.defaultAction = { anomaly in }
+MemoryStorageAnomalyHandler.defaultAction = { anomaly in }
 ```
 
 ### Unregistering mappings

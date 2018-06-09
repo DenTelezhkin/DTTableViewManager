@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-* Anomaly detecting system for various errors in `DTTableViewManager`.
+* Anomaly detecting system for various errors in `DTTableViewManager`. Read more about it in [Anomaly Handler Readme section](https://github.com/DenHeadless/DTTableViewManager#anomaly-handler).
 
 ### Changed
 
