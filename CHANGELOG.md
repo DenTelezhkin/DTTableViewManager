@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Changed
+
+* Reduced severity comment for `nilHeaderModel` and `nilFooterModel` anomalies, since in some cases it's actually a desired behavior.
+
 ## [6.3.0](https://github.com/DenHeadless/DTTableViewManager/releases/tag/6.3.0)
 
 ### Added

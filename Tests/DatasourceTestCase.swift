@@ -334,7 +334,7 @@ class DatasourceTestCase: XCTestCase {
         let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         waitForExpectations(timeout: 0.1)
         
-        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a header view at section 0, however the model was nil.")
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] UITableView requested a header view at section 0, however the model was nil.")
     }
     
     func testNilFooterModelLeadsToAnomaly() {
@@ -348,7 +348,7 @@ class DatasourceTestCase: XCTestCase {
         let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         waitForExpectations(timeout: 0.1)
         
-        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a footer view at section 0, however the model was nil.")
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] UITableView requested a footer view at section 0, however the model was nil.")
     }
     
     func testNilHeaderModelDoesNotLeadToAnomalyIfItShouldNotBeDisplayedInTheFirstPlace() {
