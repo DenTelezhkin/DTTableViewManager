@@ -1,6 +1,7 @@
-language: objective-c
 sudo: false
-osx_image: xcode9.3
+language: objective-c
+os: osx
+osx_image: xcode10
 
 cache:
   directories:
@@ -8,22 +9,20 @@ cache:
 
 matrix:
   include:
-    - os: osx
-      env: ACTION=test_ios11
-    - os: osx
-      env: ACTION=test_ios10
-    - os: osx
-      env: ACTION=test_tvos11
-    - os: osx
-      env: ACTION=test_tvos10
-    - os: osx
-      env: ACTION=test_ios_swift3
-    - os: osx
-      env: ACTION=test_tvos_swift3
-    - os: osx
-      env: ACTION=pod_lint
-    - os: osx
-      env: ACTION=carthage_build
+    - env: ACTION=test_ios12
+    - env: ACTION=test_ios11
+    - env: ACTION=test_tvos12
+    - env: ACTION=test_tvos11
+    - env: ACTION=test_ios_swift3
+    - env: ACTION=test_ios_swift4
+    - env: ACTION=test_tvos_swift3
+    - env: ACTION=test_tvos_swift4
+    - osx_image: xcode9.4
+      env: ACTION=test_xcode9_ios_swift3
+    - osx_image: xcode9.4
+      env: ACTION=test_xcode9_ios_swift4
+    - env: ACTION=pod_lint
+    - env: ACTION=carthage_build
 
 before_script:
   - brew update
