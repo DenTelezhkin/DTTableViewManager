@@ -27,7 +27,7 @@ matrix:
 before_script:
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - carthage bootstrap --cache-builds
+  - carthage bootstrap --cache-builds --platform iOS,tvOS
 
 script:
   - instruments -s devices # List all available simulators

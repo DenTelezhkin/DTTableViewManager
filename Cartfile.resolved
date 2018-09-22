@@ -1,2 +1,3 @@
-github "DenHeadless/DTModelStorage" "e27f93f327be42c44573e3a3253d829b72e8a431"
-github "Quick/Nimble" "v7.3.0"
+github "DenHeadless/DTModelStorage" "ab2784111d7788a3ae8e36b33b9279d5d1bfcd72"
+github "Quick/Nimble" "v7.3.1"
+github "osteslag/Changeset" "v3.1"

@@ -16,6 +16,9 @@
 		3E665CB320A0840500BA5718 /* RandomNameWrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E665CAD20A0832400BA5718 /* RandomNameWrongReuseIdentifierCell.xib */; };
 		3EA4FF291FA9FF6600B3D853 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; };
 		3EA4FF2A1FA9FF6600B3D853 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3EE31B4B21563AB600FA9361 /* Changeset.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE31B4A21563AB600FA9361 /* Changeset.framework */; };
+		3EE31B4C21563AC000FA9361 /* Changeset.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EE31B4A21563AB600FA9361 /* Changeset.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3EE31B4F21563BB000FA9361 /* AutoDiffSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE31B4E21563BB000FA9361 /* AutoDiffSearchViewController.swift */; };
 		3EF6EB531F1E5E24007F610A /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */; };
 		3EFE2ED41F1E5F6700A73565 /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */; };
 		9A0889811F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */; };
@@ -154,6 +157,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3EE31B4C21563AC000FA9361 /* Changeset.framework in CopyFiles */,
 				3EA4FF2A1FA9FF6600B3D853 /* DTModelStorage.framework in CopyFiles */,
 				9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */,
 			);
@@ -168,6 +172,8 @@
 		3E665CAB20A0400600BA5718 /* WrongReuseIdentifierCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WrongReuseIdentifierCell.xib; path = Fixtures/tvOS/WrongReuseIdentifierCell.xib; sourceTree = "<group>"; };
 		3E665CAD20A0832400BA5718 /* RandomNameWrongReuseIdentifierCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RandomNameWrongReuseIdentifierCell.xib; path = Fixtures/iOS/RandomNameWrongReuseIdentifierCell.xib; sourceTree = "<group>"; };
 		3E665CB120A083A300BA5718 /* RandomNameWrongReuseIdentifierCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RandomNameWrongReuseIdentifierCell.xib; path = Fixtures/tvOS/RandomNameWrongReuseIdentifierCell.xib; sourceTree = "<group>"; };
+		3EE31B4A21563AB600FA9361 /* Changeset.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Changeset.framework; path = Carthage/Build/iOS/Changeset.framework; sourceTree = "<group>"; };
+		3EE31B4E21563BB000FA9361 /* AutoDiffSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoDiffSearchViewController.swift; path = "Example controllers/AutoDiffSearchViewController.swift"; sourceTree = "<group>"; };
 		3EF6EB521F1E5E24007F610A /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/iOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
 		3EFE2ED31F1E5F6700A73565 /* CustomNibCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomNibCell.xib; path = Tests/Fixtures/tvOS/CustomNibCell.xib; sourceTree = SOURCE_ROOT; };
 		9A0889801F52D0FC00A1AA54 /* DTTableViewDropPlaceholderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DTTableViewDropPlaceholderContext.swift; path = Source/DTTableViewDropPlaceholderContext.swift; sourceTree = "<group>"; };
@@ -286,6 +292,7 @@
 			files = (
 				3EA4FF291FA9FF6600B3D853 /* DTModelStorage.framework in Frameworks */,
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
+				3EE31B4B21563AB600FA9361 /* Changeset.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +309,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EE31B4D21563B8F00FA9361 /* Automatic diffing */ = {
+			isa = PBXGroup;
+			children = (
+				3EE31B4E21563BB000FA9361 /* AutoDiffSearchViewController.swift */,
+			);
+			name = "Automatic diffing";
+			sourceTree = "<group>";
+		};
 		9A08A9AB1B8A23A100877C62 /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +368,7 @@
 		9A2350001F654B8B00A13B55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3EE31B4A21563AB600FA9361 /* Changeset.framework */,
 				9A2350071F654BB300A13B55 /* Nimble.framework */,
 				9A2350051F654BB000A13B55 /* DTModelStorage.framework */,
 				9A2350031F654BA200A13B55 /* Nimble.framework */,
@@ -364,6 +380,7 @@
 		9A30334D1B77A303000B3355 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				3EE31B4D21563B8F00FA9361 /* Automatic diffing */,
 				9ABE073E1B85FC6C00636D78 /* CoreData */,
 			);
 			name = Search;
@@ -655,6 +672,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = L94VC9ZZXC;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					9AF003191A5ABE7000ABFC90 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -752,7 +770,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \\\"${CONFIGURATION}\\\" = \\\"Debug\\\" ]; then\n  if which swiftlint > /dev/null; then\n    swiftlint autocorrect --config \"${SRCROOT}/.swiftlint.yml\"\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\"\n  else\n    echo \\\"SwiftLint not installed, download it from https://github.com/realm/SwiftLint\\\"\n  fi\nfi";
+			shellScript = "if [ \\\"${CONFIGURATION}\\\" = \\\"Debug\\\" ]; then\n  if which swiftlint > /dev/null; then\n    swiftlint autocorrect --config \"${SRCROOT}/.swiftlint.yml\"\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\"\n  else\n    echo \\\"SwiftLint not installed, download it from https://github.com/realm/SwiftLint\\\"\n  fi\nfi\n";
 		};
 		9A234FFF1F654AA400A13B55 /* Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -865,6 +883,7 @@
 				9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */,
 				9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */,
 				9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */,
+				3EE31B4F21563BB000FA9361 /* AutoDiffSearchViewController.swift in Sources */,
 				9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */,
 				9AD9D9ED1B6EBEAD00AD49AC /* CustomStringCell.swift in Sources */,
 				9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */,
@@ -1018,6 +1037,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L94VC9ZZXC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1030,6 +1051,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1040,6 +1062,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = L94VC9ZZXC;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1054,6 +1078,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

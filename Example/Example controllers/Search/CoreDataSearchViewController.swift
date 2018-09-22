@@ -37,7 +37,6 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
         }
 
         searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
     }
