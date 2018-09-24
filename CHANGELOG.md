@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+Dependency changelog -> [DTModelStorage 7.2.0 and higher](https://github.com/DenHeadless/DTModelStorage/releases)
+
+### Added
+
+* Example of auto-diffing capability and animations when using `SingleSectionStorage`.
+* Support for Swift 4.2 and Xcode 10.
+
 ### Changed
 
 * Reduced severity comment for `nilHeaderModel` and `nilFooterModel` anomalies, since in some cases it's actually a desired behavior.
