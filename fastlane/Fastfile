@@ -88,7 +88,7 @@ lane :release do |params|
     sh "bundle exec pod trunk push DTTableViewManager.podspec --allow-warnings"
 
     puts "Preparing Carthage binary framework."
-    sh "carthage build --no-skip-current"
+    sh "carthage build --no-skip-current --platform iOS,tvOS"
     sh "carthage archive DTTableViewManager"
 
     puts "Pushing as a GitHub Release."

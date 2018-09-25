@@ -8,35 +8,26 @@ Make sure you have the latest version of the Xcode command line tools installed:
 xcode-select --install
 ```
 
-## Choose your installation method:
-
-<table width="100%" >
-<tr>
-<th width="33%"><a href="http://brew.sh">Homebrew</a></td>
-<th width="33%">Installer Script</td>
-<th width="33%">Rubygems</td>
-</tr>
-<tr>
-<td width="33%" align="center">macOS</td>
-<td width="33%" align="center">macOS</td>
-<td width="33%" align="center">macOS or Linux with Ruby 2.0.0 or above</td>
-</tr>
-<tr>
-<td width="33%"><code>brew cask install fastlane</code></td>
-<td width="33%"><a href="https://download.fastlane.tools">Download the zip file</a>. Then double click on the <code>install</code> script (or run it in a terminal window).</td>
-<td width="33%"><code>sudo gem install fastlane -NV</code></td>
-</tr>
-</table>
+Install _fastlane_ using
+```
+[sudo] gem install fastlane -NV
+```
+or alternatively using `brew cask install fastlane`
 
 # Available Actions
+### test_ios12
+```
+fastlane test_ios12
+```
+
 ### test_ios11
 ```
 fastlane test_ios11
 ```
 
-### test_ios10
+### test_tvos12
 ```
-fastlane test_ios10
+fastlane test_tvos12
 ```
 
 ### test_tvos11
@@ -44,19 +35,34 @@ fastlane test_ios10
 fastlane test_tvos11
 ```
 
-### test_tvos10
-```
-fastlane test_tvos10
-```
-
 ### test_ios_swift3
 ```
 fastlane test_ios_swift3
 ```
 
+### test_ios_swift4
+```
+fastlane test_ios_swift4
+```
+
 ### test_tvos_swift3
 ```
 fastlane test_tvos_swift3
+```
+
+### test_tvos_swift4
+```
+fastlane test_tvos_swift4
+```
+
+### test_xcode9_ios_swift3
+```
+fastlane test_xcode9_ios_swift3
+```
+
+### test_xcode9_ios_swift4
+```
+fastlane test_xcode9_ios_swift4
 ```
 
 ### pod_lint
