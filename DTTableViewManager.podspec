@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary  = 'Protocol-oriented UITableView management, powered by generics and associated types.'
   s.homepage = 'https://github.com/DenHeadless/DTTableViewManager'
   s.authors  = { 'Denys Telezhkin' => 'denys.telezhkin.oss@gmail.com' }
-  s.social_media_url = 'https://twitter.com/DTCoder'
+  s.social_media_url = 'https://twitter.com/DenTelezhkin'
   s.source   = { :git => 'https://github.com/DenHeadless/DTTableViewManager.git', :tag => s.version.to_s }
   s.source_files = 'Source/*.swift'
   s.requires_arc = true
