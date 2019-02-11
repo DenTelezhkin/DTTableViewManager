@@ -152,7 +152,7 @@ There's also a shorter method, that works, if your cell is visible:
 
 ## Supported types
 
-Thanks to new storage implementation, `DTTableViewManager` now supports all Swift types - classes, structs, enums, tuples as data models. It also has even more extended support for ObjectiveC Foundation classes - you can read all about it [on wiki](https://github.com/DenHeadless/DTTableViewManager/wiki/Mapping-and-registration).
+Thanks to new storage implementation, `DTTableViewManager` now supports all Swift types - classes, structs, enums, tuples as data models. It also has even more extended support for ObjectiveC Foundation classes - you can read all about it [on wiki](https://github.com/DenTelezhkin/DTTableViewManager/wiki/Mapping-and-registration).
 
 ## Summary
 

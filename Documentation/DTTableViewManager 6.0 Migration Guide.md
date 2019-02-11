@@ -79,7 +79,7 @@ Usually backwards compatibility is not considered a "feature", but since last ye
 
 New convenience classes `DTTableViewDropPlaceholderContext` and `DTCollectionViewDropPlaceholderContext` serve as thin wrappers around `UITableViewDropPlaceholderContext` and `UICollectionViewDropPlaceholderContext`, automatically dispatching placeholder updates to `DispatchQueue.main`, and providing automatic datasource updates if you are using `MemoryStorage` class.
 
-To demonstrate `Drag&Drop` usage with `DTTableViewManager` and `DTCollectionViewManager` there's a new example repo - [https://github.com/DenHeadless/DTDragAndDropExample](https://github.com/DenHeadless/DTDragAndDropExample), containing [Apple's sample on Drag&Drop](https://developer.apple.com/sample-code/wwdc/2017/Drag-and-Drop-in-UICollectionView-and-UITableView.zip), rewritten using `DTTableViewManager` and `DTCollectionViewManager`.
+To demonstrate `Drag&Drop` usage with `DTTableViewManager` and `DTCollectionViewManager` there's a new example repo - [https://github.com/DenTelezhkin/DTDragAndDropExample](https://github.com/DenTelezhkin/DTDragAndDropExample), containing [Apple's sample on Drag&Drop](https://developer.apple.com/sample-code/wwdc/2017/Drag-and-Drop-in-UICollectionView-and-UITableView.zip), rewritten using `DTTableViewManager` and `DTCollectionViewManager`.
 
 ### Improvements to events system
 

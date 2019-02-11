@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version      = "6.4.0"
   s.license  = 'MIT'
   s.summary  = 'Protocol-oriented UITableView management, powered by generics and associated types.'
-  s.homepage = 'https://github.com/DenHeadless/DTTableViewManager'
+  s.homepage = 'https://github.com/DenTelezhkin/DTTableViewManager'
   s.authors  = { 'Denys Telezhkin' => 'denys.telezhkin.oss@gmail.com' }
   s.social_media_url = 'https://twitter.com/DenTelezhkin'
   s.source   = { :git => 'https://github.com/DenTelezhkin/DTTableViewManager.git', :tag => s.version.to_s }

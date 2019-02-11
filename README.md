@@ -1,12 +1,12 @@
-[![Build Status](https://travis-ci.org/DenHeadless/DTTableViewManager.svg?branch=master)](https://travis-ci.org/DenHeadless/DTTableViewManager)
-[![codecov.io](http://codecov.io/github/DenHeadless/DTTableViewManager/coverage.svg?branch=master)](http://codecov.io/github/DenHeadless/DTTableViewManager?branch=master)
+[![Build Status](https://travis-ci.org/DenTelezhkin/DTTableViewManager.svg?branch=master)](https://travis-ci.org/DenTelezhkin/DTTableViewManager)
+[![codecov.io](http://codecov.io/github/DenTelezhkin/DTTableViewManager/coverage.svg?branch=master)](http://codecov.io/github/DenTelezhkin/DTTableViewManager?branch=master)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/DTTableViewManager.svg)](https://cocoapods.org/pods/DTTableViewManager)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 DTTableViewManager 6
 ================
-> This is a sister-project for [DTCollectionViewManager](https://github.com/DenHeadless/DTCollectionViewManager) - great tool for UICollectionView management, built on the same principles.
+> This is a sister-project for [DTCollectionViewManager](https://github.com/DenTelezhkin/DTCollectionViewManager) - great tool for UICollectionView management, built on the same principles.
 
 Powerful generic-based UITableView management framework, written in Swift.
 
@@ -57,7 +57,7 @@ Powerful generic-based UITableView management framework, written in Swift.
 
 [Carthage](https://github.com/Carthage/Carthage):
 
-    github "DenHeadless/DTTableViewManager" ~> 6.3
+    github "DenTelezhkin/DTTableViewManager" ~> 6.3
 
 After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to Xcode project embedded binaries.
 
@@ -137,11 +137,11 @@ manager.memoryStorage.addItems([Apple(),Carrot()])
 
 ## Storage classes
 
-[DTModelStorage](https://github.com/DenHeadless/DTModelStorage/) is a framework, that provides storage classes for `DTTableViewManager`. By default, storage property on `DTTableViewManager` holds a `MemoryStorage` instance.
+[DTModelStorage](https://github.com/DenTelezhkin/DTModelStorage/) is a framework, that provides storage classes for `DTTableViewManager`. By default, storage property on `DTTableViewManager` holds a `MemoryStorage` instance.
 
 ### MemoryStorage
 
-`MemoryStorage` is a class, that manages UITableView models in memory. It has methods for adding, removing, replacing, reordering table view models etc. You can read all about them in [DTModelStorage repo](https://github.com/DenHeadless/DTModelStorage#memorystorage). Basically, every section in `MemoryStorage` is an array of `SectionModel` objects, which itself is an object, that contains optional header and footer models, and array of table items.
+`MemoryStorage` is a class, that manages UITableView models in memory. It has methods for adding, removing, replacing, reordering table view models etc. You can read all about them in [DTModelStorage repo](https://github.com/DenTelezhkin/DTModelStorage#memorystorage). Basically, every section in `MemoryStorage` is an array of `SectionModel` objects, which itself is an object, that contains optional header and footer models, and array of table items.
 
 ### CoreDataStorage
 
@@ -240,7 +240,7 @@ manager.configureEvents(for: IntCell.self) { cellType, modelType in
 
 ### Drag and Drop in iOS 11
 
-There is a [dedicated repo](https://github.com/DenHeadless/DTDragAndDropExample), containing Apple's sample on Drag&Drop, enhanced with `DTTableViewManager` and `DTCollectionViewManager`. Most of the stuff is just usual drop and drag delegate events, but there is also special support for UITableView and UICollectionView placeholders, that makes sure calls are dispatched to main thread, and if you use `MemoryStorage`, performs datasource updates automatically.
+There is a [dedicated repo](https://github.com/DenTelezhkin/DTDragAndDropExample), containing Apple's sample on Drag&Drop, enhanced with `DTTableViewManager` and `DTCollectionViewManager`. Most of the stuff is just usual drop and drag delegate events, but there is also special support for UITableView and UICollectionView placeholders, that makes sure calls are dispatched to main thread, and if you use `MemoryStorage`, performs datasource updates automatically.
 
 ### Reacting to content updates
 
@@ -392,7 +392,7 @@ This is equivalent to calling `tableView(register:nil,forCellWithReuseIdenfier: 
 
 ## ObjectiveC support
 
-`DTTableViewManager` is heavily relying on Swift protocol extensions, generics and associated types. Enabling this stuff to work on Objective-c right now is not possible. Because of this DTTableViewManager 4 and greater only supports building from Swift. If you need to use Objective-C, you can use [latest Objective-C compatible version of `DTTableViewManager`](https://github.com/DenHeadless/DTTableViewManager/releases/tag/3.3.0).
+`DTTableViewManager` is heavily relying on Swift protocol extensions, generics and associated types. Enabling this stuff to work on Objective-c right now is not possible. Because of this DTTableViewManager 4 and greater only supports building from Swift. If you need to use Objective-C, you can use [latest Objective-C compatible version of `DTTableViewManager`](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/3.3.0).
 
 ## Thanks
 
