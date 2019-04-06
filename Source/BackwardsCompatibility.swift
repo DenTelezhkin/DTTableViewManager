@@ -27,17 +27,6 @@ import Foundation
 import UIKit
 import DTModelStorage
 
-#if swift(>=4.1)
-#else
-/// Extension for adding Swift 4.1 methods, to support Swift 4.0 and Swift 3.2/3.3 concurrently.
-extension Sequence {
-    func compactMap<ElementOfResult>(_ transform: (Self.Element) throws -> ElementOfResult?) rethrows -> [ElementOfResult] {
-        return try flatMap(transform)
-    }
-}
-#endif
-
-
 extension DTTableViewManager {
 #if swift(>=4.2)
     @available(*, unavailable, message: "This method was removed, please use editingStyle(forItem:,_:) instead.")

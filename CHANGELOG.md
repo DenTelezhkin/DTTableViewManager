@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+* Added support fort Xcode 10.2 and Swift 5
+* Dropped support for Xcode 9 and Swift 3
+
 ## [6.4.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.4.0)
 
 Dependency changelog -> [DTModelStorage 7.2.0 and higher](https://github.com/DenTelezhkin/DTModelStorage/releases)

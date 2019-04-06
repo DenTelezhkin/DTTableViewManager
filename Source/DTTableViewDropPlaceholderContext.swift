@@ -27,7 +27,7 @@ import Foundation
 import UIKit
 import DTModelStorage
 
-#if os(iOS) && swift(>=3.2)
+#if os(iOS)
 @available(iOS 11, *)
 
 /// Thin wrapper around `UITableViewDropPlaceholderContext`, which automates insertion of `dragItems` if you are using `MemoryStorage`.

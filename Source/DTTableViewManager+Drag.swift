@@ -29,7 +29,7 @@ import DTModelStorage
 
 extension DTTableViewManager
 {
-    #if os(iOS) && swift(>=3.2)
+    #if os(iOS)
     
     @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)` method is called for `cellClass`.

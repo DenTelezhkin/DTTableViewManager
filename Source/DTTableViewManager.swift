@@ -105,10 +105,8 @@ open class DTTableViewManager {
     /// - SeeAlso: `TableViewConfiguration`.
     open var configuration = TableViewConfiguration()
     
-#if swift(>=4.1)
     /// Anomaly handler, that handles reported by `DTTableViewManager` anomalies.
     open var anomalyHandler : DTTableViewManagerAnomalyHandler = .init()
-#endif
     
     /// Bool property, that will be true, after `startManagingWithDelegate` method is called on `DTTableViewManager`.
     open var isManagingTableView : Bool {
@@ -120,9 +118,7 @@ open class DTTableViewManager {
         precondition(self.isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
         //swiftlint:disable:next force_unwrapping
         let factory = TableViewFactory(tableView: self.tableView!)
-        #if swift(>=4.1)
         factory.anomalyHandler = anomalyHandler
-        #endif
         return factory
     }()
     
@@ -191,7 +187,7 @@ open class DTTableViewManager {
         }
     }
     
-    #if os(iOS) && swift(>=3.2)
+    #if os(iOS)
     // Yeah, @availability macros does not work on stored properties ¯\_(ツ)_/¯
     private var _tableDragDelegatePrivate : AnyObject?
     @available(iOS 11, *)
@@ -262,7 +258,7 @@ open class DTTableViewManager {
         tableViewUpdater = TableViewUpdater(tableView: tableView)
         tableDelegate = DTTableViewDelegate(delegate: delegate, tableViewManager: self)
         tableDataSource = DTTableViewDataSource(delegate: delegate, tableViewManager: self)
-        #if os(iOS) && swift(>=3.2)
+        #if os(iOS)
         if #available(iOS 11.0, *) {
             tableDragDelegate = DTTableViewDragDelegate(delegate: delegate, tableViewManager: self)
             tableDropDelegate = DTTableViewDropDelegate(delegate: delegate, tableViewManager: self)
@@ -318,7 +314,6 @@ open class DTTableViewManager {
     }
     
     func verifyItemEvent<T>(for itemType: T.Type, eventMethod: String) {
-        #if swift(>=4.1)
         switch itemType {
         case is UICollectionReusableView.Type:
             anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UICollectionReusableView"))
@@ -327,17 +322,14 @@ open class DTTableViewManager {
         case is UITableViewHeaderFooterView.Type: anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UITableViewHeaderFooterView"))
         default: ()
         }
-        #endif
     }
     
     func verifyViewEvent<T:ModelTransfer>(for viewType: T.Type, methodName: String) {
-        #if swift(>=4.1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             if self?.viewFactory.mappings.filter({ $0.viewClass == T.self }).count == 0 {
                 self?.anomalyHandler.reportAnomaly(DTTableViewManagerAnomaly.unusedEventDetected(viewType: String(describing: T.self), methodName: methodName))
             }
         }
-        #endif
     }
 }
 

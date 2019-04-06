@@ -21,7 +21,7 @@ extension DTTableViewManager {
     }
 }
 
-#if os(iOS) && swift(>=3.2)
+#if os(iOS)
     
 @available (iOS 11, *)
 class SpringLoadedContextMock : NSObject, UISpringLoadedInteractionContext {
@@ -230,21 +230,12 @@ class ReactingToEventsTestCase: XCTestCase {
         }
         controller.manager.register(SelectionReactingTableCell.self)
         self.controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-        #if swift(>=4.0)
             measureMetrics([XCTPerformanceMetric.wallClockTime], automaticallyStartMeasuring: true) {
             self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
                 self.stopMeasuring()
             }
             self.controller.manager.tableDelegate?.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
             }
-        #else
-            measureMetrics([XCTPerformanceMetric_WallClockTime], automaticallyStartMeasuring: true) {
-                self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
-                    self.stopMeasuring()
-                }
-                self.controller.manager.tableDelegate?.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
-            }
-        #endif
     }
     
     func testCellConfigurationClosure()
@@ -794,7 +785,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    #if os(iOS) && swift(>=3.2)
+    #if os(iOS)
     func testItemsForBeginningInDragSession() {
         guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "ItemsForBeginningInDragSession")
@@ -1073,7 +1064,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         }
         
         // MARK: - UITableViewDragDelegate
-        #if os(iOS) && swift(>=3.2)
+        #if os(iOS)
         if #available(iOS 11, *) {
             expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)))) == EventMethodSignature.itemsForBeginningDragSession.rawValue
             expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)))) == EventMethodSignature.itemsForAddingToDragSession.rawValue
@@ -1101,9 +1092,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEventsRegistrationPerfomance() {
         let manager = self.controller.manager
-        #if swift(>=4.1)
         manager.anomalyHandler.anomalyAction = { _ in }
-        #endif
         measure {
             manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
             manager.canEditCell(withItem: Int.self, { _,_ in return true })
@@ -1134,7 +1123,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             manager.shouldHighlight(NibCell.self, { _,_,_ in return true })
             manager.didHighlight(NibCell.self, { _,_,_ in })
             manager.didUnhighlight(NibCell.self, { _,_,_ in })
-            #if os(iOS) && swift(>=3.2)
+            #if os(iOS)
             if #available(iOS 11, *) {
                 manager.itemsForBeginningDragSession(from: NibCell.self, { (_, _, _, _) in [] })
                 manager.itemsForAddingToDragSession(from: NibCell.self, { (_, _, _, _, _) in [] })
@@ -1151,9 +1140,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testSearchForEventPerfomance() {
         let manager = self.controller.manager
         controller.tableView = UITableView()
-        #if swift(>=4.1)
         manager.anomalyHandler.anomalyAction = { _ in }
-        #endif
         manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
         manager.canEditCell(withItem: Int.self, { _,_ in return true })
         manager.canMove(NibCell.self, { _,_,_ in return true })
@@ -1191,7 +1178,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
         }
     }
     
-#if swift(>=4.1)
     func testModelEventCalledWithCellTypeLeadsToAnomaly() {
         let exp = expectation(description: "Model event called with cell")
         let anomaly = DTTableViewManagerAnomaly.modelEventCalledWithCellClass(modelType: "NibCell", methodName: "canEditCell(withItem:_:)", subclassOf: "UITableViewCell")
@@ -1204,13 +1190,12 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testUnusedEventLeadsToAnomaly() {
         let exp = expectation(description: "Unused event")
-        let anomaly = DTTableViewManagerAnomaly.unusedEventDetected(viewType: "StringCell", methodName: "didSelect")
+        let anomaly = DTTableViewManagerAnomaly.unusedEventDetected(viewType: "StringCell", methodName: "didSelect(_:_:)")
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.didSelect(StringCell.self) { _, _, _ in }
         waitForExpectations(timeout: 1.1)
         
-        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] didSelect event registered for StringCell, but there were no view mappings registered for StringCell type. This event will never be called.")
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] didSelect(_:_:) event registered for StringCell, but there were no view mappings registered for StringCell type. This event will never be called.")
     }
-#endif
 }
 

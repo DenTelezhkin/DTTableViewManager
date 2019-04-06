@@ -36,9 +36,7 @@ final class TableViewFactory
     
     weak var mappingCustomizableDelegate : ViewModelMappingCustomizing?
     
-    #if swift(>=4.1)
     weak var anomalyHandler : DTTableViewManagerAnomalyHandler?
-    #endif
     
     init(tableView: UITableView)
     {
@@ -51,11 +49,9 @@ final class TableViewFactory
         if let cell = tableView.dequeueReusableCell(withIdentifier: mapping.reuseIdentifier) {
             // Storyboard prototype cell
             mappings.append(mapping)
-#if swift(>=4.1)
             if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != mapping.reuseIdentifier {
                 anomalyHandler?.reportAnomaly(.differentCellReuseIdentifier(mappingReuseIdentifier: mapping.reuseIdentifier, cellReuseIdentifier: cellReuseIdentifier))
             }
-#endif
         } else {
             tableView.register(T.self, forCellReuseIdentifier: mapping.reuseIdentifier)
             
@@ -76,7 +72,6 @@ final class TableViewFactory
             if let instantiatedCell = objects.first as? T {
                 cell = instantiatedCell
             } else {
-                #if swift(>=4.1)
                 if let first = objects.first {
                     anomalyHandler?.reportAnomaly(.differentCellClass(xibName: nibName,
                                                                       cellClass: String(describing: type(of: first)),
@@ -84,14 +79,11 @@ final class TableViewFactory
                 } else {
                     anomalyHandler?.reportAnomaly(.emptyXibFile(xibName: nibName, expectedViewClass: String(describing: T.self)))
                 }
-                #endif
             }
         }
-#if swift(>=4.1)
         if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != reuseIdentifier {
             anomalyHandler?.reportAnomaly(.differentCellReuseIdentifier(mappingReuseIdentifier: reuseIdentifier, cellReuseIdentifier: cellReuseIdentifier))
         }
-#endif
     }
     
     func verifyHeaderFooterView<T:UIView>(_ view: T.Type, nibName: String?) {
@@ -102,7 +94,6 @@ final class TableViewFactory
             if let instantiatedView = objects.first as? T {
                 view = instantiatedView
             } else {
-#if swift(>=4.1)
                 if let first = objects.first {
                     anomalyHandler?.reportAnomaly(.differentHeaderFooterClass(xibName: nibName,
                                                                               viewClass: String(describing: type(of: first)),
@@ -110,7 +101,6 @@ final class TableViewFactory
                 } else {
                     anomalyHandler?.reportAnomaly(.emptyXibFile(xibName: nibName, expectedViewClass: String(describing: T.self)))
                 }
-#endif
             }
         }
     }
@@ -230,9 +220,7 @@ final class TableViewFactory
             mapping.updateBlock(cell, model)
             return cell
         }
-        #if swift(>=4.1)
         anomalyHandler?.reportAnomaly(.noCellMappingFound(modelDescription: String(describing: model), indexPath: indexPath))
-        #endif
         return nil
     }
     
@@ -247,9 +235,7 @@ final class TableViewFactory
     func headerFooterView(of type: ViewType, model : Any, atIndexPath indexPath: IndexPath) -> UIView?
     {
         guard let mapping = viewModelMapping(for: type, model: model, indexPath: indexPath) else {
-#if swift(>=4.1)
             anomalyHandler?.reportAnomaly(.noHeaderFooterMappingFound(modelDescription: String(describing: model), indexPath: indexPath))
-#endif
             return nil
         }
       
@@ -257,7 +243,7 @@ final class TableViewFactory
             mapping.updateBlock(view, model)
             return view
         } else {
-            var view : UIView? = nil
+            var view : UIView?
             
             if let type = mapping.viewClass as? UIView.Type {
                 view = type.dt_loadFromXib()

@@ -33,11 +33,7 @@ class CoreDataManager
     
     fileprivate let managedObjectModel : NSManagedObjectModel = {
         let modelURL = Bundle.main.url(forResource: "Banks", withExtension: "momd")!
-        #if swift(>=3.2)
-            return NSManagedObjectModel(contentsOf: modelURL)!
-        #else
-            return NSManagedObjectModel(contentsOf: modelURL)!
-        #endif
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
     fileprivate let persistentStoreCoordinator : NSPersistentStoreCoordinator

@@ -26,7 +26,7 @@
 import UIKit
 import DTModelStorage
 
-#if os(iOS) && swift(>=3.2)
+#if os(iOS)
     
 @available(iOS 11.0, *)
     

@@ -26,7 +26,6 @@
 import Foundation
 import DTModelStorage
 
-#if swift(>=4.1)
 /// `DTTableViewManagerAnomaly` represents various errors and unwanted behaviors that can happen when using `DTTableViewManager` class.
 /// - SeeAlso: `MemoryStorageAnomaly`, `DTCollectionViewManagerAnomaly`
 public enum DTTableViewManagerAnomaly: Equatable, CustomStringConvertible, CustomDebugStringConvertible {
@@ -113,4 +112,3 @@ open class DTTableViewManagerAnomalyHandler : AnomalyHandler {
     /// Creates `DTTableViewManagerAnomalyHandler`.
     public init() {}
 }
-#endif

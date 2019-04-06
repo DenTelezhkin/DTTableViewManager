@@ -27,7 +27,7 @@ import Foundation
 import DTModelStorage
 
 /// Convenience getters and setters for table view header and footer models
-public extension SupplementaryAccessible
+extension SupplementaryAccessible
 {
     /// returns UITableView header model for current section
     ///

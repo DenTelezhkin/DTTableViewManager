@@ -69,11 +69,9 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                 return createdView
             }
         } else {
-#if swift(>=4.1)
             if shouldDisplayHeaderView(forSection: section) {
                 manager?.anomalyHandler.reportAnomaly(.nilHeaderModel(section))
             }
-#endif
         }
         return nil
     }
@@ -91,11 +89,9 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                 return createdView
             }
         } else {
-#if swift(>=4.1)
             if shouldDisplayFooterView(forSection: section) {
                 manager?.anomalyHandler.reportAnomaly(.nilFooterModel(section))
             }
-#endif
         }
         return nil
     }
@@ -368,7 +364,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canFocusRowAt: indexPath) ?? tableView.cellForRow(at: indexPath)?.canBecomeFocused ?? true
     }
-    #if os(iOS) && swift(>=3.2)
+    #if os(iOS)
     @available (iOS 11, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

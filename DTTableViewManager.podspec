@@ -9,6 +9,7 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/DenTelezhkin/DTTableViewManager.git', :tag => s.version.to_s }
   s.source_files = 'Source/*.swift'
   s.requires_arc = true
+  s.swift_versions = ['4.0', '4.2', '5.0']
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
   s.frameworks = 'UIKit', 'Foundation'
