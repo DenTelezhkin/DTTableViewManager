@@ -338,14 +338,14 @@
     },
     {
       "file": "/Users/denystelezkin/Developer/DTTableViewManager/Source/DTTableViewManager.swift",
-      "line": 195,
+      "line": 187,
       "symbol": "DTTableViewManager.tableDragDelegate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/denystelezkin/Developer/DTTableViewManager/Source/DTTableViewManager.swift",
-      "line": 209,
+      "line": 201,
       "symbol": "DTTableViewManager.tableDropDelegate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

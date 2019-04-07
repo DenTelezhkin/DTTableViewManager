@@ -74,7 +74,7 @@ lane :release do |params|
     sh "git commit -am '#{message}'"
     sh "git tag #{version} -m '#{message}'"
     sh "git push --follow-tags"
-    
+
     puts "Updating Specs repo"
     sh "bundle exec pod repo update"
 
@@ -97,5 +97,6 @@ lane :release do |params|
     puts "Attaching Carthage prebuilt binary to release."
     releases = client.releases('DenTelezhkin/DTTableViewManager')
     client.upload_asset(releases[0].url, 'DTTableViewManager.framework.zip')
+    sh "rm -rf DTTableViewManager.framework.zip"
   end
 end
