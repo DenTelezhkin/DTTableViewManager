@@ -45,8 +45,8 @@ class AutoDiffSearchViewController: UIViewController, DTTableViewManageable, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        manager = DTTableViewManager(storage: storage)
         manager.register(StringCell.self)
-        manager.storage = storage
         searchController.searchResultsUpdater = self
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar

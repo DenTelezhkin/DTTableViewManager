@@ -98,9 +98,6 @@ extension DTTableViewOptionalManageable {
 /// - SeeAlso: `startManagingWithDelegate:`
 open class DTTableViewManager {
     
-    /// Creates `DTTableViewManager`. Usually you don't need to call this method directly, as `manager` property on `DTTableViewManageable` instance is filled automatically.
-    public init() {}
-    
     /// Stores all configuration options for `DTTableViewManager`.
     /// - SeeAlso: `TableViewConfiguration`.
     open var configuration = TableViewConfiguration()
@@ -112,7 +109,7 @@ open class DTTableViewManager {
     open var isManagingTableView : Bool {
         return tableView != nil
     }
-
+    
     ///  Factory for creating cells and views for UITableView
     final lazy var viewFactory: TableViewFactory = {
         precondition(self.isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
@@ -148,12 +145,7 @@ open class DTTableViewManager {
     /// - Note: When setting custom storage for this property, it will be automatically configured for using with UITableView and it's delegate will be set to `DTTableViewManager` instance.
     /// - Note: Previous storage `delegate` property will be nilled out to avoid collisions.
     /// - SeeAlso: `MemoryStorage`, `CoreDataStorage`, `RealmStorage`.
-    open var storage : Storage = {
-        let storage = MemoryStorage()
-        storage.configureForTableViewUsage()
-        return storage
-    }()
-    {
+    open var storage : Storage {
         willSet {
             storage.delegate = nil
         }
@@ -216,6 +208,17 @@ open class DTTableViewManager {
         }
     }
     #endif
+    
+    /// Storage construction block, used by `DTTableViewManager` when it's created. Returns `MemoryStorage` by default.
+    public static var defaultStorage: () -> Storage = { MemoryStorage() }
+    
+    /// Creates `DTTableViewManager`. Usually you don't need to call this method directly, as `manager` property on `DTTableViewManageable` instance is filled automatically. `DTTableViewManager.defaultStorage` closure is used to determine which `Storage` would be used by default.
+    ///
+    /// - Parameter storage: storage class to be used
+    public init(storage: Storage = DTTableViewManager.defaultStorage()) {
+        (storage as? BaseStorage)?.configureForTableViewUsage()
+        self.storage = storage
+    }
     
     /// Starts managing `UITableView`.
     ///

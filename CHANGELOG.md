@@ -4,9 +4,16 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
-* Added [documentation](https://dentelezhkin.github.io/DTTableViewManager)
-* Added support fort Xcode 10.2 and Swift 5
-* Dropped support for Xcode 9 and Swift 3
+### Added
+
+* Convenience constructor for `DTTableViewManager` object: `init(storage:)` that allows to create it's instance without initializing `MemoryStorage`.
+* Static variable `defaultStorage` on `DTTableViewManager` that allows to configure which `Storage` class is used by default. 
+* [Documentation](https://dentelezhkin.github.io/DTTableViewManager)
+* Support for Xcode 10.2 and Swift 5
+
+### Removed
+
+* Support for Xcode 9 and Swift 3
 
 ## [6.4.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.4.0)
 

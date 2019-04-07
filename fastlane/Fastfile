@@ -66,12 +66,15 @@ lane :release do |params|
     changelog.gsub!(/# Next/, "# Next\n\n## [#{version}](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/#{version})")
     File.open(changelog_filename, 'w') { |file| file.puts changelog }
 
+    puts "Updating docs"
+    sh "bundle exec jazzy"
+
     puts "Comitting, tagging, and pushing."
     message = "Releasing version #{version}."
     sh "git commit -am '#{message}'"
     sh "git tag #{version} -m '#{message}'"
     sh "git push --follow-tags"
-
+    
     puts "Updating Specs repo"
     sh "bundle exec pod repo update"
 
