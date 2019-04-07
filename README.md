@@ -42,6 +42,7 @@ Powerful generic-based UITableView management framework, written in Swift.
 - [x] No need to subclass
 - [x] Support for Drag&Drop in iOS 11
 - [x] Can be used with UITableViewController, or UIViewController with UITableView, or any other class, that contains UITableView
+- [x] [Complete documentation](https://dentelezhkin.github.io/DTTableViewManager)
 
 ## Requirements
 
