@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TableViewUpdater Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/TableViewUpdater" class="dashAnchor"></a>
+
+    <a title="TableViewUpdater Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          DTTableViewManager Docs
+        </a>
+         (72% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/DenTelezhkin/DTTableViewManager">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="dash-feed://https%3A%2F%2Fdentelezhkin%2Egithub%2Eio%2FDTTableViewManager%2Fdocsets%2FDTTableViewManager%2Exml">
+            <img class="header-icon" src="../img/dash.png"/>
+            Install in Dash
+          </a>
+        </p>
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">DTTableViewManager Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      TableViewUpdater Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDataSource.html">DTTableViewDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDelegate.html">DTTableViewDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDelegateWrapper.html">DTTableViewDelegateWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDragDelegate.html">DTTableViewDragDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDropDelegate.html">DTTableViewDropDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDropPlaceholderContext.html">DTTableViewDropPlaceholderContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewManager.html">DTTableViewManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewManagerAnomalyHandler.html">DTTableViewManagerAnomalyHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TableViewUpdater.html">TableViewUpdater</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/DTTableViewManagerAnomaly.html">DTTableViewManagerAnomaly</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/SupplementarySectionStyle.html">SupplementarySectionStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SupplementaryAccessible.html">SupplementaryAccessible</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DTTableViewManageable.html">DTTableViewManageable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DTTableViewOptionalManageable.html">DTTableViewOptionalManageable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TableViewConfiguration.html">TableViewConfiguration</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>TableViewUpdater</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">TableViewUpdater</span> <span class="p">:</span> <span class="kt">StorageUpdating</span></code></pre>
+
+                </div>
+              </div>
+            <p><code>TableViewUpdater</code> is responsible for updating <code>UITableView</code>, when it receives storage updates.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC17willUpdateContenty14DTModelStorage0jG0CSgcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/willUpdateContent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC17willUpdateContenty14DTModelStorage0jG0CSgcSgvp">willUpdateContent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>closure to be executed before content is updated</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">willUpdateContent</span><span class="p">:</span> <span class="p">((</span><span class="kt">StorageUpdate</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC16didUpdateContenty14DTModelStorage0jG0CSgcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/didUpdateContent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC16didUpdateContenty14DTModelStorage0jG0CSgcSgvp">didUpdateContent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>closure to be executed after content is updated</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">didUpdateContent</span><span class="p">:</span> <span class="p">((</span><span class="kt">StorageUpdate</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC22insertSectionAnimationSo07UITableb3RowH0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/insertSectionAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC22insertSectionAnimationSo07UITableb3RowH0Vvp">insertSectionAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Insert section animation. Default - .none.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">insertSectionAnimation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC22deleteSectionAnimationSo07UITableb3RowH0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/deleteSectionAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC22deleteSectionAnimationSo07UITableb3RowH0Vvp">deleteSectionAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete section animation. Default - .automatic</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">deleteSectionAnimation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC22reloadSectionAnimationSo07UITableb3RowH0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/reloadSectionAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC22reloadSectionAnimationSo07UITableb3RowH0Vvp">reloadSectionAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reload section animation. Default - .automatic.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">reloadSectionAnimation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC18insertRowAnimationSo07UITablebgH0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/insertRowAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC18insertRowAnimationSo07UITablebgH0Vvp">insertRowAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Insert row animation. Default - .automatic.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">insertRowAnimation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC18deleteRowAnimationSo07UITablebgH0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/deleteRowAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC18deleteRowAnimationSo07UITablebgH0Vvp">deleteRowAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete row animation. Default - .automatic.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">deleteRowAnimation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC18reloadRowAnimationSo07UITablebgH0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/reloadRowAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC18reloadRowAnimationSo07UITablebgH0Vvp">reloadRowAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reload row animation. Default - .automatic.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">reloadRowAnimation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/insertSectionAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/">insertSectionAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Insert section animation. Default - .none.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/deleteSectionAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/">deleteSectionAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete section animation. Default - .automatic</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/reloadSectionAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/">reloadSectionAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reload section animation. Default - .automatic.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/insertRowAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/">insertRowAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Insert row animation. Default - .automatic.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/deleteRowAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/">deleteRowAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete row animation. Default - .automatic.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/reloadRowAnimation" class="dashAnchor"></a>
+                    <a class="token" href="#/">reloadRowAnimation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reload row animation. Default - .automatic.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC16reloadRowClosurey10Foundation9IndexPathV_yptcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/reloadRowClosure" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC16reloadRowClosurey10Foundation9IndexPathV_yptcSgvp">reloadRowClosure</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Closure to be executed, when reloading a row.</p>
+
+<p>If this property is not nil, then reloadRowAnimation property is ignored.</p>
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <code><a href="../Classes/DTTableViewManager.html#/s:18DTTableViewManagerAAC17updateCellClosurey10Foundation9IndexPathV_yptcyF">DTTableViewManager.updateCellClosure()</a></code> method and <code><a href="../Classes/DTTableViewManager.html#/s:18DTTableViewManagerAAC15coreDataUpdaterAA05TablebF0CyF">DTTableViewManager.coreDataUpdater()</a></code> method.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">reloadRowClosure</span><span class="p">:</span> <span class="p">((</span><span class="kt">IndexPath</span><span class="p">,</span> <span class="kt">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC28animateMoveAsDeleteAndInsertSbvp"></a>
+                    <a name="//apple_ref/swift/Property/animateMoveAsDeleteAndInsert" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC28animateMoveAsDeleteAndInsertSbvp">animateMoveAsDeleteAndInsert</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>When this property is true, move events will be animated as delete event and insert event.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">animateMoveAsDeleteAndInsert</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC010usesLegacydB13UpdateMethodsSbvp"></a>
+                    <a name="//apple_ref/swift/Property/usesLegacyTableViewUpdateMethods" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC010usesLegacydB13UpdateMethodsSbvp">usesLegacyTableViewUpdateMethods</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If turned on, <code>TableViewUpdater</code> will use <code>tableView.beginUpdates</code> and <code>tableView.endUpdates</code> methods instead of iOS/tvOS 11 <code>performBatchUpdates</code> method.
+Defaults to <code>false</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">usesLegacyTableViewUpdateMethods</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC05tableB09reloadRow28animateMoveAsDeleteAndInsertACSo07UITableB0C_y10Foundation9IndexPathV_yptcSgSbtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(tableView:reloadRow:animateMoveAsDeleteAndInsert:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC05tableB09reloadRow28animateMoveAsDeleteAndInsertACSo07UITableB0C_y10Foundation9IndexPathV_yptcSgSbtcfc">init(tableView:reloadRow:animateMoveAsDeleteAndInsert:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates updater with tableView.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="nv">reloadRow</span><span class="p">:</span> <span class="p">((</span><span class="kt">IndexPath</span><span class="p">,</span> <span class="kt">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">animateMoveAsDeleteAndInsert</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC23storageDidPerformUpdateyy14DTModelStorage0kI0CF"></a>
+                    <a name="//apple_ref/swift/Method/storageDidPerformUpdate(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC23storageDidPerformUpdateyy14DTModelStorage0kI0CF">storageDidPerformUpdate(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates <code>UITableView</code> with received <code>update</code>. This method applies object and section changes in <code>performBatchUpdates</code> method or <code>tableView.beginUpdates</code> - <code>tableView.endUpdates</code> block.
+To enable iOS 11 <code>performBatchUpdates</code> method usage, set <code><a href="../Classes/TableViewUpdater.html#/s:18DTTableViewManager05TableB7UpdaterC010usesLegacydB13UpdateMethodsSbvp">usesLegacyTableViewUpdateMethods</a></code> to false. It is also highly recommended to turn on <code>MemoryStorage.defersDatasourceUpdates</code> flag on to prevent multiple issues that can happen if you try to use iOS 11 <code>performBatchUpdates</code> API.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">storageDidPerformUpdate</span><span class="p">(</span><span class="n">_</span> <span class="nv">update</span><span class="p">:</span> <span class="kt">StorageUpdate</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB7UpdaterC21storageNeedsReloadingyyF"></a>
+                    <a name="//apple_ref/swift/Method/storageNeedsReloading()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB7UpdaterC21storageNeedsReloadingyyF">storageNeedsReloading()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Call this method, if you want UITableView to be reloaded, and beforeContentUpdate: and afterContentUpdate: closures to be called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">storageNeedsReloading</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="https://github.com/DenTelezhkin" target="_blank" rel="external">Denys Telezhkin</a>. All rights reserved. (Last updated: 2019-04-07)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
