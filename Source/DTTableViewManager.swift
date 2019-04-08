@@ -297,7 +297,7 @@ open class DTTableViewManager {
     /// - Precondition: UITableView instance on `delegate` should not be nil.
     open func coreDataUpdater() -> TableViewUpdater {
         guard let tableView = tableView else {
-            preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
+            preconditionFailure("Call coreDataUpdater() method only when UITableView is created and passed to `DTTableViewManager` via startManaging(with:) method.")
         }
         return TableViewUpdater(tableView: tableView,
                                 reloadRow: updateCellClosure(),
