@@ -29,9 +29,7 @@
 		9A1D804820A09D3B001E9B4F /* EmptyXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1D804720A09D3B001E9B4F /* EmptyXib.xib */; };
 		9A234FFC1F65485B00A13B55 /* FixtureStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A234FFB1F65485B00A13B55 /* FixtureStoryboard.storyboard */; };
 		9A2350021F654B8B00A13B55 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350011F654B8B00A13B55 /* DTModelStorage.framework */; };
-		9A2350041F654BA200A13B55 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350031F654BA200A13B55 /* Nimble.framework */; };
 		9A2350061F654BB000A13B55 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; };
-		9A2350081F654BB300A13B55 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350071F654BB300A13B55 /* Nimble.framework */; };
 		9A383C9B1CE1D9FD0081D843 /* DTTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383C961CE1D9FD0081D843 /* DTTableViewManager.swift */; };
 		9A383C9D1CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383C971CE1D9FD0081D843 /* SectionModel+HeaderFooter.swift */; };
 		9A383C9F1CE1D9FD0081D843 /* TableViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A383C981CE1D9FD0081D843 /* TableViewConfiguration.swift */; };
@@ -282,7 +280,6 @@
 			files = (
 				9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */,
 				9A2350021F654B8B00A13B55 /* DTModelStorage.framework in Frameworks */,
-				9A2350041F654BA200A13B55 /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +299,6 @@
 			files = (
 				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
 				9A2350061F654BB000A13B55 /* DTModelStorage.framework in Frameworks */,
-				9A2350081F654BB300A13B55 /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,7 +781,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"";
+			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"\n";
 		};
 		9A23500D1F655D7600A13B55 /* Copy Carthage frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -794,14 +790,13 @@
 			);
 			inputPaths = (
 				DTModelStorage.framework,
-				Nimble.framework,
 			);
 			name = "Copy Carthage frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"";
+			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"\n";
 		};
 		9A23500E1F655D9600A13B55 /* Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -809,7 +804,6 @@
 			files = (
 			);
 			inputPaths = (
-				Nimble.framework,
 				DTModelStorage.framework,
 			);
 			name = "Copy Carthage Frameworks";

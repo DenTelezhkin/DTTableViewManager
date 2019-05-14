@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 import DTModelStorage
 
-class OptionalIntCell : UITableViewCell, ModelTransfer
+class OptionalIntCell : UITableViewCell, ModelTransfer, ModelRetrievable
 {
+    var model: Any!
     func update(with model: Int?) {
-        
+        self.model = model
     }
 }

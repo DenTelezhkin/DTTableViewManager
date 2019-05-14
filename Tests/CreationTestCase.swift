@@ -10,7 +10,6 @@ import UIKit
 import XCTest
 @testable import DTTableViewManager
 import DTModelStorage
-import Nimble
 
 class FooCell : UITableViewCell, ModelTransfer
 {
@@ -29,7 +28,7 @@ class CreationTestCase: XCTestCase {
         let controller = OptionalTableViewController()
         controller.tableView = UITableView()
         
-        expect(controller.manager.isManagingTableView).to(beTrue())
+        XCTAssert(controller.manager.isManagingTableView)
     }
     
     func testCreatingTableControllerFromCode()
@@ -40,12 +39,12 @@ class CreationTestCase: XCTestCase {
     
     func testDelegateIsNotNil() {
         let controller = DTTestTableViewController()
-        expect(controller.manager.storage.delegate != nil).to(beTrue())
+        XCTAssertNotNil(controller.manager.storage.delegate)
     }
     
     func testDelegateIsNotNilForMemoryStorage() {
         let controller = DTTestTableViewController()
-        expect(controller.manager.memoryStorage.delegate != nil).to(beTrue())
+        XCTAssertNotNil(controller.manager.memoryStorage.delegate)
     }
     
     func testSwitchingStorages() {
@@ -53,12 +52,12 @@ class CreationTestCase: XCTestCase {
         let first = MemoryStorage()
         let second = MemoryStorage()
         controller.manager.storage = first
-        expect(first.delegate === controller.manager.tableViewUpdater).to(beTrue())
+        XCTAssert(first.delegate === controller.manager.tableViewUpdater)
         
         controller.manager.storage = second
         
-        expect(first.delegate == nil).to(beTrue())
-        expect(second.delegate === controller.manager.tableViewUpdater).to(beTrue())
+        XCTAssertNil(first.delegate)
+        XCTAssert(second.delegate === controller.manager.tableViewUpdater)
     }
     
     func testCreatingTableControllerFromXIB()
@@ -72,8 +71,8 @@ class CreationTestCase: XCTestCase {
     {
         let foo = DTTestTableViewController(nibName: nil, bundle: nil)
         
-        expect(foo.manager).toNot(beNil())
-        expect(foo.manager) === foo.manager // Test if lazily instantiating using associations works correctly
+        XCTAssertNotNil(foo.manager)
+        XCTAssert(foo.manager === foo.manager) // Test if lazily instantiating using associations works correctly
     }
     
     func testManagerSetter()
@@ -82,13 +81,13 @@ class CreationTestCase: XCTestCase {
         let foo = DTTestTableViewController(nibName: nil, bundle: nil)
         foo.manager = manager
         
-        expect(foo.manager === manager).to(beTruthy())
+        XCTAssert(foo.manager === manager)
     }
     
     func testLoadFromXibChecksCorrectClassName() {
         let loadedView = StringCell.dt_loadFromXibNamed("NibCell")
         
-        expect(loadedView).to(beNil())
+        XCTAssertNil(loadedView)
     }
     
     func testCallingStartManagingMethodIsNotRequired() {

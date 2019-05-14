@@ -8,7 +8,6 @@
 
 import UIKit
 import XCTest
-import Nimble
 import DTModelStorage
 @testable import DTTableViewManager
 
@@ -39,6 +38,6 @@ class StoryboardMappingTestCase: XCTestCase {
             }
         }
     
-        expect(cell.storyboardLabel).toNot(beNil())
+        XCTAssertNotNil(cell.storyboardLabel)
     }
 }

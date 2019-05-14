@@ -10,7 +10,6 @@ import UIKit
 import XCTest
 import DTModelStorage
 @testable import DTTableViewManager
-import Nimble
 
 extension DTTableViewManager {
     var usesLegacyUpdateAPI : Bool {
@@ -179,8 +178,8 @@ class ReactingToEventsTestCase: XCTestCase {
         controller.manager.memoryStorage.addItems([1,2], toSection: 0)
         controller.manager.tableDelegate?.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
         
-        expect(reactingCell?.indexPath) == indexPath(1, 0)
-        expect(reactingCell?.model) == 2
+        XCTAssertEqual(reactingCell?.indexPath, indexPath(1, 0))
+        XCTAssertEqual(reactingCell?.model, 2)
     }
     
     func testCellSelectionPerfomance() {
@@ -188,13 +187,13 @@ class ReactingToEventsTestCase: XCTestCase {
             controller.tableView = UITableView()
         }
         controller.manager.register(SelectionReactingTableCell.self)
-        self.controller.manager.memoryStorage.addItems([1,2], toSection: 0)
-            measureMetrics([XCTPerformanceMetric.wallClockTime], automaticallyStartMeasuring: true) {
-            self.controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
+        controller.manager.memoryStorage.addItems([1,2], toSection: 0)
+        measureMetrics([XCTPerformanceMetric.wallClockTime], automaticallyStartMeasuring: true) {
+            controller.manager.didSelect(SelectionReactingTableCell.self) { (_, _, _) in
                 self.stopMeasuring()
             }
-            self.controller.manager.tableDelegate?.tableView(self.controller.tableView, didSelectRowAt: indexPath(1, 0))
-            }
+            controller.manager.tableDelegate?.tableView(controller.tableView, didSelectRowAt: indexPath(1, 0))
+        }
     }
     
     func testCellConfigurationClosure()
@@ -213,9 +212,9 @@ class ReactingToEventsTestCase: XCTestCase {
         controller.manager.memoryStorage.addItem(2, toSection: 0)
         _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         
-        expect(reactingCell?.indexPath) == indexPath(0, 0)
-        expect(reactingCell?.model) == 2
-        expect(reactingCell?.textLabel?.text) == "Foo"
+        XCTAssertEqual(reactingCell?.indexPath, indexPath(0, 0))
+        XCTAssertEqual(reactingCell?.model, 2)
+        XCTAssertEqual(reactingCell?.textLabel?.text, "Foo")
     }
     
     func testHeaderConfigurationClosure()
@@ -231,8 +230,8 @@ class ReactingToEventsTestCase: XCTestCase {
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
         reactingHeader = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
         
-        expect(reactingHeader?.sectionIndex) == 0
-        expect(reactingHeader?.model) == "Bar"
+        XCTAssertEqual(reactingHeader?.sectionIndex, 0)
+        XCTAssertEqual(reactingHeader?.model, "Bar")
     }
     
     func testFooterConfigurationClosure()
@@ -248,8 +247,8 @@ class ReactingToEventsTestCase: XCTestCase {
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
         reactingFooter = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
         
-        expect(reactingFooter?.sectionIndex) == 0
-        expect(reactingFooter?.model) == "Bar"
+        XCTAssertEqual(reactingFooter?.sectionIndex, 0)
+        XCTAssertEqual(reactingFooter?.model, "Bar")
     }
     
     func testShouldReactAfterContentUpdate()
@@ -961,89 +960,89 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testAllDelegateMethodSignatures() {
-        expect(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:)))) == EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDataSource.tableView(_:canEditRowAt:)))) == EventMethodSignature.canEditRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDataSource.tableView(_:canMoveRowAt:)))) == EventMethodSignature.canMoveRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDataSource.tableView(_:moveRowAt:to:)))) == EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))), EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDataSource.tableView(_:canEditRowAt:))), EventMethodSignature.canEditRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDataSource.tableView(_:canMoveRowAt:))), EventMethodSignature.canMoveRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDataSource.tableView(_:moveRowAt:to:))), EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue)
         #if os(iOS)
-        expect(String(describing: #selector(UITableViewDataSource.sectionIndexTitles(for:)))) == EventMethodSignature.sectionIndexTitlesForTableView.rawValue
-        expect(String(describing: #selector(UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:)))) == EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDataSource.sectionIndexTitles(for:))), EventMethodSignature.sectionIndexTitlesForTableView.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:))), EventMethodSignature.sectionForSectionIndexTitleAtIndex.rawValue)
         #endif
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForRowAt:)))) == EventMethodSignature.heightForRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:)))) == EventMethodSignature.estimatedHeightForRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAt:)))) == EventMethodSignature.indentationLevelForRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:)))) == EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:heightForRowAt:))), EventMethodSignature.heightForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:))), EventMethodSignature.estimatedHeightForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAt:))), EventMethodSignature.indentationLevelForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:))), EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue)
         
         #if os(iOS)
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:editActionsForRowAt:)))) == EventMethodSignature.editActionsForRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:editActionsForRowAt:))), EventMethodSignature.editActionsForRowAtIndexPath.rawValue)
         #endif
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWith:)))) == EventMethodSignature.accessoryButtonTappedForRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWith:))), EventMethodSignature.accessoryButtonTappedForRowAtIndexPath.rawValue)
         
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:willSelectRowAt:)))) == EventMethodSignature.willSelectRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:didSelectRowAt:)))) == EventMethodSignature.didSelectRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:willDeselectRowAt:)))) == EventMethodSignature.willDeselectRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:didDeselectRowAt:)))) == EventMethodSignature.didDeselectRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willSelectRowAt:))), EventMethodSignature.willSelectRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didSelectRowAt:))), EventMethodSignature.didSelectRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willDeselectRowAt:))), EventMethodSignature.willDeselectRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didDeselectRowAt:))), EventMethodSignature.didDeselectRowAtIndexPath.rawValue)
         
         // These methods are not equal on purpose - DTTableViewManager implements custom logic in them, and they are always implemented, even though they can act as events
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:)))) != EventMethodSignature.heightForHeaderInSection.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:)))) != EventMethodSignature.heightForFooterInSection.rawValue
+        XCTAssertNotEqual(String(describing: #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:))), EventMethodSignature.heightForHeaderInSection.rawValue)
+        XCTAssertNotEqual(String(describing: #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:))), EventMethodSignature.heightForFooterInSection.rawValue)
         
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:)))) == EventMethodSignature.estimatedHeightForHeaderInSection.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:)))) == EventMethodSignature.estimatedHeightForFooterInSection.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:)))) == EventMethodSignature.willDisplayHeaderForSection.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplayFooterView:forSection:)))) == EventMethodSignature.willDisplayFooterForSection.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:))), EventMethodSignature.estimatedHeightForHeaderInSection.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:))), EventMethodSignature.estimatedHeightForFooterInSection.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:))), EventMethodSignature.willDisplayHeaderForSection.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplayFooterView:forSection:))), EventMethodSignature.willDisplayFooterForSection.rawValue)
         
         #if os(iOS)
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAt:)))) == EventMethodSignature.willBeginEditingRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:didEndEditingRowAt:)))) == EventMethodSignature.didEndEditingRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAt:))), EventMethodSignature.willBeginEditingRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didEndEditingRowAt:))), EventMethodSignature.didEndEditingRowAtIndexPath.rawValue)
         #endif
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:editingStyleForRowAt:)))) == EventMethodSignature.editingStyleForRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:editingStyleForRowAt:))), EventMethodSignature.editingStyleForRowAtIndexPath.rawValue)
         #if os(iOS)
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:)))) == EventMethodSignature.titleForDeleteButtonForRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:))), EventMethodSignature.titleForDeleteButtonForRowAtIndexPath.rawValue)
         #endif
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:)))) == EventMethodSignature.shouldIndentWhileEditingRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:))), EventMethodSignature.shouldIndentWhileEditingRowAtIndexPath.rawValue)
         
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:didEndDisplaying:forRowAt:)))) == EventMethodSignature.didEndDisplayingCellForRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:didEndDisplayingHeaderView:forSection:)))) == EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:didEndDisplayingFooterView:forSection:)))) == EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didEndDisplaying:forRowAt:))), EventMethodSignature.didEndDisplayingCellForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didEndDisplayingHeaderView:forSection:))), EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didEndDisplayingFooterView:forSection:))), EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue)
         
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:)))) == EventMethodSignature.shouldShowMenuForRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)))) == EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:)))) == EventMethodSignature.performActionForRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:))), EventMethodSignature.shouldShowMenuForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:))), EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:))), EventMethodSignature.performActionForRowAtIndexPath.rawValue)
         
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAt:)))) == EventMethodSignature.shouldHighlightRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:)))) == EventMethodSignature.didHighlightRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:)))) == EventMethodSignature.didUnhighlightRowAtIndexPath.rawValue
-        expect(String(describing: #selector(UITableViewDelegate.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:)))) == EventMethodSignature.targetIndexPathForMoveFromRowAtIndexPath.rawValue
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAt:))), EventMethodSignature.shouldHighlightRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:))), EventMethodSignature.didHighlightRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:))), EventMethodSignature.didUnhighlightRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:))), EventMethodSignature.targetIndexPathForMoveFromRowAtIndexPath.rawValue)
         if #available(iOS 9.0, tvOS 9.0, *) {
-            expect(String(describing: #selector(UITableViewDelegate.tableView(_:canFocusRowAt:)))) == EventMethodSignature.canFocusRowAtIndexPath.rawValue
-            expect(String(describing: #selector(UITableViewDelegate.tableView(_:shouldUpdateFocusIn:)))) == EventMethodSignature.shouldUpdateFocusInContext.rawValue
-            expect(String(describing: #selector(UITableViewDelegate.tableView(_:didUpdateFocusIn:with:)))) == EventMethodSignature.didUpdateFocusInContextWithAnimationCoordinator.rawValue
-            expect(String(describing: #selector(UITableViewDelegate.indexPathForPreferredFocusedView(in:)))) == EventMethodSignature.indexPathForPreferredFocusedViewInTableView.rawValue
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:canFocusRowAt:))), EventMethodSignature.canFocusRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldUpdateFocusIn:))), EventMethodSignature.shouldUpdateFocusInContext.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didUpdateFocusIn:with:))), EventMethodSignature.didUpdateFocusInContextWithAnimationCoordinator.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.indexPathForPreferredFocusedView(in:))), EventMethodSignature.indexPathForPreferredFocusedViewInTableView.rawValue)
         }
         
         // MARK: - UITableViewDragDelegate
         #if os(iOS)
         if #available(iOS 11, *) {
-            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)))) == EventMethodSignature.itemsForBeginningDragSession.rawValue
-            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)))) == EventMethodSignature.itemsForAddingToDragSession.rawValue
-            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)))) == EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue
-            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionWillBegin:)))) == EventMethodSignature.dragSessionWillBegin.rawValue
-            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionDidEnd:)))) == EventMethodSignature.dragSessionDidEnd.rawValue
-            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionAllowsMoveOperation:)))) == EventMethodSignature.dragSessionAllowsMoveOperation.rawValue
-            expect(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionIsRestrictedToDraggingApplication:)))) == EventMethodSignature.dragSessionIsRestrictedToDraggingApplication.rawValue
+            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForBeginning:at:))),EventMethodSignature.itemsForBeginningDragSession.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:))), EventMethodSignature.itemsForAddingToDragSession.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:))), EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionWillBegin:))), EventMethodSignature.dragSessionWillBegin.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionDidEnd:))), EventMethodSignature.dragSessionDidEnd.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionAllowsMoveOperation:))), EventMethodSignature.dragSessionAllowsMoveOperation.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionIsRestrictedToDraggingApplication:))), EventMethodSignature.dragSessionIsRestrictedToDraggingApplication.rawValue)
             
-            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:performDropWith:)))) == EventMethodSignature.performDropWithCoordinator.rawValue
-            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:canHandle:)))) == EventMethodSignature.canHandleDropSession.rawValue
-            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnter:)))) == EventMethodSignature.dropSessionDidEnter.rawValue
-            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidUpdate:withDestinationIndexPath:)))) == EventMethodSignature.dropSessionDidUpdateWithDestinationIndexPath.rawValue
-            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidExit:)))) == EventMethodSignature.dropSessionDidExit.rawValue
-            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnd:)))) == EventMethodSignature.dropSessionDidEnd.rawValue
-            expect(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropPreviewParametersForRowAt:)))) == EventMethodSignature.dropPreviewParametersForRowAtIndexPath.rawValue
+            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:performDropWith:))), EventMethodSignature.performDropWithCoordinator.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:canHandle:))), EventMethodSignature.canHandleDropSession.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnter:))), EventMethodSignature.dropSessionDidEnter.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidUpdate:withDestinationIndexPath:))), EventMethodSignature.dropSessionDidUpdateWithDestinationIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidExit:))), EventMethodSignature.dropSessionDidExit.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnd:))), EventMethodSignature.dropSessionDidEnd.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropPreviewParametersForRowAt:))), EventMethodSignature.dropPreviewParametersForRowAtIndexPath.rawValue)
             
-            expect(String(describing: #selector(UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)))) == EventMethodSignature.leadingSwipeActionsConfigurationForRowAtIndexPath.rawValue
-            expect(String(describing: #selector(UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:)))) == EventMethodSignature.trailingSwipeActionsConfigurationForRowAtIndexPath.rawValue
-            expect(String(describing: #selector(UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:with:)))) == EventMethodSignature.shouldSpringLoadRowAtIndexPathWithContext.rawValue
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:))), EventMethodSignature.leadingSwipeActionsConfigurationForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:))), EventMethodSignature.trailingSwipeActionsConfigurationForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:with:))), EventMethodSignature.shouldSpringLoadRowAtIndexPathWithContext.rawValue)
         }
         
         #endif

@@ -8,7 +8,6 @@
 
 import UIKit
 import XCTest
-import Nimble
 import DTModelStorage
 @testable import DTTableViewManager
 
@@ -40,9 +39,9 @@ class MappingTestCase: XCTestCase {
             cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NiblessCell
         }
         
-        expect(cell.model as? Int) == 1
-        expect(cell.awakedFromNib) == false
-        expect(cell.inittedWithStyle) == true
+        XCTAssertEqual(cell.model as? Int, 1)
+        XCTAssertFalse(cell.awakedFromNib)
+        XCTAssert(cell.inittedWithStyle)
     }
     
     func testOptionalUnwrapping()
@@ -53,7 +52,7 @@ class MappingTestCase: XCTestCase {
         let intOptional : Int? = 3
         controller.manager.memoryStorage.addItem(intOptional, toSection: 0)
         
-        expect(self.controller.verifyItem(3, atIndexPath: indexPath(0, 0))) == true
+        XCTAssert(controller.verifyItem(3, atIndexPath: indexPath(0, 0)))
     }
     
     func testSeveralLevelsOfOptionalUnwrapping()
@@ -64,7 +63,7 @@ class MappingTestCase: XCTestCase {
         let intOptional : Int?? = 3
         controller.manager.memoryStorage.addItem(intOptional, toSection: 0)
         
-        expect(self.controller.verifyItem(3, atIndexPath: indexPath(0, 0))) == true
+        XCTAssert(controller.verifyItem(3, atIndexPath: indexPath(0, 0)))
     }
     
     func testCellMappingFromNib()
@@ -84,9 +83,9 @@ class MappingTestCase: XCTestCase {
             cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NibCell
         }
         
-        expect(cell.model as? Int) == 1
-        expect(cell.awakedFromNib) == true
-        expect(cell.inittedWithStyle) == false
+        XCTAssertEqual(cell.model as? Int, 1)
+        XCTAssert(cell.awakedFromNib)
+        XCTAssertFalse(cell.inittedWithStyle)
     }
     
     func testCellMappingFromNibWithDifferentName()
@@ -106,21 +105,19 @@ class MappingTestCase: XCTestCase {
             cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! BaseTestCell
         }
         
-        expect(cell.model as? Int) == 1
-        expect(cell.awakedFromNib) == true
-        expect(cell.inittedWithStyle) == false
+        XCTAssertEqual(cell.model as? Int, 1)
+        XCTAssert(cell.awakedFromNib)
+        XCTAssertFalse(cell.inittedWithStyle)
     }
 
-    // MARK: TODO - Reevaluate this functionality in the future
-    // Is there a reason to have optional cell mapping or not?
-//    func testOptionalModelCellMapping()
-//    {
-//        controller.registerCellClass(OptionalIntCell)
-//        
-//        controller.memoryStorage.addItem(Optional(1), toSection: 0)
-//        
-//        expect(self.controller.verifyItem(1, atIndexPath: indexPath(0, 0))) == true
-//    }
+    func testOptionalModelCellMapping()
+    {
+        controller.manager.register(OptionalIntCell.self)
+        
+        controller.manager.memoryStorage.addItem(1, toSection: 0)
+        
+        XCTAssert(controller.verifyItem(1, atIndexPath: indexPath(0, 0)))
+    }
     
     func testHeaderViewMappingFromUIView()
     {
@@ -128,7 +125,7 @@ class MappingTestCase: XCTestCase {
         
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
-        expect(view).to(beAKindOf(NibView.self))
+        XCTAssert(view is NibView)
     }
     
     func testHeaderMappingFromHeaderFooterView()
@@ -136,7 +133,7 @@ class MappingTestCase: XCTestCase {
         controller.manager.registerHeader(NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
-        expect(view).to(beAKindOf(NibHeaderFooterView.self))
+        XCTAssert(view is NibHeaderFooterView)
     }
     
     func testFooterViewMappingFromUIView()
@@ -145,7 +142,7 @@ class MappingTestCase: XCTestCase {
         
         controller.manager.memoryStorage.setSectionFooterModels([1])
         let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
-        expect(view).to(beAKindOf(NibView.self))
+        XCTAssert(view is NibView)
     }
     
     func testFooterMappingFromHeaderFooterView()
@@ -153,49 +150,49 @@ class MappingTestCase: XCTestCase {
         controller.manager.registerHeader(ReactingHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
         let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
-        expect(view).to(beAKindOf(ReactingHeaderFooterView.self))
+        XCTAssert(view is ReactingHeaderFooterView)
     }
     
     func testHeaderViewShouldSupportNSStringModel()
     {
         controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
-        expect(self.controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForHeaderInSection: 0)).to(beAKindOf(NibHeaderFooterView.self))
+        XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) is NibHeaderFooterView)
     }
     
     func testNiblessHeaderRegistrationWorks() {
         controller.manager.registerNiblessHeader(NiblessHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
-        expect(view).to(beAKindOf(NiblessHeaderFooterView.self))
+        XCTAssert(view is NiblessHeaderFooterView)
     }
     
     func testNiblessFooterRegistrationWorks() {
         controller.manager.registerNiblessFooter(NiblessHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
         let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
-        expect(view).to(beAKindOf(NiblessHeaderFooterView.self))
+        XCTAssert(view is NiblessHeaderFooterView)
     }
     
     func testUnregisterCellClass() {
         controller.manager.register(NibCell.self)
         controller.manager.unregister(NibCell.self)
         
-        expect(self.controller.manager.viewFactory.mappings.count) == 0
+        XCTAssertEqual(controller.manager.viewFactory.mappings.count, 0)
     }
     
     func testUnregisterHeaderClass() {
         controller.manager.registerHeader(NibHeaderFooterView.self)
         controller.manager.unregisterHeader(NibHeaderFooterView.self)
         
-        expect(self.controller.manager.viewFactory.mappings.count) == 0
+        XCTAssertEqual(controller.manager.viewFactory.mappings.count, 0)
     }
     
     func testUnregisterFooterClass() {
         controller.manager.registerFooter(NibHeaderFooterView.self)
         controller.manager.unregisterFooter(NibHeaderFooterView.self)
         
-        expect(self.controller.manager.viewFactory.mappings.count) == 0
+        XCTAssertEqual(controller.manager.viewFactory.mappings.count, 0)
     }
     
     func testUnregisterHeaderClassDoesNotUnregisterCell() {
@@ -203,7 +200,7 @@ class MappingTestCase: XCTestCase {
         controller.manager.registerHeader(NibHeaderFooterView.self)
         controller.manager.unregisterHeader(NibCell.self)
         
-        expect(self.controller.manager.viewFactory.mappings.count) == 2
+        XCTAssertEqual(controller.manager.viewFactory.mappings.count, 2)
     }
     
     func testUnregisteringHeaderDoesNotUnregisterFooter() {
@@ -211,7 +208,7 @@ class MappingTestCase: XCTestCase {
         controller.manager.registerHeader(NibHeaderFooterView.self)
         controller.manager.unregisterHeader(NibHeaderFooterView.self)
         
-        expect(self.controller.manager.viewFactory.mappings.count) == 1
+        XCTAssertEqual(controller.manager.viewFactory.mappings.count, 1)
     }
 }
 
@@ -226,24 +223,24 @@ class NibNameViewModelMappingTestCase : XCTestCase {
     func testRegisterCellWithoutNibYieldsNoXibName() {
         factory.registerCellClass(NiblessCell.self, mappingBlock: nil)
         
-        expect(self.factory.mappings.first?.xibName).to(beNil())
+        XCTAssertNil(factory.mappings.first?.xibName)
     }
     
     func testCellWithXibHasXibNameInMapping() {
         factory.registerCellClass(NibCell.self, mappingBlock: nil)
         
-        expect(self.factory.mappings.first?.xibName) == "NibCell"
+        XCTAssertEqual(factory.mappings.first?.xibName, "NibCell")
     }
     
     func testHeaderHasXibInMapping() {
         factory.registerHeaderClass(NibHeaderFooterView.self, mappingBlock: nil)
         
-        expect(self.factory.mappings.first?.xibName) == "NibHeaderFooterView"
+        XCTAssertEqual(factory.mappings.first?.xibName, "NibHeaderFooterView")
     }
     
     func testFooterHasXibInMapping() {
         factory.registerFooterClass(NibHeaderFooterView.self, mappingBlock: nil)
         
-        expect(self.factory.mappings.first?.xibName) == "NibHeaderFooterView"
+        XCTAssertEqual(factory.mappings.first?.xibName, "NibHeaderFooterView")
     }
 }

@@ -9,7 +9,6 @@
 import XCTest
 @testable import DTTableViewManager
 import DTModelStorage
-import Nimble
 
 fileprivate class UpdatableModel {
     var value: Bool = false
@@ -53,9 +52,9 @@ class TableViewFactoryTestCase: XCTestCase {
         model.value = true
         controller.manager.updateCellClosure()(indexPath(0, 0),model)
         if #available(iOS 11, tvOS 11, *) {
-            expect((self.controller.manager.tableDataSource?.tableView(self.controller.tableView, cellForRowAt: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
+            XCTAssertTrue((controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as? UpdatableCell)?.model?.value ?? false)
         } else {
-            expect((self.controller.tableView.cellForRow(at: indexPath(0, 0)) as? UpdatableCell)?.model?.value).to(beTrue())
+            XCTAssertTrue((controller.tableView.cellForRow(at: indexPath(0, 0)) as? UpdatableCell)?.model?.value ?? false)
         }
     }
     

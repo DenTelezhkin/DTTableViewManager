@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>classNames</key>
+	<dict>
+		<key>ReactingToEventsFastTestCase</key>
+		<dict>
+			<key>testEventsRegistrationPerfomance()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.01259</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>May 14, 2019 at 5:01:06 PM</string>
+				</dict>
+			</dict>
+			<key>testSearchForEventPerfomance()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>3.5677e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>May 14, 2019 at 5:01:06 PM</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>ReactingToEventsTestCase</key>
+		<dict>
+			<key>testCellSelectionPerfomance()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.00019277</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>May 14, 2019 at 5:01:06 PM</string>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>
