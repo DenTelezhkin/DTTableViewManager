@@ -356,7 +356,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         _ = performCellReaction(.didUnhighlightRowAtIndexPath, location: indexPath, provideCell: true)
     }
     
-    @available(iOS 9.0, tvOS 9.0, *)
+    @available(iOS 9.0, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         if let should = performCellReaction(.canFocusRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {

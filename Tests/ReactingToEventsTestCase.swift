@@ -141,16 +141,6 @@ class ReactingTestTableViewController: DTTestTableViewController
     var text : String?
 }
 
-class ViewModelMappingCustomizingController : ReactingTestTableViewController, ViewModelMappingCustomizing {
-    var viewModelMappingCustomization : ([ViewModelMapping], Any) -> ViewModelMapping = { mappings, _ in
-        return mappings.first!
-    }
-    
-    func viewModelMapping(fromCandidates candidates: [ViewModelMapping], forModel model: Any) -> ViewModelMapping? {
-        return viewModelMappingCustomization(candidates, model)
-    }
-}
-
 fileprivate class FirstTableViewCell : UITableViewCell, ModelTransfer {
     func update(with model: Int) {
         
@@ -160,37 +150,6 @@ fileprivate class FirstTableViewCell : UITableViewCell, ModelTransfer {
 fileprivate class SecondTableViewCell : UITableViewCell, ModelTransfer {
     func update(with model: Int) {
         
-    }
-}
-
-class ViewModelMappingCustomizationTestCase : XCTestCase {
-    var sut : ViewModelMappingCustomizingController!
-    
-    override func setUp() {
-        super.setUp()
-        sut = ViewModelMappingCustomizingController()
-        sut.tableView = AlwaysVisibleTableView()
-        _ = sut.view
-    }
-    
-    func testEventReactionsSupportViewModelMappingCustomization() {
-        sut.manager.memoryStorage.defersDatasourceUpdates = true
-        sut.manager.register(FirstTableViewCell.self)
-        sut.manager.register(SecondTableViewCell.self)
-        
-        sut.viewModelMappingCustomization = { mappings,_ in return mappings.last! }
-        sut.manager.didSelect(FirstTableViewCell.self) { cell, _, _ in
-            XCTFail()
-        }
-        let exp = expectation(description: "did select second cell")
-        sut.manager.didSelect(SecondTableViewCell.self) { cell, _, _ in
-            exp.fulfill()
-        }
-        
-        sut.manager.memoryStorage.addItems([1,2], toSection: 0)
-        sut.manager.tableDelegate?.tableView(sut.tableView, didSelectRowAt: indexPath(0, 0))
-        
-        waitForExpectations(timeout: 0.5, handler: nil)
     }
 }
 

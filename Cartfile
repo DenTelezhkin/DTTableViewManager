@@ -1,2 +1,2 @@
-github "DenTelezhkin/DTModelStorage" ~> 7.3.0
+github "DenTelezhkin/DTModelStorage" "master"
 github "osteslag/Changeset"

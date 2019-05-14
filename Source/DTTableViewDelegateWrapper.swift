@@ -29,7 +29,7 @@ import DTModelStorage
 /// Base class for objects, that implement various datasource and delegate methods from `UITableView`. Even though this class is declared as `open`, subclassing it is discouraged. Please subsclass concrete subclass of this class, such as `DTTableViewDelegate`.
 open class DTTableViewDelegateWrapper : NSObject {
     weak var delegate: AnyObject?
-    weak var tableView: UITableView? { return manager?.tableView }
+    var tableView: UITableView? { return manager?.tableView }
     var viewFactory: TableViewFactory? { return manager?.viewFactory }
     var storage: Storage? { return manager?.storage }
     var configuration: TableViewConfiguration? { return manager?.configuration }
