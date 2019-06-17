@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'DTTableViewManager'
-  s.version      = "6.5.0"
+  s.version      = "6.6.0"
   s.license  = 'MIT'
   s.summary  = 'Protocol-oriented UITableView management, powered by generics and associated types.'
   s.homepage = 'https://github.com/DenTelezhkin/DTTableViewManager'

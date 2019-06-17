@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [6.6.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.6.0)
+
 * Added support for Swift Package Manager in Xcode 11
 
 ## [6.5.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.5.0)
