@@ -20,7 +20,9 @@ opt_in_rules: # some rules are only opt-in
   # Find all the available rules by running:
   # swiftlint rules
 included:
-  - Source
+  - Sources
+excluded:
+  - Sources/Tests
 
 # configurable rules can be customized from this configuration file
 # binary rules can set their severity level
