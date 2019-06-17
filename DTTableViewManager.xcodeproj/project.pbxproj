@@ -64,7 +64,6 @@
 		3EDC20C822B818030078EB0D /* ReactingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC206F22B817E00078EB0D /* ReactingTableCell.swift */; };
 		3EDC20C922B818030078EB0D /* FixtureViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC207022B817E00078EB0D /* FixtureViews.swift */; };
 		3EDC20CA22B818030078EB0D /* StoryboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC207122B817E00078EB0D /* StoryboardCell.swift */; };
-		3EDC20CB22B818030078EB0D /* FixtureStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC207222B817E00078EB0D /* FixtureStoryboard.storyboard */; };
 		3EDC20CC22B818030078EB0D /* ReactingHeaderFooters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC207322B817E00078EB0D /* ReactingHeaderFooters.swift */; };
 		3EDC20CD22B818030078EB0D /* OptionalCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC208B22B817E00078EB0D /* OptionalCells.swift */; };
 		3EDC20CE22B818030078EB0D /* FixtureCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC208C22B817E00078EB0D /* FixtureCells.swift */; };
@@ -697,7 +696,6 @@
 				3EDC20E022B8181D0078EB0D /* EmptyXib.xib in Resources */,
 				3EDC20DD22B8181D0078EB0D /* NibView.xib in Resources */,
 				3EDC20E222B8181D0078EB0D /* XibTableViewController.xib in Resources */,
-				3EDC20CB22B818030078EB0D /* FixtureStoryboard.storyboard in Resources */,
 				3EDC20DE22B8181D0078EB0D /* FixtureStoryboard.storyboard in Resources */,
 				3EDC20E122B8181D0078EB0D /* NibHeaderFooterView.xib in Resources */,
 				3EDC20E522B8181D0078EB0D /* CustomNibCell.xib in Resources */,
