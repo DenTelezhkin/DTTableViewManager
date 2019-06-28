@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 * Ability to customize bundle, from which xib files are loaded from by setting `bundle` property on `ViewModelMapping` in `mappingBlock`. As before, `bundle` defaults to `Bundle(for: ViewClass.self)`.
 
+### Breaking
+
+* `DTTableViewOptionalManageable` protocol was removed and replaced by `optionalTableView` property on `DTTableViewManageable` protocol. One of `tableView`/`optionalTableView` properties must be implemented by `DTTableViewManageable` instance to work with `DTTableViewManager`.
+
 ## [6.6.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.6.0)
 
 * Added support for Swift Package Manager in Xcode 11
