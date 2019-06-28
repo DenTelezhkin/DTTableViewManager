@@ -34,8 +34,6 @@ final class TableViewFactory
     
     var mappings = [ViewModelMapping]()
     
-    weak var mappingCustomizableDelegate : ViewModelMappingCustomizing?
-    
     weak var anomalyHandler : DTTableViewManagerAnomalyHandler?
     
     init(tableView: UITableView)
@@ -206,15 +204,7 @@ final class TableViewFactory
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
             return nil
         }
-        let mappingCandidates = mappings.mappingCandidates(for: viewType, withModel: unwrappedModel, at: indexPath)
-        
-        if let customizedMapping = mappingCustomizableDelegate?.viewModelMapping(fromCandidates: mappingCandidates, forModel: unwrappedModel) {
-            return customizedMapping
-        } else if let defaultMapping = mappingCandidates.first {
-            return defaultMapping
-        } else {
-            return nil
-        }
+        return mappings.mappingCandidates(for: viewType, withModel: unwrappedModel, at: indexPath).first
     }
     
     func cellForModel(_ model: Any, atIndexPath indexPath:IndexPath) -> UITableViewCell?

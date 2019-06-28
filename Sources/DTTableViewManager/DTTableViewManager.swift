@@ -220,9 +220,6 @@ open class DTTableViewManager {
     private func startManaging(with tableView: UITableView) {
         guard !isConfigured else { return }
         defer { isConfigured = true }
-        if let mappingDelegate = delegate as? ViewModelMappingCustomizing {
-            viewFactory.mappingCustomizableDelegate = mappingDelegate
-        }
         tableViewUpdater = TableViewUpdater(tableView: tableView)
         tableDelegate = DTTableViewDelegate(delegate: delegate, tableViewManager: self)
         tableDataSource = DTTableViewDataSource(delegate: delegate, tableViewManager: self)
