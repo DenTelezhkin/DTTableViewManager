@@ -40,7 +40,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "DTTableViewManager", dependencies: ["DTModelStorage"]),
-        .testTarget(name: "Tests-iOS", dependencies: ["DTTableViewManager", "DTModelStorage"], path: "Sources/Tests")
+        // .testTarget(name: "Tests-iOS", dependencies: ["DTTableViewManager", "DTModelStorage"], path: "Sources/Tests")
     ],
     swiftLanguageVersions: [.v5, .v4_2]
 )
