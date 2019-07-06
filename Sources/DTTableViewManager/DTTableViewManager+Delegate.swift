@@ -71,6 +71,7 @@ extension DTTableViewManager {
     }
     
     #if os(iOS)
+    @available(iOS, deprecated: 13.0)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editActionsForRowAt:)` method is called for `cellClass`.
     open func editActions<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> [UITableViewRowAction]?) where T: UITableViewCell {
         tableDelegate?.appendReaction(for: T.self, signature: .editActionsForRowAtIndexPath, closure: closure)
@@ -175,12 +176,16 @@ extension DTTableViewManager {
         tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: .didEndDisplayingFooterViewForSection, closure: closure)
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:)` method is called for `cellClass`.
     open func shouldShowMenu<T:ModelTransfer>(for cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell
     {
         tableDelegate?.appendReaction(for: T.self, signature: .shouldShowMenuForRowAtIndexPath, closure: closure)
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func canPerformAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
         tableDelegate?.append5ArgumentReaction(for: T.self,
@@ -188,6 +193,8 @@ extension DTTableViewManager {
                                                closure: closure)
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func performAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
         tableDelegate?.append5ArgumentReaction(for: T.self,

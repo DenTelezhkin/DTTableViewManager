@@ -223,6 +223,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     
     #if os(iOS)
+    @available(iOS, deprecated: 13.0)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if let eventReaction = cellReaction(.editActionsForRowAtIndexPath, location: indexPath) {
@@ -306,6 +307,8 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         if let should = performCellReaction(.shouldShowMenuForRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
@@ -314,6 +317,8 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldShowMenuForRowAt: indexPath) ?? false
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         if let canPerform = perform5ArgumentCellReaction(.canPerformActionForRowAtIndexPath,
@@ -326,6 +331,8 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canPerformAction: action, forRowAt: indexPath, withSender: sender) ?? false
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, performAction: action, forRowAt: indexPath, withSender: sender) }
