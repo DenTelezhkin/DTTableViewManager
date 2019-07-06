@@ -363,6 +363,8 @@ internal enum EventMethodSignature: String {
     case indexPathForPreferredFocusedViewInTableView = "indexPathForPreferredFocusedViewInTableView:"
     case shouldSpringLoadRowAtIndexPathWithContext = "tableView:shouldSpringLoadRowAtIndexPath:withContext:"
     
+    case shouldBeginMultipleSelectionInteractionAtIndexPath = "tableView:shouldBeginMultipleSelectionInteractionAtIndexPath:"
+    
     /// UITableViewDragDelegate
     case itemsForBeginningDragSession = "tableView:itemsForBeginningDragSession:atIndexPath:"
     case itemsForAddingToDragSession = "tableView:itemsForAddingToDragSession:atIndexPath:point:"

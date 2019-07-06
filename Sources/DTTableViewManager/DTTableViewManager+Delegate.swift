@@ -248,6 +248,13 @@ extension DTTableViewManager {
         tableDelegate?.appendNonCellReaction(.indexPathForPreferredFocusedViewInTableView, closure: closure)
     }
     
+    /// Registers `closure` to be executed when `UITableViewDelegate.targetIndexPathForMoveFromRowAt(_:toProposed:)` method is called for `cellClass`
+    open func targetIndexPathForMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (IndexPath, T, T.ModelType, IndexPath) -> IndexPath) where T:UITableViewCell {
+        tableDelegate?.append4ArgumentReaction(for: T.self,
+                                               signature: .targetIndexPathForMoveFromRowAtIndexPath,
+                                               closure: closure)
+    }
+    
     #if os(iOS)
     @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)` method is called for `cellClass`
@@ -272,12 +279,18 @@ extension DTTableViewManager {
                                                signature: .shouldSpringLoadRowAtIndexPathWithContext,
                                                closure: closure)
     }
-    #endif
     
-    /// Registers `closure` to be executed when `UITableViewDelegate.targetIndexPathForMoveFromRowAt(_:toProposed:)` method is called for `cellClass`
-    open func targetIndexPathForMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (IndexPath, T, T.ModelType, IndexPath) -> IndexPath) where T:UITableViewCell {
-        tableDelegate?.append4ArgumentReaction(for: T.self,
-                                               signature: .targetIndexPathForMoveFromRowAtIndexPath,
-                                               closure: closure)
+    @available(iOS 13, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)`method is called for `cellClass`.
+    /// - Parameter Type: cell class to react for event
+    /// - Parameter closure: closure to run.
+    open func shouldBeginMultipleSelectionInteraction<T:ModelTransfer>(for cellClass: T.Type,
+                                                              _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool)
+        where T: UITableViewCell
+    {
+        tableDelegate?.appendReaction(for: T.self,
+                                      signature: .shouldBeginMultipleSelectionInteractionAtIndexPath,
+                                      closure: closure)
     }
+    #endif
 }
