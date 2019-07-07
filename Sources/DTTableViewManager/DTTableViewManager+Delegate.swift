@@ -292,5 +292,18 @@ extension DTTableViewManager {
                                       signature: .shouldBeginMultipleSelectionInteractionAtIndexPath,
                                       closure: closure)
     }
+    
+    @available(iOS 13, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:)`method is called for `cellClass`.
+    /// - Parameter Type: cell class to react for event
+    /// - Parameter closure: closure to run.
+    open func didBeginMultipleSelectionInteraction<T:ModelTransfer>(for cellClass: T.Type,
+                                                                    _ closure: @escaping (T, T.ModelType, IndexPath) -> Void)
+        where T: UITableViewCell
+    {
+        tableDelegate?.appendReaction(for: T.self,
+                                      signature: .didBeginMultipleSelectionInteractionAtIndexPath,
+                                      closure: closure)
+    }
     #endif
 }

@@ -945,6 +945,17 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testDidBeginMultipleSelectionInteraction() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "shouldBeginMultipleSelectionInteractionAT")
+        controller.manager.didBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
+            exp.fulfill()
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didBeginMultipleSelectionInteractionAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     #endif
     
     func testTargetIndexPathForMoveFromTo() {
@@ -1059,6 +1070,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         
         if #available(iOS 13, *) {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:))), EventMethodSignature.shouldBeginMultipleSelectionInteractionAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:))), EventMethodSignature.didBeginMultipleSelectionInteractionAtIndexPath.rawValue)
         }
         
         #endif

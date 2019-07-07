@@ -458,5 +458,12 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldBeginMultipleSelectionInteractionAt: indexPath) ?? false
     }
+    
+    @available(iOS 13.0, *)
+    /// Implementation for `UITableViewDelegate` protocol
+    open func tableView(_ tableView: UITableView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
+        _ = performCellReaction(.didBeginMultipleSelectionInteractionAtIndexPath, location: indexPath, provideCell: true)
+        (delegate as? UITableViewDelegate)?.tableView?(tableView, didBeginMultipleSelectionInteractionAt: indexPath)
+    }
     #endif
 }
