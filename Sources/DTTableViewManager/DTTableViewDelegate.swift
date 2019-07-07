@@ -465,5 +465,12 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         _ = performCellReaction(.didBeginMultipleSelectionInteractionAtIndexPath, location: indexPath, provideCell: true)
         (delegate as? UITableViewDelegate)?.tableView?(tableView, didBeginMultipleSelectionInteractionAt: indexPath)
     }
+    
+    @available(iOS 13.0, *)
+    /// Implementation for `UITableViewDelegate` protocol
+    open func tableViewDidEndMultipleSelectionInteraction(_ tableView: UITableView) {
+        _ = performNonCellReaction(.didEndMultipleSelectionInteraction)
+        (delegate as? UITableViewDelegate)?.tableViewDidEndMultipleSelectionInteraction?(tableView)
+    }
     #endif
 }

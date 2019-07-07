@@ -305,5 +305,12 @@ extension DTTableViewManager {
                                       signature: .didBeginMultipleSelectionInteractionAtIndexPath,
                                       closure: closure)
     }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:)` method is called
+    open func didEndMultipleSelectionInteraction(_ closure: @escaping () -> Void)
+    {
+        tableDelegate?.appendNonCellReaction(.didEndMultipleSelectionInteraction, closure: closure)
+    }
     #endif
 }

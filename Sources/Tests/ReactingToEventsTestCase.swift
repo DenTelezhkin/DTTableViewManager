@@ -947,12 +947,22 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testDidBeginMultipleSelectionInteraction() {
         guard #available(iOS 13, *) else { return }
-        let exp = expectation(description: "shouldBeginMultipleSelectionInteractionAT")
+        let exp = expectation(description: "didBeginMultipleSelectionInteractionAT")
         controller.manager.didBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
             exp.fulfill()
         }
         controller.manager.memoryStorage.addItem(1)
         _ = controller.manager.tableDelegate?.tableView(controller.tableView, didBeginMultipleSelectionInteractionAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidEndMultipleSelectionInteraction() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "didEndMultipleSelectionInteractionAT")
+        controller.manager.didEndMultipleSelectionInteraction {
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDelegate?.tableViewDidEndMultipleSelectionInteraction(controller.tableView)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -1071,6 +1081,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         if #available(iOS 13, *) {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:))), EventMethodSignature.shouldBeginMultipleSelectionInteractionAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:))), EventMethodSignature.didBeginMultipleSelectionInteractionAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:))), EventMethodSignature.didEndMultipleSelectionInteraction.rawValue)
         }
         
         #endif
