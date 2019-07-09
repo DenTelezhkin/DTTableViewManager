@@ -18,7 +18,7 @@ matrix:
 
 script:
   - instruments -s devices # List all available simulators
-  - bundle exec fastlane $ACTION
+  - FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=120 bundle exec fastlane $ACTION
 
 env:
   global:
