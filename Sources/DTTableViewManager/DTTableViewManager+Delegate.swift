@@ -323,5 +323,12 @@ extension DTTableViewManager {
                                                signature: .contextMenuConfigurationForRowAtIndexPath,
                                                closure: closure)
     }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWithConfiguration:)` method is called
+    open func previewForHighlightingContextMenu(_ closure: @escaping (UIContextMenuConfiguration) -> UITargetedPreview?)
+    {
+        tableDelegate?.appendNonCellReaction(.previewForHighlightingContextMenu, closure: closure)
+    }
     #endif
 }

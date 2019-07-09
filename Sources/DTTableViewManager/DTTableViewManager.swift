@@ -367,6 +367,7 @@ internal enum EventMethodSignature: String {
     case didBeginMultipleSelectionInteractionAtIndexPath = "tableView:didBeginMultipleSelectionInteractionAtIndexPath:"
     case didEndMultipleSelectionInteraction = "tableViewDidEndMultipleSelectionInteraction:"
     case contextMenuConfigurationForRowAtIndexPath = "tableView:contextMenuConfigurationForRowAtIndexPath:point:"
+    case previewForHighlightingContextMenu = "tableView:previewForHighlightingContextMenuWithConfiguration:"
     
     /// UITableViewDragDelegate
     case itemsForBeginningDragSession = "tableView:itemsForBeginningDragSession:atIndexPath:"

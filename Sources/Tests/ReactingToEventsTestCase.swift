@@ -979,6 +979,17 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testPreviewForHighlightingContextMenu() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "previewForHighlightingContextMenuWith")
+        controller.manager.previewForHighlightingContextMenu { configuration in
+            exp.fulfill()
+            return nil
+        }
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForHighlightingContextMenuWith: .init())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     #endif
     
     func testTargetIndexPathForMoveFromTo() {
@@ -1096,6 +1107,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:))), EventMethodSignature.didBeginMultipleSelectionInteractionAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:))), EventMethodSignature.didEndMultipleSelectionInteraction.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:))), EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWith:))), EventMethodSignature.previewForHighlightingContextMenu.rawValue)
         }
         
         #endif
