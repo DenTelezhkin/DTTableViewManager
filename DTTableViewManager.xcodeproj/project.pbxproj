@@ -119,6 +119,7 @@
 		9AFAAF7622D4BDB5001C86B0 /* DTModelStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7522D4BDB5001C86B0 /* DTModelStorage */; };
 		9AFAAF7922D4BE79001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7822D4BE79001C86B0 /* Changeset */; };
 		9AFAAF7B22D4BEA6001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7A22D4BEA6001C86B0 /* Changeset */; };
+		9AFAAF7E22D4C9A6001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7D22D4C9A6001C86B0 /* Changeset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
+				9AFAAF7E22D4C9A6001C86B0 /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +517,13 @@
 			name = "Custom views example";
 			sourceTree = "<group>";
 		};
+		9AFAAF7C22D4C9A6001C86B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
@@ -525,6 +534,7 @@
 				E6EA83631615EE6000F8B8C3 /* Products */,
 				3EDC205122B817E00078EB0D /* Sources */,
 				9A383C821CE1CC5F0081D843 /* Supporting files */,
+				9AFAAF7C22D4C9A6001C86B0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -598,6 +608,9 @@
 				9A9B172B1B65773800D8ABD3 /* PBXTargetDependency */,
 			);
 			name = Example;
+			packageProductDependencies = (
+				9AFAAF7D22D4C9A6001C86B0 /* Changeset */,
+			);
 			productName = Example;
 			productReference = 9A9B17021B65771600D8ABD3 /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -1251,6 +1264,11 @@
 			productName = Changeset;
 		};
 		9AFAAF7A22D4BEA6001C86B0 /* Changeset */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */;
+			productName = Changeset;
+		};
+		9AFAAF7D22D4C9A6001C86B0 /* Changeset */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */;
 			productName = Changeset;
