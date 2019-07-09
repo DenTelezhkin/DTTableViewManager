@@ -496,5 +496,14 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, previewForHighlightingContextMenuWith: configuration)
     }
     
+    @available(iOS 13.0, *)
+    /// Implementation for `UITableViewDelegate` protocol
+    open func tableView(_ tableView: UITableView, previewForDismissingContextMenuWith configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        if let preview = performNonCellReaction(.previewForDismissingContextMenu, argument: configuration) as? UITargetedPreview {
+            return preview
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, previewForDismissingContextMenuWith: configuration)
+    }
+    
     #endif
 }

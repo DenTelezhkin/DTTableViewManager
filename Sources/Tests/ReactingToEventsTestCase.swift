@@ -990,6 +990,17 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testPreviewForDismissingContextMenu() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "previewForDismissingContextMenuWith")
+        controller.manager.previewForDismissingContextMenu { configuration in
+            exp.fulfill()
+            return nil
+        }
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForDismissingContextMenuWith: .init())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     #endif
     
     func testTargetIndexPathForMoveFromTo() {
@@ -1108,6 +1119,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:))), EventMethodSignature.didEndMultipleSelectionInteraction.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:))), EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWith:))), EventMethodSignature.previewForHighlightingContextMenu.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForDismissingContextMenuWith:))), EventMethodSignature.previewForDismissingContextMenu.rawValue)
         }
         
         #endif

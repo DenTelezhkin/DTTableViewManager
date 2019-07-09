@@ -330,5 +330,12 @@ extension DTTableViewManager {
     {
         tableDelegate?.appendNonCellReaction(.previewForHighlightingContextMenu, closure: closure)
     }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:)` method is called
+    open func previewForDismissingContextMenu(_ closure: @escaping (UIContextMenuConfiguration) -> UITargetedPreview?)
+    {
+        tableDelegate?.appendNonCellReaction(.previewForDismissingContextMenu, closure: closure)
+    }
     #endif
 }
