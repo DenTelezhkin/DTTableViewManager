@@ -118,6 +118,23 @@ class DropCoordinatorMock: NSObject, UITableViewDropCoordinator {
         
     
 }
+
+@available(iOS 13, *)
+class ContextMenuInteractionAnimatorMock: NSObject, UIContextMenuInteractionCommitAnimating {
+    var preferredCommitStyle: UIContextMenuInteractionCommitStyle = .pop
+    
+    var previewViewController: UIViewController?
+    
+    func addAnimations(_ animations: @escaping () -> Void) {
+        
+    }
+    
+    func addCompletion(_ completion: @escaping () -> Void) {
+        
+    }
+    
+    
+}
     
 #endif
 
@@ -1001,6 +1018,16 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testWillCommitMenuWithAnimator() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "willCommitMenuWithAnimator")
+        controller.manager.willCommitMenuWithAnimator { animator in
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willCommitMenuWithAnimator: ContextMenuInteractionAnimatorMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     #endif
     
     func testTargetIndexPathForMoveFromTo() {
@@ -1120,6 +1147,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:))), EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWith:))), EventMethodSignature.previewForHighlightingContextMenu.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForDismissingContextMenuWith:))), EventMethodSignature.previewForDismissingContextMenu.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willCommitMenuWithAnimator:))), EventMethodSignature.willCommitMenuWithAnimator.rawValue)
         }
         
         #endif
