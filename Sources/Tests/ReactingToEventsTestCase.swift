@@ -966,6 +966,19 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testContextMenuConfiguration() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "contextMenuConfiguration")
+        controller.manager.contextMenuConfiguration(for: NibCell.self) { point, _, _, _ in
+            XCTAssertEqual(point, CGPoint(x: 1, y: 1))
+            exp.fulfill()
+            return nil
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, contextMenuConfigurationForRowAt: indexPath(0, 0), point: CGPoint(x: 1, y: 1))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     #endif
     
     func testTargetIndexPathForMoveFromTo() {
@@ -1082,6 +1095,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:))), EventMethodSignature.shouldBeginMultipleSelectionInteractionAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:))), EventMethodSignature.didBeginMultipleSelectionInteractionAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:))), EventMethodSignature.didEndMultipleSelectionInteraction.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:))), EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue)
         }
         
         #endif

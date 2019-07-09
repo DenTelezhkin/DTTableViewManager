@@ -312,5 +312,16 @@ extension DTTableViewManager {
     {
         tableDelegate?.appendNonCellReaction(.didEndMultipleSelectionInteraction, closure: closure)
     }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.contextMenuConfigurationForRowAt(_:point:)` method is called
+    open func contextMenuConfiguration<T:ModelTransfer>(for cellClass: T.Type,
+                                                        _ closure: @escaping (CGPoint, T, T.ModelType, IndexPath) -> UIContextMenuConfiguration?)
+        where T: UITableViewCell
+    {
+        tableDelegate?.append4ArgumentReaction(for: T.self,
+                                               signature: .contextMenuConfigurationForRowAtIndexPath,
+                                               closure: closure)
+    }
     #endif
 }

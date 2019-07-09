@@ -472,5 +472,19 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         _ = performNonCellReaction(.didEndMultipleSelectionInteraction)
         (delegate as? UITableViewDelegate)?.tableViewDidEndMultipleSelectionInteraction?(tableView)
     }
+    
+    @available(iOS 13.0, *)
+    /// Implementation for `UITableViewDelegate` protocol
+    open func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if let configuration = perform4ArgumentCellReaction(.contextMenuConfigurationForRowAtIndexPath,
+                                                            argument: point,
+                                                            location: indexPath,
+                                                            provideCell: true) as? UIContextMenuConfiguration {
+            return configuration
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView,
+                                                              contextMenuConfigurationForRowAt: indexPath,
+                                                              point: point)
+    }
     #endif
 }
