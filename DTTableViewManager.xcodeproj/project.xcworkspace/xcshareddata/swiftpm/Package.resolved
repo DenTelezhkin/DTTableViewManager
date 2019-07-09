@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Changeset",
+        "repositoryURL": "https://github.com/daveanderson/Changeset",
+        "state": {
+          "branch": "ImproveSwiftPackageManagerSupport",
+          "revision": "2aa6372ad8df8bf05474c40d3a0fca89a62c763e",
+          "version": null
+        }
+      },
+      {
+        "package": "DTModelStorage",
+        "repositoryURL": "https://github.com/DenTelezhkin/DTModelStorage",
+        "state": {
+          "branch": "next",
+          "revision": "6203eeb1bcebf27bc814623812edc104509eac58",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
