@@ -8,6 +8,16 @@ All notable changes to this project will be documented in this file.
 
 * Ability to customize bundle, from which xib files are loaded from by setting `bundle` property on `ViewModelMapping` in `mappingBlock`. As before, `bundle` defaults to `Bundle(for: ViewClass.self)`.
 
+New method wrappers for iOS 13 API
+
+* `shouldBeginMultipleSelectionInteraction`
+* `didBeginMultipleSelectionInteraction`
+* `didEndMultipleSelectionInteraction`
+* `contextMenuConfiguration(for:)`
+* `previewForHighlightingContextMenu`
+* `previewForDismissingContextMenu`
+* `willCommitMenuWithAnimator`
+
 ### Removed
 
 * Usage of previously deprecated and now removed from `DTModelStorage` `ViewModelMappingCustomizing` protocol.
@@ -15,6 +25,15 @@ All notable changes to this project will be documented in this file.
 ### Breaking
 
 * `DTTableViewOptionalManageable` protocol was removed and replaced by `optionalTableView` property on `DTTableViewManageable` protocol. One of `tableView`/`optionalTableView` properties must be implemented by `DTTableViewManageable` instance to work with `DTTableViewManager`.
+
+### Deprecated 
+
+Following methods have been deprecated due to their delegate methods being deprecated in iOS 13:
+
+* `editActions(for:)`
+* `shouldShowMenuForItemAt`
+* `canPerformAction`
+* `performAction`
 
 ## [6.6.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.6.0)
 
