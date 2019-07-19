@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+* `animateChangesOffScreen` property on `TableViewUpdater` that allows to turn off animated updates for `UITableView` when it is not on screen.
 * Ability to customize bundle, from which xib files are loaded from by setting `bundle` property on `ViewModelMapping` in `mappingBlock`. As before, `bundle` defaults to `Bundle(for: ViewClass.self)`.
 
 ## [6.6.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.6.0)

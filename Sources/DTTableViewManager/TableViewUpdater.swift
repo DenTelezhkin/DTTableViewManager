@@ -90,6 +90,9 @@ open class TableViewUpdater : StorageUpdating {
     /// Defaults to `false`.
     open var usesLegacyTableViewUpdateMethods = false
     
+    /// If turned on, animates changes off screen, otherwise calls `tableView.reloadData` when update come offscreen. To verify if tableView is onscreen, `TableViewUpdater` compares tableView.window to nil. Defaults to true.
+    open var animateChangesOffScreen = true
+    
     /// Creates updater with tableView.
     public init(tableView: UITableView, reloadRow: ((IndexPath, Any) -> Void)? = nil, animateMoveAsDeleteAndInsert: Bool = false) {
         self.tableView = tableView
@@ -102,6 +105,12 @@ open class TableViewUpdater : StorageUpdating {
     open func storageDidPerformUpdate(_ update : StorageUpdate)
     {
         willUpdateContent?(update)
+        
+        if !animateChangesOffScreen, tableView?.window == nil {
+            tableView?.reloadData()
+            didUpdateContent?(update)
+            return
+        }
         
         if #available(iOS 11, tvOS 11, *), !usesLegacyTableViewUpdateMethods {
             tableView?.performBatchUpdates({ [weak self] in
