@@ -69,6 +69,9 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                 return createdView
             }
         } else {
+            if let view = (delegate as? UITableViewDelegate)?.tableView?(tableView, viewForHeaderInSection: section) {
+                return view
+            }
             if shouldDisplayHeaderView(forSection: section) {
                 manager?.anomalyHandler.reportAnomaly(.nilHeaderModel(section))
             }
@@ -89,6 +92,9 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                 return createdView
             }
         } else {
+            if let view = (delegate as? UITableViewDelegate)?.tableView?(tableView, viewForFooterInSection: section) {
+                return view
+            }
             if shouldDisplayFooterView(forSection: section) {
                 manager?.anomalyHandler.reportAnomaly(.nilFooterModel(section))
             }
@@ -105,7 +111,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
             return height
         }
         if configuration?.sectionHeaderStyle == .title {
-            if let _ = self.headerModel(forSection:section)
+            if let _ = headerModel(forSection:section)
             {
                 #if swift(>=4.2)
                     return UITableView.automaticDimension
@@ -113,14 +119,14 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                     return UITableViewAutomaticDimension
                 #endif
             }
-            return CGFloat.leastNormalMagnitude
+            return configuration?.minimalHeaderHeightForTableView(tableView) ?? .zero
         }
         
-        if let _ = self.headerModel(forSection:section)
+        if let _ = headerModel(forSection:section)
         {
-            return self.tableView?.sectionHeaderHeight ?? CGFloat.leastNormalMagnitude
+            return tableView.sectionHeaderHeight
         }
-        return CGFloat.leastNormalMagnitude
+        return configuration?.minimalHeaderHeightForTableView(tableView) ?? .zero
     }
     
     /// Implementation for `UITableViewDelegate` protocol
@@ -140,20 +146,20 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
             return height
         }
         if configuration?.sectionFooterStyle == .title {
-            if let _ = self.footerModel(forSection:section) {
+            if let _ = footerModel(forSection:section) {
                 #if swift(>=4.2)
                 return UITableView.automaticDimension
                 #else
                 return UITableViewAutomaticDimension
                 #endif
             }
-            return CGFloat.leastNormalMagnitude
+            return configuration?.minimalFooterHeightForTableView(tableView) ?? .zero
         }
         
-        if let _ = self.footerModel(forSection:section) {
-            return self.tableView?.sectionFooterHeight ?? CGFloat.leastNormalMagnitude
+        if let _ = footerModel(forSection:section) {
+            return tableView.sectionFooterHeight
         }
-        return CGFloat.leastNormalMagnitude
+        return configuration?.minimalFooterHeightForTableView(tableView) ?? .zero
     }
     
     /// Implementation for `UITableViewDelegate` protocol

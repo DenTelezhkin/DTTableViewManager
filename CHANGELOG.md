@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+* Ability for `DTTableViewManageable` to implement `tableView(_:viewForHeaderInSection:)` and `tableView(_:viewForFooterInSection:)` to return view directly without going through storages.
+* `minimalHeaderHeightForTableView` and `minimalFooterHeightForTableView` properties for `TableViewConfiguration`, that allows configuring height for section headers and footers that need to be hidden.
 * Ability to customize bundle, from which xib files are loaded from by setting `bundle` property on `ViewModelMapping` in `mappingBlock`. As before, `bundle` defaults to `Bundle(for: ViewClass.self)`.
 
 New method wrappers for iOS 13 API
