@@ -147,7 +147,7 @@ final class TableViewFactory
                                        xibName: nibName,
                                        mappingBlock: mappingBlock)
         
-        assert(UINib.nibExists(withNibName: nibName, inBundle: mapping.bundle), "Register header nib method should be called only if nib exists")
+        assert(UINib.nibExists(withNibName: nibName, inBundle: mapping.bundle), "Register header nib method should be called only if nib exists. If you need to register header without nib, please call `registerNiblessHeader` method.")
         
         if T.isSubclass(of: UITableViewHeaderFooterView.self) {
             self.tableView.register(UINib(nibName: nibName, bundle: mapping.bundle), forHeaderFooterViewReuseIdentifier: mapping.reuseIdentifier)
@@ -163,7 +163,7 @@ final class TableViewFactory
                                        xibName: nibName,
                                        mappingBlock: mappingBlock)
         
-        assert(UINib.nibExists(withNibName: nibName, inBundle: mapping.bundle), "Register footer nib method should be called only if nib exists")
+        assert(UINib.nibExists(withNibName: nibName, inBundle: mapping.bundle), "Register footer nib method should be called only if nib exists. If you need to register footer without nib, please call `registerNiblessHeader` method.")
         
         if T.isSubclass(of: UITableViewHeaderFooterView.self) {
             tableView.register(UINib(nibName: nibName, bundle: mapping.bundle), forHeaderFooterViewReuseIdentifier: mapping.reuseIdentifier)
