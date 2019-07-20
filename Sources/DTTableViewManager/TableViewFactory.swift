@@ -173,7 +173,7 @@ final class TableViewFactory
     }
     
     func unregisterCellClass<T:ModelTransfer>(_ cellClass: T.Type) where T: UITableViewCell {
-        mappings = mappings.filter({ mapping in
+        mappings = mappings.filter({ (mapping) -> Bool in
             if mapping.viewClass is T.Type && mapping.viewType == .cell { return false }
             return true
         })

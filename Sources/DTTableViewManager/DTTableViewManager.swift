@@ -125,22 +125,22 @@ open class DTTableViewManager {
     /// - Note: When setting custom storage for this property, it will be automatically configured for using with UITableView and it's delegate will be set to `DTTableViewManager` instance.
     /// - Note: Previous storage `delegate` property will be nilled out to avoid collisions.
     /// - SeeAlso: `MemoryStorage`, `CoreDataStorage`, `RealmStorage`.
-    open var storage : Storage {
+    open var storage : Storage? {
         willSet {
-            storage.delegate = nil
+            storage?.delegate = nil
         }
         didSet {
             if let headerFooterCompatibleStorage = storage as? BaseStorage {
                 headerFooterCompatibleStorage.configureForTableViewUsage()
             }
-            storage.delegate = tableViewUpdater
+            storage?.delegate = tableViewUpdater
         }
     }
     
     /// Object, that is responsible for updating `UITableView`, when received update from `Storage`
     open var tableViewUpdater : TableViewUpdater? {
         didSet {
-            storage.delegate = tableViewUpdater
+            storage?.delegate = tableViewUpdater
             tableViewUpdater?.didUpdateContent?(nil)
         }
     }
@@ -200,6 +200,42 @@ open class DTTableViewManager {
         self.storage = storage
     }
     
+    @available(iOS 13.0, tvOS 13.0, *)
+    /// Configures `UITableViewDiffableDataSource` to be used with `DTTableViewManager`.
+    ///  Because `UITableViewDiffableDataSource` considers storage objects to be external as well as handles dataSource methods and updating tableView, `tableDataSource`, `storage` and `tableViewUpdater` properties on `DTTableViewManager` will be set to nil.
+    ///  Also, `configuration.sectionHeaderStyle` and `configuration.sectionFooterStyle` will be set to `.view`, because titles cannot be implemented when using `UITableViewDiffableDataSource`.
+    /// - Parameter modelProvider: closure that provides `DTTableViewManager` models.
+    /// This closure mirrors `cellProvider` property on `UITableViewDiffableDataSource`, but strips away tableView, and asks for data model instead of a cell. Cell mapping is then executed in the same way as without diffable data sources.
+    open func configureDiffableDataSource<SectionIdentifier, ItemIdentifier>(modelProvider: @escaping (IndexPath, ItemIdentifier) -> Any)
+        -> UITableViewDiffableDataSource<SectionIdentifier, ItemIdentifier>
+    {
+        guard let tableView = tableView else {
+            fatalError("Attempt to configure diffable datasource before tableView have been initialized")
+        }
+        // UITableViewDiffableDataSource will provide DataSource implementation instead of `DTTableViewDataSource` object.
+        // TODO: - migrate events?
+        tableDataSource = nil
+        storage = nil
+        tableViewUpdater = nil
+        
+        // Section header and footer styles are set to .view because `tableView(_:titleForHeaderInSection:)` and `tableView(_:titleForFooterInSection:)` cannot be used since `UITableViewDataSource` is implemented by `UITableViewDiffableDataSource` instead of `DTTableViewDataSource`.
+        configuration.sectionHeaderStyle = .view
+        configuration.sectionFooterStyle = .view
+        
+        return .init(tableView: tableView) { [weak self] tableView, indexPath, identifier -> UITableViewCell? in
+            guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(modelProvider(indexPath, identifier)) else {
+                self?.anomalyHandler.reportAnomaly(.nilCellModel(indexPath))
+                return nil
+            }
+            guard let cell = self?.viewFactory.cellForModel(model, atIndexPath: indexPath) else {
+                return nil
+            }
+            // TODO: - Implement configure cell reaction
+            
+            return cell
+        }
+    }
+    
     /// Starts managing `UITableView`.
     ///
     /// Call this method before calling any of `DTTableViewManager` methods.
@@ -246,7 +282,7 @@ open class DTTableViewManager {
     /// - Parameter closure: closure to run for each cell after update has been completed.
     open func updateVisibleCells(_ closure: ((UITableViewCell) -> Void)? = nil) {
         (tableView?.indexPathsForVisibleRows ?? []).forEach { indexPath in
-            guard let model = storage.item(at: indexPath),
+            guard let model = storage?.item(at: indexPath),
                 let visibleCell = tableView?.cellForRow(at: indexPath)
             else { return }
             updateCellClosure()(indexPath, model)

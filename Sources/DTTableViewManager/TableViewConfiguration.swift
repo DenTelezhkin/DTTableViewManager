@@ -52,11 +52,11 @@ public struct TableViewConfiguration
     
     /// Minimal header height to hide it when section is empty. This defaults to .zero if `UITableView.Style` is `.plain` and `.leastNormalMagnitude` otherwise.
     public var minimalHeaderHeightForTableView: (UITableView) -> CGFloat = {
-        $0.style == .plain ? .zero : .leastNormalMagnitude
+        $0.style == .plain ? CGFloat.zero : CGFloat.leastNormalMagnitude
     }
     
     /// Minimal footer height to hide it when section is empty. This defaults to .zero if `UITableView.Style` is `.plain` and `.leastNormalMagnitude` otherwise.
     public var minimalFooterHeightForTableView: (UITableView) -> CGFloat = {
-        $0.style == .plain ? .zero : .leastNormalMagnitude
+        $0.style == .plain ? CGFloat.zero : CGFloat.leastNormalMagnitude
     }
 }
