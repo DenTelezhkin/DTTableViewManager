@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+* `configureDiffableDataSource(modelProvider:)` method to enable `UITableViewDiffableDataSource` with `DTTableViewManager`.
 * Ability for `DTTableViewManageable` to implement `tableView(_:viewForHeaderInSection:)` and `tableView(_:viewForFooterInSection:)` to return view directly without going through storages.
 * `minimalHeaderHeightForTableView` and `minimalFooterHeightForTableView` properties for `TableViewConfiguration`, that allows configuring height for section headers and footers that need to be hidden.
 * Ability to customize bundle, from which xib files are loaded from by setting `bundle` property on `ViewModelMapping` in `mappingBlock`. As before, `bundle` defaults to `Bundle(for: ViewClass.self)`.
@@ -26,6 +27,8 @@ New method wrappers for iOS 13 API
 
 ### Breaking
 
+* `storage` property on `DTTableViewManager` is now optional and might be nil in some situations (see `configureDiffableDataSource` method).
+* `tableViewUpdater` and `tableDataSource` will contain nil if `DTTableViewManager` is configured to work with `UITableViewDiffableDataSource`.
 * `DTTableViewOptionalManageable` protocol was removed and replaced by `optionalTableView` property on `DTTableViewManageable` protocol. One of `tableView`/`optionalTableView` properties must be implemented by `DTTableViewManageable` instance to work with `DTTableViewManager`.
 
 ### Deprecated 
