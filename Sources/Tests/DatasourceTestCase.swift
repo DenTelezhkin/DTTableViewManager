@@ -11,17 +11,10 @@ import XCTest
 import DTModelStorage
 import DTTableViewManager
 
-class DatasourceTestCase: XCTestCase {
-
-    var controller : DTTestTableViewController!
+class DatasourceTestCase: BaseTestCase {
     
     override func setUp() {
         super.setUp()
-        
-        controller = DTTestTableViewController()
-        controller.tableView = AlwaysVisibleTableView()
-        let _ = controller.view
-        
         controller.manager.register(NibCell.self)
     }
     

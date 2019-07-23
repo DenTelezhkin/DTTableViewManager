@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3EBF90E022E7552700135C10 /* ProxyDiffableDatasourceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90DF22E7552700135C10 /* ProxyDiffableDatasourceStorage.swift */; };
+		3EBF90E222E7640500135C10 /* DiffableDatasourcesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */; };
+		3EBF90E322E7640500135C10 /* DiffableDatasourcesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */; };
+		3EBF90E522E7643900135C10 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90E422E7643900135C10 /* BaseTestCase.swift */; };
+		3EBF90E622E7643900135C10 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90E422E7643900135C10 /* BaseTestCase.swift */; };
 		3ED770A422E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED770A322E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift */; };
 		3ED770A522E3254A00C0E3A6 /* students.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ED770A022E3211200C0E3A6 /* students.json */; };
 		3EDC209422B817E90078EB0D /* DTTableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */; };
@@ -164,6 +168,8 @@
 
 /* Begin PBXFileReference section */
 		3EBF90DF22E7552700135C10 /* ProxyDiffableDatasourceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyDiffableDatasourceStorage.swift; sourceTree = "<group>"; };
+		3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableDatasourcesTestCase.swift; sourceTree = "<group>"; };
+		3EBF90E422E7643900135C10 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		3ED770A022E3211200C0E3A6 /* students.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = students.json; sourceTree = "<group>"; };
 		3ED770A322E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MultiSectionDiffingTableViewController.swift; path = "Example controllers/MultiSectionDiffingTableViewController.swift"; sourceTree = "<group>"; };
 		3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDragDelegate.swift; sourceTree = "<group>"; };
@@ -341,19 +347,21 @@
 		3EDC206622B817E00078EB0D /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3EDC206722B817E00078EB0D /* NSIndexPath+Constructor.swift */,
-				3EDC206822B817E00078EB0D /* TableViewFactoryTestCase.swift */,
-				3EDC206922B817E00078EB0D /* MappingTestCase.swift */,
-				3EDC206A22B817E00078EB0D /* StoryboardMappingTestCase.swift */,
-				3EDC206B22B817E00078EB0D /* ViewModelMappingCustomizableTestCase.swift */,
-				3EDC206C22B817E00078EB0D /* TableViewController+UnitTests.swift */,
 				3EDC206D22B817E00078EB0D /* AnomaliesTestCase.swift */,
-				3EDC206E22B817E00078EB0D /* Fixtures */,
-				3EDC208F22B817E00078EB0D /* StoryboardViewController.swift */,
-				3EDC209022B817E00078EB0D /* ReactingToEventsTestCase.swift */,
+				3EBF90E422E7643900135C10 /* BaseTestCase.swift */,
 				3EDC209122B817E00078EB0D /* CreationTestCase.swift */,
-				3EDC209222B817E00078EB0D /* MappingConditionsTestCase.swift */,
 				3EDC209322B817E00078EB0D /* DatasourceTestCase.swift */,
+				3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */,
+				3EDC206E22B817E00078EB0D /* Fixtures */,
+				3EDC209222B817E00078EB0D /* MappingConditionsTestCase.swift */,
+				3EDC206922B817E00078EB0D /* MappingTestCase.swift */,
+				3EDC206722B817E00078EB0D /* NSIndexPath+Constructor.swift */,
+				3EDC209022B817E00078EB0D /* ReactingToEventsTestCase.swift */,
+				3EDC206A22B817E00078EB0D /* StoryboardMappingTestCase.swift */,
+				3EDC208F22B817E00078EB0D /* StoryboardViewController.swift */,
+				3EDC206C22B817E00078EB0D /* TableViewController+UnitTests.swift */,
+				3EDC206822B817E00078EB0D /* TableViewFactoryTestCase.swift */,
+				3EDC206B22B817E00078EB0D /* ViewModelMappingCustomizableTestCase.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -810,6 +818,7 @@
 				3EDC20D022B818030078EB0D /* DTTestTableViewController.swift in Sources */,
 				3EDC20C922B818030078EB0D /* FixtureViews.swift in Sources */,
 				3EDC20BC22B817F70078EB0D /* CreationTestCase.swift in Sources */,
+				3EBF90E322E7640500135C10 /* DiffableDatasourcesTestCase.swift in Sources */,
 				3EDC20B822B817F70078EB0D /* TableViewController+UnitTests.swift in Sources */,
 				3EDC20B522B817F70078EB0D /* MappingTestCase.swift in Sources */,
 				3EDC20CD22B818030078EB0D /* OptionalCells.swift in Sources */,
@@ -819,6 +828,7 @@
 				3EDC20B322B817F70078EB0D /* NSIndexPath+Constructor.swift in Sources */,
 				3EDC20B722B817F70078EB0D /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				3EDC20B922B817F70078EB0D /* AnomaliesTestCase.swift in Sources */,
+				3EBF90E622E7643900135C10 /* BaseTestCase.swift in Sources */,
 				3EDC20BB22B817F70078EB0D /* ReactingToEventsTestCase.swift in Sources */,
 				3EDC20CC22B818030078EB0D /* ReactingHeaderFooters.swift in Sources */,
 				3EDC20B622B817F70078EB0D /* StoryboardMappingTestCase.swift in Sources */,
@@ -859,6 +869,7 @@
 				3EDC20C722B818020078EB0D /* DTTestTableViewController.swift in Sources */,
 				3EDC20C022B818020078EB0D /* FixtureViews.swift in Sources */,
 				3EDC20B022B817F70078EB0D /* CreationTestCase.swift in Sources */,
+				3EBF90E222E7640500135C10 /* DiffableDatasourcesTestCase.swift in Sources */,
 				3EDC20AC22B817F70078EB0D /* TableViewController+UnitTests.swift in Sources */,
 				3EDC20A922B817F70078EB0D /* MappingTestCase.swift in Sources */,
 				3EDC20C422B818020078EB0D /* OptionalCells.swift in Sources */,
@@ -868,6 +879,7 @@
 				3EDC20A722B817F70078EB0D /* NSIndexPath+Constructor.swift in Sources */,
 				3EDC20AB22B817F70078EB0D /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				3EDC20AD22B817F70078EB0D /* AnomaliesTestCase.swift in Sources */,
+				3EBF90E522E7643900135C10 /* BaseTestCase.swift in Sources */,
 				3EDC20AF22B817F70078EB0D /* ReactingToEventsTestCase.swift in Sources */,
 				3EDC20C322B818020078EB0D /* ReactingHeaderFooters.swift in Sources */,
 				3EDC20AA22B817F70078EB0D /* StoryboardMappingTestCase.swift in Sources */,
