@@ -212,29 +212,56 @@ open class DTTableViewManager {
         guard let tableView = tableView else {
             fatalError("Attempt to configure diffable datasource before tableView have been initialized")
         }
-        // UITableViewDiffableDataSource will provide DataSource implementation instead of `DTTableViewDataSource` object.
-        // TODO: - migrate events?
-        tableDataSource = nil
-        storage = nil
+        // UITableViewDiffableDataSource will update UITableView instead of `TableViewUpdater` object.
         tableViewUpdater = nil
+        
+        // TODO: - check if section titles can be made possible with diffable datasources
         
         // Section header and footer styles are set to .view because `tableView(_:titleForHeaderInSection:)` and `tableView(_:titleForFooterInSection:)` cannot be used since `UITableViewDataSource` is implemented by `UITableViewDiffableDataSource` instead of `DTTableViewDataSource`.
         configuration.sectionHeaderStyle = .view
         configuration.sectionFooterStyle = .view
         
-        return .init(tableView: tableView) { [weak self] tableView, indexPath, identifier -> UITableViewCell? in
-            guard let model = RuntimeHelper.recursivelyUnwrapAnyValue(modelProvider(indexPath, identifier)) else {
-                self?.anomalyHandler.reportAnomaly(.nilCellModel(indexPath))
-                return nil
-            }
-            guard let cell = self?.viewFactory.cellForModel(model, atIndexPath: indexPath) else {
-                return nil
-            }
-            // TODO: - Implement configure cell reaction
-            
-            return cell
+        let dataSource = UITableViewDiffableDataSource<SectionIdentifier, ItemIdentifier>(tableView: tableView) { [weak tableDataSource] tableView, indexPath, _ -> UITableViewCell? in
+            return tableDataSource?.tableView(tableView, cellForRowAt: indexPath)
         }
+        storage = ProxyDiffableDataSourceStorage(tableView: tableView,
+                                                                 dataSource: dataSource,
+                                                                 modelProvider: modelProvider)
+        tableView.dataSource = tableDataSource
+        
+        return dataSource
     }
+    
+    @available(iOS 13.0, tvOS 13.0, *)
+        /// Configures `UITableViewDiffableDataSourceReference` to be used with `DTTableViewManager`.
+        ///  Because `UITableViewDiffableDataSourceReference` considers storage objects to be external as well as handles dataSource methods and updating tableView, `tableDataSource`, `storage` and `tableViewUpdater` properties on `DTTableViewManager` will be set to nil.
+        ///  Also, `configuration.sectionHeaderStyle` and `configuration.sectionFooterStyle` will be set to `.view`, because titles cannot be implemented when using `UITableViewDiffableDataSource`.
+        /// - Parameter modelProvider: closure that provides `DTTableViewManager` models.
+        /// This closure mirrors `cellProvider` property on `UITableViewDiffableDataSourceReference`, but strips away tableView, and asks for data model instead of a cell. Cell mapping is then executed in the same way as without diffable data sources.
+        open func configureDiffableDataSource(modelProvider: @escaping (IndexPath, Any) -> Any) -> UITableViewDiffableDataSourceReference
+        {
+            guard let tableView = tableView else {
+                fatalError("Attempt to configure diffable datasource before tableView have been initialized")
+            }
+            // UITableViewDiffableDataSourceReference will update UITableView instead of `TableViewUpdater` object.
+            tableViewUpdater = nil
+            
+            // TODO: - check if section titles can be made possible with diffable datasources
+            
+            // Section header and footer styles are set to .view because `tableView(_:titleForHeaderInSection:)` and `tableView(_:titleForFooterInSection:)` cannot be used since `UITableViewDataSource` is implemented by `UITableViewDiffableDataSource` instead of `DTTableViewDataSource`.
+            configuration.sectionHeaderStyle = .view
+            configuration.sectionFooterStyle = .view
+            
+            let dataSource = UITableViewDiffableDataSourceReference(tableView: tableView) { [weak tableDataSource] tableView, indexPath, _ in
+                return tableDataSource?.tableView(tableView, cellForRowAt: indexPath)
+            }
+            storage = ProxyDiffableDataSourceStorage(tableView: tableView,
+                                                                     dataSource: dataSource,
+                                                                     modelProvider: modelProvider)
+            tableView.dataSource = tableDataSource
+            
+            return dataSource
+        }
     
     /// Starts managing `UITableView`.
     ///

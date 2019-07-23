@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EBF90E022E7552700135C10 /* ProxyDiffableDatasourceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90DF22E7552700135C10 /* ProxyDiffableDatasourceStorage.swift */; };
 		3ED770A422E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED770A322E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift */; };
 		3ED770A522E3254A00C0E3A6 /* students.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ED770A022E3211200C0E3A6 /* students.json */; };
 		3EDC209422B817E90078EB0D /* DTTableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */; };
@@ -162,6 +163,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3EBF90DF22E7552700135C10 /* ProxyDiffableDatasourceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyDiffableDatasourceStorage.swift; sourceTree = "<group>"; };
 		3ED770A022E3211200C0E3A6 /* students.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = students.json; sourceTree = "<group>"; };
 		3ED770A322E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MultiSectionDiffingTableViewController.swift; path = "Example controllers/MultiSectionDiffingTableViewController.swift"; sourceTree = "<group>"; };
 		3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDragDelegate.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				3EDC206422B817E00078EB0D /* DTTableViewManager+Drop.swift */,
 				3EDC206022B817E00078EB0D /* DTTableViewManager+Registration.swift */,
 				3EDC206222B817E00078EB0D /* DTTableViewManagerAnomalyHandler.swift */,
+				3EBF90DF22E7552700135C10 /* ProxyDiffableDatasourceStorage.swift */,
 				3EDC205822B817E00078EB0D /* SectionModel+HeaderFooter.swift */,
 				3EDC205C22B817E00078EB0D /* TableViewConfiguration.swift */,
 				3EDC205522B817E00078EB0D /* TableViewFactory.swift */,
@@ -782,6 +785,7 @@
 				3EDC20A322B817E90078EB0D /* DTTableViewManagerAnomalyHandler.swift in Sources */,
 				3EDC20A222B817E90078EB0D /* UIView+XibLoading.swift in Sources */,
 				3EDC20A622B817E90078EB0D /* DTTableViewManager.swift in Sources */,
+				3EBF90E022E7552700135C10 /* ProxyDiffableDatasourceStorage.swift in Sources */,
 				3EDC20A422B817E90078EB0D /* DTTableViewDropDelegate.swift in Sources */,
 				3EDC209A22B817E90078EB0D /* DTTableViewManager+Delegate.swift in Sources */,
 				3EDC209922B817E90078EB0D /* SectionModel+HeaderFooter.swift in Sources */,
