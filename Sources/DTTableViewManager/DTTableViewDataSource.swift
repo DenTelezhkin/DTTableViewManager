@@ -37,12 +37,12 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     
     /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storage?.sections[section].numberOfItems ?? 0
+        return storage?.numberOfItems(inSection: section) ?? 0
     }
     
     /// Implementation for `UITableViewDataSource` protocol
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return storage?.sections.count ?? 0
+        return storage?.numberOfSections() ?? 0
     }
     
     /// Implementation for `UITableViewDataSource` protocol

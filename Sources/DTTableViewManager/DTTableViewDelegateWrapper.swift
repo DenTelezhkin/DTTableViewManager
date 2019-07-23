@@ -56,16 +56,16 @@ open class DTTableViewDelegateWrapper : NSObject {
     }
     
     func shouldDisplayHeaderView(forSection index: Int) -> Bool {
-        guard let storage = storage, let configuration = configuration, storage.sections.count > index else { return false }
-        if storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection {
+        guard let storage = storage, let configuration = configuration, storage.numberOfSections() > index else { return false }
+        if storage.numberOfItems(inSection: index) == 0 && !configuration.displayHeaderOnEmptySection {
             return false
         }
         return true
     }
     
     func shouldDisplayFooterView(forSection index: Int) -> Bool {
-        guard let storage = storage, let configuration = configuration, storage.sections.count > index else { return false }
-        if storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection {
+        guard let storage = storage, let configuration = configuration, storage.numberOfSections() > index else { return false }
+        if storage.numberOfItems(inSection: index) == 0 && !configuration.displayFooterOnEmptySection {
             return false
         }
         return true
