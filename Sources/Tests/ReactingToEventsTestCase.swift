@@ -183,7 +183,6 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testCellSelectionClosure()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
         controller.manager.didSelect(SelectionReactingTableCell.self) { (cell, model, indexPath) in
