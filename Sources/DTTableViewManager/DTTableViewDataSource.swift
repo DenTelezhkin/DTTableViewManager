@@ -61,14 +61,14 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if configuration?.sectionHeaderStyle == .view { return nil }
         
-        return self.headerModel(forSection: section) as? String
+        return headerModel(forSection: section) as? String
     }
     
     /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if configuration?.sectionFooterStyle == .view { return nil }
         
-        return self.footerModel(forSection: section) as? String
+        return footerModel(forSection: section) as? String
     }
     
     /// Implementation for `UITableViewDataSource` protocol

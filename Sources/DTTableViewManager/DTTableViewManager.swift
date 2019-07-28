@@ -137,7 +137,8 @@ open class DTTableViewManager {
         }
     }
     
-    open var supplementaryStorage: SupplementaryStorage? {
+    /// Current storage, conditionally casted to `SupplementaryStorage` protocol.
+    public var supplementaryStorage: SupplementaryStorage? {
         return storage as? SupplementaryStorage
     }
     

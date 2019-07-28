@@ -172,6 +172,28 @@ class DiffableDatasourcesTestCase: BaseTestCase {
         setItems([1])
         XCTAssertNil(controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0))
     }
+    
+    func testWillDisplayHeaderInSection() {
+        let exp = expectation(description: "willDisplayHeaderInSection")
+        controller.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
+            exp.fulfill()
+        })
+        controller.manager.supplementaryStorage?.setSectionHeaderModels(["Foo"])
+        setItems([])
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDisplayHeaderView: ReactingHeaderFooterView(), forSection: 0)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testWillDisplayFooterInSection() {
+        let exp = expectation(description: "willDisplayFooterInSection")
+        controller.manager.willDisplayFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
+            exp.fulfill()
+        })
+        controller.manager.supplementaryStorage?.setSectionFooterModels(["Foo"])
+        setItems([])
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDisplayFooterView: ReactingHeaderFooterView(), forSection: 0)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }
 
 @available(iOS 13, tvOS 13, *)
