@@ -15,18 +15,7 @@ class CoreDataSearchViewController: UIViewController, DTTableViewManageable {
 
     @IBOutlet weak var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
-    let fetchResultsController: NSFetchedResultsController<Bank> = {
-    
-        let context = CoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest<Bank>()
-        request.entity = NSEntityDescription.entity(forEntityName: "Bank", in: context)
-        request.fetchBatchSize = 20
-        request.sortDescriptors = [NSSortDescriptor(key: "zip", ascending: true)]
-        
-        let fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "state", cacheName: nil)
-        try! fetchResultsController.performFetch()
-        return fetchResultsController
-    }()
+    let fetchResultsController = CoreDataManager.sharedInstance.banksFetchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

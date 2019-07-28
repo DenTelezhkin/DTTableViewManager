@@ -119,8 +119,29 @@
                                             <segue destination="QIn-sW-ZGE" kind="show" id="Czd-P4-O1U"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="ybP-Ll-dsS" style="IBUITableViewCellStyleDefault" id="u38-Qq-ahS">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="8Pt-gy-zKb" style="IBUITableViewCellStyleDefault" id="chC-nN-byq">
                                         <rect key="frame" x="0.0" y="204" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="chC-nN-byq" id="KuO-b7-JpF">
+                                            <rect key="frame" x="0.0" y="0.0" width="347.5" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Diffable CoreData(iOS 13)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Pt-gy-zKb">
+                                                    <rect key="frame" x="16" y="0.0" width="323.5" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="PD4-2B-f5o" kind="show" id="fBz-i2-e1Q"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="ybP-Ll-dsS" style="IBUITableViewCellStyleDefault" id="u38-Qq-ahS">
+                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u38-Qq-ahS" id="TQc-46-4gv">
                                             <rect key="frame" x="0.0" y="0.0" width="347.5" height="44"/>
@@ -141,7 +162,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Z6q-yk-P3n" style="IBUITableViewCellStyleDefault" id="8Mj-cQ-rru">
-                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="292" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Mj-cQ-rru" id="vwp-22-XMQ">
                                             <rect key="frame" x="0.0" y="0.0" width="347.5" height="44"/>
@@ -162,7 +183,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="h36-eM-lK8" style="IBUITableViewCellStyleDefault" id="5Bc-ig-bS4">
-                                        <rect key="frame" x="0.0" y="292" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="336" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Bc-ig-bS4" id="K4Y-88-jwA">
                                             <rect key="frame" x="0.0" y="0.0" width="347.5" height="44"/>
@@ -316,7 +337,7 @@
             </objects>
             <point key="canvasLocation" x="2068" y="-1152"/>
         </scene>
-        <!--Title-->
+        <!--Auto Diff Search View Controller-->
         <scene sceneID="Lk0-Zg-ATJ">
             <objects>
                 <viewController id="HD3-wL-KkG" customClass="AutoDiffSearchViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -338,7 +359,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dEP-PX-ygh"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="Jas-Ar-zjg"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Jas-Ar-zjg"/>
                     <connections>
                         <outlet property="tableView" destination="i7n-Cc-osg" id="SOg-Ly-lM8"/>
                     </connections>
@@ -366,7 +387,7 @@
             </objects>
             <point key="canvasLocation" x="2684" y="215"/>
         </scene>
-        <!--CoreData-->
+        <!--Core Data Search View Controller-->
         <scene sceneID="XWk-kD-SQL">
             <objects>
                 <viewController id="QIn-sW-ZGE" customClass="CoreDataSearchViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -402,7 +423,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="CoreData" largeTitleDisplayMode="never" id="dRS-JV-FNf"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="9wD-PS-BnH"/>
                     <connections>
                         <outlet property="tableView" destination="I0c-u6-f9D" id="rsr-Ud-8Sj"/>
                     </connections>
@@ -410,6 +431,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6F-7U-sdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2743" y="-554"/>
+        </scene>
+        <!--Diffable Core Data View Controller-->
+        <scene sceneID="M3i-Nc-qJP">
+            <objects>
+                <tableViewController id="PD4-2B-f5o" customClass="DiffableCoreDataViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fau-1g-UOx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="PD4-2B-f5o" id="mJN-kZ-kR2"/>
+                            <outlet property="delegate" destination="PD4-2B-f5o" id="4v1-eL-NYx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="GVT-ME-iI9">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add record" id="NqG-wI-I7f">
+                                <connections>
+                                    <action selector="addRecordButtonTapped:" destination="PD4-2B-f5o" id="SGu-Iv-Zuh"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Reset data" id="o7t-ME-F7o">
+                                <connections>
+                                    <action selector="resetDataButtonTapped:" destination="PD4-2B-f5o" id="25T-35-tb1"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zQh-IF-xJy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3466" y="-107"/>
         </scene>
     </scenes>
 </document>

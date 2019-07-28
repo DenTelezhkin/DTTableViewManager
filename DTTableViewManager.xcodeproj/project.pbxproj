@@ -121,6 +121,7 @@
 		9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */; };
 		9AD9D9F21B6EBF8800AD49AC /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */; };
 		9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA63321B88A56F0060B2C0 /* TableViewController.swift */; };
+		9AE9E16B22EDD84A00E653F0 /* DiffableCoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9E16A22EDD84A00E653F0 /* DiffableCoreDataViewController.swift */; };
 		9AFAAF7622D4BDB5001C86B0 /* DTModelStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7522D4BDB5001C86B0 /* DTModelStorage */; };
 		9AFAAF7922D4BE79001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7822D4BE79001C86B0 /* Changeset */; };
 		9AFAAF7B22D4BEA6001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7A22D4BEA6001C86B0 /* Changeset */; };
@@ -262,6 +263,7 @@
 		9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomHeaderFooterView.swift; path = "Headers:Footers/CustomHeaderFooterView.swift"; sourceTree = "<group>"; };
 		9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = "Headers:Footers/CustomHeaderFooterView.xib"; sourceTree = "<group>"; };
 		9ADA63321B88A56F0060B2C0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = "Example controllers/TableViewController.swift"; sourceTree = "<group>"; };
+		9AE9E16A22EDD84A00E653F0 /* DiffableCoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiffableCoreDataViewController.swift; path = "Example controllers/DiffableCoreDataViewController.swift"; sourceTree = "<group>"; };
 		9AF0031A1A5ABE7000ABFC90 /* Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -472,6 +474,7 @@
 				9A41FBDF1B8A17C400508207 /* Banks.json */,
 				9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */,
 				9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */,
+				9AE9E16A22EDD84A00E653F0 /* DiffableCoreDataViewController.swift */,
 				9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */,
 				9ABE07441B85FE4E00636D78 /* Bank.swift */,
 				9ABE074B1B86074900636D78 /* BankCell.swift */,
@@ -845,6 +848,7 @@
 				9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */,
 				9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */,
 				9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */,
+				9AE9E16B22EDD84A00E653F0 /* DiffableCoreDataViewController.swift in Sources */,
 				9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

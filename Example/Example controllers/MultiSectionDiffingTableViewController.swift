@@ -10,6 +10,16 @@ import UIKit
 import DTTableViewManager
 import DTModelStorage
 
+extension UIViewController {
+    func showiOS13RequiredAlert() {
+        let alert = UIAlertController(title: "Unavailable", message: "Multi-section diffing is supported on iOS 13 and higher", preferredStyle: .alert)
+        alert.addAction(.init(title: "Ok", style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+}
+
 @available(iOS 13.0, *)
 class MultiSectionDiffingTableViewController: UITableViewController, DTTableViewManageable {
 
@@ -33,11 +43,7 @@ class MultiSectionDiffingTableViewController: UITableViewController, DTTableView
         super.viewDidLoad()
         manager.register(StringCell.self)
         guard #available(iOS 13, *) else {
-            let alert = UIAlertController(title: "Unavailable", message: "Multi-section diffing is supported on iOS 13 and higher", preferredStyle: .alert)
-            alert.addAction(.init(title: "Ok", style: .default, handler: { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
-            }))
-            present(alert, animated: true, completion: nil)
+            showiOS13RequiredAlert()
             return
         }
         diffableDataSource = manager.configureDiffableDataSource { indexPath, item in
