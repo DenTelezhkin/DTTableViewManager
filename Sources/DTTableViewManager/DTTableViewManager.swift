@@ -137,6 +137,10 @@ open class DTTableViewManager {
         }
     }
     
+    open var supplementaryStorage: SupplementaryStorage? {
+        return storage as? SupplementaryStorage
+    }
+    
     /// Object, that is responsible for updating `UITableView`, when received update from `Storage`
     open var tableViewUpdater : TableViewUpdater? {
         didSet {
@@ -202,8 +206,7 @@ open class DTTableViewManager {
     
     @available(iOS 13.0, tvOS 13.0, *)
     /// Configures `UITableViewDiffableDataSource` to be used with `DTTableViewManager`.
-    ///  Because `UITableViewDiffableDataSource` considers storage objects to be external as well as handles dataSource methods and updating tableView, `tableDataSource`, `storage` and `tableViewUpdater` properties on `DTTableViewManager` will be set to nil.
-    ///  Also, `configuration.sectionHeaderStyle` and `configuration.sectionFooterStyle` will be set to `.view`, because titles cannot be implemented when using `UITableViewDiffableDataSource`.
+    ///  Because `UITableViewDiffableDataSource` handles UITableView updates, `tableViewUpdater` property on `DTTableViewManager` will be set to nil.
     /// - Parameter modelProvider: closure that provides `DTTableViewManager` models.
     /// This closure mirrors `cellProvider` property on `UITableViewDiffableDataSource`, but strips away tableView, and asks for data model instead of a cell. Cell mapping is then executed in the same way as without diffable data sources.
     open func configureDiffableDataSource<SectionIdentifier, ItemIdentifier>(modelProvider: @escaping (IndexPath, ItemIdentifier) -> Any)
@@ -214,12 +217,6 @@ open class DTTableViewManager {
         }
         // UITableViewDiffableDataSource will update UITableView instead of `TableViewUpdater` object.
         tableViewUpdater = nil
-        
-        // TODO: - check if section titles can be made possible with diffable datasources
-        
-        // Section header and footer styles are set to .view because `tableView(_:titleForHeaderInSection:)` and `tableView(_:titleForFooterInSection:)` cannot be used since `UITableViewDataSource` is implemented by `UITableViewDiffableDataSource` instead of `DTTableViewDataSource`.
-        configuration.sectionHeaderStyle = .view
-        configuration.sectionFooterStyle = .view
         
         // Cell is provided by `DTTableViewDataSource` without actually calling closure that is passed to `UITableViewDiffableDataSource`.
         let dataSource = UITableViewDiffableDataSource<SectionIdentifier, ItemIdentifier>(tableView: tableView) { _, _, _ in nil }
@@ -233,8 +230,7 @@ open class DTTableViewManager {
     
     @available(iOS 13.0, tvOS 13.0, *)
     /// Configures `UITableViewDiffableDataSourceReference` to be used with `DTTableViewManager`.
-    ///  Because `UITableViewDiffableDataSourceReference` considers storage objects to be external as well as handles dataSource methods and updating tableView, `tableDataSource`, `storage` and `tableViewUpdater` properties on `DTTableViewManager` will be set to nil.
-    ///  Also, `configuration.sectionHeaderStyle` and `configuration.sectionFooterStyle` will be set to `.view`, because titles cannot be implemented when using `UITableViewDiffableDataSource`.
+    ///  Because `UITableViewDiffableDataSourceReference` handles UITableView updates, `tableViewUpdater` property on `DTTableViewManager` will be set to nil.
     /// - Parameter modelProvider: closure that provides `DTTableViewManager` models.
     /// This closure mirrors `cellProvider` property on `UITableViewDiffableDataSourceReference`, but strips away tableView, and asks for data model instead of a cell. Cell mapping is then executed in the same way as without diffable data sources.
     open func configureDiffableDataSource(modelProvider: @escaping (IndexPath, Any) -> Any) -> UITableViewDiffableDataSourceReference
@@ -244,12 +240,6 @@ open class DTTableViewManager {
         }
         // UITableViewDiffableDataSourceReference will update UITableView instead of `TableViewUpdater` object.
         tableViewUpdater = nil
-        
-        // TODO: - check if section titles can be made possible with diffable datasources
-        
-        // Section header and footer styles are set to .view because `tableView(_:titleForHeaderInSection:)` and `tableView(_:titleForFooterInSection:)` cannot be used since `UITableViewDataSource` is implemented by `UITableViewDiffableDataSource` instead of `DTTableViewDataSource`.
-        configuration.sectionHeaderStyle = .view
-        configuration.sectionFooterStyle = .view
         
         // Cell is provided by `DTTableViewDataSource` without actually calling closure that is passed to `UITableViewDiffableDataSourceReference`.
         let dataSource = UITableViewDiffableDataSourceReference(tableView: tableView) { _, _, _ in nil }

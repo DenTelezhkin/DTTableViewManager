@@ -28,7 +28,7 @@ import DTModelStorage
 import UIKit
 
 @available(iOS 13, tvOS 13, *)
-public class ProxyDiffableDataSourceStorage: Storage {
+public class ProxyDiffableDataSourceStorage: BaseSupplementaryStorage, Storage {
     private let numberOfSectionsInTableView: () -> Int
     public func numberOfSections() -> Int {
         return numberOfSectionsInTableView()

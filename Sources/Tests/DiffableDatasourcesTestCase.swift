@@ -38,6 +38,13 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     var dataSource: UITableViewDiffableDataSource<Section, Int>!
     
+    func setItems(_ items: [Int]) {
+        dataSource.apply(.snapshot(with: { snapshot in
+            snapshot.appendSections([.one])
+            snapshot.appendItems(items)
+        }))
+    }
+    
     override func setUp() {
         super.setUp()
         dataSource = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
@@ -80,6 +87,90 @@ class DiffableDatasourcesTestCase: BaseTestCase {
         
         XCTAssertEqual(reactingCell?.indexPath, indexPath(1, 0))
         XCTAssertEqual(reactingCell?.model, 2)
+    }
+    
+    func testShouldShowTitlesOnEmptySection()
+    {
+        controller.manager.supplementaryStorage?.setSectionHeaderModels(["Foo"])
+        controller.manager.configuration.displayHeaderOnEmptySection = false
+        setItems([])
+        XCTAssertNil(controller.manager.tableDataSource?.tableView(controller.tableView, titleForHeaderInSection: 0))
+    }
+    
+    func testShouldShowTitleOnEmptySectionFooter()
+    {
+        controller.manager.supplementaryStorage?.setSectionFooterModels(["Foo"])
+        controller.manager.configuration.displayFooterOnEmptySection = false
+        setItems([])
+        XCTAssertNil(controller.manager.tableDataSource?.tableView(controller.tableView, titleForFooterInSection: 0))
+    }
+    
+    func testShouldShowViewHeaderOnEmptySEction()
+    {
+        controller.manager.registerHeader(NibView.self)
+        controller.manager.configuration.displayHeaderOnEmptySection = false
+        controller.manager.supplementaryStorage?.setSectionHeaderModels([1])
+        setItems([])
+        XCTAssertNil(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0))
+    }
+    
+    func testShouldShowViewFooterOnEmptySection()
+    {
+        controller.manager.registerFooter(NibView.self)
+        controller.manager.configuration.displayFooterOnEmptySection = false
+        controller.manager.supplementaryStorage?.setSectionFooterModels([1])
+        setItems([])
+        XCTAssertNil(controller.manager.tableDelegate?.tableView(self.controller.tableView, viewForFooterInSection: 0))
+    }
+    
+    func testSupplementaryKindsShouldBeSet()
+    {
+        XCTAssertEqual(controller.manager.supplementaryStorage?.supplementaryHeaderKind, DTTableViewElementSectionHeader)
+        XCTAssertEqual(controller.manager.supplementaryStorage?.supplementaryFooterKind, DTTableViewElementSectionFooter)
+    }
+    
+    func testHeaderViewShouldBeCreated()
+    {
+        controller.manager.registerHeader(NibHeaderFooterView.self)
+        controller.manager.supplementaryStorage?.setSectionHeaderModels([1])
+        setItems([1])
+        XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) is NibHeaderFooterView)
+    }
+    
+    func testFooterViewShouldBeCreated()
+    {
+        controller.manager.registerFooter(NibHeaderFooterView.self)
+        controller.manager.supplementaryStorage?.setSectionFooterModels([1])
+        setItems([1])
+        XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0) is NibHeaderFooterView)
+    }
+    
+    func testHeaderViewShouldBeCreatedFromXib()
+    {
+        controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
+        controller.manager.supplementaryStorage?.setSectionHeaderModels([1])
+        setItems([1])
+        XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) is NibHeaderFooterView)
+    }
+    
+    func testFooterViewShouldBeCreatedFromXib()
+    {
+        controller.manager.registerNibNamed("NibHeaderFooterView", forFooter: NibHeaderFooterView.self)
+        controller.manager.supplementaryStorage?.setSectionFooterModels([1])
+        setItems([1])
+        XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0) is NibHeaderFooterView)
+    }
+    
+    func testNilHeaderViewWithStyleTitle() {
+        controller.manager.supplementaryStorage?.setSectionHeaderModels(["Foo"])
+        setItems([1])
+        XCTAssertNil(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0))
+    }
+    
+    func testNilFooterViewWithStyleTitle() {
+        controller.manager.supplementaryStorage?.setSectionFooterModels(["Foo"])
+        setItems([1])
+        XCTAssertNil(controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0))
     }
 }
 

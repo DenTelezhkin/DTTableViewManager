@@ -21,10 +21,10 @@ class MultiSectionDiffingTableViewController: UITableViewController, DTTableView
     }()
     
     enum Section: String, CaseIterable {
-            case gryffindor
-            case ravenclaw
-            case hufflepuff
-            case slytherin
+        case gryffindor
+        case ravenclaw
+        case hufflepuff
+        case slytherin
     }
     let searchController = UISearchController(searchResultsController: nil)
     var diffableDataSource : UITableViewDiffableDataSource<Section, String>?
@@ -43,6 +43,7 @@ class MultiSectionDiffingTableViewController: UITableViewController, DTTableView
         diffableDataSource = manager.configureDiffableDataSource { indexPath, item in
             item
         }
+        manager.supplementaryStorage?.setSectionHeaderModels(Section.allCases.map { $0.rawValue.capitalized })
         searchController.searchResultsUpdater = self
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
@@ -60,17 +61,6 @@ class MultiSectionDiffingTableViewController: UITableViewController, DTTableView
             }
         }
         diffableDataSource?.apply(snapshot, animatingDifferences: animated)
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.text = "  " + Section.allCases[section].rawValue.capitalized
-        label.backgroundColor = .gray
-        return label
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
     }
 }
 
