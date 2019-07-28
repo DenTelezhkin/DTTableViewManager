@@ -19,8 +19,8 @@ class CustomViewsController: UIViewController, DTTableViewManageable {
         manager.registerHeader(CustomHeaderFooterView.self)
         manager.registerFooter(CustomHeaderFooterView.self)
         
-        manager.memoryStorage.setSectionHeaderModel(("Awesome custom header", UIImage(named: "textured_paper.png")!), forSection: 0)
-        manager.memoryStorage.setSectionFooterModel(("Not so awesome custom footer", UIImage(named: "mochaGrunge.png")!), forSection: 0)
+        manager.memoryStorage.setSectionHeaderModels([("Awesome custom header", UIImage(named: "textured_paper.png")!)])
+        manager.memoryStorage.setSectionFooterModels([("Not so awesome custom footer", UIImage(named: "mochaGrunge.png")!)])
         
         let foo = ["Custom cell", "Custom cell 2"]
         manager.memoryStorage.addItems(foo)

@@ -44,14 +44,14 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayHeaderView: view, forSection: section) }
-        guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: section) else { return }
+        guard let model = headerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.willDisplayHeaderForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, willDisplayFooterView: view, forSection: section) }
-        guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: section) else { return }
+        guard let model = footerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.willDisplayFooterForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
@@ -83,7 +83,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if configuration?.sectionFooterStyle == .title { return nil }
         let viewKind = ViewType.supplementaryView(kind: DTTableViewElementSectionFooter)
-        if let model = self.footerModel(forSection: section) {
+        if let model = footerModel(forSection: section) {
             if let createdView = viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
             {
                 _ = tableViewEventReactions.performReaction(of: viewKind,
@@ -302,14 +302,14 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section) }
-        guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: section) else { return }
+        guard let model = headerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionHeader), signature: EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndDisplayingFooterView: view, forSection: section) }
-        guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: section) else { return }
+        guard let model = footerModel(forSection: section) else { return }
         _ = tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue, view: view, model: model, location: IndexPath(item: 0, section: section))
     }
     

@@ -127,20 +127,20 @@ open class DTTableViewManager {
     /// - SeeAlso: `MemoryStorage`, `CoreDataStorage`, `RealmStorage`.
     open var storage : Storage? {
         willSet {
-            storage?.delegate = nil
+            (storage as? BaseUpdateDeliveringStorage)?.delegate = nil
         }
         didSet {
-            if let headerFooterCompatibleStorage = storage as? BaseStorage {
+            if let headerFooterCompatibleStorage = storage as? SupplementaryStorage {
                 headerFooterCompatibleStorage.configureForTableViewUsage()
             }
-            storage?.delegate = tableViewUpdater
+            (storage as? BaseUpdateDeliveringStorage)?.delegate = tableViewUpdater
         }
     }
     
     /// Object, that is responsible for updating `UITableView`, when received update from `Storage`
     open var tableViewUpdater : TableViewUpdater? {
         didSet {
-            storage?.delegate = tableViewUpdater
+            (storage as? BaseUpdateDeliveringStorage)?.delegate = tableViewUpdater
             tableViewUpdater?.didUpdateContent?(nil)
         }
     }
@@ -196,7 +196,7 @@ open class DTTableViewManager {
     ///
     /// - Parameter storage: storage class to be used
     public init(storage: Storage = DTTableViewManager.defaultStorage()) {
-        (storage as? BaseStorage)?.configureForTableViewUsage()
+        (storage as? SupplementaryStorage)?.configureForTableViewUsage()
         self.storage = storage
     }
     

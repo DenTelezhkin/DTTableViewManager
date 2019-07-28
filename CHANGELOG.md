@@ -27,8 +27,16 @@ New method wrappers for iOS 13 API
 
 ### Breaking
 
+DTModelStorage header, footer and supplementary model handling has been largely restructured to be a single closure-based API. Read more about changes in [DTModelStorage changelog](https://github.com/DenTelezhkin/DTModelStorage/blob/master/CHANGELOG.md). As a result of those changes, several breaking changes in DTTableViewManager include:
+
+* `SupplementaryAccessible` extension with `tableHeaderModel` and `tableFooterModel` properties has been removed.
+* Because headers/footers are now a closure based API, `setSectionHeaderModels` and `setSectionFooterModels` do not create sections by default, and do not call tableView.reloadData.
+* If a storage does not contain any sections, even if `configuration.displayHeaderOnEmptySections` or `configuration.displayFooterOnEmptySections` is set, headers and footers will not be displayed, since there are no sections, which is different from present sections, that contain 0 items. For example, If you need to show a header or footer in empty section using MemoryStorage, you can call `memoryStorage.setItems([Int](), forSectionAt: emptySectionIndex)`, and now with empty section header and footer can be displayed.
+
+Other breaking changes:
+
 * `storage` property on `DTTableViewManager` is now optional and might be nil in some situations (see `configureDiffableDataSource` method).
-* `tableViewUpdater` and `tableDataSource` will contain nil if `DTTableViewManager` is configured to work with `UITableViewDiffableDataSource`.
+* `tableViewUpdater` will contain nil if `DTTableViewManager` is configured to work with `UITableViewDiffableDataSource`.
 * `DTTableViewOptionalManageable` protocol was removed and replaced by `optionalTableView` property on `DTTableViewManageable` protocol. One of `tableView`/`optionalTableView` properties must be implemented by `DTTableViewManageable` instance to work with `DTTableViewManager`.
 
 ### Deprecated 

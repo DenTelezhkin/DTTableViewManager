@@ -39,7 +39,7 @@ class CreationTestCase: XCTestCase {
     
     func testDelegateIsNotNil() {
         let controller = DTTestTableViewController()
-        XCTAssertNotNil(controller.manager.storage?.delegate)
+        XCTAssertNotNil((controller.manager.storage as? BaseUpdateDeliveringStorage)?.delegate)
     }
     
     func testDelegateIsNotNilForMemoryStorage() {

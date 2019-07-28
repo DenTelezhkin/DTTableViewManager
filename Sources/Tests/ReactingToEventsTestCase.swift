@@ -485,6 +485,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        controller.manager.memoryStorage.setItems([1,2])
         controller.tableView.beginUpdates()
         controller.tableView.endUpdates()
         waitForExpectations(timeout: 1, handler: nil)
@@ -508,6 +509,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        controller.manager.memoryStorage.setItems([1,2])
         if #available(iOS 11, tvOS 11, *) {
             
         } else {
@@ -526,6 +528,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        controller.manager.memoryStorage.setItems([1,2])
         controller.tableView.beginUpdates()
         controller.tableView.endUpdates()
         waitForExpectations(timeout: 1, handler: nil)
@@ -533,11 +536,13 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEstimatedHeightForFooterInSection() {
         let exp = expectation(description: "estimatedHeightForFooter")
+        
         controller.manager.estimatedHeightForFooter(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        controller.manager.memoryStorage.setItems([1,2])
         waitForExpectations(timeout: 1, handler: nil)
     }
     

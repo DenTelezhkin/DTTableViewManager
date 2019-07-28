@@ -243,22 +243,21 @@ class DatasourceTestCase: BaseTestCase {
     func testTableHeaderModel() {
         controller.manager.memoryStorage.addItem(4)
         controller.manager.memoryStorage.setSectionHeaderModels(["1"])
-        XCTAssertEqual(controller.manager.memoryStorage.section(atIndex: 0)?.tableHeaderModel as? String, "1")
+        XCTAssertEqual(controller.manager.memoryStorage.headerModel(forSection: 0) as? String, "1")
         
-        controller.manager.memoryStorage.section(atIndex: 0)?.tableHeaderModel = "2"
+        controller.manager.memoryStorage.setSectionHeaderModels(["2"])
         
-        XCTAssertEqual(controller.manager.memoryStorage.section(atIndex: 0)?.tableHeaderModel as? String, "2")
+        XCTAssertEqual(controller.manager.memoryStorage.headerModel(forSection: 0) as? String, "2")
     }
     
     func testTableFooterModel() {
         controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItem(4)
         controller.manager.memoryStorage.setSectionFooterModels(["1"])
-        XCTAssertEqual(controller.manager.memoryStorage.section(atIndex: 0)?.tableFooterModel as? String, "1")
+        XCTAssertEqual(controller.manager.memoryStorage.footerModel(forSection: 0) as? String, "1")
         
-        controller.manager.memoryStorage.section(atIndex: 0)?.tableFooterModel = "2"
-        
-        XCTAssertEqual(controller.manager.memoryStorage.section(atIndex: 0)?.tableFooterModel as? String, "2")
+        controller.manager.memoryStorage.setSectionFooterModels(["2"])
+        XCTAssertEqual(controller.manager.memoryStorage.footerModel(forSection: 0) as? String, "2")
     }
     
     func testNilHeaderViewWithStyleTitle() {
@@ -314,11 +313,11 @@ class DatasourceTestCase: BaseTestCase {
     
     func testNilHeaderModelLeadsToAnomaly() {
         let exp = expectation(description: "Nil header model in storage")
-        let model: Int?? = nil
+        let model: Int? = nil
         let anomaly = DTTableViewManagerAnomaly.nilHeaderModel(0)
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.registerHeader(NibHeaderFooterView.self)
-        controller.manager.memoryStorage.setSectionHeaderModel(model, forSection: 0)
+        controller.manager.memoryStorage.setSectionHeaderModels([model])
         controller.manager.configuration.displayHeaderOnEmptySection = true
         let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         waitForExpectations(timeout: 0.1)
@@ -332,7 +331,7 @@ class DatasourceTestCase: BaseTestCase {
         let anomaly = DTTableViewManagerAnomaly.nilFooterModel(0)
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.registerFooter(NibHeaderFooterView.self)
-        controller.manager.memoryStorage.setSectionFooterModel(model, forSection: 0)
+        controller.manager.memoryStorage.setSectionFooterModels([model])
         controller.manager.configuration.displayFooterOnEmptySection = true
         let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         waitForExpectations(timeout: 0.1)
@@ -348,7 +347,7 @@ class DatasourceTestCase: BaseTestCase {
         let anomaly = DTTableViewManagerAnomaly.nilHeaderModel(0)
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.registerHeader(NibHeaderFooterView.self)
-        controller.manager.memoryStorage.setSectionHeaderModel(model, forSection: 0)
+        controller.manager.memoryStorage.setSectionHeaderModels([model])
         let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         waitForExpectations(timeout: 0.1)
     }
@@ -361,7 +360,7 @@ class DatasourceTestCase: BaseTestCase {
         let anomaly = DTTableViewManagerAnomaly.nilFooterModel(0)
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.registerFooter(NibHeaderFooterView.self)
-        controller.manager.memoryStorage.setSectionFooterModel(model, forSection: 0)
+        controller.manager.memoryStorage.setSectionFooterModels([model])
         let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         waitForExpectations(timeout: 0.1)
     }
@@ -387,7 +386,7 @@ class DatasourceTestCase: BaseTestCase {
         let exp = expectation(description: "No header mapping found")
         let anomaly = DTTableViewManagerAnomaly.noHeaderFooterMappingFound(modelDescription: "0", indexPath: IndexPath(index: 0))
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.memoryStorage.setSectionHeaderModel(0, forSection: 0)
+        controller.manager.memoryStorage.setSectionHeaderModels([0])
         controller.manager.configuration.displayHeaderOnEmptySection = true
         controller.manager.configuration.sectionHeaderStyle = .view
         let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
