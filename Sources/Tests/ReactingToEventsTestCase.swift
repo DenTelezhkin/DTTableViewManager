@@ -1007,7 +1007,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
             return nil
         }
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForHighlightingContextMenuWith: .init())
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForHighlightingContextMenuWithConfiguration: .init())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -1018,7 +1018,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
             return nil
         }
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForDismissingContextMenuWith: .init())
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForDismissingContextMenuWithConfiguration: .init())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -1149,8 +1149,8 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:))), EventMethodSignature.didBeginMultipleSelectionInteractionAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:))), EventMethodSignature.didEndMultipleSelectionInteraction.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:))), EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWith:))), EventMethodSignature.previewForHighlightingContextMenu.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForDismissingContextMenuWith:))), EventMethodSignature.previewForDismissingContextMenu.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWithConfiguration:))), EventMethodSignature.previewForHighlightingContextMenu.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:))), EventMethodSignature.previewForDismissingContextMenu.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willCommitMenuWithAnimator:))), EventMethodSignature.willCommitMenuWithAnimator.rawValue)
         }
         
