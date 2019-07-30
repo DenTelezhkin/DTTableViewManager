@@ -125,7 +125,7 @@ open class DTTableViewManager {
     /// - Note: When setting custom storage for this property, it will be automatically configured for using with UITableView and it's delegate will be set to `DTTableViewManager` instance.
     /// - Note: Previous storage `delegate` property will be nilled out to avoid collisions.
     /// - SeeAlso: `MemoryStorage`, `CoreDataStorage`, `RealmStorage`.
-    open var storage : Storage? {
+    open var storage : Storage {
         willSet {
             (storage as? BaseUpdateDeliveringStorage)?.delegate = nil
         }
@@ -298,7 +298,7 @@ open class DTTableViewManager {
     /// - Parameter closure: closure to run for each cell after update has been completed.
     open func updateVisibleCells(_ closure: ((UITableViewCell) -> Void)? = nil) {
         (tableView?.indexPathsForVisibleRows ?? []).forEach { indexPath in
-            guard let model = storage?.item(at: indexPath),
+            guard let model = storage.item(at: indexPath),
                 let visibleCell = tableView?.cellForRow(at: indexPath)
             else { return }
             updateCellClosure()(indexPath, model)

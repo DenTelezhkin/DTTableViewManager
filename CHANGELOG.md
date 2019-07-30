@@ -36,7 +36,6 @@ DTModelStorage header, footer and supplementary model handling has been largely 
 
 Other breaking changes:
 
-* `storage` property on `DTTableViewManager` is now optional and might be nil in some situations (see `configureDiffableDataSource` method).
 * `tableViewUpdater` will contain nil if `DTTableViewManager` is configured to work with `UITableViewDiffableDataSource`.
 * `DTTableViewOptionalManageable` protocol was removed and replaced by `optionalTableView` property on `DTTableViewManageable` protocol. One of `tableView`/`optionalTableView` properties must be implemented by `DTTableViewManageable` instance to work with `DTTableViewManager`.
 

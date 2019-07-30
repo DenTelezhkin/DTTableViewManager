@@ -60,9 +60,9 @@ class DiffableDatasourcesTestCase: BaseTestCase {
         
         XCTAssert(controller.verifyItem(2, atIndexPath: indexPath(1, 0)))
         XCTAssert(controller.verifyItem(3, atIndexPath: indexPath(0, 1)))
-        XCTAssertEqual(controller.manager.storage?.numberOfSections(), 2)
-        XCTAssertEqual(controller.manager.storage?.numberOfItems(inSection: 0), 2)
-        XCTAssertEqual(controller.manager.storage?.numberOfItems(inSection: 1), 2)
+        XCTAssertEqual(controller.manager.storage.numberOfSections(), 2)
+        XCTAssertEqual(controller.manager.storage.numberOfItems(inSection: 0), 2)
+        XCTAssertEqual(controller.manager.storage.numberOfItems(inSection: 1), 2)
     }
     
     func testCellSelectionClosure()
@@ -221,9 +221,9 @@ class DiffableDatasourceReferencesTestCase: BaseTestCase {
         
         XCTAssert(controller.verifyItem(2, atIndexPath: indexPath(1, 0)))
         XCTAssert(controller.verifyItem(3, atIndexPath: indexPath(0, 1)))
-        XCTAssertEqual(controller.manager.storage?.numberOfSections(), 2)
-        XCTAssertEqual(controller.manager.storage?.numberOfItems(inSection: 0), 2)
-        XCTAssertEqual(controller.manager.storage?.numberOfItems(inSection: 1), 2)
+        XCTAssertEqual(controller.manager.storage.numberOfSections(), 2)
+        XCTAssertEqual(controller.manager.storage.numberOfItems(inSection: 0), 2)
+        XCTAssertEqual(controller.manager.storage.numberOfItems(inSection: 1), 2)
     }
     
     func testCellSelectionClosure()
