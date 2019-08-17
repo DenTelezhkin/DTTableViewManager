@@ -25,6 +25,7 @@ New method wrappers for iOS 13 API
 ### Changed
 
 * If tableView section does not contain any items, and `TableViewConfiguration.display<Header/Footer>OnEmptySection` property is set to false, `DTTableViewManager` no longer asks for header footer height explicitly and returns `TableViewConfiguration.minimal<Header/Footer>HeightForTableView`.
+* Anomaly event verification now allows subclasses to prevent false-positives.
 
 ### Removed
 

@@ -343,7 +343,7 @@ open class DTTableViewManager {
     
     func verifyViewEvent<T:ModelTransfer>(for viewType: T.Type, methodName: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            if self?.viewFactory.mappings.filter({ $0.viewClass == T.self }).count == 0 {
+            if self?.viewFactory.mappings.filter({ $0.viewClass.isSubclass(of: viewType) }).count == 0 {
                 self?.anomalyHandler.reportAnomaly(DTTableViewManagerAnomaly.unusedEventDetected(viewType: String(describing: T.self), methodName: methodName))
             }
         }
