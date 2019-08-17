@@ -22,6 +22,10 @@ New method wrappers for iOS 13 API
 * `previewForDismissingContextMenu`
 * `willCommitMenuWithAnimator`
 
+### Changed
+
+* If tableView section does not contain any items, and `TableViewConfiguration.display<Header/Footer>OnEmptySection` property is set to false, `DTTableViewManager` no longer asks for header footer height explicitly and returns `TableViewConfiguration.minimal<Header/Footer>HeightForTableView`.
+
 ### Removed
 
 * Usage of previously deprecated and now removed from `DTModelStorage` `ViewModelMappingCustomizing` protocol.
