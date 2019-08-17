@@ -53,7 +53,8 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     override func setUp() {
         super.setUp()
         guard #available(iOS 13, tvOS 13, *) else { return }
-        diffableDataSource = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
+        let temp : UITableViewDiffableDataSource<Section, Int> = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
+        diffableDataSource = temp
         controller.manager.register(NibCell.self)
     }
     
@@ -78,7 +79,8 @@ class DiffableDatasourcesTestCase: BaseTestCase {
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        diffableDataSource = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
+        let temp: UITableViewDiffableDataSource<Section, Int> = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
+        diffableDataSource = temp
         controller.manager.register(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
         controller.manager.didSelect(SelectionReactingTableCell.self) { (cell, model, indexPath) in
