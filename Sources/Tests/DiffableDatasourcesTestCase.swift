@@ -28,7 +28,6 @@ extension NSDiffableDataSourceSnapshotReference {
     }
 }
 
-@available(iOS 13, tvOS 13, *)
 class DiffableDatasourcesTestCase: BaseTestCase {
     enum Section {
         case one
@@ -36,8 +35,14 @@ class DiffableDatasourcesTestCase: BaseTestCase {
         case three
     }
     
-    var dataSource: UITableViewDiffableDataSource<Section, Int>!
+    var diffableDataSource: Any?
     
+    @available(iOS 13, tvOS 13, *)
+    var dataSource: UITableViewDiffableDataSource<Section, Int>! {
+        return diffableDataSource as? UITableViewDiffableDataSource<Section, Int>
+    }
+    
+    @available(iOS 13, tvOS 13, *)
     func setItems(_ items: [Int]) {
         dataSource.apply(.snapshot(with: { snapshot in
             snapshot.appendSections([.one])
@@ -47,11 +52,13 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     override func setUp() {
         super.setUp()
-        dataSource = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
+        guard #available(iOS 13, tvOS 13, *) else { return }
+        diffableDataSource = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
         controller.manager.register(NibCell.self)
     }
     
     func testMultipleSectionsWorkWithDiffableDataSources() {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         dataSource.apply(.snapshot(with: { snapshot in
             snapshot.appendSections([.one, .two])
             snapshot.appendItems([1,2], toSection: .one)
@@ -67,10 +74,11 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testCellSelectionClosure()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        dataSource = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
+        diffableDataSource = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
         controller.manager.register(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
         controller.manager.didSelect(SelectionReactingTableCell.self) { (cell, model, indexPath) in
@@ -91,6 +99,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testShouldShowTitlesOnEmptySection()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.supplementaryStorage?.setSectionHeaderModels(["Foo"])
         controller.manager.configuration.displayHeaderOnEmptySection = false
         setItems([])
@@ -99,6 +108,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testShouldShowTitleOnEmptySectionFooter()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.supplementaryStorage?.setSectionFooterModels(["Foo"])
         controller.manager.configuration.displayFooterOnEmptySection = false
         setItems([])
@@ -107,6 +117,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testShouldShowViewHeaderOnEmptySEction()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.registerHeader(NibView.self)
         controller.manager.configuration.displayHeaderOnEmptySection = false
         controller.manager.supplementaryStorage?.setSectionHeaderModels([1])
@@ -116,6 +127,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testShouldShowViewFooterOnEmptySection()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.registerFooter(NibView.self)
         controller.manager.configuration.displayFooterOnEmptySection = false
         controller.manager.supplementaryStorage?.setSectionFooterModels([1])
@@ -131,6 +143,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testHeaderViewShouldBeCreated()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.registerHeader(NibHeaderFooterView.self)
         controller.manager.supplementaryStorage?.setSectionHeaderModels([1])
         setItems([1])
@@ -139,6 +152,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testFooterViewShouldBeCreated()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.registerFooter(NibHeaderFooterView.self)
         controller.manager.supplementaryStorage?.setSectionFooterModels([1])
         setItems([1])
@@ -147,6 +161,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testHeaderViewShouldBeCreatedFromXib()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
         controller.manager.supplementaryStorage?.setSectionHeaderModels([1])
         setItems([1])
@@ -155,6 +170,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     
     func testFooterViewShouldBeCreatedFromXib()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.registerNibNamed("NibHeaderFooterView", forFooter: NibHeaderFooterView.self)
         controller.manager.supplementaryStorage?.setSectionFooterModels([1])
         setItems([1])
@@ -162,18 +178,21 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     }
     
     func testNilHeaderViewWithStyleTitle() {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.supplementaryStorage?.setSectionHeaderModels(["Foo"])
         setItems([1])
         XCTAssertNil(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0))
     }
     
     func testNilFooterViewWithStyleTitle() {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller.manager.supplementaryStorage?.setSectionFooterModels(["Foo"])
         setItems([1])
         XCTAssertNil(controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0))
     }
     
     func testWillDisplayHeaderInSection() {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         let exp = expectation(description: "willDisplayHeaderInSection")
         controller.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
             exp.fulfill()
@@ -185,6 +204,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     }
     
     func testWillDisplayFooterInSection() {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         let exp = expectation(description: "willDisplayFooterInSection")
         controller.manager.willDisplayFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
             exp.fulfill()
@@ -196,7 +216,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     }
 }
 
-@available(iOS 13, tvOS 13, *)
+
 class DiffableDatasourceReferencesTestCase: BaseTestCase {
     enum Section {
         case one
@@ -204,15 +224,22 @@ class DiffableDatasourceReferencesTestCase: BaseTestCase {
         case three
     }
     
-    var dataSourceReference: UITableViewDiffableDataSourceReference!
+    var diffableDataSourceReference: Any?
+    
+    @available(iOS 13, tvOS 13, *)
+    var dataSourceReference: UITableViewDiffableDataSourceReference! {
+        return diffableDataSourceReference as? UITableViewDiffableDataSourceReference
+    }
     
     override func setUp() {
         super.setUp()
-        dataSourceReference = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
+        guard #available(iOS 13, tvOS 13, *) else { return }
+        diffableDataSourceReference = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
         controller.manager.register(NibCell.self)
     }
     
     func testMultipleSectionsWorkWithDiffableDataSourceReferences() {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         dataSourceReference.applySnapshot(.snapshot(with: { snapshot in
             snapshot.appendSections(withIdentifiers: [Section.one, Section.two])
             snapshot.appendItems(withIdentifiers: [1,2], intoSectionWithIdentifier: Section.one)
@@ -228,10 +255,11 @@ class DiffableDatasourceReferencesTestCase: BaseTestCase {
     
     func testCellSelectionClosure()
     {
+        guard #available(iOS 13, tvOS 13, *) else { return }
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        dataSourceReference = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
+        diffableDataSourceReference = controller.manager.configureDiffableDataSource(modelProvider: { $1 })
         controller.manager.register(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
         controller.manager.didSelect(SelectionReactingTableCell.self) { (cell, model, indexPath) in

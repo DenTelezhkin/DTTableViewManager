@@ -124,9 +124,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
             }
             return configuration?.minimalHeaderHeightForTableView(tableView) ?? .zero
         }
-        
-        if let _ = headerModel(forSection:section)
-        {
+        if let _ = headerModel(forSection:section) {
             return tableView.sectionHeaderHeight
         }
         return configuration?.minimalHeaderHeightForTableView(tableView) ?? .zero
@@ -524,6 +522,5 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         (delegate as? UITableViewDelegate)?.tableView?(tableView,
                                                        willCommitMenuWithAnimator: animator)
     }
-    
     #endif
 }
