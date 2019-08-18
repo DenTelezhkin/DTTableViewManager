@@ -50,7 +50,11 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
     }
     
     @IBAction func resetDataButtonTapped(_ sender: Any) {
+        // This functionality is currently bugged as NSFetchedResultsController returns duplicated records each time
+        // Which leads to displaying wrong data, even though database was cleared.
+        // So we just pop to rootViewController.
         CoreDataManager.sharedInstance.resetData()
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func addRecordButtonTapped(_ sender: Any) {
@@ -59,7 +63,7 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
             "name": "Random bank name",
             "city": "Random city",
             "zip": ["111","222","333","4444"].randomElement() ?? "",
-            "state": manager.supplementaryStorage?.headerModelProvider?((0..<(manager.storage?.numberOfSections() ?? 0)).randomElement() ?? 0) as Any
+            "state": manager.supplementaryStorage?.headerModelProvider?((0..<(manager.storage.numberOfSections())).randomElement() ?? 0) as Any
         ], inContext: context)
         _ = try? context.save()
     }

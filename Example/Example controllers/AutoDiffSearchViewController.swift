@@ -12,7 +12,7 @@ import DTModelStorage
 import Changeset
 
 struct ChangesetDiffer : EquatableDiffingAlgorithm {
-    func diff<T>(from: [T], to: [T]) -> [SingleSectionOperation] where T : Identifiable, T : Equatable {
+    func diff<T>(from: [T], to: [T]) -> [SingleSectionOperation] where T : EntityIdentifiable, T : Equatable {
         let changeset = Changeset.edits(from: from, to: to)
         return changeset.map {
             switch $0.operation {
@@ -25,7 +25,7 @@ struct ChangesetDiffer : EquatableDiffingAlgorithm {
     }
 }
 
-extension String: Identifiable {
+extension String: EntityIdentifiable {
     public var identifier: AnyHashable { return self }
 }
 

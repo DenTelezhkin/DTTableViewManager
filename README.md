@@ -16,7 +16,7 @@ Powerful generic-based UITableView management framework, written in Swift.
 - [Quick start](#quick-start)
 - [Usage](#usage)
     - **Intro -** [Mapping and Registration](#mapping-and-registration), [Data Models](#data-models)
-    - **Storage classes -** [Memory Storage](#memorystorage), [CoreDataStorage](#coredatastorage), [RealmStorage](#realmstorage)
+    - **Storage classes -** [Memory Storage](#memorystorage), [CoreDataStorage](#coredatastorage), [RealmStorage](#realmstorage), [Diffable Datasources in iOS13](#diffable-datasources-in-ios-13)
     - **Reacting to events -** [Event types](#event-types), [Events configuration](#events-configuration)
 - [Advanced Usage](#advanced-usage)
   - [Drag and Drop in iOS 11](#drag-and-drop-in-ios-11)
@@ -26,41 +26,43 @@ Powerful generic-based UITableView management framework, written in Swift.
   - [Conditional mappings](#conditional-mappings)
   - [Anomaly handler](#anomaly-handler)
   - [Unregistering mappings](#unregistering-mappings)
-- [ObjectiveC support](#objectivec-support)
 - [Thanks](#thanks)
 
 ## Features
 
 - [x] Powerful mapping system between data models and cells, headers and footers
 - [x] Support for all Swift types - classes, structs, enums, tuples, protocols
+- [x] Support for diffable datasources in iOS 13
 - [x] Powerful events system, that covers all UITableView delegate and datasource methods
 - [x] Views created from code, XIB, or storyboard
 - [x] Flexible Memory/CoreData/Realm.io storage options
 - [x] Automatic datasource and interface synchronization.
 - [x] Automatic XIB registration and dequeue
-- [x] No type casts required
-- [x] No need to subclass
-- [x] Support for Drag&Drop in iOS 11
+- [x] Support for Drag&Drop API for iOS 11 and higher
 - [x] Can be used with UITableViewController, or UIViewController with UITableView, or any other class, that contains UITableView
 - [x] [Complete documentation](https://dentelezhkin.github.io/DTTableViewManager)
 
 ## Requirements
 
-* Xcode 8 and higher
+* Xcode 9 and higher
 * iOS 8.0 and higher / tvOS 9.0 and higher
-* Swift 3 and higher
+* Swift 4 and higher
 
 ## Installation
 
-[CocoaPods](http://www.cocoapods.org):
+### Swift Package Manager(requires Xcode 11)
 
-    pod 'DTTableViewManager', '~> 6.5'
+Add package into Project settings -> Swift Packages
 
-[Carthage](https://github.com/Carthage/Carthage):
+### [CocoaPods](http://www.cocoapods.org):
 
-    github "DenTelezhkin/DTTableViewManager" ~> 6.5
+    pod 'DTTableViewManager'
 
-After running `carthage update` drop DTTableViewManager.framework and DTModelStorage.framework to Xcode project embedded binaries.
+### [Carthage](https://github.com/Carthage/Carthage):
+
+    github "DenTelezhkin/DTTableViewManager"
+
+After running `carthage update` add DTTableViewManager.framework and DTModelStorage.framework to Xcode project embedded binaries.
 
 ## Quick start
 
@@ -85,10 +87,18 @@ class PostCell : UITableViewCell, ModelTransfer {
 
 * Declare your class as `DTTableViewManageable`, and it will be automatically injected with `manager` property, that will hold an instance of `DTTableViewManager`.
 
-* Make sure your UITableView outlet is wired to your class and call registration methods (typically in viewDidLoad method):
+* Make sure your UITableView outlet is wired to your class and call registration methods:
 
 ```swift
-	manager.register(PostCell.self)
+class PostsViewController: UIViewController, DTTableViewManageable {
+
+    @IBOutlet weak var tableView: UITableView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        manager.register(PostCell.self)
+    }
+}	
 ```
 
 ModelType will be automatically gathered from your `PostCell`. If you have a PostCell.xib file, it will be automatically registered for PostCell. If you have a storyboard with PostCell, set it's reuseIdentifier to be identical to class - "PostCell".
@@ -142,7 +152,7 @@ manager.memoryStorage.addItems([Apple(),Carrot()])
 
 ### MemoryStorage
 
-`MemoryStorage` is a class, that manages UITableView models in memory. It has methods for adding, removing, replacing, reordering table view models etc. You can read all about them in [DTModelStorage repo](https://github.com/DenTelezhkin/DTModelStorage#memorystorage). Basically, every section in `MemoryStorage` is an array of `SectionModel` objects, which itself is an object, that contains optional header and footer models, and array of table items.
+`MemoryStorage` is a class, that manages UITableView models in memory. It has methods for adding, removing, replacing, reordering table view models etc. You can read all about them in [DTModelStorage repo](https://github.com/DenTelezhkin/DTModelStorage#memorystorage). Basically, every section in `MemoryStorage` is an array of `SectionModel` objects, which itself is an object that contains array of table items.
 
 ### CoreDataStorage
 
@@ -176,6 +186,49 @@ Keep in mind, that MemoryStorage is not limited to objects in memory. For exampl
 ```ruby
     pod 'DTModelStorage/Realm'
 ```
+
+### Diffable datasources in iOS 13
+
+Diffable datasources is a cool new feature, that is introduced in UIKit in iOS / tvOS 13. `DTTableViewManager 7` provides a powerful integration layer with it, but in order to understand how this layer works, it's highly recommended to check out great [Advances in UI Data Sources WWDC session](https://developer.apple.com/videos/play/wwdc2019/220/).
+
+If you don't use `DTTableViewManager`, you would typically create diffable datasource like so (taken from Apple's sample code on diffable datasources):
+
+```swift
+dataSource = UICollectionViewDiffableDataSource
+    <Section, MountainsController.Mountain>(collectionView: mountainsCollectionView) {
+        (collectionView: UICollectionView, indexPath: IndexPath,
+        mountain: MountainsController.Mountain) -> UICollectionViewCell? in
+    guard let mountainCell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: LabelCell.reuseIdentifier, for: indexPath) as? LabelCell else {
+            fatalError("Cannot create new cell") }
+    mountainCell.label.text = mountain.name
+    return mountainCell
+}
+```
+
+One of `DTTableViewManager`s main goals is to get rid of String identifiers, and to handle cell creation, as well as updating cell with it's model, for you. Which is why with DTTableViewManager 7 code, equivalent to one above, is the following:
+
+```swift
+dataSource = manager.configureDiffableDataSource { indexPath, model in
+    return model
+}
+```
+
+You should persist strong reference to `dataSource` object, and use it for constructing sections and items exactly as described in Apple documentation and WWDC session.
+
+Diffable datasources and `DTTableViewManager 7` are tightly integrated, so all events, even datasource ones like `manager.configure(_:)`, continue to work in the same way as they were working before.
+
+On top of that, there is an additional functionality, that currently `UITableViewDiffableDataSource` class does not provide. It's currently not possible to use it and have section titles/headers/footers in `UITableView`. With `DTTableViewManager` however, it works just as you would expect:
+
+```swift
+manager.supplementaryStorage?.setSectionHeaderModels(["Foo"])
+```
+
+Both events and section header/footer integration is possible, because `DTTableViewManager` injects a special `ProxyDiffableDataSourceStorage` object between `UITableViewDiffableDataSource` and `UITableView`. This storage does not store data models and just queries diffable data source to receive them. It does, however, implement section header and footer model providers, which unlocks possibility to have section titles/headers/footers when using diffable datasources.
+
+`DTTableViewManager` supports both generic `UITableViewDiffableDataSource<SectionType,ItemType>` and non-generic  `UITableViewDiffableDataSourceReference` with the same method name(`configureDiffableDataSource`). Resulting diffable datasource type is inferred from your declaration of the datasource.
+
+Keep in mind, that for diffable datasources, `tableViewUpdater` property will contain nil, since UI updates are handled by diffable datasource itself.
 
 ## Reacting to events
 
@@ -345,7 +398,7 @@ controller.manager.registerNibNamed("CustomNibCell", for: NibCell.self) { mappin
 
 `DTTableViewManager` is built on some conventions. For example, your cell needs to have reuseIdentifier that matches the name of your class, XIB files need to be named also identical to the name of your class(to work with default mapping without customization). However when those conventions are not followed, or something unexpected happens, your app may crash or behave inconsistently. Most of the errors are reported by `UITableView` API, but there's space to improve.
 
-And so, starting with 6.3.0 release, `DTTableViewManager` as well as `DTCollectionViewManager` and `DTModelStorage` now have dedicated anomaly analyzer, that tries to find inconsistencies and programmer errors when using those frameworks. It detects stuff like missing mappings, inconsistencies in xib files, and even unused events. By default, detected anomalies will be printed in console while you are debugging your app. For example, if you try to register an empty xib to use for your cell, here's what you'll see in console:
+ `DTTableViewManager` as well as `DTCollectionViewManager` and `DTModelStorage` have dedicated anomaly analyzers, that try to find inconsistencies and programmer errors when using those frameworks. They detect stuff like missing mappings, inconsistencies in xib files, and even unused events. By default, detected anomalies will be printed in console while you are debugging your app. For example, if you try to register an empty xib to use for your cell, here's what you'll see in console:
 
 ```
 ⚠️[DTTableViewManager] Attempted to register xib EmptyXib for PostCell, but this xib does not contain any views.
@@ -390,10 +443,6 @@ manager.unregisterFooter(FooterView.self)
 ```
 
 This is equivalent to calling `tableView(register:nil,forCellWithReuseIdenfier: "FooCell")`
-
-## ObjectiveC support
-
-`DTTableViewManager` is heavily relying on Swift protocol extensions, generics and associated types. Enabling this stuff to work on Objective-c right now is not possible. Because of this DTTableViewManager 4 and greater only supports building from Swift. If you need to use Objective-C, you can use [latest Objective-C compatible version of `DTTableViewManager`](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/3.3.0).
 
 ## Thanks
 
