@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+**This is a major release with some breaking changes, please read [DTTableViewManager 7.0 Migration Guide](https://github.com/DenTelezhkin/DTTableViewManager/blob/master/Guides/7.0%20Migration%20Guide.md)**
+
 ### Added
 
 * `configureDiffableDataSource(modelProvider:)` method to enable `UITableViewDiffableDataSource` with `DTTableViewManager`.
@@ -141,7 +143,7 @@ Please note, though, that new default behavior is recommended, because it is mor
 
 ## [6.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.0.0-beta.1)
 
-**This is a major release with some breaking changes, please read [DTTableViewManager 6.0 Migration Guide](https://github.com/DenTelezhkin/DTTableViewManager/blob/master/Documentation/DTTableViewManager%206.0%20Migration%20Guide.md)**
+**This is a major release with some breaking changes, please read [DTTableViewManager 6.0 Migration Guide](https://github.com/DenTelezhkin/DTTableViewManager/blob/master/Guides/DTTableViewManager%206.0%20Migration%20Guide.md)**
 
 * Added `updateVisibleCells(_:) method`, that allows updating cell data for visible cells with callback on each cell. This is more efficient than calling `reloadData` when number of elements in `UITableView` does not change, and only contents of items change.
 * Implement `configureEvents(for:_:)` method, that allows batching in several cell events to avoid using T.ModelType for events, that do not have cell created.
