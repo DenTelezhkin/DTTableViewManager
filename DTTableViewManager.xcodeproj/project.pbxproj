@@ -168,6 +168,10 @@
 /* Begin PBXFileReference section */
 		3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableDatasourcesTestCase.swift; sourceTree = "<group>"; };
 		3EBF90E422E7643900135C10 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		3EC8F87C2309810A00FF3C7A /* DTTableViewManager 6.0 Migration Guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DTTableViewManager 6.0 Migration Guide.md"; sourceTree = "<group>"; };
+		3EC8F87D2309810A00FF3C7A /* DTTableViewManager 4.x Migration Guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DTTableViewManager 4.x Migration Guide.md"; sourceTree = "<group>"; };
+		3EC8F87E2309810A00FF3C7A /* DTTableViewManager 5.0 migration guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DTTableViewManager 5.0 migration guide.md"; sourceTree = "<group>"; };
+		3EC8F87F2309813E00FF3C7A /* 7.0 Migration Guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "7.0 Migration Guide.md"; sourceTree = "<group>"; };
 		3ED770A022E3211200C0E3A6 /* students.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = students.json; sourceTree = "<group>"; };
 		3ED770A322E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MultiSectionDiffingTableViewController.swift; path = "Example controllers/MultiSectionDiffingTableViewController.swift"; sourceTree = "<group>"; };
 		3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDragDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +310,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EC8F87B2309810A00FF3C7A /* Guides */ = {
+			isa = PBXGroup;
+			children = (
+				3EC8F87C2309810A00FF3C7A /* DTTableViewManager 6.0 Migration Guide.md */,
+				3EC8F87F2309813E00FF3C7A /* 7.0 Migration Guide.md */,
+				3EC8F87D2309810A00FF3C7A /* DTTableViewManager 4.x Migration Guide.md */,
+				3EC8F87E2309810A00FF3C7A /* DTTableViewManager 5.0 migration guide.md */,
+			);
+			path = Guides;
+			sourceTree = "<group>";
+		};
 		3EDC205122B817E00078EB0D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,11 +559,12 @@
 				9A383CA51CE1DA2F0081D843 /* Default-568h@2x.png */,
 				9AD92BED1BE266D700E667FF /* Documentation */,
 				9A9B17031B65771600D8ABD3 /* Example */,
+				9AFAAF7C22D4C9A6001C86B0 /* Frameworks */,
+				3EC8F87B2309810A00FF3C7A /* Guides */,
 				9A88F5A819EAC683008436C9 /* Images.xcassets */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
 				3EDC205122B817E00078EB0D /* Sources */,
 				9A383C821CE1CC5F0081D843 /* Supporting files */,
-				9AFAAF7C22D4C9A6001C86B0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
