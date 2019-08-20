@@ -5,9 +5,9 @@
         "package": "DTModelStorage",
         "repositoryURL": "https://github.com/DenTelezhkin/DTModelStorage",
         "state": {
-          "branch": "next",
-          "revision": "87ff88491abc8d77cb0a610fa424d25f5bcfd560",
-          "version": null
+          "branch": null,
+          "revision": "bcdf8bc860699f986827385b248a9822f11c0453",
+          "version": "8.0.0-beta.1"
         }
       }
     ]
