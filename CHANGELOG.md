@@ -4,10 +4,57 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+**This is a major release with some breaking changes, please read [DTTableViewManager 7.0 Migration Guide](https://github.com/DenTelezhkin/DTTableViewManager/blob/master/Guides/7.0%20Migration%20Guide.md)**
+
 ### Added
 
-* `animateChangesOffScreen` property on `TableViewUpdater` that allows to turn off animated updates for `UITableView` when it is not on screen.
+* `configureDiffableDataSource(modelProvider:)` method to enable `UITableViewDiffableDataSource` with `DTTableViewManager`.
+* Ability for `DTTableViewManageable` to implement `tableView(_:viewForHeaderInSection:)` and `tableView(_:viewForFooterInSection:)` to return view directly without going through storages.
+* `minimalHeaderHeightForTableView` and `minimalFooterHeightForTableView` properties for `TableViewConfiguration`, that allows configuring height for section headers and footers that need to be hidden.
 * Ability to customize bundle, from which xib files are loaded from by setting `bundle` property on `ViewModelMapping` in `mappingBlock`. As before, `bundle` defaults to `Bundle(for: ViewClass.self)`.
+* `DTTableViewManager.supplementaryStorage` getter, that conditionally casts current storage to `SupplementaryStorage` protocol.
+
+New method wrappers for iOS 13 API
+
+* `shouldBeginMultipleSelectionInteraction`
+* `didBeginMultipleSelectionInteraction`
+* `didEndMultipleSelectionInteraction`
+* `contextMenuConfiguration(for:)`
+* `previewForHighlightingContextMenu`
+* `previewForDismissingContextMenu`
+* `willCommitMenuWithAnimator`
+
+### Changed
+
+* If tableView section does not contain any items, and `TableViewConfiguration.display<Header/Footer>OnEmptySection` property is set to false, `DTTableViewManager` no longer asks for header footer height explicitly and returns `TableViewConfiguration.minimal<Header/Footer>HeightForTableView`.
+* Anomaly event verification now allows subclasses to prevent false-positives.
+* `animateChangesOffScreen` property on `TableViewUpdater` that allows to turn off animated updates for `UITableView` when it is not on screen.
+
+### Removed
+
+* Usage of previously deprecated and now removed from `DTModelStorage` `ViewModelMappingCustomizing` protocol.
+
+### Breaking
+
+DTModelStorage header, footer and supplementary model handling has been largely restructured to be a single closure-based API. Read more about changes in [DTModelStorage changelog](https://github.com/DenTelezhkin/DTModelStorage/blob/master/CHANGELOG.md). As a result of those changes, several breaking changes in DTTableViewManager include:
+
+* `SupplementaryAccessible` extension with `tableHeaderModel` and `tableFooterModel` properties has been removed.
+* Because headers/footers are now a closure based API, `setSectionHeaderModels` and `setSectionFooterModels` do not create sections by default, and do not call tableView.reloadData.
+* If a storage does not contain any sections, even if `configuration.displayHeaderOnEmptySections` or `configuration.displayFooterOnEmptySections` is set, headers and footers will not be displayed, since there are no sections, which is different from present sections, that contain 0 items. For example, If you need to show a header or footer in empty section using MemoryStorage, you can call `memoryStorage.setItems([Int](), forSectionAt: emptySectionIndex)`, and now with empty section header and footer can be displayed.
+
+Other breaking changes:
+
+* `tableViewUpdater` will contain nil if `DTTableViewManager` is configured to work with `UITableViewDiffableDataSource`.
+* `DTTableViewOptionalManageable` protocol was removed and replaced by `optionalTableView` property on `DTTableViewManageable` protocol. One of `tableView`/`optionalTableView` properties must be implemented by `DTTableViewManageable` instance to work with `DTTableViewManager`.
+
+### Deprecated
+
+Following methods have been deprecated due to their delegate methods being deprecated in iOS 13:
+
+* `editActions(for:)`
+* `shouldShowMenuForItemAt`
+* `canPerformAction`
+* `performAction`
 
 ## [6.6.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.6.0)
 
@@ -18,7 +65,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 * Convenience constructor for `DTTableViewManager` object: `init(storage:)` that allows to create it's instance without initializing `MemoryStorage`.
-* Static variable `defaultStorage` on `DTTableViewManager` that allows to configure which `Storage` class is used by default. 
+* Static variable `defaultStorage` on `DTTableViewManager` that allows to configure which `Storage` class is used by default.
 * [Documentation](https://dentelezhkin.github.io/DTTableViewManager)
 * Support for Xcode 10.2 and Swift 5
 
@@ -97,7 +144,7 @@ Please note, though, that new default behavior is recommended, because it is mor
 
 ## [6.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.0.0-beta.1)
 
-**This is a major release with some breaking changes, please read [DTTableViewManager 6.0 Migration Guide](https://github.com/DenTelezhkin/DTTableViewManager/blob/master/Documentation/DTTableViewManager%206.0%20Migration%20Guide.md)**
+**This is a major release with some breaking changes, please read [DTTableViewManager 6.0 Migration Guide](https://github.com/DenTelezhkin/DTTableViewManager/blob/master/Guides/DTTableViewManager%206.0%20Migration%20Guide.md)**
 
 * Added `updateVisibleCells(_:) method`, that allows updating cell data for visible cells with callback on each cell. This is more efficient than calling `reloadData` when number of elements in `UITableView` does not change, and only contents of items change.
 * Implement `configureEvents(for:_:)` method, that allows batching in several cell events to avoid using T.ModelType for events, that do not have cell created.

@@ -27,16 +27,7 @@ fileprivate class UpdatableCell : UITableViewCell, ModelTransfer {
     }
 }
 
-class TableViewFactoryTestCase: XCTestCase {
-    
-    var controller : DTTestTableViewController!
-    
-    override func setUp() {
-        super.setUp()
-        controller = DTTestTableViewController()
-        controller.tableView = AlwaysVisibleTableView()
-        let _ = controller.view
-    }
+class TableViewFactoryTestCase: BaseTestCase {
     
     func testUpdateCellAtIndexPath() {
         if #available(iOS 11, tvOS 11, *) {

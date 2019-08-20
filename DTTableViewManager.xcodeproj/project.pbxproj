@@ -3,18 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3EA4FF291FA9FF6600B3D853 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; };
-		3EA4FF2A1FA9FF6600B3D853 /* DTModelStorage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3EBF90E222E7640500135C10 /* DiffableDatasourcesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */; };
+		3EBF90E322E7640500135C10 /* DiffableDatasourcesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */; };
+		3EBF90E522E7643900135C10 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90E422E7643900135C10 /* BaseTestCase.swift */; };
+		3EBF90E622E7643900135C10 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF90E422E7643900135C10 /* BaseTestCase.swift */; };
+		3ED770A422E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED770A322E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift */; };
+		3ED770A522E3254A00C0E3A6 /* students.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ED770A022E3211200C0E3A6 /* students.json */; };
 		3EDC209422B817E90078EB0D /* DTTableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */; };
 		3EDC209522B817E90078EB0D /* DTTableViewManager+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205422B817E00078EB0D /* DTTableViewManager+Drag.swift */; };
 		3EDC209622B817E90078EB0D /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205522B817E00078EB0D /* TableViewFactory.swift */; };
 		3EDC209722B817E90078EB0D /* DTTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205622B817E00078EB0D /* DTTableViewDelegate.swift */; };
 		3EDC209822B817E90078EB0D /* BackwardsCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205722B817E00078EB0D /* BackwardsCompatibility.swift */; };
-		3EDC209922B817E90078EB0D /* SectionModel+HeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205822B817E00078EB0D /* SectionModel+HeaderFooter.swift */; };
 		3EDC209A22B817E90078EB0D /* DTTableViewManager+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205922B817E00078EB0D /* DTTableViewManager+Delegate.swift */; };
 		3EDC209B22B817E90078EB0D /* DTTableViewDropPlaceholderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205A22B817E00078EB0D /* DTTableViewDropPlaceholderContext.swift */; };
 		3EDC209C22B817E90078EB0D /* TableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */; };
@@ -90,11 +93,7 @@
 		3EDC20E322B8181D0078EB0D /* ReactingHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208822B817E00078EB0D /* ReactingHeaderFooterView.xib */; };
 		3EDC20E422B8181D0078EB0D /* RandomNameWrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208922B817E00078EB0D /* RandomNameWrongReuseIdentifierCell.xib */; };
 		3EDC20E522B8181D0078EB0D /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208A22B817E00078EB0D /* CustomNibCell.xib */; };
-		3EE31B4B21563AB600FA9361 /* Changeset.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE31B4A21563AB600FA9361 /* Changeset.framework */; };
-		3EE31B4C21563AC000FA9361 /* Changeset.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EE31B4A21563AB600FA9361 /* Changeset.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3EE31B4F21563BB000FA9361 /* AutoDiffSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE31B4E21563BB000FA9361 /* AutoDiffSearchViewController.swift */; };
-		9A2350021F654B8B00A13B55 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350011F654B8B00A13B55 /* DTModelStorage.framework */; };
-		9A2350061F654BB000A13B55 /* DTModelStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2350051F654BB000A13B55 /* DTModelStorage.framework */; };
 		9A383CA61CE1DA2F0081D843 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A383CA51CE1DA2F0081D843 /* Default-568h@2x.png */; };
 		9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDA1B8A176300508207 /* BankCell.xib */; };
 		9A41FBE01B8A17C400508207 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDF1B8A17C400508207 /* Banks.json */; };
@@ -122,6 +121,11 @@
 		9AD9D9F01B6EBF7700AD49AC /* CustomHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */; };
 		9AD9D9F21B6EBF8800AD49AC /* CustomHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */; };
 		9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA63321B88A56F0060B2C0 /* TableViewController.swift */; };
+		9AE9E16B22EDD84A00E653F0 /* DiffableCoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9E16A22EDD84A00E653F0 /* DiffableCoreDataViewController.swift */; };
+		9AFAAF7622D4BDB5001C86B0 /* DTModelStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7522D4BDB5001C86B0 /* DTModelStorage */; };
+		9AFAAF7922D4BE79001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7822D4BE79001C86B0 /* Changeset */; };
+		9AFAAF7B22D4BEA6001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7A22D4BEA6001C86B0 /* Changeset */; };
+		9AFAAF7E22D4C9A6001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7D22D4C9A6001C86B0 /* Changeset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,8 +159,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3EE31B4C21563AC000FA9361 /* Changeset.framework in CopyFiles */,
-				3EA4FF2A1FA9FF6600B3D853 /* DTModelStorage.framework in CopyFiles */,
 				9AA3E6C51BA84CB4004950AE /* DTTableViewManager.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,12 +166,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableDatasourcesTestCase.swift; sourceTree = "<group>"; };
+		3EBF90E422E7643900135C10 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		3EC8F87C2309810A00FF3C7A /* DTTableViewManager 6.0 Migration Guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DTTableViewManager 6.0 Migration Guide.md"; sourceTree = "<group>"; };
+		3EC8F87D2309810A00FF3C7A /* DTTableViewManager 4.x Migration Guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DTTableViewManager 4.x Migration Guide.md"; sourceTree = "<group>"; };
+		3EC8F87E2309810A00FF3C7A /* DTTableViewManager 5.0 migration guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DTTableViewManager 5.0 migration guide.md"; sourceTree = "<group>"; };
+		3EC8F87F2309813E00FF3C7A /* 7.0 Migration Guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "7.0 Migration Guide.md"; sourceTree = "<group>"; };
+		3ED770A022E3211200C0E3A6 /* students.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = students.json; sourceTree = "<group>"; };
+		3ED770A322E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MultiSectionDiffingTableViewController.swift; path = "Example controllers/MultiSectionDiffingTableViewController.swift"; sourceTree = "<group>"; };
 		3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDragDelegate.swift; sourceTree = "<group>"; };
 		3EDC205422B817E00078EB0D /* DTTableViewManager+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTableViewManager+Drag.swift"; sourceTree = "<group>"; };
 		3EDC205522B817E00078EB0D /* TableViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewFactory.swift; sourceTree = "<group>"; };
 		3EDC205622B817E00078EB0D /* DTTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDelegate.swift; sourceTree = "<group>"; };
 		3EDC205722B817E00078EB0D /* BackwardsCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackwardsCompatibility.swift; sourceTree = "<group>"; };
-		3EDC205822B817E00078EB0D /* SectionModel+HeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SectionModel+HeaderFooter.swift"; sourceTree = "<group>"; };
 		3EDC205922B817E00078EB0D /* DTTableViewManager+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTableViewManager+Delegate.swift"; sourceTree = "<group>"; };
 		3EDC205A22B817E00078EB0D /* DTTableViewDropPlaceholderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDropPlaceholderContext.swift; sourceTree = "<group>"; };
 		3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewUpdater.swift; sourceTree = "<group>"; };
@@ -225,12 +234,7 @@
 		3EDC209122B817E00078EB0D /* CreationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationTestCase.swift; sourceTree = "<group>"; };
 		3EDC209222B817E00078EB0D /* MappingConditionsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingConditionsTestCase.swift; sourceTree = "<group>"; };
 		3EDC209322B817E00078EB0D /* DatasourceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasourceTestCase.swift; sourceTree = "<group>"; };
-		3EE31B4A21563AB600FA9361 /* Changeset.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Changeset.framework; path = Carthage/Build/iOS/Changeset.framework; sourceTree = "<group>"; };
 		3EE31B4E21563BB000FA9361 /* AutoDiffSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoDiffSearchViewController.swift; path = "Example controllers/AutoDiffSearchViewController.swift"; sourceTree = "<group>"; };
-		9A2350011F654B8B00A13B55 /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = Carthage/Build/tvOS/DTModelStorage.framework; sourceTree = "<group>"; };
-		9A2350031F654BA200A13B55 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/tvOS/Nimble.framework; sourceTree = "<group>"; };
-		9A2350051F654BB000A13B55 /* DTModelStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTModelStorage.framework; path = Carthage/Build/iOS/DTModelStorage.framework; sourceTree = "<group>"; };
-		9A2350071F654BB300A13B55 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A383C831CE1CC790081D843 /* Example.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Example.plist; path = "Supporting files/Example.plist"; sourceTree = "<group>"; };
 		9A383C841CE1CC790081D843 /* Framework.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Framework.plist; path = "Supporting files/Framework.plist"; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 		9AD9D9EF1B6EBF7700AD49AC /* CustomHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomHeaderFooterView.swift; path = "Headers:Footers/CustomHeaderFooterView.swift"; sourceTree = "<group>"; };
 		9AD9D9F11B6EBF8800AD49AC /* CustomHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomHeaderFooterView.xib; path = "Headers:Footers/CustomHeaderFooterView.xib"; sourceTree = "<group>"; };
 		9ADA63321B88A56F0060B2C0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = "Example controllers/TableViewController.swift"; sourceTree = "<group>"; };
+		9AE9E16A22EDD84A00E653F0 /* DiffableCoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiffableCoreDataViewController.swift; path = "Example controllers/DiffableCoreDataViewController.swift"; sourceTree = "<group>"; };
 		9AF0031A1A5ABE7000ABFC90 /* Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -271,6 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AFAAF7622D4BDB5001C86B0 /* DTModelStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,7 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */,
-				9A2350021F654B8B00A13B55 /* DTModelStorage.framework in Frameworks */,
+				9AFAAF7B22D4BEA6001C86B0 /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,9 +293,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EA4FF291FA9FF6600B3D853 /* DTModelStorage.framework in Frameworks */,
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
-				3EE31B4B21563AB600FA9361 /* Changeset.framework in Frameworks */,
+				9AFAAF7E22D4C9A6001C86B0 /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,13 +303,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
-				9A2350061F654BB000A13B55 /* DTModelStorage.framework in Frameworks */,
+				9AFAAF7922D4BE79001C86B0 /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EC8F87B2309810A00FF3C7A /* Guides */ = {
+			isa = PBXGroup;
+			children = (
+				3EC8F87C2309810A00FF3C7A /* DTTableViewManager 6.0 Migration Guide.md */,
+				3EC8F87F2309813E00FF3C7A /* 7.0 Migration Guide.md */,
+				3EC8F87D2309810A00FF3C7A /* DTTableViewManager 4.x Migration Guide.md */,
+				3EC8F87E2309810A00FF3C7A /* DTTableViewManager 5.0 migration guide.md */,
+			);
+			path = Guides;
+			sourceTree = "<group>";
+		};
 		3EDC205122B817E00078EB0D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,25 +333,24 @@
 		3EDC205222B817E00078EB0D /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
-				3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */,
-				3EDC205422B817E00078EB0D /* DTTableViewManager+Drag.swift */,
-				3EDC205522B817E00078EB0D /* TableViewFactory.swift */,
-				3EDC205622B817E00078EB0D /* DTTableViewDelegate.swift */,
 				3EDC205722B817E00078EB0D /* BackwardsCompatibility.swift */,
-				3EDC205822B817E00078EB0D /* SectionModel+HeaderFooter.swift */,
-				3EDC205922B817E00078EB0D /* DTTableViewManager+Delegate.swift */,
-				3EDC205A22B817E00078EB0D /* DTTableViewDropPlaceholderContext.swift */,
-				3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */,
-				3EDC205C22B817E00078EB0D /* TableViewConfiguration.swift */,
-				3EDC205D22B817E00078EB0D /* DTTableViewManager+DataSource.swift */,
-				3EDC205E22B817E00078EB0D /* DTTableViewDelegateWrapper.swift */,
 				3EDC205F22B817E00078EB0D /* DTTableViewDataSource.swift */,
-				3EDC206022B817E00078EB0D /* DTTableViewManager+Registration.swift */,
-				3EDC206122B817E00078EB0D /* UIView+XibLoading.swift */,
-				3EDC206222B817E00078EB0D /* DTTableViewManagerAnomalyHandler.swift */,
+				3EDC205622B817E00078EB0D /* DTTableViewDelegate.swift */,
+				3EDC205E22B817E00078EB0D /* DTTableViewDelegateWrapper.swift */,
+				3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */,
 				3EDC206322B817E00078EB0D /* DTTableViewDropDelegate.swift */,
-				3EDC206422B817E00078EB0D /* DTTableViewManager+Drop.swift */,
+				3EDC205A22B817E00078EB0D /* DTTableViewDropPlaceholderContext.swift */,
 				3EDC206522B817E00078EB0D /* DTTableViewManager.swift */,
+				3EDC205D22B817E00078EB0D /* DTTableViewManager+DataSource.swift */,
+				3EDC205922B817E00078EB0D /* DTTableViewManager+Delegate.swift */,
+				3EDC205422B817E00078EB0D /* DTTableViewManager+Drag.swift */,
+				3EDC206422B817E00078EB0D /* DTTableViewManager+Drop.swift */,
+				3EDC206022B817E00078EB0D /* DTTableViewManager+Registration.swift */,
+				3EDC206222B817E00078EB0D /* DTTableViewManagerAnomalyHandler.swift */,
+				3EDC205C22B817E00078EB0D /* TableViewConfiguration.swift */,
+				3EDC205522B817E00078EB0D /* TableViewFactory.swift */,
+				3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */,
+				3EDC206122B817E00078EB0D /* UIView+XibLoading.swift */,
 			);
 			path = DTTableViewManager;
 			sourceTree = "<group>";
@@ -343,19 +358,21 @@
 		3EDC206622B817E00078EB0D /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3EDC206722B817E00078EB0D /* NSIndexPath+Constructor.swift */,
-				3EDC206822B817E00078EB0D /* TableViewFactoryTestCase.swift */,
-				3EDC206922B817E00078EB0D /* MappingTestCase.swift */,
-				3EDC206A22B817E00078EB0D /* StoryboardMappingTestCase.swift */,
-				3EDC206B22B817E00078EB0D /* ViewModelMappingCustomizableTestCase.swift */,
-				3EDC206C22B817E00078EB0D /* TableViewController+UnitTests.swift */,
 				3EDC206D22B817E00078EB0D /* AnomaliesTestCase.swift */,
-				3EDC206E22B817E00078EB0D /* Fixtures */,
-				3EDC208F22B817E00078EB0D /* StoryboardViewController.swift */,
-				3EDC209022B817E00078EB0D /* ReactingToEventsTestCase.swift */,
+				3EBF90E422E7643900135C10 /* BaseTestCase.swift */,
 				3EDC209122B817E00078EB0D /* CreationTestCase.swift */,
-				3EDC209222B817E00078EB0D /* MappingConditionsTestCase.swift */,
 				3EDC209322B817E00078EB0D /* DatasourceTestCase.swift */,
+				3EBF90E122E7640500135C10 /* DiffableDatasourcesTestCase.swift */,
+				3EDC206E22B817E00078EB0D /* Fixtures */,
+				3EDC209222B817E00078EB0D /* MappingConditionsTestCase.swift */,
+				3EDC206922B817E00078EB0D /* MappingTestCase.swift */,
+				3EDC206722B817E00078EB0D /* NSIndexPath+Constructor.swift */,
+				3EDC209022B817E00078EB0D /* ReactingToEventsTestCase.swift */,
+				3EDC206A22B817E00078EB0D /* StoryboardMappingTestCase.swift */,
+				3EDC208F22B817E00078EB0D /* StoryboardViewController.swift */,
+				3EDC206C22B817E00078EB0D /* TableViewController+UnitTests.swift */,
+				3EDC206822B817E00078EB0D /* TableViewFactoryTestCase.swift */,
+				3EDC206B22B817E00078EB0D /* ViewModelMappingCustomizableTestCase.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -417,20 +434,9 @@
 			isa = PBXGroup;
 			children = (
 				3EE31B4E21563BB000FA9361 /* AutoDiffSearchViewController.swift */,
+				3ED770A322E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift */,
 			);
 			name = "Automatic diffing";
-			sourceTree = "<group>";
-		};
-		9A2350001F654B8B00A13B55 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3EE31B4A21563AB600FA9361 /* Changeset.framework */,
-				9A2350071F654BB300A13B55 /* Nimble.framework */,
-				9A2350051F654BB000A13B55 /* DTModelStorage.framework */,
-				9A2350031F654BA200A13B55 /* Nimble.framework */,
-				9A2350011F654B8B00A13B55 /* DTModelStorage.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9A30334D1B77A303000B3355 /* Search */ = {
@@ -461,6 +467,7 @@
 				9A9B17061B65771600D8ABD3 /* AppDelegate.swift */,
 				9A9B170C1B65771600D8ABD3 /* Main.storyboard */,
 				9A9B170F1B65771600D8ABD3 /* Images.xcassets */,
+				3ED770A022E3211200C0E3A6 /* students.json */,
 				9A9B17111B65771600D8ABD3 /* LaunchScreen.xib */,
 				9A9B17041B65771600D8ABD3 /* Supporting Files */,
 			);
@@ -482,6 +489,7 @@
 				9A41FBDF1B8A17C400508207 /* Banks.json */,
 				9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */,
 				9ABE073F1B85FC8400636D78 /* CoreDataSearchViewController.swift */,
+				9AE9E16A22EDD84A00E653F0 /* DiffableCoreDataViewController.swift */,
 				9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */,
 				9ABE07441B85FE4E00636D78 /* Bank.swift */,
 				9ABE074B1B86074900636D78 /* BankCell.swift */,
@@ -538,13 +546,21 @@
 			name = "Custom views example";
 			sourceTree = "<group>";
 		};
+		9AFAAF7C22D4C9A6001C86B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E6EA83571615EE6000F8B8C3 = {
 			isa = PBXGroup;
 			children = (
 				9A383CA51CE1DA2F0081D843 /* Default-568h@2x.png */,
 				9AD92BED1BE266D700E667FF /* Documentation */,
 				9A9B17031B65771600D8ABD3 /* Example */,
-				9A2350001F654B8B00A13B55 /* Frameworks */,
+				9AFAAF7C22D4C9A6001C86B0 /* Frameworks */,
+				3EC8F87B2309810A00FF3C7A /* Guides */,
 				9A88F5A819EAC683008436C9 /* Images.xcassets */,
 				E6EA83631615EE6000F8B8C3 /* Products */,
 				3EDC205122B817E00078EB0D /* Sources */,
@@ -573,13 +589,15 @@
 				9A0205CF1FD44AF6009D9A63 /* SwiftLint */,
 				9A2A38B71AEE285E0021E97D /* Sources */,
 				9A2A38B81AEE285E0021E97D /* Frameworks */,
-				9A234FFF1F654AA400A13B55 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = DTTableViewManager;
+			packageProductDependencies = (
+				9AFAAF7522D4BDB5001C86B0 /* DTModelStorage */,
+			);
 			productName = DTTableViewManager;
 			productReference = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */;
 			productType = "com.apple.product-type.framework";
@@ -591,7 +609,6 @@
 				9A6CED5E1BE570750091B0AF /* Sources */,
 				9A6CED6D1BE570750091B0AF /* Frameworks */,
 				9A6CED711BE570750091B0AF /* Resources */,
-				9A23500D1F655D7600A13B55 /* Copy Carthage frameworks */,
 			);
 			buildRules = (
 			);
@@ -599,6 +616,9 @@
 				9A234FFA1F65468500A13B55 /* PBXTargetDependency */,
 			);
 			name = "Tests-tvOS";
+			packageProductDependencies = (
+				9AFAAF7A22D4BEA6001C86B0 /* Changeset */,
+			);
 			productName = XCTests;
 			productReference = 9A6CED7D1BE570750091B0AF /* Tests-tvOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -618,6 +638,9 @@
 				9A9B172B1B65773800D8ABD3 /* PBXTargetDependency */,
 			);
 			name = Example;
+			packageProductDependencies = (
+				9AFAAF7D22D4C9A6001C86B0 /* Changeset */,
+			);
 			productName = Example;
 			productReference = 9A9B17021B65771600D8ABD3 /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -629,7 +652,6 @@
 				9AF003161A5ABE7000ABFC90 /* Sources */,
 				9AF003171A5ABE7000ABFC90 /* Frameworks */,
 				9AF003181A5ABE7000ABFC90 /* Resources */,
-				9A23500E1F655D9600A13B55 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -637,6 +659,9 @@
 				9A1A499F1B5452FA0006610B /* PBXTargetDependency */,
 			);
 			name = "Tests-iOS";
+			packageProductDependencies = (
+				9AFAAF7822D4BE79001C86B0 /* Changeset */,
+			);
 			productName = XCTests;
 			productReference = 9AF0031A1A5ABE7000ABFC90 /* Tests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -676,6 +701,10 @@
 				Base,
 			);
 			mainGroup = E6EA83571615EE6000F8B8C3;
+			packageReferences = (
+				9AFAAF7422D4BDB5001C86B0 /* XCRemoteSwiftPackageReference "DTModelStorage" */,
+				9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */,
+			);
 			productRefGroup = E6EA83631615EE6000F8B8C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -717,6 +746,7 @@
 				9A383CA61CE1DA2F0081D843 /* Default-568h@2x.png in Resources */,
 				9A9B17131B65771600D8ABD3 /* LaunchScreen.xib in Resources */,
 				9A9B17101B65771600D8ABD3 /* Images.xcassets in Resources */,
+				3ED770A522E3254A00C0E3A6 /* students.json in Resources */,
 				9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */,
 				9A41FBE01B8A17C400508207 /* Banks.json in Resources */,
 				9A41FBE31B8A17E700508207 /* mochaGrunge.png in Resources */,
@@ -759,51 +789,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \\\"${CONFIGURATION}\\\" = \\\"Debug\\\" ]; then\n  if which swiftlint > /dev/null; then\n    swiftlint autocorrect --config \"${SRCROOT}/.swiftlint.yml\"\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\"\n  else\n    echo \\\"SwiftLint not installed, download it from https://github.com/realm/SwiftLint\\\"\n  fi\nfi\n";
 		};
-		9A234FFF1F654AA400A13B55 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				DTModelStorage.framework,
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"\n";
-		};
-		9A23500D1F655D7600A13B55 /* Copy Carthage frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				DTModelStorage.framework,
-			);
-			name = "Copy Carthage frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"\n";
-		};
-		9A23500E1F655D9600A13B55 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				DTModelStorage.framework,
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -823,7 +808,6 @@
 				3EDC20A622B817E90078EB0D /* DTTableViewManager.swift in Sources */,
 				3EDC20A422B817E90078EB0D /* DTTableViewDropDelegate.swift in Sources */,
 				3EDC209A22B817E90078EB0D /* DTTableViewManager+Delegate.swift in Sources */,
-				3EDC209922B817E90078EB0D /* SectionModel+HeaderFooter.swift in Sources */,
 				3EDC209D22B817E90078EB0D /* TableViewConfiguration.swift in Sources */,
 				3EDC20A022B817E90078EB0D /* DTTableViewDataSource.swift in Sources */,
 				3EDC209822B817E90078EB0D /* BackwardsCompatibility.swift in Sources */,
@@ -845,6 +829,7 @@
 				3EDC20D022B818030078EB0D /* DTTestTableViewController.swift in Sources */,
 				3EDC20C922B818030078EB0D /* FixtureViews.swift in Sources */,
 				3EDC20BC22B817F70078EB0D /* CreationTestCase.swift in Sources */,
+				3EBF90E322E7640500135C10 /* DiffableDatasourcesTestCase.swift in Sources */,
 				3EDC20B822B817F70078EB0D /* TableViewController+UnitTests.swift in Sources */,
 				3EDC20B522B817F70078EB0D /* MappingTestCase.swift in Sources */,
 				3EDC20CD22B818030078EB0D /* OptionalCells.swift in Sources */,
@@ -854,6 +839,7 @@
 				3EDC20B322B817F70078EB0D /* NSIndexPath+Constructor.swift in Sources */,
 				3EDC20B722B817F70078EB0D /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				3EDC20B922B817F70078EB0D /* AnomaliesTestCase.swift in Sources */,
+				3EBF90E622E7643900135C10 /* BaseTestCase.swift in Sources */,
 				3EDC20BB22B817F70078EB0D /* ReactingToEventsTestCase.swift in Sources */,
 				3EDC20CC22B818030078EB0D /* ReactingHeaderFooters.swift in Sources */,
 				3EDC20B622B817F70078EB0D /* StoryboardMappingTestCase.swift in Sources */,
@@ -866,6 +852,7 @@
 			files = (
 				9AD9D9E41B6EB8AB00AD49AC /* ReorderViewController.swift in Sources */,
 				9AD9D9E91B6EBD7D00AD49AC /* CustomViewsController.swift in Sources */,
+				3ED770A422E3236400C0E3A6 /* MultiSectionDiffingTableViewController.swift in Sources */,
 				9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */,
 				9ABE07401B85FC8400636D78 /* CoreDataSearchViewController.swift in Sources */,
 				3EE31B4F21563BB000FA9361 /* AutoDiffSearchViewController.swift in Sources */,
@@ -877,6 +864,7 @@
 				9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */,
 				9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */,
 				9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */,
+				9AE9E16B22EDD84A00E653F0 /* DiffableCoreDataViewController.swift in Sources */,
 				9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -893,6 +881,7 @@
 				3EDC20C722B818020078EB0D /* DTTestTableViewController.swift in Sources */,
 				3EDC20C022B818020078EB0D /* FixtureViews.swift in Sources */,
 				3EDC20B022B817F70078EB0D /* CreationTestCase.swift in Sources */,
+				3EBF90E222E7640500135C10 /* DiffableDatasourcesTestCase.swift in Sources */,
 				3EDC20AC22B817F70078EB0D /* TableViewController+UnitTests.swift in Sources */,
 				3EDC20A922B817F70078EB0D /* MappingTestCase.swift in Sources */,
 				3EDC20C422B818020078EB0D /* OptionalCells.swift in Sources */,
@@ -902,6 +891,7 @@
 				3EDC20A722B817F70078EB0D /* NSIndexPath+Constructor.swift in Sources */,
 				3EDC20AB22B817F70078EB0D /* ViewModelMappingCustomizableTestCase.swift in Sources */,
 				3EDC20AD22B817F70078EB0D /* AnomaliesTestCase.swift in Sources */,
+				3EBF90E522E7643900135C10 /* BaseTestCase.swift in Sources */,
 				3EDC20AF22B817F70078EB0D /* ReactingToEventsTestCase.swift in Sources */,
 				3EDC20C322B818020078EB0D /* ReactingHeaderFooters.swift in Sources */,
 				3EDC20AA22B817F70078EB0D /* StoryboardMappingTestCase.swift in Sources */,
@@ -1044,10 +1034,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L94VC9ZZXC;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting files/Example.plist";
@@ -1075,10 +1061,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = L94VC9ZZXC;
 				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting files/Example.plist";
@@ -1168,14 +1150,6 @@
 				"DEBUG_INFORMATION_FORMAT[sdk=iphonesimulator*]" = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"FRAMEWORK_SEARCH_PATHS[sdk=appletv*]" = (
-					"$(SRCROOT)/Carthage/Build/tvOS/",
-					"$(inherited)",
-				);
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphone*]" = (
-					"$(SRCROOT)/Carthage/Build/iOS/",
-					"$(inherited)",
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1226,14 +1200,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"FRAMEWORK_SEARCH_PATHS[sdk=appletv*]" = (
-					"$(SRCROOT)/Carthage/Build/tvOS/",
-					"$(inherited)",
-				);
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphone*]" = (
-					"$(SRCROOT)/Carthage/Build/iOS/",
-					"$(inherited)",
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1302,6 +1268,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9AFAAF7422D4BDB5001C86B0 /* XCRemoteSwiftPackageReference "DTModelStorage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DenTelezhkin/DTModelStorage";
+			requirement = {
+				branch = next;
+				kind = branch;
+			};
+		};
+		9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daveanderson/Changeset";
+			requirement = {
+				branch = ImproveSwiftPackageManagerSupport;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9AFAAF7522D4BDB5001C86B0 /* DTModelStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AFAAF7422D4BDB5001C86B0 /* XCRemoteSwiftPackageReference "DTModelStorage" */;
+			productName = DTModelStorage;
+		};
+		9AFAAF7822D4BE79001C86B0 /* Changeset */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */;
+			productName = Changeset;
+		};
+		9AFAAF7A22D4BEA6001C86B0 /* Changeset */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */;
+			productName = Changeset;
+		};
+		9AFAAF7D22D4C9A6001C86B0 /* Changeset */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */;
+			productName = Changeset;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */ = {

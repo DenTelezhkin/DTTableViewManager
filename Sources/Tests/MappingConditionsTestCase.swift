@@ -10,16 +10,7 @@ import XCTest
 import DTTableViewManager
 import DTModelStorage
 
-class MappingConditionsTestCase: XCTestCase {
-    
-    var controller : DTTestTableViewController!
-    
-    override func setUp() {
-        super.setUp()
-        controller = DTTestTableViewController()
-        controller.tableView = AlwaysVisibleTableView()
-        let _ = controller.view
-    }
+class MappingConditionsTestCase: BaseTestCase {
     
     func testMappingCanBeSwitchedBetweenSections() {
         controller.manager.memoryStorage.defersDatasourceUpdates = true

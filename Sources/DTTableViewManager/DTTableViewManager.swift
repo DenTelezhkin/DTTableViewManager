@@ -31,13 +31,18 @@ import DTModelStorage
 /// Target is not required to be `UITableViewController`, and can be a regular UIViewController with UITableView, or even different object like UICollectionViewCell.
 public protocol DTTableViewManageable : class
 {
-    /// Table view, that will be managed by DTTableViewManager
+    /// Table view, that will be managed by DTTableViewManager. This property or `optionalTableView` property must be implemented in order for `DTTableViewManager` to work.
     var tableView : UITableView! { get }
+    
+    // Table view, that will be managed by DTTableViewManager. This property or `tableView` property must be implemented in order for `DTTableViewManager` to work.
+    var optionalTableView: UITableView? { get }
 }
 
-/// This protocol is similar to `DTTableViewManageable`, but allows using optional `UITableView` property.
-public protocol DTTableViewOptionalManageable : class {
-    var tableView : UITableView? { get }
+/// Extension for `DTTableViewManageable` that provides default implementations for `tableView` and `optionalTableView` properties. One of those properties must be implemented in `DTTableViewManageable` implementation.
+public extension DTTableViewManageable {
+    var tableView: UITableView! { return nil }
+    
+    var optionalTableView: UITableView? { return nil }
 }
 
 /// This key is used to store `DTTableViewManager` instance on `DTTableViewManageable` class using object association.
@@ -52,37 +57,13 @@ extension DTTableViewManageable
     public var manager : DTTableViewManager {
         get {
             if let manager = objc_getAssociatedObject(self, &DTTableViewManagerAssociatedKey) as? DTTableViewManager {
-                if !manager.isConfigured && tableView != nil {
+                if !manager.isConfigured && (tableView != nil || optionalTableView != nil) {
                     manager.startManaging(withDelegate: self)
                 }
                 return manager
             }
             let manager = DTTableViewManager()
-            if tableView != nil {
-                manager.startManaging(withDelegate: self)
-            }
-            objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, manager, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            return manager
-        }
-        set {
-            objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-}
-
-extension DTTableViewOptionalManageable {
-    /// Lazily instantiated `DTTableViewManager` instance. When your table view is loaded, call startManagingWithDelegate: method and `DTTableViewManager` will take over UITableView datasource and delegate. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
-    /// - SeeAlso: `startManagingWithDelegate:`
-    public var manager : DTTableViewManager {
-        get {
-            if let manager = objc_getAssociatedObject(self, &DTTableViewManagerAssociatedKey) as? DTTableViewManager {
-                if !manager.isConfigured && tableView != nil {
-                    manager.startManaging(withDelegate: self)
-                }
-                return manager
-            }
-            let manager = DTTableViewManager()
-            if tableView != nil {
+            if tableView != nil || optionalTableView != nil {
                 manager.startManaging(withDelegate: self)
             }
             objc_setAssociatedObject(self, &DTTableViewManagerAssociatedKey, manager, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -112,7 +93,7 @@ open class DTTableViewManager {
     
     ///  Factory for creating cells and views for UITableView
     final lazy var viewFactory: TableViewFactory = {
-        precondition(self.isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
+        precondition(isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
         //swiftlint:disable:next force_unwrapping
         let factory = TableViewFactory(tableView: self.tableView!)
         factory.anomalyHandler = anomalyHandler
@@ -122,8 +103,7 @@ open class DTTableViewManager {
     /// Internal weak link to `UITableView`
     final var tableView : UITableView?
     {
-        if let delegate = delegate as? DTTableViewManageable { return delegate.tableView }
-        if let delegate = delegate as? DTTableViewOptionalManageable { return delegate.tableView }
+        if let delegate = delegate as? DTTableViewManageable { return delegate.optionalTableView ?? delegate.tableView }
         return nil
     }
     
@@ -147,20 +127,25 @@ open class DTTableViewManager {
     /// - SeeAlso: `MemoryStorage`, `CoreDataStorage`, `RealmStorage`.
     open var storage : Storage {
         willSet {
-            storage.delegate = nil
+            (storage as? BaseUpdateDeliveringStorage)?.delegate = nil
         }
         didSet {
-            if let headerFooterCompatibleStorage = storage as? BaseStorage {
+            if let headerFooterCompatibleStorage = storage as? SupplementaryStorage {
                 headerFooterCompatibleStorage.configureForTableViewUsage()
             }
-            storage.delegate = tableViewUpdater
+            (storage as? BaseUpdateDeliveringStorage)?.delegate = tableViewUpdater
         }
+    }
+    
+    /// Current storage, conditionally casted to `SupplementaryStorage` protocol.
+    public var supplementaryStorage: SupplementaryStorage? {
+        return storage as? SupplementaryStorage
     }
     
     /// Object, that is responsible for updating `UITableView`, when received update from `Storage`
     open var tableViewUpdater : TableViewUpdater? {
         didSet {
-            storage.delegate = tableViewUpdater
+            (storage as? BaseUpdateDeliveringStorage)?.delegate = tableViewUpdater
             tableViewUpdater?.didUpdateContent?(nil)
         }
     }
@@ -216,8 +201,55 @@ open class DTTableViewManager {
     ///
     /// - Parameter storage: storage class to be used
     public init(storage: Storage = DTTableViewManager.defaultStorage()) {
-        (storage as? BaseStorage)?.configureForTableViewUsage()
+        (storage as? SupplementaryStorage)?.configureForTableViewUsage()
         self.storage = storage
+    }
+    
+    @available(iOS 13.0, tvOS 13.0, *)
+    /// Configures `UITableViewDiffableDataSource` to be used with `DTTableViewManager`.
+    ///  Because `UITableViewDiffableDataSource` handles UITableView updates, `tableViewUpdater` property on `DTTableViewManager` will be set to nil.
+    /// - Parameter modelProvider: closure that provides `DTTableViewManager` models.
+    /// This closure mirrors `cellProvider` property on `UITableViewDiffableDataSource`, but strips away tableView, and asks for data model instead of a cell. Cell mapping is then executed in the same way as without diffable data sources.
+    open func configureDiffableDataSource<SectionIdentifier, ItemIdentifier>(modelProvider: @escaping (IndexPath, ItemIdentifier) -> Any)
+        -> UITableViewDiffableDataSource<SectionIdentifier, ItemIdentifier>
+    {
+        guard let tableView = tableView else {
+            fatalError("Attempt to configure diffable datasource before tableView have been initialized")
+        }
+        // UITableViewDiffableDataSource will update UITableView instead of `TableViewUpdater` object.
+        tableViewUpdater = nil
+        
+        // Cell is provided by `DTTableViewDataSource` without actually calling closure that is passed to `UITableViewDiffableDataSource`.
+        let dataSource = UITableViewDiffableDataSource<SectionIdentifier, ItemIdentifier>(tableView: tableView) { _, _, _ in nil }
+        storage = ProxyDiffableDataSourceStorage(tableView: tableView,
+                                                                 dataSource: dataSource,
+                                                                 modelProvider: modelProvider)
+        tableView.dataSource = tableDataSource
+        
+        return dataSource
+    }
+    
+    @available(iOS 13.0, tvOS 13.0, *)
+    /// Configures `UITableViewDiffableDataSourceReference` to be used with `DTTableViewManager`.
+    ///  Because `UITableViewDiffableDataSourceReference` handles UITableView updates, `tableViewUpdater` property on `DTTableViewManager` will be set to nil.
+    /// - Parameter modelProvider: closure that provides `DTTableViewManager` models.
+    /// This closure mirrors `cellProvider` property on `UITableViewDiffableDataSourceReference`, but strips away tableView, and asks for data model instead of a cell. Cell mapping is then executed in the same way as without diffable data sources.
+    open func configureDiffableDataSource(modelProvider: @escaping (IndexPath, Any) -> Any) -> UITableViewDiffableDataSourceReference
+    {
+        guard let tableView = tableView else {
+            fatalError("Attempt to configure diffable datasource before tableView have been initialized")
+        }
+        // UITableViewDiffableDataSourceReference will update UITableView instead of `TableViewUpdater` object.
+        tableViewUpdater = nil
+        
+        // Cell is provided by `DTTableViewDataSource` without actually calling closure that is passed to `UITableViewDiffableDataSourceReference`.
+        let dataSource = UITableViewDiffableDataSourceReference(tableView: tableView) { _, _, _ in nil }
+        storage = ProxyDiffableDataSourceStorage(tableView: tableView,
+                                                                 dataSource: dataSource,
+                                                                 modelProvider: modelProvider)
+        tableView.dataSource = tableDataSource
+        
+        return dataSource
     }
     
     /// Starts managing `UITableView`.
@@ -228,22 +260,7 @@ open class DTTableViewManager {
     open func startManaging(withDelegate delegate : DTTableViewManageable)
     {
         guard !isConfigured else { return }
-        guard let tableView = delegate.tableView else {
-            preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
-        }
-        self.delegate = delegate
-        startManaging(with: tableView)
-    }
-    
-    /// Starts managing `UITableView`.
-    ///
-    /// Call this method before calling any of `DTTableViewManager` methods.
-    /// - Precondition: UITableView instance on `delegate` should not be nil.
-    /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
-    open func startManaging(withDelegate delegate : DTTableViewOptionalManageable)
-    {
-        guard !isConfigured else { return }
-        guard let tableView = delegate.tableView else {
+        guard let tableView = delegate.optionalTableView ?? delegate.tableView else {
             preconditionFailure("Call startManagingWithDelegate: method only when UITableView has been created")
         }
         self.delegate = delegate
@@ -255,9 +272,6 @@ open class DTTableViewManager {
     private func startManaging(with tableView: UITableView) {
         guard !isConfigured else { return }
         defer { isConfigured = true }
-        if let mappingDelegate = delegate as? ViewModelMappingCustomizing {
-            viewFactory.mappingCustomizableDelegate = mappingDelegate
-        }
         tableViewUpdater = TableViewUpdater(tableView: tableView)
         tableDelegate = DTTableViewDelegate(delegate: delegate, tableViewManager: self)
         tableDataSource = DTTableViewDataSource(delegate: delegate, tableViewManager: self)
@@ -329,7 +343,7 @@ open class DTTableViewManager {
     
     func verifyViewEvent<T:ModelTransfer>(for viewType: T.Type, methodName: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            if self?.viewFactory.mappings.filter({ $0.viewClass == T.self }).count == 0 {
+            if self?.viewFactory.mappings.filter({ $0.viewClass.isSubclass(of: viewType) }).count == 0 {
                 self?.anomalyHandler.reportAnomaly(DTTableViewManagerAnomaly.unusedEventDetected(viewType: String(describing: T.self), methodName: methodName))
             }
         }
@@ -400,6 +414,14 @@ internal enum EventMethodSignature: String {
     case didUpdateFocusInContextWithAnimationCoordinator = "tableView:didUpdateFocusInContext:withAnimationCoordinator:"
     case indexPathForPreferredFocusedViewInTableView = "indexPathForPreferredFocusedViewInTableView:"
     case shouldSpringLoadRowAtIndexPathWithContext = "tableView:shouldSpringLoadRowAtIndexPath:withContext:"
+    
+    case shouldBeginMultipleSelectionInteractionAtIndexPath = "tableView:shouldBeginMultipleSelectionInteractionAtIndexPath:"
+    case didBeginMultipleSelectionInteractionAtIndexPath = "tableView:didBeginMultipleSelectionInteractionAtIndexPath:"
+    case didEndMultipleSelectionInteraction = "tableViewDidEndMultipleSelectionInteraction:"
+    case contextMenuConfigurationForRowAtIndexPath = "tableView:contextMenuConfigurationForRowAtIndexPath:point:"
+    case previewForHighlightingContextMenu = "tableView:previewForHighlightingContextMenuWithConfiguration:"
+    case previewForDismissingContextMenu = "tableView:previewForDismissingContextMenuWithConfiguration:"
+    case willCommitMenuWithAnimator = "tableView:willCommitMenuWithAnimator:"
     
     /// UITableViewDragDelegate
     case itemsForBeginningDragSession = "tableView:itemsForBeginningDragSession:atIndexPath:"

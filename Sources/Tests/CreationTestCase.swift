@@ -18,15 +18,15 @@ class FooCell : UITableViewCell, ModelTransfer
     }
 }
 
-class OptionalTableViewController : UIViewController, DTTableViewOptionalManageable {
-    var tableView: UITableView?
+class OptionalTableViewController : UIViewController, DTTableViewManageable {
+    var optionalTableView: UITableView?
 }
 
 class CreationTestCase: XCTestCase {
 
     func testManagingWithOptionalTableViewWorks() {
         let controller = OptionalTableViewController()
-        controller.tableView = UITableView()
+        controller.optionalTableView = UITableView()
         
         XCTAssert(controller.manager.isManagingTableView)
     }
@@ -39,7 +39,7 @@ class CreationTestCase: XCTestCase {
     
     func testDelegateIsNotNil() {
         let controller = DTTestTableViewController()
-        XCTAssertNotNil(controller.manager.storage.delegate)
+        XCTAssertNotNil((controller.manager.storage as? BaseUpdateDeliveringStorage)?.delegate)
     }
     
     func testDelegateIsNotNilForMemoryStorage() {

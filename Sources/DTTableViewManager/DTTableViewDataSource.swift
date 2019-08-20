@@ -26,7 +26,6 @@
 import UIKit
 import DTModelStorage
 
-
 /// Object, that implements `UITableViewDataSource` methods for `DTTableViewManager`.
 open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSource {
     
@@ -37,12 +36,12 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     
     /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storage?.sections[section].numberOfItems ?? 0
+        return storage?.numberOfItems(inSection: section) ?? 0
     }
     
     /// Implementation for `UITableViewDataSource` protocol
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return storage?.sections.count ?? 0
+        return storage?.numberOfSections() ?? 0
     }
     
     /// Implementation for `UITableViewDataSource` protocol
@@ -62,14 +61,14 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
     open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if configuration?.sectionHeaderStyle == .view { return nil }
         
-        return self.headerModel(forSection: section) as? String
+        return headerModel(forSection: section) as? String
     }
     
     /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if configuration?.sectionFooterStyle == .view { return nil }
         
-        return self.footerModel(forSection: section) as? String
+        return footerModel(forSection: section) as? String
     }
     
     /// Implementation for `UITableViewDataSource` protocol

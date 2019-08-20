@@ -41,7 +41,7 @@ open class DTTableViewDropPlaceholderContext {
     weak var storage: Storage?
     
     /// Creates `DTTableViewDropPlaceholderContext` with `context` and `storage`
-    public init(context: UITableViewDropPlaceholderContext, storage: Storage) {
+    public init(context: UITableViewDropPlaceholderContext, storage: Storage?) {
         self.context = context
         self.storage = storage
     }

@@ -56,16 +56,16 @@ open class DTTableViewDelegateWrapper : NSObject {
     }
     
     func shouldDisplayHeaderView(forSection index: Int) -> Bool {
-        guard let storage = storage, let configuration = configuration, storage.sections.count > index else { return false }
-        if storage.sections[index].numberOfItems == 0 && !configuration.displayHeaderOnEmptySection {
+        guard let storage = storage, let configuration = configuration else { return false }
+        if storage.numberOfItems(inSection: index) == 0 && !configuration.displayHeaderOnEmptySection {
             return false
         }
         return true
     }
     
     func shouldDisplayFooterView(forSection index: Int) -> Bool {
-        guard let storage = storage, let configuration = configuration, storage.sections.count > index else { return false }
-        if storage.sections[index].numberOfItems == 0 && !configuration.displayFooterOnEmptySection {
+        guard let storage = storage, let configuration = configuration else { return false }
+        if storage.numberOfItems(inSection: index) == 0 && !configuration.displayFooterOnEmptySection {
             return false
         }
         return true
@@ -77,7 +77,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     final func headerModel(forSection index: Int) -> Any?
     {
         if !shouldDisplayHeaderView(forSection: index) { return nil }
-        return (storage as? HeaderFooterStorage)?.headerModel(forSection: index)
+        return RuntimeHelper.recursivelyUnwrapAnyValue((storage as? SupplementaryStorage)?.headerModel(forSection: index) as Any)
     }
     
     /// Returns footer model for section at `index`, or nil if it is not found.
@@ -86,7 +86,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     final func footerModel(forSection index: Int) -> Any?
     {
         if !shouldDisplayFooterView(forSection: index) { return nil }
-        return (storage as? HeaderFooterStorage)?.footerModel(forSection: index)
+        return RuntimeHelper.recursivelyUnwrapAnyValue((storage as? SupplementaryStorage)?.footerModel(forSection: index) as Any)
     }
     
     final internal func appendReaction<T, U>(for cellClass: T.Type, signature: EventMethodSignature, methodName: String = #function, closure: @escaping (T, T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
@@ -249,7 +249,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         if provideView {
             view = tableView?.headerView(forSection: location)
         }
-        guard let model = (storage as? HeaderFooterStorage)?.headerModel(forSection: location) else { return nil }
+        guard let model = headerModel(forSection: location) else { return nil }
         return tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionHeader), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
     }
     
@@ -258,7 +258,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         if provideView {
             view = tableView?.footerView(forSection: location)
         }
-        guard let model = (storage as? HeaderFooterStorage)?.footerModel(forSection: location) else { return nil }
+        guard let model = footerModel(forSection: location) else { return nil }
         return tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
     }
     

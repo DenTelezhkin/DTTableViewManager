@@ -35,8 +35,8 @@ cyclomatic_complexity:
 function_body_length:
   - 300 #warning
 type_body_length:
-  - 300 # warning
-  - 400 # error
+  - 350 # warning
+  - 500 # error
 # or they can set both explicitly
 line_length:
   - 300

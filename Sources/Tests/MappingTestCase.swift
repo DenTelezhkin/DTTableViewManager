@@ -11,16 +11,7 @@ import XCTest
 import DTModelStorage
 @testable import DTTableViewManager
 
-class MappingTestCase: XCTestCase {
-
-    var controller : DTTestTableViewController!
-    
-    override func setUp() {
-        super.setUp()
-        controller = DTTestTableViewController()
-        controller.tableView = AlwaysVisibleTableView()
-        let _ = controller.view
-    }
+class MappingTestCase: BaseTestCase {
 
     func testShouldCreateCellFromCode()
     {

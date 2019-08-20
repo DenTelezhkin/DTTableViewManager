@@ -43,7 +43,10 @@ class CoreDataManager
     func preloadData()
     {
         if banksPreloaded { return }
-        
+        loadData()
+    }
+    
+    private func loadData() {
         if let filePath = Bundle.main.path(forResource: "Banks", ofType: "json"),
             let url = URL(string: "file://\(filePath)"),
             let banksData = try? Data(contentsOf: url),
@@ -56,5 +59,30 @@ class CoreDataManager
             try! managedObjectContext.save()
             banksPreloaded = true
         }
+    }
+    
+    func resetData() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Bank")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try persistentStoreCoordinator.execute(deleteRequest, with: managedObjectContext)
+        } catch {
+            print("Failed to reset the database")
+        }
+        banksPreloaded = false
+        loadData()
+    }
+    
+    func banksFetchController() -> NSFetchedResultsController<Bank> {
+        let context = CoreDataManager.sharedInstance.managedObjectContext
+        let request = NSFetchRequest<Bank>()
+        request.entity = NSEntityDescription.entity(forEntityName: "Bank", in: context)
+        request.fetchBatchSize = 20
+        request.sortDescriptors = [NSSortDescriptor(key: "zip", ascending: true)]
+        
+        let fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "state", cacheName: nil)
+        try! fetchResultsController.performFetch()
+        return fetchResultsController
     }
 }

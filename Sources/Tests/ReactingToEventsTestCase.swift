@@ -118,6 +118,23 @@ class DropCoordinatorMock: NSObject, UITableViewDropCoordinator {
         
     
 }
+
+@available(iOS 13, *)
+class ContextMenuInteractionAnimatorMock: NSObject, UIContextMenuInteractionCommitAnimating {
+    var preferredCommitStyle: UIContextMenuInteractionCommitStyle = .pop
+    
+    var previewViewController: UIViewController?
+    
+    func addAnimations(_ animations: @escaping () -> Void) {
+        
+    }
+    
+    func addCompletion(_ completion: @escaping () -> Void) {
+        
+    }
+    
+    
+}
     
 #endif
 
@@ -166,7 +183,6 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testCellSelectionClosure()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(SelectionReactingTableCell.self)
         var reactingCell : SelectionReactingTableCell?
         controller.manager.didSelect(SelectionReactingTableCell.self) { (cell, model, indexPath) in
@@ -469,6 +485,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        controller.manager.memoryStorage.setItems([1,2])
         controller.tableView.beginUpdates()
         controller.tableView.endUpdates()
         waitForExpectations(timeout: 1, handler: nil)
@@ -492,6 +509,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        controller.manager.memoryStorage.setItems([1,2])
         if #available(iOS 11, tvOS 11, *) {
             
         } else {
@@ -510,6 +528,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             return 0
         })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        controller.manager.memoryStorage.setItems([1,2])
         controller.tableView.beginUpdates()
         controller.tableView.endUpdates()
         waitForExpectations(timeout: 1, handler: nil)
@@ -517,11 +536,13 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEstimatedHeightForFooterInSection() {
         let exp = expectation(description: "estimatedHeightForFooter")
+        
         controller.manager.estimatedHeightForFooter(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        controller.manager.memoryStorage.setItems([1,2])
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -933,6 +954,84 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func testShouldBeginMultipleSelectionInteraction() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "shouldBeginMultipleSelectionInteractionAT")
+        controller.manager.shouldBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
+            exp.fulfill()
+            return false
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldBeginMultipleSelectionInteractionAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidBeginMultipleSelectionInteraction() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "didBeginMultipleSelectionInteractionAT")
+        controller.manager.didBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
+            exp.fulfill()
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didBeginMultipleSelectionInteractionAt: indexPath(0, 0))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testDidEndMultipleSelectionInteraction() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "didEndMultipleSelectionInteractionAT")
+        controller.manager.didEndMultipleSelectionInteraction {
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDelegate?.tableViewDidEndMultipleSelectionInteraction(controller.tableView)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testContextMenuConfiguration() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "contextMenuConfiguration")
+        controller.manager.contextMenuConfiguration(for: NibCell.self) { point, _, _, _ in
+            XCTAssertEqual(point, CGPoint(x: 1, y: 1))
+            exp.fulfill()
+            return nil
+        }
+        controller.manager.memoryStorage.addItem(1)
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, contextMenuConfigurationForRowAt: indexPath(0, 0), point: CGPoint(x: 1, y: 1))
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testPreviewForHighlightingContextMenu() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "previewForHighlightingContextMenuWith")
+        controller.manager.previewForHighlightingContextMenu { configuration in
+            exp.fulfill()
+            return nil
+        }
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForHighlightingContextMenuWithConfiguration: .init())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testPreviewForDismissingContextMenu() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "previewForDismissingContextMenuWith")
+        controller.manager.previewForDismissingContextMenu { configuration in
+            exp.fulfill()
+            return nil
+        }
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForDismissingContextMenuWithConfiguration: .init())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testWillCommitMenuWithAnimator() {
+        guard #available(iOS 13, *) else { return }
+        let exp = expectation(description: "willCommitMenuWithAnimator")
+        controller.manager.willCommitMenuWithAnimator { animator in
+            exp.fulfill()
+        }
+        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willCommitMenuWithAnimator: ContextMenuInteractionAnimatorMock())
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     #endif
     
     func testTargetIndexPathForMoveFromTo() {
@@ -1043,6 +1142,16 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:))), EventMethodSignature.leadingSwipeActionsConfigurationForRowAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:))), EventMethodSignature.trailingSwipeActionsConfigurationForRowAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:with:))), EventMethodSignature.shouldSpringLoadRowAtIndexPathWithContext.rawValue)
+        }
+        
+        if #available(iOS 13, *) {
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:))), EventMethodSignature.shouldBeginMultipleSelectionInteractionAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:))), EventMethodSignature.didBeginMultipleSelectionInteractionAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:))), EventMethodSignature.didEndMultipleSelectionInteraction.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:))), EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWithConfiguration:))), EventMethodSignature.previewForHighlightingContextMenu.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:))), EventMethodSignature.previewForDismissingContextMenu.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willCommitMenuWithAnimator:))), EventMethodSignature.willCommitMenuWithAnimator.rawValue)
         }
         
         #endif

@@ -71,6 +71,7 @@ extension DTTableViewManager {
     }
     
     #if os(iOS)
+    @available(iOS, deprecated: 13.0)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editActionsForRowAt:)` method is called for `cellClass`.
     open func editActions<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> [UITableViewRowAction]?) where T: UITableViewCell {
         tableDelegate?.appendReaction(for: T.self, signature: .editActionsForRowAtIndexPath, closure: closure)
@@ -175,12 +176,16 @@ extension DTTableViewManager {
         tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: .didEndDisplayingFooterViewForSection, closure: closure)
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:)` method is called for `cellClass`.
     open func shouldShowMenu<T:ModelTransfer>(for cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell
     {
         tableDelegate?.appendReaction(for: T.self, signature: .shouldShowMenuForRowAtIndexPath, closure: closure)
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func canPerformAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
         tableDelegate?.append5ArgumentReaction(for: T.self,
@@ -188,6 +193,8 @@ extension DTTableViewManager {
                                                closure: closure)
     }
     
+    @available(iOS, deprecated: 13.0)
+    @available(tvOS, deprecated: 13.0)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:)` method is called for `cellClass`.
     open func performAction<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (Selector, Any?, T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
         tableDelegate?.append5ArgumentReaction(for: T.self,
@@ -241,6 +248,13 @@ extension DTTableViewManager {
         tableDelegate?.appendNonCellReaction(.indexPathForPreferredFocusedViewInTableView, closure: closure)
     }
     
+    /// Registers `closure` to be executed when `UITableViewDelegate.targetIndexPathForMoveFromRowAt(_:toProposed:)` method is called for `cellClass`
+    open func targetIndexPathForMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (IndexPath, T, T.ModelType, IndexPath) -> IndexPath) where T:UITableViewCell {
+        tableDelegate?.append4ArgumentReaction(for: T.self,
+                                               signature: .targetIndexPathForMoveFromRowAtIndexPath,
+                                               closure: closure)
+    }
+    
     #if os(iOS)
     @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)` method is called for `cellClass`
@@ -265,12 +279,70 @@ extension DTTableViewManager {
                                                signature: .shouldSpringLoadRowAtIndexPathWithContext,
                                                closure: closure)
     }
-    #endif
     
-    /// Registers `closure` to be executed when `UITableViewDelegate.targetIndexPathForMoveFromRowAt(_:toProposed:)` method is called for `cellClass`
-    open func targetIndexPathForMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (IndexPath, T, T.ModelType, IndexPath) -> IndexPath) where T:UITableViewCell {
+    @available(iOS 13, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)`method is called for `cellClass`.
+    /// - Parameter Type: cell class to react for event
+    /// - Parameter closure: closure to run.
+    open func shouldBeginMultipleSelectionInteraction<T:ModelTransfer>(for cellClass: T.Type,
+                                                              _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool)
+        where T: UITableViewCell
+    {
+        tableDelegate?.appendReaction(for: T.self,
+                                      signature: .shouldBeginMultipleSelectionInteractionAtIndexPath,
+                                      closure: closure)
+    }
+    
+    @available(iOS 13, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:)`method is called for `cellClass`.
+    /// - Parameter Type: cell class to react for event
+    /// - Parameter closure: closure to run.
+    open func didBeginMultipleSelectionInteraction<T:ModelTransfer>(for cellClass: T.Type,
+                                                                    _ closure: @escaping (T, T.ModelType, IndexPath) -> Void)
+        where T: UITableViewCell
+    {
+        tableDelegate?.appendReaction(for: T.self,
+                                      signature: .didBeginMultipleSelectionInteractionAtIndexPath,
+                                      closure: closure)
+    }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:)` method is called
+    open func didEndMultipleSelectionInteraction(_ closure: @escaping () -> Void)
+    {
+        tableDelegate?.appendNonCellReaction(.didEndMultipleSelectionInteraction, closure: closure)
+    }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.contextMenuConfigurationForRowAt(_:point:)` method is called
+    open func contextMenuConfiguration<T:ModelTransfer>(for cellClass: T.Type,
+                                                        _ closure: @escaping (CGPoint, T, T.ModelType, IndexPath) -> UIContextMenuConfiguration?)
+        where T: UITableViewCell
+    {
         tableDelegate?.append4ArgumentReaction(for: T.self,
-                                               signature: .targetIndexPathForMoveFromRowAtIndexPath,
+                                               signature: .contextMenuConfigurationForRowAtIndexPath,
                                                closure: closure)
     }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWithConfiguration:)` method is called
+    open func previewForHighlightingContextMenu(_ closure: @escaping (UIContextMenuConfiguration) -> UITargetedPreview?)
+    {
+        tableDelegate?.appendNonCellReaction(.previewForHighlightingContextMenu, closure: closure)
+    }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:)` method is called
+    open func previewForDismissingContextMenu(_ closure: @escaping (UIContextMenuConfiguration) -> UITargetedPreview?)
+    {
+        tableDelegate?.appendNonCellReaction(.previewForDismissingContextMenu, closure: closure)
+    }
+    
+    @available(iOS 13.0, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:willCommitMenuWithAnimator:)` method is called
+    open func willCommitMenuWithAnimator(_ closure: @escaping (UIContextMenuInteractionCommitAnimating) -> Void)
+    {
+        tableDelegate?.appendNonCellReaction(.willCommitMenuWithAnimator, closure: closure)
+    }
+    #endif
 }

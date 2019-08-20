@@ -1,0 +1,14 @@
+{
+    "Gryffindor": [
+        "Harry Potter", "Ronald Weasley", "Neville Longbottom", "Dean Thomas", "Seamus Finnigan", "Hermione Granger", "Lavender Brown", "Parvati Patil"
+    ],
+    "Hufflepuff": [
+        "Ernie Macmillan", "Justin Finch-Fletchley", "Hannah Abbott", "Susan Bones"
+    ],
+    "Ravenclaw": [
+        "Terry Boot", "Mandy Brocklehurst", "Michael Corner", "Anthony Goldstein", "Padma Patil", "Lisa Turpin"
+    ],
+    "Slytherin": [
+        "Draco Malfoy", "Vincent Crabbe", "Gregory Goyle", "Blaise Zabini", "Theodore Nott", "Pansy Parkinson", "Millicent Bulstrode", "Daphne Greengrass"
+    ]
+}

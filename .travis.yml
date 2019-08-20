@@ -1,18 +1,14 @@
 sudo: false
 language: objective-c
 os: osx
-osx_image: xcode10.2
-
-cache:
-  directories:
-  - Carthage
+osx_image: xcode11
 
 matrix:
   include:
+    - env: ACTION=test_ios13 PLATFORM=iOS
     - env: ACTION=test_ios12 PLATFORM=iOS
-    - env: ACTION=test_ios11 PLATFORM=iOS
+    - env: ACTION=test_tvos13 PLATFORM=tvOS
     - env: ACTION=test_tvos12 PLATFORM=tvOS
-    - env: ACTION=test_tvos11 PLATFORM=tvOS
     - env: ACTION=test_ios_swift4 PLATFORM=iOS
     - env: ACTION=test_ios_swift4_2 PLATFORM=iOS
     - env: ACTION=test_tvos_swift4 PLATFORM=tvOS
@@ -20,14 +16,9 @@ matrix:
     - env: ACTION=pod_lint PLATFORM="iOS,tvOS"
     - env: ACTION=carthage_build PLATFORM="iOS,tvOS"
 
-before_script:
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
-  - carthage bootstrap --cache-builds --platform iOS,tvOS
-
 script:
   - instruments -s devices # List all available simulators
-  - bundle exec fastlane $ACTION
+  - FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=120 bundle exec fastlane $ACTION
 
 env:
   global:

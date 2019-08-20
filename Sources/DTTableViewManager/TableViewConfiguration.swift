@@ -49,4 +49,14 @@ public struct TableViewConfiguration
     
     /// Defines, whether to show footer on a section, that does not contain any items. Default is true.
     public var displayFooterOnEmptySection = true
+    
+    /// Minimal header height to hide it when section is empty. This defaults to .zero if `UITableView.Style` is `.plain` and `.leastNormalMagnitude` otherwise.
+    public var minimalHeaderHeightForTableView: (UITableView) -> CGFloat = {
+        $0.style == .plain ? CGFloat.zero : CGFloat.leastNormalMagnitude
+    }
+    
+    /// Minimal footer height to hide it when section is empty. This defaults to .zero if `UITableView.Style` is `.plain` and `.leastNormalMagnitude` otherwise.
+    public var minimalFooterHeightForTableView: (UITableView) -> CGFloat = {
+        $0.style == .plain ? CGFloat.zero : CGFloat.leastNormalMagnitude
+    }
 }

@@ -34,8 +34,6 @@ final class TableViewFactory
     
     var mappings = [ViewModelMapping]()
     
-    weak var mappingCustomizableDelegate : ViewModelMappingCustomizing?
-    
     weak var anomalyHandler : DTTableViewManagerAnomalyHandler?
     
     init(tableView: UITableView)
@@ -149,7 +147,7 @@ final class TableViewFactory
                                        xibName: nibName,
                                        mappingBlock: mappingBlock)
         
-        assert(UINib.nibExists(withNibName: nibName, inBundle: mapping.bundle), "Register header nib method should be called only if nib exists")
+        assert(UINib.nibExists(withNibName: nibName, inBundle: mapping.bundle), "Register header nib method should be called only if nib exists. If you need to register header without nib, please call `registerNiblessHeader` method.")
         
         if T.isSubclass(of: UITableViewHeaderFooterView.self) {
             self.tableView.register(UINib(nibName: nibName, bundle: mapping.bundle), forHeaderFooterViewReuseIdentifier: mapping.reuseIdentifier)
@@ -165,7 +163,7 @@ final class TableViewFactory
                                        xibName: nibName,
                                        mappingBlock: mappingBlock)
         
-        assert(UINib.nibExists(withNibName: nibName, inBundle: mapping.bundle), "Register footer nib method should be called only if nib exists")
+        assert(UINib.nibExists(withNibName: nibName, inBundle: mapping.bundle), "Register footer nib method should be called only if nib exists. If you need to register footer without nib, please call `registerNiblessHeader` method.")
         
         if T.isSubclass(of: UITableViewHeaderFooterView.self) {
             tableView.register(UINib(nibName: nibName, bundle: mapping.bundle), forHeaderFooterViewReuseIdentifier: mapping.reuseIdentifier)
@@ -175,7 +173,7 @@ final class TableViewFactory
     }
     
     func unregisterCellClass<T:ModelTransfer>(_ cellClass: T.Type) where T: UITableViewCell {
-        mappings = mappings.filter({ mapping in
+        mappings = mappings.filter({ (mapping) -> Bool in
             if mapping.viewClass is T.Type && mapping.viewType == .cell { return false }
             return true
         })
@@ -206,15 +204,7 @@ final class TableViewFactory
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else {
             return nil
         }
-        let mappingCandidates = mappings.mappingCandidates(for: viewType, withModel: unwrappedModel, at: indexPath)
-        
-        if let customizedMapping = mappingCustomizableDelegate?.viewModelMapping(fromCandidates: mappingCandidates, forModel: unwrappedModel) {
-            return customizedMapping
-        } else if let defaultMapping = mappingCandidates.first {
-            return defaultMapping
-        } else {
-            return nil
-        }
+        return mappings.mappingCandidates(for: viewType, withModel: unwrappedModel, at: indexPath).first
     }
     
     func cellForModel(_ model: Any, atIndexPath indexPath:IndexPath) -> UITableViewCell?
