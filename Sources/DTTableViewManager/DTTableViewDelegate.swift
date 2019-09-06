@@ -459,6 +459,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.indexPathForPreferredFocusedView?(in: tableView)
     }
     
+#if compiler(>=5.1)
     #if os(iOS)
     @available(iOS 13.0, *)
     /// Implementation for `UITableViewDelegate` protocol
@@ -523,4 +524,5 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                                                        willCommitMenuWithAnimator: animator)
     }
     #endif
+#endif
 }

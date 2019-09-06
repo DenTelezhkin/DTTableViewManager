@@ -79,4 +79,5 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
                                         toSection: section)
         }
         dataSource.apply(genericSnapshot, animatingDifferences: true)
-    }}
+    }
+}
