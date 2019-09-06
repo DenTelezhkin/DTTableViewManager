@@ -205,6 +205,7 @@ open class DTTableViewManager {
         self.storage = storage
     }
     
+#if compiler(>=5.1)
     @available(iOS 13.0, tvOS 13.0, *)
     /// Configures `UITableViewDiffableDataSource` to be used with `DTTableViewManager`.
     ///  Because `UITableViewDiffableDataSource` handles UITableView updates, `tableViewUpdater` property on `DTTableViewManager` will be set to nil.
@@ -251,6 +252,7 @@ open class DTTableViewManager {
         
         return dataSource
     }
+#endif
     
     /// Starts managing `UITableView`.
     ///

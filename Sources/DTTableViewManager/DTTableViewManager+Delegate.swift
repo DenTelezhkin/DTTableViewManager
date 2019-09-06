@@ -121,9 +121,7 @@ extension DTTableViewManager {
     {
         tableDelegate?.appendReaction(for: T.self, signature: .willBeginEditingRowAtIndexPath, closure: closure)
     }
-    #endif
-    
-    #if os(iOS)
+
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didEndEditingRowAt:)` method is called for `cellClass`.
     open func didEndEditing<T:ModelTransfer>(_ cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell
     {
@@ -280,6 +278,7 @@ extension DTTableViewManager {
                                                closure: closure)
     }
     
+#if compiler(>=5.1)
     @available(iOS 13, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)`method is called for `cellClass`.
     /// - Parameter Type: cell class to react for event
@@ -345,4 +344,5 @@ extension DTTableViewManager {
         tableDelegate?.appendNonCellReaction(.willCommitMenuWithAnimator, closure: closure)
     }
     #endif
+#endif
 }
