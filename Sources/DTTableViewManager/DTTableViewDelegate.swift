@@ -232,7 +232,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         (delegate as? UITableViewDelegate)?.tableView?(tableView, accessoryButtonTappedForRowWith: indexPath)
     }
     
-    #if os(iOS)
+#if os(iOS)
     @available(iOS, deprecated: 13.0)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -241,24 +241,28 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, editActionsForRowAt: indexPath)
     }
-    #endif
-    
-    #if os(iOS)
+
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         _ = performCellReaction(.willBeginEditingRowAtIndexPath, location: indexPath, provideCell: true)
         (delegate as? UITableViewDelegate)?.tableView?(tableView, willBeginEditingRowAt: indexPath)
     }
-    #endif
     
-    #if os(iOS)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         defer { (delegate as? UITableViewDelegate)?.tableView?(tableView, didEndEditingRowAt: indexPath) }
         guard let indexPath = indexPath else { return }
         _ = performCellReaction(.didEndEditingRowAtIndexPath, location: indexPath, provideCell: true)
     }
-    #endif
+    
+    /// Implementation for `UITableViewDelegate` protocol
+    open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        if let eventReaction = cellReaction(.titleForDeleteButtonForRowAtIndexPath, location: indexPath) {
+            return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? String
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
+    }
+#endif
     
 #if swift(>=4.2)
     /// Implementation for `UITableViewDelegate` protocol
@@ -277,17 +281,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, editingStyleForRowAt: indexPath) ?? .none
     }
 #endif
-    
-    #if os(iOS)
-    /// Implementation for `UITableViewDelegate` protocol
-    open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        if let eventReaction = cellReaction(.titleForDeleteButtonForRowAtIndexPath, location: indexPath) {
-            return performNillableCellReaction(eventReaction, location: indexPath, provideCell: true) as? String
-        }
-        return (delegate as? UITableViewDelegate)?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
-    }
-    #endif
-    
+
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         if let should = performCellReaction(.shouldIndentWhileEditingRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
@@ -381,7 +375,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canFocusRowAt: indexPath) ?? tableView.cellForRow(at: indexPath)?.canBecomeFocused ?? true
     }
-    #if os(iOS)
+#if os(iOS)
     @available (iOS 11, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -415,7 +409,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                                                               shouldSpringLoadRowAt:indexPath,
                                                               with: context) ?? true
     }
-    #endif
+#endif
     
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
@@ -459,8 +453,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.indexPathForPreferredFocusedView?(in: tableView)
     }
     
-#if compiler(>=5.1)
-    #if os(iOS)
+#if compiler(>=5.1) && os(iOS)
     @available(iOS 13.0, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
@@ -515,7 +508,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, previewForDismissingContextMenuWithConfiguration: configuration)
     }
-    
+    #if compiler(<5.1.2)
     @available(iOS 13.0, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, willCommitMenuWithAnimator animator: UIContextMenuInteractionCommitAnimating) {

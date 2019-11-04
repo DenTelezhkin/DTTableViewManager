@@ -70,14 +70,6 @@ extension DTTableViewManager {
         tableDelegate?.appendReaction(for: T.self, signature: .willDisplayCellForRowAtIndexPath, closure: closure)
     }
     
-    #if os(iOS)
-    @available(iOS, deprecated: 13.0)
-    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editActionsForRowAt:)` method is called for `cellClass`.
-    open func editActions<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> [UITableViewRowAction]?) where T: UITableViewCell {
-        tableDelegate?.appendReaction(for: T.self, signature: .editActionsForRowAtIndexPath, closure: closure)
-    }
-    #endif
-    
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:accessoryButtonTappedForRowAt:)` method is called for `cellClass`.
     open func accessoryButtonTapped<T:ModelTransfer>(in cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell {
         tableDelegate?.appendReaction(for: T.self, signature: .accessoryButtonTappedForRowAtIndexPath, closure: closure)
@@ -115,7 +107,13 @@ extension DTTableViewManager {
         tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: .willDisplayFooterForSection, closure: closure)
     }
     
-    #if os(iOS)
+#if os(iOS)
+    @available(iOS, deprecated: 13.0)
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editActionsForRowAt:)` method is called for `cellClass`.
+    open func editActions<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> [UITableViewRowAction]?) where T: UITableViewCell {
+        tableDelegate?.appendReaction(for: T.self, signature: .editActionsForRowAtIndexPath, closure: closure)
+    }
+    
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willBeginEditingRowAt:)` method is called for `cellClass`.
     open func willBeginEditing<T:ModelTransfer>(_ cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell
     {
@@ -127,7 +125,13 @@ extension DTTableViewManager {
     {
         tableDelegate?.appendReaction(for: T.self, signature: .didEndEditingRowAtIndexPath, closure: closure)
     }
-    #endif
+    
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:)` method is called for `cellClass`.
+    open func titleForDeleteConfirmationButton<T:ModelTransfer>(in cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> String?) where T: UITableViewCell
+    {
+        tableDelegate?.appendReaction(for: T.self, signature: .titleForDeleteButtonForRowAtIndexPath, closure: closure)
+    }
+#endif
     
 #if swift(>=4.2)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for cell that contains item `ofType` at `indexPath`.
@@ -142,14 +146,6 @@ extension DTTableViewManager {
         tableDelegate?.appendReaction(for: T.self, signature: .editingStyleForRowAtIndexPath, closure: closure)
     }
 #endif
-    
-    #if os(iOS)
-    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:)` method is called for `cellClass`.
-    open func titleForDeleteConfirmationButton<T:ModelTransfer>(in cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> String?) where T: UITableViewCell
-    {
-        tableDelegate?.appendReaction(for: T.self, signature: .titleForDeleteButtonForRowAtIndexPath, closure: closure)
-    }
-    #endif
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:)` method is called for `cellClass`.
     open func shouldIndentWhileEditing<T:ModelTransfer>(_ cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell
@@ -253,7 +249,7 @@ extension DTTableViewManager {
                                                closure: closure)
     }
     
-    #if os(iOS)
+#if os(iOS)
     @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)` method is called for `cellClass`
     open func leadingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
@@ -278,7 +274,7 @@ extension DTTableViewManager {
                                                closure: closure)
     }
     
-#if compiler(>=5.1)
+    #if compiler(>=5.1)
     @available(iOS 13, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)`method is called for `cellClass`.
     /// - Parameter Type: cell class to react for event
@@ -336,13 +332,14 @@ extension DTTableViewManager {
     {
         tableDelegate?.appendNonCellReaction(.previewForDismissingContextMenu, closure: closure)
     }
-    
+        #if compiler(<5.1.2)
     @available(iOS 13.0, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:willCommitMenuWithAnimator:)` method is called
     open func willCommitMenuWithAnimator(_ closure: @escaping (UIContextMenuInteractionCommitAnimating) -> Void)
     {
         tableDelegate?.appendNonCellReaction(.willCommitMenuWithAnimator, closure: closure)
     }
+        #endif
     #endif
 #endif
 }
