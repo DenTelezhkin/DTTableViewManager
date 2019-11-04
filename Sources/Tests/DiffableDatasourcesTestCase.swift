@@ -12,9 +12,9 @@ import DTModelStorage
 
 @available(iOS 13, tvOS 13, *)
 extension NSDiffableDataSourceSnapshot {
-    static func snapshot(with block: (NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>) -> ()) -> NSDiffableDataSourceSnapshot {
-        let snapshot = NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>()
-        block(snapshot)
+    static func snapshot(with block: (inout NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>) -> ()) -> NSDiffableDataSourceSnapshot {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>()
+        block(&snapshot)
         return snapshot
     }
 }
