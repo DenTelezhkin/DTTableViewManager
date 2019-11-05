@@ -1,23 +1,23 @@
 fastlane_version "1.98.0"
 
 lane :test_ios13 do
-  create_test_simulator(device: "iPhone X", runtime: "iOS13.2")
+  create_test_simulator(device: "iPhone X", runtime: "iOS13.1")
   scan(scheme: 'Tests-iOS')
   sh "bash ../codecov.sh"
 end
 
 lane :test_ios12 do
-  create_test_simulator(device: "iPhone X", runtime: "iOS12.2")
+  create_test_simulator(device: "iPhone X", runtime: "iOS12.1")
   scan(scheme: 'Tests-iOS')
 end
 
 lane :test_tvos13 do
-  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS13.2")
+  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS13.1")
   scan(scheme: 'Tests-tvOS')
 end
 
 lane :test_tvos12 do
-  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS12.2")
+  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS12.1")
   scan(scheme: 'Tests-tvOS')
 end
 
@@ -27,22 +27,22 @@ lane :pod_lint do
 end
 
 lane :test_ios_swift4 do
-  create_test_simulator(device: "iPhone X", runtime: "iOS13.2")
+  create_test_simulator(device: "iPhone X", runtime: "iOS13.1")
   scan(xcargs: "SWIFT_VERSION=4.0", scheme: 'Tests-iOS')
 end
 
 lane :test_ios_swift4_2 do
-  create_test_simulator(device: "iPhone X", runtime: "iOS13.2")
+  create_test_simulator(device: "iPhone X", runtime: "iOS13.1")
   scan(xcargs: "SWIFT_VERSION=4.2", scheme: 'Tests-iOS')
 end
 
 lane :test_tvos_swift4 do
-  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS13.2")
+  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS13.1")
   scan(xcargs: "SWIFT_VERSION=4.0", scheme: 'Tests-tvOS')
 end
 
 lane :test_tvos_swift4_2 do
-  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS13.2")
+  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS13.1")
   scan(xcargs: "SWIFT_VERSION=4.2", scheme: 'Tests-tvOS')
 end
 
