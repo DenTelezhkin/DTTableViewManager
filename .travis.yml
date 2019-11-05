@@ -17,6 +17,7 @@ matrix:
     - env: ACTION=carthage_build PLATFORM="iOS,tvOS"
 
 script:
+  - xcrun simctl list runtimes
   - instruments -s devices # List all available simulators
   - FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=120 bundle exec fastlane $ACTION
 

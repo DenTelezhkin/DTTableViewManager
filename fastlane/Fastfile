@@ -7,7 +7,7 @@ lane :test_ios13 do
 end
 
 lane :test_ios12 do
-  create_test_simulator(device: "iPhone X", runtime: "iOS12.1")
+  create_test_simulator(device: "iPhone X", runtime: "iOS12.2")
   scan(scheme: 'Tests-iOS')
 end
 
@@ -17,7 +17,7 @@ lane :test_tvos13 do
 end
 
 lane :test_tvos12 do
-  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS12.1")
+  create_test_simulator(device: "Apple TV 4K", runtime: "tvOS12.2")
   scan(scheme: 'Tests-tvOS')
 end
 
