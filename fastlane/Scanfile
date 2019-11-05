@@ -1,3 +1,4 @@
 clean true
 output_types ""
 skip_slack true
+device "Test Simulator"
