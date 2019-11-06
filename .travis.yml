@@ -6,9 +6,9 @@ osx_image: xcode11.1
 matrix:
   include:
     - env: ACTION=test_ios13 PLATFORM=iOS
-    - env: ACTION=test_ios12 PLATFORM=iOS
+    # - env: ACTION=test_ios12 PLATFORM=iOS
     - env: ACTION=test_tvos13 PLATFORM=tvOS
-    - env: ACTION=test_tvos12 PLATFORM=tvOS
+    # - env: ACTION=test_tvos12 PLATFORM=tvOS
     - env: ACTION=test_ios_swift4 PLATFORM=iOS
     - env: ACTION=test_ios_swift4_2 PLATFORM=iOS
     - env: ACTION=test_tvos_swift4 PLATFORM=tvOS
