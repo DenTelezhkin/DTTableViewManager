@@ -20,19 +20,9 @@ or alternatively using `brew cask install fastlane`
 fastlane test_ios13
 ```
 
-### test_ios12
-```
-fastlane test_ios12
-```
-
 ### test_tvos13
 ```
 fastlane test_tvos13
-```
-
-### test_tvos12
-```
-fastlane test_tvos12
 ```
 
 ### pod_lint
