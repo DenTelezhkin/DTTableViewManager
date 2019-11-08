@@ -41,7 +41,7 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
     
     func updateInitialSnapshot() {
         guard let sections = fetchController.sections else { return }
-        let snapshot = NSDiffableDataSourceSnapshot<String,Bank>()
+        var snapshot = NSDiffableDataSourceSnapshot<String,Bank>()
         for section in sections {
             snapshot.appendSections([section.name])
             snapshot.appendItems((section.objects ?? []).compactMap { $0 as? Bank }, toSection: section.name)
@@ -69,7 +69,7 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
-        let genericSnapshot = NSDiffableDataSourceSnapshot<String,Bank>()
+        var genericSnapshot = NSDiffableDataSourceSnapshot<String,Bank>()
         for section in snapshot.sectionIdentifiers.compactMap({ $0 as? String}) {
             genericSnapshot.appendSections([section])
             genericSnapshot.appendItems(snapshot.itemIdentifiersInSection(withIdentifier: section)

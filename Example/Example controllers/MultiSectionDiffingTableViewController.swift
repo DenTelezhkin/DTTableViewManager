@@ -58,7 +58,7 @@ class MultiSectionDiffingTableViewController: UITableViewController, DTTableView
     }
     
     func updateUI(searchTerm: String, animated: Bool) {
-        let snapshot : NSDiffableDataSourceSnapshot<Section, String> = .init()
+        var snapshot : NSDiffableDataSourceSnapshot<Section, String> = .init()
         for section in Section.allCases {
             let studentsInClass = students[section.rawValue.capitalized]?.filter { $0.lowercased().contains(searchTerm.lowercased()) || searchTerm.isEmpty } ?? []
             if !studentsInClass.isEmpty {
