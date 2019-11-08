@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [7.0.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.0.0)
+
+* `willCommitMenuWithAnimator` method has been made unavailable for Xcode 11.2, because `UITableViewDelegate` method it used has been removed from UIKit on Xcode 11.2.
+
 ## [7.0.0-beta.2](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.0.0-beta.2)
 
 * Added support for Xcode versions, that are older than Xcode 11.
