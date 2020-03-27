@@ -1,7 +1,7 @@
 ![CI](https://github.com/DenTelezhkin/DTTableViewManager/workflows/CI/badge.svg)
 [![codecov.io](http://codecov.io/github/DenTelezhkin/DTTableViewManager/coverage.svg?branch=master)](http://codecov.io/github/DenTelezhkin/DTTableViewManager?branch=master)
-[![CocoaPods compatible](https://img.shields.io/cocoapods/v/DTTableViewManager.svg)](https://cocoapods.org/pods/DTTableViewManager)
-[![Platform](https://img.shields.io/cocoapods/p/DTTableViewManager.svg?style=flat)](https://dentelezhkin.github.io/DTTableViewManager)
+![CocoaPod platform](https://cocoapod-badges.herokuapp.com/p/DTTableViewManager/badge.svg) &nbsp;
+![CocoaPod version](https://cocoapod-badges.herokuapp.com/v/DTTableViewManager/badge.svg) &nbsp;
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
