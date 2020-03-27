@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/DenTelezhkin/DTTableViewManager.svg?branch=master)](https://travis-ci.org/DenTelezhkin/DTTableViewManager)
+![CI](https://github.com/DenTelezhkin/DTTableViewManager/workflows/CI/badge.svg)
 [![codecov.io](http://codecov.io/github/DenTelezhkin/DTTableViewManager/coverage.svg?branch=master)](http://codecov.io/github/DenTelezhkin/DTTableViewManager?branch=master)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/DTTableViewManager.svg)](https://cocoapods.org/pods/DTTableViewManager)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Platform](https://img.shields.io/cocoapods/p/DTTableViewManager.svg?style=flat)](https://dentelezhkin.github.io/DTTableViewManager)
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 DTTableViewManager
@@ -58,12 +59,6 @@ Add package into Project settings -> Swift Packages
 
     pod 'DTTableViewManager'
 
-### [Carthage](https://github.com/Carthage/Carthage):
-
-    github "DenTelezhkin/DTTableViewManager"
-
-After running `carthage update` add DTTableViewManager.framework and DTModelStorage.framework to Xcode project embedded binaries.
-
 ## Quick start
 
 `DTTableViewManager` framework has two parts - core framework, and storage classes. Import them both to your view controller class to start:
@@ -98,7 +93,7 @@ class PostsViewController: UIViewController, DTTableViewManageable {
         super.viewDidLoad()
         manager.register(PostCell.self)
     }
-}	
+}
 ```
 
 ModelType will be automatically gathered from your `PostCell`. If you have a PostCell.xib file, it will be automatically registered for PostCell. If you have a storyboard with PostCell, set it's reuseIdentifier to be identical to class - "PostCell".
