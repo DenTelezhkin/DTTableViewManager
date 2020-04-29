@@ -2,119 +2,119 @@
   "warnings": [
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 238,
+      "line": 237,
       "symbol": "DTTableViewDelegate.tableView(_:editActionsForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 317,
+      "line": 316,
       "symbol": "DTTableViewDelegate.tableView(_:shouldShowMenuForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 327,
+      "line": 326,
       "symbol": "DTTableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 341,
+      "line": 340,
       "symbol": "DTTableViewDelegate.tableView(_:performAction:forRowAt:withSender:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 372,
+      "line": 371,
       "symbol": "DTTableViewDelegate.tableView(_:canFocusRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 381,
+      "line": 380,
       "symbol": "DTTableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 391,
+      "line": 390,
       "symbol": "DTTableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 401,
+      "line": 400,
       "symbol": "DTTableViewDelegate.tableView(_:shouldSpringLoadRowAt:with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 429,
+      "line": 428,
       "symbol": "DTTableViewDelegate.tableView(_:shouldUpdateFocusIn:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 438,
+      "line": 437,
       "symbol": "DTTableViewDelegate.tableView(_:didUpdateFocusIn:with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 449,
+      "line": 448,
       "symbol": "DTTableViewDelegate.indexPathForPreferredFocusedView(in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 459,
+      "line": 458,
       "symbol": "DTTableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 468,
+      "line": 467,
       "symbol": "DTTableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 475,
+      "line": 474,
       "symbol": "DTTableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 482,
+      "line": 481,
       "symbol": "DTTableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 496,
+      "line": 495,
       "symbol": "DTTableViewDelegate.tableView(_:previewForHighlightingContextMenuWithConfiguration:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 505,
+      "line": 504,
       "symbol": "DTTableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
