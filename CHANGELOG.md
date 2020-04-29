@@ -4,11 +4,9 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
-## [7.1.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.1.0)
-
 ### Changed
 
-* It's not longer necessary to import DTModelStorage framework to use it's API's. `import DTTableViewManager` now implicitly exports `DTModelStorage` as well.
+* It's not longer necessary to import DTModelStorage framework to use it's API's. `import DTTableViewManager` now implicitly exports `DTModelStorage`.
 
 ## [7.0.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.0.0)
 
