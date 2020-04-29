@@ -8,7 +8,6 @@
 
 import XCTest
 import DTTableViewManager
-import DTModelStorage
 
 class MappingConditionsTestCase: BaseTestCase {
     

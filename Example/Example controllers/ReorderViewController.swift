@@ -8,7 +8,6 @@
 
 import UIKit
 import DTTableViewManager
-import DTModelStorage
 
 class ReorderViewController: UIViewController, DTTableViewManageable, UITableViewDelegate {
 

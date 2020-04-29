@@ -8,7 +8,6 @@
 
 import UIKit
 import DTTableViewManager
-import DTModelStorage
 import CoreData
 
 @available(iOS 13, *)

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DTModelStorage
+import DTTableViewManager
 
 class StoryboardCell : UITableViewCell, ModelTransfer
 {

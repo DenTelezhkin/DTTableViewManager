@@ -24,7 +24,6 @@
 // THE SOFTWARE.
 
 import UIKit
-import DTModelStorage
 
 /// Object, that implements `UITableViewDataSource` methods for `DTTableViewManager`.
 open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSource {

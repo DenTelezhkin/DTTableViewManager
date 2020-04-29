@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import DTTableViewManager
-import DTModelStorage
 
 fileprivate class UpdatableModel {
     var value: Bool = false

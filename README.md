@@ -61,13 +61,6 @@ Add package into Project settings -> Swift Packages
 
 ## Quick start
 
-`DTTableViewManager` framework has two parts - core framework, and storage classes. Import them both to your view controller class to start:
-
-```swift
-import DTTableViewManager
-import DTModelStorage
-```
-
 Let's say you have an array of Posts you want to display in UITableView. To quickly show them using DTTableViewManager, here's what you need to do:
 
 * Create UITableViewCell subclass, let's say PostCell. Adopt ModelTransfer protocol

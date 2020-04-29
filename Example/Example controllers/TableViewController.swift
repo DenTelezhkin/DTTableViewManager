@@ -8,7 +8,6 @@
 
 import UIKit
 import DTTableViewManager
-import DTModelStorage
 
 class TableViewController: UITableViewController, DTTableViewManageable {
 

@@ -112,6 +112,7 @@
 		9ABE07421B85FCCC00636D78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */; };
 		9ABE07451B85FE4E00636D78 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE07441B85FE4E00636D78 /* Bank.swift */; };
 		9ABE074D1B861BCF00636D78 /* BankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE074B1B86074900636D78 /* BankCell.swift */; };
+		9ABE13F724599952008874D2 /* Exports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE13F624599952008874D2 /* Exports.swift */; };
 		9AD9D9DF1B6EB2F700AD49AC /* AddRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */; };
 		9AD9D9E21B6EB3C700AD49AC /* StringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */; };
 		9AD9D9E41B6EB8AB00AD49AC /* ReorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */; };
@@ -259,6 +260,7 @@
 		9ABE07411B85FCCC00636D78 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9ABE07441B85FE4E00636D78 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = CoreData/Bank.swift; sourceTree = "<group>"; };
 		9ABE074B1B86074900636D78 /* BankCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankCell.swift; path = "Example controllers/Search/BankCell.swift"; sourceTree = "<group>"; };
+		9ABE13F624599952008874D2 /* Exports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exports.swift; sourceTree = "<group>"; };
 		9AD9D9DE1B6EB2F700AD49AC /* AddRemoveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRemoveViewController.swift; path = "Example controllers/AddRemoveViewController.swift"; sourceTree = "<group>"; };
 		9AD9D9E11B6EB3C700AD49AC /* StringCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringCell.swift; path = Cells/StringCell.swift; sourceTree = "<group>"; };
 		9AD9D9E31B6EB8AB00AD49AC /* ReorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReorderViewController.swift; path = "Example controllers/ReorderViewController.swift"; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				3EDC205522B817E00078EB0D /* TableViewFactory.swift */,
 				3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */,
 				3EDC206122B817E00078EB0D /* UIView+XibLoading.swift */,
+				9ABE13F624599952008874D2 /* Exports.swift */,
 			);
 			path = DTTableViewManager;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				3EDC20A322B817E90078EB0D /* DTTableViewManagerAnomalyHandler.swift in Sources */,
 				3EDC20A222B817E90078EB0D /* UIView+XibLoading.swift in Sources */,
 				3EDC20A622B817E90078EB0D /* DTTableViewManager.swift in Sources */,
+				9ABE13F724599952008874D2 /* Exports.swift in Sources */,
 				3EDC20A422B817E90078EB0D /* DTTableViewDropDelegate.swift in Sources */,
 				3EDC209A22B817E90078EB0D /* DTTableViewManager+Delegate.swift in Sources */,
 				3EDC209D22B817E90078EB0D /* TableViewConfiguration.swift in Sources */,

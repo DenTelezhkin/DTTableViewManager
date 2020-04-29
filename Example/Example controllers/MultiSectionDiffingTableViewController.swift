@@ -8,7 +8,6 @@
 
 import UIKit
 import DTTableViewManager
-import DTModelStorage
 
 extension UIViewController {
     func showiOS13RequiredAlert() {

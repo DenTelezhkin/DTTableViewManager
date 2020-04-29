@@ -8,7 +8,6 @@
 
 import UIKit
 import XCTest
-import DTModelStorage
 @testable import DTTableViewManager
 
 class MappingTestCase: BaseTestCase {

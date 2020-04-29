@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DTModelStorage
+import DTTableViewManager
 
 class BaseTestCell : UITableViewCell, ModelTransfer, ModelRetrievable
 {

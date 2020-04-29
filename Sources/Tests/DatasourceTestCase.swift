@@ -8,7 +8,6 @@
 
 import UIKit
 import XCTest
-import DTModelStorage
 import DTTableViewManager
 
 class DatasourceTestCase: BaseTestCase {

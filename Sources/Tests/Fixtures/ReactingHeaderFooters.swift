@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import DTModelStorage
+import DTTableViewManager
 
 class ReactingHeaderFooterView : UITableViewHeaderFooterView, ModelTransfer
 {

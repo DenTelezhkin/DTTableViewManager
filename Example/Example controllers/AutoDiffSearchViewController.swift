@@ -8,7 +8,6 @@
 
 import UIKit
 import DTTableViewManager
-import DTModelStorage
 import Changeset
 
 struct ChangesetDiffer : EquatableDiffingAlgorithm {

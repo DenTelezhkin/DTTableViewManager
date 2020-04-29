@@ -24,7 +24,6 @@
 // THE SOFTWARE.
 
 import UIKit
-import DTModelStorage
 
 /// Object, that implements `UITableViewDelegate` for `DTTableViewManager`.
 open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate {

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Changed
+
+* It's not longer necessary to import DTModelStorage framework to use it's API's. `import DTTableViewManager` now implicitly exports `DTModelStorage` as well.
+
 ## [7.0.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.0.0)
 
 * `willCommitMenuWithAnimator` method has been made unavailable for Xcode 11.2, because `UITableViewDelegate` method it used has been removed from UIKit on Xcode 11.2.

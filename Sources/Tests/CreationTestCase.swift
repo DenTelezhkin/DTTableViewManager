@@ -9,7 +9,6 @@
 import UIKit
 import XCTest
 @testable import DTTableViewManager
-import DTModelStorage
 
 class FooCell : UITableViewCell, ModelTransfer
 {

@@ -8,7 +8,6 @@
 
 import XCTest
 import DTTableViewManager
-import DTModelStorage
 
 enum TestAnomaly : Equatable, CustomDebugStringConvertible {
     case itemEventCalledWithCellType(ObjectIdentifier)
