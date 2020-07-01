@@ -30,7 +30,7 @@ class StoryboardMappingTestCase: XCTestCase {
         if controller.manager.usesLegacyUpdateAPI {
             cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell
         } else {
-            if #available(iOS 11, tvOS 11, *) {
+            if #available(tvOS 11, *) {
                 cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! StoryboardCell
             } else {
                 cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! StoryboardCell

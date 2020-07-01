@@ -214,28 +214,24 @@ extension DTTableViewManager {
         tableDelegate?.appendReaction(for: T.self, signature: .didUnhighlightRowAtIndexPath, closure: closure)
     }
     
-    @available(iOS 9.0, *)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canFocusRowAt:)` method is called for `cellClass`.
     open func canFocus<T:ModelTransfer>(_ cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell
     {
         tableDelegate?.appendReaction(for: T.self, signature: .canFocusRowAtIndexPath, closure: closure)
     }
     
-    @available(iOS 9.0, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldUpdateFocusInContext:)` method is called.
     open func shouldUpdateFocus(_ closure: @escaping (UITableViewFocusUpdateContext) -> Bool)
     {
         tableDelegate?.appendNonCellReaction(.shouldUpdateFocusInContext, closure: closure)
     }
     
-    @available(iOS 9.0, *)
     /// Registers `closure` tp be executed when `UITableViewDelegate.tableView(_:didUpdateFocusIn:with:)` method is called.
     open func didUpdateFocus(_ closure: @escaping (UITableViewFocusUpdateContext, UIFocusAnimationCoordinator) -> Void)
     {
         tableDelegate?.appendNonCellReaction(.didUpdateFocusInContextWithAnimationCoordinator, closure: closure)
     }
     
-    @available(iOS 9.0, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.indexPathForPreferredFocusedView(in:)` method is called
     open func indexPathForPreferredFocusedView(_ closure: @escaping () -> IndexPath?)
     {
@@ -250,7 +246,6 @@ extension DTTableViewManager {
     }
     
 #if os(iOS)
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)` method is called for `cellClass`
     open func leadingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
         tableDelegate?.appendReaction(for: T.self,
@@ -258,7 +253,6 @@ extension DTTableViewManager {
                                       closure: closure)
     }
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:)` method is called for `cellClass`
     open func trailingSwipeActionsConfiguration<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UISwipeActionsConfiguration?) where T: UITableViewCell {
         tableDelegate?.appendReaction(for: T.self,
@@ -266,7 +260,6 @@ extension DTTableViewManager {
                                       closure: closure)
     }
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:)` method is called for `cellClass`.
     open func shouldSpringLoad<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (UISpringLoadedInteractionContext, T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
         tableDelegate?.append4ArgumentReaction(for: T.self,

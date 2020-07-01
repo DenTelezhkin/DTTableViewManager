@@ -12,7 +12,7 @@ import XCTest
 
 extension DTTableViewManager {
     var usesLegacyUpdateAPI : Bool {
-        if #available(iOS 11, tvOS 11, *) {
+        if #available(tvOS 11, *) {
             return tableViewUpdater?.usesLegacyTableViewUpdateMethods ?? false
         }
         return true
@@ -21,7 +21,6 @@ extension DTTableViewManager {
 
 #if os(iOS)
     
-@available (iOS 11, *)
 class SpringLoadedContextMock : NSObject, UISpringLoadedInteractionContext {
     var state: UISpringLoadedInteractionEffectState = .activated
     
@@ -32,7 +31,6 @@ class SpringLoadedContextMock : NSObject, UISpringLoadedInteractionContext {
     }
 }
     
-@available (iOS 11, *)
 class DragAndDropMock : NSObject, UIDragSession, UIDropSession {
     var progress: Progress = Progress()
     
@@ -65,7 +63,6 @@ class DragAndDropMock : NSObject, UIDragSession, UIDropSession {
     var localContext: Any?
 }
     
-@available (iOS 11, *)
 class DropPlaceholderContextMock : NSObject, UITableViewDropPlaceholderContext {
     var dragItem: UIDragItem = UIDragItem(itemProvider: NSItemProvider(contentsOf: URL(fileURLWithPath: ""))!)
     func commitInsertion(dataSourceUpdates: (IndexPath) -> Void) -> Bool {
@@ -85,7 +82,6 @@ class DropPlaceholderContextMock : NSObject, UITableViewDropPlaceholderContext {
     }
 }
     
-@available (iOS 11, *)
 class DropCoordinatorMock: NSObject, UITableViewDropCoordinator {
     var items: [UITableViewDropItem] = []
     
@@ -198,7 +194,7 @@ class ReactingToEventsTestCase: XCTestCase {
     }
     
     func testCellSelectionPerfomance() {
-        if #available(iOS 11, tvOS 11, *) {
+        if #available(tvOS 11, *) {
             controller.tableView = UITableView()
         }
         controller.manager.register(SelectionReactingTableCell.self)
@@ -509,7 +505,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         })
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
         controller.manager.memoryStorage.setItems([1,2])
-        if #available(iOS 11, tvOS 11, *) {
+        if #available(tvOS 11, *) {
             
         } else {
             controller.tableView.beginUpdates()
@@ -718,7 +714,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    @available(iOS 9.0, tvOS 9.0, *)
+    @available(tvOS 9.0, *)
     func testCanFocusRowAtIndexPath() {
         let exp = expectation(description: "canFocus")
         controller.manager.canFocus(NibCell.self, { (cell, model, indexPath) -> Bool in
@@ -765,7 +761,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     #if os(iOS)
     func testItemsForBeginningInDragSession() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "ItemsForBeginningInDragSession")
         controller.manager.itemsForBeginningDragSession(from: NibCell.self) { session, cell, model, _ in
             exp.fulfill()
@@ -777,7 +772,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testItemsForAddingToDragSession() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "ItemsForAddingToDragSession")
         controller.manager.itemsForAddingToDragSession(from: NibCell.self) { session, point, cell, model, _ in
             exp.fulfill()
@@ -789,7 +783,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDragPreviewParametersForRowAtIndexPath() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dragPreviewParametersForRowAtIndexPath")
         controller.manager.dragPreviewParameters(for: NibCell.self) { cell, model, indexPath in
             exp.fulfill()
@@ -801,7 +794,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDragSessionWillBegin() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dragSessionWillBegin")
         controller.manager.dragSessionWillBegin { _ in
             exp.fulfill()
@@ -811,7 +803,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDragSessionDidEnd() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dragSessionDidEnd")
         controller.manager.dragSessionDidEnd { _ in
             exp.fulfill()
@@ -821,7 +812,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDragSessionAllowsMoveOperation() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dragSessionAllowsMoveOperation")
         controller.manager.dragSessionAllowsMoveOperation{ _  in
             exp.fulfill()
@@ -832,7 +822,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDragSessionIsRestrictedToDraggingApplication() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dragSessionRestrictedToDraggingApplication")
         controller.manager.dragSessionIsRestrictedToDraggingApplication{ _  in
             exp.fulfill()
@@ -845,7 +834,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     /// MARK: - UITableViewDropDelegate
     
     func testPerformDropWithCoordinator() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "performDropWithCoordinator")
         controller.manager.performDropWithCoordinator { _ in
             exp.fulfill()
@@ -855,7 +843,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testCanHandleDropSession() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "canHandleDropSession")
         controller.manager.canHandleDropSession { _ in
             exp.fulfill()
@@ -866,7 +853,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDropSessionDidEnter() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dropSessionDidEnter")
         controller.manager.dropSessionDidEnter { _ in
             exp.fulfill()
@@ -876,7 +862,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDropSessionDidUpdate() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dropSessionDidUpdate")
         controller.manager.dropSessionDidUpdate { _, _ in
             exp.fulfill()
@@ -887,7 +872,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDropSessionDidExit() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dropSessionDidExit")
         controller.manager.dropSessionDidExit { _ in
             exp.fulfill()
@@ -897,7 +881,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDropSessionDidEnd() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dropSessionDidEnd")
         controller.manager.dropSessionDidEnd { _ in
             exp.fulfill()
@@ -907,7 +890,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testDropPreviewParametersForRowAtIndexPath() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "dropPreviewParametersForRowAtIndexPath")
         controller.manager.dropPreviewParameters { _ in
             exp.fulfill()
@@ -918,7 +900,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testLeadingSwipeActionsConfiguration() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "leadingSwipeActionsConfiguration")
         controller.manager.leadingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
             exp.fulfill()
@@ -930,7 +911,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testTrailingSwipeActionsConfiguration() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "trailingSwipeActionsConfiguration")
         controller.manager.trailingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
             exp.fulfill()
@@ -942,7 +922,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testShouldSpringLoadRow() {
-        guard #available(iOS 11, *) else { return }
         let exp = expectation(description: "shouldSpringLoadRow")
         controller.manager.shouldSpringLoad(NibCell.self) { _,_,_,_ in
             exp.fulfill()
@@ -1046,7 +1025,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    @available (iOS 9, *)
     func testIndexPathForPreferredFocusedView() {
         let exp = expectation(description: "indexPathForPreferredFocusedView")
         controller.manager.indexPathForPreferredFocusedView {
@@ -1112,7 +1090,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:))), EventMethodSignature.didHighlightRowAtIndexPath.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:))), EventMethodSignature.didUnhighlightRowAtIndexPath.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:))), EventMethodSignature.targetIndexPathForMoveFromRowAtIndexPath.rawValue)
-        if #available(iOS 9.0, tvOS 9.0, *) {
+        if #available(tvOS 9.0, *) {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:canFocusRowAt:))), EventMethodSignature.canFocusRowAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldUpdateFocusIn:))), EventMethodSignature.shouldUpdateFocusInContext.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didUpdateFocusIn:with:))), EventMethodSignature.didUpdateFocusInContextWithAnimationCoordinator.rawValue)
@@ -1121,27 +1099,25 @@ class ReactingToEventsFastTestCase : XCTestCase {
         
         // MARK: - UITableViewDragDelegate
         #if os(iOS)
-        if #available(iOS 11, *) {
-            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForBeginning:at:))),EventMethodSignature.itemsForBeginningDragSession.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:))), EventMethodSignature.itemsForAddingToDragSession.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:))), EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionWillBegin:))), EventMethodSignature.dragSessionWillBegin.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionDidEnd:))), EventMethodSignature.dragSessionDidEnd.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionAllowsMoveOperation:))), EventMethodSignature.dragSessionAllowsMoveOperation.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionIsRestrictedToDraggingApplication:))), EventMethodSignature.dragSessionIsRestrictedToDraggingApplication.rawValue)
-            
-            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:performDropWith:))), EventMethodSignature.performDropWithCoordinator.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:canHandle:))), EventMethodSignature.canHandleDropSession.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnter:))), EventMethodSignature.dropSessionDidEnter.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidUpdate:withDestinationIndexPath:))), EventMethodSignature.dropSessionDidUpdateWithDestinationIndexPath.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidExit:))), EventMethodSignature.dropSessionDidExit.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnd:))), EventMethodSignature.dropSessionDidEnd.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropPreviewParametersForRowAt:))), EventMethodSignature.dropPreviewParametersForRowAtIndexPath.rawValue)
-            
-            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:))), EventMethodSignature.leadingSwipeActionsConfigurationForRowAtIndexPath.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:))), EventMethodSignature.trailingSwipeActionsConfigurationForRowAtIndexPath.rawValue)
-            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:with:))), EventMethodSignature.shouldSpringLoadRowAtIndexPathWithContext.rawValue)
-        }
+        XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForBeginning:at:))),EventMethodSignature.itemsForBeginningDragSession.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:))), EventMethodSignature.itemsForAddingToDragSession.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:))), EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionWillBegin:))), EventMethodSignature.dragSessionWillBegin.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionDidEnd:))), EventMethodSignature.dragSessionDidEnd.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionAllowsMoveOperation:))), EventMethodSignature.dragSessionAllowsMoveOperation.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDragDelegate.tableView(_:dragSessionIsRestrictedToDraggingApplication:))), EventMethodSignature.dragSessionIsRestrictedToDraggingApplication.rawValue)
+        
+        XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:performDropWith:))), EventMethodSignature.performDropWithCoordinator.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:canHandle:))), EventMethodSignature.canHandleDropSession.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnter:))), EventMethodSignature.dropSessionDidEnter.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidUpdate:withDestinationIndexPath:))), EventMethodSignature.dropSessionDidUpdateWithDestinationIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidExit:))), EventMethodSignature.dropSessionDidExit.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropSessionDidEnd:))), EventMethodSignature.dropSessionDidEnd.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDropDelegate.tableView(_:dropPreviewParametersForRowAt:))), EventMethodSignature.dropPreviewParametersForRowAtIndexPath.rawValue)
+        
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:))), EventMethodSignature.leadingSwipeActionsConfigurationForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:))), EventMethodSignature.trailingSwipeActionsConfigurationForRowAtIndexPath.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:with:))), EventMethodSignature.shouldSpringLoadRowAtIndexPathWithContext.rawValue)
         
         if #available(iOS 13, *) {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:))), EventMethodSignature.shouldBeginMultipleSelectionInteractionAtIndexPath.rawValue)
@@ -1192,15 +1168,13 @@ class ReactingToEventsFastTestCase : XCTestCase {
             manager.didHighlight(NibCell.self, { _,_,_ in })
             manager.didUnhighlight(NibCell.self, { _,_,_ in })
             #if os(iOS)
-            if #available(iOS 11, *) {
-                manager.itemsForBeginningDragSession(from: NibCell.self, { (_, _, _, _) in [] })
-                manager.itemsForAddingToDragSession(from: NibCell.self, { (_, _, _, _, _) in [] })
-                manager.dragPreviewParameters(for: NibCell.self, { (_, _, _) in nil })
-                manager.dragSessionWillBegin{ _ in }
-                manager.dragSessionDidEnd{ _ in }
-                manager.dragSessionAllowsMoveOperation{ _ in false }
-                manager.dragSessionIsRestrictedToDraggingApplication{ _ in false }
-            }
+            manager.itemsForBeginningDragSession(from: NibCell.self, { (_, _, _, _) in [] })
+            manager.itemsForAddingToDragSession(from: NibCell.self, { (_, _, _, _, _) in [] })
+            manager.dragPreviewParameters(for: NibCell.self, { (_, _, _) in nil })
+            manager.dragSessionWillBegin{ _ in }
+            manager.dragSessionDidEnd{ _ in }
+            manager.dragSessionAllowsMoveOperation{ _ in false }
+            manager.dragSessionIsRestrictedToDraggingApplication{ _ in false }
             #endif
         }
     }

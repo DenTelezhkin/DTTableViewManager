@@ -29,7 +29,7 @@ fileprivate class UpdatableCell : UITableViewCell, ModelTransfer {
 class TableViewFactoryTestCase: BaseTestCase {
     
     func testUpdateCellAtIndexPath() {
-        if #available(iOS 11, tvOS 11, *) {
+        if #available(tvOS 11, *) {
             controller.tableView = UITableView()
             controller.manager.memoryStorage.defersDatasourceUpdates = true
         } 
@@ -41,7 +41,7 @@ class TableViewFactoryTestCase: BaseTestCase {
         controller.manager.tableViewUpdater = controller.manager.coreDataUpdater()
         model.value = true
         controller.manager.updateCellClosure()(indexPath(0, 0),model)
-        if #available(iOS 11, tvOS 11, *) {
+        if #available(tvOS 11, *) {
             XCTAssertTrue((controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as? UpdatableCell)?.model?.value ?? false)
         } else {
             XCTAssertTrue((controller.tableView.cellForRow(at: indexPath(0, 0)) as? UpdatableCell)?.model?.value ?? false)

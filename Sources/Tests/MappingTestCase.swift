@@ -19,15 +19,10 @@ class MappingTestCase: BaseTestCase {
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        let cell: NiblessCell
-        if #available(iOS 11, *) {
-            controller.tableView.beginUpdates()
-            controller.tableView.endUpdates()
-            
-            cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NiblessCell
-        } else {
-            cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NiblessCell
-        }
+        controller.tableView.beginUpdates()
+        controller.tableView.endUpdates()
+        
+        let cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NiblessCell
         
         XCTAssertEqual(cell.model as? Int, 1)
         XCTAssertFalse(cell.awakedFromNib)
@@ -63,15 +58,10 @@ class MappingTestCase: BaseTestCase {
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        let cell: NibCell
-        if #available(iOS 11, *) {
-            controller.tableView.beginUpdates()
-            controller.tableView.endUpdates()
-            
-            cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NibCell
-        } else {
-            cell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as! NibCell
-        }
+        controller.tableView.beginUpdates()
+        controller.tableView.endUpdates()
+        
+        let cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NibCell
         
         XCTAssertEqual(cell.model as? Int, 1)
         XCTAssert(cell.awakedFromNib)
@@ -86,7 +76,7 @@ class MappingTestCase: BaseTestCase {
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
         let cell: BaseTestCell
-        if #available(iOS 11, tvOS 11, *) {
+        if #available(tvOS 11, *) {
             controller.tableView.beginUpdates()
             controller.tableView.endUpdates()
             

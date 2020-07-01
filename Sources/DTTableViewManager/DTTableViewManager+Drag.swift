@@ -31,7 +31,6 @@ extension DTTableViewManager
 {
     #if os(iOS)
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)` method is called for `cellClass`.
     open func itemsForBeginningDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, T, T.ModelType, IndexPath) -> [UIDragItem]) where T:UITableViewCell
     {
@@ -40,7 +39,6 @@ extension DTTableViewManager
                                                    closure: closure)
     }
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)` method is called for `cellClass`
     open func itemsForAddingToDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, CGPoint, T, T.ModelType, IndexPath) -> [UIDragItem]) where T: UITableViewCell
     {
@@ -49,7 +47,6 @@ extension DTTableViewManager
                                                    closure: closure)
     }
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)` method is called for `cellClass`
     open func dragPreviewParameters<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UIDragPreviewParameters?) where T:UITableViewCell {
         tableDragDelegate?.appendReaction(for: T.self,
@@ -57,25 +54,21 @@ extension DTTableViewManager
                                           closure: closure)
     }
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragSessionWillBegin:)` method is called.
     open func dragSessionWillBegin(_ closure: @escaping (UIDragSession) -> Void) {
         tableDragDelegate?.appendNonCellReaction(.dragSessionWillBegin, closure: closure)
     }
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragSessionDidEnd:)` method is called.
     open func dragSessionDidEnd(_ closure: @escaping (UIDragSession) -> Void) {
         tableDragDelegate?.appendNonCellReaction(.dragSessionDidEnd, closure: closure)
     }
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragSessionAllowsMoveOperation)` method is called.
     open func dragSessionAllowsMoveOperation(_ closure: @escaping (UIDragSession) -> Bool) {
         tableDragDelegate?.appendNonCellReaction(.dragSessionAllowsMoveOperation, closure: closure)
     }
     
-    @available(iOS 11, *)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragSessionIsRestrictedToDraggingApplication:)` method is called.
     open func dragSessionIsRestrictedToDraggingApplication(_ closure: @escaping (UIDragSession) -> Bool) {
         tableDragDelegate?.appendNonCellReaction(.dragSessionIsRestrictedToDraggingApplication, closure: closure)
