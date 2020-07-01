@@ -167,7 +167,7 @@ open class DTTableViewManager {
     #if os(iOS)
     // Yeah, @availability macros does not work on stored properties ¯\_(ツ)_/¯
     private var _tableDragDelegatePrivate : AnyObject?
-    @available(iOS 11, *)
+    
     /// Object, that is responsible for implementing `UITableViewDragDelegate` protocol
     open var tableDragDelegate : DTTableViewDragDelegate? {
         get {
@@ -181,7 +181,7 @@ open class DTTableViewManager {
     
     // Yeah, @availability macros does not work on stored properties ¯\_(ツ)_/¯
     private var _tableDropDelegatePrivate : AnyObject?
-    @available(iOS 11, *)
+
     /// Object, that is responsible for implementing `UITableViewDropDelegate` protocol
     open var tableDropDelegate : DTTableViewDropDelegate? {
         get {
@@ -278,10 +278,8 @@ open class DTTableViewManager {
         tableDelegate = DTTableViewDelegate(delegate: delegate, tableViewManager: self)
         tableDataSource = DTTableViewDataSource(delegate: delegate, tableViewManager: self)
         #if os(iOS)
-        if #available(iOS 11.0, *) {
-            tableDragDelegate = DTTableViewDragDelegate(delegate: delegate, tableViewManager: self)
-            tableDropDelegate = DTTableViewDropDelegate(delegate: delegate, tableViewManager: self)
-        }
+        tableDragDelegate = DTTableViewDragDelegate(delegate: delegate, tableViewManager: self)
+        tableDropDelegate = DTTableViewDropDelegate(delegate: delegate, tableViewManager: self)
         #endif
     }
     

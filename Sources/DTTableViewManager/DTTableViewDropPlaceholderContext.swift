@@ -28,7 +28,6 @@ import UIKit
 import DTModelStorage
 
 #if os(iOS)
-@available(iOS 11, *)
 
 /// Thin wrapper around `UITableViewDropPlaceholderContext`, which automates insertion of `dragItems` if you are using `MemoryStorage`.
 /// Typically, you would not create this class directly, but use `DTTableViewManager.drop(_:to:with:)` convenience method.

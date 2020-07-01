@@ -300,10 +300,6 @@ class DatasourceTestCase: BaseTestCase {
         #if os(tvOS)
             let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         #endif
-        if #available(iOS 11, *) {}
-        else {
-            let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
-        }
         
         waitForExpectations(timeout: 0.1)
         
@@ -372,10 +368,7 @@ class DatasourceTestCase: BaseTestCase {
         #if os(tvOS)
         let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         #endif
-        if #available(iOS 11, *) {}
-        else {
-            let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
-        }
+
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell for model at [0, 0], but view model mapping for it was not found, model description: 3")

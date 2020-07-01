@@ -366,7 +366,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         _ = performCellReaction(.didUnhighlightRowAtIndexPath, location: indexPath, provideCell: true)
     }
     
-    @available(iOS 9.0, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         if let should = performCellReaction(.canFocusRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
@@ -375,7 +374,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, canFocusRowAt: indexPath) ?? tableView.cellForRow(at: indexPath)?.canBecomeFocused ?? true
     }
 #if os(iOS)
-    @available (iOS 11, *)
+
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if let reaction = cellReaction(.leadingSwipeActionsConfigurationForRowAtIndexPath, location: indexPath) {
@@ -385,7 +384,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                                                               leadingSwipeActionsConfigurationForRowAt: indexPath)
     }
     
-    @available (iOS 11, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if let reaction = cellReaction(.trailingSwipeActionsConfigurationForRowAtIndexPath, location: indexPath) {
@@ -395,7 +393,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                                                               trailingSwipeActionsConfigurationForRowAt: indexPath)
     }
     
-    @available (iOS 11, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldSpringLoadRowAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
         if let shouldSpringLoad = perform4ArgumentCellReaction(.shouldSpringLoadRowAtIndexPathWithContext,
@@ -423,7 +420,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                                                               toProposedIndexPath: proposedDestinationIndexPath) ?? IndexPath(item: 0, section: 0)
     }
     
-    @available(iOS 9, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
         if let should = performNonCellReaction(.shouldUpdateFocusInContext, argument: context) as? Bool {
@@ -432,7 +428,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, shouldUpdateFocusIn:context) ?? true
     }
     
-    @available(iOS 9, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         _ = performNonCellReaction(.didUpdateFocusInContextWithAnimationCoordinator,
@@ -443,7 +438,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
                                                       with: coordinator)
     }
     
-    @available(iOS 9, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
         if let reaction = tableViewEventReactions.first(where: { $0.methodSignature == EventMethodSignature.indexPathForPreferredFocusedViewInTableView.rawValue }) {

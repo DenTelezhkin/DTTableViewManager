@@ -112,7 +112,7 @@ open class TableViewUpdater : StorageUpdating {
             return
         }
         
-        if #available(iOS 11, tvOS 11, *), !usesLegacyTableViewUpdateMethods {
+        if #available(tvOS 11, *), !usesLegacyTableViewUpdateMethods {
             tableView?.performBatchUpdates({ [weak self] in
                 if update.containsDeferredDatasourceUpdates {
                     update.applyDeferredDatasourceUpdates()
