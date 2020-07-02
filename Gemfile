@@ -5,7 +5,7 @@ gem "fastlane"
 gem 'octokit'
 gem 'netrc'
 gem 'cocoapods'
-gem 'jazzy'
+gem 'jazzy', '0.13.1'
 gem 'mime-types'
 gem 'cocoapods-trunk'
 
