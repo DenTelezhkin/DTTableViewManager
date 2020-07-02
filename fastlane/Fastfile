@@ -1,7 +1,7 @@
 fastlane_version "1.98.0"
 
 lane :test_ios13 do
-  scan(scheme: 'Tests-iOS', device: "iPad Pro (12.9-inch) (3rd generation) (13.3)")
+  scan(scheme: 'Tests-iOS', device: "iPhone 11 Pro (13.5)")
   sh "bash ../codecov.sh"
 end
 
@@ -11,7 +11,7 @@ lane :test_ios12 do
 end
 
 lane :test_tvos13 do
-  scan(scheme: 'Tests-tvOS',device: "Apple TV 4K (13.3)")
+  scan(scheme: 'Tests-tvOS',device: "Apple TV 4K (13.4)")
 end
 
 lane :test_tvos12 do
