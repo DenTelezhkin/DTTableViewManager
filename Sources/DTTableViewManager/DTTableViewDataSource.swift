@@ -79,7 +79,6 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
         (delegate as? UITableViewDataSource)?.tableView?(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath)
     }
     
-#if swift(>=4.2)
     /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
@@ -88,18 +87,6 @@ open class DTTableViewDataSource : DTTableViewDelegateWrapper, UITableViewDataSo
                                          location: indexPath,
                                          provideCell: true)
     }
-#else
-    /// Implementation for `UITableViewDataSource` protocol
-    open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        defer { (delegate as? UITableViewDataSource)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath) }
-        _ = perform4ArgumentCellReaction(.commitEditingStyleForRowAtIndexPath,
-                                argument: editingStyle,
-                                location: indexPath,
-                                provideCell: true)
-    }
-#endif
-    
-    
     
     /// Implementation for `UITableViewDataSource` protocol
     open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

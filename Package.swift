@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.2
 //
 //  Package.swift
 //  DTTableViewManager
@@ -30,17 +30,17 @@ let package = Package(
     name: "DTTableViewManager",
     platforms: [
         .iOS(.v11),
-        .tvOS(.v9)
+        .tvOS(.v11)
     ],
     products: [
         .library(name: "DTTableViewManager", targets: ["DTTableViewManager"])
     ],
     dependencies: [
-        .package(url: "https://github.com/DenTelezhkin/DTModelStorage", Package.Dependency.Requirement.upToNextMinor(from: "8.0.0"))
+        .package(url: "https://github.com/DenTelezhkin/DTModelStorage", Package.Dependency.Requirement.upToNextMajor(from: "8.0.0"))
     ],
     targets: [
         .target(name: "DTTableViewManager", dependencies: ["DTModelStorage"]),
         // .testTarget(name: "Tests-iOS", dependencies: ["DTTableViewManager", "DTModelStorage"], path: "Sources/Tests")
     ],
-    swiftLanguageVersions: [.v5, .v4_2]
+    swiftLanguageVersions: [.v5]
 )

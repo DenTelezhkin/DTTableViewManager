@@ -3,20 +3,20 @@
     "pins": [
       {
         "package": "Changeset",
-        "repositoryURL": "https://github.com/daveanderson/Changeset",
+        "repositoryURL": "https://github.com/osteslag/Changeset",
         "state": {
-          "branch": "ImproveSwiftPackageManagerSupport",
-          "revision": "2aa6372ad8df8bf05474c40d3a0fca89a62c763e",
-          "version": null
+          "branch": null,
+          "revision": "3f68006be9d378160fa154a1f239b984a459c82f",
+          "version": "3.2.0"
         }
       },
       {
         "package": "DTModelStorage",
         "repositoryURL": "https://github.com/DenTelezhkin/DTModelStorage",
         "state": {
-          "branch": null,
-          "revision": "2a202af2e6dfbef70983f4eed8ffda54b9a92e46",
-          "version": "8.0.0"
+          "branch": "master",
+          "revision": "f32800c874cafa1658524b240a8bd17293e7a649",
+          "version": null
         }
       }
     ]

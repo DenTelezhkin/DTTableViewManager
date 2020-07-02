@@ -94,6 +94,9 @@
 		3EDC20E422B8181D0078EB0D /* RandomNameWrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208922B817E00078EB0D /* RandomNameWrongReuseIdentifierCell.xib */; };
 		3EDC20E522B8181D0078EB0D /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208A22B817E00078EB0D /* CustomNibCell.xib */; };
 		3EE31B4F21563BB000FA9361 /* AutoDiffSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE31B4E21563BB000FA9361 /* AutoDiffSearchViewController.swift */; };
+		9A245D5824ADD200001D6A9E /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A245D5724ADD200001D6A9E /* Changeset */; };
+		9A245D5A24ADD232001D6A9E /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A245D5924ADD232001D6A9E /* Changeset */; };
+		9A245D5C24ADD74A001D6A9E /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A245D5B24ADD74A001D6A9E /* Changeset */; };
 		9A383CA61CE1DA2F0081D843 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A383CA51CE1DA2F0081D843 /* Default-568h@2x.png */; };
 		9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDA1B8A176300508207 /* BankCell.xib */; };
 		9A41FBE01B8A17C400508207 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDF1B8A17C400508207 /* Banks.json */; };
@@ -124,9 +127,6 @@
 		9ADA63331B88A56F0060B2C0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA63321B88A56F0060B2C0 /* TableViewController.swift */; };
 		9AE9E16B22EDD84A00E653F0 /* DiffableCoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9E16A22EDD84A00E653F0 /* DiffableCoreDataViewController.swift */; };
 		9AFAAF7622D4BDB5001C86B0 /* DTModelStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7522D4BDB5001C86B0 /* DTModelStorage */; };
-		9AFAAF7922D4BE79001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7822D4BE79001C86B0 /* Changeset */; };
-		9AFAAF7B22D4BEA6001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7A22D4BEA6001C86B0 /* Changeset */; };
-		9AFAAF7E22D4C9A6001C86B0 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9AFAAF7D22D4C9A6001C86B0 /* Changeset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,7 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */,
-				9AFAAF7B22D4BEA6001C86B0 /* Changeset in Frameworks */,
+				9A245D5A24ADD232001D6A9E /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
-				9AFAAF7E22D4C9A6001C86B0 /* Changeset in Frameworks */,
+				9A245D5C24ADD74A001D6A9E /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
-				9AFAAF7922D4BE79001C86B0 /* Changeset in Frameworks */,
+				9A245D5824ADD200001D6A9E /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,7 +622,7 @@
 			);
 			name = "Tests-tvOS";
 			packageProductDependencies = (
-				9AFAAF7A22D4BEA6001C86B0 /* Changeset */,
+				9A245D5924ADD232001D6A9E /* Changeset */,
 			);
 			productName = XCTests;
 			productReference = 9A6CED7D1BE570750091B0AF /* Tests-tvOS.xctest */;
@@ -644,7 +644,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				9AFAAF7D22D4C9A6001C86B0 /* Changeset */,
+				9A245D5B24ADD74A001D6A9E /* Changeset */,
 			);
 			productName = Example;
 			productReference = 9A9B17021B65771600D8ABD3 /* Example.app */;
@@ -665,7 +665,7 @@
 			);
 			name = "Tests-iOS";
 			packageProductDependencies = (
-				9AFAAF7822D4BE79001C86B0 /* Changeset */,
+				9A245D5724ADD200001D6A9E /* Changeset */,
 			);
 			productName = XCTests;
 			productReference = 9AF0031A1A5ABE7000ABFC90 /* Tests-iOS.xctest */;
@@ -698,7 +698,7 @@
 				};
 			};
 			buildConfigurationList = E6EA835C1615EE6000F8B8C3 /* Build configuration list for PBXProject "DTTableViewManager" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -708,7 +708,7 @@
 			mainGroup = E6EA83571615EE6000F8B8C3;
 			packageReferences = (
 				9AFAAF7422D4BDB5001C86B0 /* XCRemoteSwiftPackageReference "DTModelStorage" */,
-				9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */,
+				9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */,
 			);
 			productRefGroup = E6EA83631615EE6000F8B8C3 /* Products */;
 			projectDirPath = "";
@@ -1047,7 +1047,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting files/Example.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1077,7 +1076,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting files/Example.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1183,7 +1181,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1231,7 +1229,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1288,44 +1286,44 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/osteslag/Changeset";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
 		9AFAAF7422D4BDB5001C86B0 /* XCRemoteSwiftPackageReference "DTModelStorage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DenTelezhkin/DTModelStorage";
 			requirement = {
-				kind = exactVersion;
-				version = 8.0.0;
-			};
-		};
-		9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/daveanderson/Changeset";
-			requirement = {
-				branch = ImproveSwiftPackageManagerSupport;
+				branch = master;
 				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9A245D5724ADD200001D6A9E /* Changeset */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */;
+			productName = Changeset;
+		};
+		9A245D5924ADD232001D6A9E /* Changeset */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */;
+			productName = Changeset;
+		};
+		9A245D5B24ADD74A001D6A9E /* Changeset */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */;
+			productName = Changeset;
+		};
 		9AFAAF7522D4BDB5001C86B0 /* DTModelStorage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9AFAAF7422D4BDB5001C86B0 /* XCRemoteSwiftPackageReference "DTModelStorage" */;
 			productName = DTModelStorage;
-		};
-		9AFAAF7822D4BE79001C86B0 /* Changeset */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */;
-			productName = Changeset;
-		};
-		9AFAAF7A22D4BEA6001C86B0 /* Changeset */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */;
-			productName = Changeset;
-		};
-		9AFAAF7D22D4C9A6001C86B0 /* Changeset */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9AFAAF7722D4BE79001C86B0 /* XCRemoteSwiftPackageReference "Changeset" */;
-			productName = Changeset;
 		};
 /* End XCSwiftPackageProductDependency section */
 

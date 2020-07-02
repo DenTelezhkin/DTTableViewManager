@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Changed
+
+* Deployment targets - iOS 11 / tvOS 11.
+* Minimum Swift version required: 5.0
+* Added support for DTModelStorage/Realm with Realm 5
+
+Please note, that this framework version source is identical to previous version, which supports iOS 8 / tvOS 9 / Swift 4.0 and higher. 
+
 ## [7.1.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.1.0)
 
 ### Changed

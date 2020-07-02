@@ -13,19 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
 
-
-#if swift(>=4.2)
     func application(_ application: UIApplication,  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool {
         CoreDataManager.sharedInstance.preloadData()
         return true
     }
-#else
-    func application(_ application: UIApplication,  didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
-        CoreDataManager.sharedInstance.preloadData()
-        return true
-    }
-#endif
-    
 
 }
 

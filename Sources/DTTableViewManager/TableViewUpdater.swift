@@ -38,8 +38,7 @@ open class TableViewUpdater : StorageUpdating {
     
     /// closure to be executed after content is updated
     open var didUpdateContent: ((StorageUpdate?) -> Void)?
-    
-#if swift(>=4.2)
+
     /// Insert section animation. Default - .none.
     open var insertSectionAnimation = UITableView.RowAnimation.none
     
@@ -57,25 +56,6 @@ open class TableViewUpdater : StorageUpdating {
     
     /// Reload row animation. Default - .automatic.
     open var reloadRowAnimation = UITableView.RowAnimation.automatic
-#else
-    /// Insert section animation. Default - .none.
-    open var insertSectionAnimation = UITableViewRowAnimation.none
-    
-    /// Delete section animation. Default - .automatic
-    open var deleteSectionAnimation = UITableViewRowAnimation.automatic
-    
-    /// Reload section animation. Default - .automatic.
-    open var reloadSectionAnimation = UITableViewRowAnimation.automatic
-    
-    /// Insert row animation. Default - .automatic.
-    open var insertRowAnimation = UITableViewRowAnimation.automatic
-    
-    /// Delete row animation. Default - .automatic.
-    open var deleteRowAnimation = UITableViewRowAnimation.automatic
-    
-    /// Reload row animation. Default - .automatic.
-    open var reloadRowAnimation = UITableViewRowAnimation.automatic
-#endif
 
     /// Closure to be executed, when reloading a row.
     ///

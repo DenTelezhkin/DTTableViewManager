@@ -115,11 +115,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         if configuration?.sectionHeaderStyle == .title {
             if let _ = headerModel(forSection:section)
             {
-                #if swift(>=4.2)
-                    return UITableView.automaticDimension
-                #else
-                    return UITableViewAutomaticDimension
-                #endif
+                return UITableView.automaticDimension
             }
             return configuration?.minimalHeaderHeightForTableView(tableView) ?? .zero
         }
@@ -150,11 +146,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         if configuration?.sectionFooterStyle == .title {
             if let _ = footerModel(forSection:section) {
-                #if swift(>=4.2)
                 return UITableView.automaticDimension
-                #else
-                return UITableViewAutomaticDimension
-                #endif
             }
             return configuration?.minimalFooterHeightForTableView(tableView) ?? .zero
         }
@@ -263,7 +255,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
 #endif
     
-#if swift(>=4.2)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if let editingStyle = performCellReaction(.editingStyleForRowAtIndexPath, location: indexPath, provideCell: false) as? UITableViewCell.EditingStyle {
@@ -271,15 +262,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, editingStyleForRowAt: indexPath) ?? .none
     }
-#else
-    /// Implementation for `UITableViewDelegate` protocol
-    open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if let editingStyle = performCellReaction(.editingStyleForRowAtIndexPath, location: indexPath, provideCell: false) as? UITableViewCellEditingStyle {
-            return editingStyle
-        }
-        return (delegate as? UITableViewDelegate)?.tableView?(tableView, editingStyleForRowAt: indexPath) ?? .none
-    }
-#endif
 
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
