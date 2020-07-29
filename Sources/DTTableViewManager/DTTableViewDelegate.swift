@@ -139,14 +139,14 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        guard shouldDisplayFooterView(forSection: section) else {
-            return configuration?.minimalFooterHeightForTableView(tableView) ?? .zero
-        }
         if let height = performFooterReaction(.heightForFooterInSection, location: section, provideView: false) as? CGFloat {
             return height
         }
         if let height = (delegate as? UITableViewDelegate)?.tableView?(tableView, heightForFooterInSection: section) {
             return height
+        }
+        guard shouldDisplayFooterView(forSection: section) else {
+            return configuration?.minimalFooterHeightForTableView(tableView) ?? .zero
         }
         if configuration?.sectionFooterStyle == .title {
             if let _ = footerModel(forSection:section) {

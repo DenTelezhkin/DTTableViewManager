@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Added
+
+* `TableViewConfiguration` `semanticHeaderHeight` and `semanticFooterHeight`, that specify whether `DTTableViewManager` should deploy custom logic in `tableView(_ tableView: UITableView, heightForHeaderInSection section: Int)` and `tableView(_ tableView: UITableView, heightForFooterInSection section: Int)`. This logic includes checking whether header and footer models exist in storage, returning `UITableView.automaticDimension` for sections, whose header and footer models are Strings (for table section titles), as well as returning minimal height for cases where data model is not there(which happens to be different for `UITableView.Style.plain` and `UITableView.Style.grouped`). Those properties default to true, but if you want to use self-sizing table view sections headers or footers, which may improve perfomance, consider turning those off:
+
+```swift
+manager.configuration.semanticHeaderHeight = false
+manager.configuration.semanticFooterHeight = false
+```
+
+Please note, that even when those properties are set to false, corresponding `UITableViewDelegate` methods will still be called in two cases: 
+
+1. Your `DTTableViewManageable` instance implements them
+2. You register a `heightForHeader(withItem:_:)` or `heightForFooter(withItem:_:)` closures on `DTTableViewManager` instance.
+
 ### Breaking
 
 This release requires Swift 5.3. Minimum iOS / tvOS deployment targets are unchanged (iOS 11, tvOS 11).

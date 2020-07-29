@@ -1060,9 +1060,8 @@ class ReactingToEventsFastTestCase : XCTestCase {
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willDeselectRowAt:))), EventMethodSignature.willDeselectRowAtIndexPath.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didDeselectRowAt:))), EventMethodSignature.didDeselectRowAtIndexPath.rawValue)
         
-        // These methods are not equal on purpose - DTTableViewManager implements custom logic in them, and they are always implemented, even though they can act as events
-        XCTAssertNotEqual(String(describing: #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:))), EventMethodSignature.heightForHeaderInSection.rawValue)
-        XCTAssertNotEqual(String(describing: #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:))), EventMethodSignature.heightForFooterInSection.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:))), EventMethodSignature.heightForHeaderInSection.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:))), EventMethodSignature.heightForFooterInSection.rawValue)
         
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:))), EventMethodSignature.estimatedHeightForHeaderInSection.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:))), EventMethodSignature.estimatedHeightForFooterInSection.rawValue)

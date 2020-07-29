@@ -318,6 +318,14 @@ open class DTTableViewDelegateWrapper : NSObject {
         return delegate
     }
     
+    private func shouldEnableMethodCall(signature: EventMethodSignature) -> Bool {
+        switch signature {
+            case .heightForHeaderInSection: return configuration?.semanticHeaderHeight ?? false
+            case .heightForFooterInSection: return configuration?.semanticFooterHeight ?? false
+            default: return false
+        }
+    }
+    
     /// Returns true, if `DTTableViewManageable` implements `aSelector`, or `DTTableViewManager` has an event, associated with this selector.
     ///
     /// - SeeAlso: `EventMethodSignature`
@@ -327,7 +335,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         }
         if super.responds(to: aSelector) {
             if let eventSelector = EventMethodSignature(rawValue: String(describing: aSelector)) {
-                return unmappedReactions.contains {
+                return (unmappedReactions.contains {
                     $0.methodSignature == eventSelector.rawValue
                 } ||
                 (viewFactory?.mappings ?? [])
@@ -335,7 +343,7 @@ open class DTTableViewDelegateWrapper : NSObject {
                     mapping.reactions.contains(where: { reaction in
                         reaction.methodSignature == eventSelector.rawValue
                     })
-                })
+                })) || shouldEnableMethodCall(signature: eventSelector)
             }
             return true
         }
