@@ -227,14 +227,18 @@ class DatasourceTestCase: BaseTestCase {
     
     func testHeaderViewShouldBeCreatedFromXib()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
+        controller.manager.registerHeader(NibHeaderFooterView.self) { mapping in
+            mapping.xibName = "NibHeaderFooterView"
+        }
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) is NibHeaderFooterView)
     }
     
     func testFooterViewShouldBeCreatedFromXib()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forFooter: NibHeaderFooterView.self)
+        controller.manager.registerFooter(NibHeaderFooterView.self) { mapping in
+            mapping.xibName = "NibHeaderFooterView"
+        }
         controller.manager.memoryStorage.setSectionFooterModels([1])
         XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0) is NibHeaderFooterView)
     }
@@ -406,7 +410,9 @@ class DatasourceTestCase: BaseTestCase {
         let anomaly = DTTableViewManagerAnomaly.differentCellReuseIdentifier(mappingReuseIdentifier: "WrongReuseIdentifierCell",
                                                                              cellReuseIdentifier: "Foo")
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.registerNibNamed("RandomNameWrongReuseIdentifierCell", for: WrongReuseIdentifierCell.self)
+        controller.manager.register(WrongReuseIdentifierCell.self) { mapping in
+            mapping.xibName = "RandomNameWrongReuseIdentifierCell"
+        }
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: Foo does not match reuseIdentifier used to register with UITableView: WrongReuseIdentifierCell. \nIf you are using XIB, please remove reuseIdentifier from XIB file, or change it to name of UITableViewCell subclass. If you are using Storyboards, please change UITableViewCell identifier to name of the class. \nIf you need different reuseIdentifier for any reason, you can change reuseIdentifier when registering mapping.")
@@ -418,7 +424,9 @@ class DatasourceTestCase: BaseTestCase {
                                                                    cellClass: "BaseTestCell",
                                                                    expectedCellClass: "StringCell")
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.registerNibNamed("RandomNibNameCell", for: StringCell.self)
+        controller.manager.register(StringCell.self) { mapping in
+            mapping.xibName = "RandomNibNameCell"
+        }
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib RandomNibNameCell, but view found in a xib was of type BaseTestCell, while expected type is StringCell. This can prevent cells from being updated with models and react to events.")
@@ -429,7 +437,9 @@ class DatasourceTestCase: BaseTestCase {
         let anomaly = DTTableViewManagerAnomaly.emptyXibFile(xibName: "EmptyXib",
                                                              expectedViewClass: "StringCell")
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.registerNibNamed("EmptyXib", for: StringCell.self)
+        controller.manager.register(StringCell.self) { mapping in
+            mapping.xibName = "EmptyXib"
+        }
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib EmptyXib for StringCell, but this xib does not contain any views.")
@@ -441,7 +451,9 @@ class DatasourceTestCase: BaseTestCase {
                                                                            viewClass: "NibView",
                                                                            expectedViewClass: "ReactingHeaderFooterView")
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.registerNibNamed("NibView", forHeader: ReactingHeaderFooterView.self)
+        controller.manager.registerHeader(ReactingHeaderFooterView.self) { mapping in
+            mapping.xibName = "NibView"
+        }
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib NibView, but view found in a xib was of type NibView, while expected type is ReactingHeaderFooterView. This can prevent headers/footers from being updated with models and react to events.")
@@ -453,7 +465,9 @@ class DatasourceTestCase: BaseTestCase {
                                                                            viewClass: "NibView",
                                                                            expectedViewClass: "ReactingHeaderFooterView")
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.registerNibNamed("NibView", forFooter: ReactingHeaderFooterView.self)
+        controller.manager.registerFooter(ReactingHeaderFooterView.self) { mapping in
+            mapping.xibName = "NibView"
+        }
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib NibView, but view found in a xib was of type NibView, while expected type is ReactingHeaderFooterView. This can prevent headers/footers from being updated with models and react to events.")

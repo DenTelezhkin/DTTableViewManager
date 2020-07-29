@@ -71,7 +71,9 @@ class MappingTestCase: BaseTestCase {
     func testCellMappingFromNibWithDifferentName()
     {
         controller.manager.memoryStorage.defersDatasourceUpdates = true
-        controller.manager.registerNibNamed("RandomNibNameCell", for: BaseTestCell.self)
+        controller.manager.register(BaseTestCell.self) { mapping in
+            mapping.xibName = "RandomNibNameCell"
+        }
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
@@ -135,20 +137,22 @@ class MappingTestCase: BaseTestCase {
     
     func testHeaderViewShouldSupportNSStringModel()
     {
-        controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
+        controller.manager.registerHeader(NibHeaderFooterView.self) { mapping in
+            mapping.xibName = "NibHeaderFooterView"
+        }
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) is NibHeaderFooterView)
     }
     
     func testNiblessHeaderRegistrationWorks() {
-        controller.manager.registerNiblessHeader(NiblessHeaderFooterView.self)
+        controller.manager.registerHeader(NiblessHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionHeaderModels([1])
         let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         XCTAssert(view is NiblessHeaderFooterView)
     }
     
     func testNiblessFooterRegistrationWorks() {
-        controller.manager.registerNiblessFooter(NiblessHeaderFooterView.self)
+        controller.manager.registerFooter(NiblessHeaderFooterView.self)
         controller.manager.memoryStorage.setSectionFooterModels([1])
         let view = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         XCTAssert(view is NiblessHeaderFooterView)
@@ -200,26 +204,20 @@ class NibNameViewModelMappingTestCase : XCTestCase {
         factory = TableViewFactory(tableView: UITableView())
     }
     
-    func testRegisterCellWithoutNibYieldsNoXibName() {
-        factory.registerCellClass(NiblessCell.self, mappingBlock: nil)
-        
-        XCTAssertNil(factory.mappings.first?.xibName)
-    }
-    
     func testCellWithXibHasXibNameInMapping() {
-        factory.registerCellClass(NibCell.self, mappingBlock: nil)
+        factory.registerCellClass(NibCell.self, handler: { _,_,_ in }, mapping: nil)
         
         XCTAssertEqual(factory.mappings.first?.xibName, "NibCell")
     }
     
     func testHeaderHasXibInMapping() {
-        factory.registerHeaderClass(NibHeaderFooterView.self, mappingBlock: nil)
+        factory.registerSupplementaryClass(NibHeaderFooterView.self, ofKind: DTTableViewElementSectionHeader, handler: { _,_,_ in }, mapping: nil)
         
         XCTAssertEqual(factory.mappings.first?.xibName, "NibHeaderFooterView")
     }
     
     func testFooterHasXibInMapping() {
-        factory.registerFooterClass(NibHeaderFooterView.self, mappingBlock: nil)
+        factory.registerSupplementaryClass(NibHeaderFooterView.self, ofKind: DTTableViewElementSectionFooter, handler: { _,_,_ in }, mapping: nil)
         
         XCTAssertEqual(factory.mappings.first?.xibName, "NibHeaderFooterView")
     }

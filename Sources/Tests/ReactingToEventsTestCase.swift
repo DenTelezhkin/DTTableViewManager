@@ -475,11 +475,12 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testHeightForHeaderInSection() {
         let exp = expectation(description: "heightForHeader")
         exp.expectedFulfillmentCount = 2
-        controller.manager.heightForHeader(withItem: String.self, { (model, section) -> CGFloat in
+        controller.manager.registerHeader(NibHeaderFooterView.self)
+        controller.manager.heightForHeader(withItem: Int.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        controller.manager.memoryStorage.setSectionHeaderModels([1])
         controller.manager.memoryStorage.setItems([1,2])
         controller.tableView.beginUpdates()
         controller.tableView.endUpdates()
@@ -488,9 +489,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testEstimatedHeightForHeaderInSection() {
         let exp = expectation(description: "estimatedHeightForHeader")
-        #if os(iOS)
-            exp.expectedFulfillmentCount = 2
-        #endif
         #if os(tvOS)
             if #available(tvOS 11, *) {
                 
@@ -499,11 +497,12 @@ class ReactingToEventsFastTestCase : XCTestCase {
             }
         #endif
         
-        controller.manager.estimatedHeightForHeader(withItem: String.self, { (model, section) -> CGFloat in
+        controller.manager.registerHeader(NibHeaderFooterView.self)
+        controller.manager.estimatedHeightForHeader(withItem: Int.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        controller.manager.memoryStorage.setSectionHeaderModels([1])
         controller.manager.memoryStorage.setItems([1,2])
         if #available(tvOS 11, *) {
             
@@ -543,6 +542,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testWillDisplayHeaderInSection() {
         let exp = expectation(description: "willDisplayHeaderInSection")
+        controller.manager.registerHeader(ReactingHeaderFooterView.self)
         controller.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
             exp.fulfill()
         })
@@ -630,6 +630,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testDidEndDisplayingHeaderInSection() {
         let exp = expectation(description: "didEndDisplayingHeaderInSection")
+        controller.manager.registerHeader(ReactingHeaderFooterView.self)
         controller.manager.didEndDisplayingHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
             exp.fulfill()
         })

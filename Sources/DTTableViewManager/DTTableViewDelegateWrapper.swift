@@ -145,13 +145,14 @@ open class DTTableViewDelegateWrapper : NSObject {
         manager?.verifyViewEvent(for: CellClass.self, methodName: methodName)
     }
     
-    final internal func appendReaction<T, U>(for modelClass: T.Type,
+    final internal func appendReaction<T, U>(viewType: ViewType,
+                                             for modelClass: T.Type,
                                              signature: EventMethodSignature,
                                              methodName: String = #function,
                                              closure: @escaping (T, IndexPath) -> U)
     {
-        let reaction = EventReaction(modelType: T.self, signature: signature.rawValue, closure)
-        unmappedReactions.append(reaction)
+        let reaction = EventReaction(modelType: T.self, signature: signature.rawValue, supplementaryKind: viewType.supplementaryKind(), closure)
+        appendMappedReaction(viewType: viewType, modelType: T.self, reaction: reaction, signature: signature)
         manager?.verifyItemEvent(for: T.self, eventMethod: methodName)
     }
     

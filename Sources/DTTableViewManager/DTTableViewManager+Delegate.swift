@@ -51,17 +51,17 @@ extension DTTableViewManager {
     
     /// Registers `closure` to be executed to determine cell height in `UITableViewDelegate.tableView(_:heightForRowAt:)` method, when it's called for cell which model is of `itemType`.
     open func heightForCell<T>(withItem itemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
-        tableDelegate?.appendReaction(for: T.self, signature: .heightForRowAtIndexPath, closure: closure)
+        tableDelegate?.appendReaction(viewType: .cell, for: T.self, signature: .heightForRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed to determine estimated cell height in `UITableViewDelegate.tableView(_:estimatedHeightForRowAt:)` method, when it's called for cell which model is of `itemType`.
     open func estimatedHeightForCell<T>(withItem itemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
-        tableDelegate?.appendReaction(for: T.self, signature: .estimatedHeightForRowAtIndexPath, closure: closure)
+        tableDelegate?.appendReaction(viewType: .cell, for: T.self, signature: .estimatedHeightForRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed to determine indentation level in `UITableViewDelegate.tableView(_:indentationLevelForRowAt:)` method, when it's called for cell which model is of `itemType`.
     open func indentationLevelForCell<T>(withItem itemType: T.Type, _ closure: @escaping (T, IndexPath) -> CGFloat) {
-        tableDelegate?.appendReaction(for: T.self, signature: .indentationLevelForRowAtIndexPath, closure: closure)
+        tableDelegate?.appendReaction(viewType: .cell, for: T.self, signature: .indentationLevelForRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willDisplayCell:forRowAt:)` method is called for `cellClass`.
@@ -136,7 +136,7 @@ extension DTTableViewManager {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called for cell that contains item `ofType` at `indexPath`.
     open func editingStyle<T>(forItem ofType:T.Type, _ closure: @escaping (T, IndexPath) -> UITableViewCell.EditingStyle)
     {
-        tableDelegate?.appendReaction(for: T.self, signature: .editingStyleForRowAtIndexPath, closure: closure)
+        tableDelegate?.appendReaction(viewType: .cell, for: T.self, signature: .editingStyleForRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:)` method is called for `cellClass`.

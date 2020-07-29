@@ -163,7 +163,9 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     func testHeaderViewShouldBeCreatedFromXib()
     {
         guard #available(iOS 13, tvOS 13, *) else { return }
-        controller.manager.registerNibNamed("NibHeaderFooterView", forHeader: NibHeaderFooterView.self)
+        controller.manager.registerHeader(NibHeaderFooterView.self) { mapping in
+            mapping.xibName = "NibHeaderFooterView"
+        }
         controller.manager.supplementaryStorage?.setSectionHeaderModels([1])
         setItems([1])
         XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) is NibHeaderFooterView)
@@ -172,7 +174,9 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     func testFooterViewShouldBeCreatedFromXib()
     {
         guard #available(iOS 13, tvOS 13, *) else { return }
-        controller.manager.registerNibNamed("NibHeaderFooterView", forFooter: NibHeaderFooterView.self)
+        controller.manager.registerFooter(NibHeaderFooterView.self) { mapping in
+            mapping.xibName = "NibHeaderFooterView"
+        }
         controller.manager.supplementaryStorage?.setSectionFooterModels([1])
         setItems([1])
         XCTAssert(controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0) is NibHeaderFooterView)
@@ -195,6 +199,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     func testWillDisplayHeaderInSection() {
         guard #available(iOS 13, tvOS 13, *) else { return }
         let exp = expectation(description: "willDisplayHeaderInSection")
+        controller.manager.registerHeader(ReactingHeaderFooterView.self)
         controller.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
             exp.fulfill()
         })
@@ -207,6 +212,7 @@ class DiffableDatasourcesTestCase: BaseTestCase {
     func testWillDisplayFooterInSection() {
         guard #available(iOS 13, tvOS 13, *) else { return }
         let exp = expectation(description: "willDisplayFooterInSection")
+        controller.manager.registerFooter(ReactingHeaderFooterView.self)
         controller.manager.willDisplayFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
             exp.fulfill()
         })
