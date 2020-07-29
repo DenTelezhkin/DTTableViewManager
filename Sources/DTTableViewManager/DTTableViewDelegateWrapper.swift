@@ -43,7 +43,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     
     /// Array of `UITableViewDataSource` reactions for `DTTableViewDataSource`
     /// - SeeAlso: `EventReaction`.
-    final var tableViewEventReactions = ContiguousArray<EventReaction>()  {
+    final var unmappedReactions = [EventReaction]()  {
         didSet {
             delegateWasReset()
         }
@@ -89,11 +89,27 @@ open class DTTableViewDelegateWrapper : NSObject {
         return RuntimeHelper.recursivelyUnwrapAnyValue((storage as? SupplementaryStorage)?.footerModel(forSection: index) as Any)
     }
     
+    final private func appendMappedReaction<T:UIView>(type: T.Type, reaction: EventReaction, signature: EventMethodSignature) {
+        let compatibleMappings = (viewFactory?.mappings ?? []).filter {
+            (($0.viewClass as? UIView.Type)?.isSubclass(of: T.self) ?? false)
+        }
+        
+        if compatibleMappings.count == 0 {
+            // TODO: implement anomaly
+//            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
+        }
+        
+        compatibleMappings.forEach { mapping in
+            mapping.reactions.append(reaction)
+        }
+        
+        delegateWasReset()
+    }
+    
     final internal func appendReaction<T, U>(for cellClass: T.Type, signature: EventMethodSignature, methodName: String = #function, closure: @escaping (T, T.ModelType, IndexPath) -> U) where T: ModelTransfer, T:UITableViewCell
     {
-        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, viewClass: T.self)
-        reaction.makeReaction(closure)
-        tableViewEventReactions.append(reaction)
+        let reaction = EventReaction(viewType: T.self, modelType: T.ModelType.self, signature: signature.rawValue, closure)
+        appendMappedReaction(type: T.self, reaction: reaction, signature: signature)
         manager?.verifyViewEvent(for: T.self, methodName: methodName)
     }
     
@@ -104,11 +120,12 @@ open class DTTableViewDelegateWrapper : NSObject {
          closure: @escaping (Argument, CellClass, CellClass.ModelType, IndexPath) -> Result)
         where CellClass: ModelTransfer, CellClass: UITableViewCell
     {
-        let reaction = FourArgumentsEventReaction(signature: signature.rawValue,
-                                                  viewType: .cell,
-                                                  viewClass: CellClass.self)
-        reaction.make4ArgumentsReaction(closure)
-        tableViewEventReactions.append(reaction)
+        let reaction = FourArgumentsEventReaction(CellClass.self,
+                                                  modelType: CellClass.ModelType.self,
+                                                  argument: Argument.self,
+                                                  signature: signature.rawValue,
+                                                  closure)
+        appendMappedReaction(type: CellClass.self, reaction: reaction, signature: signature)
         manager?.verifyViewEvent(for: CellClass.self, methodName: methodName)
     }
     
@@ -119,11 +136,12 @@ open class DTTableViewDelegateWrapper : NSObject {
          closure: @escaping (ArgumentOne, ArgumentTwo, CellClass, CellClass.ModelType, IndexPath) -> Result)
         where CellClass: ModelTransfer, CellClass: UITableViewCell
     {
-        let reaction = FiveArgumentsEventReaction(signature: signature.rawValue,
-                                                  viewType: .cell,
-                                                  viewClass: CellClass.self)
-        reaction.make5ArgumentsReaction(closure)
-        tableViewEventReactions.append(reaction)
+        let reaction = FiveArgumentsEventReaction(CellClass.self, modelType: CellClass.ModelType.self,
+                                                  argumentOne: ArgumentOne.self,
+                                                  argumentTwo: ArgumentTwo.self,
+                                                  signature: signature.rawValue,
+                                                  closure)
+        appendMappedReaction(type: CellClass.self, reaction: reaction, signature: signature)
         manager?.verifyViewEvent(for: CellClass.self, methodName: methodName)
     }
     
@@ -132,9 +150,8 @@ open class DTTableViewDelegateWrapper : NSObject {
                                              methodName: String = #function,
                                              closure: @escaping (T, IndexPath) -> U)
     {
-        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: T.self)
-        reaction.makeReaction(closure)
-        tableViewEventReactions.append(reaction)
+        let reaction = EventReaction(modelType: T.self, signature: signature.rawValue, closure)
+        unmappedReactions.append(reaction)
         manager?.verifyItemEvent(for: T.self, eventMethod: methodName)
     }
     
@@ -144,13 +161,48 @@ open class DTTableViewDelegateWrapper : NSObject {
                                     methodName: String = #function,
                                     closure: @escaping (T, T.ModelType, Int) -> U) where T: ModelTransfer, T: UIView
     {
-        let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), viewClass: T.self)
-        let indexPathBlock : (T, T.ModelType, IndexPath) -> U = { cell, model, indexPath in
-            return closure(cell, model, indexPath.section)
-        }
-        reaction.makeReaction(indexPathBlock)
-        tableViewEventReactions.append(reaction)
+        let reaction = EventReaction(viewType: T.self, modelType: T.ModelType.self,
+                                     signature: signature.rawValue,
+                                     supplementaryKind: kind, { cell, model, indexPath in
+                                        closure(cell, model, indexPath.section)
+                                     })
+        appendMappedReaction(viewType: .supplementaryView(kind: kind), type: T.self, reaction: reaction, signature: signature)
         manager?.verifyViewEvent(for: T.self, methodName: methodName)
+    }
+    
+    final private func appendMappedReaction<T:UIView>(viewType: ViewType, type: T.Type, reaction: EventReaction, signature: EventMethodSignature) {
+        let compatibleMappings = (viewFactory?.mappings ?? []).filter {
+            (($0.viewClass as? UIView.Type)?.isSubclass(of: T.self) ?? false) &&
+                $0.viewType == viewType
+        }
+        
+        if compatibleMappings.count == 0 {
+            // TODO: - implement anomaly
+//            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
+        }
+        
+        compatibleMappings.forEach { mapping in
+            mapping.reactions.append(reaction)
+        }
+        
+        delegateWasReset()
+    }
+    
+    final private func appendMappedReaction<T>(viewType: ViewType, modelType: T.Type, reaction: EventReaction, signature: EventMethodSignature) {
+        let compatibleMappings = (viewFactory?.mappings ?? []).filter {
+            $0.viewType == viewType && $0.modelTypeTypeCheckingBlock(T.self)
+        }
+        
+        if compatibleMappings.count == 0 {
+//            TODO: - implement anomaly
+//            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
+        }
+        
+        compatibleMappings.forEach { mapping in
+            mapping.reactions.append(reaction)
+        }
+        
+        delegateWasReset()
     }
     
     final func appendReaction<T, U>(forSupplementaryKind kind: String,
@@ -159,55 +211,37 @@ open class DTTableViewDelegateWrapper : NSObject {
                                     methodName: String = #function,
                                     closure: @escaping (T, Int) -> U)
     {
-        let reaction = EventReaction(signature: signature.rawValue, viewType: .supplementaryView(kind: kind), modelType: T.self)
-        let indexPathBlock : (T, IndexPath) -> U = { model, indexPath in
-            return closure(model, indexPath.section)
+        let reaction = EventReaction(modelType: T.self, signature: signature.rawValue, supplementaryKind: kind) { model, indexPath in
+            closure(model, indexPath.section)
         }
-        reaction.makeReaction(indexPathBlock)
-        tableViewEventReactions.append(reaction)
+        appendMappedReaction(viewType: .supplementaryView(kind: kind), modelType: T.self, reaction: reaction, signature: signature)
         manager?.verifyItemEvent(for: T.self, eventMethod: methodName)
     }
     
     final func appendNonCellReaction(_ signature: EventMethodSignature, closure: @escaping () -> Any) {
-        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
-        reaction.reaction = { _, _, _ in
-            return closure()
-        }
-        tableViewEventReactions.append(reaction)
+        unmappedReactions.append(EventReaction(signature: signature.rawValue, closure))
     }
     
     final func appendNonCellReaction<Arg>(_ signature: EventMethodSignature, closure: @escaping (Arg) -> Any) {
-        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
-        reaction.reaction = { arg, _, _ in
-            guard let arg = arg as? Arg else { return nil as Any? as Any }
-            return closure(arg)
-        }
-        tableViewEventReactions.append(reaction)
+        unmappedReactions.append(EventReaction(argument: Arg.self, signature: signature.rawValue, closure))
     }
     
     final func appendNonCellReaction<Arg1, Arg2, Result>(_ signature: EventMethodSignature, closure: @escaping (Arg1, Arg2) -> Result) {
-        let reaction = EventReaction(signature: signature.rawValue, viewType: .cell, modelType: Any.self)
-        reaction.reaction = { arg1, arg2, _ in
-            guard let arg1 = arg1 as? Arg1,
-                let arg2 = arg2 as? Arg2
-            else { return nil as Any? as Any }
-            return closure(arg1, arg2)
-        }
-        tableViewEventReactions.append(reaction)
+        unmappedReactions.append(EventReaction(argumentOne: Arg1.self, argumentTwo: Arg2.self, signature: signature.rawValue, closure))
     }
     
     final func performCellReaction(_ signature: EventMethodSignature, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
         guard let model = storage?.item(at: location) else { return nil }
-        return tableViewEventReactions.performReaction(of: .cell, signature: signature.rawValue, view: cell, model: model, location: location)
+        return EventReaction.performReaction(from: viewFactory?.mappings ?? [], signature: signature.rawValue, view: cell, model: model, location: location)
     }
     
     final func perform4ArgumentCellReaction(_ signature: EventMethodSignature, argument: Any, location: IndexPath, provideCell: Bool) -> Any? {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
         guard let model = storage?.item(at: location) else { return nil }
-        return tableViewEventReactions.perform4ArgumentsReaction(of: .cell,
+        return EventReaction.perform4ArgumentsReaction(from: viewFactory?.mappings ?? [],
                                                                  signature: signature.rawValue,
                                                                  argument: argument,
                                                                  view: cell,
@@ -223,7 +257,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         var cell : UITableViewCell?
         if provideCell { cell = tableView?.cellForRow(at: location) }
         guard let model = storage?.item(at: location) else { return nil }
-        return tableViewEventReactions.perform5ArgumentsReaction(of: .cell,
+        return EventReaction.perform5ArgumentsReaction(from: viewFactory?.mappings ?? [],
                                                                  signature: signature.rawValue,
                                                                  firstArgument: argumentOne,
                                                                  secondArgument: argumentTwo,
@@ -241,7 +275,7 @@ open class DTTableViewDelegateWrapper : NSObject {
     
     final func cellReaction(_ signature: EventMethodSignature, location: IndexPath) -> EventReaction? {
         guard let model = storage?.item(at: location) else { return nil }
-        return tableViewEventReactions.reaction(of: .cell, signature: signature.rawValue, forModel: model, view: nil)
+        return EventReaction.reaction(from: viewFactory?.mappings ?? [], signature: signature.rawValue, forModel: model, at: location, view: nil)
     }
     
     final func performHeaderReaction(_ signature: EventMethodSignature, location: Int, provideView: Bool) -> Any? {
@@ -250,7 +284,7 @@ open class DTTableViewDelegateWrapper : NSObject {
             view = tableView?.headerView(forSection: location)
         }
         guard let model = headerModel(forSection: location) else { return nil }
-        return tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionHeader), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
+        return EventReaction.performReaction(from: viewFactory?.mappings ?? [], signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location), supplementaryKind: DTTableViewElementSectionHeader)
     }
     
     final func performFooterReaction(_ signature: EventMethodSignature, location: Int, provideView: Bool) -> Any? {
@@ -259,22 +293,19 @@ open class DTTableViewDelegateWrapper : NSObject {
             view = tableView?.footerView(forSection: location)
         }
         guard let model = footerModel(forSection: location) else { return nil }
-        return tableViewEventReactions.performReaction(of: .supplementaryView(kind: DTTableViewElementSectionFooter), signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location))
+        return EventReaction.performReaction(from: viewFactory?.mappings ?? [], signature: signature.rawValue, view: view, model: model, location: IndexPath(item: 0, section: location), supplementaryKind: DTTableViewElementSectionFooter)
     }
     
     func performNonCellReaction(_ signature: EventMethodSignature) -> Any? {
-        return tableViewEventReactions.first(where: { $0.methodSignature == signature.rawValue })?
-            .performWithArguments((0, 0, 0))
+        EventReaction.performUnmappedReaction(from: unmappedReactions, signature.rawValue)
     }
     
     func performNonCellReaction<T>(_ signature: EventMethodSignature, argument: T) -> Any? {
-        return tableViewEventReactions.first(where: { $0.methodSignature == signature.rawValue })?
-            .performWithArguments((argument, 0, 0))
+        EventReaction.performUnmappedReaction(from: unmappedReactions, signature.rawValue, argument: argument)
     }
     
     func performNonCellReaction<T, U>(_ signature: EventMethodSignature, argumentOne: T, argumentTwo: U) -> Any? {
-        return tableViewEventReactions.first(where: { $0.methodSignature == signature.rawValue })?
-            .performWithArguments((argumentOne, argumentTwo, 0))
+        EventReaction.performUnmappedReaction(from: unmappedReactions, signature.rawValue, argumentOne: argumentOne, argumentTwo: argumentTwo)
     }
     
     // MARK: - Target Forwarding
@@ -295,7 +326,15 @@ open class DTTableViewDelegateWrapper : NSObject {
         }
         if super.responds(to: aSelector) {
             if let eventSelector = EventMethodSignature(rawValue: String(describing: aSelector)) {
-                return tableViewEventReactions.contains(where: { $0.methodSignature == eventSelector.rawValue })
+                return unmappedReactions.contains {
+                    $0.methodSignature == eventSelector.rawValue
+                } ||
+                (viewFactory?.mappings ?? [])
+                .contains(where: { mapping in
+                    mapping.reactions.contains(where: { reaction in
+                        reaction.methodSignature == eventSelector.rawValue
+                    })
+                })
             }
             return true
         }

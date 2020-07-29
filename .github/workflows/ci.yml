@@ -9,14 +9,14 @@ on:
       - '*'
 
 jobs:
-  iOS:
+  iOS-Xcode-12:
     name: Test iOS
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_11.5.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12_beta.app/Contents/Developer
     strategy:
       matrix:
-        destination: ["test_ios13"] #,"test_ios12"]
+        destination: ["test_ios14"] #,"test_ios12"]
     steps:
       - uses: actions/checkout@v2
       - name: Install gems
@@ -25,14 +25,14 @@ jobs:
         run: instruments -s devices
       - name: iOS - ${{ matrix.destination }}
         run: bundle exec fastlane ${{ matrix.destination }}
-  tvOS:
+  tvOS-Xcode-12:
     name: Test tvOS
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_11.5.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12_beta.app/Contents/Developer
     strategy:
       matrix:
-        destination: ["test_tvos13"] #,"test_tvos12"]
+        destination: ["test_tvos14"] #,"test_tvos12"]
     steps:
       - uses: actions/checkout@v2
       - name: Install gems
@@ -50,12 +50,3 @@ jobs:
         run: bundle install
       - name: CocoaPods spec lint
         run: bundle exec fastlane pod_lint
-  # spm:
-  #   name: Test with SPM
-  #   runs-on: macOS-latest
-  #   env:
-  #     DEVELOPER_DIR: /Applications/Xcode_11.3.1.app/Contents/Developer
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: SPM Test
-  #       run: swift test -c debug

@@ -1,23 +1,23 @@
 fastlane_version "1.98.0"
 
-lane :test_ios13 do
-  scan(scheme: 'Tests-iOS', device: "iPhone 11 Pro (13.5)")
+lane :test_ios14 do
+  scan(devices: ["iPhone 11 Pro (14.0)"], scheme: 'Tests-iOS')
   sh "bash ../codecov.sh"
 end
 
-lane :test_ios12 do
-  # create_test_simulator(device: "iPhone X", runtime: "iOS12.2")
-  # scan(scheme: 'Tests-iOS')
+# lane :test_ios12 do
+#   # create_test_simulator(device: "iPhone X", runtime: "iOS12.2")
+#   # scan(scheme: 'Tests-iOS')
+# end
+
+lane :test_tvos14 do
+  scan(device: "Apple TV 4K (14.0)", scheme: 'Tests-tvOS')
 end
 
-lane :test_tvos13 do
-  scan(scheme: 'Tests-tvOS',device: "Apple TV 4K (13.4)")
-end
-
-lane :test_tvos12 do
-  # create_test_simulator(device: "Apple TV 4K", runtime: "tvOS12.2")
-  # scan(scheme: 'Tests-tvOS')
-end
+# lane :test_tvos12 do
+#   # create_test_simulator(device: "Apple TV 4K", runtime: "tvOS12.2")
+#   # scan(scheme: 'Tests-tvOS')
+# end
 
 lane :pod_lint do
   sh "bundle exec pod repo update"

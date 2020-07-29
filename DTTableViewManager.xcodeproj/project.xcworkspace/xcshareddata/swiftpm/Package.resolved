@@ -3,20 +3,20 @@
     "pins": [
       {
         "package": "Changeset",
-        "repositoryURL": "https://github.com/osteslag/Changeset",
+        "repositoryURL": "https://github.com/DenTelezhkin/Changeset",
         "state": {
-          "branch": null,
-          "revision": "3f68006be9d378160fa154a1f239b984a459c82f",
-          "version": "3.2.0"
+          "branch": "swiftpm-platforms",
+          "revision": "76ee0cdc4f46a5129229e36530384e1bee7d34e5",
+          "version": null
         }
       },
       {
         "package": "DTModelStorage",
         "repositoryURL": "https://github.com/DenTelezhkin/DTModelStorage",
         "state": {
-          "branch": null,
-          "revision": "1dd8d83882eb0e1c72342dcacd32c687cb39531b",
-          "version": "8.1.0"
+          "branch": "custom-view-mappings",
+          "revision": "e0d6de68c6dc3ac3906b7febe11fc1ad23aa06f7",
+          "version": null
         }
       }
     ]

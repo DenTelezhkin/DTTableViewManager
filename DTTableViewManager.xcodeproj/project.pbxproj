@@ -94,9 +94,6 @@
 		3EDC20E422B8181D0078EB0D /* RandomNameWrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208922B817E00078EB0D /* RandomNameWrongReuseIdentifierCell.xib */; };
 		3EDC20E522B8181D0078EB0D /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208A22B817E00078EB0D /* CustomNibCell.xib */; };
 		3EE31B4F21563BB000FA9361 /* AutoDiffSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE31B4E21563BB000FA9361 /* AutoDiffSearchViewController.swift */; };
-		9A245D5824ADD200001D6A9E /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A245D5724ADD200001D6A9E /* Changeset */; };
-		9A245D5A24ADD232001D6A9E /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A245D5924ADD232001D6A9E /* Changeset */; };
-		9A245D5C24ADD74A001D6A9E /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A245D5B24ADD74A001D6A9E /* Changeset */; };
 		9A383CA61CE1DA2F0081D843 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A383CA51CE1DA2F0081D843 /* Default-568h@2x.png */; };
 		9A41FBDB1B8A176300508207 /* BankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDA1B8A176300508207 /* BankCell.xib */; };
 		9A41FBE01B8A17C400508207 /* Banks.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBDF1B8A17C400508207 /* Banks.json */; };
@@ -104,6 +101,9 @@
 		9A41FBE41B8A17E700508207 /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A41FBE21B8A17E700508207 /* textured_paper.png */; };
 		9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
+		9A66DC1624D0333A002AD705 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A66DC1524D0333A002AD705 /* Changeset */; };
+		9A66DC1824D0334A002AD705 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A66DC1724D0334A002AD705 /* Changeset */; };
+		9A66DC1A24D03357002AD705 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A66DC1924D03357002AD705 /* Changeset */; };
 		9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A9B17071B65771600D8ABD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9B17061B65771600D8ABD3 /* AppDelegate.swift */; };
 		9A9B170E1B65771600D8ABD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A9B170C1B65771600D8ABD3 /* Main.storyboard */; };
@@ -288,7 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A6CED701BE570750091B0AF /* DTTableViewManager.framework in Frameworks */,
-				9A245D5A24ADD232001D6A9E /* Changeset in Frameworks */,
+				9A66DC1A24D03357002AD705 /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A9B17261B65772E00D8ABD3 /* DTTableViewManager.framework in Frameworks */,
-				9A245D5C24ADD74A001D6A9E /* Changeset in Frameworks */,
+				9A66DC1824D0334A002AD705 /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */,
-				9A245D5824ADD200001D6A9E /* Changeset in Frameworks */,
+				9A66DC1624D0333A002AD705 /* Changeset in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,7 +622,7 @@
 			);
 			name = "Tests-tvOS";
 			packageProductDependencies = (
-				9A245D5924ADD232001D6A9E /* Changeset */,
+				9A66DC1924D03357002AD705 /* Changeset */,
 			);
 			productName = XCTests;
 			productReference = 9A6CED7D1BE570750091B0AF /* Tests-tvOS.xctest */;
@@ -644,7 +644,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				9A245D5B24ADD74A001D6A9E /* Changeset */,
+				9A66DC1724D0334A002AD705 /* Changeset */,
 			);
 			productName = Example;
 			productReference = 9A9B17021B65771600D8ABD3 /* Example.app */;
@@ -665,7 +665,7 @@
 			);
 			name = "Tests-iOS";
 			packageProductDependencies = (
-				9A245D5724ADD200001D6A9E /* Changeset */,
+				9A66DC1524D0333A002AD705 /* Changeset */,
 			);
 			productName = XCTests;
 			productReference = 9AF0031A1A5ABE7000ABFC90 /* Tests-iOS.xctest */;
@@ -678,7 +678,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Denys Telezhkin";
 				TargetAttributes = {
 					9A2A38BB1AEE285E0021E97D = {
@@ -708,7 +708,7 @@
 			mainGroup = E6EA83571615EE6000F8B8C3;
 			packageReferences = (
 				9AFAAF7422D4BDB5001C86B0 /* XCRemoteSwiftPackageReference "DTModelStorage" */,
-				9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */,
+				9A66DC1424D0333A002AD705 /* XCRemoteSwiftPackageReference "Changeset" */,
 			);
 			productRefGroup = E6EA83631615EE6000F8B8C3 /* Products */;
 			projectDirPath = "";
@@ -1151,6 +1151,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1206,6 +1207,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1286,38 +1288,38 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */ = {
+		9A66DC1424D0333A002AD705 /* XCRemoteSwiftPackageReference "Changeset" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/osteslag/Changeset";
+			repositoryURL = "https://github.com/DenTelezhkin/Changeset";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.0;
+				branch = "swiftpm-platforms";
+				kind = branch;
 			};
 		};
 		9AFAAF7422D4BDB5001C86B0 /* XCRemoteSwiftPackageReference "DTModelStorage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DenTelezhkin/DTModelStorage";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.1.0;
+				branch = "custom-view-mappings";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9A245D5724ADD200001D6A9E /* Changeset */ = {
+		9A66DC1524D0333A002AD705 /* Changeset */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */;
+			package = 9A66DC1424D0333A002AD705 /* XCRemoteSwiftPackageReference "Changeset" */;
 			productName = Changeset;
 		};
-		9A245D5924ADD232001D6A9E /* Changeset */ = {
+		9A66DC1724D0334A002AD705 /* Changeset */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */;
+			package = 9A66DC1424D0333A002AD705 /* XCRemoteSwiftPackageReference "Changeset" */;
 			productName = Changeset;
 		};
-		9A245D5B24ADD74A001D6A9E /* Changeset */ = {
+		9A66DC1924D03357002AD705 /* Changeset */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9A245D5624ADD200001D6A9E /* XCRemoteSwiftPackageReference "Changeset" */;
+			package = 9A66DC1424D0333A002AD705 /* XCRemoteSwiftPackageReference "Changeset" */;
 			productName = Changeset;
 		};
 		9AFAAF7522D4BDB5001C86B0 /* DTModelStorage */ = {

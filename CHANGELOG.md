@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
-## [7.2.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.2.0)
+### Breaking
+
+This release requires Swift 5.3. Minimum iOS / tvOS deployment targets are unchanged (iOS 11, tvOS 11).
+
+Some context: this release heavily relies on where clauses on contextually generic declarations, that are only available in Swift 5.3 - [SE-0267](https://github.com/apple/swift-evolution/blob/master/proposals/0267-where-on-contextually-generic.md).
 
 ## [7.2.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.2.0)
 
