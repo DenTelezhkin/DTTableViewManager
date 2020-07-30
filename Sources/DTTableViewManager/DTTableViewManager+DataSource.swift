@@ -67,3 +67,17 @@ extension DTTableViewManager
         tableDataSource?.appendReaction(viewType: .cell, for: T.self, signature: EventMethodSignature.canEditRowAtIndexPath, closure: closure)
     }
 }
+
+extension ViewModelMapping where T: UITableViewCell {
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canMoveRowAt:)` method is called for `cellClass`.
+    open func canMove(_ closure: @escaping (T, U, IndexPath) -> Bool) {
+        reactions.append(EventReaction(viewType: T.self, modelType: U.self, signature: EventMethodSignature.canMoveRowAtIndexPath.rawValue, closure))
+    }
+    
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:moveRowAt:to:)` method is called for `cellClass`.
+    /// - warning: This method requires items to be moved without animations, since animation has already happened when user moved those cells. If you use `MemoryStorage`, it's appropriate to call `memoryStorage.moveItemWithoutAnimation(from:to:)` method to achieve desired behavior.
+    /// - SeeAlso: 'tableView:moveRowAt:to:' method
+    open func moveRowTo(_ closure: @escaping (_ destinationIndexPath: IndexPath, T, U, _ sourceIndexPath: IndexPath) -> Void) where T: UITableViewCell {
+        reactions.append(FourArgumentsEventReaction(T.self, modelType: U.self, argument: IndexPath.self, signature: EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue, closure))
+    }
+}

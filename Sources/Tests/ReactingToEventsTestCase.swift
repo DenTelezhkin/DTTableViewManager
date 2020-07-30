@@ -141,7 +141,7 @@ class AlwaysVisibleTableView: UITableView
     
     
     override func headerView(forSection section: Int) -> UITableViewHeaderFooterView? {
-        return self.delegate?.tableView!(self, viewForHeaderInSection: section) as? UITableViewHeaderFooterView
+        return self.delegate?.tableView?(self, viewForHeaderInSection: section) as? UITableViewHeaderFooterView
     }
 }
 
@@ -273,45 +273,154 @@ class ReactingToEventsTestCase: XCTestCase {
 }
 
 class ReactingToEventsFastTestCase : XCTestCase {
-    var controller : ReactingTestTableViewController!
+    var sut : ReactingTestTableViewController!
     
     override func setUp() {
         super.setUp()
-        controller = ReactingTestTableViewController()
-        controller.tableView = AlwaysVisibleTableView()
-        let _ = controller.view
-        controller.manager.registerFooter(ReactingHeaderFooterView.self)
-        controller.manager.register(NibCell.self)
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
+        sut = ReactingTestTableViewController()
+        sut.tableView = AlwaysVisibleTableView()
+        let _ = sut.view
+        sut.manager.registerFooter(ReactingHeaderFooterView.self)
+        sut.manager.register(NibCell.self)
+        sut.manager.memoryStorage.defersDatasourceUpdates = true
+    }
+    
+    func unregisterAll() {
+        sut.manager.viewFactory.mappings.removeAll()
+    }
+    
+    func fullfill<Cell,Model,ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (Cell,Model,IndexPath) -> ReturnValue {
+        { cell, model, indexPath in
+            expectation.fulfill()
+            return returnValue
+        }
+    }
+    
+    func fullfill<Cell,Model,Argument,ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (Argument,Cell,Model,IndexPath) -> ReturnValue {
+        { argument,cell, model, indexPath in
+            expectation.fulfill()
+            return returnValue
+        }
+    }
+    
+    func fullfill<Cell,Model,ArgumentOne,ArgumentTwo,ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (ArgumentOne,ArgumentTwo,Cell,Model,IndexPath) -> ReturnValue {
+        { argumentOne, argumentTwo, cell, model, indexPath in
+            expectation.fulfill()
+            return returnValue
+        }
+    }
+    
+    func fulfill<Model, ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (Model,IndexPath) -> ReturnValue {
+        { model, indexPath in
+            expectation.fulfill()
+            return returnValue
+        }
+    }
+    
+    func addIntItem(_ item: Int = 3) -> (ReactingTestTableViewController) -> Void {
+        {
+            $0.manager.memoryStorage.addItem(item)
+        }
+    }
+    
+    func setHeaderIntModels(_ models: [Int] = [5]) -> (ReactingTestTableViewController) -> Void {
+        {
+            $0.manager.memoryStorage.setSectionHeaderModels(models)
+        }
+    }
+    
+    func setFooterIntModels(_ models: [Int] = [5]) -> (ReactingTestTableViewController) -> Void {
+        {
+            $0.manager.memoryStorage.setSectionFooterModels(models)
+        }
+    }
+    
+    func verifyEvent<U: Equatable>(_ signature: EventMethodSignature,
+                                                   registration: (ReactingTestTableViewController, XCTestExpectation) -> Void,
+                                                   alternativeRegistration: (ReactingTestTableViewController, XCTestExpectation) -> Void,
+                                                   preparation: (ReactingTestTableViewController) -> Void,
+                                                   action: (ReactingTestTableViewController) throws -> U,
+                                                   expectedResult: U? = nil) throws {
+        guard let sut = sut else {
+            XCTFail()
+            return
+        }
+        unregisterAll()
+        
+        let exp = expectation(description: signature.rawValue)
+        registration(sut,exp)
+        preparation(sut)
+        let result = try action(sut)
+        if let expectedResult = expectedResult {
+            XCTAssertEqual(result, expectedResult)
+        }
+        waitForExpectations(timeout: 1)
+        
+        unregisterAll()
+        
+        let altExp = expectation(description: signature.rawValue)
+        alternativeRegistration(sut,altExp)
+        preparation(sut)
+        let altResult = try action(sut)
+        if let expectedResult = expectedResult {
+            XCTAssertEqual(altResult, expectedResult)
+        }
+        waitForExpectations(timeout: 1)
+    }
+    
+    func verifyEvent<U>(_ signature: EventMethodSignature,
+                                                   registration: (ReactingTestTableViewController, XCTestExpectation) -> Void,
+                                                   alternativeRegistration: (ReactingTestTableViewController, XCTestExpectation) -> Void,
+                                                   preparation: (ReactingTestTableViewController) -> Void,
+                                                   action: (ReactingTestTableViewController) throws -> U) throws {
+        guard let sut = sut else {
+            XCTFail()
+            return
+        }
+        unregisterAll()
+        
+        let exp = expectation(description: signature.rawValue)
+        registration(sut,exp)
+        preparation(sut)
+        _ = try action(sut)
+        waitForExpectations(timeout: 1)
+        
+        unregisterAll()
+        
+        let altExp = expectation(description: signature.rawValue)
+        alternativeRegistration(sut,altExp)
+        preparation(sut)
+        _ = try action(sut)
+        waitForExpectations(timeout: 1)
     }
     
     func testFooterConfigurationClosure()
     {
-        controller.manager.unregisterFooter(ReactingHeaderFooterView.self)
+        sut.manager.unregisterFooter(ReactingHeaderFooterView.self)
         let exp = expectation(description: "Configure footer")
-        controller.manager.registerFooter(ReactingHeaderFooterView.self, handler: { view, model, sectionIndex in
+        sut.manager.registerFooter(ReactingHeaderFooterView.self, handler: { view, model, sectionIndex in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
+        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, viewForFooterInSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "heightForRowAtIndexPath")
-        if !controller.manager.usesLegacyUpdateAPI {
+        if !sut.manager.usesLegacyUpdateAPI {
             #if os(iOS)
                 exp.expectedFulfillmentCount = 4
             #endif
         }
-        controller.manager.heightForCell(withItem: Int.self, { int, indexPath in
+        sut.manager.heightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.addItem(3)
-        if controller.manager.usesLegacyUpdateAPI {
-            _ = controller.manager.tableDelegate?.tableView(controller.tableView, heightForRowAt: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(3)
+        if sut.manager.usesLegacyUpdateAPI {
+            _ = sut.manager.tableDelegate?.tableView(sut.tableView, heightForRowAt: indexPath(0, 0))
         }
         waitForExpectations(timeout: 1, handler: nil)
     }
@@ -319,125 +428,125 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testEstimatedHeightForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "estimatedHeightForRowAtIndexPath")
-        if !controller.manager.usesLegacyUpdateAPI {
+        if !sut.manager.usesLegacyUpdateAPI {
             exp.expectedFulfillmentCount = 2
         }
-        controller.manager.estimatedHeightForCell(withItem: Int.self, { int, indexPath in
+        sut.manager.estimatedHeightForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, estimatedHeightForRowAt: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, estimatedHeightForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testIndentationLevelForRowAtIndexPathClosure()
     {
         let exp = expectation(description: "indentationLevelForRowAtIndexPath")
-        if !controller.manager.usesLegacyUpdateAPI {
+        if !sut.manager.usesLegacyUpdateAPI {
             #if os(iOS)
                 exp.expectedFulfillmentCount = 2
             #endif
         }
-        controller.manager.indentationLevelForCell(withItem: Int.self, { int, indexPath in
+        sut.manager.indentationLevelForCell(withItem: Int.self, { int, indexPath in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, indentationLevelForRowAt: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, indentationLevelForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testWillSelectRowAtIndexPathClosure() {
         let exp = expectation(description: "willSelect")
-        controller.manager.willSelect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
+        sut.manager.willSelect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
             exp.fulfill()
             return nil
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willSelectRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willSelectRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testWillDeselectRowAtIndexPathClosure() {
         let exp = expectation(description: "willDeselect")
-        controller.manager.willDeselect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
+        sut.manager.willDeselect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
             exp.fulfill()
             return nil
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDeselectRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willDeselectRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidDeselectRowAtIndexPathClosure() {
         let exp = expectation(description: "didDeselect")
-        controller.manager.didDeselect(NibCell.self, { cell, model, indexPath in
+        sut.manager.didDeselect(NibCell.self, { cell, model, indexPath in
             exp.fulfill()
             return
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didDeselectRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didDeselectRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testWillDisplayRowAtIndexPathClosure() {
         let exp = expectation(description: "willDisplay")
-        if !controller.manager.usesLegacyUpdateAPI {
+        if !sut.manager.usesLegacyUpdateAPI {
             #if os(iOS)
                 exp.expectedFulfillmentCount = 2
             #endif
         }
-        controller.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
+        sut.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDisplay: NibCell(), forRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willDisplay: NibCell(), forRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     #if os(iOS)
     func testEditActionsForRowAtIndexPathClosure() {
         let exp = expectation(description: "editActions")
-        controller.manager.editActions(for: NibCell.self, { (cell, model, indexPath) -> [UITableViewRowAction]? in
+        sut.manager.editActions(for: NibCell.self, { (cell, model, indexPath) -> [UITableViewRowAction]? in
             exp.fulfill()
             return nil
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, editActionsForRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, editActionsForRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     #endif
     
     func testAccessoryButtonTappedForRowAtIndexPathClosure() {
         let exp = expectation(description: "accessoryButtonTapped")
-        controller.manager.accessoryButtonTapped(in: NibCell.self, { cell, model, indexPath  in
+        sut.manager.accessoryButtonTapped(in: NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, accessoryButtonTappedForRowWith: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, accessoryButtonTappedForRowWith: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testCommitEditingStyleForRowAtIndexPathClosure() {
         let exp = expectation(description: "commitEditingStyle")
-        controller.manager.commitEditingStyle(for: NibCell.self, { style, cell, model, indexPath  in
+        sut.manager.commitEditingStyle(for: NibCell.self, { style, cell, model, indexPath  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDataSource?.tableView(controller.tableView, commit: .delete, forRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDataSource?.tableView(sut.tableView, commit: .delete, forRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testCanEditRowAtIndexPathClosure() {
         let exp = expectation(description: "canEditRow")
-        controller.manager.canEditCell(withItem: Int.self, { (model, indexPath) -> Bool in
+        sut.manager.canEditCell(withItem: Int.self, { (model, indexPath) -> Bool in
             exp.fulfill()
             return false
         })
-        controller.manager.memoryStorage.addItem(3)
-        if controller.manager.usesLegacyUpdateAPI {
-            _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        if sut.manager.usesLegacyUpdateAPI {
+            _ = sut.manager.tableDataSource?.tableView(sut.tableView, canEditRowAt: indexPath(0,0))
         }
         #if os(tvOS)
             if #available(tvOS 11, *) {
@@ -447,29 +556,29 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testCanMoveRowAtIndexPathClosure() {
-        let exp = expectation(description: "canMoveRow")
-        controller.manager.canMove(NibCell.self, { (cell, model, indexPath) -> Bool in
-            exp.fulfill()
-            return false
-        })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDataSource?.tableView(controller.tableView, canMoveRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testCanMoveRowAtIndexPathClosure() throws {
+        try verifyEvent(.canMoveRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.canMove(NibCell.self, fullfill(exp, andReturn: true))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.canMove(self.fullfill(exp, andReturn: true)) }
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDataSource?.tableView(sut.tableView, canMoveRowAt: indexPath(0,0)))
+        }, expectedResult: true)
     }
     
     func testHeightForHeaderInSection() {
         let exp = expectation(description: "heightForHeader")
         exp.expectedFulfillmentCount = 2
-        controller.manager.registerHeader(NibHeaderFooterView.self)
-        controller.manager.heightForHeader(withItem: Int.self, { (model, section) -> CGFloat in
+        sut.manager.registerHeader(NibHeaderFooterView.self)
+        sut.manager.heightForHeader(withItem: Int.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.setSectionHeaderModels([1])
-        controller.manager.memoryStorage.setItems([1,2])
-        controller.tableView.beginUpdates()
-        controller.tableView.endUpdates()
+        sut.manager.memoryStorage.setSectionHeaderModels([1])
+        sut.manager.memoryStorage.setItems([1,2])
+        sut.tableView.beginUpdates()
+        sut.tableView.endUpdates()
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -483,18 +592,18 @@ class ReactingToEventsFastTestCase : XCTestCase {
             }
         #endif
         
-        controller.manager.registerHeader(NibHeaderFooterView.self)
-        controller.manager.estimatedHeightForHeader(withItem: Int.self, { (model, section) -> CGFloat in
+        sut.manager.registerHeader(NibHeaderFooterView.self)
+        sut.manager.estimatedHeightForHeader(withItem: Int.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.setSectionHeaderModels([1])
-        controller.manager.memoryStorage.setItems([1,2])
+        sut.manager.memoryStorage.setSectionHeaderModels([1])
+        sut.manager.memoryStorage.setItems([1,2])
         if #available(tvOS 11, *) {
             
         } else {
-            controller.tableView.beginUpdates()
-            controller.tableView.endUpdates()
+            sut.tableView.beginUpdates()
+            sut.tableView.endUpdates()
         }
         
         waitForExpectations(timeout: 1, handler: nil)
@@ -503,318 +612,319 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testHeightForFooterInSection() {
         let exp = expectation(description: "heightForHeader")
         exp.expectedFulfillmentCount = 2
-        controller.manager.heightForFooter(withItem: String.self, { (model, section) -> CGFloat in
+        sut.manager.heightForFooter(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        controller.manager.memoryStorage.setItems([1,2])
-        controller.tableView.beginUpdates()
-        controller.tableView.endUpdates()
+        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        sut.manager.memoryStorage.setItems([1,2])
+        sut.tableView.beginUpdates()
+        sut.tableView.endUpdates()
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testEstimatedHeightForFooterInSection() {
         let exp = expectation(description: "estimatedHeightForFooter")
         
-        controller.manager.estimatedHeightForFooter(withItem: String.self, { (model, section) -> CGFloat in
+        sut.manager.estimatedHeightForFooter(withItem: String.self, { (model, section) -> CGFloat in
             exp.fulfill()
             return 0
         })
-        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        controller.manager.memoryStorage.setItems([1,2])
+        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        sut.manager.memoryStorage.setItems([1,2])
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testWillDisplayHeaderInSection() {
         let exp = expectation(description: "willDisplayHeaderInSection")
-        controller.manager.registerHeader(ReactingHeaderFooterView.self)
-        controller.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
+        sut.manager.registerHeader(ReactingHeaderFooterView.self)
+        sut.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDisplayHeaderView: ReactingHeaderFooterView(), forSection: 0)
+        sut.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willDisplayHeaderView: ReactingHeaderFooterView(), forSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testWillDisplayFooterInSection() {
         let exp = expectation(description: "willDisplayFooterInSection")
-        controller.manager.willDisplayFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
+        sut.manager.willDisplayFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willDisplayFooterView: ReactingHeaderFooterView(), forSection: 0)
+        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willDisplayFooterView: ReactingHeaderFooterView(), forSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     #if os(iOS)
     func testWillBeginEditingRowAtIndexPathClosure() {
         let exp = expectation(description: "willBeginEditing")
-        controller.manager.willBeginEditing(NibCell.self, { cell, model, indexPath  in
+        sut.manager.willBeginEditing(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willBeginEditingRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willBeginEditingRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidEndEditingRowAtIndexPathClosure() {
         let exp = expectation(description: "didEndEditing")
-        controller.manager.didEndEditing(NibCell.self, { cell, model, indexPath  in
+        sut.manager.didEndEditing(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didEndEditingRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didEndEditingRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     #endif
     
     func testEditingStyleForRowAtIndexPath() {
         let exp = expectation(description: "editingStyle")
-        controller.manager.editingStyle(forItem: Int.self, { model, indexPath in
+        sut.manager.editingStyle(forItem: Int.self, { model, indexPath in
             exp.fulfill()
             return .none
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, editingStyleForRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, editingStyleForRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     #if os(iOS)
     func testTitleForDeleteButtonForRowAtIndexPath() {
         let exp = expectation(description: "titleForDeleteButton")
-        controller.manager.titleForDeleteConfirmationButton(in: NibCell.self, { (cell, model, indexPath) -> String? in
+        sut.manager.titleForDeleteConfirmationButton(in: NibCell.self, { (cell, model, indexPath) -> String? in
             exp.fulfill()
             return nil
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, titleForDeleteConfirmationButtonForRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, titleForDeleteConfirmationButtonForRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     #endif
     
     func testShouldIndentRowWhileEditingAtIndexPath() {
         let exp = expectation(description: "shouldIndent")
-        controller.manager.shouldIndentWhileEditing(NibCell.self, { (cell, model, indexPath) -> Bool in
+        sut.manager.shouldIndentWhileEditing(NibCell.self, { (cell, model, indexPath) -> Bool in
             exp.fulfill()
             return true
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldIndentWhileEditingRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldIndentWhileEditingRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidEndDisplayingRowAtIndexPathClosure() {
         let exp = expectation(description: "didEndDispaying")
-        controller.manager.didEndDisplaying(NibCell.self, { cell, model, indexPath  in
+        sut.manager.didEndDisplaying(NibCell.self, { cell, model, indexPath  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didEndDisplaying:NibCell(), forRowAt : indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didEndDisplaying:NibCell(), forRowAt : indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidEndDisplayingHeaderInSection() {
         let exp = expectation(description: "didEndDisplayingHeaderInSection")
-        controller.manager.registerHeader(ReactingHeaderFooterView.self)
-        controller.manager.didEndDisplayingHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
+        sut.manager.registerHeader(ReactingHeaderFooterView.self)
+        sut.manager.didEndDisplayingHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didEndDisplayingHeaderView: ReactingHeaderFooterView(), forSection: 0)
+        sut.manager.memoryStorage.setSectionHeaderModels(["Foo"])
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didEndDisplayingHeaderView: ReactingHeaderFooterView(), forSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidEndDisplayingFooterInSection() {
         let exp = expectation(description: "didEndDisplayingFooterInSection")
-        controller.manager.didEndDisplayingFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
+        sut.manager.didEndDisplayingFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
             exp.fulfill()
         })
-        controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didEndDisplayingFooterView: ReactingHeaderFooterView(), forSection: 0)
+        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didEndDisplayingFooterView: ReactingHeaderFooterView(), forSection: 0)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testShouldMenuForRowAtIndexPath() {
         let exp = expectation(description: "shouldShowMenu")
-        controller.manager.shouldShowMenu(for: NibCell.self, { (cell, model, indexPath) -> Bool in
+        sut.manager.shouldShowMenu(for: NibCell.self, { (cell, model, indexPath) -> Bool in
             exp.fulfill()
             return true
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldShowMenuForRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldShowMenuForRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testCanPerformActionForRowAtIndexPath() {
         let exp = expectation(description: "canPerformActionForRowAtIndexPath")
-        controller.manager.canPerformAction(for: NibCell.self, { (selector, sender, cell, model, indexPath) -> Bool in
+        sut.manager.canPerformAction(for: NibCell.self, { (selector, sender, cell, model, indexPath) -> Bool in
             exp.fulfill()
             return true
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, canPerformAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, canPerformAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testPerformActionForRowAtIndexPath() {
         let exp = expectation(description: "performActionForRowAtIndexPath")
-        controller.manager.performAction(for: NibCell.self, { (selector, sender, cell, model, indexPath) in
+        sut.manager.performAction(for: NibCell.self, { (selector, sender, cell, model, indexPath) in
             exp.fulfill()
             return
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, performAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, performAction: #selector(testDidEndDisplayingFooterInSection), forRowAt: indexPath(0, 0), withSender: exp)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testShouldHighlightRowAtIndexPath() {
         let exp = expectation(description: "shouldHighlight")
-        controller.manager.shouldHighlight(NibCell.self, { (cell, model, indexPath) -> Bool in
+        sut.manager.shouldHighlight(NibCell.self, { (cell, model, indexPath) -> Bool in
             exp.fulfill()
             return true
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldHighlightRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldHighlightRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidHighlightRowAtIndexPath() {
         let exp = expectation(description: "didHighlight")
-        controller.manager.didHighlight(NibCell.self, { (cell, model, indexPath) in
+        sut.manager.didHighlight(NibCell.self, { (cell, model, indexPath) in
             exp.fulfill()
             return
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didHighlightRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didHighlightRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidUnhighlightRowAtIndexPath() {
         let exp = expectation(description: "didUnhighlight")
-        controller.manager.didUnhighlight(NibCell.self, { (cell, model, indexPath) in
+        sut.manager.didUnhighlight(NibCell.self, { (cell, model, indexPath) in
             exp.fulfill()
             return
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didUnhighlightRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didUnhighlightRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     @available(tvOS 9.0, *)
     func testCanFocusRowAtIndexPath() {
         let exp = expectation(description: "canFocus")
-        controller.manager.canFocus(NibCell.self, { (cell, model, indexPath) -> Bool in
+        sut.manager.canFocus(NibCell.self, { (cell, model, indexPath) -> Bool in
             exp.fulfill()
             return true
         })
-        controller.manager.memoryStorage.addItem(3)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, canFocusRowAt: indexPath(0,0))
+        sut.manager.memoryStorage.addItem(3)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, canFocusRowAt: indexPath(0,0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     #if os(iOS)
     func testSectionIndexTitlesFor() {
         let exp = expectation(description: "sectionIndexTitles")
-        controller.manager.sectionIndexTitles {
+        sut.manager.sectionIndexTitles {
             exp.fulfill()
             return ["1","2"]
         }
-        _ = controller.manager.tableDataSource?.sectionIndexTitles(for: controller.tableView)
+        _ = sut.manager.tableDataSource?.sectionIndexTitles(for: sut.tableView)
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     
     func testSectionForSectionIndexTitleAt() {
         let exp = expectation(description: "sectionForSectionIndexTitle")
-        controller.manager.sectionForSectionIndexTitle { title, index -> Int in
+        sut.manager.sectionForSectionIndexTitle { title, index -> Int in
             exp.fulfill()
             return 5
         }
-        _ = controller.manager.tableDataSource?.tableView(controller.tableView, sectionForSectionIndexTitle: "2", at: 3)
+        _ = sut.manager.tableDataSource?.tableView(sut.tableView, sectionForSectionIndexTitle: "2", at: 3)
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     #endif
     
-    func testMoveRowAtIndexPath() {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
-        let exp = expectation(description: "Move row at indexPath")
-        controller.manager.move(NibCell.self, { (cell, model, sourceIndexPath, destinationIndexPath) in
-            exp.fulfill()
-            return
+    func testMoveRowAtIndexPath() throws {
+        try verifyEvent(.moveRowAtIndexPathToIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.move(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.moveRowTo(self.fullfill(exp, andReturn: ()))}
+        }, preparation: { sut in
+            sut.manager.memoryStorage.addItems([3,4])
+        }, action: {
+            $0.manager.tableDataSource?.tableView(sut.tableView, moveRowAt: indexPath(0,0), to: indexPath(1, 0))
         })
-        controller.manager.memoryStorage.addItems([3,4])
-        _ = controller.manager.tableDataSource?.tableView(controller.tableView, moveRowAt: indexPath(0,0), to: indexPath(1, 0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
     #if os(iOS)
     func testItemsForBeginningInDragSession() {
         let exp = expectation(description: "ItemsForBeginningInDragSession")
-        controller.manager.itemsForBeginningDragSession(from: NibCell.self) { session, cell, model, _ in
+        sut.manager.itemsForBeginningDragSession(from: NibCell.self) { session, cell, model, _ in
             exp.fulfill()
             return []
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, itemsForBeginning: DragAndDropMock(), at: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, itemsForBeginning: DragAndDropMock(), at: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testItemsForAddingToDragSession() {
         let exp = expectation(description: "ItemsForAddingToDragSession")
-        controller.manager.itemsForAddingToDragSession(from: NibCell.self) { session, point, cell, model, _ in
+        sut.manager.itemsForAddingToDragSession(from: NibCell.self) { session, point, cell, model, _ in
             exp.fulfill()
             return []
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, itemsForAddingTo: DragAndDropMock(), at: indexPath(0,0), point: .zero)
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, itemsForAddingTo: DragAndDropMock(), at: indexPath(0,0), point: .zero)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDragPreviewParametersForRowAtIndexPath() {
         let exp = expectation(description: "dragPreviewParametersForRowAtIndexPath")
-        controller.manager.dragPreviewParameters(for: NibCell.self) { cell, model, indexPath in
+        sut.manager.dragPreviewParameters(for: NibCell.self) { cell, model, indexPath in
             exp.fulfill()
             return nil
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragPreviewParametersForRowAt: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, dragPreviewParametersForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDragSessionWillBegin() {
         let exp = expectation(description: "dragSessionWillBegin")
-        controller.manager.dragSessionWillBegin { _ in
+        sut.manager.dragSessionWillBegin { _ in
             exp.fulfill()
         }
-        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionWillBegin: DragAndDropMock())
+        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, dragSessionWillBegin: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDragSessionDidEnd() {
         let exp = expectation(description: "dragSessionDidEnd")
-        controller.manager.dragSessionDidEnd { _ in
+        sut.manager.dragSessionDidEnd { _ in
             exp.fulfill()
         }
-        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionDidEnd: DragAndDropMock())
+        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, dragSessionDidEnd: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDragSessionAllowsMoveOperation() {
         let exp = expectation(description: "dragSessionAllowsMoveOperation")
-        controller.manager.dragSessionAllowsMoveOperation{ _  in
+        sut.manager.dragSessionAllowsMoveOperation{ _  in
             exp.fulfill()
             return true
         }
-        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionAllowsMoveOperation: DragAndDropMock())
+        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, dragSessionAllowsMoveOperation: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDragSessionIsRestrictedToDraggingApplication() {
         let exp = expectation(description: "dragSessionRestrictedToDraggingApplication")
-        controller.manager.dragSessionIsRestrictedToDraggingApplication{ _  in
+        sut.manager.dragSessionIsRestrictedToDraggingApplication{ _  in
             exp.fulfill()
             return true
         }
-        _ = controller.manager.tableDragDelegate?.tableView(controller.tableView, dragSessionIsRestrictedToDraggingApplication: DragAndDropMock())
+        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, dragSessionIsRestrictedToDraggingApplication: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -822,168 +932,168 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testPerformDropWithCoordinator() {
         let exp = expectation(description: "performDropWithCoordinator")
-        controller.manager.performDropWithCoordinator { _ in
+        sut.manager.performDropWithCoordinator { _ in
             exp.fulfill()
         }
-        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, performDropWith: DropCoordinatorMock())
+        _ = sut.manager.tableDropDelegate?.tableView(sut.tableView, performDropWith: DropCoordinatorMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testCanHandleDropSession() {
         let exp = expectation(description: "canHandleDropSession")
-        controller.manager.canHandleDropSession { _ in
+        sut.manager.canHandleDropSession { _ in
             exp.fulfill()
             return true
         }
-        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, canHandle: DragAndDropMock())
+        _ = sut.manager.tableDropDelegate?.tableView(sut.tableView, canHandle: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDropSessionDidEnter() {
         let exp = expectation(description: "dropSessionDidEnter")
-        controller.manager.dropSessionDidEnter { _ in
+        sut.manager.dropSessionDidEnter { _ in
             exp.fulfill()
         }
-        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropSessionDidEnter: DragAndDropMock())
+        _ = sut.manager.tableDropDelegate?.tableView(sut.tableView, dropSessionDidEnter: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDropSessionDidUpdate() {
         let exp = expectation(description: "dropSessionDidUpdate")
-        controller.manager.dropSessionDidUpdate { _, _ in
+        sut.manager.dropSessionDidUpdate { _, _ in
             exp.fulfill()
             return UITableViewDropProposal(operation: .cancel)
         }
-        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropSessionDidUpdate: DragAndDropMock(), withDestinationIndexPath: nil)
+        _ = sut.manager.tableDropDelegate?.tableView(sut.tableView, dropSessionDidUpdate: DragAndDropMock(), withDestinationIndexPath: nil)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDropSessionDidExit() {
         let exp = expectation(description: "dropSessionDidExit")
-        controller.manager.dropSessionDidExit { _ in
+        sut.manager.dropSessionDidExit { _ in
             exp.fulfill()
         }
-        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropSessionDidExit: DragAndDropMock())
+        _ = sut.manager.tableDropDelegate?.tableView(sut.tableView, dropSessionDidExit: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDropSessionDidEnd() {
         let exp = expectation(description: "dropSessionDidEnd")
-        controller.manager.dropSessionDidEnd { _ in
+        sut.manager.dropSessionDidEnd { _ in
             exp.fulfill()
         }
-        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropSessionDidEnd: DragAndDropMock())
+        _ = sut.manager.tableDropDelegate?.tableView(sut.tableView, dropSessionDidEnd: DragAndDropMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDropPreviewParametersForRowAtIndexPath() {
         let exp = expectation(description: "dropPreviewParametersForRowAtIndexPath")
-        controller.manager.dropPreviewParameters { _ in
+        sut.manager.dropPreviewParameters { _ in
             exp.fulfill()
             return nil
         }
-        _ = controller.manager.tableDropDelegate?.tableView(controller.tableView, dropPreviewParametersForRowAt: indexPath(0, 0))
+        _ = sut.manager.tableDropDelegate?.tableView(sut.tableView, dropPreviewParametersForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testLeadingSwipeActionsConfiguration() {
         let exp = expectation(description: "leadingSwipeActionsConfiguration")
-        controller.manager.leadingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
+        sut.manager.leadingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
             exp.fulfill()
             return nil
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, leadingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, leadingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testTrailingSwipeActionsConfiguration() {
         let exp = expectation(description: "trailingSwipeActionsConfiguration")
-        controller.manager.trailingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
+        sut.manager.trailingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
             exp.fulfill()
             return nil
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, trailingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, trailingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testShouldSpringLoadRow() {
         let exp = expectation(description: "shouldSpringLoadRow")
-        controller.manager.shouldSpringLoad(NibCell.self) { _,_,_,_ in
+        sut.manager.shouldSpringLoad(NibCell.self) { _,_,_,_ in
             exp.fulfill()
             return false
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldSpringLoadRowAt: indexPath(0, 0), with: SpringLoadedContextMock())
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldSpringLoadRowAt: indexPath(0, 0), with: SpringLoadedContextMock())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testShouldBeginMultipleSelectionInteraction() {
         guard #available(iOS 13, *) else { return }
         let exp = expectation(description: "shouldBeginMultipleSelectionInteractionAT")
-        controller.manager.shouldBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
+        sut.manager.shouldBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
             exp.fulfill()
             return false
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, shouldBeginMultipleSelectionInteractionAt: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldBeginMultipleSelectionInteractionAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidBeginMultipleSelectionInteraction() {
         guard #available(iOS 13, *) else { return }
         let exp = expectation(description: "didBeginMultipleSelectionInteractionAT")
-        controller.manager.didBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
+        sut.manager.didBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
             exp.fulfill()
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, didBeginMultipleSelectionInteractionAt: indexPath(0, 0))
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didBeginMultipleSelectionInteractionAt: indexPath(0, 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testDidEndMultipleSelectionInteraction() {
         guard #available(iOS 13, *) else { return }
         let exp = expectation(description: "didEndMultipleSelectionInteractionAT")
-        controller.manager.didEndMultipleSelectionInteraction {
+        sut.manager.didEndMultipleSelectionInteraction {
             exp.fulfill()
         }
-        _ = controller.manager.tableDelegate?.tableViewDidEndMultipleSelectionInteraction(controller.tableView)
+        _ = sut.manager.tableDelegate?.tableViewDidEndMultipleSelectionInteraction(sut.tableView)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testContextMenuConfiguration() {
         guard #available(iOS 13, *) else { return }
         let exp = expectation(description: "contextMenuConfiguration")
-        controller.manager.contextMenuConfiguration(for: NibCell.self) { point, _, _, _ in
+        sut.manager.contextMenuConfiguration(for: NibCell.self) { point, _, _, _ in
             XCTAssertEqual(point, CGPoint(x: 1, y: 1))
             exp.fulfill()
             return nil
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, contextMenuConfigurationForRowAt: indexPath(0, 0), point: CGPoint(x: 1, y: 1))
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, contextMenuConfigurationForRowAt: indexPath(0, 0), point: CGPoint(x: 1, y: 1))
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testPreviewForHighlightingContextMenu() {
         guard #available(iOS 13, *) else { return }
         let exp = expectation(description: "previewForHighlightingContextMenuWith")
-        controller.manager.previewForHighlightingContextMenu { configuration in
+        sut.manager.previewForHighlightingContextMenu { configuration in
             exp.fulfill()
             return nil
         }
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForHighlightingContextMenuWithConfiguration: .init())
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, previewForHighlightingContextMenuWithConfiguration: .init())
         waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testPreviewForDismissingContextMenu() {
         guard #available(iOS 13, *) else { return }
         let exp = expectation(description: "previewForDismissingContextMenuWith")
-        controller.manager.previewForDismissingContextMenu { configuration in
+        sut.manager.previewForDismissingContextMenu { configuration in
             exp.fulfill()
             return nil
         }
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, previewForDismissingContextMenuWithConfiguration: .init())
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView, previewForDismissingContextMenuWithConfiguration: .init())
         waitForExpectations(timeout: 1, handler: nil)
     }
         #if compiler(<5.1.2)
@@ -1001,12 +1111,12 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testTargetIndexPathForMoveFromTo() {
         let exp = expectation(description: "targetIndexPathForMoveFromRowToRow")
-        controller.manager.targetIndexPathForMove(NibCell.self) { _, _, _, _ in
+        sut.manager.targetIndexPathForMove(NibCell.self) { _, _, _, _ in
             exp.fulfill()
             return indexPath(0, 0)
         }
-        controller.manager.memoryStorage.addItem(1)
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView,
+        sut.manager.memoryStorage.addItem(1)
+        _ = sut.manager.tableDelegate?.tableView(sut.tableView,
                                                         targetIndexPathForMoveFromRowAt: indexPath(0, 0),
                                                         toProposedIndexPath: indexPath(1, 0))
         waitForExpectations(timeout: 1, handler: nil)
@@ -1014,11 +1124,11 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testIndexPathForPreferredFocusedView() {
         let exp = expectation(description: "indexPathForPreferredFocusedView")
-        controller.manager.indexPathForPreferredFocusedView {
+        sut.manager.indexPathForPreferredFocusedView {
             exp.fulfill()
             return nil
         }
-        _ = controller.manager.tableDelegate?.indexPathForPreferredFocusedView(in: controller.tableView)
+        _ = sut.manager.tableDelegate?.indexPathForPreferredFocusedView(in: sut.tableView)
         waitForExpectations(timeout: 1, handler: nil)
     }
     
@@ -1121,7 +1231,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testEventsRegistrationPerfomance() {
-        let manager = self.controller.manager
+        let manager = self.sut.manager
         manager.anomalyHandler.anomalyAction = { _ in }
         measure {
             manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
@@ -1166,8 +1276,8 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testSearchForEventPerfomance() {
-        let manager = self.controller.manager
-        controller.tableView = UITableView()
+        let manager = self.sut.manager
+        sut.tableView = UITableView()
         manager.anomalyHandler.anomalyAction = { _ in }
         manager.commitEditingStyle(for: NibCell.self, { _,_,_,_ in })
         manager.canEditCell(withItem: Int.self, { _,_ in return true })
@@ -1202,15 +1312,15 @@ class ReactingToEventsFastTestCase : XCTestCase {
         manager.register(NibCell.self)
         manager.memoryStorage.addItem(5)
         measure {
-            manager.tableDelegate?.tableView(self.controller.tableView, didSelectRowAt: indexPath(0, 0))
+            manager.tableDelegate?.tableView(self.sut.tableView, didSelectRowAt: indexPath(0, 0))
         }
     }
     
     func testModelEventCalledWithCellTypeLeadsToAnomaly() {
         let exp = expectation(description: "Model event called with cell")
         let anomaly = DTTableViewManagerAnomaly.modelEventCalledWithCellClass(modelType: "NibCell", methodName: "canEditCell(withItem:_:)", subclassOf: "UITableViewCell")
-        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.canEditCell(withItem: NibCell.self) { _, _ in true }
+        sut.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        sut.manager.canEditCell(withItem: NibCell.self) { _, _ in true }
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "    ⚠️[DTTableViewManager] Event canEditCell(withItem:_:) registered with model type, that happens to be a subclass of UITableViewCell: NibCell.\n\n    This is likely not what you want, because this event expects to receive model type used for current indexPath instead of cell/view.\n    Reasoning behind it is the fact that for some events views have not yet been created(for example: tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)).\n    Because they are not created yet, this event cannot be called with cell/view object, and even it\'s type is unknown at this point, as the mapping resolution will happen later.\n\n    Most likely you need to use model type, that will be passed to this cell/view through ModelTransfer protocol.\n    For example, for height of cell that expects to receive model Int, event would look like so:\n            \n        manager.heightForCell(withItem: Int.self) { model, indexPath in\n            return 44\n        }")
@@ -1219,8 +1329,8 @@ class ReactingToEventsFastTestCase : XCTestCase {
     func testUnusedEventLeadsToAnomaly() {
         let exp = expectation(description: "Unused event")
         let anomaly = DTTableViewManagerAnomaly.unusedEventDetected(viewType: "StringCell", methodName: "didSelect(_:_:)")
-        controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.didSelect(StringCell.self) { _, _, _ in }
+        sut.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        sut.manager.didSelect(StringCell.self) { _, _, _ in }
         waitForExpectations(timeout: 1.1)
         
         XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] didSelect(_:_:) event registered for StringCell, but there were no view mappings registered for StringCell type. This event will never be called.")

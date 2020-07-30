@@ -24,6 +24,8 @@ This release requires Swift 5.3. Minimum iOS / tvOS deployment targets are uncha
 
 Some context: this release heavily relies on where clauses on contextually generic declarations, that are only available in Swift 5.3 - [SE-0267](https://github.com/apple/swift-evolution/blob/master/proposals/0267-where-on-contextually-generic.md).
 
+* `ViewModelMapping` is now a generic class, that captures view and model information(ViewModelMapping<T,U>).
+
 ### Deprecated
 
 * Several cell/header/footer/supplementary view registration methods have been deprecated to unify registration logic. Please use `register(_:handler:mapping:)`, `registerHeader(_:handler:mapping:)`, `registerFooter(_:handler:mapping:)` as a replacements for all of those methods. For more information on those changes, please read [migration guide LINK MISSING](link to migration guide).
