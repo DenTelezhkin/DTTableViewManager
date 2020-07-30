@@ -83,12 +83,6 @@ class CreationTestCase: XCTestCase {
         XCTAssert(foo.manager === manager)
     }
     
-    func testLoadFromXibChecksCorrectClassName() {
-        let loadedView = StringCell.dt_loadFromXibNamed("NibCell")
-        
-        XCTAssertNil(loadedView)
-    }
-    
     func testCallingStartManagingMethodIsNotRequired() {
         let controller = DTTestTableViewController()
         controller.manager.register(NibCell.self)

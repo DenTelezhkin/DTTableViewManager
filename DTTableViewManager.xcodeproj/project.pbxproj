@@ -26,7 +26,6 @@
 		3EDC209F22B817E90078EB0D /* DTTableViewDelegateWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205E22B817E00078EB0D /* DTTableViewDelegateWrapper.swift */; };
 		3EDC20A022B817E90078EB0D /* DTTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205F22B817E00078EB0D /* DTTableViewDataSource.swift */; };
 		3EDC20A122B817E90078EB0D /* DTTableViewManager+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC206022B817E00078EB0D /* DTTableViewManager+Registration.swift */; };
-		3EDC20A222B817E90078EB0D /* UIView+XibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC206122B817E00078EB0D /* UIView+XibLoading.swift */; };
 		3EDC20A322B817E90078EB0D /* DTTableViewManagerAnomalyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC206222B817E00078EB0D /* DTTableViewManagerAnomalyHandler.swift */; };
 		3EDC20A422B817E90078EB0D /* DTTableViewDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC206322B817E00078EB0D /* DTTableViewDropDelegate.swift */; };
 		3EDC20A522B817E90078EB0D /* DTTableViewManager+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC206422B817E00078EB0D /* DTTableViewManager+Drop.swift */; };
@@ -189,7 +188,6 @@
 		3EDC205E22B817E00078EB0D /* DTTableViewDelegateWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDelegateWrapper.swift; sourceTree = "<group>"; };
 		3EDC205F22B817E00078EB0D /* DTTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDataSource.swift; sourceTree = "<group>"; };
 		3EDC206022B817E00078EB0D /* DTTableViewManager+Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTableViewManager+Registration.swift"; sourceTree = "<group>"; };
-		3EDC206122B817E00078EB0D /* UIView+XibLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+XibLoading.swift"; sourceTree = "<group>"; };
 		3EDC206222B817E00078EB0D /* DTTableViewManagerAnomalyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewManagerAnomalyHandler.swift; sourceTree = "<group>"; };
 		3EDC206322B817E00078EB0D /* DTTableViewDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDropDelegate.swift; sourceTree = "<group>"; };
 		3EDC206422B817E00078EB0D /* DTTableViewManager+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTableViewManager+Drop.swift"; sourceTree = "<group>"; };
@@ -356,7 +354,6 @@
 				3EDC205C22B817E00078EB0D /* TableViewConfiguration.swift */,
 				3EDC205522B817E00078EB0D /* TableViewFactory.swift */,
 				3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */,
-				3EDC206122B817E00078EB0D /* UIView+XibLoading.swift */,
 				9ABE13F624599952008874D2 /* Exports.swift */,
 			);
 			path = DTTableViewManager;
@@ -813,7 +810,6 @@
 				3EDC209722B817E90078EB0D /* DTTableViewDelegate.swift in Sources */,
 				3EDC20A322B817E90078EB0D /* DTTableViewManagerAnomalyHandler.swift in Sources */,
 				9A66DC1C24D18326002AD705 /* DTTableViewManager+Deprecated.swift in Sources */,
-				3EDC20A222B817E90078EB0D /* UIView+XibLoading.swift in Sources */,
 				3EDC20A622B817E90078EB0D /* DTTableViewManager.swift in Sources */,
 				9ABE13F724599952008874D2 /* Exports.swift in Sources */,
 				3EDC20A422B817E90078EB0D /* DTTableViewDropDelegate.swift in Sources */,
