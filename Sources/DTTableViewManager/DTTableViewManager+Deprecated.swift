@@ -95,4 +95,31 @@ public extension DTTableViewManager {
             mapping?(mappingInstance)
         }
     }
+    
+    @available(*, deprecated, message: "Please use handler parameter in register(_:handler:mapping:) method instead.")
+    /// Registers `closure` to be executed, when `UITableView` requests `cellClass` in `UITableViewDataSource.tableView(_:cellForRowAt:)` method and cell is being configured.
+    ///
+    /// This closure will be performed *after* cell is created and `update(with:)` method is called.
+    func configure<T:ModelTransfer>(_ cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell
+    {
+        tableDataSource?.appendReaction(for: T.self, signature: .configureCell, closure: closure)
+    }
+    
+    @available(*, deprecated, message: "Please use handler parameter in registerHeader(_:handler:mapping:) method instead.")
+    /// Registers `closure` to be executed, when `UITableView` requests `headerClass` in `UITableViewDelegate.tableView(_:viewForHeaderInSection:)` method and header is being configured.
+    ///
+    /// This closure will be performed *after* header is created and `update(with:)` method is called.
+    func configureHeader<T:ModelTransfer>(_ headerClass: T.Type, _ closure: @escaping (T, T.ModelType, Int) -> Void) where T: UIView
+    {
+        tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, supplementaryClass: T.self, signature: .configureHeader, closure: closure)
+    }
+    
+    @available(*, deprecated, message: "Please use handler parameter in registerFooter(_:handler:mapping:) method instead.")
+    /// Registers `closure` to be executed, when `UITableView` requests `footerClass` in `UITableViewDelegate.tableView(_:viewForFooterInSection:)` method and footer is being configured.
+    ///
+    /// This closure will be performed *after* footer is created and `update(with:)` method is called.
+    func configureFooter<T:ModelTransfer>(_ footerClass: T.Type, _ closure: @escaping (T, T.ModelType, Int) -> Void) where T: UIView
+    {
+        tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: .configureFooter, closure: closure)
+    }
 }

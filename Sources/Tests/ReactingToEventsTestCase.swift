@@ -209,11 +209,8 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testCellConfigurationClosure()
     {
-        controller.manager.register(SelectionReactingTableCell.self)
-        
         var reactingCell : SelectionReactingTableCell?
-        
-        controller.manager.configure(SelectionReactingTableCell.self, { (cell, model, indexPath) in
+        controller.manager.register(SelectionReactingTableCell.self, handler: { cell, model, indexPath in
             cell.indexPath = indexPath
             cell.model = model
             cell.textLabel?.text = "Foo"
@@ -230,36 +227,24 @@ class ReactingToEventsTestCase: XCTestCase {
     
     func testHeaderConfigurationClosure()
     {
-        controller.manager.registerHeader(ReactingHeaderFooterView.self)
+        controller.manager.registerHeader(ReactingHeaderFooterView.self, handler: { view, model, sectionIndex in
+            view.sectionIndex = sectionIndex
+        })
         
-        var reactingHeader : ReactingHeaderFooterView?
-        
-        controller.manager.configureHeader(ReactingHeaderFooterView.self) { (header, model, sectionIndex) in
-            header.model = "Bar"
-            header.sectionIndex = sectionIndex
-        }
         controller.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        reactingHeader = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
-        
+        let reactingHeader : ReactingHeaderFooterView? = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0) as? ReactingHeaderFooterView
         XCTAssertEqual(reactingHeader?.sectionIndex, 0)
-        XCTAssertEqual(reactingHeader?.model, "Bar")
     }
     
     func testFooterConfigurationClosure()
     {
-        controller.manager.registerFooter(ReactingHeaderFooterView.self)
-        
-        var reactingFooter : ReactingHeaderFooterView?
-        
-        controller.manager.configureFooter(ReactingHeaderFooterView.self) { (footer, model, sectionIndex) in
-            footer.model = "Bar"
-            footer.sectionIndex = sectionIndex
-        }
+        controller.manager.registerFooter(ReactingHeaderFooterView.self, handler: { view, model, sectionIndex in
+            view.sectionIndex = sectionIndex
+        })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        reactingFooter = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
+        let reactingFooter : ReactingHeaderFooterView? = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0) as? ReactingHeaderFooterView
         
         XCTAssertEqual(reactingFooter?.sectionIndex, 0)
-        XCTAssertEqual(reactingFooter?.model, "Bar")
     }
     
     func testShouldReactAfterContentUpdate()
@@ -302,10 +287,11 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testFooterConfigurationClosure()
     {
+        controller.manager.unregisterFooter(ReactingHeaderFooterView.self)
         let exp = expectation(description: "Configure footer")
-        controller.manager.configureFooter(ReactingHeaderFooterView.self) { _,_,_ in
+        controller.manager.registerFooter(ReactingHeaderFooterView.self, handler: { view, model, sectionIndex in
             exp.fulfill()
-        }
+        })
         controller.manager.memoryStorage.setSectionFooterModels(["Foo"])
         _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         waitForExpectations(timeout: 1, handler: nil)

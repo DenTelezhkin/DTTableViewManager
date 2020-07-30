@@ -29,30 +29,6 @@ import DTModelStorage
 
 extension DTTableViewManager
 {
-    /// Registers `closure` to be executed, when `UITableView` requests `cellClass` in `UITableViewDataSource.tableView(_:cellForRowAt:)` method and cell is being configured.
-    ///
-    /// This closure will be performed *after* cell is created and `update(with:)` method is called.
-    open func configure<T:ModelTransfer>(_ cellClass:T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Void) where T: UITableViewCell
-    {
-        tableDataSource?.appendReaction(for: T.self, signature: .configureCell, closure: closure)
-    }
-    
-    /// Registers `closure` to be executed, when `UITableView` requests `headerClass` in `UITableViewDelegate.tableView(_:viewForHeaderInSection:)` method and header is being configured.
-    ///
-    /// This closure will be performed *after* header is created and `update(with:)` method is called.
-    open func configureHeader<T:ModelTransfer>(_ headerClass: T.Type, _ closure: @escaping (T, T.ModelType, Int) -> Void) where T: UIView
-    {
-        tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, supplementaryClass: T.self, signature: .configureHeader, closure: closure)
-    }
-    
-    /// Registers `closure` to be executed, when `UITableView` requests `footerClass` in `UITableViewDelegate.tableView(_:viewForFooterInSection:)` method and footer is being configured.
-    ///
-    /// This closure will be performed *after* footer is created and `update(with:)` method is called.
-    open func configureFooter<T:ModelTransfer>(_ footerClass: T.Type, _ closure: @escaping (T, T.ModelType, Int) -> Void) where T: UIView
-    {
-        tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: .configureFooter, closure: closure)
-    }
-    
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canMoveRowAt:)` method is called for `cellClass`.
     open func canMove<T:ModelTransfer>(_ cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> Bool) where T: UITableViewCell {
         tableDataSource?.appendReaction(for: T.self, signature: EventMethodSignature.canMoveRowAtIndexPath, closure: closure)

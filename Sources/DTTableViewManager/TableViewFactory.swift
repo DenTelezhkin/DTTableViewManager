@@ -217,20 +217,6 @@ final class TableViewFactory
             return nil
         }
       
-        if let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: mapping.reuseIdentifier) {
-            mapping.updateBlock(view, model)
-            return view
-        } else {
-            var view : UIView?
-            
-            if let type = mapping.viewClass as? UIView.Type {
-                view = type.dt_loadFromXib()
-            }
-            
-            if let view = view {
-                mapping.updateBlock(view, model)
-            }
-            return view
-        }
+        return mapping.dequeueConfiguredReusableSupplementaryView(for: tableView, kind: type.supplementaryKind() ?? "", model: model, indexPath: indexPath)
     }
 }

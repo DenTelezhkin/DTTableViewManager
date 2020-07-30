@@ -380,7 +380,7 @@ class DatasourceTestCase: BaseTestCase {
     
     func testNoHeaderMappingTriggersToAnomaly() {
         let exp = expectation(description: "No header mapping found")
-        let anomaly = DTTableViewManagerAnomaly.noHeaderFooterMappingFound(modelDescription: "0", indexPath: IndexPath(index: 0))
+        let anomaly = DTTableViewManagerAnomaly.noHeaderFooterMappingFound(modelDescription: "0", indexPath: IndexPath(item: 0, section: 0))
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.memoryStorage.setSectionHeaderModels([0])
         controller.manager.configuration.displayHeaderOnEmptySection = true
@@ -388,7 +388,7 @@ class DatasourceTestCase: BaseTestCase {
         let _ = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
         waitForExpectations(timeout: 0.1)
         
-        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a header/footer view for model ar [0], but view model mapping for it was not found, model description: 0")
+        XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a header/footer view for model at [0, 0], but view model mapping for it was not found, model description: 0")
     }
     
     func testWrongReuseIdentifierLeadsToAnomaly() {

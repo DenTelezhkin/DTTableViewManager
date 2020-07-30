@@ -49,7 +49,7 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomStringConvertible, Custo
         case .nilHeaderModel(let section): return "⚠️[DTTableViewManager] UITableView requested a header view at section \(section), however the model was nil."
         case .nilFooterModel(let section): return "⚠️[DTTableViewManager] UITableView requested a footer view at section \(section), however the model was nil."
         case .noCellMappingFound(modelDescription: let description, indexPath: let indexPath): return "❗️[DTTableViewManager] UITableView requested a cell for model at \(indexPath), but view model mapping for it was not found, model description: \(description)"
-        case .noHeaderFooterMappingFound(modelDescription: let description, let indexPath): return "❗️[DTTableViewManager] UITableView requested a header/footer view for model ar \(indexPath), but view model mapping for it was not found, model description: \(description)"
+        case .noHeaderFooterMappingFound(modelDescription: let description, let indexPath): return "❗️[DTTableViewManager] UITableView requested a header/footer view for model at \(indexPath), but view model mapping for it was not found, model description: \(description)"
         case .differentCellReuseIdentifier(mappingReuseIdentifier: let mappingReuseIdentifier,
                                            cellReuseIdentifier: let cellReuseIdentifier):
             return "❗️[DTTableViewManager] Reuse identifier specified in InterfaceBuilder: \(cellReuseIdentifier) does not match reuseIdentifier used to register with UITableView: \(mappingReuseIdentifier). \n" +

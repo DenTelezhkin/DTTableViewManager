@@ -60,7 +60,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         if configuration?.sectionHeaderStyle == .title { return nil }
         let viewKind = ViewType.supplementaryView(kind: DTTableViewElementSectionHeader)
         if let model = headerModel(forSection:section) {
-            if let createdView = viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
+            if let createdView = viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(row: 0, section: section))
             {
                 _ = EventReaction.performReaction(from: viewFactory?.mappings ?? [],
                                                             signature: EventMethodSignature.configureHeader.rawValue,
@@ -85,7 +85,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         if configuration?.sectionFooterStyle == .title { return nil }
         let viewKind = ViewType.supplementaryView(kind: DTTableViewElementSectionFooter)
         if let model = footerModel(forSection: section) {
-            if let createdView = viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(index: section))
+            if let createdView = viewFactory?.headerFooterView(of: viewKind, model: model, atIndexPath: IndexPath(row: 0, section: section))
             {
                 _ = EventReaction.performReaction(from: viewFactory?.mappings ?? [],
                                                             signature: EventMethodSignature.configureFooter.rawValue,
