@@ -857,37 +857,37 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     #if os(iOS)
-    func testItemsForBeginningInDragSession() {
-        let exp = expectation(description: "ItemsForBeginningInDragSession")
-        sut.manager.itemsForBeginningDragSession(from: NibCell.self) { session, cell, model, _ in
-            exp.fulfill()
-            return []
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, itemsForBeginning: DragAndDropMock(), at: indexPath(0, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testItemsForBeginningInDragSession() throws {
+        try verifyEvent(.itemsForBeginningDragSession, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.itemsForBeginningDragSession(from: NibCell.self, fullfill(exp, andReturn: []))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.itemsForBeginningDragSession(self.fullfill(exp, andReturn: [])) }
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDragDelegate?.tableView(sut.tableView, itemsForBeginning: DragAndDropMock(), at: indexPath(0, 0)))
+        }, expectedResult: [])
     }
     
-    func testItemsForAddingToDragSession() {
-        let exp = expectation(description: "ItemsForAddingToDragSession")
-        sut.manager.itemsForAddingToDragSession(from: NibCell.self) { session, point, cell, model, _ in
-            exp.fulfill()
-            return []
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, itemsForAddingTo: DragAndDropMock(), at: indexPath(0,0), point: .zero)
-        waitForExpectations(timeout: 1, handler: nil)
+    func testItemsForAddingToDragSession() throws {
+        try verifyEvent(.itemsForAddingToDragSession, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.itemsForAddingToDragSession(from: NibCell.self, fullfill(exp, andReturn: []))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.itemsForAddingToDragSession(self.fullfill(exp, andReturn: []))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDragDelegate?.tableView(sut.tableView, itemsForAddingTo: DragAndDropMock(), at: indexPath(0,0), point: .zero))
+        }, expectedResult: [])
     }
     
-    func testDragPreviewParametersForRowAtIndexPath() {
-        let exp = expectation(description: "dragPreviewParametersForRowAtIndexPath")
-        sut.manager.dragPreviewParameters(for: NibCell.self) { cell, model, indexPath in
-            exp.fulfill()
-            return nil
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDragDelegate?.tableView(sut.tableView, dragPreviewParametersForRowAt: indexPath(0, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testDragPreviewParametersForRowAtIndexPath() throws {
+        try verifyEvent(.dragPreviewParametersForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.dragPreviewParameters(for: NibCell.self, fullfill(exp, andReturn: nil))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.dragPreviewParameters(self.fullfill(exp, andReturn: nil)) }
+        }, preparation: addIntItem(), action: {
+            _ = $0.manager.tableDragDelegate?.tableView(sut.tableView, dragPreviewParametersForRowAt: indexPath(0, 0))
+        })
     }
     
     func testDragSessionWillBegin() {
