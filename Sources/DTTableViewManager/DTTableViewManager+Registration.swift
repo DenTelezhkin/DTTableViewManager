@@ -84,6 +84,20 @@ extension DTTableViewManager
         viewFactory.registerSupplementaryClass(T.self, ofKind: DTTableViewElementSectionFooter, handler: handler, mapping: mapping)
     }
     
+    /// Registers mapping from model class to footer view of `footerClass` type.
+    ///
+    /// Method will automatically check for nib with the same name as `footerClass`. If it exists - nib will be registered instead of class.
+    /// This method also sets TableViewConfiguration.sectionFooterStyle property to .view.
+    /// - Note: Views does not need to be `UITableViewHeaderFooterView`, if it's a `UIView` subclass, it will be created from XIB.
+    /// - SeeAlso: `UIView+XibLoading`.
+    open func registerFooter<T: UIView, U>(_ footerClass : T.Type,
+                                              handler: @escaping (T, U, Int) -> Void,
+                                              mapping: ((ViewModelMapping<T, U>) -> Void)? = nil)
+    {
+        configuration.sectionFooterStyle = .view
+        viewFactory.registerSupplementaryClass(T.self, ofKind: DTTableViewElementSectionFooter, handler: handler, mapping: mapping)
+    }
+    
     /// Unregisters `cellClass` from `DTTableViewManager` and `UITableView`.
     open func unregister<T:ModelTransfer>(_ cellClass: T.Type) where T:UITableViewCell {
         viewFactory.unregisterCellClass(T.self)

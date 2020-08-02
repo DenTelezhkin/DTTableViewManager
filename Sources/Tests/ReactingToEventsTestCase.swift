@@ -296,6 +296,13 @@ class ReactingToEventsFastTestCase : XCTestCase {
         }
     }
     
+    func fullfill<View,Model,ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (View,Model,Int) -> ReturnValue {
+        { cell, model, indexPath in
+            expectation.fulfill()
+            return returnValue
+        }
+    }
+    
     func fullfill<Cell,Model,Argument,ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (Argument,Cell,Model,IndexPath) -> ReturnValue {
         { argument,cell, model, indexPath in
             expectation.fulfill()
@@ -310,8 +317,15 @@ class ReactingToEventsFastTestCase : XCTestCase {
         }
     }
     
-    func fulfill<Model, ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (Model,IndexPath) -> ReturnValue {
+    func fullfill<Model, ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (Model,IndexPath) -> ReturnValue {
         { model, indexPath in
+            expectation.fulfill()
+            return returnValue
+        }
+    }
+    
+    func fullfill<Model, ReturnValue>(_ expectation: XCTestExpectation, andReturn returnValue: ReturnValue) -> (Model,Int) -> ReturnValue {
+        { model, section in
             expectation.fulfill()
             return returnValue
         }
@@ -329,7 +343,19 @@ class ReactingToEventsFastTestCase : XCTestCase {
         }
     }
     
+    func setHeaderStringModels(_ models: [String] = ["Foo"]) -> (ReactingTestTableViewController) -> Void {
+        {
+            $0.manager.memoryStorage.setSectionHeaderModels(models)
+        }
+    }
+    
     func setFooterIntModels(_ models: [Int] = [5]) -> (ReactingTestTableViewController) -> Void {
+        {
+            $0.manager.memoryStorage.setSectionFooterModels(models)
+        }
+    }
+    
+    func setFooterStringModels(_ models: [String] = ["Foo"]) -> (ReactingTestTableViewController) -> Void {
         {
             $0.manager.memoryStorage.setSectionFooterModels(models)
         }
@@ -406,103 +432,103 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testHeightForRowAtIndexPathClosure()
+    func testHeightForRowAtIndexPathClosure() throws
     {
-        let exp = expectation(description: "heightForRowAtIndexPath")
-        if !sut.manager.usesLegacyUpdateAPI {
-            #if os(iOS)
-                exp.expectedFulfillmentCount = 4
-            #endif
-        }
-        sut.manager.heightForCell(withItem: Int.self, { int, indexPath in
-            exp.fulfill()
-            return 0
-        })
-        sut.manager.memoryStorage.addItem(3)
-        if sut.manager.usesLegacyUpdateAPI {
-            _ = sut.manager.tableDelegate?.tableView(sut.tableView, heightForRowAt: indexPath(0, 0))
-        }
-        waitForExpectations(timeout: 1, handler: nil)
+        try verifyEvent(.heightForRowAtIndexPath, registration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self)
+            sut.manager.heightForCell(withItem: Int.self, self.fullfill(exp, andReturn: 42))
+        }, alternativeRegistration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self) { $0.heightForCell(self.fullfill(exp, andReturn: 42))}
+        }, preparation: addIntItem(), action: {
+           try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, heightForRowAt: indexPath(0, 0)))
+        }, expectedResult: 42)
     }
     
-    func testEstimatedHeightForRowAtIndexPathClosure()
+    func testEstimatedHeightForRowAtIndexPathClosure() throws
     {
-        let exp = expectation(description: "estimatedHeightForRowAtIndexPath")
-        if !sut.manager.usesLegacyUpdateAPI {
-            exp.expectedFulfillmentCount = 2
-        }
-        sut.manager.estimatedHeightForCell(withItem: Int.self, { int, indexPath in
-            exp.fulfill()
-            return 0
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, estimatedHeightForRowAt: indexPath(0, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+        try verifyEvent(.estimatedHeightForRowAtIndexPath, registration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self)
+            sut.manager.estimatedHeightForCell(withItem: Int.self, self.fullfill(exp, andReturn: 42))
+        }, alternativeRegistration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self) { $0.estimatedHeightForCell(self.fullfill(exp, andReturn: 42))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, estimatedHeightForRowAt: indexPath(0, 0)))
+        }, expectedResult: 42)
     }
     
-    func testIndentationLevelForRowAtIndexPathClosure()
+    func testIndentationLevelForRowAtIndexPathClosure() throws
     {
-        let exp = expectation(description: "indentationLevelForRowAtIndexPath")
-        if !sut.manager.usesLegacyUpdateAPI {
-            #if os(iOS)
-                exp.expectedFulfillmentCount = 2
-            #endif
-        }
-        sut.manager.indentationLevelForCell(withItem: Int.self, { int, indexPath in
-            exp.fulfill()
-            return 0
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, indentationLevelForRowAt: indexPath(0, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+        try verifyEvent(.indentationLevelForRowAtIndexPath, registration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self)
+            sut.manager.indentationLevelForCell(withItem: Int.self, self.fullfill(exp, andReturn: 3))
+        }, alternativeRegistration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self) { $0.indentationLevelForCell(self.fullfill(exp, andReturn: 3))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, indentationLevelForRowAt: indexPath(0, 0)))
+        }, expectedResult: 3)
     }
     
-    func testWillSelectRowAtIndexPathClosure() {
-        let exp = expectation(description: "willSelect")
-        sut.manager.willSelect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
-            exp.fulfill()
-            return nil
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willSelectRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testWillSelectRowAtIndexPathClosure() throws {
+        try verifyEvent(.willSelectRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.willSelect(NibCell.self, self.fullfill(exp, andReturn: indexPath(10, 10)))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.willSelect(self.fullfill(exp, andReturn: indexPath(10, 10)))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, willSelectRowAt: indexPath(0,0)))
+        }, expectedResult: indexPath(10, 10))
     }
     
-    func testWillDeselectRowAtIndexPathClosure() {
-        let exp = expectation(description: "willDeselect")
-        sut.manager.willDeselect(NibCell.self, { (cell, model, indexPath) -> IndexPath? in
-            exp.fulfill()
-            return nil
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willDeselectRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testWillDeselectRowAtIndexPathClosure() throws {
+        try verifyEvent(.willDeselectRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.willDeselect(NibCell.self, self.fullfill(exp, andReturn: indexPath(5, 5)))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.willDeselect(self.fullfill(exp, andReturn: indexPath(5, 5)))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, willDeselectRowAt: indexPath(0,0)))
+        }, expectedResult: indexPath(5, 5))
     }
     
-    func testDidDeselectRowAtIndexPathClosure() {
-        let exp = expectation(description: "didDeselect")
-        sut.manager.didDeselect(NibCell.self, { cell, model, indexPath in
-            exp.fulfill()
-            return
+    func testDidSelectRowAtIndexPathClosure() throws {
+        try verifyEvent(.didSelectRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.didSelect(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.didSelect(self.fullfill(exp, andReturn: ()))}
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, didSelectRowAt: indexPath(0, 0))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didDeselectRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testWillDisplayRowAtIndexPathClosure() {
-        let exp = expectation(description: "willDisplay")
-        if !sut.manager.usesLegacyUpdateAPI {
-            #if os(iOS)
-                exp.expectedFulfillmentCount = 2
-            #endif
-        }
-        sut.manager.willDisplay(NibCell.self, { cell, model, indexPath  in
-            exp.fulfill()
+    func testDidDeselectRowAtIndexPathClosure() throws {
+        try verifyEvent(.didDeselectRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.didDeselect(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.didDeselect(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, didDeselectRowAt: indexPath(0,0))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willDisplay: NibCell(), forRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testWillDisplayRowAtIndexPathClosure() throws {
+        try verifyEvent(.willDisplayCellForRowAtIndexPath, registration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self)
+            sut.manager.willDisplay(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self) { $0.willDisplay(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, willDisplay: NibCell(), forRowAt: indexPath(0,0))
+        })
     }
     
     #if os(iOS)
@@ -518,42 +544,39 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     #endif
     
-    func testAccessoryButtonTappedForRowAtIndexPathClosure() {
-        let exp = expectation(description: "accessoryButtonTapped")
-        sut.manager.accessoryButtonTapped(in: NibCell.self, { cell, model, indexPath  in
-            exp.fulfill()
+    func testAccessoryButtonTappedForRowAtIndexPathClosure() throws {
+        try verifyEvent(.accessoryButtonTappedForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.accessoryButtonTapped(in: NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.accessoryButtonTapped(self.fullfill(exp, andReturn: ()))}
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, accessoryButtonTappedForRowWith: indexPath(0,0))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, accessoryButtonTappedForRowWith: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testCommitEditingStyleForRowAtIndexPathClosure() {
-        let exp = expectation(description: "commitEditingStyle")
-        sut.manager.commitEditingStyle(for: NibCell.self, { style, cell, model, indexPath  in
-            exp.fulfill()
+    func testCommitEditingStyleForRowAtIndexPathClosure() throws {
+        try verifyEvent(.commitEditingStyleForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.commitEditingStyle(for: NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.commitEditingStyle(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDataSource?.tableView(sut.tableView, commit: .delete, forRowAt: indexPath(0,0))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDataSource?.tableView(sut.tableView, commit: .delete, forRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testCanEditRowAtIndexPathClosure() {
-        let exp = expectation(description: "canEditRow")
-        sut.manager.canEditCell(withItem: Int.self, { (model, indexPath) -> Bool in
-            exp.fulfill()
-            return false
-        })
-        sut.manager.memoryStorage.addItem(3)
-        if sut.manager.usesLegacyUpdateAPI {
-            _ = sut.manager.tableDataSource?.tableView(sut.tableView, canEditRowAt: indexPath(0,0))
-        }
-        #if os(tvOS)
-            if #available(tvOS 11, *) {
-                _ = controller.manager.tableDataSource?.tableView(controller.tableView, canEditRowAt: indexPath(0,0))
-            }
-        #endif
-        waitForExpectations(timeout: 1, handler: nil)
+    func testCanEditRowAtIndexPathClosure() throws {
+        try verifyEvent(.canEditRowAtIndexPath, registration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self)
+            sut.manager.canEditCell(withItem: Int.self, self.fullfill(exp, andReturn: true))
+        }, alternativeRegistration: { (sut, exp) in
+            exp.assertForOverFulfill = false
+            sut.manager.register(NibCell.self) { $0.canEditCell(self.fullfill(exp, andReturn: true))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDataSource?.tableView(sut.tableView, canEditRowAt: indexPath(0,0)))
+        }, expectedResult: true)
     }
     
     func testCanMoveRowAtIndexPathClosure() throws {
@@ -567,181 +590,162 @@ class ReactingToEventsFastTestCase : XCTestCase {
         }, expectedResult: true)
     }
     
-    func testHeightForHeaderInSection() {
-        let exp = expectation(description: "heightForHeader")
-        exp.expectedFulfillmentCount = 2
-        sut.manager.registerHeader(NibHeaderFooterView.self)
-        sut.manager.heightForHeader(withItem: Int.self, { (model, section) -> CGFloat in
-            exp.fulfill()
-            return 0
-        })
-        sut.manager.memoryStorage.setSectionHeaderModels([1])
-        sut.manager.memoryStorage.setItems([1,2])
-        sut.tableView.beginUpdates()
-        sut.tableView.endUpdates()
-        waitForExpectations(timeout: 1, handler: nil)
+    func testHeightForHeaderInSection() throws {
+        try verifyEvent(.heightForHeaderInSection, registration: { (sut, exp) in
+            sut.manager.registerHeader(NibHeaderFooterView.self)
+            sut.manager.heightForHeader(withItem: Int.self, self.fullfill(exp, andReturn: 42))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.registerHeader(NibHeaderFooterView.self) { $0.heightForHeader(self.fullfill(exp, andReturn: 42)) }
+        }, preparation: setHeaderIntModels(), action: { sut in
+            try XCTUnwrap(sut.manager.tableDelegate?.tableView(sut.tableView, heightForHeaderInSection: 0))
+        }, expectedResult: CGFloat(42))
     }
     
-    func testEstimatedHeightForHeaderInSection() {
-        let exp = expectation(description: "estimatedHeightForHeader")
-        #if os(tvOS)
-            if #available(tvOS 11, *) {
-                
-            } else {
-               exp.expectedFulfillmentCount = 2
-            }
-        #endif
-        
-        sut.manager.registerHeader(NibHeaderFooterView.self)
-        sut.manager.estimatedHeightForHeader(withItem: Int.self, { (model, section) -> CGFloat in
-            exp.fulfill()
-            return 0
-        })
-        sut.manager.memoryStorage.setSectionHeaderModels([1])
-        sut.manager.memoryStorage.setItems([1,2])
-        if #available(tvOS 11, *) {
-            
-        } else {
-            sut.tableView.beginUpdates()
-            sut.tableView.endUpdates()
-        }
-        
-        waitForExpectations(timeout: 1, handler: nil)
+    func testEstimatedHeightForHeaderInSection() throws {
+        try verifyEvent(.estimatedHeightForHeaderInSection, registration: { (sut, exp) in
+            sut.manager.registerHeader(NibHeaderFooterView.self)
+            sut.manager.estimatedHeightForHeader(withItem: Int.self, self.fullfill(exp, andReturn: 42))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.registerHeader(NibHeaderFooterView.self) { $0.estimatedHeightForHeader(self.fullfill(exp, andReturn: 42)) }
+        }, preparation: setHeaderIntModels(), action: { sut in
+            try XCTUnwrap(sut.manager.tableDelegate?.tableView(sut.tableView, estimatedHeightForHeaderInSection: 0))
+        }, expectedResult: CGFloat(42))
     }
     
-    func testHeightForFooterInSection() {
-        let exp = expectation(description: "heightForHeader")
-        exp.expectedFulfillmentCount = 2
-        sut.manager.heightForFooter(withItem: String.self, { (model, section) -> CGFloat in
-            exp.fulfill()
-            return 0
-        })
-        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        sut.manager.memoryStorage.setItems([1,2])
-        sut.tableView.beginUpdates()
-        sut.tableView.endUpdates()
-        waitForExpectations(timeout: 1, handler: nil)
+    func testHeightForFooterInSection() throws {
+        try verifyEvent(.heightForFooterInSection, registration: { (sut, exp) in
+            sut.manager.registerFooter(NibHeaderFooterView.self)
+            sut.manager.heightForFooter(withItem: Int.self, self.fullfill(exp, andReturn: 42))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.registerFooter(NibHeaderFooterView.self) { $0.heightForFooter(self.fullfill(exp, andReturn: 42)) }
+        }, preparation: setFooterIntModels(), action: { sut in
+            try XCTUnwrap(sut.manager.tableDelegate?.tableView(sut.tableView, heightForFooterInSection: 0))
+        }, expectedResult: CGFloat(42))
     }
     
-    func testEstimatedHeightForFooterInSection() {
-        let exp = expectation(description: "estimatedHeightForFooter")
-        
-        sut.manager.estimatedHeightForFooter(withItem: String.self, { (model, section) -> CGFloat in
-            exp.fulfill()
-            return 0
-        })
-        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        sut.manager.memoryStorage.setItems([1,2])
-        waitForExpectations(timeout: 1, handler: nil)
+    func testEstimatedHeightForFooterInSection() throws {
+        try verifyEvent(.estimatedHeightForFooterInSection, registration: { (sut, exp) in
+            sut.manager.registerFooter(NibHeaderFooterView.self)
+            sut.manager.estimatedHeightForFooter(withItem: Int.self, self.fullfill(exp, andReturn: 42))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.registerFooter(NibHeaderFooterView.self) { $0.estimatedHeightForFooter(self.fullfill(exp, andReturn: 42)) }
+        }, preparation: setFooterIntModels(), action: { sut in
+            try XCTUnwrap(sut.manager.tableDelegate?.tableView(sut.tableView, estimatedHeightForFooterInSection: 0))
+        }, expectedResult: CGFloat(42))
     }
     
-    func testWillDisplayHeaderInSection() {
-        let exp = expectation(description: "willDisplayHeaderInSection")
-        sut.manager.registerHeader(ReactingHeaderFooterView.self)
-        sut.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
-            exp.fulfill()
+    func testWillDisplayHeaderInSection() throws {
+        try verifyEvent(.willDisplayHeaderForSection, registration: { (sut, exp) in
+            sut.manager.registerHeader(ReactingHeaderFooterView.self)
+            sut.manager.willDisplayHeaderView(ReactingHeaderFooterView.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.registerHeader(ReactingHeaderFooterView.self) { $0.willDisplayHeaderView(self.fullfill(exp, andReturn: ())) }
+        }, preparation: setHeaderStringModels(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, willDisplayHeaderView: ReactingHeaderFooterView(), forSection: 0)
         })
-        sut.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willDisplayHeaderView: ReactingHeaderFooterView(), forSection: 0)
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testWillDisplayFooterInSection() {
-        let exp = expectation(description: "willDisplayFooterInSection")
-        sut.manager.willDisplayFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
-            exp.fulfill()
+    func testWillDisplayFooterInSection() throws {
+        try verifyEvent(.willDisplayFooterForSection, registration: { (sut, exp) in
+            sut.manager.registerFooter(ReactingHeaderFooterView.self)
+            sut.manager.willDisplayFooterView(ReactingHeaderFooterView.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.registerFooter(ReactingHeaderFooterView.self) { $0.willDisplayFooterView(self.fullfill(exp, andReturn: ())) }
+        }, preparation: setFooterStringModels(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, willDisplayFooterView: ReactingHeaderFooterView(), forSection: 0)
         })
-        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willDisplayFooterView: ReactingHeaderFooterView(), forSection: 0)
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
     #if os(iOS)
-    func testWillBeginEditingRowAtIndexPathClosure() {
-        let exp = expectation(description: "willBeginEditing")
-        sut.manager.willBeginEditing(NibCell.self, { cell, model, indexPath  in
-            exp.fulfill()
+    func testWillBeginEditingRowAtIndexPathClosure() throws {
+        try verifyEvent(.willBeginEditingRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.willBeginEditing(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.willBeginEditing(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, willBeginEditingRowAt: indexPath(0,0))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, willBeginEditingRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testDidEndEditingRowAtIndexPathClosure() {
-        let exp = expectation(description: "didEndEditing")
-        sut.manager.didEndEditing(NibCell.self, { cell, model, indexPath  in
-            exp.fulfill()
+    func testDidEndEditingRowAtIndexPathClosure() throws {
+        try verifyEvent(.didEndEditingRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.didEndEditing(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.didEndEditing(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, didEndEditingRowAt: indexPath(0,0))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didEndEditingRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     #endif
     
-    func testEditingStyleForRowAtIndexPath() {
-        let exp = expectation(description: "editingStyle")
-        sut.manager.editingStyle(forItem: Int.self, { model, indexPath in
-            exp.fulfill()
-            return .none
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, editingStyleForRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testEditingStyleForRowAtIndexPath() throws {
+        try verifyEvent(.editingStyleForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.editingStyle(forItem: Int.self, self.fullfill(exp, andReturn: .insert))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.editingStyle(self.fullfill(exp, andReturn: .insert))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, editingStyleForRowAt: indexPath(0,0)))
+        }, expectedResult: .insert)
     }
     
     #if os(iOS)
-    func testTitleForDeleteButtonForRowAtIndexPath() {
-        let exp = expectation(description: "titleForDeleteButton")
-        sut.manager.titleForDeleteConfirmationButton(in: NibCell.self, { (cell, model, indexPath) -> String? in
-            exp.fulfill()
-            return nil
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, titleForDeleteConfirmationButtonForRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testTitleForDeleteButtonForRowAtIndexPath() throws {
+        try verifyEvent(.titleForDeleteButtonForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.titleForDeleteConfirmationButton(in: NibCell.self, self.fullfill(exp, andReturn: "Title"))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.titleForDeleteConfirmationButton(self.fullfill(exp, andReturn: "Title"))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, titleForDeleteConfirmationButtonForRowAt: indexPath(0,0)))
+        }, expectedResult: "Title")
     }
     #endif
     
-    func testShouldIndentRowWhileEditingAtIndexPath() {
-        let exp = expectation(description: "shouldIndent")
-        sut.manager.shouldIndentWhileEditing(NibCell.self, { (cell, model, indexPath) -> Bool in
-            exp.fulfill()
-            return true
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldIndentWhileEditingRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testShouldIndentRowWhileEditingAtIndexPath() throws {
+        try verifyEvent(.shouldIndentWhileEditingRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.shouldIndentWhileEditing(NibCell.self, self.fullfill(exp, andReturn: false))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.shouldIndentWhileEditing(self.fullfill(exp, andReturn: false)) }
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, shouldIndentWhileEditingRowAt: indexPath(0,0)))
+        }, expectedResult: false)
     }
     
-    func testDidEndDisplayingRowAtIndexPathClosure() {
-        let exp = expectation(description: "didEndDispaying")
-        sut.manager.didEndDisplaying(NibCell.self, { cell, model, indexPath  in
-            exp.fulfill()
+    func testDidEndDisplayingRowAtIndexPathClosure() throws {
+        try verifyEvent(.didEndDisplayingCellForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.didEndDisplaying(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.didEndDisplaying(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, didEndDisplaying: NibCell(), forRowAt: indexPath(0,0))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didEndDisplaying:NibCell(), forRowAt : indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testDidEndDisplayingHeaderInSection() {
-        let exp = expectation(description: "didEndDisplayingHeaderInSection")
-        sut.manager.registerHeader(ReactingHeaderFooterView.self)
-        sut.manager.didEndDisplayingHeaderView(ReactingHeaderFooterView.self, { header, model, section  in
-            exp.fulfill()
+    func testDidEndDisplayingHeaderInSection() throws {
+        try verifyEvent(.didEndDisplayingHeaderViewForSection, registration: { (sut, exp) in
+            sut.manager.registerHeader(ReactingHeaderFooterView.self)
+            sut.manager.didEndDisplayingHeaderView(ReactingHeaderFooterView.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.registerHeader(ReactingHeaderFooterView.self) { $0.didEndDisplayingHeaderView(self.fullfill(exp, andReturn: ())) }
+        }, preparation: setHeaderStringModels(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, didEndDisplayingHeaderView: ReactingHeaderFooterView(), forSection: 0)
         })
-        sut.manager.memoryStorage.setSectionHeaderModels(["Foo"])
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didEndDisplayingHeaderView: ReactingHeaderFooterView(), forSection: 0)
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testDidEndDisplayingFooterInSection() {
-        let exp = expectation(description: "didEndDisplayingFooterInSection")
-        sut.manager.didEndDisplayingFooterView(ReactingHeaderFooterView.self, { footer, model, section  in
-            exp.fulfill()
+    func testDidEndDisplayingFooterInSection() throws {
+        try verifyEvent(.didEndDisplayingFooterViewForSection, registration: { (sut, exp) in
+            sut.manager.registerFooter(ReactingHeaderFooterView.self)
+            sut.manager.didEndDisplayingFooterView(ReactingHeaderFooterView.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.registerFooter(ReactingHeaderFooterView.self) { $0.didEndDisplayingFooterView(self.fullfill(exp, andReturn: ())) }
+        }, preparation: setFooterStringModels(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, didEndDisplayingFooterView: ReactingHeaderFooterView(), forSection: 0)
         })
-        sut.manager.memoryStorage.setSectionFooterModels(["Foo"])
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didEndDisplayingFooterView: ReactingHeaderFooterView(), forSection: 0)
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testShouldMenuForRowAtIndexPath() {
@@ -777,49 +781,49 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testShouldHighlightRowAtIndexPath() {
-        let exp = expectation(description: "shouldHighlight")
-        sut.manager.shouldHighlight(NibCell.self, { (cell, model, indexPath) -> Bool in
-            exp.fulfill()
-            return true
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldHighlightRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testShouldHighlightRowAtIndexPath() throws {
+        try verifyEvent(.shouldHighlightRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.shouldHighlight(NibCell.self, self.fullfill(exp, andReturn: true))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.shouldHighlight(self.fullfill(exp, andReturn: true)) }
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, shouldHighlightRowAt: indexPath(0,0)))
+        }, expectedResult: true)
     }
     
-    func testDidHighlightRowAtIndexPath() {
-        let exp = expectation(description: "didHighlight")
-        sut.manager.didHighlight(NibCell.self, { (cell, model, indexPath) in
-            exp.fulfill()
-            return
+    func testDidHighlightRowAtIndexPath() throws {
+        try verifyEvent(.didHighlightRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.didHighlight(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.didHighlight(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, didHighlightRowAt: indexPath(0,0)))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didHighlightRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testDidUnhighlightRowAtIndexPath() {
-        let exp = expectation(description: "didUnhighlight")
-        sut.manager.didUnhighlight(NibCell.self, { (cell, model, indexPath) in
-            exp.fulfill()
-            return
+    func testDidUnhighlightRowAtIndexPath() throws {
+        try verifyEvent(.didUnhighlightRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.didUnhighlight(NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.didUnhighlight(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, didUnhighlightRowAt: indexPath(0,0)))
         })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didUnhighlightRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
     }
     
     @available(tvOS 9.0, *)
-    func testCanFocusRowAtIndexPath() {
-        let exp = expectation(description: "canFocus")
-        sut.manager.canFocus(NibCell.self, { (cell, model, indexPath) -> Bool in
-            exp.fulfill()
-            return true
-        })
-        sut.manager.memoryStorage.addItem(3)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, canFocusRowAt: indexPath(0,0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testCanFocusRowAtIndexPath() throws {
+        try verifyEvent(.canFocusRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.canFocus(NibCell.self, self.fullfill(exp, andReturn: true))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.canFocus(self.fullfill(exp, andReturn: true)) }
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, canFocusRowAt: indexPath(0,0)))
+        }, expectedResult: true)
     }
     #if os(iOS)
     func testSectionIndexTitlesFor() {
@@ -828,7 +832,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
             return ["1","2"]
         }
-        _ = sut.manager.tableDataSource?.sectionIndexTitles(for: sut.tableView)
+        XCTAssertEqual(["1","2"], sut.manager.tableDataSource?.sectionIndexTitles(for: sut.tableView))
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     
@@ -838,7 +842,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
             return 5
         }
-        _ = sut.manager.tableDataSource?.tableView(sut.tableView, sectionForSectionIndexTitle: "2", at: 3)
+        XCTAssertEqual(sut.manager.tableDataSource?.tableView(sut.tableView, sectionForSectionIndexTitle: "2", at: 3), 5)
         waitForExpectations(timeout: 0.5, handler: nil)
     }
     #endif
@@ -996,60 +1000,73 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testLeadingSwipeActionsConfiguration() {
-        let exp = expectation(description: "leadingSwipeActionsConfiguration")
-        sut.manager.leadingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
-            exp.fulfill()
-            return nil
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, leadingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testLeadingSwipeActionsConfiguration() throws {
+        var swipeActionConfiguration: UISwipeActionsConfiguration? = nil
+        let conf = UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: "Foo", handler: { _, _, _ in
+            
+        })])
+        try verifyEvent(.leadingSwipeActionsConfigurationForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.leadingSwipeActionsConfiguration(for: NibCell.self, self.fullfill(exp, andReturn: conf))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.leadingSwipeActionsConfiguration(self.fullfill(exp, andReturn: conf))}
+        }, preparation: addIntItem(), action: {
+            swipeActionConfiguration = $0.manager.tableDelegate?.tableView(sut.tableView, leadingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
+        })
+        XCTAssertEqual(swipeActionConfiguration?.actions.count, 1)
+        XCTAssertEqual(swipeActionConfiguration?.actions.first?.title, "Foo")
     }
     
-    func testTrailingSwipeActionsConfiguration() {
-        let exp = expectation(description: "trailingSwipeActionsConfiguration")
-        sut.manager.trailingSwipeActionsConfiguration(for: NibCell.self) { _, _, _ in
-            exp.fulfill()
-            return nil
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, trailingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testTrailingSwipeActionsConfiguration() throws {
+        var swipeActionConfiguration: UISwipeActionsConfiguration? = nil
+        let conf = UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: "Foo", handler: { _, _, _ in
+            
+        })])
+        try verifyEvent(.trailingSwipeActionsConfigurationForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.trailingSwipeActionsConfiguration(for: NibCell.self, self.fullfill(exp, andReturn: conf))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.trailingSwipeActionsConfiguration(self.fullfill(exp, andReturn: conf))}
+        }, preparation: addIntItem(), action: {
+            swipeActionConfiguration = $0.manager.tableDelegate?.tableView(sut.tableView, trailingSwipeActionsConfigurationForRowAt: indexPath(0, 0))
+        })
+        XCTAssertEqual(swipeActionConfiguration?.actions.count, 1)
+        XCTAssertEqual(swipeActionConfiguration?.actions.first?.title, "Foo")
     }
     
-    func testShouldSpringLoadRow() {
-        let exp = expectation(description: "shouldSpringLoadRow")
-        sut.manager.shouldSpringLoad(NibCell.self) { _,_,_,_ in
-            exp.fulfill()
-            return false
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldSpringLoadRowAt: indexPath(0, 0), with: SpringLoadedContextMock())
-        waitForExpectations(timeout: 1, handler: nil)
+    func testShouldSpringLoadRow() throws {
+        try verifyEvent(.shouldSpringLoadRowAtIndexPathWithContext, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.shouldSpringLoad(NibCell.self, self.fullfill(exp, andReturn: true))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.shouldSpringLoad(self.fullfill(exp, andReturn: true))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, shouldSpringLoadRowAt: indexPath(0, 0), with: SpringLoadedContextMock()))
+        }, expectedResult: true)
     }
     
-    func testShouldBeginMultipleSelectionInteraction() {
-        guard #available(iOS 13, *) else { return }
-        let exp = expectation(description: "shouldBeginMultipleSelectionInteractionAT")
-        sut.manager.shouldBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
-            exp.fulfill()
-            return false
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, shouldBeginMultipleSelectionInteractionAt: indexPath(0, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testShouldBeginMultipleSelectionInteraction() throws {
+        guard #available(iOS 13, *) else { throw XCTSkip() }
+        try verifyEvent(.shouldBeginMultipleSelectionInteractionAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.shouldBeginMultipleSelectionInteraction(for: NibCell.self, self.fullfill(exp, andReturn: true))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.shouldBeginMultipleSelectionInteraction(self.fullfill(exp, andReturn: true))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView, shouldBeginMultipleSelectionInteractionAt: indexPath(0, 0)))
+        }, expectedResult: true)
     }
     
-    func testDidBeginMultipleSelectionInteraction() {
-        guard #available(iOS 13, *) else { return }
-        let exp = expectation(description: "didBeginMultipleSelectionInteractionAT")
-        sut.manager.didBeginMultipleSelectionInteraction(for: NibCell.self) { _,_,_ in
-            exp.fulfill()
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, didBeginMultipleSelectionInteractionAt: indexPath(0, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testDidBeginMultipleSelectionInteraction() throws {
+        guard #available(iOS 13, *) else { throw XCTSkip() }
+        try verifyEvent(.didBeginMultipleSelectionInteractionAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.didBeginMultipleSelectionInteraction(for: NibCell.self, self.fullfill(exp, andReturn: ()))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.didBeginMultipleSelectionInteraction(self.fullfill(exp, andReturn: ())) }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, didBeginMultipleSelectionInteractionAt: indexPath(0, 0))
+        })
     }
     
     func testDidEndMultipleSelectionInteraction() {
@@ -1062,17 +1079,19 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func testContextMenuConfiguration() {
+    func testContextMenuConfiguration() throws {
         guard #available(iOS 13, *) else { return }
-        let exp = expectation(description: "contextMenuConfiguration")
-        sut.manager.contextMenuConfiguration(for: NibCell.self) { point, _, _, _ in
-            XCTAssertEqual(point, CGPoint(x: 1, y: 1))
-            exp.fulfill()
-            return nil
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView, contextMenuConfigurationForRowAt: indexPath(0, 0), point: CGPoint(x: 1, y: 1))
-        waitForExpectations(timeout: 1, handler: nil)
+        var contextConfiguration : UIContextMenuConfiguration? = nil
+        let conf : UIContextMenuConfiguration = UIContextMenuConfiguration(identifier: "Foo" as NSCopying, previewProvider: nil, actionProvider: nil)
+        try verifyEvent(.contextMenuConfigurationForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.contextMenuConfiguration(for: NibCell.self, self.fullfill(exp, andReturn: conf))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.contextMenuConfiguration(self.fullfill(exp, andReturn: conf))}
+        }, preparation: addIntItem(), action: {
+            contextConfiguration = $0.manager.tableDelegate?.tableView(sut.tableView, contextMenuConfigurationForRowAt: indexPath(0, 0), point: CGPoint(x: 1, y: 1))
+        })
+        XCTAssertEqual(contextConfiguration?.identifier as? String, "Foo")
     }
     
     func testPreviewForHighlightingContextMenu() {
@@ -1109,17 +1128,17 @@ class ReactingToEventsFastTestCase : XCTestCase {
         #endif
     #endif
     
-    func testTargetIndexPathForMoveFromTo() {
-        let exp = expectation(description: "targetIndexPathForMoveFromRowToRow")
-        sut.manager.targetIndexPathForMove(NibCell.self) { _, _, _, _ in
-            exp.fulfill()
-            return indexPath(0, 0)
-        }
-        sut.manager.memoryStorage.addItem(1)
-        _ = sut.manager.tableDelegate?.tableView(sut.tableView,
-                                                        targetIndexPathForMoveFromRowAt: indexPath(0, 0),
-                                                        toProposedIndexPath: indexPath(1, 0))
-        waitForExpectations(timeout: 1, handler: nil)
+    func testTargetIndexPathForMoveFromTo() throws {
+        try verifyEvent(.targetIndexPathForMoveFromRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.targetIndexPathForMove(NibCell.self, self.fullfill(exp, andReturn: indexPath(10, 10)))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.targetIndexPathForMove(self.fullfill(exp, andReturn: indexPath(10, 10)))}
+        }, preparation: addIntItem(), action: {
+            try XCTUnwrap($0.manager.tableDelegate?.tableView(sut.tableView,
+                                                              targetIndexPathForMoveFromRowAt: indexPath(0, 0),
+                                                              toProposedIndexPath: indexPath(1, 0)))
+        }, expectedResult: indexPath(10, 10))
     }
     
     func testIndexPathForPreferredFocusedView() {

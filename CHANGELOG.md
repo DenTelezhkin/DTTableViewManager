@@ -6,6 +6,41 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+* Cell and supplementary view events are now available inside mapping closure directly, for example:
+
+```swift
+// Previous releases
+manager.register(PostCell.self)
+manager.didSelect(PostCell.self) { cell, model, indexPath in
+    // React to selection
+}
+
+// New
+manager.register(PostCell.self) { mapping in 
+    mapping.didSelect { cell, model, indexPath in
+    
+    }
+}
+```
+Those events are now tied to `ViewModelMapping` instance, which means, that events, registered this way, will only trigger, if mapping condition of current mapping applies. For example:
+
+```swift
+manager.register(PostCell.self) { mapping in 
+    mapping.condition = .section(0)
+    mapping.didSelect { cell, model, indexPath in  
+        // This closure will only get called, when user selects cell in the first section
+    }
+}
+manager.register(PostCell.self) { mapping in 
+    mapping.condition = .section(1)
+    mapping.didSelect { cell, model, indexPath in  
+        // This closure will only get called, when user selects cell in the second section
+    }
+}
+```
+
+Please note, that headers and footers only support mapping-style event registration, if they inherit from `UITableViewHeaderFooterView`.
+
 * `TableViewConfiguration` `semanticHeaderHeight` and `semanticFooterHeight`, that specify whether `DTTableViewManager` should deploy custom logic in `tableView(_ tableView: UITableView, heightForHeaderInSection section: Int)` and `tableView(_ tableView: UITableView, heightForFooterInSection section: Int)`. This logic includes checking whether header and footer models exist in storage, returning `UITableView.automaticDimension` for sections, whose header and footer models are Strings (for table section titles), as well as returning minimal height for cases where data model is not there(which happens to be different for `UITableView.Style.plain` and `UITableView.Style.grouped`). Those properties default to true, but if you want to use self-sizing table view sections headers or footers, which may improve perfomance, consider turning those off:
 
 ```swift
@@ -25,6 +60,10 @@ This release requires Swift 5.3. Minimum iOS / tvOS deployment targets are uncha
 Some context: this release heavily relies on where clauses on contextually generic declarations, that are only available in Swift 5.3 - [SE-0267](https://github.com/apple/swift-evolution/blob/master/proposals/0267-where-on-contextually-generic.md).
 
 * `ViewModelMapping` is now a generic class, that captures view and model information(ViewModelMapping<T,U>).
+
+### Fixed
+
+* `indentationLevelForCell` closure now correctly returns `Int` instead of `CGFloat`.
 
 ### Deprecated
 

@@ -80,4 +80,17 @@ extension ViewModelMapping where T: UITableViewCell {
     open func moveRowTo(_ closure: @escaping (_ destinationIndexPath: IndexPath, T, U, _ sourceIndexPath: IndexPath) -> Void) where T: UITableViewCell {
         reactions.append(FourArgumentsEventReaction(T.self, modelType: U.self, argument: IndexPath.self, signature: EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue, closure))
     }
+    
+    /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)` method is called for `cellClass`.
+    open func commitEditingStyle(_ closure: @escaping (UITableViewCell.EditingStyle, T, U, IndexPath) -> Void) {
+        reactions.append(FourArgumentsEventReaction(T.self, modelType: U.self,
+                                                    argument: UITableViewCell.EditingStyle.self,
+                                                    signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue,
+                                                    closure))
+    }
+    
+    /// Registers `closure` to be executed in `UITableViewDelegate.tableView(_:canEditCellForRowAt:)` method, when it's called for cell which model is of `itemType`.
+    open func canEditCell(_ closure: @escaping (U, IndexPath) -> Bool) {
+        reactions.append(EventReaction(modelType: U.self, signature: EventMethodSignature.canEditRowAtIndexPath.rawValue, closure))
+    }
 }
