@@ -194,6 +194,68 @@ class MappingTestCase: BaseTestCase {
         
         XCTAssertEqual(controller.manager.viewFactory.mappings.count, 1)
     }
+    
+    
+    func testTwoKindsOfCellRegistrationsAreCombinable() {
+        controller.manager.register(NibCell.self)
+        controller.manager.register(UITableViewCell.self, for: String.self, handler: { cell, model, _ in
+            let label = UILabel()
+            label.text = model
+            cell.backgroundView = label
+        })
+        controller.manager.memoryStorage.addItem(1)
+        controller.manager.memoryStorage.addItem("Foo")
+        
+        XCTAssertEqual(controller.manager.tableDataSource?.tableView(controller.tableView, numberOfRowsInSection: 0), 2)
+        _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+        let tvCell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(1, 0))
+        
+        XCTAssertEqual((tvCell?.backgroundView as? UILabel)?.text, "Foo")
+    }
+
+    func testTwoKindsOfHeaderRegistrationsAreCombinable() {
+        controller.manager.registerHeader(NibHeaderFooterView.self)
+        controller.manager.registerHeader(UITableViewHeaderFooterView.self, for: String.self, handler: { view, model, _ in
+            let label = UILabel()
+            label.text = model
+            view.addSubview(label)
+        })
+        controller.manager.memoryStorage.headerModelProvider = { section in
+            if section == 0 {
+                return 1
+            } else {
+                return "2"
+            }
+        }
+        controller.manager.memoryStorage.setItemsForAllSections([[1], [2]])
+        let nibView = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 0)
+        let tView = controller.manager.tableDelegate?.tableView(controller.tableView, viewForHeaderInSection: 1)
+        XCTAssertTrue(nibView is NibHeaderFooterView)
+        XCTAssertEqual((tView?.subviews.last as? UILabel)?.text, "2")
+    }
+    
+    func testTwoKindsOfFooterRegistrationsAreCombinable() {
+        controller.manager.registerFooter(NibHeaderFooterView.self)
+        controller.manager.registerFooter(UITableViewHeaderFooterView.self, for: String.self, handler: { view, model, _ in
+            let label = UILabel()
+            label.text = model
+            view.addSubview(label)
+        })
+        controller.manager.memoryStorage.footerModelProvider = { section in
+            if section == 0 {
+                return 1
+            } else {
+                return "2"
+            }
+        }
+        controller.manager.memoryStorage.setItemsForAllSections([[1], [2]])
+        controller.tableView.beginUpdates()
+        controller.tableView.endUpdates()
+        let nibView = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
+        let tView = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 1)
+        XCTAssertTrue(nibView is NibHeaderFooterView)
+        XCTAssertEqual((tView?.subviews.last as? UILabel)?.text, "2")
+    }
 }
 
 class NibNameViewModelMappingTestCase : XCTestCase {

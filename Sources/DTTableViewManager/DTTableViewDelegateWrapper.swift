@@ -95,8 +95,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         }
         
         if compatibleMappings.count == 0 {
-            // TODO: implement anomaly
-//            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
+            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
         }
         
         compatibleMappings.forEach { mapping in
@@ -178,8 +177,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         }
         
         if compatibleMappings.count == 0 {
-            // TODO: - implement anomaly
-//            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
+            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
         }
         
         compatibleMappings.forEach { mapping in
@@ -195,8 +193,7 @@ open class DTTableViewDelegateWrapper : NSObject {
         }
         
         if compatibleMappings.count == 0 {
-//            TODO: - implement anomaly
-//            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
+            manager?.anomalyHandler.reportAnomaly(.eventRegistrationForUnregisteredMapping(viewClass: String(describing: T.self), signature: signature.rawValue))
         }
         
         compatibleMappings.forEach { mapping in

@@ -70,8 +70,8 @@ final class TableViewFactory
                 anomalyHandler?.reportAnomaly(.differentCellReuseIdentifier(mappingReuseIdentifier: mapping.reuseIdentifier, cellReuseIdentifier: cellReuseIdentifier))
             }
         } else {
-            if UINib.nibExists(withNibName: mapping.xibName ?? "", inBundle: mapping.bundle) {
-                let nib = UINib(nibName: mapping.xibName ?? "", bundle: mapping.bundle)
+            if let xibName = mapping.xibName, UINib.nibExists(withNibName: xibName, inBundle: mapping.bundle) {
+                let nib = UINib(nibName: xibName, bundle: mapping.bundle)
                 tableView.register(nib, forCellReuseIdentifier: mapping.reuseIdentifier)
             } else {
                 tableView.register(T.self, forCellReuseIdentifier: mapping.reuseIdentifier)

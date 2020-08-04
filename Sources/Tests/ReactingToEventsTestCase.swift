@@ -1354,5 +1354,16 @@ class ReactingToEventsFastTestCase : XCTestCase {
         
         XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] didSelect(_:_:) event registered for StringCell, but there were no view mappings registered for StringCell type. This event will never be called.")
     }
+    
+    func testUnregisteredMappingCausesAnomalyWhenEventIsRegistered() {
+        let exp = expectation(description: "No mappings found")
+        let anomaly = DTTableViewManagerAnomaly.eventRegistrationForUnregisteredMapping(viewClass: "StringCell", signature: EventMethodSignature.didSelectRowAtIndexPath.rawValue)
+        sut.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
+        sut.manager.didSelect(StringCell.self) { _, _, _ in
+            
+        }
+        waitForExpectations(timeout: 0.1)
+        XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] While registering event reaction for tableView:didSelectRowAtIndexPath:, no view mapping was found for view: StringCell")
+    }
 }
 

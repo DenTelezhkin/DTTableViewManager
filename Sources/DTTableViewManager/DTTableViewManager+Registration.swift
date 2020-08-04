@@ -63,6 +63,7 @@ extension DTTableViewManager
     /// - Note: Views does not need to be `UITableViewHeaderFooterView`, if it's a `UIView` subclass, it also will be created from XIB.
     /// - SeeAlso: `UIView+XibLoading`.
     open func registerHeader<T: UIView, U>(_ headerClass : T.Type,
+                                           for: U.Type,
                                               handler: @escaping (T, U, Int) -> Void,
                                               mapping: ((ViewModelMapping<T, U>) -> Void)? = nil)
     {
@@ -91,8 +92,9 @@ extension DTTableViewManager
     /// - Note: Views does not need to be `UITableViewHeaderFooterView`, if it's a `UIView` subclass, it will be created from XIB.
     /// - SeeAlso: `UIView+XibLoading`.
     open func registerFooter<T: UIView, U>(_ footerClass : T.Type,
-                                              handler: @escaping (T, U, Int) -> Void,
-                                              mapping: ((ViewModelMapping<T, U>) -> Void)? = nil)
+                                           for: U.Type,
+                                           handler: @escaping (T, U, Int) -> Void,
+                                           mapping: ((ViewModelMapping<T, U>) -> Void)? = nil)
     {
         configuration.sectionFooterStyle = .view
         viewFactory.registerSupplementaryClass(T.self, ofKind: DTTableViewElementSectionFooter, handler: handler, mapping: mapping)

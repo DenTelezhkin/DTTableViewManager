@@ -41,6 +41,7 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomStringConvertible, Custo
     case emptyXibFile(xibName: String, expectedViewClass: String)
     case modelEventCalledWithCellClass(modelType: String, methodName: String, subclassOf: String)
     case unusedEventDetected(viewType: String, methodName: String)
+    case eventRegistrationForUnregisteredMapping(viewClass: String, signature: String)
     
     /// Debug information for happened anomaly
     public var debugDescription: String {
@@ -79,6 +80,9 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomStringConvertible, Custo
 """
         case .unusedEventDetected(viewType: let view, methodName: let methodName):
             return "⚠️[DTTableViewManager] \(methodName) event registered for \(view), but there were no view mappings registered for \(view) type. This event will never be called."
+            
+        case .eventRegistrationForUnregisteredMapping(let viewClass, let signature):
+                return "⚠️[DTTableViewManager] While registering event reaction for \(signature), no view mapping was found for view: \(viewClass)"
         }
     }
     
@@ -96,6 +100,8 @@ public enum DTTableViewManagerAnomaly: Equatable, CustomStringConvertible, Custo
         case .emptyXibFile(xibName: let xibName, expectedViewClass: let expected): return "DTTableViewManagerAnomaly.emptyXibFile(\(xibName), \(expected))"
         case .modelEventCalledWithCellClass(modelType: let model, methodName: let method, subclassOf: let subclass): return "DTTableViewManagerAnomaly.modelEventCalledWithCellClass(\(model), \(method), \(subclass))"
         case .unusedEventDetected(viewType: let view, methodName: let method): return "DTTableViewManagerAnomaly.unusedEventDetected(\(view), \(method))"
+        case .eventRegistrationForUnregisteredMapping(let viewClass, let signature):
+                return "DTCollectionViewManagerAnomaly.eventRegistrationForUnregisteredMapping(\(viewClass), \(signature)"
         }
     }
 }
