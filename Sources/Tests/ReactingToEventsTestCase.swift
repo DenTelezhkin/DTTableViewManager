@@ -717,9 +717,11 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func testDidEndDisplayingRowAtIndexPathClosure() throws {
         try verifyEvent(.didEndDisplayingCellForRowAtIndexPath, registration: { (sut, exp) in
+            exp.assertForOverFulfill = false
             sut.manager.register(NibCell.self)
             sut.manager.didEndDisplaying(NibCell.self, self.fullfill(exp, andReturn: ()))
         }, alternativeRegistration: { (sut, exp) in
+            exp.assertForOverFulfill = false
             sut.manager.register(NibCell.self) { $0.didEndDisplaying(self.fullfill(exp, andReturn: ())) }
         }, preparation: addIntItem(), action: {
             $0.manager.tableDelegate?.tableView(sut.tableView, didEndDisplaying: NibCell(), forRowAt: indexPath(0,0))

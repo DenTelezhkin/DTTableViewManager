@@ -97,6 +97,16 @@ open class DTTableViewManager {
         //swiftlint:disable:next force_unwrapping
         let factory = TableViewFactory(tableView: self.tableView!)
         factory.anomalyHandler = anomalyHandler
+        factory.resetDelegates = { [weak self] in
+            self?.tableDataSource?.delegateWasReset()
+            self?.tableDelegate?.delegateWasReset()
+            self?.tableDragDelegate?.delegateWasReset()
+            
+            // Enabling next line causes crash as of Xcode 12 beta 3: UITableView internal inconsistency: attempted to end ignoring drags more times than begin ignoring drags
+            // Since currently drop delegate does not contain any mapped events, resetting this particular delegate is unnecessary.
+            // However, if in the future drop delegate will have a mapped event, this needs some resolution, which currently I don't have.
+//            self?.tableDropDelegate?.delegateWasReset()
+        }
         return factory
     }()
     

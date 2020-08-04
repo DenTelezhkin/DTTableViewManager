@@ -32,9 +32,15 @@ final class TableViewFactory
 {
     fileprivate let tableView: UITableView
     
-    var mappings = [ViewModelMappingProtocol]()
+    var mappings = [ViewModelMappingProtocol]() {
+        didSet {
+            resetDelegates?()
+        }
+    }
     
     weak var anomalyHandler : DTTableViewManagerAnomalyHandler?
+    
+    var resetDelegates : (() -> Void)?
     
     init(tableView: UITableView)
     {
