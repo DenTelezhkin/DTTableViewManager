@@ -890,8 +890,8 @@ class ReactingToEventsFastTestCase : XCTestCase {
         }, alternativeRegistration: { (sut, exp) in
             sut.manager.register(NibCell.self) { $0.dragPreviewParameters(self.fullfill(exp, andReturn: nil)) }
         }, preparation: addIntItem(), action: {
-            _ = $0.manager.tableDragDelegate?.tableView(sut.tableView, dragPreviewParametersForRowAt: indexPath(0, 0))
-        })
+            $0.manager.tableDragDelegate?.tableView(sut.tableView, dragPreviewParametersForRowAt: indexPath(0, 0))
+        }, expectedResult: nil)
     }
     
     func testDragSessionWillBegin() {
@@ -996,7 +996,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
             exp.fulfill()
             return nil
         }
-        _ = sut.manager.tableDropDelegate?.tableView(sut.tableView, dropPreviewParametersForRowAt: indexPath(0, 0))
+        XCTAssertNil(sut.manager.tableDropDelegate?.tableView(sut.tableView, dropPreviewParametersForRowAt: indexPath(0, 0)))
         waitForExpectations(timeout: 1, handler: nil)
     }
     

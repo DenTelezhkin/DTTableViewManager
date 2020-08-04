@@ -459,11 +459,11 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     @available(iOS 13.0, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        if let configuration = perform4ArgumentCellReaction(.contextMenuConfigurationForRowAtIndexPath,
-                                                            argument: point,
-                                                            location: indexPath,
-                                                            provideCell: true) as? UIContextMenuConfiguration {
-            return configuration
+        if let _ = cellReaction(.contextMenuConfigurationForRowAtIndexPath, location: indexPath) as? FourArgumentsEventReaction {
+            return perform4ArgumentCellReaction(.contextMenuConfigurationForRowAtIndexPath,
+                                                argument: point,
+                                                location: indexPath,
+                                                provideCell: true) as? UIContextMenuConfiguration
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView,
                                                               contextMenuConfigurationForRowAt: indexPath,
@@ -473,8 +473,8 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     @available(iOS 13.0, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        if let preview = performNonCellReaction(.previewForHighlightingContextMenu, argument: configuration) as? UITargetedPreview {
-            return preview
+        if unmappedReactions.contains(where: { $0.methodSignature == EventMethodSignature.previewForHighlightingContextMenu.rawValue }) {
+            return performNonCellReaction(.previewForHighlightingContextMenu, argument: configuration) as? UITargetedPreview
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, previewForHighlightingContextMenuWithConfiguration: configuration)
     }
@@ -482,8 +482,8 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     @available(iOS 13.0, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        if let preview = performNonCellReaction(.previewForDismissingContextMenu, argument: configuration) as? UITargetedPreview {
-            return preview
+        if unmappedReactions.contains(where: { $0.methodSignature == EventMethodSignature.previewForDismissingContextMenu.rawValue }) {
+            return performNonCellReaction(.previewForDismissingContextMenu, argument: configuration) as? UITargetedPreview
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, previewForDismissingContextMenuWithConfiguration: configuration)
     }

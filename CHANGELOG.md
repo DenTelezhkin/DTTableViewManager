@@ -64,6 +64,8 @@ Some context: this release heavily relies on where clauses on contextually gener
 ### Fixed
 
 * `indentationLevelForCell` closure now correctly returns `Int` instead of `CGFloat`.
+* Several event API's have been improved to allow returning nil for methods, that accept nil as a valid value: 
+`contextMenuConfiguration`, `previewForHighlightingContextMenu`, `previewForDismissingContextMenu`
 
 ### Deprecated
 
