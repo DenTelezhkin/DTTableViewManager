@@ -28,10 +28,10 @@ func recursiveForceUnwrap<T>(_ any: T) -> T
 
 extension DTTestTableViewController
 {
-    func verifyItem<T:Equatable>(_ item: T, atIndexPath indexPath: IndexPath) -> Bool
+    func verifyItem<Model:Equatable>(_ item: Model, atIndexPath indexPath: IndexPath) -> Bool
     {
-        let itemTable = (self.manager.tableDataSource?.tableView(self.tableView, cellForRowAt: indexPath) as! ModelRetrievable).model as! T
-        let itemDatasource = recursiveForceUnwrap(self.manager.storage.item(at: indexPath)!) as! T
+        let itemTable = (self.manager.tableDataSource?.tableView(self.tableView, cellForRowAt: indexPath) as! ModelRetrievable).model as! Model
+        let itemDatasource = recursiveForceUnwrap(self.manager.storage.item(at: indexPath)!) as! Model
         
         if !(item == itemDatasource)
         {

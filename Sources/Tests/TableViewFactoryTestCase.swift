@@ -31,7 +31,6 @@ class TableViewFactoryTestCase: BaseTestCase {
     func testUpdateCellAtIndexPath() {
         if #available(tvOS 11, *) {
             controller.tableView = UITableView()
-            controller.manager.memoryStorage.defersDatasourceUpdates = true
         } 
         
         controller.manager.register(UpdatableCell.self)

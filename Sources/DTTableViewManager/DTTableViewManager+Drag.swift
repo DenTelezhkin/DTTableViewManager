@@ -32,24 +32,24 @@ extension DTTableViewManager
     #if os(iOS)
     
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)` method is called for `cellClass`.
-    open func itemsForBeginningDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, T, T.ModelType, IndexPath) -> [UIDragItem]) where T:UITableViewCell
+    open func itemsForBeginningDragSession<Cell:ModelTransfer>(from cellClass: Cell.Type, _ closure: @escaping (UIDragSession, Cell, Cell.ModelType, IndexPath) -> [UIDragItem]) where Cell:UITableViewCell
     {
-        tableDragDelegate?.append4ArgumentReaction(for: T.self,
+        tableDragDelegate?.append4ArgumentReaction(for: Cell.self,
                                                    signature: .itemsForBeginningDragSession,
                                                    closure: closure)
     }
     
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)` method is called for `cellClass`
-    open func itemsForAddingToDragSession<T:ModelTransfer>(from cellClass: T.Type, _ closure: @escaping (UIDragSession, CGPoint, T, T.ModelType, IndexPath) -> [UIDragItem]) where T: UITableViewCell
+    open func itemsForAddingToDragSession<Cell:ModelTransfer>(from cellClass: Cell.Type, _ closure: @escaping (UIDragSession, CGPoint, Cell, Cell.ModelType, IndexPath) -> [UIDragItem]) where Cell: UITableViewCell
     {
-        tableDragDelegate?.append5ArgumentReaction(for: T.self,
+        tableDragDelegate?.append5ArgumentReaction(for: Cell.self,
                                                    signature: .itemsForAddingToDragSession,
                                                    closure: closure)
     }
     
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)` method is called for `cellClass`
-    open func dragPreviewParameters<T:ModelTransfer>(for cellClass: T.Type, _ closure: @escaping (T, T.ModelType, IndexPath) -> UIDragPreviewParameters?) where T:UITableViewCell {
-        tableDragDelegate?.appendReaction(for: T.self,
+    open func dragPreviewParameters<Cell:ModelTransfer>(for cellClass: Cell.Type, _ closure: @escaping (Cell, Cell.ModelType, IndexPath) -> UIDragPreviewParameters?) where Cell:UITableViewCell {
+        tableDragDelegate?.appendReaction(for: Cell.self,
                                           signature: .dragPreviewParametersForRowAtIndexPath,
                                           closure: closure)
     }
@@ -76,26 +76,26 @@ extension DTTableViewManager
     #endif
 }
 
-extension ViewModelMapping where T: UITableViewCell {
+extension ViewModelMapping where View: UITableViewCell {
     #if os(iOS)
-    /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)` method is called for `cellClass`.
-    open func itemsForBeginningDragSession(_ closure: @escaping (UIDragSession, T, U, IndexPath) -> [UIDragItem])
+    /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)` method is called.
+    open func itemsForBeginningDragSession(_ closure: @escaping (UIDragSession, View, Model, IndexPath) -> [UIDragItem])
     {
-        reactions.append(FourArgumentsEventReaction(T.self, modelType: U.self, argument: UIDragSession.self,
+        reactions.append(FourArgumentsEventReaction(View.self, modelType: Model.self, argument: UIDragSession.self,
                                                     signature: EventMethodSignature.itemsForBeginningDragSession.rawValue,
                                                     closure))
     }
     
-    /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)` method is called for `cellClass`
-    open func itemsForAddingToDragSession(_ closure: @escaping (UIDragSession, CGPoint, T, U, IndexPath) -> [UIDragItem])
+    /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)` method is called.
+    open func itemsForAddingToDragSession(_ closure: @escaping (UIDragSession, CGPoint, View, Model, IndexPath) -> [UIDragItem])
     {
-        reactions.append(FiveArgumentsEventReaction(T.self, modelType: U.self, argumentOne: UIDragSession.self, argumentTwo: CGPoint.self,
+        reactions.append(FiveArgumentsEventReaction(View.self, modelType: Model.self, argumentOne: UIDragSession.self, argumentTwo: CGPoint.self,
                                                     signature: EventMethodSignature.itemsForAddingToDragSession.rawValue, closure))
     }
     
-    /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)` method is called for `cellClass`
-    open func dragPreviewParameters(_ closure: @escaping (T, U, IndexPath) -> UIDragPreviewParameters?) {
-        reactions.append(EventReaction(viewType: T.self, modelType: U.self, signature: EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue, closure))
+    /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)` method is called.
+    open func dragPreviewParameters(_ closure: @escaping (View, Model, IndexPath) -> UIDragPreviewParameters?) {
+        reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue, closure))
     }
     #endif
 }

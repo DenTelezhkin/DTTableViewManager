@@ -173,7 +173,6 @@ class ReactingToEventsTestCase: XCTestCase {
         controller = ReactingTestTableViewController()
         controller.tableView = AlwaysVisibleTableView()
         let _ = controller.view
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
     }
     
     func testCellSelectionClosure()
@@ -282,7 +281,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
         let _ = sut.view
         sut.manager.registerFooter(ReactingHeaderFooterView.self)
         sut.manager.register(NibCell.self)
-        sut.manager.memoryStorage.defersDatasourceUpdates = true
     }
     
     func unregisterAll() {

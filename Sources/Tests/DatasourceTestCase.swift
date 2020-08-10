@@ -19,7 +19,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testTableItemAtIndexPath()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([3,2,1,6,4], toSection: 0)
         
         XCTAssert(controller.verifyItem(6, atIndexPath: indexPath(3, 0)))
@@ -29,7 +28,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testShouldReturnCorrectNumberOfTableItems()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([1,1,1,1], toSection: 0)
         controller.manager.memoryStorage.addItems([2,2,2], toSection: 1)
         let tableView = controller.tableView
@@ -39,7 +37,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testShouldReturnCorrectNumberOfSections()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         controller.manager.memoryStorage.addItem(4, toSection: 3)
         controller.manager.memoryStorage.addItem(2, toSection: 2)
@@ -65,7 +62,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testShouldHandleAbsenceOfHeadersFooters()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         controller.manager.memoryStorage.addItem(2, toSection: 1)
         
@@ -75,7 +71,6 @@ class DatasourceTestCase: BaseTestCase {
 
     func testShouldAddTableItems()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([3,2], toSection: 0)
         
         XCTAssertEqual(controller.manager.memoryStorage.items(inSection: 0)?.count, 2)
@@ -83,7 +78,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testShouldInsertTableItem()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([2,4,6], toSection: 0)
         try! controller.manager.memoryStorage.insertItem(1, to: indexPath(2, 0))
         
@@ -94,7 +88,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testReplaceItem()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([1,3], toSection: 0)
         controller.manager.memoryStorage.addItems([4,6], toSection: 1)
         try! controller.manager.memoryStorage.replaceItem(3, with: 2)
@@ -108,7 +101,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testRemoveItem()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([1,3,2,4], toSection: 0)
         controller.manager.memoryStorage.removeItems([1,4,3,5])
         
@@ -118,7 +110,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testRemoveItems()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([1,2,3], toSection: 0)
         controller.manager.memoryStorage.removeAllItems()
         
@@ -127,7 +118,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testMovingItems()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([1,2,3], toSection: 0)
         controller.manager.memoryStorage.moveItem(at: indexPath(0, 0), to: indexPath(2, 0))
         
@@ -136,21 +126,18 @@ class DatasourceTestCase: BaseTestCase {
     
     func testShouldNotCrashWhenMovingToBadRow()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([1,2,3], toSection: 0)
         controller.manager.memoryStorage.moveItem(at: indexPath(0, 0), to: indexPath(2, 1))
     }
     
     func testShouldNotCrashWhenMovingFromBadRow()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItems([1,2,3], toSection: 0)
         controller.manager.memoryStorage.moveItem(at: indexPath(0, 1), to: indexPath(0, 0))
     }
     
     func testShouldMoveSections()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         controller.manager.memoryStorage.addItem(2, toSection: 1)
         controller.manager.memoryStorage.addItem(3, toSection: 2)
@@ -164,7 +151,6 @@ class DatasourceTestCase: BaseTestCase {
     
     func testShouldDeleteSections()
     {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItem(0, toSection: 0)
         controller.manager.memoryStorage.addItem(1, toSection: 1)
         controller.manager.memoryStorage.addItem(2, toSection: 2)
@@ -254,7 +240,6 @@ class DatasourceTestCase: BaseTestCase {
     }
     
     func testTableFooterModel() {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.memoryStorage.addItem(4)
         controller.manager.memoryStorage.setSectionFooterModels(["1"])
         XCTAssertEqual(controller.manager.memoryStorage.footerModel(forSection: 0) as? String, "1")

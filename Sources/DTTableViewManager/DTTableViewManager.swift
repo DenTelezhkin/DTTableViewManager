@@ -28,7 +28,7 @@ import UIKit
 import DTModelStorage
 
 /// Adopting this protocol will automatically inject `manager` property to your object, that lazily instantiates `DTTableViewManager` object.
-/// Target is not required to be `UITableViewController`, and can be a regular UIViewController with UITableView, or even different object like UICollectionViewCell.
+/// Target is not required to be `UITableViewController`, and can be a regular UIViewController with UITableView, or any other view, that contains UITableView.
 public protocol DTTableViewManageable : class
 {
     /// Table view, that will be managed by DTTableViewManager. This property or `optionalTableView` property must be implemented in order for `DTTableViewManager` to work.
@@ -100,12 +100,14 @@ open class DTTableViewManager {
         factory.resetDelegates = { [weak self] in
             self?.tableDataSource?.delegateWasReset()
             self?.tableDelegate?.delegateWasReset()
-            self?.tableDragDelegate?.delegateWasReset()
             
+            #if os(iOS)
+            self?.tableDragDelegate?.delegateWasReset()
             // Enabling next line causes crash as of Xcode 12 beta 3: UITableView internal inconsistency: attempted to end ignoring drags more times than begin ignoring drags
             // Since currently drop delegate does not contain any mapped events, resetting this particular delegate is unnecessary.
             // However, if in the future drop delegate will have a mapped event, this needs some resolution, which currently I don't have.
 //            self?.tableDropDelegate?.delegateWasReset()
+            #endif
         }
         return factory
     }()
@@ -264,9 +266,8 @@ open class DTTableViewManager {
     }
 #endif
     
-    /// Starts managing `UITableView`.
-    ///
-    /// Call this method before calling any of `DTTableViewManager` methods.
+    /// If you access `manager` property when managed `UITableView` is already created(for example: viewDidLoad method), calling this method is not necessary.
+    /// If for any reason, `UITableView` is created later, please call this method before modifying storage or registering cells/supplementary views.
     /// - Precondition: UITableView instance on `delegate` should not be nil.
     /// - Note: If delegate is `DTViewModelMappingCustomizable`, it will also be used to determine which view-model mapping should be used by table view factory.
     open func startManaging(withDelegate delegate : DTTableViewManageable)
@@ -328,33 +329,21 @@ open class DTTableViewManager {
                                 animateMoveAsDeleteAndInsert: true)
     }
     
-    
-    /// Immediately runs closure to provide access to both T and T.ModelType for `klass`.
-    ///
-    /// - Discussion: This is particularly useful for registering events, because near 1/3 of events don't have cell or view before they are getting run, which prevents view type from being known, and required developer to remember, which model is mapped to which cell.
-    /// By using this container closure you will be able to provide compile-time safety for all events.
-    /// - Parameters:
-    ///   - klass: Class of reusable view to be used in configuration container
-    ///   - closure: closure to run with view types.
-    open func configureEvents<T:ModelTransfer>(for klass: T.Type, _ closure: (T.Type, T.ModelType.Type) -> Void) {
-        closure(T.self, T.ModelType.self)
-    }
-    
-    func verifyItemEvent<T>(for itemType: T.Type, eventMethod: String) {
+    func verifyItemEvent<Model>(for itemType: Model.Type, eventMethod: String) {
         switch itemType {
         case is UICollectionReusableView.Type:
-            anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UICollectionReusableView"))
+            anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: Model.self), methodName: eventMethod, subclassOf: "UICollectionReusableView"))
         case is UITableViewCell.Type:
-            anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UITableViewCell"))
-        case is UITableViewHeaderFooterView.Type: anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: T.self), methodName: eventMethod, subclassOf: "UITableViewHeaderFooterView"))
+            anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: Model.self), methodName: eventMethod, subclassOf: "UITableViewCell"))
+        case is UITableViewHeaderFooterView.Type: anomalyHandler.reportAnomaly(.modelEventCalledWithCellClass(modelType: String(describing: Model.self), methodName: eventMethod, subclassOf: "UITableViewHeaderFooterView"))
         default: ()
         }
     }
     
-    func verifyViewEvent<T:ModelTransfer>(for viewType: T.Type, methodName: String) {
+    func verifyViewEvent<View:ModelTransfer>(for viewType: View.Type, methodName: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             if self?.viewFactory.mappings.filter({ $0.viewClass.isSubclass(of: viewType) }).count == 0 {
-                self?.anomalyHandler.reportAnomaly(DTTableViewManagerAnomaly.unusedEventDetected(viewType: String(describing: T.self), methodName: methodName))
+                self?.anomalyHandler.reportAnomaly(DTTableViewManagerAnomaly.unusedEventDetected(viewType: String(describing: View.self), methodName: methodName))
             }
         }
     }

@@ -67,10 +67,15 @@ Some context: this release heavily relies on where clauses on contextually gener
 * Several event API's have been improved to allow returning nil for methods, that accept nil as a valid value: 
 `contextMenuConfiguration`, `previewForHighlightingContextMenu`, `previewForDismissingContextMenu`
 
+### Changed
+
+* Generic placeholders for cell/model/view methods have been improved for better readability.
+
 ### Deprecated
 
 * Several cell/header/footer/supplementary view registration methods have been deprecated to unify registration logic. Please use `register(_:handler:mapping:)`, `registerHeader(_:handler:mapping:)`, `registerFooter(_:handler:mapping:)` as a replacements for all of those methods. For more information on those changes, please read [migration guide LINK MISSING](link to migration guide).
 * All non-deprecated registration methods now have an additional `handler` closure, that allows to configure cells/headers/footers that are dequeued from UITableView. This is a direct replacement for `configure(_:_:`, `configureHeader(_:_:)`, `configureFooter(_:_:)` , that are all now deprecated. Please note, that handler closure is called before `DTModelTransfer.update(with:)` method.
+* `DTTableViewManager.configureEvents(for:_:)`, it's functionality has become unnecessary since mapping closure of cell/header/footer registration now captures both cell and model type information for such events.
 
 ## [7.2.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.2.0)
 

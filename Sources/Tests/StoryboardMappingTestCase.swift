@@ -22,7 +22,6 @@ class StoryboardMappingTestCase: XCTestCase {
     }
     
     func testCellIsMappedAndOutletsAreCreated() {
-        controller.manager.memoryStorage.defersDatasourceUpdates = true
         controller.manager.register(StoryboardCell.self)
         controller.manager.memoryStorage.addItem(1)
         
