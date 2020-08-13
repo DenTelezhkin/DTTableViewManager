@@ -243,6 +243,7 @@ open class DTTableViewManager {
     }
     
     @available(iOS 13.0, tvOS 13.0, *)
+    @available(*, deprecated, message: "Please use configureDiffableDataSource method for models, that are Hashable. From Apple documentation: If you’re working in a Swift codebase, always use UITableViewDiffableDataSource instead.")
     /// Configures `UITableViewDiffableDataSourceReference` to be used with `DTTableViewManager`.
     ///  Because `UITableViewDiffableDataSourceReference` handles UITableView updates, `tableViewUpdater` property on `DTTableViewManager` will be set to nil.
     /// - Parameter modelProvider: closure that provides `DTTableViewManager` models.
