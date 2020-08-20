@@ -29,7 +29,7 @@ import DTModelStorage
 
 /// Deprecated methods
 public extension DTTableViewManager {
-    @available(*, deprecated, message: "Please use register(_:handler:mapping:) and set xibName in mapping closure instead.")
+    @available(*, deprecated, message: "Please use register(_:mapping:handler:) and set xibName in mapping closure instead.")
     /// Registers nib with `nibName` mapping from model class to `cellClass`.
     func registerNibNamed<T:ModelTransfer>(_ nibName: String, for cellClass: T.Type, mapping: ((ViewModelMapping<T, T.ModelType>) -> Void)? = nil) where T: UITableViewCell
     {
@@ -38,7 +38,7 @@ public extension DTTableViewManager {
         }
     }
     
-    @available(*, deprecated, message: "Please use registerHeader(_:handler:mapping:) instead.")
+    @available(*, deprecated, message: "Please use registerHeader(_:mapping:handler:) instead.")
     /// Registers mapping from model class to header view of `headerClass` type.
     ///
     /// This method is intended to be used for headers created from code - without UI made in XIB.
@@ -52,7 +52,7 @@ public extension DTTableViewManager {
         }
     }
     
-    @available(*, deprecated, message: "Please use registerFooter(_:handler:mapping:) instead.")
+    @available(*, deprecated, message: "Please use registerFooter(_:mapping:handler:) instead.")
     /// Registers mapping from model class to footer view of `footerClass` type.
     ///
     /// This method is intended to be used for footers created from code - without UI made in XIB.
@@ -66,7 +66,7 @@ public extension DTTableViewManager {
         })
     }
     
-    @available(*, deprecated, message: "Please use registerHeader(_:handler:mapping:) and set xibName in mapping closure instead.")
+    @available(*, deprecated, message: "Please use registerHeader(_:mapping:handler:) and set xibName in mapping closure instead.")
     /// Registers mapping from model class to headerView view of `headerClass` type with `nibName`.
     ///
     /// This method also sets TableViewConfiguration.sectionHeaderStyle property to .view.
@@ -81,7 +81,7 @@ public extension DTTableViewManager {
         }
     }
     
-    @available(*, deprecated, message: "Please use registerFooter(_:handler:mapping:) and set xibName in mapping closure instead.")
+    @available(*, deprecated, message: "Please use registerFooter(_:mapping:handler:) and set xibName in mapping closure instead.")
     /// Registers mapping from model class to headerView view of `footerClass` type with `nibName`.
     ///
     /// This method also sets TableViewConfiguration.sectionFooterStyle property to .view.
@@ -96,7 +96,7 @@ public extension DTTableViewManager {
         }
     }
     
-    @available(*, deprecated, message: "Please use handler parameter in register(_:handler:mapping:) method instead.")
+    @available(*, deprecated, message: "Please use handler parameter in register(_:mapping:handler:) method instead.")
     /// Registers `closure` to be executed, when `UITableView` requests `cellClass` in `UITableViewDataSource.tableView(_:cellForRowAt:)` method and cell is being configured.
     ///
     /// This closure will be performed *after* cell is created and `update(with:)` method is called.
@@ -105,7 +105,7 @@ public extension DTTableViewManager {
         tableDataSource?.appendReaction(for: T.self, signature: .configureCell, closure: closure)
     }
     
-    @available(*, deprecated, message: "Please use handler parameter in registerHeader(_:handler:mapping:) method instead.")
+    @available(*, deprecated, message: "Please use handler parameter in registerHeader(_:mapping:handler:) method instead.")
     /// Registers `closure` to be executed, when `UITableView` requests `headerClass` in `UITableViewDelegate.tableView(_:viewForHeaderInSection:)` method and header is being configured.
     ///
     /// This closure will be performed *after* header is created and `update(with:)` method is called.
@@ -114,7 +114,7 @@ public extension DTTableViewManager {
         tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionHeader, supplementaryClass: T.self, signature: .configureHeader, closure: closure)
     }
     
-    @available(*, deprecated, message: "Please use handler parameter in registerFooter(_:handler:mapping:) method instead.")
+    @available(*, deprecated, message: "Please use handler parameter in registerFooter(_:mapping:handler:) method instead.")
     /// Registers `closure` to be executed, when `UITableView` requests `footerClass` in `UITableViewDelegate.tableView(_:viewForFooterInSection:)` method and footer is being configured.
     ///
     /// This closure will be performed *after* footer is created and `update(with:)` method is called.
@@ -123,7 +123,7 @@ public extension DTTableViewManager {
         tableDelegate?.appendReaction(forSupplementaryKind: DTTableViewElementSectionFooter, supplementaryClass: T.self, signature: .configureFooter, closure: closure)
     }
     
-    @available(*, deprecated, message: "All cell and view events are now available inside mapping closure in register(_:handler:mapping:) method, along with type already inferred, thus making this method obsolete")
+    @available(*, deprecated, message: "All cell and view events are now available inside mapping closure in register(_:mapping:handler:) method, along with type already inferred, thus making this method obsolete")
     /// Immediately runs closure to provide access to both T and T.ModelType for `klass`.
     ///
     /// - Discussion: This is particularly useful for registering events, because near 1/3 of events don't have cell or view before they are getting run, which prevents view type from being known, and required developer to remember, which model is mapped to which cell.
