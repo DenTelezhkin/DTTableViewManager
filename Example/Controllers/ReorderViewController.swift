@@ -9,23 +9,18 @@
 import UIKit
 import DTTableViewManager
 
-class ReorderViewController: UIViewController, DTTableViewManageable, UITableViewDelegate {
-
-    @IBOutlet weak var tableView: UITableView!
-    
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        tableView.setEditing(editing, animated: animated)
-    }
+class ReorderViewController: UITableViewController, DTTableViewManageable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.register(StringCell.self) { [weak self] in
+        manager.register(UITableViewCell.self, for: String.self) { [weak self] in
             $0.canMove { _,_,_ in true }
             $0.editingStyle { _,_ in .none }
             $0.moveRowTo { destination, _, _, source in
                 self?.manager.memoryStorage.moveItemWithoutAnimation(from: source, to: destination)
             }
+        } handler: { cell, model, _ in
+            cell.textLabel?.text = model
         }
         manager.memoryStorage.addItems(["Section 1 cell", "Section 1 cell"], toSection: 0)
         manager.memoryStorage.addItems(["Section 2 cell"], toSection: 1)

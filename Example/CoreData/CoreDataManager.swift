@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class CoreDataManager
 {
@@ -47,15 +48,12 @@ class CoreDataManager
     }
     
     private func loadData() {
-        if let filePath = Bundle.main.path(forResource: "Banks", ofType: "json"),
-            let url = URL(string: "file://\(filePath)"),
-            let banksData = try? Data(contentsOf: url),
-            let banks = try! JSONSerialization.jsonObject(with: banksData, options: []) as? [[String:AnyObject]]
+        if let data = NSDataAsset(name: "Banks")?.data,
+           let banks = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String:AnyObject]]
         {
             for bankInfo in banks {
                 let _ = Bank(info: bankInfo, inContext: managedObjectContext)
             }
-            
             try! managedObjectContext.save()
             banksPreloaded = true
         }

@@ -33,9 +33,9 @@ public extension DTTableViewManager {
     /// Registers nib with `nibName` mapping from model class to `cellClass`.
     func registerNibNamed<T:ModelTransfer>(_ nibName: String, for cellClass: T.Type, mapping: ((ViewModelMapping<T, T.ModelType>) -> Void)? = nil) where T: UITableViewCell
     {
-        register(T.self) { mapping in
+        register(T.self, mapping:  { mapping in
             mapping.xibName = nibName
-        }
+        })
     }
     
     @available(*, deprecated, message: "Please use registerHeader(_:mapping:handler:) instead.")
@@ -46,10 +46,10 @@ public extension DTTableViewManager {
     func registerNiblessHeader<T:ModelTransfer>(_ headerClass : T.Type, mapping: ((ViewModelMapping<T, T.ModelType>) -> Void)? = nil) where T: UITableViewHeaderFooterView
     {
         configuration.sectionHeaderStyle = .view
-        registerHeader(T.self) { mappingInstance in
+        registerHeader(T.self, mapping:  { mappingInstance in
             mappingInstance.xibName = nil
             mapping?(mappingInstance)
-        }
+        })
     }
     
     @available(*, deprecated, message: "Please use registerFooter(_:mapping:handler:) instead.")
@@ -75,10 +75,10 @@ public extension DTTableViewManager {
     func registerNibNamed<T:ModelTransfer>(_ nibName: String, forHeader headerClass: T.Type, mapping: ((ViewModelMapping<T, T.ModelType>) -> Void)? = nil) where T:UIView
     {
         configuration.sectionHeaderStyle = .view
-        registerHeader(T.self) { mappingInstance in
+        registerHeader(T.self, mapping:  { mappingInstance in
             mappingInstance.xibName = nibName
             mapping?(mappingInstance)
-        }
+        })
     }
     
     @available(*, deprecated, message: "Please use registerFooter(_:mapping:handler:) and set xibName in mapping closure instead.")
@@ -90,10 +90,10 @@ public extension DTTableViewManager {
     func registerNibNamed<T:ModelTransfer>(_ nibName: String, forFooter footerClass: T.Type, mapping: ((ViewModelMapping<T, T.ModelType>) -> Void)? = nil) where T:UIView
     {
         configuration.sectionFooterStyle = .view
-        registerFooter(T.self) { mappingInstance in
+        registerFooter(T.self, mapping:  { mappingInstance in
             mappingInstance.xibName = nibName
             mapping?(mappingInstance)
-        }
+        })
     }
     
     @available(*, deprecated, message: "Please use handler parameter in register(_:mapping:handler:) method instead.")

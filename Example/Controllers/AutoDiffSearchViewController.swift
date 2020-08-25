@@ -28,9 +28,8 @@ extension String: EntityIdentifiable {
     public var identifier: AnyHashable { return self }
 }
 
-class AutoDiffSearchViewController: UIViewController, DTTableViewManageable, UISearchResultsUpdating {
+class AutoDiffSearchViewController: UITableViewController, DTTableViewManageable, UISearchResultsUpdating {
 
-    @IBOutlet weak var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
     
     let spells = [
@@ -45,10 +44,12 @@ class AutoDiffSearchViewController: UIViewController, DTTableViewManageable, UIS
         super.viewDidLoad()
         
         manager = DTTableViewManager(storage: storage)
-        manager.register(StringCell.self)
+        manager.register(UITableViewCell.self, for: String.self) { cell, model, _ in
+            cell.textLabel?.text = model
+        }
         searchController.searchResultsUpdater = self
-        searchController.searchBar.sizeToFit()
-        tableView.tableHeaderView = searchController.searchBar
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.searchController = searchController
     }
     
     func updateSearchResults(for searchController: UISearchController) {

@@ -10,7 +10,6 @@ import UIKit
 import DTTableViewManager
 import CoreData
 
-@available(iOS 13, *)
 class DiffableCoreDataViewController: UITableViewController, DTTableViewManageable, NSFetchedResultsControllerDelegate {
 
     let fetchController = CoreDataManager.sharedInstance.banksFetchController()
@@ -18,14 +17,16 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.register(BankCell.self)
-        
-        guard #available(iOS 13, *) else {
-            showiOS13RequiredAlert()
-            return 
+        manager.register(BankCell.self) { mapping in
+            mapping.trailingSwipeActionsConfiguration { _, model, _ in
+                UISwipeActionsConfiguration(actions: [UIContextualAction(style: .destructive, title: "Delete", handler: { _, _, _ in
+                    CoreDataManager.sharedInstance.managedObjectContext.delete(model)
+                    try? CoreDataManager.sharedInstance.managedObjectContext.save()
+                })])
+            }
         }
         dataSource = manager.configureDiffableDataSource(modelProvider: { [weak self] indexPath, identifier in
-            return self?.fetchController.object(at: indexPath) as Any
+            self?.fetchController.object(at: indexPath) as Any
         })
         manager.supplementaryStorage?.headerModelProvider = { [weak self] in
             if let sections = self?.fetchController.sections {
@@ -34,21 +35,25 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
             }
             return nil
         }
-        updateInitialSnapshot()
+        updateSnapshot(animatingDifferences: false)
         fetchController.delegate = self
+        navigationItem.rightBarButtonItems = [
+            barButton(title: "Add", action: { vc in vc.addRecordButtonTapped()} ),
+            barButton(title: "Reset", action: { vc in vc.resetDataButtonTapped() })
+        ]
     }
     
-    func updateInitialSnapshot() {
+    func updateSnapshot(animatingDifferences: Bool) {
         guard let sections = fetchController.sections else { return }
         var snapshot = NSDiffableDataSourceSnapshot<String,Bank>()
         for section in sections {
             snapshot.appendSections([section.name])
             snapshot.appendItems((section.objects ?? []).compactMap { $0 as? Bank }, toSection: section.name)
         }
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
-    @IBAction func resetDataButtonTapped(_ sender: Any) {
+    func resetDataButtonTapped() {
         // This functionality is currently bugged as NSFetchedResultsController returns duplicated records each time
         // Which leads to displaying wrong data, even though database was cleared.
         // So we just pop to rootViewController.
@@ -56,7 +61,7 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func addRecordButtonTapped(_ sender: Any) {
+    func addRecordButtonTapped() {
         let context = CoreDataManager.sharedInstance.managedObjectContext
         _ = Bank(info: [
             "name": "Random bank name",
@@ -64,19 +69,10 @@ class DiffableCoreDataViewController: UITableViewController, DTTableViewManageab
             "zip": ["111","222","333","4444"].randomElement() ?? "",
             "state": manager.supplementaryStorage?.headerModelProvider?((0..<(manager.storage.numberOfSections())).randomElement() ?? 0) as Any
         ], inContext: context)
-        _ = try? context.save()
+        try? context.save()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
-        var genericSnapshot = NSDiffableDataSourceSnapshot<String,Bank>()
-        for section in snapshot.sectionIdentifiers.compactMap({ $0 as? String}) {
-            genericSnapshot.appendSections([section])
-            genericSnapshot.appendItems(snapshot.itemIdentifiersInSection(withIdentifier: section)
-                .compactMap { $0 as? NSManagedObjectID }
-                .compactMap { CoreDataManager.sharedInstance.managedObjectContext.object(with: $0) }
-                .compactMap { $0 as? Bank },
-                                        toSection: section)
-        }
-        dataSource.apply(genericSnapshot, animatingDifferences: true)
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateSnapshot(animatingDifferences: true)
     }
 }

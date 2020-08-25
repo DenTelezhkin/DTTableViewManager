@@ -93,7 +93,7 @@ open class DTTableViewManager {
     
     ///  Factory for creating cells and views for UITableView
     final lazy var viewFactory: TableViewFactory = {
-        precondition(isManagingTableView, "Please call manager.startManagingWithDelegate(self) before calling any other DTTableViewManager methods")
+        precondition(isManagingTableView, "Received attempt to register views for UITableView, but UITableView is nil.")
         //swiftlint:disable:next force_unwrapping
         let factory = TableViewFactory(tableView: self.tableView!)
         factory.anomalyHandler = anomalyHandler

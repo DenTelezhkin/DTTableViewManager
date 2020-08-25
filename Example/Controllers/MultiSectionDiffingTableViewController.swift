@@ -9,24 +9,11 @@
 import UIKit
 import DTTableViewManager
 
-extension UIViewController {
-    func showiOS13RequiredAlert() {
-        let alert = UIAlertController(title: "Unavailable", message: "Multi-section diffing is supported on iOS 13 and higher", preferredStyle: .alert)
-        alert.addAction(.init(title: "Ok", style: .default, handler: { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
-        }))
-        present(alert, animated: true, completion: nil)
-    }
-}
-
-@available(iOS 13.0, *)
 class MultiSectionDiffingTableViewController: UITableViewController, DTTableViewManageable {
 
     lazy var students: [String: [String]] = {
-        Bundle.main.path(forResource: "students", ofType: "json")
-                    .flatMap { URL(fileURLWithPath: $0) }
-                    .flatMap { try? Data(contentsOf: $0) }
-                    .flatMap { try? JSONDecoder().decode([String:[String]].self, from: $0) } ?? [:]
+        (try? JSONDecoder().decode([String:[String]].self,
+                                   from: NSDataAsset(name: "students")?.data ?? .init())) ?? [:]
     }()
     
     enum Section: String, CaseIterable {
@@ -40,18 +27,17 @@ class MultiSectionDiffingTableViewController: UITableViewController, DTTableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.register(StringCell.self)
-        guard #available(iOS 13, *) else {
-            showiOS13RequiredAlert()
-            return
+        manager.register(UITableViewCell.self, for: String.self) { cell, model, _ in
+            cell.textLabel?.text = model
         }
         diffableDataSource = manager.configureDiffableDataSource { indexPath, item in
             item
         }
         manager.supplementaryStorage?.setSectionHeaderModels(Section.allCases.map { $0.rawValue.capitalized })
+        manager.tableViewUpdater?.deleteRowAnimation = .fade
         searchController.searchResultsUpdater = self
-        searchController.searchBar.sizeToFit()
-        tableView.tableHeaderView = searchController.searchBar
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         
         updateUI(searchTerm: "", animated: false)
     }

@@ -9,15 +9,13 @@
 import UIKit
 import DTTableViewManager
 
-class AddRemoveViewController: UIViewController, DTTableViewManageable {
+class AddRemoveViewController: UITableViewController, DTTableViewManageable {
 
-    @IBOutlet weak var tableView: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        manager.register(StringCell.self) { [weak self] in
-            $0.didSelect { _, model, indexPath  in
+
+        manager.register(UITableViewCell.self, for: String.self) { [weak self] mapping in
+            mapping.didSelect { _, model, indexPath in
                 let alert = UIAlertController(title: "Selected cell",
                                               message: "with model: \(model) at indexPath: \(indexPath)",
                     preferredStyle: .alert)
@@ -25,14 +23,16 @@ class AddRemoveViewController: UIViewController, DTTableViewManageable {
                 alert.addAction(action)
                 self?.present(alert, animated: true, completion: nil)
             }
-            $0.commitEditingStyle { _, _, _, indexPath in
+            mapping.commitEditingStyle { _, _, _, indexPath in
                 self?.manager.memoryStorage.removeItems(at: [indexPath])
             }
-            $0.heightForCell { _, _ in 80 }
+            mapping.heightForCell { _, _ in 80 }
+        } handler: { cell, model, _ in
+            cell.textLabel?.text = model
         }
-    }
-    
-    @IBAction func addItem(_ sender: AnyObject) {
-        manager.memoryStorage.addItem("Row # \(manager.memoryStorage.section(atIndex: 0)?.numberOfItems ?? 0)")
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: UIAction { [weak manager] _ in
+            manager?.memoryStorage.addItem("Row # \(manager?.memoryStorage.section(atIndex: 0)?.numberOfItems ?? 0)")
+        }, menu: nil)
     }
 }
