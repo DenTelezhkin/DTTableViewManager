@@ -212,7 +212,7 @@ final class TableViewFactory
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         guard let unwrappedModel = RuntimeHelper.recursivelyUnwrapAnyValue(model) else { return }
         if let mapping = viewModelMapping(for: .cell, model: unwrappedModel, indexPath: indexPath) {
-            mapping.updateBlock(cell, unwrappedModel)
+            mapping.updateCell(cell: cell, at: indexPath, with: unwrappedModel)
         }
     }
     
