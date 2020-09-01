@@ -16,22 +16,22 @@ manager.didSelect(PostCell.self) { cell, model, indexPath in
 }
 
 // New
-manager.register(PostCell.self) { mapping in 
+manager.register(PostCell.self) { mapping in
     mapping.didSelect { cell, model, indexPath in
-    
+
     }
 }
 ```
 Those events are now tied to `ViewModelMapping` instance, which means, that events, registered this way, will only trigger, if mapping condition of current mapping applies. For example:
 
 ```swift
-manager.register(PostCell.self) { mapping in 
+manager.register(PostCell.self) { mapping in
     mapping.condition = .section(0)
     mapping.didSelect { cell, model, indexPath in  
         // This closure will only get called, when user selects cell in the first section
     }
 }
-manager.register(PostCell.self) { mapping in 
+manager.register(PostCell.self) { mapping in
     mapping.condition = .section(1)
     mapping.didSelect { cell, model, indexPath in  
         // This closure will only get called, when user selects cell in the second section
@@ -48,7 +48,7 @@ manager.configuration.semanticHeaderHeight = false
 manager.configuration.semanticFooterHeight = false
 ```
 
-Please note, that even when those properties are set to false, corresponding `UITableViewDelegate` methods will still be called in two cases: 
+Please note, that even when those properties are set to false, corresponding `UITableViewDelegate` methods will still be called in two cases:
 
 1. Your `DTTableViewManageable` instance implements them
 2. You register a `heightForHeader(withItem:_:)` or `heightForFooter(withItem:_:)` closures on `DTTableViewManager` instance.
@@ -64,8 +64,8 @@ Some context: this release heavily relies on where clauses on contextually gener
 ### Fixed
 
 * `indentationLevelForCell` closure now correctly returns `Int` instead of `CGFloat`.
-* Several event API's have been improved to allow returning nil for methods, that accept nil as a valid value: 
-`contextMenuConfiguration`, `previewForHighlightingContextMenu`, `previewForDismissingContextMenu`
+* Several event API's have been improved to allow returning nil for methods, that accept nil as a valid value:
+`contextMenuConfiguration`, `previewForHighlightingContextMenu`, `previewForDismissingContextMenu`.
 
 ### Changed
 
@@ -73,7 +73,7 @@ Some context: this release heavily relies on where clauses on contextually gener
 
 ### Deprecated
 
-* Several cell/header/footer/supplementary view registration methods have been deprecated to unify registration logic. Please use `register(_:mapping:handler:)`, `registerHeader(_:mapping:handler:)`, `registerFooter(_:mapping:handler:)` as a replacements for all of those methods. For more information on those changes, please read [migration guide LINK MISSING](link to migration guide).
+* Several cell/header/footer/supplementary view registration methods have been deprecated to unify registration logic. Please use `register(_:mapping:handler:)`, `registerHeader(_:mapping:handler:)`, `registerFooter(_:mapping:handler:)` as a replacements for all of those methods. For more information on those changes, please read [migration guide](Documentation/Migration%20guides/8.0%20Migration%20Guide.md).
 * All non-deprecated registration methods now have an additional `handler` closure, that allows to configure cells/headers/footers that are dequeued from UITableView. This is a direct replacement for `configure(_:_:`, `configureHeader(_:_:)`, `configureFooter(_:_:)` , that are all now deprecated. Please note, that handler closure is called before `DTModelTransfer.update(with:)` method.
 * `DTTableViewManager.configureEvents(for:_:)`, it's functionality has become unnecessary since mapping closure of cell/header/footer registration now captures both cell and model type information for such events.
 * `DTTableViewManager.configureDiffableDataSource(modelProvider:)` for non-hashable data models. Please use configureDiffableDataSource method for models, that are Hashable. From Apple's documentation: `If you’re working in a Swift codebase, always use UITableViewDiffableDataSource instead`.
@@ -87,7 +87,7 @@ Some context: this release heavily relies on where clauses on contextually gener
 * Minimum Swift version required: 5.0
 * Added support for DTModelStorage/Realm with Realm 5
 
-Please note, that this framework version source is identical to previous version, which supports iOS 8 / tvOS 9 / Swift 4.0 and higher. 
+Please note, that this framework version source is identical to previous version, which supports iOS 8 / tvOS 9 / Swift 4.0 and higher.
 
 ## [7.1.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.1.0)
 
@@ -105,7 +105,7 @@ Please note, that this framework version source is identical to previous version
 
 ## [7.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/7.0.0-beta.1)
 
-**This is a major release with some breaking changes, please read [DTTableViewManager 7.0 Migration Guide](https://github.com/DenTelezhkin/DTTableViewManager/blob/master/Guides/7.0%20Migration%20Guide.md)**
+**This is a major release with some breaking changes, please read [DTTableViewManager 7.0 Migration Guide](Documentation/Migration%20guides/7.0%20Migration%20Guide.md)**
 
 ### Added
 
@@ -245,7 +245,7 @@ Please note, though, that new default behavior is recommended, because it is mor
 
 ## [6.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/6.0.0-beta.1)
 
-**This is a major release with some breaking changes, please read [DTTableViewManager 6.0 Migration Guide](https://github.com/DenTelezhkin/DTTableViewManager/blob/master/Guides/DTTableViewManager%206.0%20Migration%20Guide.md)**
+**This is a major release with some breaking changes, please read [DTTableViewManager 6.0 Migration Guide](Documentation/Migration%20guides/6.0%20Migration%20Guide.md)**
 
 * Added `updateVisibleCells(_:) method`, that allows updating cell data for visible cells with callback on each cell. This is more efficient than calling `reloadData` when number of elements in `UITableView` does not change, and only contents of items change.
 * Implement `configureEvents(for:_:)` method, that allows batching in several cell events to avoid using T.ModelType for events, that do not have cell created.
@@ -309,7 +309,7 @@ No changes
 
 ## [5.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/5.0.0-beta.1)
 
-This is a major release, written in Swift 3. Read [Migration guide](Documentation/DTTableViewManager 5.0 migration guide.md) with descriptions of all features and changes.
+This is a major release, written in Swift 3. Read [Migration guide](Documentation/Migration%20guides/5.0%20Migration%20Guide.md) with descriptions of all features and changes.
 
 Dependency changelog -> [DTModelStorage 3.0.0 and higher](https://github.com/DenTelezhkin/DTModelStorage/releases)
 
@@ -488,9 +488,7 @@ extension PostsViewController: DTTableViewContentUpdatable {
 
 4.0 is a next major release of `DTTableViewManager`. It was rewritten from scratch in Swift 2 and is not backwards-compatible with previous releases.
 
-Read  [4.0 Migration guide](https://github.com/DenTelezhkin/DTTableViewManager/wiki/4.0-Migration-guide).
-
-[Blog post](http://digginginswift.com/2015/09/13/dttableviewmanager-4-protocol-oriented-uitableview-management-in-swift/)
+Read  [4.0 Migration guide](Documentation/Migration%20guides/4.0%20Migration%20Guide.md).
 
 ### Features
 
