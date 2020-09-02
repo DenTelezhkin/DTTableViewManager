@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ViewModelMapping Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Extension/ViewModelMapping" class="dashAnchor"></a>
+
+    <a title="ViewModelMapping Extension Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          DTTableViewManager Docs
+        </a>
+         (82% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/DenTelezhkin/DTTableViewManager">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="dash-feed://https%3A%2F%2Fdentelezhkin%2Egithub%2Eio%2FDTTableViewManager%2Fdocsets%2FDTTableViewManager%2Exml">
+            <img class="header-icon" src="../img/dash.png"/>
+            Install in Dash
+          </a>
+        </p>
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">DTTableViewManager Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      ViewModelMapping Extension Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDataSource.html">DTTableViewDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDelegate.html">DTTableViewDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDelegateWrapper.html">DTTableViewDelegateWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDragDelegate.html">DTTableViewDragDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDropDelegate.html">DTTableViewDropDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewDropPlaceholderContext.html">DTTableViewDropPlaceholderContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewManager.html">DTTableViewManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DTTableViewManagerAnomalyHandler.html">DTTableViewManagerAnomalyHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TableViewUpdater.html">TableViewUpdater</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/DTTableViewManagerAnomaly.html">DTTableViewManagerAnomaly</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/SupplementarySectionStyle.html">SupplementarySectionStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ViewModelMapping.html">ViewModelMapping</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DTTableViewManageable.html">DTTableViewManageable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TableViewConfiguration.html">TableViewConfiguration</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>ViewModelMapping</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ViewModelMapping</span> <span class="k">where</span> <span class="kt">View</span><span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ViewModelMapping</span> <span class="k">where</span> <span class="kt">View</span><span class="p">:</span> <span class="kt">UITableViewHeaderFooterView</span></code></pre>
+
+                </div>
+              </div>
+            
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60View%60:%20%60UITableViewCell%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `View`: `UITableViewCell`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60View%60:%20%60UITableViewCell%60"></a>
+                  <h3 class="section-name"><p>Available where <code>View</code>: <code>UITableViewCell</code></p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE7canMoveyySbx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/canMove(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE7canMoveyySbx_q_10Foundation9IndexPathVtcF">canMove(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:canMoveRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">canMove</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE9moveRowToyyy10Foundation9IndexPathV_xq_AJtcF"></a>
+                    <a name="//apple_ref/swift/Method/moveRowTo(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE9moveRowToyyy10Foundation9IndexPathV_xq_AJtcF">moveRowTo(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:moveRowAt:to:)</code> method is called.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    This method requires items to be moved without animations, since animation has already happened when user moved those cells. If you use <code>MemoryStorage</code>, it&rsquo;s appropriate to call <code>memoryStorage.moveItemWithoutAnimation(from:to:)</code> method to achieve desired behavior.
+
+</div><div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    &lsquo;tableView:moveRowAt:to:&rsquo; method
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">moveRowTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">destinationIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="n">_</span> <span class="nv">sourceIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE18commitEditingStyleyyySo0hcikL0V_xq_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/commitEditingStyle(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE18commitEditingStyleyyySo0hcikL0V_xq_10Foundation9IndexPathVtcF">commitEditingStyle(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">commitEditingStyle</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">UITableViewCell</span><span class="o">.</span><span class="kt">EditingStyle</span><span class="p">,</span> <span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE07canEditI0yySbq__10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/canEditCell(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE07canEditI0yySbq__10Foundation9IndexPathVtcF">canEditCell(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed in <code>UITableViewDelegate.tableView(_:canEditCellForRowAt:)</code> method, when it&rsquo;s called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">canEditCell</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE9didSelectyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/didSelect(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE9didSelectyyyx_q_10Foundation9IndexPathVtcF">didSelect(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:didSelectRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didSelect</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE10willSelectyy10Foundation9IndexPathVSgx_q_AJtcF"></a>
+                    <a name="//apple_ref/swift/Method/willSelect(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE10willSelectyy10Foundation9IndexPathVSgx_q_AJtcF">willSelect(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:willSelectRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">willSelect</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IndexPath</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE12willDeselectyy10Foundation9IndexPathVSgx_q_AJtcF"></a>
+                    <a name="//apple_ref/swift/Method/willDeselect(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE12willDeselectyy10Foundation9IndexPathVSgx_q_AJtcF">willDeselect(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:willDeselectRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">willDeselect</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IndexPath</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE11didDeselectyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/didDeselect(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE11didDeselectyyyx_q_10Foundation9IndexPathVtcF">didDeselect(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:didDeselectRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didDeselect</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE09heightForI0yy12CoreGraphics7CGFloatVq__10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/heightForCell(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE09heightForI0yy12CoreGraphics7CGFloatVq__10Foundation9IndexPathVtcF">heightForCell(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed to determine cell height in <code>UITableViewDelegate.tableView(_:heightForRowAt:)</code> method, when it&rsquo;s called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">heightForCell</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE018estimatedHeightForI0yy12CoreGraphics7CGFloatVq__10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/estimatedHeightForCell(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE018estimatedHeightForI0yy12CoreGraphics7CGFloatVq__10Foundation9IndexPathVtcF">estimatedHeightForCell(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed to determine estimated cell height in <code>UITableViewDelegate.tableView(_:estimatedHeightForRowAt:)</code> method, when it&rsquo;s called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">estimatedHeightForCell</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE019indentationLevelForI0yySiq__10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/indentationLevelForCell(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE019indentationLevelForI0yySiq__10Foundation9IndexPathVtcF">indentationLevelForCell(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed to determine indentation level in <code>UITableViewDelegate.tableView(_:indentationLevelForRowAt:)</code> method, when it&rsquo;s called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">indentationLevelForCell</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE11willDisplayyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/willDisplay(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE11willDisplayyyyx_q_10Foundation9IndexPathVtcF">willDisplay(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:willDisplayCell:forRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">willDisplay</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE21accessoryButtonTappedyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/accessoryButtonTapped(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE21accessoryButtonTappedyyyx_q_10Foundation9IndexPathVtcF">accessoryButtonTapped(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:accessoryButtonTappedForRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">accessoryButtonTapped</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE16willBeginEditingyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/willBeginEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE16willBeginEditingyyyx_q_10Foundation9IndexPathVtcF">willBeginEditing(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:willBeginEditingRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">willBeginEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE13didEndEditingyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/didEndEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE13didEndEditingyyyx_q_10Foundation9IndexPathVtcF">didEndEditing(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:didEndEditingRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didEndEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE32titleForDeleteConfirmationButtonyySSSgx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/titleForDeleteConfirmationButton(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE32titleForDeleteConfirmationButtonyySSSgx_q_10Foundation9IndexPathVtcF">titleForDeleteConfirmationButton(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">titleForDeleteConfirmationButton</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE12editingStyleyySo0hci7EditingK0Vq__10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/editingStyle(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE12editingStyleyySo0hci7EditingK0Vq__10Foundation9IndexPathVtcF">editingStyle(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:editingStyleForRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">editingStyle</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UITableViewCell</span><span class="o">.</span><span class="kt">EditingStyle</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE24shouldIndentWhileEditingyySbx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/shouldIndentWhileEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE24shouldIndentWhileEditingyySbx_q_10Foundation9IndexPathVtcF">shouldIndentWhileEditing(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">shouldIndentWhileEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE16didEndDisplayingyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/didEndDisplaying(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE16didEndDisplayingyyyx_q_10Foundation9IndexPathVtcF">didEndDisplaying(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:didEndDisplayingCell:forRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didEndDisplaying</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE15shouldHighlightyySbx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/shouldHighlight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE15shouldHighlightyySbx_q_10Foundation9IndexPathVtcF">shouldHighlight(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:shouldHighlightRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">shouldHighlight</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE12didHighlightyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/didHighlight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE12didHighlightyyyx_q_10Foundation9IndexPathVtcF">didHighlight(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:didHighlightRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didHighlight</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE14didUnhighlightyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/didUnhighlight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE14didUnhighlightyyyx_q_10Foundation9IndexPathVtcF">didUnhighlight(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:didUnhighlightRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didUnhighlight</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE8canFocusyySbx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/canFocus(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE8canFocusyySbx_q_10Foundation9IndexPathVtcF">canFocus(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:canFocusRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">canFocus</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE22targetIndexPathForMoveyy10Foundation0kL0VAJ_xq_AJtcF"></a>
+                    <a name="//apple_ref/swift/Method/targetIndexPathForMove(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE22targetIndexPathForMoveyy10Foundation0kL0VAJ_xq_AJtcF">targetIndexPathForMove(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed when <code>UITableViewDelegate.targetIndexPathForMoveFromRowAt(_:toProposed:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">targetIndexPathForMove</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">IndexPath</span><span class="p">,</span> <span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IndexPath</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE32leadingSwipeActionsConfigurationyySo07UISwipelM0CSgx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/leadingSwipeActionsConfiguration(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE32leadingSwipeActionsConfigurationyySo07UISwipelM0CSgx_q_10Foundation9IndexPathVtcF">leadingSwipeActionsConfiguration(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed when <code>UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">leadingSwipeActionsConfiguration</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UISwipeActionsConfiguration</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE33trailingSwipeActionsConfigurationyySo07UISwipelM0CSgx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/trailingSwipeActionsConfiguration(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE33trailingSwipeActionsConfigurationyySo07UISwipelM0CSgx_q_10Foundation9IndexPathVtcF">trailingSwipeActionsConfiguration(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed when <code>UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">trailingSwipeActionsConfiguration</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UISwipeActionsConfiguration</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE16shouldSpringLoadyySbSo32UISpringLoadedInteractionContext_p_xq_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/shouldSpringLoad(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE16shouldSpringLoadyySbSo32UISpringLoadedInteractionContext_p_xq_10Foundation9IndexPathVtcF">shouldSpringLoad(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed when <code>UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">shouldSpringLoad</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">UISpringLoadedInteractionContext</span><span class="p">,</span> <span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE39shouldBeginMultipleSelectionInteractionyySbx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/shouldBeginMultipleSelectionInteraction(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE39shouldBeginMultipleSelectionInteractionyySbx_q_10Foundation9IndexPathVtcF">shouldBeginMultipleSelectionInteraction(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">shouldBeginMultipleSelectionInteraction</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE36didBeginMultipleSelectionInteractionyyyx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/didBeginMultipleSelectionInteraction(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE36didBeginMultipleSelectionInteractionyyyx_q_10Foundation9IndexPathVtcF">didBeginMultipleSelectionInteraction(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didBeginMultipleSelectionInteraction</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE24contextMenuConfigurationyySo09UIContextkL0CSgSo7CGPointV_xq_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/contextMenuConfiguration(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE24contextMenuConfigurationyySo09UIContextkL0CSgSo7CGPointV_xq_10Foundation9IndexPathVtcF">contextMenuConfiguration(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">contextMenuConfiguration</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">,</span> <span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIContextMenuConfiguration</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60View%60:%20%60UITableViewHeaderFooterView%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `View`: `UITableViewHeaderFooterView`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60View%60:%20%60UITableViewHeaderFooterView%60"></a>
+                  <h3 class="section-name"><p>Available where <code>View</code>: <code>UITableViewHeaderFooterView</code></p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE09heightForI0yy12CoreGraphics7CGFloatVq__SitcF"></a>
+                    <a name="//apple_ref/swift/Method/heightForHeader(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE09heightForI0yy12CoreGraphics7CGFloatVq__SitcF">heightForHeader(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed to determine header height in <code>UITableViewDelegate.tableView(_:heightForHeaderInSection:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">heightForHeader</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE018estimatedHeightForI0yy12CoreGraphics7CGFloatVq__SitcF"></a>
+                    <a name="//apple_ref/swift/Method/estimatedHeightForHeader(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE018estimatedHeightForI0yy12CoreGraphics7CGFloatVq__SitcF">estimatedHeightForHeader(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed to determine estimated header height in <code>UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">estimatedHeightForHeader</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE09heightForJ0yy12CoreGraphics7CGFloatVq__SitcF"></a>
+                    <a name="//apple_ref/swift/Method/heightForFooter(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE09heightForJ0yy12CoreGraphics7CGFloatVq__SitcF">heightForFooter(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed to determine footer height in <code>UITableViewDelegate.tableView(_:heightForFooterInSection:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">heightForFooter</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE018estimatedHeightForJ0yy12CoreGraphics7CGFloatVq__SitcF"></a>
+                    <a name="//apple_ref/swift/Method/estimatedHeightForFooter(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE018estimatedHeightForJ0yy12CoreGraphics7CGFloatVq__SitcF">estimatedHeightForFooter(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed to determine estimated footer height in <code>UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">estimatedHeightForFooter</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE011willDisplayiC0yyyx_q_SitcF"></a>
+                    <a name="//apple_ref/swift/Method/willDisplayHeaderView(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE011willDisplayiC0yyyx_q_SitcF">willDisplayHeaderView(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">willDisplayHeaderView</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE011willDisplayjC0yyyx_q_SitcF"></a>
+                    <a name="//apple_ref/swift/Method/willDisplayFooterView(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE011willDisplayjC0yyyx_q_SitcF">willDisplayFooterView(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:willDisplayFooterView:forSection:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">willDisplayFooterView</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE016didEndDisplayingiC0yyyx_q_SitcF"></a>
+                    <a name="//apple_ref/swift/Method/didEndDisplayingHeaderView(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE016didEndDisplayingiC0yyyx_q_SitcF">didEndDisplayingHeaderView(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:didEndDisplayingHeaderView:forSection:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didEndDisplayingHeaderView</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE016didEndDisplayingjC0yyyx_q_SitcF"></a>
+                    <a name="//apple_ref/swift/Method/didEndDisplayingFooterView(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITablec12HeaderFooterC0CRbzrlE016didEndDisplayingjC0yyyx_q_SitcF">didEndDisplayingFooterView(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed, when <code>UITableViewDelegate.tableView(_:didEndDisplayingFooterView:forSection:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didEndDisplayingFooterView</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60View%60:%20%60UITableViewCell%602"></a>
+                <a name="//apple_ref/swift/Section/Available where `View`: `UITableViewCell`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60View%60:%20%60UITableViewCell%602"></a>
+                  <h3 class="section-name"><p>Available where <code>View</code>: <code>UITableViewCell</code></p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE28itemsForBeginningDragSessionyySaySo10UIDragItemCGSo0oN0_p_xq_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/itemsForBeginningDragSession(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE28itemsForBeginningDragSessionyySaySo10UIDragItemCGSo0oN0_p_xq_10Foundation9IndexPathVtcF">itemsForBeginningDragSession(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed when <code>UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">itemsForBeginningDragSession</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">UIDragSession</span><span class="p">,</span> <span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">UIDragItem</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE27itemsForAddingToDragSessionyySaySo10UIDragItemCGSo0pO0_p_So7CGPointVxq_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/itemsForAddingToDragSession(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE27itemsForAddingToDragSessionyySaySo10UIDragItemCGSo0pO0_p_So7CGPointVxq_10Foundation9IndexPathVtcF">itemsForAddingToDragSession(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed when <code>UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">itemsForAddingToDragSession</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">UIDragSession</span><span class="p">,</span> <span class="kt">CGPoint</span><span class="p">,</span> <span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">UIDragItem</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE21dragPreviewParametersyySo06UIDragkL0CSgx_q_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/dragPreviewParameters(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14DTModelStorage16ViewModelMappingC07DTTableC7ManagerSo07UITableC4CellCRbzrlE21dragPreviewParametersyySo06UIDragkL0CSgx_q_10Foundation9IndexPathVtcF">dragPreviewParameters(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers <code>closure</code> to be executed when <code>UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)</code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">dragPreviewParameters</span><span class="p">(</span><span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">View</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIDragPreviewParameters</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://github.com/DenTelezhkin" target="_blank" rel="external">Denys Telezhkin</a>. All rights reserved. (Last updated: 2020-09-02)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

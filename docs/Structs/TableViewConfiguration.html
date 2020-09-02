@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           DTTableViewManager Docs
         </a>
-         (84% documented)
+         (82% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -103,7 +103,7 @@
             <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/UIView.html">UIView</a>
+                <a class="nav-group-task-link" href="../Extensions/ViewModelMapping.html">ViewModelMapping</a>
               </li>
             </ul>
           </li>
@@ -256,6 +256,70 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:18DTTableViewManager05TableB13ConfigurationV20semanticHeaderHeightSbvp"></a>
+                    <a name="//apple_ref/swift/Property/semanticHeaderHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB13ConfigurationV20semanticHeaderHeightSbvp">semanticHeaderHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Controls whether automatic header height detection is enabled. This includes returning UITableView.automaticDimension for cases when header model is String, returning tableView.sectionHeaderHeight for cases where headerModel is not nil, and also returning <code><a href="../Structs/TableViewConfiguration.html#/s:18DTTableViewManager05TableB13ConfigurationV022minimalHeaderHeightFordB0y12CoreGraphics7CGFloatVSo07UITableB0Ccvp">minimalHeaderHeightForTableView</a></code>, that is slightly different for UITableView.Style.plain and UITableView.Style.grouped. Defaults to true.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This property might be helpful if you want to use self-sizing table view headers for improved perfomance. In this case, set estimated header height either on UITableView, or via closure on <code><a href="../Classes/DTTableViewManager.html">DTTableViewManager</a></code>, or by implementing UITableViewDelegate method, and set <code>semanticHeaderHeight</code> property to false.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">semanticHeaderHeight</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18DTTableViewManager05TableB13ConfigurationV20semanticFooterHeightSbvp"></a>
+                    <a name="//apple_ref/swift/Property/semanticFooterHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18DTTableViewManager05TableB13ConfigurationV20semanticFooterHeightSbvp">semanticFooterHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Controls whether automatic footer height detection is enabled. This includes returning UITableView.automaticDimension for cases when footer model is String, returning tableView.sectionfooterHeight for cases where footerModel is not nil, and also returning <code><a href="../Structs/TableViewConfiguration.html#/s:18DTTableViewManager05TableB13ConfigurationV022minimalFooterHeightFordB0y12CoreGraphics7CGFloatVSo07UITableB0Ccvp">minimalFooterHeightForTableView</a></code>, that is slightly different for UITableView.Style.plain and UITableView.Style.grouped. Defaults to true.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This property might be helpful if you want to use self-sizing table view footers for improved perfomance. In this case, set estimated footer height either on UITableView, or via closure on <code><a href="../Classes/DTTableViewManager.html">DTTableViewManager</a></code>, or by implementing UITableViewDelegate method, and set <code>semanticFooterHeight</code> property to false.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">semanticFooterHeight</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:18DTTableViewManager05TableB13ConfigurationV022minimalHeaderHeightFordB0y12CoreGraphics7CGFloatVSo07UITableB0Ccvp"></a>
                     <a name="//apple_ref/swift/Property/minimalHeaderHeightForTableView" class="dashAnchor"></a>
                     <a class="token" href="#/s:18DTTableViewManager05TableB13ConfigurationV022minimalHeaderHeightFordB0y12CoreGraphics7CGFloatVSo07UITableB0Ccvp">minimalHeaderHeightForTableView</a>
@@ -315,7 +379,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/DenTelezhkin" target="_blank" rel="external">Denys Telezhkin</a>. All rights reserved. (Last updated: 2020-07-02)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/DenTelezhkin" target="_blank" rel="external">Denys Telezhkin</a>. All rights reserved. (Last updated: 2020-09-02)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

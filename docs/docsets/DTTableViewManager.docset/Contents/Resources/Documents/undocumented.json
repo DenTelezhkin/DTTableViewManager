@@ -2,245 +2,77 @@
   "warnings": [
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 237,
+      "line": 229,
       "symbol": "DTTableViewDelegate.tableView(_:editActionsForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 316,
+      "line": 298,
       "symbol": "DTTableViewDelegate.tableView(_:shouldShowMenuForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 326,
+      "line": 308,
       "symbol": "DTTableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 340,
+      "line": 322,
       "symbol": "DTTableViewDelegate.tableView(_:performAction:forRowAt:withSender:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 371,
-      "symbol": "DTTableViewDelegate.tableView(_:canFocusRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 380,
-      "symbol": "DTTableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 390,
-      "symbol": "DTTableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 400,
-      "symbol": "DTTableViewDelegate.tableView(_:shouldSpringLoadRowAt:with:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 428,
-      "symbol": "DTTableViewDelegate.tableView(_:shouldUpdateFocusIn:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 437,
-      "symbol": "DTTableViewDelegate.tableView(_:didUpdateFocusIn:with:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 448,
-      "symbol": "DTTableViewDelegate.indexPathForPreferredFocusedView(in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 458,
+      "line": 434,
       "symbol": "DTTableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 467,
+      "line": 443,
       "symbol": "DTTableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 474,
+      "line": 450,
       "symbol": "DTTableViewDelegate.tableViewDidEndMultipleSelectionInteraction(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 481,
+      "line": 457,
       "symbol": "DTTableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 495,
+      "line": 471,
       "symbol": "DTTableViewDelegate.tableView(_:previewForHighlightingContextMenuWithConfiguration:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDelegate.swift",
-      "line": 504,
+      "line": 480,
       "symbol": "DTTableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDragDelegate.swift",
-      "line": 34,
-      "symbol": "DTTableViewDragDelegate",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDragDelegate.swift",
-      "line": 37,
-      "symbol": "DTTableViewDragDelegate.tableView(_:itemsForBeginning:at:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDragDelegate.swift",
-      "line": 52,
-      "symbol": "DTTableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDragDelegate.swift",
-      "line": 68,
-      "symbol": "DTTableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDragDelegate.swift",
-      "line": 77,
-      "symbol": "DTTableViewDragDelegate.tableView(_:dragSessionWillBegin:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDragDelegate.swift",
-      "line": 84,
-      "symbol": "DTTableViewDragDelegate.tableView(_:dragSessionDidEnd:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDragDelegate.swift",
-      "line": 91,
-      "symbol": "DTTableViewDragDelegate.tableView(_:dragSessionAllowsMoveOperation:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDragDelegate.swift",
-      "line": 100,
-      "symbol": "DTTableViewDragDelegate.tableView(_:dragSessionIsRestrictedToDraggingApplication:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropDelegate.swift",
-      "line": 32,
-      "symbol": "DTTableViewDropDelegate",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropDelegate.swift",
-      "line": 35,
-      "symbol": "DTTableViewDropDelegate.tableView(_:performDropWith:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropDelegate.swift",
-      "line": 47,
-      "symbol": "DTTableViewDropDelegate.tableView(_:canHandle:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropDelegate.swift",
-      "line": 56,
-      "symbol": "DTTableViewDropDelegate.tableView(_:dropSessionDidEnter:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropDelegate.swift",
-      "line": 63,
-      "symbol": "DTTableViewDropDelegate.tableView(_:dropSessionDidUpdate:withDestinationIndexPath:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropDelegate.swift",
-      "line": 76,
-      "symbol": "DTTableViewDropDelegate.tableView(_:dropSessionDidExit:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropDelegate.swift",
-      "line": 83,
-      "symbol": "DTTableViewDropDelegate.tableView(_:dropSessionDidEnd:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropDelegate.swift",
-      "line": 90,
-      "symbol": "DTTableViewDropDelegate.tableView(_:dropPreviewParametersForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropPlaceholderContext.swift",
-      "line": 35,
-      "symbol": "DTTableViewDropPlaceholderContext",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewDropPlaceholderContext.swift",
-      "line": 68,
+      "line": 67,
       "symbol": "DTTableViewDropPlaceholderContext.deletePlaceholder()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -254,218 +86,64 @@
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 176,
+      "line": 168,
       "symbol": "DTTableViewManager.shouldShowMenu(for:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 184,
+      "line": 176,
       "symbol": "DTTableViewManager.canPerformAction(for:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 193,
+      "line": 185,
       "symbol": "DTTableViewManager.performAction(for:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 219,
-      "symbol": "DTTableViewManager.canFocus(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 226,
-      "symbol": "DTTableViewManager.shouldUpdateFocus(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 233,
-      "symbol": "DTTableViewManager.didUpdateFocus(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 240,
-      "symbol": "DTTableViewManager.indexPathForPreferredFocusedView(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 255,
-      "symbol": "DTTableViewManager.leadingSwipeActionsConfiguration(for:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 263,
-      "symbol": "DTTableViewManager.trailingSwipeActionsConfiguration(for:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 271,
-      "symbol": "DTTableViewManager.shouldSpringLoad(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 282,
+      "line": 267,
       "symbol": "DTTableViewManager.shouldBeginMultipleSelectionInteraction(for:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 295,
+      "line": 280,
       "symbol": "DTTableViewManager.didBeginMultipleSelectionInteraction(for:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 306,
+      "line": 291,
       "symbol": "DTTableViewManager.didEndMultipleSelectionInteraction(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 313,
+      "line": 298,
       "symbol": "DTTableViewManager.contextMenuConfiguration(for:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 324,
+      "line": 309,
       "symbol": "DTTableViewManager.previewForHighlightingContextMenu(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Delegate.swift",
-      "line": 331,
+      "line": 316,
       "symbol": "DTTableViewManager.previewForDismissingContextMenu(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drag.swift",
-      "line": 36,
-      "symbol": "DTTableViewManager.itemsForBeginningDragSession(from:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drag.swift",
-      "line": 45,
-      "symbol": "DTTableViewManager.itemsForAddingToDragSession(from:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drag.swift",
-      "line": 54,
-      "symbol": "DTTableViewManager.dragPreviewParameters(for:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drag.swift",
-      "line": 62,
-      "symbol": "DTTableViewManager.dragSessionWillBegin(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drag.swift",
-      "line": 68,
-      "symbol": "DTTableViewManager.dragSessionDidEnd(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drag.swift",
-      "line": 74,
-      "symbol": "DTTableViewManager.dragSessionAllowsMoveOperation(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drag.swift",
-      "line": 80,
-      "symbol": "DTTableViewManager.dragSessionIsRestrictedToDraggingApplication(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drop.swift",
-      "line": 36,
-      "symbol": "DTTableViewManager.performDropWithCoordinator(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drop.swift",
-      "line": 42,
-      "symbol": "DTTableViewManager.canHandleDropSession(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drop.swift",
-      "line": 48,
-      "symbol": "DTTableViewManager.dropSessionDidEnter(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drop.swift",
-      "line": 54,
-      "symbol": "DTTableViewManager.dropSessionDidUpdate(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drop.swift",
-      "line": 60,
-      "symbol": "DTTableViewManager.dropSessionDidExit(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drop.swift",
-      "line": 66,
-      "symbol": "DTTableViewManager.dropSessionDidEnd(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drop.swift",
-      "line": 72,
-      "symbol": "DTTableViewManager.dropPreviewParameters(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager+Drop.swift",
-      "line": 79,
-      "symbol": "DTTableViewManager.drop(_:to:with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -480,20 +158,6 @@
       "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager.swift",
       "line": 45,
       "symbol": "DTTableViewManageable.optionalTableView",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager.swift",
-      "line": 172,
-      "symbol": "DTTableViewManager.tableDragDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Denys/Projects/DTTableViewManager/Sources/DTTableViewManager/DTTableViewManager.swift",
-      "line": 186,
-      "symbol": "DTTableViewManager.tableDropDelegate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },

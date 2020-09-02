@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
   s.tvos.deployment_target = '11.0'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'DTModelStorage' , '~> 8.1.0'
+  s.dependency 'DTModelStorage' , '~> 9.0.0-beta.1'
 end

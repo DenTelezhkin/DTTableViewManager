@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           DTTableViewManager Docs
         </a>
-         (84% documented)
+         (82% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -102,7 +102,7 @@
             <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UIView.html">UIView</a>
+                <a class="nav-group-task-link" href="Extensions/ViewModelMapping.html">ViewModelMapping</a>
               </li>
             </ul>
           </li>
@@ -136,74 +136,44 @@
 <a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" alt="Swift Package Manager compatible"></a>
 <a href=""><img src="https://img.shields.io/packagist/l/doctrine/orm.svg" alt="Packagist"></a></p>
 <h1 id='dttableviewmanager' class='heading'>DTTableViewManager</h1>
-
-<blockquote>
-<p>This is a sister-project for <a href="https://github.com/DenTelezhkin/DTCollectionViewManager">DTCollectionViewManager</a> - great tool for UICollectionView management, built on the same principles.</p>
-</blockquote>
-
-<p>Powerful generic-based UITableView management framework, written in Swift.</p>
-
-<ul>
-<li><a href="#features">Features</a></li>
-<li><a href="#requirements">Requirements</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#quick-start">Quick start</a></li>
-<li><a href="#usage">Usage</a>
-
-<ul>
-<li><strong>Intro -</strong> <a href="#mapping-and-registration">Mapping and Registration</a>, <a href="#data-models">Data Models</a></li>
-<li><strong>Storage classes -</strong> <a href="#memorystorage">Memory Storage</a>, <a href="#coredatastorage">CoreDataStorage</a>, <a href="#realmstorage">RealmStorage</a>, <a href="#diffable-datasources-in-ios-13">Diffable Datasources in iOS13</a></li>
-<li><strong>Reacting to events -</strong> <a href="#event-types">Event types</a>, <a href="#events-configuration">Events configuration</a></li>
-</ul></li>
-<li><a href="#advanced-usage">Advanced Usage</a>
-
-<ul>
-<li><a href="#drag-and-drop-in-ios-11">Drag and Drop in iOS 11</a></li>
-<li><a href="#reacting-to-content-updates">Reacting to content updates</a></li>
-<li><a href="#customizing-uitableview-updates">Customizing UITableView updates</a></li>
-<li><a href="#display-header-on-empty-section">Display header on empty section</a></li>
-<li><a href="#conditional-mappings">Conditional mappings</a></li>
-<li><a href="#anomaly-handler">Anomaly handler</a></li>
-<li><a href="#unregistering-mappings">Unregistering mappings</a></li>
-</ul></li>
-<li><a href="#thanks">Thanks</a></li>
-</ul>
 <h2 id='features' class='heading'>Features</h2>
 
 <ul>
 <li>[x] Powerful mapping system between data models and cells, headers and footers</li>
-<li>[x] Support for all Swift types - classes, structs, enums, tuples, protocols</li>
-<li>[x] Support for diffable datasources in iOS 13</li>
-<li>[x] Powerful events system, that covers all UITableView delegate and datasource methods</li>
-<li>[x] Views created from code, XIB, or storyboard</li>
-<li>[x] Flexible Memory/CoreData/Realm.io storage options</li>
 <li>[x] Automatic datasource and interface synchronization.</li>
-<li>[x] Automatic XIB registration and dequeue</li>
-<li>[x] Support for Drag&amp;Drop API for iOS 11 and higher</li>
-<li>[x] Can be used with UITableViewController, or UIViewController with UITableView, or any other class, that contains UITableView</li>
-<li>[x] <a href="https://dentelezhkin.github.io/DTTableViewManager">Complete documentation</a></li>
+<li>[x] Flexible Memory/CoreData/Realm/diffable datasource storage options</li>
+<li>[x] Powerful compile-time safe events system, that covers all of UITableView delegate methods</li>
+<li>[x] Views created from code, XIB, or storyboard, automatic registration and dequeue</li>
+<li>[x] Can be used with UITableViewController, or UIViewController with UITableView</li>
+<li>[x] Unified syntax with <a href="https://github.com/DenTelezhkin/DTCollectionViewManager">DTCollectionViewManager</a></li>
+<li>[x] <a href="Documentation">Complete documentation</a></li>
+<li>[x] <a href="https://dentelezhkin.github.io/DTTableViewManager/">API Reference</a></li>
 </ul>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
-<li>Xcode 9 and higher</li>
-<li>iOS 8.0 and higher / tvOS 9.0 and higher</li>
-<li>Swift 4 and higher</li>
+<li>Xcode 12+</li>
+<li>iOS 11.0+ / tvOS 11.0+ / macCatalyst 13.0+</li>
+<li>Swift 5.3+</li>
 </ul>
-<h2 id='installation' class='heading'>Installation</h2>
-<h3 id='swift-package-manager-requires-xcode-11' class='heading'>Swift Package Manager(requires Xcode 11)</h3>
 
-<p>Add package into Project settings -&gt; Swift Packages</p>
+<blockquote>
+<p>If you need Xcode 11 support or Swift 4&hellip;Swift 5.2, or iOS 8&hellip;iOS 10 support, you can use 7.x releases.</p>
+</blockquote>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>Add package into Xcode Project settings -&gt; Swift Packages</p>
 <h3 id='a-href-http-www-cocoapods-org-cocoapods-a' class='heading'><a href="http://www.cocoapods.org">CocoaPods</a>:</h3>
-<pre class="highlight plaintext"><code>pod 'DTTableViewManager'
+<pre class="highlight plaintext"><code>pod 'DTTableViewManager', '~&gt; 8.0.0-beta.1'
 </code></pre>
 <h2 id='quick-start' class='heading'>Quick start</h2>
 
 <p>Let&rsquo;s say you have an array of Posts you want to display in UITableView. To quickly show them using DTTableViewManager, here&rsquo;s what you need to do:</p>
 
-<ul>
-<li>Create UITableViewCell subclass, let&rsquo;s say PostCell. Adopt ModelTransfer protocol</li>
-</ul>
+<ol>
+<li>Create UITableViewCell subclass, let&rsquo;s say PostCell and adopt <code>ModelTransfer</code> protocol:</li>
+</ol>
 <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">PostCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">ModelTransfer</span> <span class="p">{</span>
     <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="n">with</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">Post</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Fill your cell with actual data</span>
@@ -211,312 +181,63 @@
 <span class="p">}</span>
 </code></pre>
 
-<ul>
-<li><p>Declare your class as <code><a href="Protocols/DTTableViewManageable.html">DTTableViewManageable</a></code>, and it will be automatically injected with <code>manager</code> property, that will hold an instance of <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code>.</p></li>
-<li><p>Make sure your UITableView outlet is wired to your class and call registration methods:</p></li>
-</ul>
-<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">PostsViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">DTTableViewManageable</span> <span class="p">{</span>
-
-    <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">!</span>
+<ol>
+<li>In your view controller:</li>
+</ol>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">PostsViewController</span><span class="p">:</span> <span class="kt">UITableViewController</span><span class="p">,</span> <span class="kt">DTTableViewManageable</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
+
+        <span class="c1">// Register PostCell to be used with this controller's table view</span>
         <span class="n">manager</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="kt">PostCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+
+        <span class="c1">// Populate datasource</span>
+        <span class="n">manager</span><span class="o">.</span><span class="n">memoryStorage</span><span class="o">.</span><span class="nf">setItems</span><span class="p">(</span><span class="n">posts</span><span class="p">)</span>
     <span class="p">}</span>
-<span class="p">}</span>
+<span class="p">}</span>    
 </code></pre>
 
-<p>ModelType will be automatically gathered from your <code>PostCell</code>. If you have a PostCell.xib file, it will be automatically registered for PostCell. If you have a storyboard with PostCell, set it&rsquo;s reuseIdentifier to be identical to class - &ldquo;PostCell&rdquo;.</p>
-
-<ul>
-<li>Add your posts!</li>
-</ul>
-<pre class="highlight swift"><code>    <span class="n">manager</span><span class="o">.</span><span class="n">memoryStorage</span><span class="o">.</span><span class="nf">addItems</span><span class="p">(</span><span class="n">posts</span><span class="p">)</span>
-</code></pre>
-
-<p>That&rsquo;s it! It&rsquo;s that easy!</p>
-<h2 id='usage' class='heading'>Usage</h2>
-<h3 id='mapping-and-registration' class='heading'>Mapping and registration</h3>
-
-<ul>
-<li><code>register(_:)</code></li>
-<li><code>registerNibNamed(_:for:)</code></li>
-<li><code>registerHeader(_:)</code></li>
-<li><code>registerNibNamed(_:forHeader:)</code></li>
-<li><code>registerFooter(_:)</code></li>
-<li><code>registerNibNamed(_:forFooter:)</code></li>
-<li><code>registerNiblessHeader(_:)</code></li>
-<li><code>registerNiblessFooter(_:)</code></li>
-</ul>
-
-<p>By default, <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> uses section titles and <code>tableView(_:titleForHeaderInSection:)</code> UITableViewDatasource methods. However, if you call any mapping methods for headers or footers, it will automatically switch to using <code>tableView(_:viewForHeaderInSection:)</code> methods and dequeue <code>UITableViewHeaderFooterView</code> instances. Make your <code>UITableViewHeaderFooterView</code> subclasses conform to <code>ModelTransfer</code> protocol to allow them participate in mapping.</p>
-
-<p>You can also use UIView subclasses for headers and footers.</p>
-<h3 id='data-models' class='heading'>Data models</h3>
-
-<p><code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> supports all Swift and Objective-C types as data models. This also includes protocols and subclasses.</p>
-<pre class="highlight swift"><code><span class="kd">protocol</span> <span class="kt">Food</span> <span class="p">{}</span>
-<span class="kd">class</span> <span class="kt">Apple</span> <span class="p">:</span> <span class="kt">Food</span> <span class="p">{}</span>
-<span class="kd">class</span> <span class="kt">Carrot</span><span class="p">:</span> <span class="kt">Food</span> <span class="p">{}</span>
-
-<span class="kd">class</span> <span class="kt">FoodTableViewCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">ModelTransfer</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="n">with</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">Food</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Display food in a cell</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="n">manager</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="kt">FoodTableViewCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">memoryStorage</span><span class="o">.</span><span class="nf">addItems</span><span class="p">([</span><span class="kt">Apple</span><span class="p">(),</span><span class="kt">Carrot</span><span class="p">()])</span>
-</code></pre>
-<h2 id='storage-classes' class='heading'>Storage classes</h2>
-
-<p><a href="https://github.com/DenTelezhkin/DTModelStorage/">DTModelStorage</a> is a framework, that provides storage classes for <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code>. By default, storage property on <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> holds a <code>MemoryStorage</code> instance.</p>
-<h3 id='memorystorage' class='heading'>MemoryStorage</h3>
-
-<p><code>MemoryStorage</code> is a class, that manages UITableView models in memory. It has methods for adding, removing, replacing, reordering table view models etc. You can read all about them in <a href="https://github.com/DenTelezhkin/DTModelStorage#memorystorage">DTModelStorage repo</a>. Basically, every section in <code>MemoryStorage</code> is an array of <code>SectionModel</code> objects, which itself is an object that contains array of table items.</p>
-<h3 id='coredatastorage' class='heading'>CoreDataStorage</h3>
-
-<p><code>CoreDataStorage</code> is meant to be used with <code>NSFetchedResultsController</code>. It automatically monitors all NSFetchedResultsControllerDelegate methods and updates UI accordingly to it&rsquo;s changes. All you need to do to display CoreData models in your UITableView, is create CoreDataStorage object and set it on your <code>storage</code> property of <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code>.</p>
-
-<p>It also recommended to use built-in CoreData updater to properly update UITableView:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="n">tableViewUpdater</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="nf">coreDataUpdater</span><span class="p">()</span>
-</code></pre>
-
-<p>Standard flow for creating <code>CoreDataStorage</code> can be something like this:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSFetchRequest</span><span class="o">&lt;</span><span class="kt">Post</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="n">request</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="kt">NSEntityDescription</span><span class="o">.</span><span class="nf">entity</span><span class="p">(</span><span class="nv">forEntityName</span><span class="p">:</span> <span class="kt">String</span><span class="p">(</span><span class="kt">Post</span><span class="o">.</span><span class="k">self</span><span class="p">),</span> <span class="nv">in</span><span class="p">:</span> <span class="n">context</span><span class="p">)</span>
-<span class="n">request</span><span class="o">.</span><span class="n">fetchBatchSize</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">request</span><span class="o">.</span><span class="n">sortDescriptors</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSSortDescriptor</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="s">"id"</span><span class="p">,</span> <span class="nv">ascending</span><span class="p">:</span> <span class="kc">true</span><span class="p">)]</span>
-<span class="k">let</span> <span class="nv">fetchResultsController</span> <span class="o">=</span> <span class="kt">NSFetchedResultsController</span><span class="p">(</span><span class="nv">fetchRequest</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">managedObjectContext</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span> <span class="nv">sectionNameKeyPath</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">cacheName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="n">fetchResultsController</span><span class="o">.</span><span class="nf">performFetch</span><span class="p">()</span>
-
-<span class="n">manager</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="kt">CoreDataStorage</span><span class="p">(</span><span class="nv">fetchedResultsController</span><span class="p">:</span> <span class="n">fetchResultsController</span><span class="p">)</span>
-</code></pre>
-
-<p>Keep in mind, that MemoryStorage is not limited to objects in memory. For example, if you have CoreData database, and you now for sure, that number of items is not big, you can choose not to use CoreDataStorage and NSFetchedResultsController. You can fetch all required models, and store them in MemoryStorage.</p>
-<h3 id='realmstorage' class='heading'>RealmStorage</h3>
-
-<p><code>RealmStorage</code> is a class, that is meant to be used with <a href="https://realm.io">realm.io</a> databases. To use <code>RealmStorage</code> with <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code>, add following line to your Podfile:</p>
-<pre class="highlight ruby"><code>    <span class="n">pod</span> <span class="s1">'DTModelStorage/Realm'</span>
-</code></pre>
-<h3 id='diffable-datasources-in-ios-13' class='heading'>Diffable datasources in iOS 13</h3>
-
-<p>Diffable datasources is a cool new feature, that is introduced in UIKit in iOS / tvOS 13. <code>DTTableViewManager 7</code> provides a powerful integration layer with it, but in order to understand how this layer works, it&rsquo;s highly recommended to check out great <a href="https://developer.apple.com/videos/play/wwdc2019/220/">Advances in UI Data Sources WWDC session</a>.</p>
-
-<p>If you don&rsquo;t use <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code>, you would typically create diffable datasource like so (taken from Apple&rsquo;s sample code on diffable datasources):</p>
-<pre class="highlight swift"><code><span class="n">dataSource</span> <span class="o">=</span> <span class="kt">UICollectionViewDiffableDataSource</span>
-    <span class="o">&lt;</span><span class="kt">Section</span><span class="p">,</span> <span class="kt">MountainsController</span><span class="o">.</span><span class="kt">Mountain</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">collectionView</span><span class="p">:</span> <span class="n">mountainsCollectionView</span><span class="p">)</span> <span class="p">{</span>
-        <span class="p">(</span><span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span>
-        <span class="nv">mountain</span><span class="p">:</span> <span class="kt">MountainsController</span><span class="o">.</span><span class="kt">Mountain</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UICollectionViewCell</span><span class="p">?</span> <span class="k">in</span>
-    <span class="k">guard</span> <span class="k">let</span> <span class="nv">mountainCell</span> <span class="o">=</span> <span class="n">collectionView</span><span class="o">.</span><span class="nf">dequeueReusableCell</span><span class="p">(</span>
-        <span class="nv">withReuseIdentifier</span><span class="p">:</span> <span class="kt">LabelCell</span><span class="o">.</span><span class="n">reuseIdentifier</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span> <span class="k">as?</span> <span class="kt">LabelCell</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="nf">fatalError</span><span class="p">(</span><span class="s">"Cannot create new cell"</span><span class="p">)</span> <span class="p">}</span>
-    <span class="n">mountainCell</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">mountain</span><span class="o">.</span><span class="n">name</span>
-    <span class="k">return</span> <span class="n">mountainCell</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>One of <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code>s main goals is to get rid of String identifiers, and to handle cell creation, as well as updating cell with it&rsquo;s model, for you. Which is why with DTTableViewManager 7 code, equivalent to one above, is the following:</p>
-<pre class="highlight swift"><code><span class="n">dataSource</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">configureDiffableDataSource</span> <span class="p">{</span> <span class="n">indexPath</span><span class="p">,</span> <span class="n">model</span> <span class="k">in</span>
-    <span class="k">return</span> <span class="n">model</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>You should persist strong reference to <code>dataSource</code> object, and use it for constructing sections and items exactly as described in Apple documentation and WWDC session.</p>
-
-<p>Diffable datasources and <code>DTTableViewManager 7</code> are tightly integrated, so all events, even datasource ones like <code>manager.configure(_:)</code>, continue to work in the same way as they were working before.</p>
-
-<p>On top of that, there is an additional functionality, that currently <code>UITableViewDiffableDataSource</code> class does not provide. It&rsquo;s currently not possible to use it and have section titles/headers/footers in <code>UITableView</code>. With <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> however, it works just as you would expect:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="n">supplementaryStorage</span><span class="p">?</span><span class="o">.</span><span class="nf">setSectionHeaderModels</span><span class="p">([</span><span class="s">"Foo"</span><span class="p">])</span>
-</code></pre>
-
-<p>Both events and section header/footer integration is possible, because <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> injects a special <code>ProxyDiffableDataSourceStorage</code> object between <code>UITableViewDiffableDataSource</code> and <code>UITableView</code>. This storage does not store data models and just queries diffable data source to receive them. It does, however, implement section header and footer model providers, which unlocks possibility to have section titles/headers/footers when using diffable datasources.</p>
-
-<p><code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> supports both generic <code>UITableViewDiffableDataSource&lt;SectionType,ItemType&gt;</code> and non-generic  <code>UITableViewDiffableDataSourceReference</code> with the same method name(<code>configureDiffableDataSource</code>). Resulting diffable datasource type is inferred from your declaration of the datasource.</p>
-
-<p>Keep in mind, that for diffable datasources, <code>tableViewUpdater</code> property will contain nil, since UI updates are handled by diffable datasource itself.</p>
-<h2 id='reacting-to-events' class='heading'>Reacting to events</h2>
-
-<p>Event system in DTTableViewManager 5 allows you to react to <code>UITableViewDelegate</code> and <code>UITableViewDataSource</code> events based on view and model types, completely bypassing any switches or ifs when working with UITableView API. For example:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">didSelect</span><span class="p">(</span><span class="kt">PostCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">cell</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">indexPath</span> <span class="k">in</span>
-  <span class="nf">print</span><span class="p">(</span><span class="s">"Selected PostCell with </span><span class="se">\(</span><span class="n">model</span><span class="se">)</span><span class="s"> at </span><span class="se">\(</span><span class="n">indexPath</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-
-<p><strong>Important</strong></p>
-
-<p>While it&rsquo;s possible to register multiple closures for a single event, only first closure will be called once event is fired. This means that if the same event has two closures for the same view/model type, last one will be ignored. You can still register multiple event handlers for a single event and different view/model types. You can see how reactions are being searched for in <a href="https://github.com/DenTelezhkin/DTModelStorage/blob/master/Sources/DTModelStorage/EventReactions.swift#L155-L166">DTModelStorage EventReaction extension</a>.</p>
-<h3 id='event-types' class='heading'>Event types</h3>
-
-<p>There are two types of events:</p>
+<p>Make sure your UITableView outlet is wired to your class (or use UITableViewController subclass). If you have a PostCell.xib file, it will be automatically used for dequeueing PostCell.</p>
 
 <ol>
-<li>Event where we have underlying view at runtime</li>
-<li>Event where we have only data model, because view has not been created yet.</li>
+<li>That&rsquo;s it! It&rsquo;s that easy!</li>
 </ol>
 
-<p>In the first case, we are able to check view and model types, and pass them into closure. In the second case, however, if there&rsquo;s no view, we can&rsquo;t make any guarantees of which type it will be, therefore it loses view generic type and is not passed to closure. These two types of events have different signature, for example:</p>
-<pre class="highlight swift"><code><span class="c1">// Signature for didSelect event</span>
-<span class="c1">// We do have a cell, when UITableView calls "tableView(_:didSelectRowAt:)" method</span>
-<span class="kd">open</span> <span class="kd">func</span> <span class="n">didSelect</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span><span class="kt">ModelTransfer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">cellClass</span><span class="p">:</span>  <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">T</span><span class="p">,</span><span class="kt">T</span><span class="o">.</span><span class="kt">ModelType</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span><span class="kt">UITableViewCell</span>
-
-
-<span class="c1">// Signature for heightForCell event</span>
-<span class="c1">// When UITableView calls "tableView(_:heightForRowAt:)" method, cell is not created yet, so closure contains two arguments instead of three, and there are no guarantees made about cell type, only model type</span>
-<span class="kd">open</span> <span class="kd">func</span> <span class="n">heightForCell</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">withItem</span> <span class="nv">itemType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">T</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span>
-</code></pre>
-
-<p>It&rsquo;s also important to understand, that event system is implemented using <code>responds(to:)</code> method override and is working on the following rules:</p>
+<p>Of course, cool stuff does not stop there, framework supports all datasource and delegate methods as closures, conditional mappings and much much more! Choose what interests you in the next section of readme.</p>
+<h2 id='burning-questions' class='heading'>Burning questions</h2>
+<h6 id='starter-pack' class='heading'>Starter pack</h6>
 
 <ul>
-<li>If <code><a href="Protocols/DTTableViewManageable.html">DTTableViewManageable</a></code> is implementing delegate method, <code>responds(to:)</code> returns true</li>
-<li>If <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> has events tied to selector being called, <code>responds(to:)</code> also returns true</li>
+<li><strong><a href="Documentation/Why.md">Why do I need this library?</a></strong></li>
+<li><a href="Documentation/Mapping.md">How data models are mapped to cells?</a></li>
+<li><a href="Documentation/Mapping.md#without-modeltransfer">Can I use unsubclassed UITableViewCell or UITableViewHeaderFooterView?</a></li>
+<li><a href="Documentation/Registration.md">How can I register views to dequeue from code/xib/storyboard?</a></li>
+<li><a href="Documentation/Conditional%20mappings.md">How can I use the same cells differently in different places?</a></li>
+<li><a href="Documentation/Datasources.md">What datasource options do I have?(e.g. memory/CoreData/Realm/diffable datasources)</a></li>
+<li><a href="Documentation/Events.md">How can I implement datasource/delegate methods from <code>UITableView</code>?</a></li>
 </ul>
-
-<p>What this approach allows us to do, is configuring UITableView knowledge about what delegate method is implemented and what is not. For example, <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> is implementing <code>tableView(_:heightForRowAt:)</code> method, however if you don&rsquo;t call <code>heightForCell(withItem:_:)</code> method, you are safe to use self-sizing cells in UITableView. While all delegate methods are implemented, only those that have events or are implemented by delegate will be called by <code>UITableView</code>.</p>
-
-<p><code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> has the same approach for handling each delegate and datasource method:</p>
+<h6 id='advanced' class='heading'>Advanced</h6>
 
 <ul>
-<li>Try to execute event, if cell and model type satisfy requirements</li>
-<li>Try to call delegate or datasource method on <code><a href="Protocols/DTTableViewManageable.html">DTTableViewManageable</a></code> instance</li>
-<li>If two previous scenarios fail, fallback to whatever default <code>UITableView</code> has for this delegate or datasource method</li>
+<li><a href="Documentation/Events.md#can-i-still-use-delegate-methods">Can I implement delegate methods instead of using DTTableViewManager event closures?</a></li>
+<li><a href="Documentation/TableViewUpdater.md">How can I react to and customize UITableView updates?</a></li>
+<li><a href="Documentation/TableViewConfiguration">What can be additionally configured when using DTTableViewManager with UITableView?</a></li>
+<li><a href="Documentation/Anomalies.md">What if something goes wrong?</a></li>
 </ul>
-<h3 id='events-configuration' class='heading'>Events configuration</h3>
+<h2 id='sample-code-and-documentation' class='heading'>Sample code and documentation</h2>
 
-<p>To have compile safety when registering events, you can use <code>configureEvents</code> method:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">configureEvents</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="kt">IntCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">cellType</span><span class="p">,</span> <span class="n">modelType</span> <span class="k">in</span>
-  <span class="n">manager</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="n">cellType</span><span class="p">)</span>
-  <span class="n">manager</span><span class="o">.</span><span class="nf">estimatedHeight</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">modelType</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span><span class="n">_</span> <span class="k">in</span>
-    <span class="k">return</span> <span class="mi">44</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-<h2 id='advanced-usage' class='heading'>Advanced usage</h2>
-<h3 id='drag-and-drop-in-ios-11' class='heading'>Drag and Drop in iOS 11</h3>
-
-<p>There is a <a href="https://github.com/DenTelezhkin/DTDragAndDropExample">dedicated repo</a>, containing Apple&rsquo;s sample on Drag&amp;Drop, enhanced with <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> and <code>DTCollectionViewManager</code>. Most of the stuff is just usual drop and drag delegate events, but there is also special support for UITableView and UICollectionView placeholders, that makes sure calls are dispatched to main thread, and if you use <code>MemoryStorage</code>, performs datasource updates automatically.</p>
-<h3 id='reacting-to-content-updates' class='heading'>Reacting to content updates</h3>
-
-<p>Sometimes it&rsquo;s convenient to know, when data is updated, for example to hide UITableView, if there&rsquo;s no data. <code><a href="Classes/TableViewUpdater.html">TableViewUpdater</a></code> has <code>willUpdateContent</code> and <code>didUpdateContent</code> properties, that can help:</p>
-<pre class="highlight swift"><code><span class="n">updater</span><span class="o">.</span><span class="n">willUpdateContent</span> <span class="o">=</span> <span class="p">{</span> <span class="n">update</span> <span class="k">in</span>
-  <span class="nf">print</span><span class="p">(</span><span class="s">"UI update is about to begin"</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="n">updater</span><span class="o">.</span><span class="n">didUpdateContent</span> <span class="o">=</span> <span class="p">{</span> <span class="n">update</span> <span class="k">in</span>
-  <span class="nf">print</span><span class="p">(</span><span class="s">"UI update finished"</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-<h3 id='customizing-uitableview-updates' class='heading'>Customizing UITableView updates</h3>
-
-<p><code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> uses <code><a href="Classes/TableViewUpdater.html">TableViewUpdater</a></code> class by default. However for <code>CoreData</code> you might want to tweak UI updating code. For example, when reloading cell, you might want animation to occur, or you might want to silently update your cell. This is actually how <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/nsfetchedresultscontroller.html">Apple&rsquo;s guide</a> for <code>NSFetchedResultsController</code> suggests you should do. Another interesting thing it suggests that .Move event reported by NSFetchedResultsController should be animated not as a move, but as deletion of old index path and insertion of new one.</p>
-
-<p>If you want to work with CoreData and NSFetchedResultsController, just call:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="n">tableViewUpdater</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="nf">coreDataUpdater</span><span class="p">()</span>
-</code></pre>
-
-<p><code><a href="Classes/TableViewUpdater.html">TableViewUpdater</a></code> constructor allows customizing it&rsquo;s basic behaviour:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">updater</span> <span class="o">=</span> <span class="kt">TableViewUpdater</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="n">tableView</span><span class="p">,</span> <span class="nv">reloadRow</span><span class="p">:</span> <span class="p">{</span> <span class="n">indexPath</span> <span class="k">in</span>
-  <span class="c1">// Reload row</span>
-<span class="p">},</span> <span class="nv">animateMoveAsDeleteAndInsert</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
-</code></pre>
-
-<p>These are all default options, however you might implement your own implementation of <code><a href="Classes/TableViewUpdater.html">TableViewUpdater</a></code>, the only requirement is that object needs to conform to <code>StorageUpdating</code> protocol. This gives you full control on how and when <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> will update <code>UITableView</code>.</p>
-
-<p><code><a href="Classes/TableViewUpdater.html">TableViewUpdater</a></code> also contains all animation options, that can be changed, for example:</p>
-<pre class="highlight swift"><code><span class="n">updater</span><span class="o">.</span><span class="n">deleteSectionAnimation</span> <span class="o">=</span> <span class="kt">UITableViewRowAnimation</span><span class="o">.</span><span class="n">fade</span>
-<span class="n">updater</span><span class="o">.</span><span class="n">insertRowAnimation</span> <span class="o">=</span> <span class="kt">UITableViewRowAnimation</span><span class="o">.</span><span class="n">automatic</span>
-</code></pre>
-<h3 id='display-header-on-empty-section' class='heading'>Display header on empty section</h3>
-
-<p>By default, headers are displayed if there&rsquo;s header model for them in section, even if there are no items in section. This behaviour can be changed:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">displayHeaderOnEmptySection</span> <span class="o">=</span> <span class="kc">false</span>
-<span class="c1">// or</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">displayFooterOnEmptySection</span> <span class="o">=</span> <span class="kc">false</span>
-</code></pre>
-
-<p>Also you can use simple String models for header and footer models, without any registration, and they will be used in <code>tableView(_:titleForHeaderInSection:)</code> method automatically.</p>
-<h3 id='conditional-mappings' class='heading'>Conditional mappings</h3>
-
-<p>There can be cases, where you might want to customize mappings based on some criteria. For example, you might want to display model in several kinds of cells for different sections:</p>
-<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">FoodTextCell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">ModelTransfer</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="n">with</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">Food</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Text representation</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">class</span> <span class="kt">FoodImageCell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">ModelTransfer</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="n">with</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">Food</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Photo representation</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">manager</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="kt">FoodTextCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">mapping</span> <span class="k">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="o">.</span><span class="nf">section</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">manager</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="kt">FoodImageCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">mapping</span> <span class="k">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="o">.</span><span class="nf">section</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
-</code></pre>
-
-<p>Or you may implement completely custom conditions:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="kt">FooCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">mapping</span> <span class="k">in</span>
-  <span class="n">mapping</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="o">.</span><span class="nf">custom</span><span class="p">({</span> <span class="n">indexPath</span><span class="p">,</span> <span class="n">model</span> <span class="k">in</span>
-    <span class="k">guard</span> <span class="k">let</span> <span class="nv">model</span> <span class="o">=</span> <span class="n">model</span> <span class="k">as?</span> <span class="kt">Int</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">false</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="n">model</span> <span class="o">&gt;</span> <span class="mi">2</span>
-  <span class="p">})</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>You can also change reuseIdentifier to be used:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="kt">NibCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">mapping</span> <span class="k">in</span>
-    <span class="n">mapping</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="o">.</span><span class="nf">section</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">mapping</span><span class="o">.</span><span class="n">reuseIdentifier</span> <span class="o">=</span> <span class="s">"NibCell One"</span>
-<span class="p">}</span>
-<span class="n">controller</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="nf">registerNibNamed</span><span class="p">(</span><span class="s">"CustomNibCell"</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="kt">NibCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">mapping</span> <span class="k">in</span>
-    <span class="n">mapping</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="o">.</span><span class="nf">section</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">mapping</span><span class="o">.</span><span class="n">reuseIdentifier</span> <span class="o">=</span> <span class="s">"NibCell Two"</span>
-<span class="p">}</span>
-</code></pre>
-<h3 id='anomaly-handler' class='heading'>Anomaly handler</h3>
-
-<p><code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> is built on some conventions. For example, your cell needs to have reuseIdentifier that matches the name of your class, XIB files need to be named also identical to the name of your class(to work with default mapping without customization). However when those conventions are not followed, or something unexpected happens, your app may crash or behave inconsistently. Most of the errors are reported by <code>UITableView</code> API, but there&rsquo;s space to improve.</p>
-
-<p><code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> as well as <code>DTCollectionViewManager</code> and <code>DTModelStorage</code> have dedicated anomaly analyzers, that try to find inconsistencies and programmer errors when using those frameworks. They detect stuff like missing mappings, inconsistencies in xib files, and even unused events. By default, detected anomalies will be printed in console while you are debugging your app. For example, if you try to register an empty xib to use for your cell, here&rsquo;s what you&rsquo;ll see in console:</p>
-<pre class="highlight plaintext"><code>⚠️[DTTableViewManager] Attempted to register xib EmptyXib for PostCell, but this xib does not contain any views.
-</code></pre>
-
-<p>Messages are prefixed, so for <code>DTCollectionViewManager</code> messages will have <code>[DTCollectionViewManager]</code> prefix.</p>
-
-<p>By default, anomaly handler only prints information into console and does not do anything beyond that, but you can change it&rsquo;s behavior by assigning a custom handler for anomalies:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="n">anomalyHandler</span><span class="o">.</span><span class="n">anomalyAction</span> <span class="o">=</span> <span class="p">{</span> <span class="n">anomaly</span> <span class="k">in</span>
-  <span class="c1">// invoke custom action</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>For example, you may want to send all detected anomalies to analytics you have in your app. For this case anomalies implement shorter description, that is more suitable for analytics, that often have limits for amount of data you can put in. To do that globally for all instances of <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> that will be created during runtime of your app, set default action:</p>
-<pre class="highlight swift"><code><span class="kt">DTTableViewManagerAnomalyHandler</span><span class="o">.</span><span class="n">defaultAction</span> <span class="o">=</span> <span class="p">{</span> <span class="n">anomaly</span> <span class="k">in</span>
-  <span class="nf">print</span><span class="p">(</span><span class="n">anomaly</span><span class="o">.</span><span class="n">debugDescription</span><span class="p">)</span>
-
-  <span class="n">analytics</span><span class="o">.</span><span class="nf">postEvent</span><span class="p">(</span><span class="s">"DTTableViewManager"</span><span class="p">,</span> <span class="n">anomaly</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>If you use <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> and <code>DTCollectionViewManager</code>, you can override 3 default actions for both manager frameworks and <code>DTModelStorage</code>, presumably during app initialization, before any views are loaded:</p>
-<pre class="highlight swift"><code><span class="kt">DTTableViewManagerAnomalyHandler</span><span class="o">.</span><span class="n">defaultAction</span> <span class="o">=</span> <span class="p">{</span> <span class="n">anomaly</span> <span class="k">in</span> <span class="p">}</span>
-<span class="kt">DTCollectionViewManagerAnomalyHandler</span><span class="o">.</span><span class="n">defaultAction</span> <span class="o">=</span> <span class="p">{</span> <span class="n">anomaly</span> <span class="k">in</span> <span class="p">}</span>
-<span class="kt">MemoryStorageAnomalyHandler</span><span class="o">.</span><span class="n">defaultAction</span> <span class="o">=</span> <span class="p">{</span> <span class="n">anomaly</span> <span class="k">in</span> <span class="p">}</span>
-</code></pre>
-<h3 id='unregistering-mappings' class='heading'>Unregistering mappings</h3>
-
-<p>You can unregister cells, headers and footers from <code><a href="Classes/DTTableViewManager.html">DTTableViewManager</a></code> and <code>UITableView</code> by calling:</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">unregister</span><span class="p">(</span><span class="kt">FooCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
-<span class="n">manager</span><span class="o">.</span><span class="nf">unregisterHeader</span><span class="p">(</span><span class="kt">HeaderView</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
-<span class="n">manager</span><span class="o">.</span><span class="nf">unregisterFooter</span><span class="p">(</span><span class="kt">FooterView</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
-</code></pre>
-
-<p>This is equivalent to calling <code>tableView(register:nil,forCellWithReuseIdenfier: &quot;FooCell&quot;)</code></p>
+<ul>
+<li><a href="Example">DTTableViewManager sample code</a></li>
+<li><a href="Documentation">Documentation</a></li>
+<li><a href="https://github.com/DenTelezhkin/DTDragAndDropExample">Sample code for Drag&amp;Drop integration</a></li>
+</ul>
 <h2 id='thanks' class='heading'>Thanks</h2>
 
 <ul>
 <li><a href="https://github.com/belkevich">Alexey Belkevich</a> for providing initial implementation of CellFactory.</li>
 <li><a href="https://github.com/MrRooni">Michael Fey</a> for providing insight into NSFetchedResultsController updates done right.</li>
-<li><a href="https://github.com/hawk-ukr">Nickolay Sheika</a> for great feedback, that helped shaping 3.0 release.</li>
+<li><a href="https://github.com/hawk-ukr">Nickolay Sheika</a> for great feedback, that helped shaping 3.0 release and future direction of the library.</li>
 <li><a href="https://github.com/sinarionn">Artem Antihevich</a> for great discussions about Swift generics and type capturing.</li>
 </ul>
 
@@ -527,7 +248,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/DenTelezhkin" target="_blank" rel="external">Denys Telezhkin</a>. All rights reserved. (Last updated: 2020-07-02)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/DenTelezhkin" target="_blank" rel="external">Denys Telezhkin</a>. All rights reserved. (Last updated: 2020-09-02)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

@@ -36,11 +36,10 @@ let package = Package(
         .library(name: "DTTableViewManager", targets: ["DTTableViewManager"])
     ],
     dependencies: [
-        .package(url: "https://github.com/DenTelezhkin/DTModelStorage", Package.Dependency.Requirement.upToNextMajor(from: "8.1.0"))
+        .package(url: "https://github.com/DenTelezhkin/DTModelStorage", Package.Dependency.Requirement.upToNextMajor(from: "9.0.0-beta.1"))
     ],
     targets: [
-        .target(name: "DTTableViewManager", dependencies: ["DTModelStorage"]),
-        // .testTarget(name: "Tests-iOS", dependencies: ["DTTableViewManager", "DTModelStorage"], path: "Sources/Tests")
+        .target(name: "DTTableViewManager", dependencies: ["DTModelStorage"])
     ],
     swiftLanguageVersions: [.v5]
 )
