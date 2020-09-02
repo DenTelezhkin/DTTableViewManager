@@ -90,7 +90,7 @@ Of course, cool stuff does not stop there, framework supports all datasource and
 
 * [Can I implement delegate methods instead of using DTTableViewManager event closures?](Documentation/Events.md#can-i-still-use-delegate-methods)
 * [How can I react to and customize UITableView updates?](Documentation/TableViewUpdater.md)
-* [What can be additionally configured when using DTTableViewManager with UITableView?][Documentation/TableViewConfiguration]
+* [What can be additionally configured when using DTTableViewManager with UITableView?](Documentation/TableViewConfiguration)
 * [What if something goes wrong?](Documentation/Anomalies.md)
 
 ## Sample code and documentation
