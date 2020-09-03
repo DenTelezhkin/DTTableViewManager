@@ -12,37 +12,22 @@ Install _fastlane_ using
 ```
 [sudo] gem install fastlane -NV
 ```
-or alternatively using `brew cask install fastlane`
+or alternatively using `brew install fastlane`
 
 # Available Actions
-### test_ios13
+### test_ios14
 ```
-fastlane test_ios13
-```
-
-### test_ios12
-```
-fastlane test_ios12
+fastlane test_ios14
 ```
 
-### test_tvos13
+### test_tvos14
 ```
-fastlane test_tvos13
-```
-
-### test_tvos12
-```
-fastlane test_tvos12
+fastlane test_tvos14
 ```
 
 ### pod_lint
 ```
 fastlane pod_lint
-```
-
-### carthage_build
-```
-fastlane carthage_build
 ```
 
 ### release
