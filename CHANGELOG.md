@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [8.0.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/8.0.1)
+
+### Added
+
+* Support for DTModelStorage 9.1
+
 ## [8.0.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/8.0.0)
 
 ## [8.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/8.0.0-beta.1)
