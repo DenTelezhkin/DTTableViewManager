@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Fixed
+
+* Swift 5.4 / Xcode 12.5 warnings.
+
 ## [8.0.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/8.0.1)
 
 ### Added
