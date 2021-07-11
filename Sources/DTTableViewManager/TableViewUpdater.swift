@@ -66,11 +66,6 @@ open class TableViewUpdater : StorageUpdating {
     /// When this property is true, move events will be animated as delete event and insert event.
     open var animateMoveAsDeleteAndInsert: Bool
     
-    @available(*, deprecated, message: "iOS 11 performBatchUpdates is superior then legacy update methods in every way. If for some reason you still need legacy behavior, please contact me through Github issue. This property may be removed in future release.")
-    /// If turned on, `TableViewUpdater` will use `tableView.beginUpdates` and `tableView.endUpdates` methods instead of iOS/tvOS 11 `performBatchUpdates` method.
-    /// Defaults to `false`.
-    open var usesLegacyTableViewUpdateMethods = false
-    
     /// If turned on, animates changes off screen, otherwise calls `tableView.reloadData` when update come offscreen. To verify if tableView is onscreen, `TableViewUpdater` compares tableView.window to nil. Defaults to true.
     open var animateChangesOffScreen = true
     
@@ -92,28 +87,16 @@ open class TableViewUpdater : StorageUpdating {
             didUpdateContent?(update)
             return
         }
-        
-        if #available(tvOS 11, *), !usesLegacyTableViewUpdateMethods {
-            tableView?.performBatchUpdates({ [weak self] in
-                if update.containsDeferredDatasourceUpdates {
-                    update.applyDeferredDatasourceUpdates()
-                }
-                self?.applyObjectChanges(from: update)
-                self?.applySectionChanges(from: update)
-            }, completion: { [weak self] _ in
-                self?.didUpdateContent?(update)
-            })
-        } else {
-            tableView?.beginUpdates()
+
+        tableView?.performBatchUpdates({ [weak self] in
             if update.containsDeferredDatasourceUpdates {
                 update.applyDeferredDatasourceUpdates()
             }
-            applyObjectChanges(from: update)
-            applySectionChanges(from: update)
-            
-            tableView?.endUpdates()
-            didUpdateContent?(update)
-        }
+            self?.applyObjectChanges(from: update)
+            self?.applySectionChanges(from: update)
+        }, completion: { [weak self] _ in
+            self?.didUpdateContent?(update)
+        })
     }
     
     private func applyObjectChanges(from update: StorageUpdate) {

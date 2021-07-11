@@ -10,15 +10,6 @@ import UIKit
 import XCTest
 @testable import DTTableViewManager
 
-extension DTTableViewManager {
-    var usesLegacyUpdateAPI : Bool {
-        if #available(tvOS 11, *) {
-            return tableViewUpdater?.usesLegacyTableViewUpdateMethods ?? false
-        }
-        return true
-    }
-}
-
 #if os(iOS)
     
 class SpringLoadedContextMock : NSObject, UISpringLoadedInteractionContext {

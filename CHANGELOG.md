@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
+* `usesLegacyTableViewUpdateMethod` on `TableViewUpdater`
 * `configureDiffableDatasource` deprecated method that returned `UITableViewDiffableDataSourceReference`.
 
 ### Fixed
