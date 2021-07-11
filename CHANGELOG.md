@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Removed
+
+* `configureDiffableDatasource` deprecated method that returned `UITableViewDiffableDataSourceReference`.
+
 ### Fixed
 
 * Diffable datasources exceptions in Xcode 13 / iOS 15 with some internal restructuring.

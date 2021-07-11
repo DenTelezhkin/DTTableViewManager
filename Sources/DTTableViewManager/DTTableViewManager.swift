@@ -245,30 +245,6 @@ open class DTTableViewManager {
         
         return dataSource
     }
-    
-    @available(iOS 13.0, tvOS 13.0, *)
-    @available(*, deprecated, message: "Please use configureDiffableDataSource method for models, that are Hashable. From Apple documentation: If you’re working in a Swift codebase, always use UITableViewDiffableDataSource instead.")
-    /// Configures `UITableViewDiffableDataSourceReference` to be used with `DTTableViewManager`.
-    ///  Because `UITableViewDiffableDataSourceReference` handles UITableView updates, `tableViewUpdater` property on `DTTableViewManager` will be set to nil.
-    /// - Parameter modelProvider: closure that provides `DTTableViewManager` models.
-    /// This closure mirrors `cellProvider` property on `UITableViewDiffableDataSourceReference`, but strips away tableView, and asks for data model instead of a cell. Cell mapping is then executed in the same way as without diffable data sources.
-    open func configureDiffableDataSource(modelProvider: @escaping (IndexPath, Any) -> Any) -> UITableViewDiffableDataSourceReference
-    {
-        guard let tableView = tableView else {
-            fatalError("Attempt to configure diffable datasource before tableView have been initialized")
-        }
-        // UITableViewDiffableDataSourceReference will update UITableView instead of `TableViewUpdater` object.
-        tableViewUpdater = nil
-        
-        // Cell is provided by `DTTableViewDataSource` without actually calling closure that is passed to `UITableViewDiffableDataSourceReference`.
-        let dataSource = UITableViewDiffableDataSourceReference(tableView: tableView) { _, _, _ in nil }
-        storage = ProxyDiffableDataSourceStorage(tableView: tableView,
-                                                                 dataSource: dataSource,
-                                                                 modelProvider: modelProvider)
-        tableView.dataSource = tableDataSource
-        
-        return dataSource
-    }
 #endif
     
     /// If you access `manager` property when managed `UITableView` is already created(for example: viewDidLoad method), calling this method is not necessary.
