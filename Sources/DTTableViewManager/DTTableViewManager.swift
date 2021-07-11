@@ -94,7 +94,7 @@ open class DTTableViewManager {
     ///  Factory for creating cells and views for UITableView
     final lazy var viewFactory: TableViewFactory = {
         precondition(isManagingTableView, "Received attempt to register views for UITableView, but UITableView is nil.")
-        //swiftlint:disable:next force_unwrapping
+        // swiftlint:disable:next force_unwrapping
         let factory = TableViewFactory(tableView: self.tableView!)
         factory.anomalyHandler = anomalyHandler
         factory.resetDelegates = { [weak self] in
@@ -120,7 +120,7 @@ open class DTTableViewManager {
     }
     
     /// `DTTableViewManageable` delegate.
-    final fileprivate weak var delegate : AnyObject?
+    final weak var delegate : AnyObject?
     
     /// Implicitly unwrap storage property to `MemoryStorage`.
     /// - Warning: if storage is not MemoryStorage, will throw an exception.
@@ -233,11 +233,15 @@ open class DTTableViewManager {
         tableViewUpdater = nil
         
         // Cell is provided by `DTTableViewDataSource` without actually calling closure that is passed to `UITableViewDiffableDataSource`.
-        let dataSource = UITableViewDiffableDataSource<SectionIdentifier, ItemIdentifier>(tableView: tableView) { _, _, _ in nil }
-        storage = ProxyDiffableDataSourceStorage(tableView: tableView,
-                                                                 dataSource: dataSource,
-                                                                 modelProvider: modelProvider)
-        tableView.dataSource = tableDataSource
+        let dataSource = DTTableViewDiffableDataSource<SectionIdentifier, ItemIdentifier>(
+            tableView: tableView,
+            viewFactory: viewFactory,
+            manager: self,
+            cellProvider: { _, _, _ in
+            nil
+            }, modelProvider: modelProvider)
+        storage = dataSource
+        tableView.dataSource = dataSource
         
         return dataSource
     }

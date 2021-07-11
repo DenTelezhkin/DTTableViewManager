@@ -109,6 +109,7 @@
 		3EDC20E322B8181D0078EB0D /* ReactingHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208822B817E00078EB0D /* ReactingHeaderFooterView.xib */; };
 		3EDC20E422B8181D0078EB0D /* RandomNameWrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208922B817E00078EB0D /* RandomNameWrongReuseIdentifierCell.xib */; };
 		3EDC20E522B8181D0078EB0D /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208A22B817E00078EB0D /* CustomNibCell.xib */; };
+		41D02400269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D023FF269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift */; };
 		9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
 		9A66DC1624D0333A002AD705 /* Changeset in Frameworks */ = {isa = PBXBuildFile; productRef = 9A66DC1524D0333A002AD705 /* Changeset */; };
@@ -242,6 +243,7 @@
 		3EDC209122B817E00078EB0D /* CreationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationTestCase.swift; sourceTree = "<group>"; };
 		3EDC209222B817E00078EB0D /* MappingConditionsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingConditionsTestCase.swift; sourceTree = "<group>"; };
 		3EDC209322B817E00078EB0D /* DatasourceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasourceTestCase.swift; sourceTree = "<group>"; };
+		41D023FF269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		9A0E422F237586C60027C995 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A383C831CE1CC790081D843 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				3EDC206322B817E00078EB0D /* DTTableViewDropDelegate.swift */,
 				3EDC205A22B817E00078EB0D /* DTTableViewDropPlaceholderContext.swift */,
 				3EDC206522B817E00078EB0D /* DTTableViewManager.swift */,
+				41D023FF269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift */,
 				3EDC205D22B817E00078EB0D /* DTTableViewManager+DataSource.swift */,
 				3EDC205922B817E00078EB0D /* DTTableViewManager+Delegate.swift */,
 				3EDC205422B817E00078EB0D /* DTTableViewManager+Drag.swift */,
@@ -770,6 +773,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EDC209F22B817E90078EB0D /* DTTableViewDelegateWrapper.swift in Sources */,
+				41D02400269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift in Sources */,
 				3EDC209E22B817E90078EB0D /* DTTableViewManager+DataSource.swift in Sources */,
 				3EDC209422B817E90078EB0D /* DTTableViewDragDelegate.swift in Sources */,
 				3EDC209622B817E90078EB0D /* TableViewFactory.swift in Sources */,

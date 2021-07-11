@@ -286,9 +286,13 @@ class DatasourceTestCase: BaseTestCase {
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.memoryStorage.addItem(model)
         
+#if swift(>=5.5)
+        let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+#else
         #if os(tvOS)
             let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         #endif
+#endif
         
         waitForExpectations(timeout: 0.1)
         
@@ -354,10 +358,14 @@ class DatasourceTestCase: BaseTestCase {
         let anomaly = DTTableViewManagerAnomaly.noCellMappingFound(modelDescription: "3", indexPath: indexPath(0, 0))
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
         controller.manager.memoryStorage.addItem("3")
-        #if os(tvOS)
+        
+#if swift(>=5.5)
         let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
+#else
+        #if os(tvOS)
+            let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         #endif
-
+#endif
         waitForExpectations(timeout: 0.1)
         
         XCTAssertEqual(anomaly.debugDescription, "❗️[DTTableViewManager] UITableView requested a cell for model at [0, 0], but view model mapping for it was not found, model description: 3")
