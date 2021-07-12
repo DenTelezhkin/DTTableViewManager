@@ -34,7 +34,6 @@
 		3EDC209522B817E90078EB0D /* DTTableViewManager+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205422B817E00078EB0D /* DTTableViewManager+Drag.swift */; };
 		3EDC209622B817E90078EB0D /* TableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205522B817E00078EB0D /* TableViewFactory.swift */; };
 		3EDC209722B817E90078EB0D /* DTTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205622B817E00078EB0D /* DTTableViewDelegate.swift */; };
-		3EDC209822B817E90078EB0D /* BackwardsCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205722B817E00078EB0D /* BackwardsCompatibility.swift */; };
 		3EDC209A22B817E90078EB0D /* DTTableViewManager+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205922B817E00078EB0D /* DTTableViewManager+Delegate.swift */; };
 		3EDC209B22B817E90078EB0D /* DTTableViewDropPlaceholderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205A22B817E00078EB0D /* DTTableViewDropPlaceholderContext.swift */; };
 		3EDC209C22B817E90078EB0D /* TableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */; };
@@ -188,7 +187,6 @@
 		3EDC205422B817E00078EB0D /* DTTableViewManager+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTableViewManager+Drag.swift"; sourceTree = "<group>"; };
 		3EDC205522B817E00078EB0D /* TableViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewFactory.swift; sourceTree = "<group>"; };
 		3EDC205622B817E00078EB0D /* DTTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDelegate.swift; sourceTree = "<group>"; };
-		3EDC205722B817E00078EB0D /* BackwardsCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackwardsCompatibility.swift; sourceTree = "<group>"; };
 		3EDC205922B817E00078EB0D /* DTTableViewManager+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTableViewManager+Delegate.swift"; sourceTree = "<group>"; };
 		3EDC205A22B817E00078EB0D /* DTTableViewDropPlaceholderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDropPlaceholderContext.swift; sourceTree = "<group>"; };
 		3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewUpdater.swift; sourceTree = "<group>"; };
@@ -396,7 +394,6 @@
 		3EDC205222B817E00078EB0D /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
-				3EDC205722B817E00078EB0D /* BackwardsCompatibility.swift */,
 				9A66DC1B24D18326002AD705 /* DTTableViewManager+Deprecated.swift */,
 				3EDC205F22B817E00078EB0D /* DTTableViewDataSource.swift */,
 				3EDC205622B817E00078EB0D /* DTTableViewDelegate.swift */,
@@ -788,7 +785,6 @@
 				3EDC209A22B817E90078EB0D /* DTTableViewManager+Delegate.swift in Sources */,
 				3EDC209D22B817E90078EB0D /* TableViewConfiguration.swift in Sources */,
 				3EDC20A022B817E90078EB0D /* DTTableViewDataSource.swift in Sources */,
-				3EDC209822B817E90078EB0D /* BackwardsCompatibility.swift in Sources */,
 				3EDC209C22B817E90078EB0D /* TableViewUpdater.swift in Sources */,
 				3EDC20A122B817E90078EB0D /* DTTableViewManager+Registration.swift in Sources */,
 				3EDC209522B817E90078EB0D /* DTTableViewManager+Drag.swift in Sources */,
