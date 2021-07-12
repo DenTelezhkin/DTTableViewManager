@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [9.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/9.0.0-beta.1)
+
+## [9.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/9.0.0-beta.1)
+
 ### Removed
 
 * `usesLegacyTableViewUpdateMethod` on `TableViewUpdater`
