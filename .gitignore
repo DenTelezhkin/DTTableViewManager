@@ -74,3 +74,4 @@ Carthage/Build
 
 # Ignore Ruby CI setup
 vendor/bundle
+.bundle/config
