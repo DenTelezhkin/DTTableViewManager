@@ -71,3 +71,6 @@ Carthage/Checkouts
 Carthage/Build
 
 # End of https://www.gitignore.io/api/swift
+
+# Ignore Ruby CI setup
+vendor/bundle

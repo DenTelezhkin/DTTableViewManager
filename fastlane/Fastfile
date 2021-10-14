@@ -1,15 +1,33 @@
 fastlane_version "1.98.0"
 
+lane :test_ios15 do
+  scan(devices: ["iPad Pro (12.9-inch) (3rd generation) (15.0)"], scheme: 'Tests-iOS')
+end
+
 lane :test_ios14 do
-  scan(devices: ["iPhone 11 Pro (14.0)"], scheme: 'Tests-iOS')
+  scan(devices: ["iPhone 11 Pro (14.5)"], scheme: 'Tests-iOS')
+end
+
+lane :test_tvos15 do
+  scan(device: "Apple TV 4K (15.0)", scheme: 'Tests-tvOS')
 end
 
 lane :test_tvos14 do
-  scan(device: "Apple TV 4K (14.0)", scheme: 'Tests-tvOS')
+  scan(device: "Apple TV 4K (14.5)", scheme: 'Tests-tvOS')
 end
 
 lane :pod_lint do
+  sh "bundle exec pod repo update"
   pod_lib_lint(allow_warnings: true, verbose: true)
+end
+
+lane :generate_code_coverage do
+  slather(
+    proj: "DTTableViewManager.xcodeproj",
+    scheme: "DTTableViewManager",
+    verbose: true,
+    cobertura_xml: true
+  )
 end
 
 lane :release do |params|
@@ -36,9 +54,6 @@ lane :release do |params|
     changelog = File.read(changelog_filename)
     changelog.gsub!(/# Next/, "# Next\n\n## [#{version}](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/#{version})")
     File.open(changelog_filename, 'w') { |file| file.puts changelog }
-
-    puts "Updating docs"
-    sh "bundle exec jazzy"
 
     puts "Comitting, tagging, and pushing."
     message = "Releasing version #{version}."
