@@ -1,19 +1,19 @@
 fastlane_version "1.98.0"
 
-lane :test_ios15 do
-  scan(devices: ["iPad Pro (12.9-inch) (3rd generation) (15.0)"], scheme: 'Tests-iOS')
-end
-
 lane :test_ios14 do
-  scan(devices: ["iPhone 11 Pro (14.5)"], scheme: 'Tests-iOS')
+  scan(devices: ["iPhone 12 Pro (14.5)"], scheme: 'Tests-iOS')
 end
 
-lane :test_tvos15 do
-  scan(device: "Apple TV 4K (15.0)", scheme: 'Tests-tvOS')
+lane :test_ios15 do
+  scan(devices: ["iPhone 13 Pro Max (15.0)"], scheme: 'Tests-iOS')
 end
 
 lane :test_tvos14 do
   scan(device: "Apple TV 4K (14.5)", scheme: 'Tests-tvOS')
+end
+
+lane :test_tvos15 do
+  scan(device: "Apple TV 4K (15.0)", scheme: 'Tests-tvOS')
 end
 
 lane :pod_lint do
@@ -28,6 +28,10 @@ lane :generate_code_coverage do
     verbose: true,
     cobertura_xml: true
   )
+end
+
+lane :build_macos_catalyst do
+  sh "xcodebuild -configuration Debug -destination 'platform=macOS,variant=Mac Catalyst' -project ../DTTableViewManager.xcodeproj -scheme DTTableViewManager"
 end
 
 lane :release do |params|

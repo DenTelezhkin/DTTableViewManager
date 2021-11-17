@@ -926,6 +926,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlsdev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DTTableViewManager;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos macosx";
 			};
 			name = Debug;
 		};
@@ -949,6 +950,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlsdev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DTTableViewManager;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos macosx";
 			};
 			name = Release;
 		};
@@ -1138,6 +1140,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				SDKROOT = iphoneos;
@@ -1188,6 +1191,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
 				SWIFT_COMPILATION_MODE = wholemodule;
