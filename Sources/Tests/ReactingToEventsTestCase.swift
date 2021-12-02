@@ -1142,6 +1142,20 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+#if compiler(>=5.5)
+    func testSelectionFollowsFocus() throws {
+        guard #available(iOS 15, *) else { return }
+        try verifyEvent(.selectionFollowsFocusForRowAtIndexPath, registration: { (sut, exp) in
+            sut.manager.register(NibCell.self)
+            sut.manager.selectionFollowsFocus(for: NibCell.self, self.fullfill(exp, andReturn: true))
+        }, alternativeRegistration: { (sut, exp) in
+            sut.manager.register(NibCell.self) { $0.selectionFollowsFocus(self.fullfill(exp, andReturn: true)) }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, selectionFollowsFocusForRowAt: indexPath(0, 0))
+        })
+    }
+#endif
+    
     func testAllDelegateMethodSignatures() {
         XCTAssertEqual(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))), EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDataSource.tableView(_:canEditRowAt:))), EventMethodSignature.canEditRowAtIndexPath.rawValue)
@@ -1235,6 +1249,10 @@ class ReactingToEventsFastTestCase : XCTestCase {
             #if compiler(<5.1.2)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willCommitMenuWithAnimator:))), EventMethodSignature.willCommitMenuWithAnimator.rawValue)
             #endif
+        }
+        
+        if #available(iOS 15, *) {
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:))), EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue)
         }
         
         #endif

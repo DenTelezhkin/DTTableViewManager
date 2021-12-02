@@ -326,6 +326,21 @@ extension DTTableViewManager {
     }
         #endif
     #endif
+    
+    #if compiler(>=5.5)
+    @available(iOS 15, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:)`method is called for `cellClass`.
+    /// - Parameter Type: cell class to react for event
+    /// - Parameter closure: closure to run.
+    open func selectionFollowsFocus<Cell:ModelTransfer>(for cellClass: Cell.Type,
+                                                                    _ closure: @escaping (Cell, Cell.ModelType, IndexPath) -> Bool)
+        where Cell: UITableViewCell
+    {
+        tableDelegate?.appendReaction(for: Cell.self,
+                                      signature: .selectionFollowsFocusForRowAtIndexPath,
+                                      closure: closure)
+    }
+    #endif
 #endif
 }
 
@@ -402,6 +417,18 @@ extension ViewModelMapping where View: UITableViewCell {
         reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
                                        signature: EventMethodSignature.titleForDeleteButtonForRowAtIndexPath.rawValue, closure))
     }
+    
+    #if compiler(>=5.5)
+    @available(iOS 15, *)
+    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:)`method is called for `cellClass`.
+    /// - Parameter Type: cell class to react for event
+    /// - Parameter closure: closure to run.
+    open func selectionFollowsFocus(_ closure: @escaping (View, Model, IndexPath) -> Bool)
+    {
+        reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue, closure))
+    }
+    #endif
+
 #endif
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:editingStyleForRowAt:)` method is called.

@@ -402,6 +402,7 @@ internal enum EventMethodSignature: String {
     case previewForHighlightingContextMenu = "tableView:previewForHighlightingContextMenuWithConfiguration:"
     case previewForDismissingContextMenu = "tableView:previewForDismissingContextMenuWithConfiguration:"
     case willCommitMenuWithAnimator = "tableView:willCommitMenuWithAnimator:"
+    case selectionFollowsFocusForRowAtIndexPath = "tableView:selectionFollowsFocusForRowAtIndexPath:"
     
     /// UITableViewDragDelegate
     case itemsForBeginningDragSession = "tableView:itemsForBeginningDragSession:atIndexPath:"

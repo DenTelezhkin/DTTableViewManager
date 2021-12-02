@@ -497,4 +497,18 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
     #endif
 #endif
+    
+    #if compiler(>=5.5) && os(iOS)
+    @available(iOS 15, *)
+    /// Implementation for `UITableViewDelegate` protocol
+    public func tableView(_ tableView: UITableView, selectionFollowsFocusForRowAt indexPath: IndexPath) -> Bool {
+        if let follows = performCellReaction(.selectionFollowsFocusForRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+            return follows
+        }
+        if let followsFocus = (delegate as? UITableViewDelegate)?.tableView?(tableView, selectionFollowsFocusForRowAt: indexPath) {
+            return followsFocus
+        }
+        return tableView.selectionFollowsFocus
+    }
+    #endif
 }
