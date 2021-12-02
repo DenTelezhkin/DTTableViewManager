@@ -1131,7 +1131,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-#if compiler(>=5.5)
+#if compiler(>=5.5) && os(iOS)
     func testSelectionFollowsFocus() throws {
         guard #available(iOS 15, *) else { return }
         try verifyEvent(.selectionFollowsFocusForRowAtIndexPath, registration: { (sut, exp) in
