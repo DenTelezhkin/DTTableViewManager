@@ -1237,9 +1237,11 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:))), EventMethodSignature.previewForDismissingContextMenu.rawValue)
         }
         
-        if #available(iOS 15, *) {
-            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:))), EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue)
-        }
+            #if compiler(>=5.5)
+            if #available(iOS 15, *) {
+                XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:))), EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue)
+            }
+            #endif
         
         #endif
     }
