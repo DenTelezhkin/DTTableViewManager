@@ -1106,17 +1106,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
         _ = sut.manager.tableDelegate?.tableView(sut.tableView, previewForDismissingContextMenuWithConfiguration: .init())
         waitForExpectations(timeout: 1, handler: nil)
     }
-        #if compiler(<5.1.2)
-    func testWillCommitMenuWithAnimator() {
-        guard #available(iOS 13, *) else { return }
-        let exp = expectation(description: "willCommitMenuWithAnimator")
-        controller.manager.willCommitMenuWithAnimator { animator in
-            exp.fulfill()
-        }
-        _ = controller.manager.tableDelegate?.tableView(controller.tableView, willCommitMenuWithAnimator: ContextMenuInteractionAnimatorMock())
-        waitForExpectations(timeout: 1, handler: nil)
-    }
-        #endif
     #endif
     
     func testTargetIndexPathForMoveFromTo() throws {
@@ -1246,9 +1235,6 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:contextMenuConfigurationForRowAt:point:))), EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForHighlightingContextMenuWithConfiguration:))), EventMethodSignature.previewForHighlightingContextMenu.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:))), EventMethodSignature.previewForDismissingContextMenu.rawValue)
-            #if compiler(<5.1.2)
-            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willCommitMenuWithAnimator:))), EventMethodSignature.willCommitMenuWithAnimator.rawValue)
-            #endif
         }
         
         if #available(iOS 15, *) {

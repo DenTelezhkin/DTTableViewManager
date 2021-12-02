@@ -76,8 +76,7 @@ open class TableViewUpdater : StorageUpdating {
         self.animateMoveAsDeleteAndInsert = animateMoveAsDeleteAndInsert
     }
     
-    /// Updates `UITableView` with received `update`. This method applies object and section changes in `performBatchUpdates` method or `tableView.beginUpdates` - `tableView.endUpdates` block.
-    /// To enable iOS 11 `performBatchUpdates` method usage, set `usesLegacyTableViewUpdateMethods` to false. It is also highly recommended to turn on `MemoryStorage.defersDatasourceUpdates` flag on to prevent multiple issues that can happen if you try to use iOS 11 `performBatchUpdates` API.
+    /// Updates `UITableView` with received `update`. This method applies object and section changes in `performBatchUpdates` method.
     open func storageDidPerformUpdate(_ update : StorageUpdate)
     {
         willUpdateContent?(update)

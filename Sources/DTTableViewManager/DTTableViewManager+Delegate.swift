@@ -317,14 +317,6 @@ extension DTTableViewManager {
     {
         tableDelegate?.appendNonCellReaction(.previewForDismissingContextMenu, closure: closure)
     }
-        #if compiler(<5.1.2)
-    @available(iOS 13.0, *)
-    /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:willCommitMenuWithAnimator:)` method is called
-    open func willCommitMenuWithAnimator(_ closure: @escaping (UIContextMenuInteractionCommitAnimating) -> Void)
-    {
-        tableDelegate?.appendNonCellReaction(.willCommitMenuWithAnimator, closure: closure)
-    }
-        #endif
     #endif
     
     #if compiler(>=5.5)

@@ -487,15 +487,6 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         }
         return (delegate as? UITableViewDelegate)?.tableView?(tableView, previewForDismissingContextMenuWithConfiguration: configuration)
     }
-    #if compiler(<5.1.2)
-    @available(iOS 13.0, *)
-    /// Implementation for `UITableViewDelegate` protocol
-    open func tableView(_ tableView: UITableView, willCommitMenuWithAnimator animator: UIContextMenuInteractionCommitAnimating) {
-        _ = performNonCellReaction(.willCommitMenuWithAnimator, argument: animator)
-        (delegate as? UITableViewDelegate)?.tableView?(tableView,
-                                                       willCommitMenuWithAnimator: animator)
-    }
-    #endif
 #endif
     
     #if compiler(>=5.5) && os(iOS)

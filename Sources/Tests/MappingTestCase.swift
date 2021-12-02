@@ -18,8 +18,9 @@ class MappingTestCase: BaseTestCase {
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        controller.tableView.beginUpdates()
-        controller.tableView.endUpdates()
+        controller.tableView.performBatchUpdates {
+        } completion: { _ in
+        }
         
         let cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NiblessCell
         
@@ -54,8 +55,9 @@ class MappingTestCase: BaseTestCase {
         
         controller.manager.memoryStorage.addItem(1, toSection: 0)
         
-        controller.tableView.beginUpdates()
-        controller.tableView.endUpdates()
+        controller.tableView.performBatchUpdates {
+        } completion: { _ in
+        }
         
         let cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! NibCell
         
@@ -74,8 +76,9 @@ class MappingTestCase: BaseTestCase {
         
         let cell: BaseTestCell
         if #available(tvOS 11, *) {
-            controller.tableView.beginUpdates()
-            controller.tableView.endUpdates()
+            controller.tableView.performBatchUpdates {
+            } completion: { _ in
+            }
             
             cell = controller.tableView.cellForRow(at: indexPath(0, 0)) as! BaseTestCell
         } else {
@@ -244,8 +247,9 @@ class MappingTestCase: BaseTestCase {
             }
         }
         controller.manager.memoryStorage.setItemsForAllSections([[1], [2]])
-        controller.tableView.beginUpdates()
-        controller.tableView.endUpdates()
+        controller.tableView.performBatchUpdates {
+        } completion: { _ in
+        }
         let nibView = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 0)
         let tView = controller.manager.tableDelegate?.tableView(controller.tableView, viewForFooterInSection: 1)
         XCTAssertTrue(nibView is NibHeaderFooterView)

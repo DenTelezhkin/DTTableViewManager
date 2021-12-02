@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 * Closure wrappers for iOS 15 `tableView:selectionFollowsFocusForRowAt` method.
 
+### Removed
+
+* Wrappers for `tableView:willCommitMenuWithAnimator` delegate method, that was only briefly available in Xcode 12, and was removed by Apple in one of Xcode 12 releases.
+
 ## [9.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/9.0.0-beta.1)
 
 ### Removed
