@@ -4,9 +4,15 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [10.0.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/10.0.0)
+
 ### Added
 
 * Closure wrappers for iOS 15 `tableView:selectionFollowsFocusForRowAt` method.
+
+### Changed
+
+* To align version numbers between `DTModelStorage`, `DTTableViewManager` and `DTCollectionViewManager`, `DTTableViewManager` will not have 9.x release, instead it's being released as 10.x.
 
 ### Removed
 

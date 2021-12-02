@@ -1268,7 +1268,7 @@
 			repositoryURL = "https://github.com/DenTelezhkin/DTModelStorage";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = "10.0.0-beta.1";
+				minimumVersion = 10.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
