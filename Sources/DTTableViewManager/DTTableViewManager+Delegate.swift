@@ -27,6 +27,7 @@ import Foundation
 import UIKit
 import DTModelStorage
 
+/// Extension for registering UITableViewDelegate events
 public extension DTTableViewManager {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didSelectRowAt:)` method is called for `cellClass`.
     func didSelect<Cell:ModelTransfer>(_ cellClass:  Cell.Type, _ closure: @escaping (Cell, Cell.ModelType, IndexPath) -> Void) where Cell:UITableViewCell
@@ -332,29 +333,30 @@ public extension DTTableViewManager {
 #endif
 }
 
-public extension ViewModelMapping where View: UITableViewCell {
+/// Extension registering events for UITableViewDelegate
+public extension TableViewCellViewModelMapping {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didSelectRowAt:)` method is called.
-    func didSelect(_ closure: @escaping (View, Model, IndexPath) -> Void)
+    func didSelect(_ closure: @escaping (Cell, Model, IndexPath) -> Void)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.didSelectRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willSelectRowAt:)` method is called.
-    func willSelect(_ closure: @escaping (View, Model, IndexPath) -> IndexPath?) {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+    func willSelect(_ closure: @escaping (Cell, Model, IndexPath) -> IndexPath?) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.willSelectRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willDeselectRowAt:)` method is called.
-    func willDeselect(_ closure: @escaping (View, Model, IndexPath) -> IndexPath?) {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+    func willDeselect(_ closure: @escaping (Cell, Model, IndexPath) -> IndexPath?) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.willDeselectRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didDeselectRowAt:)` method is called.
-    func didDeselect(_ closure: @escaping (View, Model, IndexPath) -> Void) {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+    func didDeselect(_ closure: @escaping (Cell, Model, IndexPath) -> Void) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.didDeselectRowAtIndexPath.rawValue, closure))
     }
     
@@ -374,35 +376,35 @@ public extension ViewModelMapping where View: UITableViewCell {
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willDisplayCell:forRowAt:)` method is called.
-    func willDisplay(_ closure: @escaping (View, Model, IndexPath) -> Void)
+    func willDisplay(_ closure: @escaping (Cell, Model, IndexPath) -> Void)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:accessoryButtonTappedForRowAt:)` method is called.
-    func accessoryButtonTapped(_ closure: @escaping (View, Model, IndexPath) -> Void) {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+    func accessoryButtonTapped(_ closure: @escaping (Cell, Model, IndexPath) -> Void) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.accessoryButtonTappedForRowAtIndexPath.rawValue, closure))
     }
     
 #if os(iOS)
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:willBeginEditingRowAt:)` method is called.
-    func willBeginEditing(_ closure: @escaping (View, Model, IndexPath) -> Void)
+    func willBeginEditing(_ closure: @escaping (Cell, Model, IndexPath) -> Void)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.willBeginEditingRowAtIndexPath.rawValue, closure))
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.willBeginEditingRowAtIndexPath.rawValue, closure))
     }
 
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didEndEditingRowAt:)` method is called.
-    func didEndEditing(_ closure: @escaping (View, Model, IndexPath) -> Void)
+    func didEndEditing(_ closure: @escaping (Cell, Model, IndexPath) -> Void)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.didEndEditingRowAtIndexPath.rawValue, closure))
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.didEndEditingRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:)` method is called.
-    func titleForDeleteConfirmationButton(_ closure: @escaping (View, Model, IndexPath) -> String?)
+    func titleForDeleteConfirmationButton(_ closure: @escaping (Cell, Model, IndexPath) -> String?)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.titleForDeleteButtonForRowAtIndexPath.rawValue, closure))
     }
     
@@ -410,9 +412,9 @@ public extension ViewModelMapping where View: UITableViewCell {
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:)`method is called for `cellClass`.
     /// - Parameter Type: cell class to react for event
     /// - Parameter closure: closure to run.
-    func selectionFollowsFocus(_ closure: @escaping (View, Model, IndexPath) -> Bool)
+    func selectionFollowsFocus(_ closure: @escaping (Cell, Model, IndexPath) -> Bool)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue, closure))
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue, closure))
     }
 
 #endif
@@ -424,47 +426,47 @@ public extension ViewModelMapping where View: UITableViewCell {
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:)` method is called.
-    func shouldIndentWhileEditing(_ closure: @escaping (View, Model, IndexPath) -> Bool)
+    func shouldIndentWhileEditing(_ closure: @escaping (Cell, Model, IndexPath) -> Bool)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.shouldIndentWhileEditingRowAtIndexPath.rawValue, closure))
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.shouldIndentWhileEditingRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didEndDisplayingCell:forRowAt:)` method is called.
-    func didEndDisplaying(_ closure: @escaping (View, Model, IndexPath) -> Void) {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+    func didEndDisplaying(_ closure: @escaping (Cell, Model, IndexPath) -> Void) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.didEndDisplayingCellForRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:shouldHighlightRowAt:)` method is called.
-    func shouldHighlight(_ closure: @escaping (View, Model, IndexPath) -> Bool)
+    func shouldHighlight(_ closure: @escaping (Cell, Model, IndexPath) -> Bool)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.shouldHighlightRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didHighlightRowAt:)` method is called.
-    func didHighlight(_ closure: @escaping (View, Model, IndexPath) -> Void)
+    func didHighlight(_ closure: @escaping (Cell, Model, IndexPath) -> Void)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.didHighlightRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didUnhighlightRowAt:)` method is called.
-    func didUnhighlight(_ closure: @escaping (View, Model, IndexPath) -> Void)
+    func didUnhighlight(_ closure: @escaping (Cell, Model, IndexPath) -> Void)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.didUnhighlightRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canFocusRowAt:)` method is called.
-    func canFocus(_ closure: @escaping (View, Model, IndexPath) -> Bool)
+    func canFocus(_ closure: @escaping (Cell, Model, IndexPath) -> Bool)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.canFocusRowAtIndexPath.rawValue, closure))
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.canFocusRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed when `UITableViewDelegate.targetIndexPathForMoveFromRowAt(_:toProposed:)` method is called.
-    func targetIndexPathForMove(_ closure: @escaping (IndexPath, View, Model, IndexPath) -> IndexPath) {
-        reactions.append(FourArgumentsEventReaction(View.self, modelType: Model.self,
+    func targetIndexPathForMove(_ closure: @escaping (IndexPath, Cell, Model, IndexPath) -> IndexPath) {
+        reactions.append(FourArgumentsEventReaction(Cell.self, modelType: Model.self,
                                                     argument: IndexPath.self,
                                                     signature: EventMethodSignature.targetIndexPathForMoveFromRowAtIndexPath.rawValue,
                                                     closure))
@@ -472,22 +474,22 @@ public extension ViewModelMapping where View: UITableViewCell {
     
 #if os(iOS)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:leadingSwipeActionsConfigurationForRowAt:)` method is called.
-    func leadingSwipeActionsConfiguration(_ closure: @escaping (View, Model, IndexPath) -> UISwipeActionsConfiguration?) {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+    func leadingSwipeActionsConfiguration(_ closure: @escaping (Cell, Model, IndexPath) -> UISwipeActionsConfiguration?) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.leadingSwipeActionsConfigurationForRowAtIndexPath.rawValue,
                                        closure))
     }
     
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:trailingSwipeActionsConfigurationForRowAt:)` method is called.
-    func trailingSwipeActionsConfiguration(_ closure: @escaping (View, Model, IndexPath) -> UISwipeActionsConfiguration?) {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+    func trailingSwipeActionsConfiguration(_ closure: @escaping (Cell, Model, IndexPath) -> UISwipeActionsConfiguration?) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.trailingSwipeActionsConfigurationForRowAtIndexPath.rawValue,
                                        closure))
     }
     
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldSpringLoadRowAt:)` method is called.
-    func shouldSpringLoad(_ closure: @escaping (UISpringLoadedInteractionContext, View, Model, IndexPath) -> Bool) {
-        reactions.append(FourArgumentsEventReaction(View.self, modelType: Model.self, argument: UISpringLoadedInteractionContext.self,
+    func shouldSpringLoad(_ closure: @escaping (UISpringLoadedInteractionContext, Cell, Model, IndexPath) -> Bool) {
+        reactions.append(FourArgumentsEventReaction(Cell.self, modelType: Model.self, argument: UISpringLoadedInteractionContext.self,
                                                     signature: EventMethodSignature.shouldSpringLoadRowAtIndexPathWithContext.rawValue,
                                                     closure))
     }
@@ -496,9 +498,9 @@ public extension ViewModelMapping where View: UITableViewCell {
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)`method is called.
     /// - Parameter Type: cell class to react for event
     /// - Parameter closure: closure to run.
-    func shouldBeginMultipleSelectionInteraction(_ closure: @escaping (View, Model, IndexPath) -> Bool)
+    func shouldBeginMultipleSelectionInteraction(_ closure: @escaping (Cell, Model, IndexPath) -> Bool)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.shouldBeginMultipleSelectionInteractionAtIndexPath.rawValue,
                                        closure))
     }
@@ -507,24 +509,25 @@ public extension ViewModelMapping where View: UITableViewCell {
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:didBeginMultipleSelectionInteractionAt:)`method is called.
     /// - Parameter Type: cell class to react for event
     /// - Parameter closure: closure to run.
-    func didBeginMultipleSelectionInteraction(_ closure: @escaping (View, Model, IndexPath) -> Void)
+    func didBeginMultipleSelectionInteraction(_ closure: @escaping (Cell, Model, IndexPath) -> Void)
     {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self,
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self,
                                        signature: EventMethodSignature.didBeginMultipleSelectionInteractionAtIndexPath.rawValue, closure))
     }
     
     @available(iOS 13.0, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.contextMenuConfigurationForRowAt(_:point:)` method is called.
-    func contextMenuConfiguration(_ closure: @escaping (CGPoint, View, Model, IndexPath) -> UIContextMenuConfiguration?)
+    func contextMenuConfiguration(_ closure: @escaping (CGPoint, Cell, Model, IndexPath) -> UIContextMenuConfiguration?)
     {
-        reactions.append(FourArgumentsEventReaction(View.self, modelType: Model.self, argument: CGPoint.self,
+        reactions.append(FourArgumentsEventReaction(Cell.self, modelType: Model.self, argument: CGPoint.self,
                                                     signature: EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue,
                                                     closure))
     }
 #endif
 }
 
-public extension ViewModelMapping where View: UITableViewHeaderFooterView {
+/// Extension registering events for UITableViewDelegate
+public extension TableViewHeaderFooterViewModelMapping where View: UITableViewHeaderFooterView {
     private func appendReaction(signature: EventMethodSignature, _ closure: @escaping (Model, Int) -> CGFloat) {
         reactions.append(EventReaction(modelType: Model.self, signature: signature.rawValue, { model, indexPath in
             closure(model, indexPath.section)
