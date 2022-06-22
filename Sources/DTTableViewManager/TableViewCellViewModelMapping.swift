@@ -29,8 +29,9 @@ import UIKit
 
 // swiftlint:disable missing_docs
 
-open class TableViewCellViewModelMapping<Cell: UITableViewCell, Model>: CellViewModelMapping<Cell, Model> {
-    
+open class TableViewCellViewModelMapping<Cell: UITableViewCell, Model>: CellViewModelMapping<Cell, Model>, CellViewModelMappingProtocolGeneric {
+    public typealias Cell = Cell
+    public typealias Model = Model
     /// Reuse identifier to be used for reusable cells.
     public var reuseIdentifier : String
     

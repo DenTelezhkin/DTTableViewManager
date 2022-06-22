@@ -26,6 +26,7 @@
 import UIKit
 import Foundation
 import DTModelStorage
+import SwiftUI
 
 /// Internal class, that is used to create table view cells, headers and footers.
 final class TableViewFactory
@@ -45,6 +46,13 @@ final class TableViewFactory
     init(tableView: UITableView)
     {
         self.tableView = tableView
+    }
+    
+    @available(iOS 13, tvOS 13, *)
+    func registerHostingCell<Content: View, Model>(_ content: @escaping (Model, IndexPath) -> Content, mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)?) {
+        let mapping = HostingCellViewModelMapping<Content, Model>(cellContent: content, mapping: mapping)
+        tableView.register(mapping.hostingCellSubclass.self, forCellReuseIdentifier: mapping.reuseIdentifier)
+        mappings.append(mapping)
     }
     
     func registerCellClass<Cell:ModelTransfer>(_ cellClass : Cell.Type, handler: @escaping (Cell, Cell.ModelType, IndexPath) -> Void, mapping: ((TableViewCellViewModelMapping<Cell, Cell.ModelType>) -> Void)?) where Cell: UITableViewCell

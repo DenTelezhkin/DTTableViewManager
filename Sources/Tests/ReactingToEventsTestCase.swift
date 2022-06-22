@@ -9,6 +9,7 @@
 import UIKit
 import XCTest
 @testable import DTTableViewManager
+import SwiftUI
 
 #if os(iOS)
     
@@ -1144,6 +1145,23 @@ class ReactingToEventsFastTestCase : XCTestCase {
         })
     }
 #endif
+    
+    func testSwiftUICellReactions() throws {
+        guard #available(iOS 13, tvOS 13, *) else { throw XCTSkip() }
+        let exp = expectation(description: "Event fired")
+        sut.manager.registerHostingCell(for: String.self) { model, _ in
+            Text(model)
+        } mapping: {
+            $0.didSelect { cell, model, indexPath in
+                XCTAssertEqual(indexPath, IndexPath(row: 0, section: 0))
+                exp.fulfill()
+            }
+        }
+        sut.manager.memoryStorage.addItem("Test")
+        sut.manager.tableDelegate?.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        
+        waitForExpectations(timeout: 1)
+    }
     
     func testAllDelegateMethodSignatures() {
         XCTAssertEqual(String(describing: #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))), EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue)

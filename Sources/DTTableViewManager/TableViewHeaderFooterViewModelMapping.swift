@@ -12,7 +12,9 @@ import UIKit
 
 // swiftlint:disable missing_docs
 
-open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: SupplementaryViewModelMapping<View, Model> {
+open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: SupplementaryViewModelMapping<View, Model>, SupplementaryViewModelMappingProtocolGeneric {
+    public typealias View = View
+    public typealias Model = Model
     
     /// Reuse identifier to be used for reusable cells.
     public var reuseIdentifier : String

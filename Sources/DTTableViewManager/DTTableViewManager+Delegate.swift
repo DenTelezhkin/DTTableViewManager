@@ -334,7 +334,7 @@ public extension DTTableViewManager {
 }
 
 /// Extension registering events for UITableViewDelegate
-public extension TableViewCellViewModelMapping {
+public extension CellViewModelMappingProtocolGeneric {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didSelectRowAt:)` method is called.
     func didSelect(_ closure: @escaping (Cell, Model, IndexPath) -> Void)
     {
@@ -527,7 +527,7 @@ public extension TableViewCellViewModelMapping {
 }
 
 /// Extension registering events for UITableViewDelegate
-public extension TableViewHeaderFooterViewModelMapping where View: UITableViewHeaderFooterView {
+public extension SupplementaryViewModelMappingProtocolGeneric where View: UITableViewHeaderFooterView {
     private func appendReaction(signature: EventMethodSignature, _ closure: @escaping (Model, Int) -> CGFloat) {
         reactions.append(EventReaction(modelType: Model.self, signature: signature.rawValue, { model, indexPath in
             closure(model, indexPath.section)

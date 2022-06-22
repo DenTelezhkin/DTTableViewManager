@@ -78,7 +78,7 @@ public extension DTTableViewManager
 }
 
 /// Extension for drag events (UITableViewDragDelegate)
-public extension TableViewCellViewModelMapping {
+public extension CellViewModelMappingProtocolGeneric {
     #if os(iOS)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)` method is called.
     func itemsForBeginningDragSession(_ closure: @escaping (UIDragSession, Cell, Model, IndexPath) -> [UIDragItem])

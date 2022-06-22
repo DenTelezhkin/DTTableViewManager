@@ -110,6 +110,9 @@
 		3EDC20E522B8181D0078EB0D /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208A22B817E00078EB0D /* CustomNibCell.xib */; };
 		4143A60E28633A9600388840 /* TableViewCellViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A60D28633A9600388840 /* TableViewCellViewModelMapping.swift */; };
 		4143A61028633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A60F28633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift */; };
+		4143A612286348E600388840 /* HostingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A611286348E600388840 /* HostingTableViewCell.swift */; };
+		4143A61428634C1900388840 /* DTTableViewManager+SwiftUIRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A61328634C1900388840 /* DTTableViewManager+SwiftUIRegistration.swift */; };
+		4143A61628634D3E00388840 /* HostingCellViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A61528634D3E00388840 /* HostingCellViewModelMapping.swift */; };
 		41D02400269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D023FF269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift */; };
 		9A41FBE71B8A181300508207 /* Banks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A41FBE51B8A181300508207 /* Banks.xcdatamodeld */; };
 		9A5292041B5D3DAC00DC8528 /* DTTableViewManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */; };
@@ -245,6 +248,9 @@
 		3EDC209322B817E00078EB0D /* DatasourceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasourceTestCase.swift; sourceTree = "<group>"; };
 		4143A60D28633A9600388840 /* TableViewCellViewModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModelMapping.swift; sourceTree = "<group>"; };
 		4143A60F28633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeaderFooterViewModelMapping.swift; sourceTree = "<group>"; };
+		4143A611286348E600388840 /* HostingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingTableViewCell.swift; sourceTree = "<group>"; };
+		4143A61328634C1900388840 /* DTTableViewManager+SwiftUIRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTableViewManager+SwiftUIRegistration.swift"; sourceTree = "<group>"; };
+		4143A61528634D3E00388840 /* HostingCellViewModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingCellViewModelMapping.swift; sourceTree = "<group>"; };
 		41D023FF269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTableViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		9A0E422F237586C60027C995 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		9A2A38BC1AEE285E0021E97D /* DTTableViewManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTTableViewManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -398,27 +404,30 @@
 		3EDC205222B817E00078EB0D /* DTTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
-				9A66DC1B24D18326002AD705 /* DTTableViewManager+Deprecated.swift */,
 				3EDC205F22B817E00078EB0D /* DTTableViewDataSource.swift */,
 				3EDC205622B817E00078EB0D /* DTTableViewDelegate.swift */,
 				3EDC205E22B817E00078EB0D /* DTTableViewDelegateWrapper.swift */,
+				41D023FF269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift */,
 				3EDC205322B817E00078EB0D /* DTTableViewDragDelegate.swift */,
 				3EDC206322B817E00078EB0D /* DTTableViewDropDelegate.swift */,
 				3EDC205A22B817E00078EB0D /* DTTableViewDropPlaceholderContext.swift */,
 				3EDC206522B817E00078EB0D /* DTTableViewManager.swift */,
-				41D023FF269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift */,
 				3EDC205D22B817E00078EB0D /* DTTableViewManager+DataSource.swift */,
 				3EDC205922B817E00078EB0D /* DTTableViewManager+Delegate.swift */,
+				9A66DC1B24D18326002AD705 /* DTTableViewManager+Deprecated.swift */,
 				3EDC205422B817E00078EB0D /* DTTableViewManager+Drag.swift */,
 				3EDC206422B817E00078EB0D /* DTTableViewManager+Drop.swift */,
 				3EDC206022B817E00078EB0D /* DTTableViewManager+Registration.swift */,
+				4143A61328634C1900388840 /* DTTableViewManager+SwiftUIRegistration.swift */,
 				3EDC206222B817E00078EB0D /* DTTableViewManagerAnomalyHandler.swift */,
+				9ABE13F624599952008874D2 /* Exports.swift */,
+				4143A61528634D3E00388840 /* HostingCellViewModelMapping.swift */,
+				4143A611286348E600388840 /* HostingTableViewCell.swift */,
+				4143A60D28633A9600388840 /* TableViewCellViewModelMapping.swift */,
 				3EDC205C22B817E00078EB0D /* TableViewConfiguration.swift */,
 				3EDC205522B817E00078EB0D /* TableViewFactory.swift */,
-				3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */,
-				9ABE13F624599952008874D2 /* Exports.swift */,
-				4143A60D28633A9600388840 /* TableViewCellViewModelMapping.swift */,
 				4143A60F28633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift */,
+				3EDC205B22B817E00078EB0D /* TableViewUpdater.swift */,
 			);
 			path = DTTableViewManager;
 			sourceTree = "<group>";
@@ -776,6 +785,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4143A61428634C1900388840 /* DTTableViewManager+SwiftUIRegistration.swift in Sources */,
 				3EDC209F22B817E90078EB0D /* DTTableViewDelegateWrapper.swift in Sources */,
 				41D02400269B341D00D75BD9 /* DTTableViewDiffableDataSource.swift in Sources */,
 				4143A61028633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift in Sources */,
@@ -791,9 +801,11 @@
 				9ABE13F724599952008874D2 /* Exports.swift in Sources */,
 				3EDC20A422B817E90078EB0D /* DTTableViewDropDelegate.swift in Sources */,
 				3EDC209A22B817E90078EB0D /* DTTableViewManager+Delegate.swift in Sources */,
+				4143A61628634D3E00388840 /* HostingCellViewModelMapping.swift in Sources */,
 				3EDC209D22B817E90078EB0D /* TableViewConfiguration.swift in Sources */,
 				3EDC20A022B817E90078EB0D /* DTTableViewDataSource.swift in Sources */,
 				3EDC209C22B817E90078EB0D /* TableViewUpdater.swift in Sources */,
+				4143A612286348E600388840 /* HostingTableViewCell.swift in Sources */,
 				4143A60E28633A9600388840 /* TableViewCellViewModelMapping.swift in Sources */,
 				3EDC20A122B817E90078EB0D /* DTTableViewManager+Registration.swift in Sources */,
 				3EDC209522B817E90078EB0D /* DTTableViewManager+Drag.swift in Sources */,

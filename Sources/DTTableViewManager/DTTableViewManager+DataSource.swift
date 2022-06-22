@@ -70,7 +70,7 @@ public extension DTTableViewManager
 }
 
 /// Extension for datasource events (UITableViewDataSource)
-public extension TableViewCellViewModelMapping {
+public extension CellViewModelMappingProtocolGeneric {
     /// Registers `closure` to be executed, when `UITableViewDataSource.tableView(_:canMoveRowAt:)` method is called.
     func canMove(_ closure: @escaping (Cell, Model, IndexPath) -> Bool) {
         reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.canMoveRowAtIndexPath.rawValue, closure))
