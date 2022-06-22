@@ -27,17 +27,17 @@ import Foundation
 import UIKit
 import DTModelStorage
 
-extension DTTableViewManager
+public extension DTTableViewManager
 {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canMoveRowAt:)` method is called for `cellClass`.
-    open func canMove<Cell:ModelTransfer>(_ cellClass: Cell.Type, _ closure: @escaping (Cell, Cell.ModelType, IndexPath) -> Bool) where Cell: UITableViewCell {
+    func canMove<Cell:ModelTransfer>(_ cellClass: Cell.Type, _ closure: @escaping (Cell, Cell.ModelType, IndexPath) -> Bool) where Cell: UITableViewCell {
         tableDataSource?.appendReaction(for: Cell.self, signature: EventMethodSignature.canMoveRowAtIndexPath, closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:moveRowAt:to:)` method is called for `cellClass`.
     /// - warning: This method requires items to be moved without animations, since animation has already happened when user moved those cells. If you use `MemoryStorage`, it's appropriate to call `memoryStorage.moveItemWithoutAnimation(from:to:)` method to achieve desired behavior.
     /// - SeeAlso: 'tableView:moveRowAt:to:' method
-    open func move<Cell:ModelTransfer>(_ cellClass: Cell.Type, _ closure: @escaping (_ destinationIndexPath: IndexPath, Cell, Cell.ModelType, _ sourceIndexPath: IndexPath) -> Void) where Cell: UITableViewCell {
+    func move<Cell:ModelTransfer>(_ cellClass: Cell.Type, _ closure: @escaping (_ destinationIndexPath: IndexPath, Cell, Cell.ModelType, _ sourceIndexPath: IndexPath) -> Void) where Cell: UITableViewCell {
         tableDataSource?.append4ArgumentReaction(for: Cell.self,
                                                  signature: .moveRowAtIndexPathToIndexPath,
                                                  closure: closure)
@@ -45,44 +45,44 @@ extension DTTableViewManager
     
     #if os(iOS)
     /// Registers `closure` to be executed, when `UITableViewDataSource.sectionIndexTitles(for:_) ` method is called.
-    open func sectionIndexTitles(_ closure: @escaping () -> [String]?) {
+    func sectionIndexTitles(_ closure: @escaping () -> [String]?) {
         tableDataSource?.appendNonCellReaction(.sectionIndexTitlesForTableView, closure: closure)
     }
     
     /// Registers `closure` to be executed, when `UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:)` method is called.
-    open func sectionForSectionIndexTitle(_ closure: @escaping (String, Int) -> Int) {
+    func sectionForSectionIndexTitle(_ closure: @escaping (String, Int) -> Int) {
         tableDataSource?.appendNonCellReaction(.sectionForSectionIndexTitleAtIndex, closure: closure)
     }
     #endif
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)` method is called for `cellClass`.
-    open func commitEditingStyle<Cell:ModelTransfer>(for cellClass: Cell.Type, _ closure: @escaping (UITableViewCell.EditingStyle, Cell, Cell.ModelType, IndexPath) -> Void) where Cell: UITableViewCell {
+    func commitEditingStyle<Cell:ModelTransfer>(for cellClass: Cell.Type, _ closure: @escaping (UITableViewCell.EditingStyle, Cell, Cell.ModelType, IndexPath) -> Void) where Cell: UITableViewCell {
         tableDataSource?.append4ArgumentReaction(for: Cell.self,
                                                  signature: .commitEditingStyleForRowAtIndexPath,
                                                  closure: closure)
     }
     
     /// Registers `closure` to be executed in `UITableViewDelegate.tableView(_:canEditCellForRowAt:)` method, when it's called for cell which model is of `itemType`.
-    open func canEditCell<Model>(withItem itemType: Model.Type, _ closure: @escaping (Model, IndexPath) -> Bool) {
+    func canEditCell<Model>(withItem itemType: Model.Type, _ closure: @escaping (Model, IndexPath) -> Bool) {
         tableDataSource?.appendReaction(viewType: .cell, for: Model.self, signature: EventMethodSignature.canEditRowAtIndexPath, closure: closure)
     }
 }
 
-extension ViewModelMapping where View: UITableViewCell {
+public extension ViewModelMapping where View: UITableViewCell {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:canMoveRowAt:)` method is called.
-    open func canMove(_ closure: @escaping (View, Model, IndexPath) -> Bool) {
+    func canMove(_ closure: @escaping (View, Model, IndexPath) -> Bool) {
         reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.canMoveRowAtIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:moveRowAt:to:)` method is called.
     /// - warning: This method requires items to be moved without animations, since animation has already happened when user moved those cells. If you use `MemoryStorage`, it's appropriate to call `memoryStorage.moveItemWithoutAnimation(from:to:)` method to achieve desired behavior.
     /// - SeeAlso: 'tableView:moveRowAt:to:' method
-    open func moveRowTo(_ closure: @escaping (_ destinationIndexPath: IndexPath, View, Model, _ sourceIndexPath: IndexPath) -> Void) {
+    func moveRowTo(_ closure: @escaping (_ destinationIndexPath: IndexPath, View, Model, _ sourceIndexPath: IndexPath) -> Void) {
         reactions.append(FourArgumentsEventReaction(View.self, modelType: Model.self, argument: IndexPath.self, signature: EventMethodSignature.moveRowAtIndexPathToIndexPath.rawValue, closure))
     }
     
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:commitEditingStyle:forRowAt:)` method is called.
-    open func commitEditingStyle(_ closure: @escaping (UITableViewCell.EditingStyle, View, Model, IndexPath) -> Void) {
+    func commitEditingStyle(_ closure: @escaping (UITableViewCell.EditingStyle, View, Model, IndexPath) -> Void) {
         reactions.append(FourArgumentsEventReaction(View.self, modelType: Model.self,
                                                     argument: UITableViewCell.EditingStyle.self,
                                                     signature: EventMethodSignature.commitEditingStyleForRowAtIndexPath.rawValue,
@@ -90,7 +90,7 @@ extension ViewModelMapping where View: UITableViewCell {
     }
     
     /// Registers `closure` to be executed in `UITableViewDelegate.tableView(_:canEditCellForRowAt:)` method, when it's called.
-    open func canEditCell(_ closure: @escaping (Model, IndexPath) -> Bool) {
+    func canEditCell(_ closure: @escaping (Model, IndexPath) -> Bool) {
         reactions.append(EventReaction(modelType: Model.self, signature: EventMethodSignature.canEditRowAtIndexPath.rawValue, closure))
     }
 }

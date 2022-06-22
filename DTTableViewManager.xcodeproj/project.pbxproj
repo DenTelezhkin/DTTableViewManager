@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -652,7 +652,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "Denys Telezhkin";
 				TargetAttributes = {
 					9A2A38BB1AEE285E0021E97D = {
@@ -750,6 +750,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		9A0205CF1FD44AF6009D9A63 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

@@ -1,25 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Changeset",
-        "repositoryURL": "https://github.com/DenTelezhkin/Changeset",
-        "state": {
-          "branch": "swiftpm-platforms",
-          "revision": "76ee0cdc4f46a5129229e36530384e1bee7d34e5",
-          "version": null
-        }
-      },
-      {
-        "package": "DTModelStorage",
-        "repositoryURL": "https://github.com/DenTelezhkin/DTModelStorage",
-        "state": {
-          "branch": null,
-          "revision": "d00f7567859a925470720b0b6fd01d791df8b51d",
-          "version": "10.0.0"
-        }
+  "pins" : [
+    {
+      "identity" : "changeset",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DenTelezhkin/Changeset",
+      "state" : {
+        "branch" : "swiftpm-platforms",
+        "revision" : "76ee0cdc4f46a5129229e36530384e1bee7d34e5"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "dtmodelstorage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DenTelezhkin/DTModelStorage",
+      "state" : {
+        "revision" : "d00f7567859a925470720b0b6fd01d791df8b51d",
+        "version" : "10.0.0"
+      }
+    }
+  ],
+  "version" : 2
 }
