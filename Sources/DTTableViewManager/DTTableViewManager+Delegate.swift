@@ -259,7 +259,6 @@ public extension DTTableViewManager {
                                                closure: closure)
     }
     
-    #if compiler(>=5.1)
     @available(iOS 13, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)`method is called for `cellClass`.
     /// - Parameter Type: cell class to react for event
@@ -317,9 +316,7 @@ public extension DTTableViewManager {
     {
         tableDelegate?.appendNonCellReaction(.previewForDismissingContextMenu, closure: closure)
     }
-    #endif
     
-    #if compiler(>=5.5)
     @available(iOS 15, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:)`method is called for `cellClass`.
     /// - Parameter Type: cell class to react for event
@@ -332,7 +329,6 @@ public extension DTTableViewManager {
                                       signature: .selectionFollowsFocusForRowAtIndexPath,
                                       closure: closure)
     }
-    #endif
 #endif
 }
 
@@ -410,7 +406,6 @@ public extension ViewModelMapping where View: UITableViewCell {
                                        signature: EventMethodSignature.titleForDeleteButtonForRowAtIndexPath.rawValue, closure))
     }
     
-    #if compiler(>=5.5)
     @available(iOS 15, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:)`method is called for `cellClass`.
     /// - Parameter Type: cell class to react for event
@@ -419,7 +414,6 @@ public extension ViewModelMapping where View: UITableViewCell {
     {
         reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue, closure))
     }
-    #endif
 
 #endif
     
@@ -498,7 +492,6 @@ public extension ViewModelMapping where View: UITableViewCell {
                                                     closure))
     }
     
-    #if compiler(>=5.1)
     @available(iOS 13, *)
     /// Registers `closure` to be executed when `UITableViewDelegate.tableView(_:shouldBeginMultipleSelectionInteractionAt:)`method is called.
     /// - Parameter Type: cell class to react for event
@@ -528,7 +521,6 @@ public extension ViewModelMapping where View: UITableViewCell {
                                                     signature: EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue,
                                                     closure))
     }
-    #endif
 #endif
 }
 

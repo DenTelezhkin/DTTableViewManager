@@ -1131,7 +1131,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-#if compiler(>=5.5) && os(iOS)
+#if os(iOS)
     func testSelectionFollowsFocus() throws {
         guard #available(iOS 15, *) else { return }
         try verifyEvent(.selectionFollowsFocusForRowAtIndexPath, registration: { (sut, exp) in
@@ -1237,11 +1237,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:previewForDismissingContextMenuWithConfiguration:))), EventMethodSignature.previewForDismissingContextMenu.rawValue)
         }
         
-            #if compiler(>=5.5)
-            if #available(iOS 15, *) {
-                XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:))), EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue)
-            }
-            #endif
+        if #available(iOS 15, *) {
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:selectionFollowsFocusForRowAt:))), EventMethodSignature.selectionFollowsFocusForRowAtIndexPath.rawValue)
+        }
         
         #endif
     }

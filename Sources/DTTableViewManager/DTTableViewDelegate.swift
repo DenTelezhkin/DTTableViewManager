@@ -432,7 +432,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return (delegate as? UITableViewDelegate)?.indexPathForPreferredFocusedView?(in: tableView)
     }
     
-#if compiler(>=5.1) && os(iOS)
+#if os(iOS)
     @available(iOS 13.0, *)
     /// Implementation for `UITableViewDelegate` protocol
     open func tableView(_ tableView: UITableView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
@@ -489,7 +489,7 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
     }
 #endif
     
-    #if compiler(>=5.5) && os(iOS)
+    #if os(iOS)
     @available(iOS 15, *)
     /// Implementation for `UITableViewDelegate` protocol
     public func tableView(_ tableView: UITableView, selectionFollowsFocusForRowAt indexPath: IndexPath) -> Bool {
