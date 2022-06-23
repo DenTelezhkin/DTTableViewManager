@@ -31,7 +31,7 @@ import DTModelStorage
 public extension DTTableViewManager {
     @available(*, deprecated, message: "Please use register(_:mapping:handler:) and set xibName in mapping closure instead.")
     /// Registers nib with `nibName` mapping from model class to `cellClass`.
-    func registerNibNamed<T:ModelTransfer>(_ nibName: String, for cellClass: T.Type, mapping: ((TableViewCellViewModelMapping<T, T.ModelType>) -> Void)? = nil)
+    func registerNibNamed<T:ModelTransfer>(_ nibName: String, for cellClass: T.Type, mapping: ((TableViewCellModelMapping<T, T.ModelType>) -> Void)? = nil)
     {
         register(T.self, mapping:  { mapping in
             mapping.xibName = nibName

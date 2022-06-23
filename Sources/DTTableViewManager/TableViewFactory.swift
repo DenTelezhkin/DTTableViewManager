@@ -49,15 +49,19 @@ final class TableViewFactory
     }
     
     @available(iOS 13, tvOS 13, *)
-    func registerHostingCell<Content: View, Model>(_ content: @escaping (Model, IndexPath) -> Content, mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)?) {
-        let mapping = HostingCellViewModelMapping<Content, Model>(cellContent: content, mapping: mapping)
+    func registerHostingCell<Content: View, Model>(_ content: @escaping (Model, IndexPath) -> Content, parentViewController: UIViewController?,
+                                                   mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)?) {
+        let mapping = HostingCellViewModelMapping<Content, Model>(cellContent: content, parentViewController: parentViewController, mapping: mapping)
+        if mapping.configuration.parentController == nil {
+            assertionFailure("HostingTableViewCellConfiguration.parentController is nil. This will prevent HostingCell from sizing and appearing correctly. Please set parentController to controller, that contains managed table view.")
+        }
         tableView.register(mapping.hostingCellSubclass.self, forCellReuseIdentifier: mapping.reuseIdentifier)
         mappings.append(mapping)
     }
     
-    func registerCellClass<Cell:ModelTransfer>(_ cellClass : Cell.Type, handler: @escaping (Cell, Cell.ModelType, IndexPath) -> Void, mapping: ((TableViewCellViewModelMapping<Cell, Cell.ModelType>) -> Void)?) where Cell: UITableViewCell
+    func registerCellClass<Cell:ModelTransfer>(_ cellClass : Cell.Type, handler: @escaping (Cell, Cell.ModelType, IndexPath) -> Void, mapping: ((TableViewCellModelMapping<Cell, Cell.ModelType>) -> Void)?) where Cell: UITableViewCell
     {
-        let mapping = TableViewCellViewModelMapping<Cell, Cell.ModelType>(cellConfiguration: handler, mapping: mapping)
+        let mapping = TableViewCellModelMapping<Cell, Cell.ModelType>(cellConfiguration: handler, mapping: mapping)
         if let cell = tableView.dequeueReusableCell(withIdentifier: mapping.reuseIdentifier) {
             // Storyboard prototype cell
             if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != mapping.reuseIdentifier {
@@ -75,9 +79,9 @@ final class TableViewFactory
         verifyCell(Cell.self, nibName: mapping.xibName, withReuseIdentifier: mapping.reuseIdentifier, in: mapping.bundle)
     }
     
-    func registerCellClass<Cell: UITableViewCell, Model>(_ cellType: Cell.Type, _ modelType: Model.Type, handler: @escaping (Cell, Model, IndexPath) -> Void, mapping: ((TableViewCellViewModelMapping<Cell, Model>) -> Void)? = nil)
+    func registerCellClass<Cell: UITableViewCell, Model>(_ cellType: Cell.Type, _ modelType: Model.Type, handler: @escaping (Cell, Model, IndexPath) -> Void, mapping: ((TableViewCellModelMapping<Cell, Model>) -> Void)? = nil)
     {
-        let mapping = TableViewCellViewModelMapping<Cell, Model>(cellConfiguration: handler, mapping: mapping)
+        let mapping = TableViewCellModelMapping<Cell, Model>(cellConfiguration: handler, mapping: mapping)
         if let cell = tableView.dequeueReusableCell(withIdentifier: mapping.reuseIdentifier) {
             // Storyboard prototype cell
             if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != mapping.reuseIdentifier {

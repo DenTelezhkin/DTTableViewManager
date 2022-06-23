@@ -108,7 +108,7 @@
 		3EDC20E322B8181D0078EB0D /* ReactingHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208822B817E00078EB0D /* ReactingHeaderFooterView.xib */; };
 		3EDC20E422B8181D0078EB0D /* RandomNameWrongReuseIdentifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208922B817E00078EB0D /* RandomNameWrongReuseIdentifierCell.xib */; };
 		3EDC20E522B8181D0078EB0D /* CustomNibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC208A22B817E00078EB0D /* CustomNibCell.xib */; };
-		4143A60E28633A9600388840 /* TableViewCellViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A60D28633A9600388840 /* TableViewCellViewModelMapping.swift */; };
+		4143A60E28633A9600388840 /* TableViewCellModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A60D28633A9600388840 /* TableViewCellModelMapping.swift */; };
 		4143A61028633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A60F28633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift */; };
 		4143A612286348E600388840 /* HostingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A611286348E600388840 /* HostingTableViewCell.swift */; };
 		4143A61428634C1900388840 /* DTTableViewManager+SwiftUIRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143A61328634C1900388840 /* DTTableViewManager+SwiftUIRegistration.swift */; };
@@ -246,7 +246,7 @@
 		3EDC209122B817E00078EB0D /* CreationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationTestCase.swift; sourceTree = "<group>"; };
 		3EDC209222B817E00078EB0D /* MappingConditionsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingConditionsTestCase.swift; sourceTree = "<group>"; };
 		3EDC209322B817E00078EB0D /* DatasourceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasourceTestCase.swift; sourceTree = "<group>"; };
-		4143A60D28633A9600388840 /* TableViewCellViewModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModelMapping.swift; sourceTree = "<group>"; };
+		4143A60D28633A9600388840 /* TableViewCellModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellModelMapping.swift; sourceTree = "<group>"; };
 		4143A60F28633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeaderFooterViewModelMapping.swift; sourceTree = "<group>"; };
 		4143A611286348E600388840 /* HostingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingTableViewCell.swift; sourceTree = "<group>"; };
 		4143A61328634C1900388840 /* DTTableViewManager+SwiftUIRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTableViewManager+SwiftUIRegistration.swift"; sourceTree = "<group>"; };
@@ -423,7 +423,7 @@
 				9ABE13F624599952008874D2 /* Exports.swift */,
 				4143A61528634D3E00388840 /* HostingCellViewModelMapping.swift */,
 				4143A611286348E600388840 /* HostingTableViewCell.swift */,
-				4143A60D28633A9600388840 /* TableViewCellViewModelMapping.swift */,
+				4143A60D28633A9600388840 /* TableViewCellModelMapping.swift */,
 				3EDC205C22B817E00078EB0D /* TableViewConfiguration.swift */,
 				3EDC205522B817E00078EB0D /* TableViewFactory.swift */,
 				4143A60F28633EB800388840 /* TableViewHeaderFooterViewModelMapping.swift */,
@@ -806,7 +806,7 @@
 				3EDC20A022B817E90078EB0D /* DTTableViewDataSource.swift in Sources */,
 				3EDC209C22B817E90078EB0D /* TableViewUpdater.swift in Sources */,
 				4143A612286348E600388840 /* HostingTableViewCell.swift in Sources */,
-				4143A60E28633A9600388840 /* TableViewCellViewModelMapping.swift in Sources */,
+				4143A60E28633A9600388840 /* TableViewCellModelMapping.swift in Sources */,
 				3EDC20A122B817E90078EB0D /* DTTableViewManager+Registration.swift in Sources */,
 				3EDC209522B817E90078EB0D /* DTTableViewManager+Drag.swift in Sources */,
 			);

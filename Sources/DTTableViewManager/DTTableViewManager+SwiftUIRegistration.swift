@@ -15,6 +15,6 @@ import SwiftUI
 @available(iOS 13, tvOS 13, *)
 public extension DTTableViewManager {
     func registerHostingCell<Content:View, Model>(for model: Model.Type, content: @escaping (Model, IndexPath) -> Content, mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)? = nil) {
-        viewFactory.registerHostingCell(content, mapping: mapping)
+        viewFactory.registerHostingCell(content, parentViewController: delegate as? UIViewController, mapping: mapping)
     }
 }

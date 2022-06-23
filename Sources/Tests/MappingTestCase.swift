@@ -268,7 +268,7 @@ class NibNameViewModelMappingTestCase : XCTestCase {
     func testCellWithXibHasXibNameInMapping() {
         factory.registerCellClass(NibCell.self, handler: { _,_,_ in }, mapping: nil)
         
-        XCTAssertEqual((factory.mappings.first as? TableViewCellViewModelMapping<NibCell, NibCell.ModelType>)?.xibName, "NibCell")
+        XCTAssertEqual((factory.mappings.first as? TableViewCellModelMapping<NibCell, NibCell.ModelType>)?.xibName, "NibCell")
     }
     
     func testHeaderHasXibInMapping() {

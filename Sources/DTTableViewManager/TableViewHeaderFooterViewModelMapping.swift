@@ -115,7 +115,7 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
     }
     
     open override func dequeueConfiguredReusableSupplementaryView(for collectionView: UICollectionView, kind: String, model: Any, indexPath: IndexPath) -> UICollectionReusableView? {
-        preconditionFailure("\(#function) should not be called with UITableView headers/footers")
+        preconditionFailure("\(#function) should not be called with UICollectionView supplementary views")
     }
 
     internal func loadViewFromXib(viewClass: UIView.Type) -> UIView? {

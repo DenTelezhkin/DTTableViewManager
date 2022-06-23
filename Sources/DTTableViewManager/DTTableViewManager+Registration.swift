@@ -35,7 +35,7 @@ public extension DTTableViewManager
     ///   - mapping: mapping configuration closure, executed before any registration or dequeue is performed.
     ///   - handler: configuration closure, that is run when cell is dequeued. Please note, that `handler` is called before `update(with:)` method.
     func register<Cell:ModelTransfer>(_ cellClass:Cell.Type,
-                                        mapping: ((TableViewCellViewModelMapping<Cell, Cell.ModelType>) -> Void)? = nil,
+                                        mapping: ((TableViewCellModelMapping<Cell, Cell.ModelType>) -> Void)? = nil,
                                         handler: @escaping (Cell, Cell.ModelType, IndexPath) -> Void = { _, _, _ in }) where Cell: UITableViewCell
     {
         self.viewFactory.registerCellClass(cellClass, handler: handler, mapping: mapping)
@@ -48,7 +48,7 @@ public extension DTTableViewManager
     ///   - mapping: mapping configuration closure, executed before any registration or dequeue is performed.
     ///   - handler: configuration closure, that is run when cell is dequeued.
     func register<Cell: UITableViewCell, Model>(_ cellClass: Cell.Type, for modelType: Model.Type,
-                                                     mapping: ((TableViewCellViewModelMapping<Cell, Model>) -> Void)? = nil,
+                                                     mapping: ((TableViewCellModelMapping<Cell, Model>) -> Void)? = nil,
                                                      handler: @escaping (Cell, Model, IndexPath) -> Void)
     {
         viewFactory.registerCellClass(cellClass, modelType, handler: handler, mapping: mapping)

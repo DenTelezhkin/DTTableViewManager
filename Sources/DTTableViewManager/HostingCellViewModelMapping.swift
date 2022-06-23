@@ -42,9 +42,12 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
     private var _cellConfigurationHandler: ((UITableViewCell, Any, IndexPath) -> Void)?
     private var _cellDequeueClosure: ((_ containerView: UITableView, _ model: Any, _ indexPath: IndexPath) -> UITableViewCell?)?
     
-    public init(cellContent: @escaping ((Model, IndexPath) -> Content), mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)?) {
+    public init(cellContent: @escaping ((Model, IndexPath) -> Content),
+                parentViewController: UIViewController?,
+                mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)?) {
         reuseIdentifier = "\(HostingTableViewCell<Content, Model>.self)"
         super.init(viewClass: HostingTableViewCell<Content, Model>.self)
+        configuration.parentController = parentViewController
         _cellDequeueClosure = { [weak self] tableView, model, indexPath in
             guard let self = self, let model = model as? Model else {
                 return nil
