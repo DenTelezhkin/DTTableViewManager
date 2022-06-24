@@ -22,7 +22,7 @@ open class HostingTableViewCell<Content: View, Model>: UITableViewCell {
             existingHosting.rootView = AnyView(rootView)
             hostingController?.view.invalidateIntrinsicContentSize()
         } else {
-            let hosting = configuration.hostingController(AnyView(rootView))
+            let hosting = configuration.hostingControllerMaker(AnyView(rootView))
             hostingController = hosting
             if let backgroundColor = configuration.backgroundColor {
                 self.backgroundColor = backgroundColor

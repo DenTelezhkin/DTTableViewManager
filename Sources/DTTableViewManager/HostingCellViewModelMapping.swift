@@ -15,7 +15,7 @@ import SwiftUI
 @available(iOS 13, tvOS 13, *)
 public struct HostingTableViewCellConfiguration {
     public weak var parentController: UIViewController?
-    public var hostingController: (AnyView) -> UIHostingController<AnyView> = { UIHostingController(rootView: $0) }
+    public var hostingControllerMaker: (AnyView) -> UIHostingController<AnyView> = { UIHostingController(rootView: $0) }
     public var configureCell: (UITableViewCell) -> Void = { _ in }
     public var backgroundColor: UIColor? = .clear
     public var contentViewBackgroundColor: UIColor? = .clear
@@ -44,10 +44,14 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
     
     public init(cellContent: @escaping ((Model, IndexPath) -> Content),
                 parentViewController: UIViewController?,
+                hostingControllerMaker: ((AnyView) -> UIHostingController<AnyView>)?,
                 mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)?) {
         reuseIdentifier = "\(HostingTableViewCell<Content, Model>.self)"
         super.init(viewClass: HostingTableViewCell<Content, Model>.self)
         configuration.parentController = parentViewController
+        if let hostingControllerMaker = hostingControllerMaker {
+            configuration.hostingControllerMaker = hostingControllerMaker
+        }
         _cellDequeueClosure = { [weak self] tableView, model, indexPath in
             guard let self = self, let model = model as? Model else {
                 return nil
