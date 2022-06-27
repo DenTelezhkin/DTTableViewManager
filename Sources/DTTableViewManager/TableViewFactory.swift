@@ -50,9 +50,8 @@ final class TableViewFactory
     
     @available(iOS 13, tvOS 13, *)
     func registerHostingCell<Content: View, Model>(_ content: @escaping (Model, IndexPath) -> Content, parentViewController: UIViewController?,
-                                                   hostingControllerMaker: ((AnyView) -> UIHostingController<AnyView>)?,
                                                    mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)?) {
-        let mapping = HostingCellViewModelMapping<Content, Model>(cellContent: content, parentViewController: parentViewController, hostingControllerMaker: hostingControllerMaker, mapping: mapping)
+        let mapping = HostingCellViewModelMapping<Content, Model>(cellContent: content, parentViewController: parentViewController, mapping: mapping)
         if mapping.configuration.parentController == nil {
             assertionFailure("HostingTableViewCellConfiguration.parentController is nil. This will prevent HostingCell from sizing and appearing correctly. Please set parentController to controller, that contains managed table view.")
         }

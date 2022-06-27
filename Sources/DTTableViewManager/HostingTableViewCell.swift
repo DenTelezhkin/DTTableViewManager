@@ -15,14 +15,14 @@ import SwiftUI
 @available(iOS 13, tvOS 13, *)
 open class HostingTableViewCell<Content: View, Model>: UITableViewCell {
 
-    private var hostingController: UIHostingController<AnyView>?
+    private var hostingController: UIHostingController<Content>?
     
-    open func updateWith(rootView: Content, configuration: HostingTableViewCellConfiguration) {
+    open func updateWith(rootView: Content, configuration: HostingTableViewCellConfiguration<Content>) {
         if let existingHosting = hostingController {
-            existingHosting.rootView = AnyView(rootView)
+            existingHosting.rootView = rootView
             hostingController?.view.invalidateIntrinsicContentSize()
         } else {
-            let hosting = configuration.hostingControllerMaker(AnyView(rootView))
+            let hosting = configuration.hostingControllerMaker(rootView)
             hostingController = hosting
             if let backgroundColor = configuration.backgroundColor {
                 self.backgroundColor = backgroundColor
@@ -54,13 +54,4 @@ open class HostingTableViewCell<Content: View, Model>: UITableViewCell {
             configuration.configureCell(self)
         }
     }
-    
-    open override func prepareForReuse() {
-        super.prepareForReuse()
-        hostingController?.willMove(toParent: nil)
-        hostingController?.view.removeFromSuperview()
-        hostingController?.removeFromParent()
-        hostingController = nil
-    }
-
 }

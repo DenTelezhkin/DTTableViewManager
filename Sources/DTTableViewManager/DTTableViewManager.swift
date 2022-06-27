@@ -177,13 +177,6 @@ open class DTTableViewManager {
         }
     }
     
-    internal var defaultHostingControllerMaker: Any?
-    
-    @available(iOS 13, tvOS 13, *)
-    public func setDefaultHostingControllerMaker(_ maker: @escaping (AnyView) -> UIHostingController<AnyView>) {
-        defaultHostingControllerMaker = maker
-    }
-    
     #if os(iOS)
     // Yeah, @availability macros does not work on stored properties ¯\_(ツ)_/¯
     private var _tableDragDelegatePrivate : AnyObject?
