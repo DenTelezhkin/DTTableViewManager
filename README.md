@@ -16,6 +16,7 @@ DTTableViewManager
 - [x] Views created from code, XIB, or storyboard, automatic registration and dequeue
 - [x] Can be used with UITableViewController, or UIViewController with UITableView
 - [x] Unified syntax with [DTCollectionViewManager](https://github.com/DenTelezhkin/DTCollectionViewManager)
+- [x] Support for SwiftUI - backed cells in iOS 13+ / tvOS 13+ / macCatalyst 13+
 - [x] [Complete documentation](Documentation)
 - [x] [API Reference](https://dentelezhkin.github.io/DTTableViewManager/)
 
@@ -88,6 +89,7 @@ Of course, cool stuff does not stop there, framework supports all datasource and
 
 ###### Advanced
 
+* [SwiftUI-backed cells](Documentation/SwiftUI.md)
 * [Can I implement delegate methods instead of using DTTableViewManager event closures?](Documentation/Events.md#can-i-still-use-delegate-methods)
 * [How can I react to and customize UITableView updates?](Documentation/TableViewUpdater.md)
 * [What can be additionally configured when using DTTableViewManager with UITableView?](Documentation/TableViewConfiguration)

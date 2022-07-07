@@ -10,10 +10,11 @@ import Foundation
 import DTModelStorage
 import UIKit
 
-// swiftlint:disable missing_docs
-
+/// Header footer - model mapping
 open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: SupplementaryViewModelMapping<View, Model>, SupplementaryViewModelMappingProtocolGeneric {
+    /// View type
     public typealias View = View
+    /// Model type
     public typealias Model = Model
     
     /// Reuse identifier to be used for reusable cells.
@@ -103,6 +104,12 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
         mapping?(self)
     }
     
+    /// Dequeues reusable header footer view for `model`, `indexPath` from `tableView`. Calls `cellConfiguration` closure, that was passed to initializer, then calls `ModelTransfer.update(with:)` if this cell conforms to `ModelTransfer` protocol.
+    /// - Parameters:
+    ///   - tableView: UITableView instance to dequeue header/footer from
+    ///   - model: model object, that was mapped to header/footer type.
+    ///   - indexPath: IndexPath, at which header/footer is going to be displayed.
+    /// - Returns: dequeued configured UIView instance.
     open override func dequeueConfiguredReusableSupplementaryView(for tableView: UITableView, kind: String, model: Any, indexPath: IndexPath) -> UIView? {
         guard viewType == .supplementaryView(kind: kind) else {
             return nil
@@ -114,6 +121,8 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
         return view
     }
     
+    @available(*, unavailable, message: "Dequeing supplementary view from table view mapping is not supported")
+    /// Unavailable method
     open override func dequeueConfiguredReusableSupplementaryView(for collectionView: UICollectionView, kind: String, model: Any, indexPath: IndexPath) -> UICollectionReusableView? {
         preconditionFailure("\(#function) should not be called with UICollectionView supplementary views")
     }

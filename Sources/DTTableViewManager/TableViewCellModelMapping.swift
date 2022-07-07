@@ -27,10 +27,11 @@ import Foundation
 import DTModelStorage
 import UIKit
 
-// swiftlint:disable missing_docs
-
+/// UITableViewCell - Model mapping
 open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewModelMapping<Cell, Model>, CellViewModelMappingProtocolGeneric {
+    /// Cell type
     public typealias Cell = Cell
+    /// Model type
     public typealias Model = Model
     /// Reuse identifier to be used for reusable cells.
     public var reuseIdentifier : String
@@ -110,6 +111,11 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
         mapping?(self)
     }
     
+    /// Updates cell with model
+    /// - Parameters:
+    ///   - cell: cell instance. Must be of `UITableViewCell`.Type.
+    ///   - indexPath: indexPath of a cell
+    ///   - model: model, mapped to a cell.
     open override func updateCell(cell: Any, at indexPath: IndexPath, with model: Any) {
         guard let cell = cell as? UITableViewCell else {
             preconditionFailure("Cannot update a cell, which is not a UITableViewCell")
@@ -118,6 +124,8 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
         updateBlock(cell, model)
     }
     
+    @available(*, unavailable, message:"Dequeing collection view cell from UITableView is not supported")
+    /// Unsupported method
     open override func dequeueConfiguredReusableCell(for collectionView: UICollectionView, model: Any, indexPath: IndexPath) -> UICollectionViewCell? {
         preconditionFailure("This method should not be used in UITableView cell view model mapping")
     }
