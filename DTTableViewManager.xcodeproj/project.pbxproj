@@ -1288,7 +1288,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DenTelezhkin/DTModelStorage";
 			requirement = {
-				branch = feature/swiftui;
+				branch = main;
 				kind = branch;
 			};
 		};
