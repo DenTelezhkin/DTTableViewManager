@@ -104,7 +104,7 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
         mapping?(self)
     }
     
-    /// Dequeues reusable header footer view for `model`, `indexPath` from `tableView`. Calls `cellConfiguration` closure, that was passed to initializer, then calls `ModelTransfer.update(with:)` if this cell conforms to `ModelTransfer` protocol.
+    /// Dequeues reusable header footer view for `model`, `indexPath` from `tableView`. Calls `headerFooterConfiguration` closure, that was passed to initializer, then calls `ModelTransfer.update(with:)` if this header/footer view conforms to `ModelTransfer` protocol.
     /// - Parameters:
     ///   - tableView: UITableView instance to dequeue header/footer from
     ///   - model: model object, that was mapped to header/footer type.
