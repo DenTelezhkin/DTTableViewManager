@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ## [11.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/11.0.0-beta.1)
 
-## **Introducing support for SwiftUI!**
+### **Introducing support for SwiftUI!**
 
 Registering SwiftUI views as content for table view cells:
 
