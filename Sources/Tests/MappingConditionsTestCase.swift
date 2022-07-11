@@ -74,4 +74,15 @@ class MappingConditionsTestCase: BaseTestCase {
         
         XCTAssertNotNil(customNibCell?.customLabel)
     }
+    
+    func testSwiftUICellCanBeLoaded() throws {
+        guard #available(iOS 13, tvOS 13, *) else { throw XCTSkip() }
+        controller.manager.registerHostingCell(for: String.self) { model, _ in
+            SwiftUICell(text: model)
+        }
+        controller.manager.memoryStorage.addItem("Hello SwiftUI")
+        let hostingCell = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0)) as? HostingTableViewCell<SwiftUICell, String>
+        
+        XCTAssertNotNil(hostingCell)
+    }
 }

@@ -48,3 +48,14 @@ class StringCell : UITableViewCell, ModelTransfer
 }
 
 class WrongReuseIdentifierCell : BaseTestCell {}
+
+import SwiftUI
+
+@available(iOS 13, tvOS 13, *)
+struct SwiftUICell: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+    }
+}

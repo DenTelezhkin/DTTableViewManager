@@ -35,7 +35,7 @@ public extension DTTableViewManager
     ///   - mapping: mapping configuration closure, executed before any registration or dequeue is performed.
     ///   - handler: configuration closure, that is run when cell is dequeued. Please note, that `handler` is called before `update(with:)` method.
     func register<Cell:ModelTransfer>(_ cellClass:Cell.Type,
-                                        mapping: ((ViewModelMapping<Cell, Cell.ModelType>) -> Void)? = nil,
+                                        mapping: ((TableViewCellModelMapping<Cell, Cell.ModelType>) -> Void)? = nil,
                                         handler: @escaping (Cell, Cell.ModelType, IndexPath) -> Void = { _, _, _ in }) where Cell: UITableViewCell
     {
         self.viewFactory.registerCellClass(cellClass, handler: handler, mapping: mapping)
@@ -48,7 +48,7 @@ public extension DTTableViewManager
     ///   - mapping: mapping configuration closure, executed before any registration or dequeue is performed.
     ///   - handler: configuration closure, that is run when cell is dequeued.
     func register<Cell: UITableViewCell, Model>(_ cellClass: Cell.Type, for modelType: Model.Type,
-                                                     mapping: ((ViewModelMapping<Cell, Model>) -> Void)? = nil,
+                                                     mapping: ((TableViewCellModelMapping<Cell, Model>) -> Void)? = nil,
                                                      handler: @escaping (Cell, Model, IndexPath) -> Void)
     {
         viewFactory.registerCellClass(cellClass, modelType, handler: handler, mapping: mapping)
@@ -61,7 +61,7 @@ public extension DTTableViewManager
     /// - Note: Views does not need to be `UITableViewHeaderFooterView`, if it's a `UIView` subclass, it also will be created from XIB. In the latter case, events defined inside mapping closure are not supported.
     /// - Note: `handler` closure is called before `update(with:)` method.
     func registerHeader<View:ModelTransfer>(_ headerClass : View.Type,
-                                              mapping: ((ViewModelMapping<View, View.ModelType>) -> Void)? = nil,
+                                              mapping: ((TableViewHeaderFooterViewModelMapping<View, View.ModelType>) -> Void)? = nil,
                                               handler: @escaping (View, View.ModelType, Int) -> Void = { _, _, _ in }) where View: UIView
     {
         configuration.sectionHeaderStyle = .view
@@ -75,7 +75,7 @@ public extension DTTableViewManager
     /// - Note: Views does not need to be `UITableViewHeaderFooterView`, if it's a `UIView` subclass, it also will be created from XIB. In the latter case, events defined inside mapping closure are not supported.
     func registerHeader<View: UIView, Model>(_ headerClass : View.Type,
                                                   for: Model.Type,
-                                                  mapping: ((ViewModelMapping<View, Model>) -> Void)? = nil,
+                                                  mapping: ((TableViewHeaderFooterViewModelMapping<View, Model>) -> Void)? = nil,
                                                   handler: @escaping (View, Model, Int) -> Void)
     {
         configuration.sectionHeaderStyle = .view
@@ -89,7 +89,7 @@ public extension DTTableViewManager
     /// - Note: Views does not need to be `UITableViewHeaderFooterView`, if it's a `UIView` subclass, it also will be created from XIB. In the latter case, events defined inside mapping closure are not supported.
     /// - Note: `handler` closure is called before `update(with:)` method.
     func registerFooter<View:ModelTransfer>(_ footerClass: View.Type,
-                                              mapping: ((ViewModelMapping<View, View.ModelType>) -> Void)? = nil,
+                                              mapping: ((TableViewHeaderFooterViewModelMapping<View, View.ModelType>) -> Void)? = nil,
                                               handler: @escaping (View, View.ModelType, Int) -> Void = { _, _, _ in }) where View:UIView
     {
         configuration.sectionFooterStyle = .view
@@ -103,7 +103,7 @@ public extension DTTableViewManager
     /// - Note: Views does not need to be `UITableViewHeaderFooterView`, if it's a `UIView` subclass, it will be created from XIB. In the latter case, events defined inside mapping closure are not supported.
     func registerFooter<View: UIView, Model>(_ footerClass : View.Type,
                                            for: Model.Type,
-                                           mapping: ((ViewModelMapping<View, Model>) -> Void)? = nil,
+                                           mapping: ((TableViewHeaderFooterViewModelMapping<View, Model>) -> Void)? = nil,
                                            handler: @escaping (View, Model, Int) -> Void)
     {
         configuration.sectionFooterStyle = .view

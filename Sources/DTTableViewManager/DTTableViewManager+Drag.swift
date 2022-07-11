@@ -78,26 +78,26 @@ public extension DTTableViewManager
 }
 
 /// Extension for drag events (UITableViewDragDelegate)
-public extension ViewModelMapping where View: UITableViewCell {
+public extension CellViewModelMappingProtocolGeneric {
     #if os(iOS)
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForBeginning:at:)` method is called.
-    func itemsForBeginningDragSession(_ closure: @escaping (UIDragSession, View, Model, IndexPath) -> [UIDragItem])
+    func itemsForBeginningDragSession(_ closure: @escaping (UIDragSession, Cell, Model, IndexPath) -> [UIDragItem])
     {
-        reactions.append(FourArgumentsEventReaction(View.self, modelType: Model.self, argument: UIDragSession.self,
+        reactions.append(FourArgumentsEventReaction(Cell.self, modelType: Model.self, argument: UIDragSession.self,
                                                     signature: EventMethodSignature.itemsForBeginningDragSession.rawValue,
                                                     closure))
     }
     
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:itemsForAddingTo:at:point:)` method is called.
-    func itemsForAddingToDragSession(_ closure: @escaping (UIDragSession, CGPoint, View, Model, IndexPath) -> [UIDragItem])
+    func itemsForAddingToDragSession(_ closure: @escaping (UIDragSession, CGPoint, Cell, Model, IndexPath) -> [UIDragItem])
     {
-        reactions.append(FiveArgumentsEventReaction(View.self, modelType: Model.self, argumentOne: UIDragSession.self, argumentTwo: CGPoint.self,
+        reactions.append(FiveArgumentsEventReaction(Cell.self, modelType: Model.self, argumentOne: UIDragSession.self, argumentTwo: CGPoint.self,
                                                     signature: EventMethodSignature.itemsForAddingToDragSession.rawValue, closure))
     }
     
     /// Registers `closure` to be executed when `UITableViewDragDelegate.tableView(_:dragPreviewParametersForRowAt:)` method is called.
-    func dragPreviewParameters(_ closure: @escaping (View, Model, IndexPath) -> UIDragPreviewParameters?) {
-        reactions.append(EventReaction(viewType: View.self, modelType: Model.self, signature: EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue, closure))
+    func dragPreviewParameters(_ closure: @escaping (Cell, Model, IndexPath) -> UIDragPreviewParameters?) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.dragPreviewParametersForRowAtIndexPath.rawValue, closure))
     }
     #endif
 }
