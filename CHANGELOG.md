@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [11.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/11.0.0-beta.1)
+
 ## **Introducing support for SwiftUI!**
 
 Registering SwiftUI views as content for table view cells:
@@ -16,7 +18,7 @@ manager.registerHostingCell(for: Post.self) { model, indexPath in
 
 This method is supported on iOS 13+ / tvOS 13+ / macCatalyst 13+. 
 
-> Please note, that this integration is not supported by Apple, therefore it comes with several workarounds, please read more about those in [SwiftUI support document](Documentation/SwiftUI.md)
+> Please note, that this integration is not supported by Apple, therefore it comes with several workarounds, read more about those in [SwiftUI support document](Documentation/SwiftUI.md)
 
 ### Added
 

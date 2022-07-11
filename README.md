@@ -36,7 +36,7 @@ Add package into Xcode Project settings -> Swift Packages
 
 ### [CocoaPods](http://www.cocoapods.org):
 
-    pod 'DTTableViewManager', '~> 10.0.0'
+    pod 'DTTableViewManager', '~> 11.0.0-beta.1'
 
 ## Quick start
 
