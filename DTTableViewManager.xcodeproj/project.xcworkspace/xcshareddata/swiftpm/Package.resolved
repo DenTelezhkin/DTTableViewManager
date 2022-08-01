@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/DenTelezhkin/DTModelStorage",
       "state" : {
-        "revision" : "3e01dce8aac114f1bd46eca5b0580b78dd495a0a",
-        "version" : "11.0.0-beta.1"
+        "branch" : "concurrency",
+        "revision" : "73925e5efde425a03cadad83c8436dc25519fd8e"
       }
     }
   ],

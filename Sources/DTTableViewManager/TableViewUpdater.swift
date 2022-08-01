@@ -27,6 +27,7 @@ import Foundation
 import UIKit
 import DTModelStorage
 
+@MainActor
 /// `TableViewUpdater` is responsible for updating `UITableView`, when it receives storage updates.
 open class TableViewUpdater : StorageUpdating {
     

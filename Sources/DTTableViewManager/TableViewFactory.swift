@@ -28,6 +28,7 @@ import Foundation
 import DTModelStorage
 import SwiftUI
 
+@MainActor
 /// Internal class, that is used to create table view cells, headers and footers.
 final class TableViewFactory
 {

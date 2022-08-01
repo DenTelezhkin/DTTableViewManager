@@ -948,6 +948,7 @@
 				PRODUCT_NAME = DTTableViewManager;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos macosx";
+				SWIFT_STRICT_CONCURRENCY = complete;
 			};
 			name = Debug;
 		};
@@ -972,6 +973,7 @@
 				PRODUCT_NAME = DTTableViewManager;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos macosx";
+				SWIFT_STRICT_CONCURRENCY = complete;
 			};
 			name = Release;
 		};
@@ -1288,8 +1290,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DenTelezhkin/DTModelStorage";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = "11.0.0-beta.1";
+				branch = concurrency;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

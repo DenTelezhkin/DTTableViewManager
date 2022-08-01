@@ -28,6 +28,7 @@ import UIKit
 import DTModelStorage
 import SwiftUI
 
+@MainActor
 /// Adopting this protocol will automatically inject `manager` property to your object, that lazily instantiates `DTTableViewManager` object.
 /// Target is not required to be `UITableViewController`, and can be a regular UIViewController with UITableView, or any other view, that contains UITableView.
 public protocol DTTableViewManageable : AnyObject
@@ -76,6 +77,7 @@ extension DTTableViewManageable
     }
 }
 
+@MainActor
 /// `DTTableViewManager` manages many of `UITableView` datasource and delegate methods and provides API for managing your data models in the table. Any method, that is not implemented by `DTTableViewManager`, will be forwarded to delegate.
 /// - SeeAlso: `startManagingWithDelegate:`
 open class DTTableViewManager {
@@ -208,14 +210,14 @@ open class DTTableViewManager {
     #endif
     
     /// Storage construction block, used by `DTTableViewManager` when it's created. Returns `MemoryStorage` by default.
-    public static var defaultStorage: () -> Storage = { MemoryStorage() }
+    public static var defaultStorage: @MainActor () -> Storage = { MemoryStorage() }
     
     /// Creates `DTTableViewManager`. Usually you don't need to call this method directly, as `manager` property on `DTTableViewManageable` instance is filled automatically. `DTTableViewManager.defaultStorage` closure is used to determine which `Storage` would be used by default.
     ///
     /// - Parameter storage: storage class to be used
-    public init(storage: Storage = DTTableViewManager.defaultStorage()) {
+    public init(storage: Storage? = nil) {
+        self.storage = storage ?? DTTableViewManager.defaultStorage()
         (storage as? SupplementaryStorage)?.configureForTableViewUsage()
-        self.storage = storage
     }
     
     @available(iOS 13.0, tvOS 13.0, *)

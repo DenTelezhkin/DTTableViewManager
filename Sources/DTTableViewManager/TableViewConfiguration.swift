@@ -36,7 +36,7 @@ public enum SupplementarySectionStyle
 }
 
 // swiftlint:disable line_length
-
+@MainActor
 /// Defines most commonly used configuration properties for UITableView
 public struct TableViewConfiguration
 {
