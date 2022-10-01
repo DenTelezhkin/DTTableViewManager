@@ -133,11 +133,6 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
             return nil
         }
 
-        for object in topLevelObjects.compactMap( { $0 as AnyObject }) {
-            if object.isKind(of: viewClass) {
-                return object as? UIView
-            }
-        }
-        return nil
+        return topLevelObjects.lazy.compactMap { $0 as? UIView }.first(where: { $0.isKind(of: viewClass) })
     }
 }

@@ -852,6 +852,40 @@ class ReactingToEventsFastTestCase : XCTestCase {
         })
     }
     
+    func testPrefetchItemAtIndexPath() throws {
+        let firstPrefetch = expectation(description: "first prefetch")
+        let secondPrefetch = expectation(description: "second prefetch")
+        sut.manager.register(NibCell.self) { mapping in
+            mapping.prefetch { item, _ in
+                if item == 1 {
+                    firstPrefetch.fulfill()
+                } else if item == 2 {
+                    secondPrefetch.fulfill()
+                }
+            }
+        }
+        sut.manager.memoryStorage.addItems([1,2])
+        sut.manager.tablePrefetchDataSource?.tableView(sut.tableView, prefetchRowsAt: [indexPath(0, 0), indexPath(1, 0)])
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testCancelPrefetchItemAtIndexPath() throws {
+        let firstPrefetch = expectation(description: "first prefetch")
+        let secondPrefetch = expectation(description: "second prefetch")
+        sut.manager.register(NibCell.self) { mapping in
+            mapping.cancelPrefetch { item, _ in
+                if item == 1 {
+                    firstPrefetch.fulfill()
+                } else if item == 2 {
+                    secondPrefetch.fulfill()
+                }
+            }
+        }
+        sut.manager.memoryStorage.addItems([1,2])
+        sut.manager.tablePrefetchDataSource?.tableView(sut.tableView, cancelPrefetchingForRowsAt: [indexPath(0, 0), indexPath(1, 0)])
+        waitForExpectations(timeout: 1)
+    }
+    
     #if os(iOS)
     func testItemsForBeginningInDragSession() throws {
         try verifyEvent(.itemsForBeginningDragSession, registration: { (sut, exp) in
@@ -1260,6 +1294,9 @@ class ReactingToEventsFastTestCase : XCTestCase {
         }
         
         #endif
+        
+        XCTAssertEqual(String(describing: #selector(UITableViewDataSourcePrefetching.tableView(_:prefetchRowsAt:))), EventMethodSignature.prefetchRowsAtIndexPaths.rawValue)
+        XCTAssertEqual(String(describing: #selector(UITableViewDataSourcePrefetching.tableView(_:cancelPrefetchingForRowsAt:))), EventMethodSignature.cancelPrefetchingForRowsAtIndexPaths.rawValue)
     }
     
     func testEventsRegistrationPerfomance() {
