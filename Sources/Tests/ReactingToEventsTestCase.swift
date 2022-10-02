@@ -386,7 +386,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func verifyEvent<U>(_ signature: EventMethodSignature,
                                                    registration: (ReactingTestTableViewController, XCTestExpectation) -> Void,
-                                                   alternativeRegistration: (ReactingTestTableViewController, XCTestExpectation) -> Void,
+                                                   alternativeRegistration: ((ReactingTestTableViewController, XCTestExpectation) -> Void)? = nil,
                                                    preparation: (ReactingTestTableViewController) -> Void,
                                                    action: (ReactingTestTableViewController) throws -> U) throws {
         guard let sut = sut else {
@@ -403,11 +403,13 @@ class ReactingToEventsFastTestCase : XCTestCase {
         
         unregisterAll()
         
-        let altExp = expectation(description: signature.rawValue)
-        alternativeRegistration(sut,altExp)
-        preparation(sut)
-        _ = try action(sut)
-        waitForExpectations(timeout: 1)
+        if let alternativeRegistration = alternativeRegistration {
+            let altExp = expectation(description: signature.rawValue)
+            alternativeRegistration(sut,altExp)
+            preparation(sut)
+            _ = try action(sut)
+            waitForExpectations(timeout: 1)
+        }
     }
     
     func testFooterConfigurationClosure()
@@ -523,6 +525,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     #if os(iOS)
     func testEditActionsForRowAtIndexPathClosure() {
+        guard #unavailable(macCatalyst 13.1) else { return }
         let exp = expectation(description: "editActions")
         sut.manager.editActions(for: NibCell.self, { (cell, model, indexPath) -> [UITableViewRowAction]? in
             exp.fulfill()
@@ -741,6 +744,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testShouldMenuForRowAtIndexPath() {
+        guard #unavailable(macCatalyst 13.0) else { return }
         let exp = expectation(description: "shouldShowMenu")
         sut.manager.shouldShowMenu(for: NibCell.self, { (cell, model, indexPath) -> Bool in
             exp.fulfill()
@@ -752,6 +756,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testCanPerformActionForRowAtIndexPath() {
+        guard #unavailable(macCatalyst 13.0) else { return }
         let exp = expectation(description: "canPerformActionForRowAtIndexPath")
         sut.manager.canPerformAction(for: NibCell.self, { (selector, sender, cell, model, indexPath) -> Bool in
             exp.fulfill()
@@ -763,6 +768,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     }
     
     func testPerformActionForRowAtIndexPath() {
+        guard #unavailable(macCatalyst 13.0) else { return }
         let exp = expectation(description: "performActionForRowAtIndexPath")
         sut.manager.performAction(for: NibCell.self, { (selector, sender, cell, model, indexPath) in
             exp.fulfill()
@@ -1105,6 +1111,30 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+#if swift(>=5.7)
+    func testCanPerformPrimaryAction() throws {
+        guard #available(iOS 16, tvOS 16, *) else { return }
+        try verifyEvent(.canPerformPrimaryActionForRowAtIndexPath, registration: { sut, exp in
+            sut.manager.register(NibCell.self) {
+                $0.canPerformPrimaryAction(self.fullfill(exp, andReturn: true))
+            }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, canPerformPrimaryActionForRowAt: indexPath(0, 0))
+        })
+    }
+    
+    func testPerformPrimaryAction() throws {
+        guard #available(iOS 16, tvOS 16, *) else { return }
+        try verifyEvent(.performPrimaryActionForRowAtIndexPath, registration: { sut, exp in
+            sut.manager.register(NibCell.self) {
+                $0.performPrimaryAction(self.fullfill(exp, andReturn: ()))
+            }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, performPrimaryActionForRowAt: indexPath(0, 0))
+        })
+    }
+#endif
+    
     func testContextMenuConfiguration() throws {
         guard #available(iOS 13, *) else { return }
         var contextConfiguration : UIContextMenuConfiguration? = nil
@@ -1212,7 +1242,10 @@ class ReactingToEventsFastTestCase : XCTestCase {
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:))), EventMethodSignature.willDisplayCellForRowAtIndexPath.rawValue)
         
         #if os(iOS)
-        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:editActionsForRowAt:))), EventMethodSignature.editActionsForRowAtIndexPath.rawValue)
+        if #unavailable(macCatalyst 13.1) {
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:editActionsForRowAt:))), EventMethodSignature.editActionsForRowAtIndexPath.rawValue)
+        }
+        
         #endif
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWith:))), EventMethodSignature.accessoryButtonTappedForRowAtIndexPath.rawValue)
         
@@ -1243,9 +1276,11 @@ class ReactingToEventsFastTestCase : XCTestCase {
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didEndDisplayingHeaderView:forSection:))), EventMethodSignature.didEndDisplayingHeaderViewForSection.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didEndDisplayingFooterView:forSection:))), EventMethodSignature.didEndDisplayingFooterViewForSection.rawValue)
         
-        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:))), EventMethodSignature.shouldShowMenuForRowAtIndexPath.rawValue)
-        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:))), EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue)
-        XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:))), EventMethodSignature.performActionForRowAtIndexPath.rawValue)
+        if #unavailable(macCatalyst 13.1) {
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:))), EventMethodSignature.shouldShowMenuForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:))), EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:))), EventMethodSignature.performActionForRowAtIndexPath.rawValue)
+        }
         
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAt:))), EventMethodSignature.shouldHighlightRowAtIndexPath.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:))), EventMethodSignature.didHighlightRowAtIndexPath.rawValue)
@@ -1297,6 +1332,13 @@ class ReactingToEventsFastTestCase : XCTestCase {
         
         XCTAssertEqual(String(describing: #selector(UITableViewDataSourcePrefetching.tableView(_:prefetchRowsAt:))), EventMethodSignature.prefetchRowsAtIndexPaths.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDataSourcePrefetching.tableView(_:cancelPrefetchingForRowsAt:))), EventMethodSignature.cancelPrefetchingForRowsAtIndexPaths.rawValue)
+        
+#if swift(>=5.7)
+        if #available(iOS 16, tvOS 16, *) {
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:canPerformPrimaryActionForRowAt:))), EventMethodSignature.canPerformPrimaryActionForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:performPrimaryActionForRowAt:))), EventMethodSignature.performPrimaryActionForRowAtIndexPath.rawValue)
+        }
+#endif
     }
     
     func testEventsRegistrationPerfomance() {
@@ -1326,9 +1368,11 @@ class ReactingToEventsFastTestCase : XCTestCase {
             manager.didEndDisplaying(NibCell.self, { _,_,_ in })
             manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _,_,_ in })
             manager.didEndDisplayingFooterView(NibHeaderFooterView.self, { _,_,_ in })
-            manager.shouldShowMenu(for: NibCell.self, { _,_,_ in return true})
-            manager.canPerformAction(for: NibCell.self, { _,_,_,_,_ in return true })
-            manager.performAction(for: NibCell.self, { _,_,_,_,_ in })
+            if #unavailable(macCatalyst 13.0) {
+                manager.shouldShowMenu(for: NibCell.self, { _,_,_ in return true})
+                manager.canPerformAction(for: NibCell.self, { _,_,_,_,_ in return true })
+                manager.performAction(for: NibCell.self, { _,_,_,_,_ in })
+            }
             manager.shouldHighlight(NibCell.self, { _,_,_ in return true })
             manager.didHighlight(NibCell.self, { _,_,_ in })
             manager.didUnhighlight(NibCell.self, { _,_,_ in })
@@ -1371,9 +1415,11 @@ class ReactingToEventsFastTestCase : XCTestCase {
         manager.didEndDisplaying(NibCell.self, { _,_,_ in })
         manager.didEndDisplayingHeaderView(NibHeaderFooterView.self, { _,_,_ in })
         manager.didEndDisplayingFooterView(NibHeaderFooterView.self, { _,_,_ in })
-        manager.shouldShowMenu(for: NibCell.self, { _,_,_ in return true})
-        manager.canPerformAction(for: NibCell.self, { _,_,_,_,_ in return true })
-        manager.performAction(for: NibCell.self, { _,_,_,_,_ in })
+        if #unavailable(macCatalyst 13.1) {
+            manager.shouldShowMenu(for: NibCell.self, { _,_,_ in return true})
+            manager.canPerformAction(for: NibCell.self, { _,_,_,_,_ in return true })
+            manager.performAction(for: NibCell.self, { _,_,_,_,_ in })
+        }
         manager.shouldHighlight(NibCell.self, { _,_,_ in return true })
         manager.didHighlight(NibCell.self, { _,_,_ in })
         manager.didUnhighlight(NibCell.self, { _,_,_ in })

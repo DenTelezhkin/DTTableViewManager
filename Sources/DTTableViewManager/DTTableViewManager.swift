@@ -397,6 +397,8 @@ internal enum EventMethodSignature: String {
     case previewForHighlightingContextMenu = "tableView:previewForHighlightingContextMenuWithConfiguration:"
     case previewForDismissingContextMenu = "tableView:previewForDismissingContextMenuWithConfiguration:"
     case selectionFollowsFocusForRowAtIndexPath = "tableView:selectionFollowsFocusForRowAtIndexPath:"
+    case canPerformPrimaryActionForRowAtIndexPath = "tableView:canPerformPrimaryActionForRowAtIndexPath:"
+    case performPrimaryActionForRowAtIndexPath = "tableView:performPrimaryActionForRowAtIndexPath:"
     
     /// UITableViewDragDelegate
     case itemsForBeginningDragSession = "tableView:itemsForBeginningDragSession:atIndexPath:"

@@ -43,7 +43,7 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_13.4.1.app/Contents/Developer
     strategy:
       matrix:
-        destination: ["test_ios15", "test_tvos15", "build_macos_catalyst"]
+        destination: ["test_ios15", "test_tvos15", "test_catalyst"]
     steps:
       - name: git checkout
         uses: actions/checkout@v2
@@ -55,7 +55,7 @@ jobs:
       - name: ${{ matrix.destination }}
         run: bundle exec fastlane ${{ matrix.destination }}
       - name: Generate code coverage
-        if: matrix.destination != 'build_macos_catalyst'
+        if: matrix.destination != 'test_catalyst'
         run: bundle exec fastlane generate_code_coverage
       - name: Codecov
         uses: codecov/codecov-action@v3
@@ -67,7 +67,7 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_14.0.app/Contents/Developer
     strategy:
       matrix:
-        destination: ["test_ios16", "test_tvos16", "build_macos_catalyst"]
+        destination: ["test_ios16", "test_tvos16", "test_catalyst"]
     steps:
       - name: git checkout
         uses: actions/checkout@v2
@@ -79,7 +79,7 @@ jobs:
       - name: ${{ matrix.destination }}
         run: bundle exec fastlane ${{ matrix.destination }}
       - name: Generate code coverage
-        if: matrix.destination != 'build_macos_catalyst'
+        if: matrix.destination != 'test_catalyst'
         run: bundle exec fastlane generate_code_coverage
       - name: Codecov
         uses: codecov/codecov-action@v2

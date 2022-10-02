@@ -27,7 +27,21 @@ import Foundation
 import UIKit
 import DTModelStorage
 
-/// Extension for registering UITableViewDelegate events
+/// Extension for registering UITableViewDelegate events. Please note that cell / view methods in this extension are soft-deprecated, and it's recommended to migrate to methods extending `CellViewModelMappingProtocolGeneric` and `SupplementaryViewModelMappingProtocolGeneric`:
+///
+/// Deprecated:
+/// ```swift
+///     manager.register(PostCell.self)
+///     manager.didSelect(PostCell.self) { postCell, post, indexPath in }
+/// ```
+/// Recommended:
+/// ```swift
+///     manager.register(PostCell.self) { mapping in
+///         mapping.didSelect { postCell, post, indexPath in }
+///     }
+/// ```
+/// While previously main benefits for second syntax were mostly syntactic, now with support for SwiftUI it will be hard to actually specialize hosting cells, so only second syntax will work for all kinds of cells, and first syntax can only work for non-SwiftUI cells.
+/// New delegate methods for UITableView (starting with iOS 16 / tvO 16 SDK) will be added only as extension to mapping protocols, not DTTableViewManager itself.
 public extension DTTableViewManager {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didSelectRowAt:)` method is called for `cellClass`.
     func didSelect<Cell:ModelTransfer>(_ cellClass:  Cell.Type, _ closure: @escaping (Cell, Cell.ModelType, IndexPath) -> Void) where Cell:UITableViewCell
@@ -522,6 +536,19 @@ public extension CellViewModelMappingProtocolGeneric {
         reactions.append(FourArgumentsEventReaction(Cell.self, modelType: Model.self, argument: CGPoint.self,
                                                     signature: EventMethodSignature.contextMenuConfigurationForRowAtIndexPath.rawValue,
                                                     closure))
+    }
+#endif
+    
+    
+#if swift(>=5.7) || (os(macOS) && swift(>=5.7.1))  // Xcode 14.0 AND macCatalyst on Xcode 14.1
+    @available(iOS 16, tvOS 16, *)
+    func canPerformPrimaryAction(_ closure: @escaping (Cell, Model, IndexPath) -> Bool) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, closure))
+    }
+    
+    @available(iOS 16, tvOS 16, *)
+    func performPrimaryAction(_ closure: @escaping (Cell, Model, IndexPath) -> Void) {
+        reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.performPrimaryActionForRowAtIndexPath.rawValue, closure))
     }
 #endif
 }

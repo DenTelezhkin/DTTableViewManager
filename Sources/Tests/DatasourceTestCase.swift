@@ -284,7 +284,7 @@ class DatasourceTestCase: BaseTestCase {
         let model: Int?? = nil
         let anomaly = DTTableViewManagerAnomaly.nilCellModel(indexPath(0, 0))
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.memoryStorage.addItem(model)
+        controller.manager.memoryStorage.setSection(SectionModel(items: [model as Any]), forSection: 0)
         let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         
         waitForExpectations(timeout: 0.1)
@@ -350,7 +350,7 @@ class DatasourceTestCase: BaseTestCase {
         let exp = expectation(description: "No cell mappings found for model")
         let anomaly = DTTableViewManagerAnomaly.noCellMappingFound(modelDescription: "3", indexPath: indexPath(0, 0))
         controller.manager.anomalyHandler.anomalyAction = exp.expect(anomaly: anomaly)
-        controller.manager.memoryStorage.addItem("3")
+        controller.manager.memoryStorage.setSection(SectionModel(items: ["3"]), forSection: 0)
         let _ = controller.manager.tableDataSource?.tableView(controller.tableView, cellForRowAt: indexPath(0, 0))
         waitForExpectations(timeout: 0.1)
         

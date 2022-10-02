@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+* Support for `UITableViewDelegate.tableView(_:canPerformPrimaryActionForRowAt:)` and `UITableViewDelegate.tableView(_:performPrimaryActionForRowAt:)` delegate methods on iOS 16 and tvOS 16.
 * Support for events, wrapping `UITableViewDataSourcePrefetching` protocol. 
 
 ```swift
@@ -16,6 +17,25 @@ manager.register(PostCell.self) { mapping in
 ```
 
 > Please note, that while datasource methods are called once per array of indexPaths, events for models will be called individually, so single model (and indexPath) is passed to each event. Theoretically, this should make prefetching and cancellation easier, since you no longer need to walk through array and find all data models, you can operate on a single data model at a time.
+
+
+### Deprecated
+
+* Cell / View events, registered with `DTTableViewManager` are soft-deprecated. Please use events in mapping instead:
+
+Deprecated:
+```swift
+    manager.register(PostCell.self)
+    manager.didSelect(PostCell.self) { postCell, post, indexPath in }
+```
+Recommended:
+```swift
+    manager.register(PostCell.self) { mapping in
+        mapping.didSelect { postCell, post, indexPath in }
+    }
+```
+> While previously main benefits for second syntax were mostly syntactic, now with support for SwiftUI it will be hard to actually specialize hosting cells (and might be impossible when iOS 16 hosting configuration is supported), so only second syntax will work for all kinds of cells, and first syntax can only work for non-SwiftUI cells.
+> New delegate methods for UITableView (starting with iOS 16 / tvO 16 SDK) will be added only as extension to mapping protocols, not DTTableViewManager itself.
 
 ## [11.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/11.0.0-beta.1)
 
