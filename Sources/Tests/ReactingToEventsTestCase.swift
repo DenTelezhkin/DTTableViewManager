@@ -386,7 +386,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
     
     func verifyEvent<U>(_ signature: EventMethodSignature,
                                                    registration: (ReactingTestTableViewController, XCTestExpectation) -> Void,
-                                                   alternativeRegistration: (ReactingTestTableViewController, XCTestExpectation) -> Void,
+                                                   alternativeRegistration: ((ReactingTestTableViewController, XCTestExpectation) -> Void)? = nil,
                                                    preparation: (ReactingTestTableViewController) -> Void,
                                                    action: (ReactingTestTableViewController) throws -> U) throws {
         guard let sut = sut else {
@@ -403,11 +403,13 @@ class ReactingToEventsFastTestCase : XCTestCase {
         
         unregisterAll()
         
-        let altExp = expectation(description: signature.rawValue)
-        alternativeRegistration(sut,altExp)
-        preparation(sut)
-        _ = try action(sut)
-        waitForExpectations(timeout: 1)
+        if let alternativeRegistration = alternativeRegistration {
+            let altExp = expectation(description: signature.rawValue)
+            alternativeRegistration(sut,altExp)
+            preparation(sut)
+            _ = try action(sut)
+            waitForExpectations(timeout: 1)
+        }
     }
     
     func testFooterConfigurationClosure()
@@ -1105,6 +1107,30 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+#if swift(>=5.7)
+    func testCanPerformPrimaryAction() throws {
+        guard #available(iOS 16, tvOS 16, *) else { return }
+        try verifyEvent(.canPerformPrimaryActionForRowAtIndexPath, registration: { sut, exp in
+            sut.manager.register(NibCell.self) {
+                $0.canPerformPrimaryAction(self.fullfill(exp, andReturn: true))
+            }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, canPerformPrimaryActionForRowAt: indexPath(0, 0))
+        })
+    }
+    
+    func testPerformPrimaryAction() throws {
+        guard #available(iOS 16, tvOS 16, *) else { return }
+        try verifyEvent(.performPrimaryActionForRowAtIndexPath, registration: { sut, exp in
+            sut.manager.register(NibCell.self) {
+                $0.performPrimaryAction(self.fullfill(exp, andReturn: ()))
+            }
+        }, preparation: addIntItem(), action: {
+            $0.manager.tableDelegate?.tableView(sut.tableView, performPrimaryActionForRowAt: indexPath(0, 0))
+        })
+    }
+#endif
+    
     func testContextMenuConfiguration() throws {
         guard #available(iOS 13, *) else { return }
         var contextConfiguration : UIContextMenuConfiguration? = nil
@@ -1297,6 +1323,13 @@ class ReactingToEventsFastTestCase : XCTestCase {
         
         XCTAssertEqual(String(describing: #selector(UITableViewDataSourcePrefetching.tableView(_:prefetchRowsAt:))), EventMethodSignature.prefetchRowsAtIndexPaths.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDataSourcePrefetching.tableView(_:cancelPrefetchingForRowsAt:))), EventMethodSignature.cancelPrefetchingForRowsAtIndexPaths.rawValue)
+        
+#if swift(>=5.7)
+        if #available(iOS 16, tvOS 16, *) {
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:canPerformPrimaryActionForRowAt:))), EventMethodSignature.canPerformPrimaryActionForRowAtIndexPath.rawValue)
+            XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:performPrimaryActionForRowAt:))), EventMethodSignature.performPrimaryActionForRowAtIndexPath.rawValue)
+        }
+#endif
     }
     
     func testEventsRegistrationPerfomance() {

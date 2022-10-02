@@ -502,4 +502,22 @@ open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate
         return tableView.selectionFollowsFocus
     }
     #endif
+    
+#if swift(>=5.7)
+    @available(iOS 16, tvOS 16, *)
+    /// Implementation for `UITableViewDelegate` protocol
+    public func tableView(_ tableView: UITableView, canPerformPrimaryActionForRowAt indexPath: IndexPath) -> Bool {
+        if let canPerform = performCellReaction(.canPerformActionForRowAtIndexPath, location: indexPath, provideCell: true) as? Bool {
+            return canPerform
+        }
+        return (delegate as? UITableViewDelegate)?.tableView?(tableView, canPerformPrimaryActionForRowAt: indexPath) ?? false
+    }
+    
+    @available(iOS 16, tvOS 16, *)
+    /// Implementation for `UITableViewDelegate` protocol
+    public func tableView(_ tableView: UITableView, performPrimaryActionForRowAt indexPath: IndexPath) {
+        _ = performCellReaction(.performPrimaryActionForRowAtIndexPath, location: indexPath, provideCell: true)
+        (delegate as? UITableViewDelegate)?.tableView?(tableView, performPrimaryActionForRowAt: indexPath)
+    }
+#endif
 }
