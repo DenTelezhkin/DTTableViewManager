@@ -540,7 +540,7 @@ public extension CellViewModelMappingProtocolGeneric {
 #endif
     
     
-#if swift(>=5.7) || canImport(AppKit, _version: 13.0) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which is macOS 13.0 SDK)
+#if swift(>=5.7) || (os(macOS) && swift(>=5.7.1))  // Xcode 14.0 AND macCatalyst on Xcode 14.1
     @available(iOS 16, tvOS 16, *)
     func canPerformPrimaryAction(_ closure: @escaping (Cell, Model, IndexPath) -> Bool) {
         reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, closure))

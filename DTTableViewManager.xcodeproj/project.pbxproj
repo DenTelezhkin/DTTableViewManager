@@ -1091,6 +1091,7 @@
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Supporting files/Tests.plist";
@@ -1101,7 +1102,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 			};
 			name = Debug;
 		};
@@ -1112,6 +1113,7 @@
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -1123,7 +1125,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "MLSDev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 			};
 			name = Release;
 		};
