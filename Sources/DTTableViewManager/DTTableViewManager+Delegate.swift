@@ -40,7 +40,7 @@ import DTModelStorage
 ///         mapping.didSelect { postCell, post, indexPath in }
 ///     }
 /// ```
-/// While previously main benefits for second syntax were mostly syntactic, now with support for SwiftUI it will be hard to actually specialize hosting cells (and might be impossible when iOS 16 hosting configuration is supported), so only second syntax will work for all kinds of cells, and first syntax can only work for non-SwiftUI cells.
+/// While previously main benefits for second syntax were mostly syntactic, now with support for SwiftUI it will be hard to actually specialize hosting cells, so only second syntax will work for all kinds of cells, and first syntax can only work for non-SwiftUI cells.
 /// New delegate methods for UITableView (starting with iOS 16 / tvO 16 SDK) will be added only as extension to mapping protocols, not DTTableViewManager itself.
 public extension DTTableViewManager {
     /// Registers `closure` to be executed, when `UITableViewDelegate.tableView(_:didSelectRowAt:)` method is called for `cellClass`.
@@ -540,7 +540,7 @@ public extension CellViewModelMappingProtocolGeneric {
 #endif
     
     
-#if swift(>=5.7)
+#if swift(>=5.7) || canImport(AppKit, _version: 13.0) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which is macOS 13.0 SDK)
     @available(iOS 16, tvOS 16, *)
     func canPerformPrimaryAction(_ closure: @escaping (Cell, Model, IndexPath) -> Bool) {
         reactions.append(EventReaction(viewType: Cell.self, modelType: Model.self, signature: EventMethodSignature.canPerformActionForRowAtIndexPath.rawValue, closure))
