@@ -9,7 +9,7 @@ lane :test_ios15 do
 end
 
 lane :test_tvos16 do
-  scan(device: "Apple TV 4K (16.0)", scheme: 'Tests-tvOS')
+  scan(device: "Apple TV (16.0)", scheme: 'Tests-tvOS')
 end
 
 lane :test_tvos15 do
