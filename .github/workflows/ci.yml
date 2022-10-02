@@ -22,19 +22,19 @@ jobs:
         run: |
           xcrun simctl delete unavailable
           xcrun simctl list
-  # env-details-Xcode-12:
-  #   name: Environment details Xcode 12
-  #   runs-on: macOS-11
-  #   env:
-  #     DEVELOPER_DIR: /Applications/Xcode_12.5.1.app/Contents/Developer
-  #   steps:
-  #     - name: xcode version
-  #       run: xcodebuild -version -sdk
+  env-details-Xcode-14:
+    name: Environment details Xcode 14
+    runs-on: macOS-12
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_14.0.app/Contents/Developer
+    steps:
+      - name: xcode version
+        run: xcodebuild -version -sdk
 
-  #     - name: list simulators
-  #       run: |
-  #         xcrun simctl delete unavailable
-  #         xcrun simctl list
+      - name: list simulators
+        run: |
+          xcrun simctl delete unavailable
+          xcrun simctl list
 
   Xcode-13:
     name: Xcode 13
@@ -60,26 +60,26 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@v3
 
-  # Xcode-12:
-  #   name: Xcode 12
-  #   runs-on: macOS-11
-  #   env:
-  #     DEVELOPER_DIR: /Applications/Xcode_12.5.1.app/Contents/Developer
-  #   strategy:
-  #     matrix:
-  #       destination: ["test_ios14", "test_tvos14", "build_macos_catalyst"]
-  #   steps:
-  #     - name: git checkout
-  #       uses: actions/checkout@v2
-  #     - name: ruby setup
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: 2.7
-  #         bundler-cache: true
-  #     - name: ${{ matrix.destination }}
-  #       run: bundle exec fastlane ${{ matrix.destination }}
-  #     - name: Generate code coverage
-  #       if: matrix.destination != 'build_macos_catalyst'
-  #       run: bundle exec fastlane generate_code_coverage
-  #     - name: Codecov
-  #       uses: codecov/codecov-action@v2
+  Xcode-14:
+    name: Xcode 14
+    runs-on: macOS-12
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_14.0.app/Contents/Developer
+    strategy:
+      matrix:
+        destination: ["test_ios16", "test_tvos16", "build_macos_catalyst"]
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v2
+      - name: ruby setup
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+      - name: ${{ matrix.destination }}
+        run: bundle exec fastlane ${{ matrix.destination }}
+      - name: Generate code coverage
+        if: matrix.destination != 'build_macos_catalyst'
+        run: bundle exec fastlane generate_code_coverage
+      - name: Codecov
+        uses: codecov/codecov-action@v2
