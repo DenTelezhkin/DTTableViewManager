@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Added
+
+* Support for events, wrapping `UITableViewDataSourcePrefetching` protocol. 
+
+```swift
+manager.register(PostCell.self) { mapping in
+    mapping.prefetch { model, indexPath in }
+    mapping.cancelPrefetch { model, indexPath in }
+}
+```
+
+> Please note, that while datasource methods are called once per array of indexPaths, events for models will be called individually, so single model (and indexPath) is passed to each event. Theoretically, this should make prefetching and cancellation easier, since you no longer need to walk through array and find all data models, you can operate on a single data model at a time.
+
 ## [11.0.0-beta.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/11.0.0-beta.1)
 
 ### **Introducing support for SwiftUI!**

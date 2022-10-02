@@ -101,6 +101,7 @@ open class DTTableViewManager {
         factory.resetDelegates = { [weak self] in
             self?.tableDataSource?.delegateWasReset()
             self?.tableDelegate?.delegateWasReset()
+            self?.tablePrefetchDataSource?.delegateWasReset()
             
             #if os(iOS)
             self?.tableDragDelegate?.delegateWasReset()
@@ -177,32 +178,26 @@ open class DTTableViewManager {
         }
     }
     
-    #if os(iOS)
-    // Yeah, @availability macros does not work on stored properties ¯\_(ツ)_/¯
-    private var _tableDragDelegatePrivate : AnyObject?
-    
-    /// Object, that is responsible for implementing `UITableViewDragDelegate` protocol
-    open var tableDragDelegate : DTTableViewDragDelegate? {
-        get {
-            return _tableDragDelegatePrivate as? DTTableViewDragDelegate
-        }
-        set {
-            _tableDragDelegatePrivate = newValue
-            tableView?.dragDelegate = newValue
+    /// Object, responsible for implementing `UITableViewDataSourcePrefetching` protocol
+    open var tablePrefetchDataSource: DTTableViewPrefetchDataSource? {
+        didSet {
+            tableView?.prefetchDataSource = tablePrefetchDataSource
         }
     }
     
-    // Yeah, @availability macros does not work on stored properties ¯\_(ツ)_/¯
-    private var _tableDropDelegatePrivate : AnyObject?
+    #if os(iOS)
+    
+    /// Object, that is responsible for implementing `UITableViewDragDelegate` protocol
+    open var tableDragDelegate : DTTableViewDragDelegate? {
+        didSet {
+            tableView?.dragDelegate = tableDragDelegate
+        }
+    }
 
     /// Object, that is responsible for implementing `UITableViewDropDelegate` protocol
     open var tableDropDelegate : DTTableViewDropDelegate? {
-        get {
-            return _tableDropDelegatePrivate as? DTTableViewDropDelegate
-        }
-        set {
-            _tableDropDelegatePrivate = newValue
-            tableView?.dropDelegate = newValue
+        didSet {
+            tableView?.dropDelegate = tableDropDelegate
         }
     }
     #endif
@@ -268,6 +263,7 @@ open class DTTableViewManager {
         tableViewUpdater = TableViewUpdater(tableView: tableView)
         tableDelegate = DTTableViewDelegate(delegate: delegate, tableViewManager: self)
         tableDataSource = DTTableViewDataSource(delegate: delegate, tableViewManager: self)
+        tablePrefetchDataSource = DTTableViewPrefetchDataSource(delegate: delegate, tableViewManager: self)
         #if os(iOS)
         tableDragDelegate = DTTableViewDragDelegate(delegate: delegate, tableViewManager: self)
         tableDropDelegate = DTTableViewDropDelegate(delegate: delegate, tableViewManager: self)
@@ -419,4 +415,8 @@ internal enum EventMethodSignature: String {
     case dropSessionDidExit = "tableView:dropSessionDidExit:"
     case dropSessionDidEnd = "tableView:dropSessionDidEnd:"
     case dropPreviewParametersForRowAtIndexPath = "tableView:dropPreviewParametersForRowAtIndexPath:"
+    
+    /// UITableViewDataSourcePrefetching
+    case prefetchRowsAtIndexPaths = "tableView:prefetchRowsAtIndexPaths:"
+    case cancelPrefetchingForRowsAtIndexPaths = "tableView:cancelPrefetchingForRowsAtIndexPaths:"
 }
