@@ -1,15 +1,15 @@
 fastlane_version "1.98.0"
 
-lane :test_ios14 do
-  scan(devices: ["iPhone 12 Pro (14.5)"], scheme: 'Tests-iOS')
+lane :test_ios16 do
+  scan(devices: ["iPhone 14 Pro (16.0)"], scheme: 'Tests-iOS')
 end
 
 lane :test_ios15 do
   scan(devices: ["iPhone 13 Pro Max (15.5)"], scheme: 'Tests-iOS')
 end
 
-lane :test_tvos14 do
-  scan(device: "Apple TV 4K (14.5)", scheme: 'Tests-tvOS')
+lane :test_tvos16 do
+  scan(device: "Apple TV (16.0)", scheme: 'Tests-tvOS')
 end
 
 lane :test_tvos15 do
