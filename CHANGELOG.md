@@ -22,11 +22,7 @@ It's also possible to incorporate UIKit cell states by simply adding additional 
 ```swift
 manager.registerHostingConfiguration(for: Post.self) { state, _, post, _ in
     UIHostingConfiguration {
-        if state.isSelected {
-            SelectedPostView(post: post)
-        } else {
-            PostView(post: post)
-        }
+        PostView(post: post, isSelected: state.isSelected)
     }
 }
 ```
