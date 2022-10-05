@@ -5,6 +5,23 @@
 //  Created by Denys Telezhkin on 22.06.2022.
 //  Copyright © 2022 Denys Telezhkin. All rights reserved.
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 import Foundation
 import DTModelStorage
@@ -58,8 +75,15 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
     /// Reuse identifier to be used for reusable cells.
     public var reuseIdentifier : String
     
-    private var _cellConfigurationHandler: ((UITableViewCell, Any, IndexPath) -> Void)?
-    private var _cellDequeueClosure: ((_ containerView: UITableView, _ model: Any, _ indexPath: IndexPath) -> UITableViewCell?)?
+    private var _cellConfigurationHandler: ((UITableViewCell, Model, IndexPath) -> Void)?
+    private var _cellDequeueClosure: ((_ containerView: UITableView, _ indexPath: IndexPath) -> UITableViewCell?) {
+        return { [weak self] tableView, indexPath in
+            guard let self = self else {
+                return nil
+            }
+            return tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath)
+        }
+    }
     
     /// Creates hosting cell model mapping
     /// - Parameters:
@@ -72,18 +96,8 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
         reuseIdentifier = "\(HostingTableViewCell<Content, Model>.self)"
         super.init(viewClass: HostingTableViewCell<Content, Model>.self)
         configuration.parentController = parentViewController
-        _cellDequeueClosure = { [weak self] tableView, model, indexPath in
-            guard let self = self, let model = model as? Model else {
-                return nil
-            }
-            let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath)
-            if let cell = cell as? HostingTableViewCell<Content, Model> {
-                cell.updateWith(rootView: cellContent(model, indexPath), configuration: self.configuration)
-            }
-            return cell
-        }
         _cellConfigurationHandler = { [weak self] cell, model, indexPath in
-            guard let cell = cell as? HostingTableViewCell<Content, Model>, let model = model as? Model,
+            guard let cell = cell as? HostingTableViewCell<Content, Model>,
             let configuration = self?.configuration else { return }
             cell.updateWith(rootView: cellContent(model, indexPath), configuration: configuration)
         }
@@ -99,6 +113,10 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
         guard let cell = cell as? UITableViewCell else {
             preconditionFailure("Cannot update a cell, which is not a UITableViewCell")
         }
+        guard let model = model as? Model else {
+            assertionFailure("Cannot update cell with model, that is not of \(Model.self) type.")
+            return
+        }
         _cellConfigurationHandler?(cell, model, indexPath)
     }
     
@@ -109,7 +127,7 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
     ///   - indexPath: IndexPath, at which cell is going to be displayed.
     /// - Returns: dequeued configured UITableViewCell instance.
     open override func dequeueConfiguredReusableCell(for tableView: UITableView, model: Any, indexPath: IndexPath) -> UITableViewCell? {
-        guard let cell = _cellDequeueClosure?(tableView, model, indexPath) else {
+        guard let cell = _cellDequeueClosure(tableView, indexPath), let model = model as? Model else {
             return nil
         }
         _cellConfigurationHandler?(cell, model, indexPath)

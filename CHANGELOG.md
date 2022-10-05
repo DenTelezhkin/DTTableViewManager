@@ -7,6 +7,30 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 * Support for `UITableViewDelegate.tableView(_:canPerformPrimaryActionForRowAt:)` and `UITableViewDelegate.tableView(_:performPrimaryActionForRowAt:)` delegate methods on iOS 16 and tvOS 16.
+* Support for `UIHostingConfiguration` on iOS 16 / tvOS 16 / macCatalyst 16:
+
+```swift
+manager.registerHostingConfiguration(for: Post.self) { _, post, _ in
+    UIHostingConfiguration {
+        PostView(post: post)
+    }
+}
+```
+
+It's also possible to incorporate UIKit cell states by simply adding additional parameter to registration:
+
+```swift
+manager.registerHostingConfiguration(for: Post.self) { state, _, post, _ in
+    UIHostingConfiguration {
+        if state.isSelected {
+            SelectedPostView(post: post)
+        } else {
+            PostView(post: post)
+        }
+    }
+}
+```
+
 * Support for events, wrapping `UITableViewDataSourcePrefetching` protocol. 
 
 ```swift

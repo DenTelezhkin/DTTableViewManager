@@ -44,10 +44,10 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
     public var bundle: Bundle
     
     /// Type-erased update block, that will be called when `ModelTransfer` `update(with:)` method needs to be executed.
-    public let updateBlock : (Any, Any) -> Void
+    public let updateBlock : (Cell, Model) -> Void
     
-    private var _cellConfigurationHandler: ((UITableViewCell, Any, IndexPath) -> Void)?
-    private var _cellDequeueClosure: ((_ containerView: UITableView, _ model: Any, _ indexPath: IndexPath) -> UITableViewCell?)?
+    private var _cellConfigurationHandler: ((UITableViewCell, Model, IndexPath) -> Void)?
+    private var _cellDequeueClosure: ((_ containerView: UITableView, _ model: Model, _ indexPath: IndexPath) -> UITableViewCell?)?
     
     /// Creates `ViewModelMapping` for UITableViewCell registration.
     /// - Parameters:
@@ -63,11 +63,11 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
         updateBlock = { _, _ in }
         super.init(viewClass: Cell.self)
         _cellConfigurationHandler = { cell, model, indexPath in
-            guard let view = cell as? Cell, let model = model as? Model else { return }
+            guard let view = cell as? Cell else { return }
             cellConfiguration(view, model, indexPath)
         }
         _cellDequeueClosure = { [weak self] tableView, model, indexPath in
-            guard let self = self, let model = model as? Model else { return nil }
+            guard let self = self else { return nil }
             let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath)
             if let cell = cell as? Cell {
                 cellConfiguration(cell, model, indexPath)
@@ -89,17 +89,16 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
         reuseIdentifier = String(describing: Cell.self)
         bundle = Bundle(for: Cell.self)
         updateBlock = { view, model in
-            guard let view = view as? Cell, let model = model as? Cell.ModelType else { return }
             view.update(with: model)
         }
         super.init(viewClass: Cell.self)
         
         _cellConfigurationHandler = { cell, model, indexPath in
-            guard let view = cell as? Cell, let model = model as? Model else { return }
+            guard let view = cell as? Cell else { return }
             cellConfiguration(view, model, indexPath)
         }
         _cellDequeueClosure = { [weak self] tableView, model, indexPath in
-            guard let self = self, let model = model as? Cell.ModelType else {
+            guard let self = self else {
                 return nil
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath)
@@ -117,9 +116,10 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
     ///   - indexPath: indexPath of a cell
     ///   - model: model, mapped to a cell.
     open override func updateCell(cell: Any, at indexPath: IndexPath, with model: Any) {
-        guard let cell = cell as? UITableViewCell else {
+        guard let cell = cell as? Cell else {
             preconditionFailure("Cannot update a cell, which is not a UITableViewCell")
         }
+        guard let model = model as? Model else { return }
         _cellConfigurationHandler?(cell, model, indexPath)
         updateBlock(cell, model)
     }
@@ -137,7 +137,7 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
     ///   - indexPath: IndexPath, at which cell is going to be displayed.
     /// - Returns: dequeued configured UITableViewCell instance.
     open override func dequeueConfiguredReusableCell(for tableView: UITableView, model: Any, indexPath: IndexPath) -> UITableViewCell? {
-        guard let cell = _cellDequeueClosure?(tableView, model, indexPath) else {
+        guard let model = model as? Model, let cell = _cellDequeueClosure?(tableView, model, indexPath) as? Cell else {
             return nil
         }
         updateBlock(cell, model)

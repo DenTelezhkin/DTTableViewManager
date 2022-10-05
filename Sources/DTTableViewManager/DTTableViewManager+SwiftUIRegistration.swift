@@ -28,4 +28,33 @@ public extension DTTableViewManager {
     func registerHostingCell<Content:View, Model>(for model: Model.Type, content: @escaping (Model, IndexPath) -> Content, mapping: ((HostingCellViewModelMapping<Content, Model>) -> Void)? = nil) {
         viewFactory.registerHostingCell(content, parentViewController: delegate as? UIViewController, mapping: mapping)
     }
+    
+#if swift(>=5.7) || (os(macOS) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
+    
+    @available(iOS 16, tvOS 16, *)
+    /// Registers mapping from `model` to `UIHostingConfiguration`, that will be created and set to `contentConfiguration` property of `UITableViewCell` once dequeued.
+    /// - Parameters:
+    ///   - model: model type
+    ///   - configuration: hosting configuration for a cell
+    ///   - mapping: mapping customization closure
+    func registerHostingConfiguration<Content: View, Background: View, Model>(
+        for model: Model.Type,
+        configuration: @escaping (UITableViewCell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>,
+        mapping: ((HostingConfigurationViewModelMapping<Content, Background, Model>) -> Void)? = nil) {
+            viewFactory.registerHostingConfiguration(configuration: configuration, mapping: mapping)
+    }
+    
+    @available(iOS 16, tvOS 16, *)
+    /// Registers mapping from `model` to `UIHostingConfiguration`, that will be created and set to `contentConfiguration` property of `UITableViewCell` inside of `UITableViewCell.configurationUpdateHandler` property to manage state.
+    /// - Parameters:
+    ///   - model: model type
+    ///   - configuration: hosting configuration for a cell
+    ///   - mapping: mapping customization closure
+    func registerHostingConfiguration<Content: View, Background: View, Model>(
+        for model: Model.Type,
+        configuration: @escaping (UICellConfigurationState, UITableViewCell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>,
+        mapping: ((HostingConfigurationViewModelMapping<Content, Background, Model>) -> Void)? = nil) {
+            viewFactory.registerHostingConfiguration(configuration: configuration, mapping: mapping)
+    }
+#endif
 }
