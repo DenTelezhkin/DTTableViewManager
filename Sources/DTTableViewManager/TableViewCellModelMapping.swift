@@ -46,8 +46,8 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
     /// Type-erased update block, that will be called when `ModelTransfer` `update(with:)` method needs to be executed.
     public let updateBlock : (Cell, Model) -> Void
     
-    private var _cellConfigurationHandler: ((UITableViewCell, Model, IndexPath) -> Void)?
-    private var _cellDequeueClosure: ((_ containerView: UITableView, _ model: Model, _ indexPath: IndexPath) -> UITableViewCell?)?
+    private var _cellConfigurationHandler: ((Cell, Model, IndexPath) -> Void)?
+    private var _cellDequeueClosure: ((_ containerView: UITableView, _ model: Model, _ indexPath: IndexPath) -> Cell?)?
     
     /// Creates `ViewModelMapping` for UITableViewCell registration.
     /// - Parameters:
@@ -63,8 +63,7 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
         updateBlock = { _, _ in }
         super.init(viewClass: Cell.self)
         _cellConfigurationHandler = { cell, model, indexPath in
-            guard let view = cell as? Cell else { return }
-            cellConfiguration(view, model, indexPath)
+            cellConfiguration(cell, model, indexPath)
         }
         _cellDequeueClosure = { [weak self] tableView, model, indexPath in
             guard let self = self else { return nil }
@@ -72,7 +71,7 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
             if let cell = cell as? Cell {
                 cellConfiguration(cell, model, indexPath)
             }
-            return cell
+            return cell as? Cell
         }
         mapping?(self)
     }
@@ -94,8 +93,7 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
         super.init(viewClass: Cell.self)
         
         _cellConfigurationHandler = { cell, model, indexPath in
-            guard let view = cell as? Cell else { return }
-            cellConfiguration(view, model, indexPath)
+            cellConfiguration(cell, model, indexPath)
         }
         _cellDequeueClosure = { [weak self] tableView, model, indexPath in
             guard let self = self else {
@@ -105,7 +103,7 @@ open class TableViewCellModelMapping<Cell: UITableViewCell, Model>: CellViewMode
             if let cell = cell as? Cell {
                 cellConfiguration(cell, model, indexPath)
             }
-            return cell
+            return cell as? Cell
         }
         mapping?(self)
     }

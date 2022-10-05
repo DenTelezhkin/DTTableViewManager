@@ -75,13 +75,13 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
     /// Reuse identifier to be used for reusable cells.
     public var reuseIdentifier : String
     
-    private var _cellConfigurationHandler: ((UITableViewCell, Model, IndexPath) -> Void)?
-    private var _cellDequeueClosure: ((_ containerView: UITableView, _ indexPath: IndexPath) -> UITableViewCell?) {
+    private var _cellConfigurationHandler: ((Cell, Model, IndexPath) -> Void)?
+    private var _cellDequeueClosure: ((_ containerView: UITableView, _ indexPath: IndexPath) -> Cell?) {
         return { [weak self] tableView, indexPath in
             guard let self = self else {
                 return nil
             }
-            return tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath) as? Cell
         }
     }
     
@@ -97,8 +97,7 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
         super.init(viewClass: HostingTableViewCell<Content, Model>.self)
         configuration.parentController = parentViewController
         _cellConfigurationHandler = { [weak self] cell, model, indexPath in
-            guard let cell = cell as? HostingTableViewCell<Content, Model>,
-            let configuration = self?.configuration else { return }
+            guard let configuration = self?.configuration else { return }
             cell.updateWith(rootView: cellContent(model, indexPath), configuration: configuration)
         }
         mapping?(self)
@@ -110,8 +109,8 @@ open class HostingCellViewModelMapping<Content: View, Model>: CellViewModelMappi
     ///   - indexPath: indexPath of a cell
     ///   - model: model, mapped to a cell.
     open override func updateCell(cell: Any, at indexPath: IndexPath, with model: Any) {
-        guard let cell = cell as? UITableViewCell else {
-            preconditionFailure("Cannot update a cell, which is not a UITableViewCell")
+        guard let cell = cell as? Cell else {
+            preconditionFailure("Cannot update a cell, which is not a \(Cell.self)")
         }
         guard let model = model as? Model else {
             assertionFailure("Cannot update cell with model, that is not of \(Model.self) type.")

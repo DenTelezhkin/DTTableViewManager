@@ -28,9 +28,9 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
     public var bundle: Bundle
     
     /// Type-erased update block, that will be called when `ModelTransfer` `update(with:)` method needs to be executed.
-    public let updateBlock : (Any, Any) -> Void
+    public let updateBlock : (View, Model) -> Void
     
-    private var _supplementaryDequeueClosure: ((_ containerView: UITableView, _ model: Any, _ indexPath: IndexPath) -> UIView?)?
+    private var _supplementaryDequeueClosure: ((_ containerView: UITableView, _ model: Model, _ indexPath: IndexPath) -> View?)?
     
     /// Creates `ViewModelMapping` for UITableView header/footer registration.
     /// - Parameters:
@@ -47,12 +47,12 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
         bundle = Bundle(for: View.self)
         super.init(viewClass: View.self, viewType: .supplementaryView(kind: kind))
         _supplementaryDequeueClosure = { [weak self] tableView, model, indexPath in
-            guard let self = self, let model = model as? Model else { return nil }
+            guard let self = self else { return nil }
             if let headerFooterView = tableView.dequeueReusableHeaderFooterView(withIdentifier: self.reuseIdentifier) {
                 if let typedHeaderFooterView = headerFooterView as? View {
                     headerFooterConfiguration(typedHeaderFooterView, model, indexPath.section)
                 }
-                return headerFooterView
+                return headerFooterView as? View
             } else {
                 if let type = self.viewClass as? UIView.Type {
                     if let loadedFromXib = self.loadViewFromXib(viewClass: type) as? View {
@@ -79,18 +79,17 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
         xibName = String(describing: View.self)
         reuseIdentifier = String(describing: View.self)
         updateBlock = { view, model in
-            guard let view = view as? View, let model = model as? View.ModelType else { return }
             view.update(with: model)
         }
         bundle = Bundle(for: View.self)
         super.init(viewClass: View.self, viewType: .supplementaryView(kind: kind))
         _supplementaryDequeueClosure = { [weak self] tableView, model, indexPath in
-            guard let self = self, let model = model as? Model else { return nil }
+            guard let self = self else { return nil }
             if let headerFooterView = tableView.dequeueReusableHeaderFooterView(withIdentifier: self.reuseIdentifier) {
                 if let typedHeaderFooterView = headerFooterView as? View {
                     headerFooterConfiguration(typedHeaderFooterView, model, indexPath.section)
                 }
-                return headerFooterView
+                return headerFooterView as? View
             } else {
                 if let type = self.viewClass as? UIView.Type {
                     if let loadedFromXib = self.loadViewFromXib(viewClass: type) as? View {
@@ -114,7 +113,7 @@ open class TableViewHeaderFooterViewModelMapping<View: UIView, Model>: Supplemen
         guard viewType == .supplementaryView(kind: kind) else {
             return nil
         }
-        guard let view = _supplementaryDequeueClosure?(tableView, model, indexPath) else {
+        guard let model = model as? Model, let view = _supplementaryDequeueClosure?(tableView, model, indexPath) else {
             return nil
         }
         updateBlock(view, model)

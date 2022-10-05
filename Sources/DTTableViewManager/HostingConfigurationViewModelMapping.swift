@@ -37,15 +37,15 @@ open class HostingConfigurationViewModelMapping<Content: View, Background: View,
     public typealias Model = Model
     
     enum Kind {
-        case `default`((UITableViewCell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>)
-        case stateUpdating((UICellConfigurationState, UITableViewCell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>)
+        case `default`((Cell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>)
+        case stateUpdating((UICellConfigurationState, Cell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>)
     }
     
     /// Reuse identifier to be used when dequeueing cells.
     public var reuseIdentifier: String
     
     private let kind: Kind
-    private var _cellDequeueClosure: ((_ containerView: UITableView, _ indexPath: IndexPath) -> UITableViewCell?) {
+    private var _cellDequeueClosure: ((_ containerView: UITableView, _ indexPath: IndexPath) -> Cell?) {
         return { [weak self] tableView, indexPath in
             guard let self else {
                 return nil
@@ -53,7 +53,7 @@ open class HostingConfigurationViewModelMapping<Content: View, Background: View,
             return tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath)
         }
     }
-    private var _cellConfigurationHandler: (UITableViewCell, Model, IndexPath) -> Void {
+    private var _cellConfigurationHandler: (Cell, Model, IndexPath) -> Void {
         return { [weak self] cell, model, indexPath in
             guard let self else { return }
             switch self.kind {
@@ -71,7 +71,7 @@ open class HostingConfigurationViewModelMapping<Content: View, Background: View,
     /// - Parameters:
     ///   - cellConfiguration: Closure to configure SwiftUI hosting configuration on a cell
     ///   - mapping: additional mapping customization after all properties have been initialized.
-    public init(cellConfiguration: @escaping (UITableViewCell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>, mapping: ((HostingConfigurationViewModelMapping<Content, Background, Model>) -> Void)?) {
+    public init(cellConfiguration: @escaping (Cell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>, mapping: ((HostingConfigurationViewModelMapping<Content, Background, Model>) -> Void)?) {
         self.kind = .default(cellConfiguration)
         reuseIdentifier = "\(Content.self) \(Background.self) \(Model.self)"
         super.init(viewClass: Cell.self)
@@ -82,7 +82,7 @@ open class HostingConfigurationViewModelMapping<Content: View, Background: View,
     /// - Parameters:
     ///   - cellConfiguration: Closure to configure SwiftUI hosting configuration on a cell, based on state changes
     ///   - mapping: additional mapping customization after all properties have been initialized.
-    public init(cellConfiguration: @escaping (UICellConfigurationState, UITableViewCell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>, mapping: ((HostingConfigurationViewModelMapping<Content, Background, Model>) -> Void)?) {
+    public init(cellConfiguration: @escaping (UICellConfigurationState, Cell, Model, IndexPath) -> UIHostingConfiguration<Content, Background>, mapping: ((HostingConfigurationViewModelMapping<Content, Background, Model>) -> Void)?) {
         self.kind = .stateUpdating(cellConfiguration)
         reuseIdentifier = "\(Content.self) \(Background.self) \(Model.self)"
         super.init(viewClass: Cell.self)
@@ -109,8 +109,8 @@ open class HostingConfigurationViewModelMapping<Content: View, Background: View,
     ///   - indexPath: indexPath of a cell
     ///   - model: model, mapped to a cell.
     open override func updateCell(cell: Any, at indexPath: IndexPath, with model: Any) {
-        guard let cell = cell as? UITableViewCell else {
-            preconditionFailure("Cannot update a cell, which is not a UITableViewCell")
+        guard let cell = cell as? Cell else {
+            preconditionFailure("Cannot update a cell, which is not a \(Cell.self)")
         }
         guard let model = model as? Model else {
             assertionFailure("Cannot update cell with model, that is not of \(Model.self) type.")
