@@ -20,6 +20,8 @@ DTTableViewManager
 - [x] [Complete documentation](Documentation)
 - [x] [API Reference](https://dentelezhkin.github.io/DTTableViewManager/)
 
+[Read more](https://dev.to/dentelezhkin/whats-new-in-dttableviewcollectionviewmanager-11-44co) about latest 11.0 release and integration with SwiftUI!
+
 ## Requirements
 
 * Xcode 13+
@@ -36,7 +38,7 @@ Add package into Xcode Project settings -> Swift Packages
 
 ### [CocoaPods](http://www.cocoapods.org):
 
-    pod 'DTTableViewManager', '~> 11.0.0-beta.1'
+    pod 'DTTableViewManager', '~> 11.0.0'
 
 ## Quick start
 
