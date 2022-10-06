@@ -151,6 +151,36 @@ It seems possible, and code infrastructure is prepared to implement SwiftUI view
 
 However, I might reconsider this, if there's demand for this feature.
 
-# When will DTTableViewManager support UIHostingConfiguration on iOS 16?
+# Is UIHostingConfiguration supported on iOS 16 and higher?
 
-If everything goes well, in the next 11.x release.
+UIHostingConfiguration on iOS 16 is supported by additional registration method:
+
+```swift
+manager.registerHostingConfiguration(for: Post.self) { cell, post, indexPath in
+    UIHostingConfiguration {
+        PostView(post: post)
+    }
+}
+```
+
+Because this is officially supported way of integrating SwiftUI with table and collection view cells, I highly recommend watching [WWDC 2022 session video](https://developer.apple.com/videos/play/wwdc2022/10072/) on this topic. 
+
+All customization options for UIHostingConfiguration is fully supported, for example you can customize margins for cells content:
+
+```swift
+manager.registerHostingConfiguration(for: Post.self) { cell, post, indexPath in
+    UIHostingConfiguration {
+        PostView(post: post)
+    }.margins(.horizontal, 16)
+}
+```
+
+Additionally, you can also use `UICellConfigurationState` of a cell by simply adding one additional parameter:
+
+```
+manager.registerHostingConfiguration(for: Post.self) { state, cell, post, indexPath in
+    UIHostingConfiguration {
+        PostView(post: post, isSelected: state.isSelected)
+    }
+}
+```
