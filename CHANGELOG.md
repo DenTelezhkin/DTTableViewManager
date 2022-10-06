@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [11.0.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/11.0.0)
+
 ### Added
 
 * Support for `UITableViewDelegate.tableView(_:canPerformPrimaryActionForRowAt:)` and `UITableViewDelegate.tableView(_:performPrimaryActionForRowAt:)` delegate methods on iOS 16 and tvOS 16.
