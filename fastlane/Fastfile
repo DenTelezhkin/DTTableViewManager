@@ -31,7 +31,7 @@ lane :generate_code_coverage do
 end
 
 lane :test_catalyst do
-  scan(catalyst_platform: "macos", scheme: 'Tests-iOS', prelaunch_simulator: false, disable_slide_to_type: false)
+  scan(destination: "platform=macOS,variant=Mac Catalyst", scheme: 'Tests-iOS', prelaunch_simulator: false, disable_slide_to_type: false)
 end
 
 lane :release do |params|
