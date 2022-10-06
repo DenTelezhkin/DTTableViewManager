@@ -453,7 +453,7 @@ class DatasourceTestCase: BaseTestCase {
         XCTAssertEqual(anomaly.debugDescription, "⚠️[DTTableViewManager] Attempted to register xib NibView, but view found in a xib was of type NibView, while expected type is ReactingHeaderFooterView. This can prevent headers/footers from being updated with models and react to events.")
     }
     
-#if swift(>=5.7) || (os(macOS) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
+#if swift(>=5.7) && !canImport(AppKit) || (canImport(AppKit) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
     func testHostingCellUpdateIsCalledOnlyOnce() {
         guard #available(iOS 13, tvOS 13, *) else { return }
         let exp = expectation(description: "Cell update block")

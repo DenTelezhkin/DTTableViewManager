@@ -26,7 +26,7 @@
 import Foundation
 import SwiftUI
 
-#if swift(>=5.7) || (os(macOS) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
+#if swift(>=5.7) && !canImport(AppKit) || (canImport(AppKit) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
 
 @available(iOS 16, tvOS 16, *)
 /// View - model mapping for creating UIHostingConfiguration from Model.

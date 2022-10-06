@@ -29,7 +29,7 @@ public extension DTTableViewManager {
         viewFactory.registerHostingCell(content, parentViewController: delegate as? UIViewController, mapping: mapping)
     }
     
-#if swift(>=5.7) || (os(macOS) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
+#if swift(>=5.7) && !canImport(AppKit) || (canImport(AppKit) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
     
     @available(iOS 16, tvOS 16, *)
     /// Registers mapping from `model` to `UIHostingConfiguration`, that will be created and set to `contentConfiguration` property of `UITableViewCell` once dequeued.

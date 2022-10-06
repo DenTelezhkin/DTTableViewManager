@@ -1111,7 +1111,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-#if swift(>=5.7)
+#if swift(>=5.7) && !canImport(AppKit) || (canImport(AppKit) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
     func testCanPerformPrimaryAction() throws {
         guard #available(iOS 16, tvOS 16, *) else { return }
         try verifyEvent(.canPerformPrimaryActionForRowAtIndexPath, registration: { sut, exp in
@@ -1333,7 +1333,7 @@ class ReactingToEventsFastTestCase : XCTestCase {
         XCTAssertEqual(String(describing: #selector(UITableViewDataSourcePrefetching.tableView(_:prefetchRowsAt:))), EventMethodSignature.prefetchRowsAtIndexPaths.rawValue)
         XCTAssertEqual(String(describing: #selector(UITableViewDataSourcePrefetching.tableView(_:cancelPrefetchingForRowsAt:))), EventMethodSignature.cancelPrefetchingForRowsAtIndexPaths.rawValue)
         
-#if swift(>=5.7)
+#if swift(>=5.7) && !canImport(AppKit) || (canImport(AppKit) && swift(>=5.7.1)) // Xcode 14.0 AND macCatalyst on Xcode 14.1 (which will have swift> 5.7.1)
         if #available(iOS 16, tvOS 16, *) {
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:canPerformPrimaryActionForRowAt:))), EventMethodSignature.canPerformPrimaryActionForRowAtIndexPath.rawValue)
             XCTAssertEqual(String(describing: #selector(UITableViewDelegate.tableView(_:performPrimaryActionForRowAt:))), EventMethodSignature.performPrimaryActionForRowAtIndexPath.rawValue)
