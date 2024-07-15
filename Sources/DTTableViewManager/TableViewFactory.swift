@@ -109,13 +109,15 @@ final class TableViewFactory
             if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != mapping.reuseIdentifier {
                 anomalyHandler?.reportAnomaly(.differentCellReuseIdentifier(mappingReuseIdentifier: mapping.reuseIdentifier, cellReuseIdentifier: cellReuseIdentifier))
             }
+            mappings.append(mapping)
+            verifyCellInstance(cell, withReuseIdentifier: mapping.reuseIdentifier)
+            return
+        }
+        if let xibName = mapping.xibName, UINib.nibExists(withNibName: xibName, inBundle: mapping.bundle) {
+            let nib = UINib(nibName: xibName, bundle: mapping.bundle)
+            tableView.register(nib, forCellReuseIdentifier: mapping.reuseIdentifier)
         } else {
-            if let xibName = mapping.xibName, UINib.nibExists(withNibName: xibName, inBundle: mapping.bundle) {
-                let nib = UINib(nibName: xibName, bundle: mapping.bundle)
-                tableView.register(nib, forCellReuseIdentifier: mapping.reuseIdentifier)
-            } else {
-                tableView.register(Cell.self, forCellReuseIdentifier: mapping.reuseIdentifier)
-            }
+            tableView.register(Cell.self, forCellReuseIdentifier: mapping.reuseIdentifier)
         }
         mappings.append(mapping)
         verifyCell(Cell.self, nibName: mapping.xibName, withReuseIdentifier: mapping.reuseIdentifier, in: mapping.bundle)
@@ -141,6 +143,13 @@ final class TableViewFactory
                 }
             }
         }
+        if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != reuseIdentifier {
+            anomalyHandler?.reportAnomaly(.differentCellReuseIdentifier(mappingReuseIdentifier: reuseIdentifier, cellReuseIdentifier: cellReuseIdentifier))
+        }
+    }
+
+    func verifyCellInstance(_ cell: UITableViewCell,
+                            withReuseIdentifier reuseIdentifier: String) {
         if let cellReuseIdentifier = cell.reuseIdentifier, cellReuseIdentifier != reuseIdentifier {
             anomalyHandler?.reportAnomaly(.differentCellReuseIdentifier(mappingReuseIdentifier: reuseIdentifier, cellReuseIdentifier: cellReuseIdentifier))
         }
