@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+## [11.0.1](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/11.0.1)
+
 ### Changed
 
 * Optimized cell registration, reducing cell instances created when registering (thanks @stephenjames, https://github.com/DenTelezhkin/DTTableViewManager/pull/83)
