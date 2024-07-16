@@ -28,6 +28,8 @@ import DTModelStorage
 
 /// Object, that implements `UITableViewDelegate` for `DTTableViewManager`.
 open class DTTableViewDelegate : DTTableViewDelegateWrapper, UITableViewDelegate {
+    // swiftlint:disable:previous type_body_length
+    
     override func delegateWasReset() {
         tableView?.delegate = nil
         tableView?.delegate = self

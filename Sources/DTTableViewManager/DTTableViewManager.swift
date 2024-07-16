@@ -47,7 +47,9 @@ public extension DTTableViewManageable {
 }
 
 /// This key is used to store `DTTableViewManager` instance on `DTTableViewManageable` class using object association.
-private var DTTableViewManagerAssociatedKey = "DTTableViewManager Associated Key"
+/// malloc is used per recommendation from Eskimo <3 https://forums.swift.org/t/handling-the-new-forming-unsaferawpointer-warning/65523/7  
+private var DTTableViewManagerAssociatedKey = malloc(1)!
+// swiftlint:disable:previous force_unwrapping
 
 /// Default implementation for `DTTableViewManageable` protocol, that will inject `manager` property to any object, that declares itself `DTTableViewManageable`.
 extension DTTableViewManageable

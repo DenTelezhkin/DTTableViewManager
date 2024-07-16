@@ -1,4 +1,5 @@
 {
+  "originHash" : "be4f6867adfebf7a2a613fab8cbb79ea7c62c436f1182c9af68110069060528d",
   "pins" : [
     {
       "identity" : "changeset",
@@ -15,9 +16,9 @@
       "location" : "https://github.com/DenTelezhkin/DTModelStorage",
       "state" : {
         "branch" : "main",
-        "revision" : "49f408f61d61917f31d1dd2ccba73813c7698f1f"
+        "revision" : "1473c7ed4970b9572e93cf0305c80d54855b3cdf"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
