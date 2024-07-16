@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 # Next
 
+### Changed
+
+* Optimized cell registration, reducing cell instances created when registering (thanks @stephenjames, https://github.com/DenTelezhkin/DTTableViewManager/pull/83)
+
+### Fixed 
+
+* Compilation warning for associated object keys
+
+### Removed
+
+* Support for iOS 11 / tvOS 11
+
 ## [11.0.0](https://github.com/DenTelezhkin/DTTableViewManager/releases/tag/11.0.0)
 
 ### Added
